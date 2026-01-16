@@ -1,0 +1,63 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "gala-chain-marketplace",
+  "version": "1.0.0",
+  "description": "Official marketplace for Gala Chain Claude Code plugins",
+  "owner": {
+    "name": "Gala Launchpad Team",
+    "email": "aschuler@gala.games"
+  },
+  "plugins": [
+    {
+      "name": "galachain-omnitool",
+      "description": "Transform Claude into a GalaChain Expert Developer Agent with 247 MCP tools and 41 teaching topics. Covers trading, liquidity, bridging, token management, DeFi operations, and comprehensive GalaChain learning paths.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Gala Launchpad Team",
+        "email": "aschuler@gala.games"
+      },
+      "source": "@gala-chain/claude-plugin",
+      "category": "development",
+      "tags": [
+        "galachain",
+        "blockchain",
+        "defi",
+        "trading",
+        "bridging",
+        "tokens",
+        "web3",
+        "gala-games"
+      ],
+      "features": {
+        "mcp_tools": 247,
+        "teaching_topics": 41,
+        "learning_paths": 8,
+        "categories": 29
+      },
+      "homepage": "https://aschulergala.github.io/claude-plugin-marketplace/",
+      "repository": "https://github.com/aschulergala/claude-plugin-marketplace"
+    }
+  ],
+  "categories": [
+    {
+      "id": "trading",
+      "name": "Token Trading",
+      "description": "Buy, sell, and track tokens on GalaChain"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity Management",
+      "description": "DEX pools, LP positions, and fee collection"
+    },
+    {
+      "id": "bridging",
+      "name": "Cross-Chain Bridging",
+      "description": "Bridge tokens between GalaChain and other networks"
+    },
+    {
+      "id": "learning",
+      "name": "Learning & Education",
+      "description": "AI-powered tutoring on GalaChain concepts"
+    }
+  ]
+}
