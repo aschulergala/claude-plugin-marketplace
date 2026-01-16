@@ -5,7 +5,7 @@ Official marketplace for GalaChain Claude Code plugins.
 ## Quick Install
 
 ```bash
-claude plugins add @gala-chain/claude-plugin
+claude plugins add omni-tool
 ```
 
 ## Features
@@ -28,6 +28,7 @@ claude plugins add @gala-chain/claude-plugin
 
 - [Landing Page](https://aschulergala.github.io/claude-plugin-marketplace/)
 - [Plugin Manifest](https://aschulergala.github.io/claude-plugin-marketplace/marketplace.json)
+- [GitHub](https://github.com/aschulergala/claude-plugin-marketplace) 🐙
 - [Gala Games](https://gala.com)
 
 ## License
