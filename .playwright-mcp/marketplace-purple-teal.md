@@ -1,0 +1,203 @@
+### Page state
+- Page URL: http://localhost:7000/
+- Page Title: GalaChain Claude Plugin Marketplace
+- Page Snapshot:
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "GalaChain logo" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - img "GalaChain logo" [ref=e5]
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Features" [ref=e20] [cursor=pointer]:
+            - /url: "#features"
+        - listitem [ref=e21]:
+          - link "Install" [ref=e22] [cursor=pointer]:
+            - /url: "#install"
+        - listitem [ref=e23]:
+          - link "Learning" [ref=e24] [cursor=pointer]:
+            - /url: "#learning"
+        - listitem [ref=e25]:
+          - link "GitHub" [ref=e26] [cursor=pointer]:
+            - /url: https://github.com/aschulergala/claude-plugin-marketplace
+  - generic [ref=e27]:
+    - img "GalaChain logo" [ref=e29]
+    - generic [ref=e42]: Claude Code Plugin
+    - heading "Transform Claude into a GalaChain Expert" [level=1] [ref=e44]:
+      - text: Transform Claude into a
+      - text: GalaChain Expert
+    - paragraph [ref=e45]: The ultimate Claude Code plugin for GalaChain development. 247 MCP tools, 41 teaching topics, one command installation.
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]: "247"
+        - text: MCP TOOLS
+      - generic [ref=e49]:
+        - generic [ref=e50]: "29"
+        - text: CATEGORIES
+      - generic [ref=e51]:
+        - generic [ref=e52]: MCP
+        - text: READY
+      - generic [ref=e53]:
+        - generic [ref=e54]: AI
+        - text: POWERED
+    - generic [ref=e55]:
+      - button "Install Plugin" [ref=e56] [cursor=pointer]:
+        - img [ref=e57]
+        - text: Install Plugin
+      - generic [ref=e59]: One command. Instant GalaChain expertise.
+  - generic [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]: "0"
+      - generic [ref=e65]: MCP Tools
+    - generic [ref=e66]:
+      - generic [ref=e67]: "0"
+      - generic [ref=e68]: Categories
+    - generic [ref=e69]:
+      - generic [ref=e70]: "0"
+      - generic [ref=e71]: Teaching Topics
+    - generic [ref=e72]:
+      - generic [ref=e73]: "0"
+      - generic [ref=e74]: Learning Paths
+  - generic [ref=e76]:
+    - generic [ref=e77]:
+      - heading "Powerful Capabilities" [level=2] [ref=e78]
+      - paragraph [ref=e79]: Everything you need to build, trade, and manage on GalaChain
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - generic [ref=e82]: 💱
+        - heading "Trading" [level=3] [ref=e83]
+        - generic [ref=e84]: 20+ tools
+        - paragraph [ref=e85]: Buy, sell, and track tokens with ease. Real-time market data, order management, and portfolio tracking at your fingertips.
+      - generic [ref=e86]:
+        - generic [ref=e87]: 💧
+        - heading "Liquidity" [level=3] [ref=e88]
+        - generic [ref=e89]: 15+ tools
+        - paragraph [ref=e90]: Manage DEX pools, provide liquidity, and collect trading fees. Full control over your LP positions and rewards.
+      - generic [ref=e91]:
+        - generic [ref=e92]: 🌐
+        - heading "Bridging" [level=3] [ref=e93]
+        - generic [ref=e94]: 18+ tools
+        - paragraph [ref=e95]: Seamless cross-chain operations between GalaChain and other networks. Bridge tokens, track transfers, manage approvals.
+      - generic [ref=e96]:
+        - generic [ref=e97]: 🎓
+        - heading "Learning" [level=3] [ref=e98]
+        - generic [ref=e99]: 41 topics
+        - paragraph [ref=e100]: AI-powered tutoring on GalaChain concepts. From basics to advanced topics, learn at your own pace with interactive guidance.
+  - generic [ref=e102]:
+    - generic [ref=e103]:
+      - heading "Quick Installation" [level=2] [ref=e104]
+      - paragraph [ref=e105]: Get started in seconds with a single command
+    - generic [ref=e106]:
+      - generic [ref=e111]: terminal
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - generic [ref=e114]: $
+          - generic [ref=e115]: claude plugins add @gala-chain/claude-plugin
+        - button "Copy" [ref=e116] [cursor=pointer]
+      - generic [ref=e117]:
+        - strong [ref=e118]: "Note:"
+        - text: Requires Claude Code CLI. The plugin will automatically configure MCP servers and load all tools on activation.
+  - generic [ref=e120]:
+    - generic [ref=e121]:
+      - heading "Tool Categories" [level=2] [ref=e122]
+      - paragraph [ref=e123]: Comprehensive coverage across all GalaChain operations
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - generic [ref=e126]: Token Trading
+        - generic [ref=e127]: "12"
+      - generic [ref=e128]:
+        - generic [ref=e129]: Allowances
+        - generic [ref=e130]: "8"
+      - generic [ref=e131]:
+        - generic [ref=e132]: DEX Pools
+        - generic [ref=e133]: "15"
+      - generic [ref=e134]:
+        - generic [ref=e135]: Bridging
+        - generic [ref=e136]: "18"
+      - generic [ref=e137]:
+        - generic [ref=e138]: Token Info
+        - generic [ref=e139]: "10"
+      - generic [ref=e140]:
+        - generic [ref=e141]: Balances
+        - generic [ref=e142]: "6"
+      - generic [ref=e143]:
+        - generic [ref=e144]: Burn Tokens
+        - generic [ref=e145]: "4"
+      - generic [ref=e146]:
+        - generic [ref=e147]: Vesting
+        - generic [ref=e148]: "8"
+      - generic [ref=e149]:
+        - generic [ref=e150]: Fee Collection
+        - generic [ref=e151]: "5"
+      - generic [ref=e152]:
+        - generic [ref=e153]: Price Quotes
+        - generic [ref=e154]: "7"
+      - generic [ref=e155]:
+        - generic [ref=e156]: Transactions
+        - generic [ref=e157]: "9"
+      - generic [ref=e158]:
+        - generic [ref=e159]: Analytics
+        - generic [ref=e160]: "11"
+  - generic [ref=e162]:
+    - generic [ref=e163]:
+      - heading "Learning Paths" [level=2] [ref=e164]
+      - paragraph [ref=e165]: Structured learning journeys for every skill level
+    - generic [ref=e166]:
+      - generic [ref=e167]:
+        - generic [ref=e168]: 🚀
+        - heading "Getting Started" [level=3] [ref=e169]
+        - generic [ref=e170]: 6 topics
+        - paragraph [ref=e171]: Introduction to GalaChain, wallet setup, basic operations, and your first transactions.
+      - generic [ref=e172]:
+        - generic [ref=e173]: 💰
+        - heading "Token Mastery" [level=3] [ref=e174]
+        - generic [ref=e175]: 8 topics
+        - paragraph [ref=e176]: Deep dive into token standards, minting, burning, transfers, and advanced token operations.
+      - generic [ref=e177]:
+        - generic [ref=e178]: 📊
+        - heading "DeFi Operations" [level=3] [ref=e179]
+        - generic [ref=e180]: 10 topics
+        - paragraph [ref=e181]: Liquidity provision, yield farming, DEX mechanics, and advanced trading strategies.
+      - generic [ref=e182]:
+        - generic [ref=e183]: 🔧
+        - heading "Developer Track" [level=3] [ref=e184]
+        - generic [ref=e185]: 12 topics
+        - paragraph [ref=e186]: Smart contract development, SDK integration, API usage, and building on GalaChain.
+      - generic [ref=e187]:
+        - generic [ref=e188]: 🛡️
+        - heading "Security Best Practices" [level=3] [ref=e189]
+        - generic [ref=e190]: 5 topics
+        - paragraph [ref=e191]: Wallet security, transaction safety, common pitfalls, and protecting your assets.
+      - generic [ref=e192]:
+        - generic [ref=e193]: 🌍
+        - heading "Cross-Chain" [level=3] [ref=e194]
+        - generic [ref=e195]: 7 topics
+        - paragraph [ref=e196]: Bridging fundamentals, multi-chain strategies, and interoperability concepts.
+      - generic [ref=e197]:
+        - generic [ref=e198]: 🎯
+        - heading "Advanced Topics" [level=3] [ref=e199]
+        - generic [ref=e200]: 9 topics
+        - paragraph [ref=e201]: Governance, staking mechanics, oracle integration, and protocol internals.
+      - generic [ref=e202]:
+        - generic [ref=e203]: 🎮
+        - heading "Gaming Integration" [level=3] [ref=e204]
+        - generic [ref=e205]: 6 topics
+        - paragraph [ref=e206]: NFT gaming assets, in-game economies, Gala Games integration, and play-to-earn mechanics.
+  - contentinfo [ref=e207]:
+    - generic [ref=e208]:
+      - generic [ref=e209]:
+        - img "GalaChain logo" [ref=e211]
+        - list [ref=e224]:
+          - listitem [ref=e225]:
+            - link "GitHub" [ref=e226] [cursor=pointer]:
+              - /url: https://github.com/aschulergala/claude-plugin-marketplace
+          - listitem [ref=e227]:
+            - link "Plugin Manifest" [ref=e228] [cursor=pointer]:
+              - /url: marketplace.json
+          - listitem [ref=e229]:
+            - link "Gala Games" [ref=e230] [cursor=pointer]:
+              - /url: https://gala.com
+      - generic [ref=e231]: © 2025 Gala Games. Built for the GalaChain ecosystem.
+```
