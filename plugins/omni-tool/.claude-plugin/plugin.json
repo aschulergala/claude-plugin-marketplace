@@ -7,7 +7,6 @@
     "email": "aschuler@gala.games"
   },
   "repository": "https://github.com/aschulergala/claude-plugin-marketplace",
-  "source": "@gala-chain/claude-code-plugin",
   "license": "MIT",
   "keywords": [
     "galachain",
