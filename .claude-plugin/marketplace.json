@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "omni-tool",
-      "source": "./",
+      "source": "@gala-chain/claude-code-plugin",
       "description": "Transform Claude into a GalaChain Expert Developer Agent with 247 MCP tools and 41 teaching topics."
     }
   ]
