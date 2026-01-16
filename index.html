@@ -440,6 +440,33 @@
       color: var(--neon-purple);
     }
 
+    .install-button {
+      display: inline-block;
+      margin-top: var(--spacing-2xl);
+      padding: var(--spacing-lg) var(--spacing-3xl);
+      background: linear-gradient(135deg, #78DBFF 0%, #A66FFF 100%);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all var(--animation-normal) ease;
+      box-shadow: 0 0 30px rgba(120, 219, 255, 0.4), 0 8px 32px rgba(138, 80, 255, 0.2);
+      animation: fade-in-up 1s ease-out 0.5s both;
+    }
+
+    .install-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 50px rgba(120, 219, 255, 0.6), 0 12px 48px rgba(138, 80, 255, 0.3);
+    }
+
+    .install-button:active {
+      transform: translateY(-1px);
+    }
+
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
@@ -1311,6 +1338,10 @@
           <span class="hero-stat-number">8</span> PATHS
         </span>
       </div>
+
+      <button class="install-button" onclick="document.getElementById('install').scrollIntoView({ behavior: 'smooth' })">
+        INSTALL PLUGIN
+      </button>
     </div>
 
     <div class="scroll-indicator">
