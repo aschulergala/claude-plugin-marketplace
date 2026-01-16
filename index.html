@@ -29,36 +29,31 @@
 
   <style>
     /* ============================================
-       LAUNCHPAD DOCS THEME - CSS VARIABLES
+       CYBERPUNK COLOR PALETTE - CSS VARIABLES
        ============================================ */
     :root {
-      /* Backgrounds */
-      --bg-primary: #000000;
-      --bg-secondary: #0a0a0a;
-      --card-bg: rgba(15, 15, 20, 0.8);
+      /* Background Spectrum */
+      --bg-void: #030509;
+      --bg-deep-space: #050a14;
+      --bg-space: #0a1628;
+      --bg-cosmic: #0d1f3c;
 
-      /* Accent Colors - Purple & Teal Palette */
-      --accent-primary: rgba(138, 80, 255, 1);      /* Purple - main accent */
-      --accent-secondary: rgba(120, 219, 255, 1);   /* Teal/Cyan - secondary */
-      --accent-tertiary: rgba(180, 120, 255, 1);    /* Lighter purple */
-      --accent-pink: rgba(255, 119, 198, 1);        /* Pink - minimal use */
-      --accent-cyan: rgba(120, 219, 255, 1);        /* Teal (alias) */
-      --accent-purple: rgba(138, 80, 255, 1);       /* Purple (alias) */
-      --accent-orange: rgba(255, 150, 100, 1);      /* Orange accent */
+      /* Neon Accents */
+      --neon-cyan: #78DBFF;
+      --neon-cyan-bright: #00E5FF;
+      --neon-purple: #8A50FF;
+      --neon-purple-bright: #A66FFF;
+      --neon-orange: #FF9966;
+      --neon-green: #00FF88;
+
+      /* Glass Effects */
+      --glass-bg: rgba(13, 31, 60, 0.7);
+      --glass-border: rgba(120, 219, 255, 0.2);
 
       /* Text */
       --text-primary: #ffffff;
       --text-secondary: rgba(255, 255, 255, 0.7);
       --text-tertiary: rgba(255, 255, 255, 0.65);
-
-      /* Borders - Purple Primary */
-      --border-primary: rgba(138, 80, 255, 0.3);
-      --border-primary-hover: rgba(138, 80, 255, 0.6);
-      --border-secondary: rgba(120, 219, 255, 0.3);
-      --border-secondary-hover: rgba(120, 219, 255, 0.6);
-
-      /* Status */
-      --success: #00ff88;
 
       /* Typography */
       --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -87,21 +82,78 @@
     }
 
     /* ============================================
-       ANIMATIONS
+       ANIMATIONS LIBRARY
        ============================================ */
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(120, 219, 255, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(120, 219, 255, 0.6); }
+    }
+
+    @keyframes text-glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(120, 219, 255, 0.3), 0 0 20px rgba(138, 80, 255, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(120, 219, 255, 0.6), 0 0 40px rgba(138, 80, 255, 0.4); }
+    }
+
+    @keyframes scanline-scroll {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    @keyframes scanline-horizontal {
+      0% { opacity: 0.03; }
+      50% { opacity: 0.1; }
+      100% { opacity: 0.03; }
+    }
+
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes robot-float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-30px) scale(1.02); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(120, 219, 255, 0.3); }
+      50% { opacity: 0.6; box-shadow: 0 0 20px rgba(120, 219, 255, 0.6); }
+    }
+
+    @keyframes status-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
     @keyframes fade-in-up {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 10px rgba(138, 80, 255, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(138, 80, 255, 0.5); }
+    @keyframes output-appear {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    @keyframes star-twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+    @keyframes badge-shimmer {
+      0%, 100% { background-position: 200% center; }
+      50% { background-position: -200% center; }
+    }
+
+    @keyframes cursor-blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0; }
+    }
+
+    @keyframes hologram-flicker {
+      0%, 100% { opacity: 1; }
+      5%, 10%, 15% { opacity: 0.8; }
+      20%, 100% { opacity: 1; }
+    }
+
+    @keyframes bracket-expand {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* ============================================
@@ -124,14 +176,8 @@
       padding: 0;
     }
 
-    /* Focus indicators for accessibility */
     :focus-visible {
-      outline: 2px solid var(--accent-pink);
-      outline-offset: 2px;
-    }
-
-    button:focus-visible {
-      outline: 2px solid var(--accent-pink);
+      outline: 2px solid var(--neon-cyan);
       outline-offset: 2px;
     }
 
@@ -139,35 +185,9 @@
       scroll-behavior: smooth;
     }
 
-    /* Star Field - CSS-based twinkling stars */
-    html::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.9), transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.7), transparent),
-        radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.5), transparent),
-        radial-gradient(1px 1px at 200px 90px, rgba(255, 255, 255, 0.8), transparent),
-        radial-gradient(1px 1px at 240px 50px, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(2px 2px at 280px 20px, rgba(255, 255, 255, 0.7), transparent),
-        radial-gradient(1px 1px at 320px 80px, rgba(255, 255, 255, 0.9), transparent),
-        radial-gradient(1px 1px at 360px 40px, rgba(255, 255, 255, 0.5), transparent);
-      background-size: 400px 100px;
-      background-repeat: repeat;
-      z-index: -1;
-      pointer-events: none;
-      animation: star-twinkle var(--animation-slow) ease-in-out infinite;
-    }
-
     body {
       font-family: var(--font-body);
-      background: var(--bg-primary);
+      background: var(--bg-void);
       color: var(--text-primary);
       line-height: 1.6;
       min-height: 100vh;
@@ -175,23 +195,23 @@
       position: relative;
     }
 
-    /* ============================================
-       DOCS-STYLE AMBIENT GRADIENT BACKGROUND
-       ============================================ */
     body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background:
-        radial-gradient(circle at 20% 80%, rgba(2, 2, 17, 0.4) 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 60%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 60%),
-        radial-gradient(circle at 60% 70%, rgba(255, 150, 100, 0.2) 0%, transparent 50%),
-        #000000;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
       z-index: -1;
+      animation: scanline-horizontal 8s linear infinite;
     }
 
     /* ============================================
@@ -219,13 +239,13 @@
       right: 0;
       z-index: 100;
       padding: var(--spacing-md) 0;
-      background: rgba(0, 0, 0, 0.95);
-      border-bottom: 1px solid var(--border-primary);
+      background: rgba(3, 5, 9, 0.95);
+      border-bottom: 1px solid rgba(120, 219, 255, 0.1);
     }
 
     @supports (backdrop-filter: blur(10px)) {
       .header {
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(3, 5, 9, 0.7);
         backdrop-filter: blur(10px);
       }
     }
@@ -247,6 +267,7 @@
     .logo-icon {
       width: 150px;
       height: auto;
+      filter: drop-shadow(0 0 10px rgba(120, 219, 255, 0.3));
     }
 
     .nav-links {
@@ -259,111 +280,118 @@
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.9rem;
-      transition: color var(--animation-fast) ease;
+      transition: all var(--animation-fast) ease;
+      position: relative;
     }
 
     .nav-link:hover {
-      color: var(--accent-pink);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(120, 219, 255, 0.5);
     }
 
     /* ============================================
-       BADGE COMPONENTS (Docs Site Style)
-       ============================================ */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-xs) var(--spacing-md);
-      background: rgba(15, 15, 20, 0.8);
-      border: 1px solid var(--border-primary);
-      border-radius: var(--radius-pill);
-      font-size: 0.85rem;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .badge-purple {
-      background: rgba(138, 80, 255, 0.1);
-      border-color: rgba(138, 80, 255, 0.4);
-      color: var(--accent-purple);
-    }
-
-    .badge-pink {
-      background: rgba(255, 119, 198, 0.1);
-      border-color: var(--border-primary);
-      color: var(--accent-pink);
-    }
-
-    .badge-cyan {
-      background: rgba(120, 219, 255, 0.1);
-      border-color: rgba(120, 219, 255, 0.4);
-      color: var(--accent-cyan);
-    }
-
-    /* ============================================
-       HERO SECTION
+       HERO SECTION - VIDEO BACKGROUND
        ============================================ */
     .hero {
+      position: relative;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: var(--spacing-3xl) var(--spacing-lg);
-      padding-top: 120px;
-      padding-bottom: var(--spacing-3xl);
+      overflow: hidden;
+      margin-top: 60px;
     }
 
-    .hero-logo {
-      margin-bottom: var(--spacing-xl);
+    .hero-video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
     }
 
-    .hero-logo svg {
-      width: 200px;
-      height: auto;
-      filter: drop-shadow(0 0 20px rgba(138, 80, 255, 0.4));
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Three-layer overlay stack */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(3, 5, 9, 0.6) 0%,
+        rgba(5, 10, 20, 0.5) 50%,
+        rgba(13, 31, 60, 0.6) 100%
+      );
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      animation: fade-in-up 1s ease-out;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: var(--spacing-sm);
-      padding: var(--spacing-xs) var(--spacing-md);
-      background: rgba(138, 80, 255, 0.2);
-      border: 1px solid rgba(138, 80, 255, 0.6);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: rgba(120, 219, 255, 0.1);
+      border: 1px solid rgba(120, 219, 255, 0.3);
       border-radius: var(--radius-pill);
       font-size: 0.85rem;
       font-weight: 600;
-      color: rgba(200, 160, 255, 1);
+      color: var(--neon-cyan);
       margin-bottom: var(--spacing-lg);
+      animation: badge-shimmer 3s ease-in-out infinite;
+      background-size: 200% auto;
     }
 
     .hero-badge-dot {
       width: 8px;
       height: 8px;
-      background: var(--success);
+      background: var(--neon-green);
       border-radius: 50%;
       animation: pulse-glow var(--animation-normal) ease-in-out infinite;
     }
 
     .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 700;
       line-height: 1.1;
       margin-bottom: var(--spacing-lg);
       color: var(--text-primary);
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-secondary) 50%, var(--accent-primary) 100%);
+      background: linear-gradient(135deg, #78DBFF 0%, #A66FFF 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-
-    @supports not (background-clip: text) {
-      .hero-title {
-        color: var(--text-primary);
-        background: none;
-        -webkit-text-fill-color: inherit;
-      }
+      animation: text-glow 3s ease-in-out infinite;
     }
 
     .hero-subtitle {
@@ -371,6 +399,7 @@
       color: var(--text-secondary);
       max-width: 600px;
       margin-bottom: var(--spacing-2xl);
+      animation: fade-in-up 1s ease-out 0.2s both;
     }
 
     .hero-stats {
@@ -386,63 +415,375 @@
       align-items: center;
       gap: var(--spacing-xs);
       padding: var(--spacing-sm) var(--spacing-md);
-      background: rgba(15, 15, 20, 0.8);
-      border: 1px solid var(--border-primary);
+      background: rgba(13, 31, 60, 0.8);
+      border: 1px solid rgba(120, 219, 255, 0.2);
       border-radius: var(--radius-pill);
       font-family: var(--font-mono);
       font-size: 0.85rem;
       color: var(--text-secondary);
+      transition: all var(--animation-fast) ease;
+      animation: fade-in-up 1s ease-out 0.3s both;
+    }
+
+    .hero-stat-badge:nth-child(odd) {
+      border-color: rgba(120, 219, 255, 0.3);
+    }
+
+    .hero-stat-badge:nth-child(even) {
+      border-color: rgba(138, 80, 255, 0.3);
+    }
+
+    .hero-stat-badge:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(120, 219, 255, 0.2);
     }
 
     .hero-stat-number {
-      color: var(--accent-pink);
+      color: var(--neon-cyan);
       font-weight: 600;
     }
 
-    .hero-cta {
+    .hero-stat-badge:nth-child(even) .hero-stat-number {
+      color: var(--neon-purple);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--spacing-md);
-    }
-
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
       gap: var(--spacing-sm);
-      padding: var(--spacing-md) var(--spacing-xl);
-      background: var(--accent-primary);
-      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-      color: var(--text-primary);
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      border-radius: var(--radius-lg);
-      cursor: pointer;
-      transition: all var(--animation-fast) ease;
-      box-shadow: 0 0 30px rgba(138, 80, 255, 0.4);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(138, 80, 255, 0.6);
-    }
-
-    .cta-secondary {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(120, 219, 255, 0.5);
       font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: float-gentle 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 20px;
+      height: 30px;
+      border: 2px solid rgba(120, 219, 255, 0.3);
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+
+    /* Sound toggle button */
+    .sound-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 50;
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(120, 219, 255, 0.3);
+      border-radius: 50%;
+      background: rgba(13, 31, 60, 0.8);
+      color: var(--neon-cyan);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--animation-fast) ease;
+      font-size: 1.5rem;
+    }
+
+    .sound-toggle:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(120, 219, 255, 0.3);
+    }
+
+    .sound-toggle.active {
+      box-shadow: 0 0 20px rgba(120, 219, 255, 0.3), inset 0 0 10px rgba(120, 219, 255, 0.1);
+      animation: pulse-glow 1s ease-in-out infinite;
     }
 
     /* ============================================
-       STATS BAR (Badge Pills)
+       INSTALLATION SECTION - DROP ZONE
+       ============================================ */
+    .installation {
+      position: relative;
+      padding: var(--spacing-3xl) 0;
+      background: linear-gradient(
+        180deg,
+        rgba(5, 10, 20, 0.8) 0%,
+        rgba(13, 31, 60, 0.4) 50%,
+        rgba(5, 10, 20, 0.8) 100%
+      );
+      border-top: 1px solid rgba(120, 219, 255, 0.1);
+      border-bottom: 1px solid rgba(120, 219, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .installation::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(120, 219, 255, 0.05) 0%, transparent 70%);
+      animation: float-gentle 8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .drop-zone {
+      position: relative;
+      z-index: 10;
+    }
+
+    .robot-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--spacing-3xl);
+      animation: fade-in-up 1s ease-out;
+    }
+
+    .robot-image {
+      width: 300px;
+      height: auto;
+      max-width: 90vw;
+      animation: robot-float 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(120, 219, 255, 0.4)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+    }
+
+    .delivery-beam {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(180deg, rgba(120, 219, 255, 0.8) 0%, transparent 100%);
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      animation: fade-in-up 2s ease-out;
+    }
+
+    .terminal-window {
+      background: rgba(13, 31, 60, 0.9);
+      border: 1px solid rgba(120, 219, 255, 0.2);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 0 40px rgba(120, 219, 255, 0.15);
+      animation: fade-in-up 1s ease-out 0.3s both;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-md);
+      background: rgba(10, 22, 40, 0.8);
+      border-bottom: 1px solid rgba(120, 219, 255, 0.1);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px currentColor;
+    }
+
+    .terminal-dot.red {
+      background: #FF5F57;
+      color: #FF5F57;
+    }
+
+    .terminal-dot.yellow {
+      background: #FEBC2E;
+      color: #FEBC2E;
+    }
+
+    .terminal-dot.green {
+      background: #28C840;
+      color: #28C840;
+    }
+
+    .terminal-title {
+      margin-left: var(--spacing-md);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      flex: 1;
+    }
+
+    .terminal-status {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: 0.75rem;
+      color: var(--neon-green);
+      font-weight: 600;
+      padding: 0 var(--spacing-md);
+    }
+
+    .status-indicator {
+      width: 6px;
+      height: 6px;
+      background: var(--neon-green);
+      border-radius: 50%;
+      animation: status-blink 1s ease-in-out infinite;
+    }
+
+    .terminal-content {
+      padding: var(--spacing-xl);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .install-step {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .install-step-label {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: rgba(120, 219, 255, 0.2);
+      border: 1px solid rgba(120, 219, 255, 0.3);
+      border-radius: 50%;
+      font-size: 0.7rem;
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+
+    .code-block {
+      background: rgba(10, 22, 40, 0.8);
+      border: 1px solid rgba(120, 219, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      position: relative;
+      animation: output-appear 1s ease-out both;
+    }
+
+    .code-block:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .code-line {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .code-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .code-prompt {
+      color: var(--neon-cyan);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .code-command {
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .code-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--neon-cyan);
+      margin-left: 4px;
+      animation: cursor-blink 1s ease-in-out infinite;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: transparent;
+      border: 1px solid rgba(120, 219, 255, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--neon-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all var(--animation-fast) ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .copy-button:hover {
+      background: rgba(120, 219, 255, 0.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(120, 219, 255, 0.2);
+    }
+
+    .copy-button.copied {
+      background: rgba(0, 255, 136, 0.15);
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+    }
+
+    .output-lines {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid rgba(120, 219, 255, 0.1);
+    }
+
+    .output-line {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--neon-green);
+      font-size: 0.85rem;
+      animation: output-appear 0.5s ease-out backwards;
+    }
+
+    .output-line:nth-child(1) { animation-delay: 0.3s; }
+    .output-line:nth-child(2) { animation-delay: 0.5s; }
+    .output-line:nth-child(3) { animation-delay: 0.7s; }
+    .output-line:nth-child(4) { animation-delay: 0.9s; }
+
+    .output-checkmark {
+      color: var(--neon-green);
+      font-weight: bold;
+    }
+
+    .connector-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(120, 219, 255, 0.3), transparent);
+      margin: var(--spacing-xl) 0;
+    }
+
+    /* ============================================
+       STATS BAR
        ============================================ */
     .stats-bar {
       padding: var(--spacing-2xl) 0;
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border-primary);
-      border-bottom: 1px solid var(--border-primary);
+      background: rgba(5, 10, 20, 0.8);
+      border-top: 1px solid rgba(120, 219, 255, 0.1);
+      border-bottom: 1px solid rgba(120, 219, 255, 0.1);
     }
 
     .stats-grid {
@@ -459,7 +800,7 @@
     .stat-number {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
-      color: var(--accent-secondary);
+      color: var(--neon-cyan);
       margin-bottom: var(--spacing-xs);
     }
 
@@ -475,6 +816,7 @@
        ============================================ */
     .features {
       padding: var(--spacing-3xl) 0;
+      background: var(--bg-void);
     }
 
     .section-header {
@@ -486,6 +828,10 @@
       font-size: clamp(1.75rem, 4vw, 2.5rem);
       font-weight: 700;
       margin-bottom: var(--spacing-md);
+      background: linear-gradient(135deg, #78DBFF 0%, #A66FFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .section-subtitle {
@@ -501,19 +847,53 @@
     }
 
     .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-primary);
+      background: rgba(13, 31, 60, 0.5);
+      border: 1px solid rgba(120, 219, 255, 0.15);
       border-radius: var(--radius-lg);
       padding: var(--spacing-xl);
       transition: all var(--animation-fast) ease;
       position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 20px;
+      height: 20px;
+      border-top: 2px solid var(--neon-cyan);
+      border-left: 2px solid var(--neon-cyan);
+      opacity: 0;
+      transition: all var(--animation-fast) ease;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      border-bottom: 2px solid var(--neon-purple);
+      border-right: 2px solid var(--neon-purple);
+      opacity: 0;
+      transition: all var(--animation-fast) ease;
     }
 
     @media (hover: hover) and (pointer: fine) {
       .feature-card:hover {
         transform: translateY(-4px);
-        border-color: var(--border-primary-hover);
-        box-shadow: 0 10px 30px rgba(138, 80, 255, 0.2);
+        border-color: rgba(120, 219, 255, 0.3);
+        box-shadow: 0 0 30px rgba(120, 219, 255, 0.15);
+        background: rgba(13, 31, 60, 0.7);
+      }
+
+      .feature-card:hover::before,
+      .feature-card:hover::after {
+        opacity: 1;
+        animation: bracket-expand 0.3s ease-out;
       }
     }
 
@@ -523,40 +903,46 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(138, 80, 255, 0.1);
+      background: rgba(120, 219, 255, 0.1);
       border-radius: var(--radius-md);
       margin-bottom: var(--spacing-lg);
       font-size: 1.5rem;
+      border: 1px solid rgba(120, 219, 255, 0.2);
     }
 
     .feature-card:nth-child(2) .feature-icon {
-      background: rgba(120, 219, 255, 0.1);
+      background: rgba(138, 80, 255, 0.1);
+      border-color: rgba(138, 80, 255, 0.2);
     }
 
     .feature-card:nth-child(3) .feature-icon {
-      background: rgba(138, 80, 255, 0.1);
+      background: rgba(120, 219, 255, 0.1);
+      border-color: rgba(120, 219, 255, 0.2);
     }
 
     .feature-card:nth-child(4) .feature-icon {
-      background: rgba(255, 150, 100, 0.1);
+      background: rgba(255, 153, 102, 0.1);
+      border-color: rgba(255, 153, 102, 0.2);
     }
 
     .feature-title {
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
     }
 
     .feature-count {
       display: inline-block;
       padding: var(--spacing-xs) var(--spacing-sm);
-      background: rgba(255, 119, 198, 0.15);
-      border: 1px solid rgba(255, 119, 198, 0.4);
+      background: rgba(255, 153, 102, 0.15);
+      border: 1px solid rgba(255, 153, 102, 0.3);
       border-radius: var(--radius-pill);
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: var(--accent-pink);
+      color: var(--neon-orange);
       margin-bottom: var(--spacing-md);
+      font-weight: 600;
     }
 
     .feature-description {
@@ -566,116 +952,11 @@
     }
 
     /* ============================================
-       INSTALLATION SECTION (Docs-Style Code Block)
-       ============================================ */
-    .installation {
-      padding: var(--spacing-3xl) 0;
-      background: var(--bg-secondary);
-    }
-
-    .install-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-primary);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-2xl);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .install-header {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .install-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .install-dot.red { background: #ff5f57; }
-    .install-dot.yellow { background: #febc2e; }
-    .install-dot.green { background: #28c840; }
-
-    .install-title {
-      margin-left: var(--spacing-md);
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-    }
-
-    .code-block {
-      background: linear-gradient(135deg, rgba(30, 20, 50, 0.6) 0%, rgba(50, 30, 60, 0.4) 100%);
-      border: 1px solid var(--border-primary);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
-    }
-
-    .code-content {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      white-space: nowrap;
-    }
-
-    .code-prompt {
-      color: var(--accent-secondary);
-      font-family: var(--font-mono);
-      flex-shrink: 0;
-    }
-
-    .code-command {
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      color: var(--text-primary);
-      white-space: nowrap;
-    }
-
-    .copy-button {
-      position: absolute;
-      top: var(--spacing-md);
-      right: var(--spacing-md);
-      padding: var(--spacing-sm) var(--spacing-md);
-      background: transparent;
-      border: 2px solid rgba(138, 80, 255, 0.8);
-      border-radius: 6px;
-      color: var(--accent-primary);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: all var(--animation-fast) ease;
-    }
-
-    .copy-button:hover {
-      background: rgba(138, 80, 255, 0.1);
-      border-color: var(--accent-primary);
-    }
-
-    .copy-button.copied {
-      background: rgba(0, 255, 136, 0.2);
-      border-color: var(--success);
-      color: var(--success);
-    }
-
-    .install-note {
-      margin-top: var(--spacing-lg);
-      padding: var(--spacing-md);
-      background: rgba(138, 80, 255, 0.05);
-      border-left: 3px solid var(--accent-primary);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    /* ============================================
        CATEGORIES SECTION
        ============================================ */
     .categories {
       padding: var(--spacing-3xl) 0;
+      background: rgba(5, 10, 20, 0.8);
     }
 
     .categories-grid {
@@ -689,8 +970,8 @@
       align-items: center;
       gap: var(--spacing-sm);
       padding: var(--spacing-md) var(--spacing-lg);
-      background: var(--card-bg);
-      border: 1px solid var(--border-primary);
+      background: rgba(13, 31, 60, 0.6);
+      border: 1px solid rgba(120, 219, 255, 0.15);
       border-radius: var(--radius-lg);
       font-size: 0.9rem;
       color: var(--text-secondary);
@@ -699,10 +980,11 @@
 
     @media (hover: hover) and (pointer: fine) {
       .category-chip:hover {
-        border-color: var(--border-primary-hover);
-        color: var(--accent-primary);
+        border-color: rgba(120, 219, 255, 0.4);
+        color: var(--neon-cyan);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(138, 80, 255, 0.15);
+        box-shadow: 0 0 20px rgba(120, 219, 255, 0.15);
+        background: rgba(13, 31, 60, 0.8);
       }
     }
 
@@ -710,18 +992,20 @@
       font-family: var(--font-mono);
       font-size: 0.75rem;
       padding: 2px 8px;
-      background: rgba(255, 119, 198, 0.15);
-      border: 1px solid rgba(255, 119, 198, 0.4);
+      background: rgba(120, 219, 255, 0.15);
+      border: 1px solid rgba(120, 219, 255, 0.3);
       border-radius: var(--radius-pill);
-      color: var(--accent-pink);
+      color: var(--neon-cyan);
+      margin-left: auto;
+      font-weight: 600;
     }
 
     /* ============================================
-       LEARNING PATHS SECTION
+       LEARNING SECTION
        ============================================ */
     .learning {
       padding: var(--spacing-3xl) 0;
-      background: var(--bg-secondary);
+      background: var(--bg-void);
     }
 
     .learning-grid {
@@ -731,8 +1015,8 @@
     }
 
     .learning-card {
-      background: linear-gradient(135deg, rgba(30, 20, 50, 0.4) 0%, rgba(20, 15, 30, 0.6) 100%);
-      border: 1px solid var(--border-primary);
+      background: rgba(13, 31, 60, 0.5);
+      border: 1px solid rgba(138, 80, 255, 0.15);
       border-radius: var(--radius-lg);
       padding: var(--spacing-lg);
       transition: all var(--animation-fast) ease;
@@ -740,9 +1024,10 @@
 
     @media (hover: hover) and (pointer: fine) {
       .learning-card:hover {
-        border-color: var(--border-primary-hover);
-        box-shadow: 0 10px 30px rgba(138, 80, 255, 0.2);
+        border-color: rgba(138, 80, 255, 0.4);
+        box-shadow: 0 0 30px rgba(138, 80, 255, 0.15);
         transform: translateY(-4px);
+        background: rgba(13, 31, 60, 0.7);
       }
     }
 
@@ -755,19 +1040,20 @@
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: var(--spacing-sm);
-      color: var(--accent-purple);
+      color: var(--neon-purple);
     }
 
     .learning-topics {
       display: inline-block;
       padding: var(--spacing-xs) var(--spacing-sm);
-      background: rgba(255, 119, 198, 0.15);
-      border: 1px solid rgba(255, 119, 198, 0.4);
+      background: rgba(138, 80, 255, 0.15);
+      border: 1px solid rgba(138, 80, 255, 0.3);
       border-radius: var(--radius-pill);
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: var(--accent-pink);
+      color: var(--neon-purple);
       margin-bottom: var(--spacing-md);
+      font-weight: 600;
     }
 
     .learning-description {
@@ -781,8 +1067,8 @@
        ============================================ */
     .footer {
       padding: var(--spacing-2xl) 0;
-      border-top: 1px solid var(--border-primary);
-      background: var(--bg-primary);
+      border-top: 1px solid rgba(120, 219, 255, 0.1);
+      background: rgba(3, 5, 9, 0.8);
     }
 
     .footer-content {
@@ -803,6 +1089,7 @@
       width: 120px;
       height: auto;
       opacity: 0.7;
+      filter: drop-shadow(0 0 10px rgba(120, 219, 255, 0.1));
     }
 
     .footer-links {
@@ -815,11 +1102,12 @@
       color: var(--text-tertiary);
       text-decoration: none;
       font-size: 0.9rem;
-      transition: color var(--animation-fast) ease;
+      transition: all var(--animation-fast) ease;
     }
 
     .footer-link:hover {
-      color: var(--accent-secondary);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(120, 219, 255, 0.3);
     }
 
     .footer-copy {
@@ -827,7 +1115,7 @@
       text-align: center;
       padding-top: var(--spacing-lg);
       margin-top: var(--spacing-lg);
-      border-top: 1px solid var(--border-primary);
+      border-top: 1px solid rgba(120, 219, 255, 0.1);
       font-size: 0.8rem;
       color: var(--text-tertiary);
     }
@@ -835,20 +1123,20 @@
     /* ============================================
        RESPONSIVE
        ============================================ */
-    @media (max-width: 640px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 768px) {
       .nav-links {
         display: none;
-        /* TODO: Future enhancement - Add mobile hamburger menu for better navigation on small screens */
       }
 
       .hero {
-        padding-top: 100px;
+        height: auto;
+        min-height: 100vh;
+        padding: var(--spacing-2xl) 0;
+      }
+
+      .hero-video-container {
+        position: relative;
+        height: 300px;
       }
 
       .hero-title {
@@ -857,6 +1145,34 @@
 
       .hero-stats {
         flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+
+      .robot-image {
+        width: 200px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+      }
+
+      .installation {
+        padding: var(--spacing-2xl) 0;
+      }
+
+      .terminal-window {
+        max-width: 100%;
+      }
+
+      .terminal-content {
+        padding: var(--spacing-lg);
+        font-size: 0.8rem;
+      }
+
+      .copy-button {
+        font-size: 0.6rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
       }
 
       .footer-content {
@@ -868,16 +1184,56 @@
         flex-direction: column;
         gap: var(--spacing-md);
       }
+
+      .sound-toggle {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.2rem;
+      }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 640px) {
       .stats-grid {
         grid-template-columns: 1fr;
       }
 
-      .cta-button {
+      .hero-stat-badge {
         width: 100%;
-        justify-content: center;
+        justify-content: space-between;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video {
+        display: none;
+      }
+
+      .hero::before {
+        background: linear-gradient(135deg, rgba(3, 5, 9, 0.8) 0%, rgba(13, 31, 60, 0.8) 100%);
+      }
+    }
+
+    @media (prefers-contrast: more) {
+      .neon-cyan {
+        --neon-cyan: #00FFFF;
+        --neon-cyan-bright: #00FFFF;
+      }
+
+      .neon-purple {
+        --neon-purple: #FF00FF;
+        --neon-purple-bright: #FF00FF;
+      }
+
+      .feature-card::before,
+      .feature-card::after {
+        width: 30px;
+        height: 30px;
       }
     }
   </style>
@@ -912,105 +1268,124 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-logo">
-      <svg role="img" aria-label="GalaChain logo" width="320" height="68" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M57.382 17.2153H48.5685V19.7454H54.5097C54.2824 20.9353 53.6984 21.8849 52.7714 22.5716C51.7894 23.2988 50.5187 23.6668 48.9948 23.6668C47.7815 23.6668 46.6911 23.3991 45.7529 22.8725C44.8162 22.3459 44.0744 21.6042 43.5487 20.6684C43.0213 19.7301 42.7544 18.647 42.7544 17.4499C42.7544 16.2527 43.0181 15.2214 43.5374 14.2912C44.0558 13.3626 44.7935 12.6209 45.7302 12.0863C46.6685 11.5516 47.7508 11.2798 48.9479 11.2798C50.0213 11.2798 50.9903 11.4845 51.8275 11.8873C52.6654 12.2909 53.4379 12.9137 54.123 13.7396L54.2476 13.8892L55.9931 11.7886L55.9058 11.6851C54.1707 9.62568 51.8218 8.58142 48.9228 8.58142C47.2719 8.58142 45.7439 8.96726 44.3834 9.72921C43.0213 10.4912 41.9358 11.5564 41.1569 12.8951C40.3787 14.233 39.984 15.765 39.984 17.4491C39.984 19.1331 40.3747 20.6206 41.1447 21.9658C41.9156 23.3125 42.997 24.3859 44.3592 25.156C45.7205 25.926 47.2719 26.3159 48.9713 26.3159C50.5729 26.3159 52.0297 25.9875 53.302 25.3388C54.5792 24.6884 55.5895 23.7477 56.3053 22.5433C57.0204 21.3405 57.3836 19.9331 57.3836 18.3598V17.2145L57.382 17.2153Z" fill="white"/>
-<path d="M64.5744 8.58142L56.7057 26.0045H59.6759L61.1391 22.6711H68.4343L69.8976 26.0045H72.8677L64.9991 8.58142H64.5744ZM62.1672 20.2372L64.775 14.2322L67.4046 20.2372H62.1672Z" fill="white"/>
-<path d="M77.192 8.89284H74.4216V26.0045H83.9064V23.3546H77.192V8.89284Z" fill="white"/>
-<path d="M92.5378 8.58142L84.6691 26.0045H87.6393L89.1025 22.6711H96.3977L97.861 26.0045H100.831L92.9625 8.58142H92.5378ZM90.1306 20.2372L92.7384 14.2322L95.368 20.2372H90.1306Z" fill="white"/>
-<path d="M109.526 8.58142C107.89 8.58142 106.374 8.97615 105.021 9.75428C103.667 10.5324 102.59 11.6098 101.82 12.9558C101.05 14.3017 100.659 15.8135 100.659 17.4491C100.659 19.0846 101.05 20.5964 101.82 21.9423C102.59 23.2883 103.667 24.3657 105.021 25.1438C106.375 25.922 107.891 26.3167 109.526 26.3167C111.016 26.3167 112.421 25.9794 113.702 25.3153L113.789 25.27V21.9431L113.522 22.1704C112.996 22.6193 112.383 22.9769 111.7 23.2333C111.018 23.4889 110.287 23.6191 109.526 23.6191C108.378 23.6191 107.329 23.3441 106.407 22.8021C105.485 22.2594 104.75 21.5136 104.223 20.5834C103.695 19.6532 103.428 18.5993 103.428 17.4499C103.428 16.3005 103.695 15.2457 104.223 14.3163C104.749 13.3861 105.485 12.6403 106.407 12.0976C107.328 11.5556 108.378 11.2806 109.526 11.2806C110.287 11.2806 111.018 11.41 111.7 11.6656C112.383 11.9212 112.996 12.2788 113.522 12.7285L113.789 12.9558V9.62891L113.702 9.58361C112.421 8.91953 111.016 8.58223 109.526 8.58223V8.58142Z" fill="white"/>
-<path d="M126.416 15.4406H119.042V8.89284H116.272V26.0045H119.042V18.0905H126.416V26.0045H129.186V8.89284H126.416V15.4406Z" fill="white"/>
-<path d="M138.585 8.58142L130.716 26.0045H133.687L135.15 22.6711H142.445L143.908 26.0045H146.878L139.01 8.58142H138.585ZM136.178 20.2372L138.786 14.2322L141.415 20.2372H136.178Z" fill="white"/>
-<path d="M151.202 8.89284H148.432V26.0045H151.202V8.89284Z" fill="white"/>
-<path d="M166.899 8.89284V20.4402L155.064 8.62834L155.016 8.58142H154.572V26.0045H157.342V14.457L169.177 26.269L169.224 26.3159H169.668V8.89284H166.899Z" fill="white"/>
-<path d="M18.3977 12.3993L15.2358 14.233L5.61193 8.68092L15.2358 3.49121L16.1879 4.01213L24.8695 8.69952L27.2411 9.984L29.5811 8.63481L15.2358 0.889893L0.904315 8.63481L15.2367 16.8893L20.7078 13.7274L18.3977 12.3993Z" fill="white"/>
-<path d="M15.235 0.889893H15.2358H15.2367H15.235Z" fill="white"/>
-<path d="M8.97116 17.6035L12.2091 19.4696V30.9531L2.31013 24.8526V11.1075L0 9.77612L0.00647095 26.1638L0.00727982 26.163L14.5111 35.0816V18.1382L8.97116 14.948V17.6035Z" fill="white"/>
-<path d="M15.9549 18.1487V24.6092L18.261 23.281V19.4801L28.16 13.7736V24.8987L18.261 31L15.9549 32.4107V35.1099L30.4596 26.1913V9.77531L28.7165 10.788L15.9549 18.1487Z" fill="white"/>
-      </svg>
+  <!-- Hero Section with Video Background -->
+  <section class="hero" id="hero">
+    <div class="hero-video-container">
+      <video class="hero-video" autoplay muted loop playsinline poster="gala-robot.png">
+        <source src="gala-robot.mp4" type="video/mp4">
+      </video>
     </div>
 
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Claude Code Plugin
-    </div>
-
-    <h1 class="hero-title">Transform Claude into a<br>GalaChain Expert</h1>
-
-    <p class="hero-subtitle">
-      The ultimate Claude Code plugin for GalaChain development.
-      247 MCP tools, 41 teaching topics, one command installation.
-    </p>
-
-    <div class="hero-stats">
-      <span class="hero-stat-badge">
-        <span class="hero-stat-number">247</span> MCP TOOLS
-      </span>
-      <span class="hero-stat-badge">
-        <span class="hero-stat-number">29</span> CATEGORIES
-      </span>
-      <span class="hero-stat-badge">
-        <span class="hero-stat-number">MCP</span> READY
-      </span>
-      <span class="hero-stat-badge">
-        <span class="hero-stat-number">AI</span> POWERED
-      </span>
-    </div>
-
-  </section>
-
-  <!-- Installation Section -->
-  <section class="installation" id="install">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Installation Steps</h2>
-        <p class="section-subtitle">
-          Two commands to activate the GalaChain Claude Code Plugin
-        </p>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        CLAUDE CODE PLUGIN
       </div>
 
-      <div class="install-card">
-        <div style="margin-bottom: var(--spacing-xl);">
-          <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: var(--spacing-sm); text-transform: uppercase; letter-spacing: 0.5px;">Step 1: Add Marketplace</div>
-          <div class="install-header">
-            <span class="install-dot red"></span>
-            <span class="install-dot yellow"></span>
-            <span class="install-dot green"></span>
-            <span class="install-title">terminal</span>
-          </div>
+      <h1 class="hero-title">Transform Claude into a<br>GalaChain Expert</h1>
 
-          <div class="code-block">
-            <div class="code-content">
-              <span class="code-prompt">$</span>
-              <span class="code-command">claude add marketplace aschulergala/claude-plugin-marketplace</span>
-            </div>
-            <button class="copy-button" onclick="copyCommand(this, 'claude add marketplace aschulergala/claude-plugin-marketplace')">Copy</button>
+      <p class="hero-subtitle">
+        The ultimate Claude Code plugin for GalaChain development.<br>
+        247 MCP tools, 41 teaching topics, one command installation.
+      </p>
+
+      <div class="hero-stats">
+        <span class="hero-stat-badge">
+          <span class="hero-stat-number">247</span> MCP TOOLS
+        </span>
+        <span class="hero-stat-badge">
+          <span class="hero-stat-number">29</span> CATEGORIES
+        </span>
+        <span class="hero-stat-badge">
+          <span class="hero-stat-number">41</span> TOPICS
+        </span>
+        <span class="hero-stat-badge">
+          <span class="hero-stat-number">8</span> PATHS
+        </span>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>INITIALIZE PROTOCOL</span>
+    </div>
+  </section>
+
+  <!-- Sound Toggle -->
+  <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">🔊</button>
+
+  <!-- Installation Section - Drop Zone -->
+  <section class="installation" id="install">
+    <div class="container">
+      <div class="drop-zone">
+        <div class="robot-container">
+          <div style="position: relative;">
+            <img src="gala-robot.png" alt="GalaChain Cyber Robot" class="robot-image">
+            <div class="delivery-beam"></div>
           </div>
         </div>
 
-        <div>
-          <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: var(--spacing-sm); text-transform: uppercase; letter-spacing: 0.5px;">Step 2: Add Plugin</div>
-          <div class="install-header">
-            <span class="install-dot red"></span>
-            <span class="install-dot yellow"></span>
-            <span class="install-dot green"></span>
-            <span class="install-title">terminal</span>
-          </div>
-
-          <div class="code-block">
-            <div class="code-content">
-              <span class="code-prompt">$</span>
-              <span class="code-command">claude plugins add @gala-chain/claude-plugin</span>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+            <div class="terminal-title">galachain-protocol.sh</div>
+            <div class="terminal-status">
+              <span class="status-indicator"></span>
+              ACTIVE
             </div>
-            <button class="copy-button" onclick="copyCommand(this, 'claude plugins add @gala-chain/claude-plugin')">Copy</button>
           </div>
-        </div>
 
-        <div class="install-note">
-          <strong>Note:</strong> Requires Claude Code CLI. After running these commands, the plugin will automatically configure
-          MCP servers and load all tools on activation. Restart Claude Code to see the new tools.
+          <div class="terminal-content">
+            <div class="install-step">
+              <div class="install-step-label">
+                <div class="step-number">01</div>
+                ADD MARKETPLACE
+              </div>
+              <div class="code-block">
+                <div class="code-line">
+                  <span class="code-prompt">/</span>
+                  <span class="code-command">plugin marketplace add aschulergala/claude-plugin-marketplace</span>
+                </div>
+                <button class="copy-button" onclick="copyCommand(this, '/plugin marketplace add aschulergala/claude-plugin-marketplace')">Copy</button>
+              </div>
+            </div>
+
+            <div class="connector-line"></div>
+
+            <div class="install-step">
+              <div class="install-step-label">
+                <div class="step-number">02</div>
+                INSTALL PLUGIN
+              </div>
+              <div class="code-block">
+                <div class="code-line">
+                  <span class="code-prompt">/</span>
+                  <span class="code-command">plugin install gala-chain/omni-tool</span>
+                </div>
+                <button class="copy-button" onclick="copyCommand(this, '/plugin install gala-chain/omni-tool')">Copy</button>
+              </div>
+            </div>
+
+            <div class="output-lines">
+              <div class="output-line">
+                <span class="output-checkmark">✓</span>
+                <span>Marketplace registered</span>
+              </div>
+              <div class="output-line">
+                <span class="output-checkmark">✓</span>
+                <span>Plugin package identified: 247 tools</span>
+              </div>
+              <div class="output-line">
+                <span class="output-checkmark">✓</span>
+                <span>Learning topics loaded: 41 modules</span>
+              </div>
+              <div class="output-line">
+                <span class="output-checkmark">✓</span>
+                <span>PROTOCOL ACTIVE - Ready for deployment</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1052,7 +1427,7 @@
 
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">&#x1F4B1;</div>
+          <div class="feature-icon" aria-hidden="true">💱</div>
           <h3 class="feature-title">Trading</h3>
           <span class="feature-count">20+ tools</span>
           <p class="feature-description">
@@ -1062,7 +1437,7 @@
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">&#x1F4A7;</div>
+          <div class="feature-icon" aria-hidden="true">💧</div>
           <h3 class="feature-title">Liquidity</h3>
           <span class="feature-count">15+ tools</span>
           <p class="feature-description">
@@ -1072,7 +1447,7 @@
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">&#x1F310;</div>
+          <div class="feature-icon" aria-hidden="true">🌐</div>
           <h3 class="feature-title">Bridging</h3>
           <span class="feature-count">18+ tools</span>
           <p class="feature-description">
@@ -1082,7 +1457,7 @@
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">&#x1F393;</div>
+          <div class="feature-icon" aria-hidden="true">🎓</div>
           <h3 class="feature-title">Learning</h3>
           <span class="feature-count">41 topics</span>
           <p class="feature-description">
@@ -1169,7 +1544,7 @@
 
       <div class="learning-grid">
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F680;</div>
+          <div class="learning-icon" aria-hidden="true">🚀</div>
           <h3 class="learning-title">Getting Started</h3>
           <div class="learning-topics">6 topics</div>
           <p class="learning-description">
@@ -1179,7 +1554,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F4B0;</div>
+          <div class="learning-icon" aria-hidden="true">💰</div>
           <h3 class="learning-title">Token Mastery</h3>
           <div class="learning-topics">8 topics</div>
           <p class="learning-description">
@@ -1189,7 +1564,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F4CA;</div>
+          <div class="learning-icon" aria-hidden="true">📊</div>
           <h3 class="learning-title">DeFi Operations</h3>
           <div class="learning-topics">10 topics</div>
           <p class="learning-description">
@@ -1199,7 +1574,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F527;</div>
+          <div class="learning-icon" aria-hidden="true">🔧</div>
           <h3 class="learning-title">Developer Track</h3>
           <div class="learning-topics">12 topics</div>
           <p class="learning-description">
@@ -1209,7 +1584,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F6E1;&#xFE0F;</div>
+          <div class="learning-icon" aria-hidden="true">🛡️</div>
           <h3 class="learning-title">Security Best Practices</h3>
           <div class="learning-topics">5 topics</div>
           <p class="learning-description">
@@ -1219,7 +1594,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F30D;</div>
+          <div class="learning-icon" aria-hidden="true">🌍</div>
           <h3 class="learning-title">Cross-Chain</h3>
           <div class="learning-topics">7 topics</div>
           <p class="learning-description">
@@ -1229,7 +1604,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F3AF;</div>
+          <div class="learning-icon" aria-hidden="true">🎯</div>
           <h3 class="learning-title">Advanced Topics</h3>
           <div class="learning-topics">9 topics</div>
           <p class="learning-description">
@@ -1239,7 +1614,7 @@
         </div>
 
         <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">&#x1F3AE;</div>
+          <div class="learning-icon" aria-hidden="true">🎮</div>
           <h3 class="learning-title">Gaming Integration</h3>
           <div class="learning-topics">6 topics</div>
           <p class="learning-description">
@@ -1256,7 +1631,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <svg role="img" aria-label="GalaChain logo" width="170" height="36" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.7">
+          <svg role="img" aria-label="GalaChain logo" width="170" height="36" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M57.382 17.2153H48.5685V19.7454H54.5097C54.2824 20.9353 53.6984 21.8849 52.7714 22.5716C51.7894 23.2988 50.5187 23.6668 48.9948 23.6668C47.7815 23.6668 46.6911 23.3991 45.7529 22.8725C44.8162 22.3459 44.0744 21.6042 43.5487 20.6684C43.0213 19.7301 42.7544 18.647 42.7544 17.4499C42.7544 16.2527 43.0181 15.2214 43.5374 14.2912C44.0558 13.3626 44.7935 12.6209 45.7302 12.0863C46.6685 11.5516 47.7508 11.2798 48.9479 11.2798C50.0213 11.2798 50.9903 11.4845 51.8275 11.8873C52.6654 12.2909 53.4379 12.9137 54.123 13.7396L54.2476 13.8892L55.9931 11.7886L55.9058 11.6851C54.1707 9.62568 51.8218 8.58142 48.9228 8.58142C47.2719 8.58142 45.7439 8.96726 44.3834 9.72921C43.0213 10.4912 41.9358 11.5564 41.1569 12.8951C40.3787 14.233 39.984 15.765 39.984 17.4491C39.984 19.1331 40.3747 20.6206 41.1447 21.9658C41.9156 23.3125 42.997 24.3859 44.3592 25.156C45.7205 25.926 47.2719 26.3159 48.9713 26.3159C50.5729 26.3159 52.0297 25.9875 53.302 25.3388C54.5792 24.6884 55.5895 23.7477 56.3053 22.5433C57.0204 21.3405 57.3836 19.9331 57.3836 18.3598V17.2145L57.382 17.2153Z" fill="white"/>
 <path d="M64.5744 8.58142L56.7057 26.0045H59.6759L61.1391 22.6711H68.4343L69.8976 26.0045H72.8677L64.9991 8.58142H64.5744ZM62.1672 20.2372L64.775 14.2322L67.4046 20.2372H62.1672Z" fill="white"/>
 <path d="M77.192 8.89284H74.4216V26.0045H83.9064V23.3546H77.192V8.89284Z" fill="white"/>
@@ -1288,6 +1663,22 @@
 
   <script>
     // ============================================
+    // SOUND TOGGLE
+    // ============================================
+    const soundToggle = document.getElementById('soundToggle');
+    const heroVideo = document.querySelector('.hero-video');
+    let soundEnabled = false;
+
+    soundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (heroVideo) {
+        heroVideo.muted = !soundEnabled;
+        soundToggle.classList.toggle('active', soundEnabled);
+        soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+      }
+    });
+
+    // ============================================
     // ANIMATED COUNTERS
     // ============================================
     function animateCounters() {
@@ -1300,7 +1691,6 @@
             const counter = entry.target;
             const target = parseInt(counter.dataset.target);
 
-            // If reduced motion is preferred, set value instantly
             if (prefersReducedMotion) {
               counter.textContent = target;
               observer.unobserve(counter);
@@ -1366,7 +1756,6 @@
     }
 
     function copyCommand(button, command) {
-
       try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(command).then(() => {
@@ -1404,61 +1793,6 @@
       } catch (err) {
         console.error('Copy failed:', err);
         alert('Failed to copy. Please copy manually: ' + command);
-      }
-    }
-
-    function copyInstallCommand() {
-      const command = 'claude plugins add @gala-chain/claude-plugin';
-      const button = document.querySelector('.cta-button');
-      const originalText = button.innerHTML;
-      const copiedHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 6L9 17l-5-5"/>
-        </svg>
-        Copied!
-      `;
-
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(command).then(() => {
-            button.innerHTML = copiedHTML;
-            setTimeout(() => {
-              button.innerHTML = originalText;
-            }, 2000);
-          }).catch(err => {
-            console.error('Clipboard API failed:', err);
-            if (fallbackCopy(command)) {
-              button.innerHTML = copiedHTML;
-              setTimeout(() => {
-                button.innerHTML = originalText;
-              }, 2000);
-            } else {
-              alert('Failed to copy. Please copy manually: ' + command);
-            }
-          });
-        } else {
-          if (fallbackCopy(command)) {
-            button.innerHTML = copiedHTML;
-            setTimeout(() => {
-              button.innerHTML = originalText;
-            }, 2000);
-          } else {
-            alert('Failed to copy. Please copy manually: ' + command);
-          }
-        }
-      } catch (err) {
-        console.error('Copy failed:', err);
-        alert('Failed to copy. Please copy manually: ' + command);
-      }
-    }
-
-    // ============================================
-    // KEYBOARD SUPPORT
-    // ============================================
-    function handleButtonKeydown(event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        copyInstallCommand();
       }
     }
 
