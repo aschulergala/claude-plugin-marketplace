@@ -6846,6 +6846,10 @@
             "type": "string",
             "description": "Comment author's wallet address"
           },
+          "poolId": {
+            "type": "number",
+            "description": "Pool ID this comment belongs to"
+          },
           "createdAt": {
             "type": "string",
             "description": "Comment creation timestamp"
@@ -6925,6 +6929,7 @@
           "messageId",
           "content",
           "userAddress",
+          "poolId",
           "createdAt"
         ],
         "description": "Comment data returned from API"
@@ -7030,6 +7035,9 @@
                     },
                     "userAddress": {
                       "type": "string"
+                    },
+                    "poolId": {
+                      "type": "number"
                     },
                     "createdAt": {
                       "type": "string"
@@ -7162,6 +7170,9 @@
               },
               "userAddress": {
                 "type": "string"
+              },
+              "poolId": {
+                "type": "number"
               },
               "createdAt": {
                 "type": "string"
@@ -7583,6 +7594,9 @@
               "userAddress": {
                 "type": "string"
               },
+              "poolId": {
+                "type": "number"
+              },
               "createdAt": {
                 "type": "string"
               },
@@ -7664,6 +7678,9 @@
               },
               "userAddress": {
                 "type": "string"
+              },
+              "poolId": {
+                "type": "number"
               },
               "createdAt": {
                 "type": "string"
@@ -12206,20 +12223,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1345": {
-                "$ref": "#/components/schemas/__@match@1345"
+              "__@match@1350": {
+                "$ref": "#/components/schemas/__@match@1350"
               },
-              "__@replace@1347": {
-                "$ref": "#/components/schemas/__@replace@1347"
+              "__@replace@1352": {
+                "$ref": "#/components/schemas/__@replace@1352"
               },
-              "__@search@1350": {
-                "$ref": "#/components/schemas/__@search@1350"
+              "__@search@1355": {
+                "$ref": "#/components/schemas/__@search@1355"
               },
-              "__@split@1352": {
-                "$ref": "#/components/schemas/__@split@1352"
+              "__@split@1357": {
+                "$ref": "#/components/schemas/__@split@1357"
               },
-              "__@matchAll@1354": {
-                "$ref": "#/components/schemas/__@matchAll@1354"
+              "__@matchAll@1359": {
+                "$ref": "#/components/schemas/__@matchAll@1359"
               }
             },
             "description": "Regex pattern for validation"
@@ -12325,20 +12342,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1345": {
-                "$ref": "#/components/schemas/__@match@1345"
+              "__@match@1350": {
+                "$ref": "#/components/schemas/__@match@1350"
               },
-              "__@replace@1347": {
-                "$ref": "#/components/schemas/__@replace@1347"
+              "__@replace@1352": {
+                "$ref": "#/components/schemas/__@replace@1352"
               },
-              "__@search@1350": {
-                "$ref": "#/components/schemas/__@search@1350"
+              "__@search@1355": {
+                "$ref": "#/components/schemas/__@search@1355"
               },
-              "__@split@1352": {
-                "$ref": "#/components/schemas/__@split@1352"
+              "__@split@1357": {
+                "$ref": "#/components/schemas/__@split@1357"
               },
-              "__@matchAll@1354": {
-                "$ref": "#/components/schemas/__@matchAll@1354"
+              "__@matchAll@1359": {
+                "$ref": "#/components/schemas/__@matchAll@1359"
               }
             },
             "description": "Regex pattern for validation"
@@ -26154,8 +26171,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             }
           }
@@ -26600,8 +26617,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true
@@ -26738,8 +26755,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true
@@ -27424,8 +27441,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             }
           }
@@ -27488,10 +27505,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             },
@@ -27798,7 +27815,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -27812,7 +27829,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -27882,10 +27899,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@518": {
-                    "$ref": "#/components/schemas/__@iterator@518"
+                  "__@iterator@519": {
+                    "$ref": "#/components/schemas/__@iterator@519"
                   },
-                  "__@toStringTag@2205": {
+                  "__@toStringTag@2210": {
                     "type": "string"
                   }
                 }
@@ -28049,6 +28066,12 @@
             "description": "Success status"
           },
           "data": {
+            "type": "object",
+            "properties": {
+              "poolId": {
+                "type": "string"
+              }
+            },
             "nullable": true,
             "description": "Pool creation result"
           },
@@ -28796,8 +28819,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "description": "Last updated timestamp"
@@ -29341,7 +29364,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -29355,7 +29378,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -29425,10 +29448,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@518": {
-                    "$ref": "#/components/schemas/__@iterator@518"
+                  "__@iterator@519": {
+                    "$ref": "#/components/schemas/__@iterator@519"
                   },
-                  "__@toStringTag@2205": {
+                  "__@toStringTag@2210": {
                     "type": "string"
                   }
                 }
@@ -30125,8 +30148,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "description": "Season start timestamp (parsed to Date object)"
@@ -30263,8 +30286,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "description": "Season end timestamp (parsed to Date object)"
@@ -33159,7 +33182,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@2205": {
+                              "__@toStringTag@2210": {
                                 "type": "string"
                               }
                             }
@@ -33173,7 +33196,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@2205": {
+                              "__@toStringTag@2210": {
                                 "type": "string"
                               }
                             }
@@ -33243,10 +33266,10 @@
                       "values": {
                         "$ref": "#/components/schemas/values"
                       },
-                      "__@iterator@518": {
-                        "$ref": "#/components/schemas/__@iterator@518"
+                      "__@iterator@519": {
+                        "$ref": "#/components/schemas/__@iterator@519"
                       },
-                      "__@toStringTag@2205": {
+                      "__@toStringTag@2210": {
                         "type": "string"
                       }
                     }
@@ -33427,8 +33450,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true,
@@ -33566,8 +33589,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true,
@@ -39517,8 +39540,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true,
@@ -39656,8 +39679,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "nullable": true,
@@ -39827,8 +39850,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "description": "Timestamp of the price snapshot (created_at from database)"
@@ -40274,9 +40297,9 @@
           "userAddress": {
             "description": "Sender's wallet address in backend format"
           },
-          "tokenName": {
-            "type": "string",
-            "description": "Token name this message belongs to"
+          "poolId": {
+            "type": "number",
+            "description": "Pool ID this message belongs to"
           },
           "createdAt": {
             "type": "string",
@@ -40302,7 +40325,7 @@
           "messageId",
           "content",
           "userAddress",
-          "tokenName",
+          "poolId",
           "createdAt"
         ],
         "description": "Stream chat message\n\nNote: Messages have TWO IDs:\n- `id`: MySQL auto-increment ID (may be undefined until flushed to DB)\n- `messageId`: UUID-based string ID (always present, format: chat-{timestamp}-{uuid8})"
@@ -40661,6 +40684,24 @@
           "pinnedMessage"
         ],
         "description": "Result from GET /live/:tokenName/chat/pinned"
+      },
+      "StreamChatMessageEvent": {
+        "type": "object",
+        "properties": {
+          "tokenName": {
+            "type": "string",
+            "description": "Token name (lowercase)"
+          },
+          "message": {
+            "$ref": "#/components/schemas/StreamChatMessage",
+            "description": "The chat message"
+          }
+        },
+        "required": [
+          "tokenName",
+          "message"
+        ],
+        "description": "WebSocket event: stream_chat_message\n\nEmitted when a new chat message is sent in a stream room"
       },
       "StreamChatSentEvent": {
         "type": "object",
@@ -41201,10 +41242,6 @@
           "token"
         ],
         "description": "Reason why chat is disabled\n\n- 'global': Chat is disabled globally for all tokens\n- 'token': Chat is disabled specifically for this token"
-      },
-      "StreamChatMessageEvent": {
-        "$ref": "#/components/schemas/StreamChatMessage",
-        "description": "WebSocket event: stream_chat_message\n\nEmitted when a new chat message is sent in a stream room"
       },
       "PresetReaction": {
         "type": "string",
@@ -41949,10 +41986,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -41987,10 +42024,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42025,10 +42062,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42063,10 +42100,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42101,10 +42138,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42139,10 +42176,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42177,10 +42214,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42215,10 +42252,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42253,10 +42290,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42291,10 +42328,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42329,10 +42366,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42367,10 +42404,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42405,10 +42442,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42443,10 +42480,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42481,10 +42518,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42519,10 +42556,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42557,10 +42594,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42595,10 +42632,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42633,10 +42670,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42671,10 +42708,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42709,10 +42746,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42747,10 +42784,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42785,10 +42822,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42823,10 +42860,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42861,10 +42898,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42899,10 +42936,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42937,10 +42974,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -42975,10 +43012,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -43013,10 +43050,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@518": {
-                "$ref": "#/components/schemas/__@iterator@518"
+              "__@iterator@519": {
+                "$ref": "#/components/schemas/__@iterator@519"
               },
-              "__@toStringTag@2205": {
+              "__@toStringTag@2210": {
                 "type": "string"
               }
             }
@@ -43941,8 +43978,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@1920": {
-                    "$ref": "#/components/schemas/__@toPrimitive@1920"
+                  "__@toPrimitive@1925": {
+                    "$ref": "#/components/schemas/__@toPrimitive@1925"
                   }
                 }
               }
@@ -45158,8 +45195,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@1920": {
-                    "$ref": "#/components/schemas/__@toPrimitive@1920"
+                  "__@toPrimitive@1925": {
+                    "$ref": "#/components/schemas/__@toPrimitive@1925"
                   }
                 }
               }
@@ -45408,8 +45445,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@1920": {
-                    "$ref": "#/components/schemas/__@toPrimitive@1920"
+                  "__@toPrimitive@1925": {
+                    "$ref": "#/components/schemas/__@toPrimitive@1925"
                   }
                 }
               },
@@ -45563,8 +45600,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@1920": {
-                    "$ref": "#/components/schemas/__@toPrimitive@1920"
+                  "__@toPrimitive@1925": {
+                    "$ref": "#/components/schemas/__@toPrimitive@1925"
                   }
                 }
               }
@@ -47308,8 +47345,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@1920": {
-                "$ref": "#/components/schemas/__@toPrimitive@1920"
+              "__@toPrimitive@1925": {
+                "$ref": "#/components/schemas/__@toPrimitive@1925"
               }
             },
             "description": "Last update timestamp"
@@ -47670,7 +47707,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -47684,7 +47721,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2205": {
+                          "__@toStringTag@2210": {
                             "type": "string"
                           }
                         }
@@ -47754,10 +47791,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@518": {
-                    "$ref": "#/components/schemas/__@iterator@518"
+                  "__@iterator@519": {
+                    "$ref": "#/components/schemas/__@iterator@519"
                   },
-                  "__@toStringTag@2205": {
+                  "__@toStringTag@2210": {
                     "type": "string"
                   }
                 }
