@@ -1,0 +1,776 @@
+{
+  "meta": {
+    "version": "6.0.0",
+    "generatedAt": "2025-01-14T00:00:00Z",
+    "eventCount": 17,
+    "subscriptionMethodCount": 17,
+    "categories": {
+      "token-bans": {
+        "label": "Token Ban Events",
+        "description": "Events related to token bans at the platform level",
+        "events": ["TOKEN_BANNED", "TOKEN_UNBANNED"]
+      },
+      "moderators": {
+        "label": "Moderator Events",
+        "description": "Events for moderator management and role changes",
+        "events": ["MODERATOR_ADDED", "MODERATOR_REMOVED", "MODERATOR_ROLE_UPDATED"]
+      },
+      "overseers": {
+        "label": "Overseer Events",
+        "description": "Events for platform-level overseer management",
+        "events": ["OVERSEER_ADDED", "OVERSEER_REMOVED"]
+      },
+      "trades": {
+        "label": "Trade Events",
+        "description": "Events for executed trades and bonding curve operations",
+        "events": ["TRADE_EXECUTED"]
+      },
+      "pool-metadata": {
+        "label": "Pool Metadata Events",
+        "description": "Events for pool information and badge updates",
+        "events": ["POOL_METADATA_UPDATED", "POOL_SOCIAL_LINKS_UPDATED", "POOL_BADGE_ASSIGNED"]
+      },
+      "holders": {
+        "label": "Holder Count Events",
+        "description": "Events for token holder count changes",
+        "events": ["HOLDER_COUNT_UPDATED"]
+      },
+      "comments": {
+        "label": "Comment Events",
+        "description": "Events for pool comments and discussions",
+        "events": ["COMMENT_CREATED"]
+      },
+      "user-profiles": {
+        "label": "User Profile Events",
+        "description": "Events for user profile updates",
+        "events": ["USER_PROFILE_UPDATED"]
+      },
+      "api-keys": {
+        "label": "API Key Events",
+        "description": "Events for API key management",
+        "events": ["API_KEY_CREATED", "API_KEY_UPDATED", "API_KEY_REVOKED"]
+      }
+    }
+  },
+  "events": {
+    "TOKEN_BANNED": {
+      "name": "TOKEN_BANNED",
+      "constant": "token_banned",
+      "interface": "TokenBannedEvent",
+      "description": "Emitted when a token is globally banned (overseer action). Broadcast to overseer room.",
+      "room": "global",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeTokenBanned",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name that was banned"
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": false,
+          "description": "Optional reason for the ban"
+        },
+        {
+          "name": "bannedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the overseer who performed the ban"
+        },
+        {
+          "name": "bannedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the ban occurred"
+        }
+      ]
+    },
+    "TOKEN_UNBANNED": {
+      "name": "TOKEN_UNBANNED",
+      "constant": "token_unbanned",
+      "interface": "TokenUnbannedEvent",
+      "description": "Emitted when a token ban is lifted. Broadcast to overseer room.",
+      "room": "global",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeTokenUnbanned",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name that was unbanned"
+        },
+        {
+          "name": "unbannedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the overseer who lifted the ban"
+        }
+      ]
+    },
+    "MODERATOR_ADDED": {
+      "name": "MODERATOR_ADDED",
+      "constant": "moderator_added",
+      "interface": "ModeratorAddedEvent",
+      "description": "Emitted when a user is added as a moderator for a token. Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeModeratorAdded",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which the user became a moderator"
+        },
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the new moderator"
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "required": true,
+          "description": "ModeratorRole enum value (MODERATOR, TECHNICAL_PRODUCER, MANAGER, OWNER)"
+        },
+        {
+          "name": "invitedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the user who invited this moderator"
+        },
+        {
+          "name": "addedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the moderator was added"
+        },
+        {
+          "name": "user",
+          "type": "{ fullName?: string; profileImage?: string }",
+          "required": false,
+          "description": "Optional user profile information"
+        }
+      ]
+    },
+    "MODERATOR_REMOVED": {
+      "name": "MODERATOR_REMOVED",
+      "constant": "moderator_removed",
+      "interface": "ModeratorRemovedEvent",
+      "description": "Emitted when a moderator is removed from a token. Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeModeratorRemoved",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name from which the user was removed"
+        },
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the removed moderator"
+        },
+        {
+          "name": "removedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the user who removed this moderator"
+        }
+      ]
+    },
+    "MODERATOR_ROLE_UPDATED": {
+      "name": "MODERATOR_ROLE_UPDATED",
+      "constant": "moderator_role_updated",
+      "interface": "ModeratorRoleUpdatedEvent",
+      "description": "Emitted when a moderator's role is updated (promoted/demoted). Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeModeratorRoleUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which the role was updated"
+        },
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the moderator"
+        },
+        {
+          "name": "oldRole",
+          "type": "string",
+          "required": true,
+          "description": "Previous ModeratorRole enum value"
+        },
+        {
+          "name": "newRole",
+          "type": "string",
+          "required": true,
+          "description": "New ModeratorRole enum value"
+        },
+        {
+          "name": "updatedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the user who updated the role"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the role was updated"
+        }
+      ]
+    },
+    "OVERSEER_ADDED": {
+      "name": "OVERSEER_ADDED",
+      "constant": "overseer_added",
+      "interface": "OverseerAddedEvent",
+      "description": "Emitted when a user becomes an overseer (system administrator). Broadcast to overseer room + global announcement.",
+      "room": "global",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeOverseerAdded",
+      "fields": [
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the new overseer"
+        },
+        {
+          "name": "addedBy",
+          "type": "string",
+          "required": false,
+          "description": "Optional address of the user who added this overseer"
+        },
+        {
+          "name": "fullName",
+          "type": "string",
+          "required": false,
+          "description": "Optional full name of the new overseer"
+        },
+        {
+          "name": "profileImage",
+          "type": "string",
+          "required": false,
+          "description": "Optional profile image URL of the new overseer"
+        },
+        {
+          "name": "addedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the overseer was added"
+        }
+      ]
+    },
+    "OVERSEER_REMOVED": {
+      "name": "OVERSEER_REMOVED",
+      "constant": "overseer_removed",
+      "interface": "OverseerRemovedEvent",
+      "description": "Emitted when overseer privileges are revoked from a user. Broadcast to overseer room.",
+      "room": "global",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeOverseerRemoved",
+      "fields": [
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the removed overseer"
+        },
+        {
+          "name": "removedBy",
+          "type": "string",
+          "required": false,
+          "description": "Optional address of the user who removed this overseer"
+        },
+        {
+          "name": "removedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the overseer was removed"
+        }
+      ]
+    },
+    "TRADE_EXECUTED": {
+      "name": "TRADE_EXECUTED",
+      "constant": "trade_executed",
+      "interface": "TradeExecutedEvent",
+      "description": "Emitted when a trade is executed on a bonding curve (buy/sell). Broadcast to token room. High-frequency event - may be throttled (1 per second per token).",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeTradeExecuted",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which the trade occurred"
+        },
+        {
+          "name": "txnId",
+          "type": "string",
+          "required": false,
+          "description": "Optional transaction ID"
+        },
+        {
+          "name": "tradeType",
+          "type": "'BUY' | 'SELL'",
+          "required": true,
+          "description": "Trade type: BUY or SELL"
+        },
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the trader"
+        },
+        {
+          "name": "inputAmount",
+          "type": "string | number",
+          "required": true,
+          "description": "Amount of input currency"
+        },
+        {
+          "name": "outputAmount",
+          "type": "string | number",
+          "required": true,
+          "description": "Amount of output currency"
+        },
+        {
+          "name": "newPrice",
+          "type": "string",
+          "required": false,
+          "description": "Optional new token price after the trade"
+        },
+        {
+          "name": "newMarketCap",
+          "type": "string",
+          "required": false,
+          "description": "Optional new market cap after the trade"
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the trade occurred"
+        }
+      ]
+    },
+    "POOL_METADATA_UPDATED": {
+      "name": "POOL_METADATA_UPDATED",
+      "constant": "pool_metadata_updated",
+      "interface": "PoolMetadataUpdatedEvent",
+      "description": "Emitted when pool metadata is updated (generic update). Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribePoolMetadataUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which metadata was updated"
+        },
+        {
+          "name": "field",
+          "type": "string",
+          "required": false,
+          "description": "Optional field name that was updated"
+        },
+        {
+          "name": "value",
+          "type": "unknown",
+          "required": false,
+          "description": "Optional new value of the updated field"
+        },
+        {
+          "name": "updatedBy",
+          "type": "string",
+          "required": false,
+          "description": "Optional address of the user who updated metadata"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the update occurred"
+        }
+      ]
+    },
+    "POOL_SOCIAL_LINKS_UPDATED": {
+      "name": "POOL_SOCIAL_LINKS_UPDATED",
+      "constant": "pool_social_links_updated",
+      "interface": "PoolSocialLinksUpdatedEvent",
+      "description": "Emitted when pool social links are updated. Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribePoolSocialLinksUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which social links were updated"
+        },
+        {
+          "name": "websiteUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional website URL"
+        },
+        {
+          "name": "twitterUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional Twitter/X URL"
+        },
+        {
+          "name": "telegramUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional Telegram URL"
+        },
+        {
+          "name": "instagramUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional Instagram URL"
+        },
+        {
+          "name": "facebookUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional Facebook URL"
+        },
+        {
+          "name": "discordUrl",
+          "type": "string",
+          "required": false,
+          "description": "Optional Discord URL"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the update occurred"
+        }
+      ]
+    },
+    "POOL_BADGE_ASSIGNED": {
+      "name": "POOL_BADGE_ASSIGNED",
+      "constant": "pool_badge_assigned",
+      "interface": "PoolBadgeAssignedEvent",
+      "description": "Emitted when a badge is assigned to a pool. Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribePoolBadgeAssigned",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name to which the badge was assigned"
+        },
+        {
+          "name": "badgeType",
+          "type": "string",
+          "required": true,
+          "description": "Badge type (e.g., 'volume', 'engagement', 'market_cap')"
+        },
+        {
+          "name": "badge",
+          "type": "string",
+          "required": true,
+          "description": "Badge name/identifier"
+        },
+        {
+          "name": "assignedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the badge was assigned"
+        }
+      ]
+    },
+    "HOLDER_COUNT_UPDATED": {
+      "name": "HOLDER_COUNT_UPDATED",
+      "constant": "holder_count_updated",
+      "interface": "HolderCountUpdatedEvent",
+      "description": "Emitted when the holder count for a token changes. Usually triggered by trade execution. Broadcast to token room.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeHolderCountUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which holder count changed"
+        },
+        {
+          "name": "holderCount",
+          "type": "number",
+          "required": true,
+          "description": "Current number of token holders"
+        },
+        {
+          "name": "previousCount",
+          "type": "number",
+          "required": false,
+          "description": "Optional previous number of token holders"
+        },
+        {
+          "name": "change",
+          "type": "number",
+          "required": false,
+          "description": "Optional change in holder count (difference)"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the update occurred"
+        }
+      ]
+    },
+    "COMMENT_CREATED": {
+      "name": "COMMENT_CREATED",
+      "constant": "comment_created",
+      "interface": "CommentCreatedEvent",
+      "description": "Emitted when a new comment is posted on a pool. Broadcast to comment room. Note: Update and delete events already exist via PoolMessageService.",
+      "room": "token",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeCommentCreated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name on which the comment was posted"
+        },
+        {
+          "name": "id",
+          "type": "number",
+          "required": true,
+          "description": "MySQL auto-increment ID of the comment"
+        },
+        {
+          "name": "messageId",
+          "type": "string",
+          "required": false,
+          "description": "Optional UUID-based string ID"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Comment text content"
+        },
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the comment author"
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the comment was created"
+        },
+        {
+          "name": "user",
+          "type": "{ fullName?: string; profileImage?: string }",
+          "required": false,
+          "description": "Optional user profile information"
+        }
+      ]
+    },
+    "USER_PROFILE_UPDATED": {
+      "name": "USER_PROFILE_UPDATED",
+      "constant": "user_profile_updated",
+      "interface": "UserProfileUpdatedEvent",
+      "description": "Emitted when a user updates their profile (name, image, bio, badges). Broadcast to user-specific room (user:{address}). Global impact - user appears in many contexts.",
+      "room": "user",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeUserProfileUpdated",
+      "fields": [
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the user whose profile was updated"
+        },
+        {
+          "name": "updatedFields",
+          "type": "string[]",
+          "required": true,
+          "description": "List of field names that were updated (e.g., ['fullName', 'profileImage', 'bio'])"
+        },
+        {
+          "name": "updates",
+          "type": "{ fullName?: string; profileImage?: string; bio?: string; badges?: string[] }",
+          "required": false,
+          "description": "Optional object containing the updated field values"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the update occurred"
+        }
+      ]
+    },
+    "API_KEY_CREATED": {
+      "name": "API_KEY_CREATED",
+      "constant": "api_key_created",
+      "interface": "ApiKeyCreatedEvent",
+      "description": "Emitted when an API key is created. Broadcast to user-specific room (user:{address}) - private to owner.",
+      "room": "user",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeApiKeyCreated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": false,
+          "description": "Optional token name associated with the API key"
+        },
+        {
+          "name": "keyId",
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier for the API key"
+        },
+        {
+          "name": "keyPrefix",
+          "type": "string",
+          "required": false,
+          "description": "Optional prefix/display portion of the API key"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Optional friendly name for the API key"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Optional description of the API key's purpose"
+        },
+        {
+          "name": "permissions",
+          "type": "string[]",
+          "required": false,
+          "description": "Optional list of permissions granted to this API key"
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the API key was created"
+        }
+      ]
+    },
+    "API_KEY_UPDATED": {
+      "name": "API_KEY_UPDATED",
+      "constant": "api_key_updated",
+      "interface": "ApiKeyUpdatedEvent",
+      "description": "Emitted when an API key settings are updated. Broadcast to user-specific room (user:{address}) - private to owner.",
+      "room": "user",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeApiKeyUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": false,
+          "description": "Optional token name associated with the API key"
+        },
+        {
+          "name": "keyId",
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier for the API key"
+        },
+        {
+          "name": "keyPrefix",
+          "type": "string",
+          "required": false,
+          "description": "Optional prefix/display portion of the API key"
+        },
+        {
+          "name": "updatedFields",
+          "type": "string[]",
+          "required": false,
+          "description": "Optional list of field names that were updated"
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the update occurred"
+        }
+      ]
+    },
+    "API_KEY_REVOKED": {
+      "name": "API_KEY_REVOKED",
+      "constant": "api_key_revoked",
+      "interface": "ApiKeyRevokedEvent",
+      "description": "Emitted when an API key is revoked/deleted. Broadcast to user-specific room (user:{address}) - private to owner.",
+      "room": "user",
+      "since": "6.0.0",
+      "subscriptionMethod": "subscribeApiKeyRevoked",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": false,
+          "description": "Optional token name associated with the API key"
+        },
+        {
+          "name": "keyId",
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier for the API key"
+        },
+        {
+          "name": "keyPrefix",
+          "type": "string",
+          "required": false,
+          "description": "Optional prefix/display portion of the API key"
+        },
+        {
+          "name": "revokedBy",
+          "type": "string",
+          "required": false,
+          "description": "Optional address of the user who revoked the API key"
+        },
+        {
+          "name": "revokedAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the API key was revoked"
+        }
+      ]
+    }
+  },
+  "examples": {
+    "connectionSetup": "import { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst wsService = new StreamWebSocketService({\n  url: 'wss://stream.gala.com',\n  authToken: 'your-jwt-token'\n});\n\nawait wsService.connect();",
+    "subscriptionPattern": "// Subscribe to trade events for a token\nawait wsService.subscribeToStream('mytoken', {\n  onTradeExecuted: (event) => {\n    console.log('Trade executed:', event.tokenName, event.tradeType, event.outputAmount);\n  }\n});\n\n// Subscribe to moderator changes\nwsService.subscribeModeratorAdded('mytoken', (event) => {\n  console.log('New moderator:', event.userAddress, 'Role:', event.role);\n});"
+  }
+}
