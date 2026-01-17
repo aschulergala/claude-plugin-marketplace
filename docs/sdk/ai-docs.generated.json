@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "5.0.4-beta.1",
-    "generatedAt": "2026-01-17T11:08:45.138Z",
+    "generatedAt": "2026-01-17T11:33:53.517Z",
     "toolCount": 254,
     "categoryCount": 29
   },
@@ -314,7 +314,7 @@
           "name": "language",
           "type": "string",
           "required": false,
-          "description": "Filter pools by stream language (ISO 639-1 code, e.g., \"en\", \"es\", \"ja\", \"zh-CN\")"
+          "description": "Filter pools by stream language (ISO 639-1 code, e.g., \"en\", \"es\", \"ja\", \"zh-CN\")."
         },
         {
           "name": "recentlyStreamed",
@@ -390,7 +390,7 @@
           "name": "language",
           "type": "string",
           "required": false,
-          "description": "Filter pools by stream language (ISO 639-1 code, e.g., \"en\", \"es\", \"ja\", \"zh-CN\")"
+          "description": "Filter pools by stream language (ISO 639-1 code, e.g., \"en\", \"es\", \"ja\", \"zh-CN\")."
         },
         {
           "name": "recentlyStreamed",
@@ -581,7 +581,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Launchpad token name (e.g., \"galadog\", \"anime\") - auto-detects graduation status"
+          "description": "Launchpad token name (e.g., \"galadog\", \"anime\") - auto-detects graduation status."
         },
         {
           "name": "tokenId",
@@ -628,7 +628,7 @@
           "name": "tokenName",
           "type": "any",
           "required": true,
-          "description": "Token name (e.g., \"dragnrkti\", \"rocketri\", \"unicornri\")"
+          "description": "Token name (e.g., \"dragnrkti\", \"rocketri\", \"unicornri\")."
         },
         {
           "name": "calculateAmountMode",
@@ -967,13 +967,13 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Token name to check (e.g., \"anime\", \"galadog\")"
+          "description": "Token name to check (e.g., \"anime\", \"galadog\")."
         },
         {
           "name": "symbol",
           "type": "any",
           "required": false,
-          "description": "Token symbol to check (e.g., \"MT\", \"LG\")"
+          "description": "Token symbol to check (e.g., \"MT\", \"LG\")."
         }
       ]
     },
@@ -1084,13 +1084,13 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)"
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount to spend\n Example: \"I want to spend 10 GALA to buy tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to buy\n  Example: \"I want to buy exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA to spend",
+          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount to spend\n Example: \"I want to spend 10 GALA to buy tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to buy\n  Example: \"I want to buy exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA to spend.",
           "enum": [
             "native",
             "exact"
@@ -1123,7 +1123,7 @@
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount you want to receive\n Example: \"I want to receive 10 GALA from selling tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to sell\n  Example: \"I want to sell exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA you want to receive",
+          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount you want to receive\n Example: \"I want to receive 10 GALA from selling tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to sell\n  Example: \"I want to sell exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA you want to receive.",
           "enum": [
             "native",
             "exact"
@@ -1337,7 +1337,7 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "GALA amount to spend for initial buy (standard decimal format, e.g., \"100\" for 100 GALA)"
+          "description": "GALA amount to spend for initial buy (standard decimal format, e.g., \"100\" for 100 GALA)."
         }
       ]
     },
@@ -1460,7 +1460,7 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)"
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "type",
@@ -1493,7 +1493,7 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)"
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "type",
@@ -1604,13 +1604,13 @@
           "name": "fromToken",
           "type": "string",
           "required": true,
-          "description": "Source token symbol (e.g., \"GALA\")"
+          "description": "Source token symbol (e.g., \"GALA\")."
         },
         {
           "name": "toToken",
           "type": "string",
           "required": true,
-          "description": "Destination token symbol (e.g., \"GUSDC\")"
+          "description": "Destination token symbol (e.g., \"GUSDC\")."
         },
         {
           "name": "amount",
@@ -1633,13 +1633,13 @@
           "name": "fromToken",
           "type": "string",
           "required": true,
-          "description": "Source token symbol (e.g., \"GALA\")"
+          "description": "Source token symbol (e.g., \"GALA\")."
         },
         {
           "name": "toToken",
           "type": "string",
           "required": true,
-          "description": "Destination token symbol (e.g., \"GUSDC\")"
+          "description": "Destination token symbol (e.g., \"GUSDC\")."
         },
         {
           "name": "amount",
@@ -1662,13 +1662,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pool (e.g., \"GALA|Unit|none|none\")"
+          "description": "First token in pool (e.g., \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pool (e.g., \"Token|Unit|BENE|client:xxx\")"
+          "description": "Second token in pool (e.g., \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "fee",
@@ -1719,13 +1719,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pool (e.g., \"GALA|Unit|none|none\")"
+          "description": "First token in pool (e.g., \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pool (e.g., \"Token|Unit|BENE|client:xxx\")"
+          "description": "Second token in pool (e.g., \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "fee",
@@ -1770,13 +1770,13 @@
           "name": "fromToken",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "toToken",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "inputAmount",
@@ -1822,7 +1822,7 @@
           "name": "walletAddress",
           "type": "any",
           "required": true,
-          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")"
+          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
         }
       ],
       "topic": "dex-trading"
@@ -1839,7 +1839,7 @@
           "name": "walletAddress",
           "type": "any",
           "required": true,
-          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")"
+          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
         }
       ],
       "topic": "utilities-and-helpers"
@@ -1950,13 +1950,13 @@
           "name": "tokenA",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "tokenB",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         }
       ],
       "topic": "dex-trading"
@@ -1973,13 +1973,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token class key (e.g., \"GALA|Unit|none|none\")"
+          "description": "First token class key (e.g., \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token class key (e.g., \"Token|Unit|BENE|client:5c806869e7fd0e2384461ce9\")"
+          "description": "Second token class key (e.g., \"Token|Unit|BENE|client:5c806869e7fd0e2384461ce9\")."
         },
         {
           "name": "fee",
@@ -2007,13 +2007,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")"
+          "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         },
         {
           "name": "fee",
@@ -2171,13 +2171,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")"
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")"
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
           "name": "fee",
@@ -2216,13 +2216,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")"
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")"
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
           "name": "fee",
@@ -2273,13 +2273,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")"
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")"
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
           "name": "fee",
@@ -2296,13 +2296,13 @@
           "name": "minPrice",
           "type": "string",
           "required": true,
-          "description": "Minimum price boundary (e.g., \"0.90\")"
+          "description": "Minimum price boundary (e.g., \"0.90\")."
         },
         {
           "name": "maxPrice",
           "type": "string",
           "required": true,
-          "description": "Maximum price boundary (e.g., \"1.10\")"
+          "description": "Maximum price boundary (e.g., \"1.10\")."
         },
         {
           "name": "amount0Desired",
@@ -2342,13 +2342,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")"
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")"
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
           "name": "feeTier",
@@ -2457,13 +2457,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")"
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")"
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
           "name": "fee",
@@ -3024,13 +3024,13 @@
           "name": "tokenCategory",
           "type": "string",
           "required": false,
-          "description": "Token category (defaults to \"Unit\")"
+          "description": "Token category (defaults to \"Unit\")."
         },
         {
           "name": "tokenCollection",
           "type": "string",
           "required": false,
-          "description": "Token collection (defaults to \"Token\")"
+          "description": "Token collection (defaults to \"Token\")."
         },
         {
           "name": "reverseBondingCurveConfiguration",
@@ -3153,13 +3153,13 @@
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Token type (e.g., \"NFT\", \"CARD\")"
+          "description": "Token type (e.g., \"NFT\", \"CARD\")."
         },
         {
           "name": "category",
           "type": "string",
           "required": true,
-          "description": "Token category (e.g., \"Unit\")"
+          "description": "Token category (e.g., \"Unit\")."
         },
         {
           "name": "quantity",
@@ -3267,13 +3267,13 @@
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Token type (e.g., \"Rare\", \"Epic\")"
+          "description": "Token type (e.g., \"Rare\", \"Epic\")."
         },
         {
           "name": "category",
           "type": "string",
           "required": true,
-          "description": "Token category (e.g., \"Unit\")"
+          "description": "Token category (e.g., \"Unit\")."
         },
         {
           "name": "name",
@@ -4120,9 +4120,9 @@
       ],
       "topic": "bridge-operations"
     },
-    "fetchEthereumWalletTokenBalance": {
-      "name": "fetchEthereumWalletTokenBalance",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_token_balance",
+    "fetchEthereumWalletTokenBalance.": {
+      "name": "fetchEthereumWalletTokenBalance.",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_token_balance.",
       "category": "bridge",
       "description": "Get a single ERC-20 token balance on Ethereum (GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC). Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4140,12 +4140,11 @@
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
-    "fetchEthereumWalletNativeBalance": {
-      "name": "fetchEthereumWalletNativeBalance",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_native_balance",
+    "fetchEthereumWalletNativeBalance.": {
+      "name": "fetchEthereumWalletNativeBalance.",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_native_balance.",
       "category": "bridge",
       "description": "Get native ETH balance on Ethereum. Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4157,12 +4156,11 @@
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
-    "fetchEthereumWalletAllBalances": {
-      "name": "fetchEthereumWalletAllBalances",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_all_balances",
+    "fetchEthereumWalletAllBalances.": {
+      "name": "fetchEthereumWalletAllBalances.",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_all_balances.",
       "category": "bridge",
       "description": "Get ALL supported token balances on Ethereum for a wallet (ETH, GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC). Returns native ETH and all supported ERC-20 token balances. Note: Makes 7 RPC calls.",
       "operationType": "read",
@@ -4174,12 +4172,11 @@
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
-    "fetchSolanaWalletTokenBalance": {
-      "name": "fetchSolanaWalletTokenBalance",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_token_balance",
+    "fetchSolanaWalletTokenBalance.": {
+      "name": "fetchSolanaWalletTokenBalance.",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_token_balance.",
       "category": "bridge",
       "description": "Get a single SPL token balance on Solana (GALA, GSOL). Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4197,12 +4194,11 @@
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
-    "fetchSolanaWalletNativeBalance": {
-      "name": "fetchSolanaWalletNativeBalance",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_native_balance",
+    "fetchSolanaWalletNativeBalance.": {
+      "name": "fetchSolanaWalletNativeBalance.",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_native_balance.",
       "category": "bridge",
       "description": "Get native SOL balance on Solana. Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4214,12 +4210,11 @@
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
-    "fetchSolanaWalletAllBalances": {
-      "name": "fetchSolanaWalletAllBalances",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_all_balances",
+    "fetchSolanaWalletAllBalances.": {
+      "name": "fetchSolanaWalletAllBalances.",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_all_balances.",
       "category": "bridge",
       "description": "Get ALL supported token balances on Solana for a wallet (SOL, GALA, GSOL). Returns native SOL and all supported SPL token balances. Note: Makes 3 RPC calls.",
       "operationType": "read",
@@ -4231,8 +4226,7 @@
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchBridgeableTokensByNetwork": {
       "name": "fetchBridgeableTokensByNetwork",
@@ -4528,7 +4522,7 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")"
+          "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")."
         },
         {
           "name": "recipient",
@@ -4563,7 +4557,7 @@
           "name": "amount",
           "type": "any",
           "required": true,
-          "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")"
+          "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")."
         },
         {
           "name": "recipient",
@@ -4592,7 +4586,7 @@
           "name": "tokenId",
           "type": "any",
           "required": true,
-          "description": "Token to wrap (e.g., \"MUSIC\" or \"$MUSIC|Unit|none|none\")"
+          "description": "Token to wrap (e.g., \"MUSIC\" or \"$MUSIC|Unit|none|none\")."
         },
         {
           "name": "amount",
@@ -4615,7 +4609,7 @@
           "name": "tokenId",
           "type": "any",
           "required": true,
-          "description": "Token to unwrap (e.g., \"GMUSIC\" or \"$GMUSIC|Unit|none|none\")"
+          "description": "Token to unwrap (e.g., \"GMUSIC\" or \"$GMUSIC|Unit|none|none\")."
         },
         {
           "name": "amount",
@@ -5688,7 +5682,7 @@
       "name": "revokeApiKey",
       "mcpTool": "gala_launchpad_revoke_api_key",
       "category": "api-keys",
-      "description": "Revoke an API key.\n\nThis performs a soft delete - the key becomes immediately unusable\nbut is retained for audit purposes.\n\nRETURNS: { success: true, message: \"API key revoked\" }\n\nAuthentication: Requires JWT auth (call SDK.login() first)",
+      "description": "Revoke an API key.\n\nThis performs a soft delete - the key becomes immediately unusable\nbut is retained for audit purposes.\n\nRETURNS: { success: true, message: \"API key revoked\" }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5705,7 +5699,7 @@
       "name": "getApiKeyRoles",
       "mcpTool": "gala_launchpad_get_api_key_roles",
       "category": "api-keys",
-      "description": "Get all valid API key roles.\n\nReturns the list of available roles for API keys.\nUseful for understanding the permission hierarchy.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat messages, ban/unban users\n- TECHNICAL_PRODUCER: Simulcast targets, stream key, stop/start stream\n- MANAGER: Moderator + Technical Producer + recordings + stream settings\n- OWNER: Full access (indistinguishable from normal auth)\n\nRETURNS: { roles: [\"MODERATOR\", \"TECHNICAL_PRODUCER\", \"MANAGER\", \"OWNER\"] }\n\nAuthentication: None required (utility method)",
+      "description": "Get all valid API key roles.\n\nReturns the list of available roles for API keys.\nUseful for understanding the permission hierarchy.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat messages, ban/unban users\n- TECHNICAL_PRODUCER: Simulcast targets, stream key, stop/start stream\n- MANAGER: Moderator + Technical Producer + recordings + stream settings\n- OWNER: Full access (indistinguishable from normal auth)\n\nRETURNS: { roles: [\"MODERATOR\", \"TECHNICAL_PRODUCER\", \"MANAGER\", \"OWNER\"] }\n\nAuthentication: None required (utility method).",
       "operationType": "read",
       "authRequired": true,
       "parameters": [],
@@ -6617,7 +6611,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Filter by token name (e.g., \"anime\")"
+          "description": "Filter by token name (e.g., \"anime\")."
         },
         {
           "name": "userAddress",
@@ -7005,13 +6999,13 @@
           "name": "startDate",
           "type": "any",
           "required": false,
-          "description": "Filter by date range start (ISO 8601 format, e.g., \"2024-01-01\")"
+          "description": "Filter by date range start (ISO 8601 format, e.g., \"2024-01-01\")."
         },
         {
           "name": "endDate",
           "type": "any",
           "required": false,
-          "description": "Filter by date range end (ISO 8601 format, e.g., \"2024-12-31\")"
+          "description": "Filter by date range end (ISO 8601 format, e.g., \"2024-12-31\")."
         },
         {
           "name": "minAmount",
@@ -7128,7 +7122,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Token name to filter by (e.g., \"anime\")"
+          "description": "Token name to filter by (e.g., \"anime\")."
         },
         {
           "name": "userAddress",
@@ -7163,7 +7157,7 @@
           "name": "tokenName",
           "type": "any",
           "required": true,
-          "description": "Token name to post the message to (e.g., \"anime\")"
+          "description": "Token name to post the message to (e.g., \"anime\")."
         },
         {
           "name": "content",
@@ -7923,9 +7917,9 @@
       "fetchDexAggregatedVolumeSummary",
       "fetchDexLeaderboardBySeasonId",
       "fetchDexPools",
-      "fetchEthereumWalletAllBalances",
-      "fetchEthereumWalletNativeBalance",
-      "fetchEthereumWalletTokenBalance",
+      "fetchEthereumWalletAllBalances.",
+      "fetchEthereumWalletNativeBalance.",
+      "fetchEthereumWalletTokenBalance.",
       "fetchGalaBalance",
       "fetchGalaSpotPrice",
       "fetchLaunchTokenFee",
@@ -7941,9 +7935,9 @@
       "fetchProfile",
       "fetchReferrals",
       "fetchReferralsSummary",
-      "fetchSolanaWalletAllBalances",
-      "fetchSolanaWalletNativeBalance",
-      "fetchSolanaWalletTokenBalance",
+      "fetchSolanaWalletAllBalances.",
+      "fetchSolanaWalletNativeBalance.",
+      "fetchSolanaWalletTokenBalance.",
       "fetchSwapPositionDirect",
       "fetchTokenBadges",
       "fetchTokenBalance",
