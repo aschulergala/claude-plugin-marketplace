@@ -1,213 +1,234 @@
 {
   "meta": {
     "version": "5.0.4-beta.1",
-    "generatedAt": "2026-01-17T11:33:53.517Z",
-    "toolCount": 254,
-    "categoryCount": 29
+    "generatedAt": "2026-01-21T02:53:45.590Z",
+    "toolCount": 257,
+    "categoryCount": 32
   },
   "categories": {
     "pools": {
       "key": "pools",
       "label": "Pools",
-      "description": "Pool management, pricing, and token availability.",
+      "description": "Pool management, pricing, and token availability",
       "icon": "🏊",
-      "count": 26
+      "count": 28
     },
     "trading": {
       "key": "trading",
       "label": "Trading",
-      "description": "Buy, sell, and calculate token amounts.",
+      "description": "Buy, sell, and calculate token amounts",
       "icon": "📈",
       "count": 13
     },
     "dex": {
       "key": "dex",
       "label": "DEX Trading",
-      "description": "GalaSwap quotes, swaps, and user assets.",
+      "description": "GalaSwap quotes, swaps, and user assets",
       "icon": "🔄",
       "count": 7
     },
     "dex-pools": {
       "key": "dex-pools",
       "label": "DEX Pools",
-      "description": "DEX pool discovery and information.",
+      "description": "DEX pool discovery and information",
       "icon": "🌊",
       "count": 7
     },
     "dex-liquidity": {
       "key": "dex-liquidity",
       "label": "DEX Liquidity",
-      "description": "Liquidity position management.",
+      "description": "Liquidity position management",
       "icon": "💧",
       "count": 10
     },
     "dex-analytics": {
       "key": "dex-analytics",
       "label": "DEX Analytics",
-      "description": "Leaderboards and volume metrics.",
+      "description": "Leaderboards and volume metrics",
       "icon": "📊",
       "count": 5
     },
     "balance": {
       "key": "balance",
       "label": "Balances",
-      "description": "Balance queries and portfolio management.",
+      "description": "Balance queries and portfolio management",
       "icon": "💰",
       "count": 10
     },
     "referrals": {
       "key": "referrals",
       "label": "Referrals",
-      "description": "Referral program and rewards tracking.",
+      "description": "Referral program and rewards tracking",
       "icon": "🔗",
       "count": 4
     },
     "creation": {
       "key": "creation",
       "label": "Token Creation",
-      "description": "Launch new tokens on Launchpad.",
+      "description": "Launch new tokens on Launchpad",
       "icon": "🪙",
       "count": 4
     },
     "nft": {
       "key": "nft",
       "label": "NFTs",
-      "description": "NFT collection management and operations.",
+      "description": "NFT collection management and operations",
       "icon": "🖼️",
       "count": 11
     },
     "transfers": {
       "key": "transfers",
       "label": "Transfers",
-      "description": "GALA and token transfers.",
+      "description": "GALA and token transfers",
       "icon": "📤",
       "count": 2
     },
     "locks": {
       "key": "locks",
       "label": "Locks",
-      "description": "Token lock and unlock operations.",
+      "description": "Token lock and unlock operations",
       "icon": "🔒",
       "count": 2
     },
     "burns": {
       "key": "burns",
       "label": "Burns",
-      "description": "Permanently destroy tokens (irreversible).",
+      "description": "Permanently destroy tokens (irreversible)",
       "icon": "🔥",
       "count": 1
     },
     "wallet": {
       "key": "wallet",
       "label": "Wallet",
-      "description": "Wallet creation and key derivation.",
+      "description": "Wallet creation and key derivation",
       "icon": "👛",
       "count": 6
     },
     "utils": {
       "key": "utils",
       "label": "Utilities",
-      "description": "SDK configuration and helpers.",
+      "description": "SDK configuration and helpers",
       "icon": "🛠️",
       "count": 16
     },
     "bridge": {
       "key": "bridge",
       "label": "Bridge",
-      "description": "Cross-chain bridging operations.",
+      "description": "Cross-chain bridging operations",
       "icon": "🌉",
       "count": 31
     },
     "streaming": {
       "key": "streaming",
       "label": "Live Stream",
-      "description": "Live streaming management.",
+      "description": "Live streaming management and control",
       "icon": "📺",
-      "count": 17
+      "count": 10
+    },
+    "recordings": {
+      "key": "recordings",
+      "label": "Recordings",
+      "description": "Stream recording management - list, download, and delete recordings",
+      "icon": "🎥",
+      "count": 3
+    },
+    "simulcasts": {
+      "key": "simulcasts",
+      "label": "Simulcasts",
+      "description": "Multi-platform streaming - YouTube, Twitch, Facebook rebroadcasting",
+      "icon": "📡",
+      "count": 3
     },
     "chat": {
       "key": "chat",
       "label": "Chat",
-      "description": "Stream chat and messaging.",
+      "description": "Stream chat and messaging",
       "icon": "💬",
-      "count": 13
+      "count": 10
     },
     "auth": {
       "key": "auth",
       "label": "Auth",
-      "description": "JWT session authentication.",
+      "description": "JWT session authentication",
       "icon": "🔐",
       "count": 8
     },
     "ban": {
       "key": "ban",
       "label": "Ban Management",
-      "description": "User bans and moderation.",
+      "description": "User bans and moderation",
       "icon": "🚫",
       "count": 6
     },
     "api-keys": {
       "key": "api-keys",
       "label": "API Keys",
-      "description": "API key management.",
+      "description": "API key management",
       "icon": "🔑",
       "count": 6
     },
     "moderators": {
       "key": "moderators",
       "label": "Moderators",
-      "description": "Moderator invites and access.",
+      "description": "Moderator invites and access",
       "icon": "👮",
       "count": 9
     },
     "content-flags": {
       "key": "content-flags",
       "label": "Content Flags",
-      "description": "Report and moderate content.",
+      "description": "Report and moderate content",
       "icon": "🚩",
       "count": 5
     },
     "overseers": {
       "key": "overseers",
       "label": "Overseers",
-      "description": "Global platform oversight.",
+      "description": "Global platform oversight",
       "icon": "👁️",
       "count": 11
     },
     "token-ban": {
       "key": "token-ban",
       "label": "Token Ban",
-      "description": "Platform-wide token bans.",
+      "description": "Platform-wide token bans",
       "icon": "⛔",
       "count": 6
     },
-    "comments": {
-      "key": "comments",
-      "label": "Comments",
-      "description": "Pool comment management.",
-      "icon": "💭",
-      "count": 5
+    "messages": {
+      "key": "messages",
+      "label": "Messages",
+      "description": "Messages operations",
+      "icon": "📦",
+      "count": 7
+    },
+    "restricted-names": {
+      "key": "restricted-names",
+      "label": "Restricted-names",
+      "description": "Restricted-names operations",
+      "icon": "📦",
+      "count": 2
     },
     "content-reactions": {
       "key": "content-reactions",
       "label": "Reactions",
-      "description": "Content reactions on messages and comments.",
+      "description": "Content reactions on messages and comments",
       "icon": "❤️",
       "count": 6
     },
     "trades": {
       "key": "trades",
       "label": "Trade History",
-      "description": "View and analyze trading history.",
+      "description": "View and analyze trading history",
       "icon": "📋",
       "count": 3
     },
-    "chat-messages": {
-      "key": "chat-messages",
-      "label": "Chat Messages",
-      "description": "Stream chat message operations.",
-      "icon": "💬",
-      "count": 4
+    "holders": {
+      "key": "holders",
+      "label": "Holders",
+      "description": "Holders operations",
+      "icon": "📦",
+      "count": 5
     }
   },
   "categoryGroups": [
@@ -249,6 +270,8 @@
       "label": "Community",
       "categories": [
         "streaming",
+        "recordings",
+        "simulcasts",
         "chat",
         "chat-messages",
         "comments",
@@ -282,7 +305,7 @@
       "name": "fetchPools",
       "mcpTool": "gala_launchpad_fetch_pools",
       "category": "pools",
-      "description": "Fetch token pools from GALA Launchpad with filtering and pagination.",
+      "description": "Fetch token pools from Gala Launchpad with filtering and pagination.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -340,16 +363,16 @@
           ]
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         }
       ],
       "topic": "fetch-pools"
@@ -490,7 +513,7 @@
       "name": "fetchUserHolderContext",
       "mcpTool": "gala_launchpad_fetch_user_holder_context",
       "category": "pools",
-      "description": "Get a user's holder context for a specific token.\n\nReturns holder tier, quantity, percentage, rank, and creator status for a user on a specific token.\nUsed for user cards in comments/chat to show token-specific holder information.\nReturns null if user is not a holder (quantity/percentage/rank/holderTier fields will be null).\n\nRETURNS: { tokenName, userAddress, quantity, percentage, rank, holderTier: { tier, tierName }, isCreator }.",
+      "description": "Get a user's holder context for a specific token.\n\nReturns holder tier, quantity, percentage, rank, and creator status for a user on a specific token.\nUsed for user cards in comments/chat to show token-specific holder information.\nReturns null if user is not a holder (quantity/percentage/rank/holderTier fields will be null).\n\nRETURNS: { tokenName, userAddress, quantity, percentage, rank, holderTier: { tier, tierName }, isCreator }",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -691,16 +714,16 @@
           ]
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 10, maximum: 50)."
+          "description": "Results per page (default: 10, maximum: 50)"
         }
       ],
       "topic": "price-history"
@@ -779,6 +802,28 @@
           "type": "any",
           "required": true,
           "description": "Token symbol."
+        }
+      ]
+    },
+    "validateToken": {
+      "name": "validateToken",
+      "mcpTool": "gala_launchpad_validate_token",
+      "category": "pools",
+      "description": "Validate if token name and/or symbol are available for use.\n\nCheck name and symbol availability before launching a token. Returns availability flags\nand any validation errors. Useful for token creation forms to prevent invalid submissions.\n\nRETURNS: { nameAvailable, symbolAvailable, nameBlocklisted, symbolBlocklisted, errors: [] }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": false,
+          "description": "Token name to validate (optional)."
+        },
+        {
+          "name": "symbol",
+          "type": "any",
+          "required": false,
+          "description": "Token symbol to validate (optional)."
         }
       ]
     },
@@ -981,7 +1026,7 @@
       "name": "onPoolUpdated",
       "mcpTool": "gala_launchpad_on_pool_updated",
       "category": "pools",
-      "description": "Watch for pool metadata updates in real-time.\n\nTriggers when pool metadata, social links, or badges are updated. Includes:\n- POOL_METADATA_UPDATED: Name, description, image, category changes\n- POOL_SOCIAL_LINKS_UPDATED: Website, Discord, Twitter, etc. Changes\n- POOL_BADGE_ASSIGNED: New badges or badge assignments\n\nReturns:\n- poolsUpdated: Number of pool updates detected\n- updates: Array of pool update events with tokenName, updateType, and metadata changes\n\nFilter Options:\n- tokenName: Only watch updates for a specific token\n- updateType: Filter by type ('METADATA', 'SOCIAL_LINKS', or 'BADGE_ASSIGNED').",
+      "description": "Watch for pool metadata updates in real-time.\n\nTriggers when pool metadata, social links, or badges are updated. Includes:\n- POOL_METADATA_UPDATED: Name, description, image, category changes\n- POOL_SOCIAL_LINKS_UPDATED: Website, Discord, Twitter, etc. changes\n- POOL_BADGE_ASSIGNED: New badges or badge assignments\n\nReturns:\n- poolsUpdated: Number of pool updates detected\n- updates: Array of pool update events with tokenName, updateType, and metadata changes\n\nFilter Options:\n- tokenName: Only watch updates for a specific token\n- updateType: Filter by type ('METADATA', 'SOCIAL_LINKS', or 'BADGE_ASSIGNED').",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -1066,6 +1111,34 @@
         }
       ]
     },
+    "updateTokenConfig": {
+      "name": "updateTokenConfig",
+      "mcpTool": "gala_launchpad_update_token_config",
+      "category": "pools",
+      "description": "Update token messaging configuration.\n\nEnable or disable chat messages and/or comments for a token.\nAt least one of messagesEnabled or commentsEnabled must be provided.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Platform admin (API key)\n\nRETURNS: void (success with no content)\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to update configuration for (e.g., \"anime\")."
+        },
+        {
+          "name": "messagesEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable chat messages for this token."
+        },
+        {
+          "name": "commentsEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable comments for this token."
+        }
+      ]
+    },
     "calculateBuyAmount": {
       "name": "calculateBuyAmount",
       "mcpTool": "gala_launchpad_calculate_buy_amount",
@@ -1090,7 +1163,7 @@
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount to spend\n Example: \"I want to spend 10 GALA to buy tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to buy\n  Example: \"I want to buy exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA to spend.",
+          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount to spend\n  Example: \"I want to spend 10 GALA to buy tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to buy\n  Example: \"I want to buy exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA to spend.",
           "enum": [
             "native",
             "exact"
@@ -1123,7 +1196,7 @@
           "name": "type",
           "type": "string",
           "required": true,
-          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount you want to receive\n Example: \"I want to receive 10 GALA from selling tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to sell\n  Example: \"I want to sell exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA you want to receive.",
+          "description": "Trade calculation type:\n\n- 'native': You specify GALA amount you want to receive\n  Example: \"I want to receive 10 GALA from selling tokens\" -> type: 'native', amount: '10'\n\n- 'exact': You specify exact token amount to sell\n  Example: \"I want to sell exactly 1000 WOO tokens\" -> type: 'exact', amount: '1000'\n\nMost common: Use 'native' when you know how much GALA you want to receive.",
           "enum": [
             "native",
             "exact"
@@ -1136,7 +1209,7 @@
       "name": "buy",
       "mcpTool": "gala_launchpad_buy",
       "category": "trading",
-      "description": "Execute token purchase with slippage protection.\n\nWORKFLOW:\n1. CalculateBuyAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. Buy() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. FetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateBuyAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
+      "description": "Execute token purchase with slippage protection.\n\nWORKFLOW:\n1. calculateBuyAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. buy() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. fetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateBuyAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -1199,7 +1272,7 @@
       "name": "sell",
       "mcpTool": "gala_launchpad_sell",
       "category": "trading",
-      "description": "Execute token sale with slippage protection.\n\nWORKFLOW:\n1. CalculateSellAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. Sell() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. FetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateSellAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
+      "description": "Execute token sale with slippage protection.\n\nWORKFLOW:\n1. calculateSellAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. sell() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. fetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateSellAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -1262,7 +1335,7 @@
       "name": "fetchTrades",
       "mcpTool": "gala_launchpad_fetch_trades",
       "category": "trading",
-      "description": "Get trade history with optional filtering and pagination.\n\nPARAMETERS:\n- tradeType: 'buy' (purchases only) or 'sell' (sales only) - optional filter\n- userAddress: Filter by specific wallet address (optional)\n- startDate/endDate: Filter by date range (optional, ISO 8601 format)\n\nRETURNS:\n- trades[]: Array of trades with:\n - txHash: Transaction ID\n - type: 'buy' or 'sell'\n - amount: Token quantity\n - price: GALA paid/received\n - timestamp: When executed.",
+      "description": "Get trade history with optional filtering and pagination.\n\nPARAMETERS:\n- tradeType: 'buy' (purchases only) or 'sell' (sales only) - optional filter\n- userAddress: Filter by specific wallet address (optional)\n- startDate/endDate: Filter by date range (optional, ISO 8601 format)\n\nRETURNS:\n- trades[]: Array of trades with:\n  - txHash: Transaction ID\n  - type: 'buy' or 'sell'\n  - amount: Token quantity\n  - price: GALA paid/received\n  - timestamp: When executed.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1289,16 +1362,16 @@
           "description": "Filter by user address."
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "startDate",
@@ -1353,7 +1426,7 @@
           "name": "transactionId",
           "type": "any",
           "required": true,
-          "description": "Transaction ID (UUID format) from buy(), sell(), or launchToken()."
+          "description": "Transaction ID (UUID format) from buy(), sell(), or launchToken()"
         }
       ],
       "topic": "utilities-and-helpers"
@@ -1395,7 +1468,7 @@
       "name": "graduateToken",
       "mcpTool": "gala_launchpad_graduate_token",
       "category": "trading",
-      "description": "Graduate a token pool by buying all remaining tokens in one transaction.\n\nWORKFLOW (automatic):\n1. Calls calculateBuyAmountForGraduation() internally\n2. Executes buy() with exact remaining token amount\n3. Returns transaction result\n\nPerformance optimization: Provide currentSupply to avoid fetching pool details twice.\n\nCRITICAL: This is a convenience method that combines multiple operations.\nThrows error if token is already graduated.\nSlippageToleranceFactor is optional and uses SDK defaults if not provided.\n\nRETURNS: TradeResult with transaction details including amounts and transaction ID.",
+      "description": "Graduate a token pool by buying all remaining tokens in one transaction.\n\nWORKFLOW (automatic):\n1. Calls calculateBuyAmountForGraduation() internally\n2. Executes buy() with exact remaining token amount\n3. Returns transaction result\n\nPerformance optimization: Provide currentSupply to avoid fetching pool details twice.\n\nCRITICAL: This is a convenience method that combines multiple operations.\nThrows error if token is already graduated.\nslippageToleranceFactor is optional and uses SDK defaults if not provided.\n\nRETURNS: TradeResult with transaction details including amounts and transaction ID.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -1446,7 +1519,7 @@
       "name": "calculateBuyAmountLocal",
       "mcpTool": "gala_launchpad_calculate_buy_amount_local",
       "category": "trading",
-      "description": "Calculate buy amounts using LOCAL bonding curve formulas (instant, no network call).\n\nUses client-side exponential bonding curve calculations for instant quotes.\nPerfect for price discovery, UI updates, and offline scenarios.\n\nACCURACY: Matches external calculations with <0.01% difference.\n\nRETURNS: { amount, reverseBondingCurveFee: \"0\", transactionFee, gasFee }.",
+      "description": "Calculate buy amounts using LOCAL bonding curve formulas (instant, no network call).\n\nUses client-side exponential bonding curve calculations for instant quotes.\nPerfect for price discovery, UI updates, and offline scenarios.\n\nACCURACY: Matches external calculations with <0.01% difference.\n\nRETURNS: { amount, reverseBondingCurveFee: \"0\", transactionFee, gasFee }",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1479,7 +1552,7 @@
       "name": "calculateBuyAmountExternal",
       "mcpTool": "gala_launchpad_calculate_buy_amount_external",
       "category": "trading",
-      "description": "Calculate buy amounts using EXTERNAL GalaChain network call (real-time).\n\nExplicit external calculation - queries GalaChain network for real-time pricing.\nIdentical to calculateBuyAmount but makes the network dependency explicit.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }.",
+      "description": "Calculate buy amounts using EXTERNAL GalaChain network call (real-time).\n\nExplicit external calculation - queries GalaChain network for real-time pricing.\nIdentical to calculateBuyAmount but makes the network dependency explicit.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1512,7 +1585,7 @@
       "name": "calculateSellAmountLocal",
       "mcpTool": "gala_launchpad_calculate_sell_amount_local",
       "category": "trading",
-      "description": "Calculate sell amounts using LOCAL bonding curve formulas (instant, no network call).\n\nUses client-side calculations with reverse bonding curve fee support.\nRequires pool details (maxSupply, fee parameters) to calculate accurately.\n\nACCURACY: Matches external calculations with <0.01% difference.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }.",
+      "description": "Calculate sell amounts using LOCAL bonding curve formulas (instant, no network call).\n\nUses client-side calculations with reverse bonding curve fee support.\nRequires pool details (maxSupply, fee parameters) to calculate accurately.\n\nACCURACY: Matches external calculations with <0.01% difference.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1563,7 +1636,7 @@
       "name": "calculateSellAmountExternal",
       "mcpTool": "gala_launchpad_calculate_sell_amount_external",
       "category": "trading",
-      "description": "Calculate sell amounts using EXTERNAL GalaChain network call (real-time).\n\nExplicit external calculation - queries GalaChain network for real-time pricing.\nIdentical to calculateSellAmount but makes the network dependency explicit.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }.",
+      "description": "Calculate sell amounts using EXTERNAL GalaChain network call (real-time).\n\nExplicit external calculation - queries GalaChain network for real-time pricing.\nIdentical to calculateSellAmount but makes the network dependency explicit.\n\nRETURNS: { amount, reverseBondingCurveFee, transactionFee, gasFee }",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1848,7 +1921,7 @@
       "name": "fetchDexPools",
       "mcpTool": "gala_launchpad_fetch_dex_pools",
       "category": "dex-pools",
-      "description": "Fetch DEX pools with pagination and filtering - query available liquidity pools on GalaSwap.",
+      "description": "Fetch DEX pools with cursor-based pagination and filtering - query available liquidity pools on GalaSwap.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1880,16 +1953,16 @@
           ]
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 10, maximum: 100)."
+          "description": "Results per page (default: 10, maximum: 100)"
         }
       ],
       "topic": "fetch-dex-pools"
@@ -2033,7 +2106,7 @@
       "name": "fetchAvailableDexTokens",
       "mcpTool": "gala_launchpad_fetch_available_dex_tokens",
       "category": "dex-pools",
-      "description": "Discover all tokens available on the DEX (paginated). Returns rich token metadata without requiring a wallet address. Use for token discovery and listing.",
+      "description": "Discover all tokens available on the DEX (cursor-based pagination). Returns rich token metadata without requiring a wallet address. Use for token discovery and listing.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2041,19 +2114,19 @@
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         }
       ],
       "topic": "dex-token-discovery"
@@ -2070,7 +2143,7 @@
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         }
       ],
       "topic": "dex-token-discovery"
@@ -2671,16 +2744,16 @@
           "description": "Wallet address."
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "tokenName",
@@ -2692,7 +2765,7 @@
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         }
       ],
       "topic": "balances"
@@ -2712,16 +2785,16 @@
           "description": "Wallet address."
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "tokenName",
@@ -2733,7 +2806,7 @@
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         }
       ],
       "topic": "balances"
@@ -2794,7 +2867,7 @@
       "name": "registerAccount",
       "mcpTool": "gala_launchpad_register_account",
       "category": "balance",
-      "description": "Register an account for trading on GALA. Call this before the first purchase to ensure the wallet is ready. Returns registration status and wallet alias. This is idempotent - calling multiple times is safe.",
+      "description": "Register an account for trading on Gala. Call this before the first purchase to ensure the wallet is ready. Returns registration status and wallet alias. This is idempotent - calling multiple times is safe.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -2839,16 +2912,16 @@
       "authRequired": true,
       "parameters": [
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         }
       ],
       "topic": "profile-management"
@@ -2867,7 +2940,7 @@
       "name": "fetchReferrals",
       "mcpTool": "gala_launchpad_fetch_referrals",
       "category": "referrals",
-      "description": "Fetch paginated list of users who signed up using this wallet's referral link. Returns relationship level, join date, and rewards earned from each referral.",
+      "description": "Fetch paginated list of users who signed up using this wallet's referral link using cursor-based pagination. Returns relationship level, join date, and rewards earned from each referral.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2878,16 +2951,16 @@
           "description": "Wallet address to fetch referrals for (defaults to SDK wallet). Supports eth|..., 0x..., or client|... formats."
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 100, maximum: 20)."
+          "description": "Results per page (default: 100, maximum: 20)"
         },
         {
           "name": "sortBy",
@@ -2968,7 +3041,7 @@
       "name": "launchToken",
       "mcpTool": "gala_launchpad_launch_token",
       "category": "creation",
-      "description": "Create a new token on the launchpad.\n\nWORKFLOW:\n1. CheckTokenName() → Verify name is available\n2. CheckTokenSymbol() → Verify symbol is available\n3. LaunchToken() → Create token with validated name/symbol\n4. GetUrlByTokenName() → Get frontend URL for the new token\n\nREQUIREMENT: At least one social URL (websiteUrl, twitterUrl, or telegramUrl) is required.\n\nRETURNS: Transaction details including token name, symbol, creator address, and transaction ID.",
+      "description": "Create a new token on the launchpad.\n\nWORKFLOW:\n1. checkTokenName() → Verify name is available\n2. checkTokenSymbol() → Verify symbol is available\n3. launchToken() → Create token with validated name/symbol\n4. getUrlByTokenName() → Get frontend URL for the new token\n\nREQUIREMENT: At least one social URL (websiteUrl, twitterUrl, or telegramUrl) is required.\n\nRETURNS: Transaction details including token name, symbol, creator address, and transaction ID.",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -2988,7 +3061,7 @@
           "name": "tokenDescription",
           "type": "any",
           "required": true,
-          "description": "Token description."
+          "description": "Token description"
         },
         {
           "name": "tokenImage",
@@ -3513,7 +3586,7 @@
           "name": "tokens",
           "type": "array",
           "required": true,
-          "description": "Array of tokens to lock (each with tokenId or tokenName, amount, and optional lock settings)."
+          "description": "Array of tokens to lock (each with tokenId or tokenName, amount, and optional lock settings)"
         },
         {
           "name": "uniqueKey",
@@ -3542,7 +3615,7 @@
           "name": "tokens",
           "type": "array",
           "required": true,
-          "description": "Array of tokens to unlock (each with tokenId or tokenName, amount, and optional name)."
+          "description": "Array of tokens to unlock (each with tokenId or tokenName, amount, and optional name)"
         },
         {
           "name": "uniqueKey",
@@ -3571,7 +3644,7 @@
           "name": "tokens",
           "type": "array",
           "required": true,
-          "description": "Array of tokens to burn (each with tokenId or tokenName, and amount)."
+          "description": "Array of tokens to burn (each with tokenId or tokenName, and amount)"
         },
         {
           "name": "uniqueKey",
@@ -3689,7 +3762,7 @@
       "name": "explainSdkUsage",
       "mcpTool": "gala_launchpad_explain_sdk_usage",
       "category": "utils",
-      "description": "Get detailed SDK code examples for all 224 MCP tools (mapping to ~208 SDK methods) organized into 49 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, DEX-trading, liquidity-positions, advanced-DEX-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, MCP-to-SDK-mapping, DEX leaderboards, bridge-operations, DEX-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, API-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, and NFT-collection-management.",
+      "description": "Get detailed SDK code examples for all 224 MCP tools (mapping to ~208 SDK methods) organized into 49 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, and nft-collection-management.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -3801,7 +3874,7 @@
       "name": "getVersion",
       "mcpTool": "gala_launchpad_get_version",
       "category": "utils",
-      "description": "Get SDK and MCP server version information. Returns both versions which are dynamically read from package.JSON files.",
+      "description": "Get SDK and MCP server version information. Returns both versions which are dynamically read from package.json files.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
@@ -4247,13 +4320,13 @@
           ]
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Pagination offset (default: 0)."
+          "description": "Cursor from previous response for pagination (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (max: 1000, default: 1000)."
@@ -4429,13 +4502,13 @@
       "authRequired": false,
       "parameters": [
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Pagination offset (default: 0)."
+          "description": "Cursor from previous response for pagination (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (max: 1000, default: 1000)."
@@ -4641,7 +4714,7 @@
       "name": "startStream",
       "mcpTool": "gala_launchpad_start_stream",
       "category": "streaming",
-      "description": "Start a live stream for a token.\n\nCreates a new stream session and returns streaming credentials.\nRtmpUrl is the RTMP server endpoint; use with streamKey in OBS or compatible software.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, playbackId, playbackUrl, status, createdAt }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "description": "Start a live stream for a token.\n\nCreates a new stream session and returns streaming credentials.\nrtmpUrl is the RTMP server endpoint; use with streamKey in OBS or compatible software.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, playbackId, playbackUrl, status, createdAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4658,26 +4731,9 @@
       "name": "stopStream",
       "mcpTool": "gala_launchpad_stop_stream",
       "category": "streaming",
-      "description": "Stop a live stream for a token.\n\nEnds the current stream session. The stream key remains valid for future streams.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "description": "Stop a live stream for a token.\n\nEnds the current stream session. The stream key remains valid for future streams.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ],
-      "topic": "streaming"
-    },
-    "getStreamInfo": {
-      "name": "getStreamInfo",
-      "mcpTool": "gala_launchpad_get_stream_info",
-      "category": "streaming",
-      "description": "Get stream information for a token.\n\nReturns current stream status, playback information, and metadata.\nNextLiveStreamAt: scheduled stream time (ISO 8601); streamLanguage: broadcast language code.\n\nRETURNS: { tokenName, status, playbackId, isLive, title, description, creatorAddress, viewerCount, enabled, nextLiveStreamAt, streamLanguage }\n\nAuthentication: None required (public endpoint).",
-      "operationType": "read",
-      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -4692,7 +4748,7 @@
       "name": "setStreamEnabled",
       "mcpTool": "gala_launchpad_set_stream_enabled",
       "category": "streaming",
-      "description": "Enable or disable streaming for a specific token (Admin only).\n\nControls per-token streaming capability. When disabled, prevents new streams\nfrom being started for this token. Existing active streams will continue\nuntil they end.\n\nRETURNS: { enabled, tokenName }\n\nAuthentication: Requires streamAdminApiKey configuration.",
+      "description": "Enable or disable streaming for a specific token (Admin only).\n\nControls per-token streaming capability. When disabled, prevents new streams\nfrom being started for this token. Existing active streams will continue\nuntil they end.\n\nRETURNS: { enabled, tokenName }\n\nAuthentication: Requires streamAdminApiKey configuration",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4714,7 +4770,7 @@
       "name": "resetStreamKey",
       "mcpTool": "gala_launchpad_reset_stream_key",
       "category": "streaming",
-      "description": "Reset the stream key for a token.\n\nGenerates a new stream key, invalidating the previous one.\nUse this if the stream key has been compromised.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, resetAt }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "description": "Reset the stream key for a token.\n\nGenerates a new stream key, invalidating the previous one.\nUse this if the stream key has been compromised.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, resetAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4731,7 +4787,7 @@
       "name": "setNextLiveStreamCountdown",
       "mcpTool": "gala_launchpad_set_next_live_stream_countdown",
       "category": "streaming",
-      "description": "Set the next live stream countdown time for a token.\n\nSchedules a future live stream for this token. The countdown can be displayed on the pool page\nto let viewers know when the stream will go live.\n\nCan be called multiple times to update the scheduled time.\nPass null as nextLiveStreamAt to clear the countdown.\n\nRETURNS: { tokenName, nextLiveStreamAt, streamLanguage, recordingEnabled }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "description": "Set the next live stream countdown time for a token.\n\nSchedules a future live stream for this token. The countdown can be displayed on the pool page\nto let viewers know when the stream will go live.\n\nCan be called multiple times to update the scheduled time.\nPass null as nextLiveStreamAt to clear the countdown.\n\nRETURNS: { tokenName, nextLiveStreamAt, streamLanguage, recordingEnabled }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4749,11 +4805,82 @@
         }
       ]
     },
+    "getGlobalStreamingStatus": {
+      "name": "getGlobalStreamingStatus",
+      "mcpTool": "gala_launchpad_get_global_streaming_status",
+      "category": "streaming",
+      "description": "Get global streaming status.\n\nReturns platform-wide streaming status including maintenance windows.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "streaming"
+    },
+    "setGlobalStreamingEnabled": {
+      "name": "setGlobalStreamingEnabled",
+      "mcpTool": "gala_launchpad_set_global_streaming_enabled",
+      "category": "streaming",
+      "description": "Enable or disable streaming globally (Admin only).\n\nControls platform-wide streaming capability.\nWhen disabled, no new streams can be started.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": true,
+          "description": "Whether streaming should be enabled globally."
+        }
+      ],
+      "topic": "streaming"
+    },
+    "getStreamRole": {
+      "name": "getStreamRole",
+      "mcpTool": "gala_launchpad_get_stream_role",
+      "category": "streaming",
+      "description": "Get the authenticated user's role for a token's stream with associated permissions.\n\nReturns effective role (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR) with boolean permission flags.\ncanStream: Can start/stop streams. canModerate: Can moderate chat/ban. canManageTeam: Can manage moderator invites.\n\nRETURNS: { role: 'OWNER'|'MANAGER'|'TECHNICAL_PRODUCER'|'MODERATOR'|null, isOwner, permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast }, source, inviteScope }\n\nAuthentication: Optional JWT - returns limited data if not authenticated",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name."
+        }
+      ],
+      "topic": "streaming"
+    },
+    "getAvailableRoles": {
+      "name": "getAvailableRoles",
+      "mcpTool": "gala_launchpad_get_available_roles",
+      "category": "streaming",
+      "description": "Get all available roles and permissions for token delegation.\n\nReturns reference data about the role system, including:\n- All available roles (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n- Role descriptions and hierarchy levels\n- Permissions assigned to each role\n- Complete list of all available permissions\n\n**Role Hierarchy (highest to lowest):**\n- OWNER (level 3): Full access to all token operations\n- MANAGER (level 2): Full moderator + tech producer + recordings + settings\n- TECHNICAL_PRODUCER (level 1): Stream setup and management\n- MODERATOR (level 0): Community and chat management\n\n**Available Permissions:**\n- MANAGE_COMMENTS: Create/delete comments\n- MANAGE_CHAT: Send/delete chat messages\n- BAN_USERS: Ban users from token streams\n- UNBAN_USERS: Remove bans from users\n- MANAGE_SIMULCAST: Add/remove simulcast targets\n- GET_STREAM_KEY: View the stream key\n- STOP_STREAM: Stop an active stream\n- RESET_STREAM_KEY: Generate a new stream key\n- START_STREAM: Start a new stream\n- DELETE_RECORDINGS: Delete stream recordings\n- MANAGE_STREAM_SETTINGS: Update stream settings (countdown, language)\n\nThis is static reference data - it doesn't change per user or token.\nUseful for building role selection UIs and understanding permission hierarchies.\n\nRETURNS: { roles: [...], permissions: [...] }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "streaming"
+    },
+    "getTokenAccess": {
+      "name": "getTokenAccess",
+      "mcpTool": "gala_launchpad_get_token_access",
+      "category": "streaming",
+      "description": "Check if the authenticated user has Studio access for a token.\n\nReturns comprehensive access information combining:\n1. Token ownership check (OWNER role)\n2. Claimed moderator invite (MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n3. Platform overseer status (global access)\n\nThis is used by frontends to determine whether to show \"Click to Studio\" links.\n\n**Access Sources:**\n- ownership: User is the token owner (OWNER role)\n- moderator_invite: User has a claimed moderator invite\n- overseer: User has platform-wide overseer access\n\n**Permissions Returned:**\n- canStream: Can start/stop streams\n- canModerate: Can moderate chat and ban users\n- canManageTeam: Can manage moderator invites\n- canViewRecordings: Can view and download recordings\n- canSimulcast: Can manage simulcast targets\n- canViewAnalytics: Can view stream analytics\n\nRETURNS: {\n  hasAccess: boolean,\n  role: 'OWNER' | 'MANAGER' | 'TECHNICAL_PRODUCER' | 'MODERATOR' | 'OVERSEER' | null,\n  permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast, canViewAnalytics },\n  accessSource: 'ownership' | 'moderator_invite' | 'overseer' | null,\n  inviteScope?: 'TOKEN' | 'ALL_OWNER_TOKENS' | null,\n  isOwner: boolean,\n  isOverseer: boolean\n}\n\nAuthentication: Optional JWT - returns limited data if not authenticated",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name."
+        }
+      ],
+      "topic": "streaming"
+    },
     "getStreamRecordings": {
       "name": "getStreamRecordings",
       "mcpTool": "gala_launchpad_get_stream_recordings",
-      "category": "streaming",
-      "description": "Get recordings for a stream.\n\nReturns paginated list of available recordings from past streams.\n\nRETURNS: { recordings: [...], tokenName, page, limit, total, hasNext }\n\nAuthentication: None required (public endpoint).",
+      "category": "recordings",
+      "description": "Get recordings for a stream.\n\nReturns paginated list of available recordings from past streams using cursor-based pagination.\n\nRETURNS: { recordings: [...], tokenName, pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4764,16 +4891,16 @@
           "description": "Token name."
         },
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         }
       ],
       "topic": "streaming"
@@ -4781,8 +4908,8 @@
     "getRecordingDownload": {
       "name": "getRecordingDownload",
       "mcpTool": "gala_launchpad_get_recording_download",
-      "category": "streaming",
-      "description": "Get a signed download URL for a recording.\n\nReturns a time-limited URL for downloading the recording file.\n\nRETURNS: { downloadUrl, expiresAt, assetId, fileName }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "category": "recordings",
+      "description": "Get a signed download URL for a recording.\n\nReturns a time-limited URL for downloading the recording file.\n\nRETURNS: { downloadUrl, expiresAt, assetId, fileName }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4804,8 +4931,8 @@
     "deleteRecording": {
       "name": "deleteRecording",
       "mcpTool": "gala_launchpad_delete_recording",
-      "category": "streaming",
-      "description": "Delete a stream recording.\n\nPermanently removes the recording. This action cannot be undone.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "category": "recordings",
+      "description": "Delete a stream recording.\n\nPermanently removes the recording. This action cannot be undone.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4827,8 +4954,8 @@
     "getSimulcastTargets": {
       "name": "getSimulcastTargets",
       "mcpTool": "gala_launchpad_get_simulcast_targets",
-      "category": "streaming",
-      "description": "Get simulcast targets for a stream.\n\nReturns list of configured simulcast destinations with platform, rtmpUrl, and status for each target.\n\nRETURNS: { targets: [{ targetId, platform, rtmpUrl, status, name, createdAt }, ...], tokenName, maxTargets }\n\nAuthentication: None required (public endpoint).",
+      "category": "simulcasts",
+      "description": "Get simulcast targets for a stream.\n\nReturns list of configured simulcast destinations with platform, rtmpUrl, and status for each target.\n\nRETURNS: { targets: [{ targetId, platform, rtmpUrl, status, name, createdAt }, ...], tokenName, maxTargets }\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4844,8 +4971,8 @@
     "addSimulcastTarget": {
       "name": "addSimulcastTarget",
       "mcpTool": "gala_launchpad_add_simulcast_target",
-      "category": "streaming",
-      "description": "Add a simulcast target to a stream.\n\nConfigure the stream to rebroadcast to an external platform like YouTube, Twitch, or Facebook.\n\nRETURNS: { target: { targetId, platform, rtmpUrl, status, name, createdAt }, tokenName }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "category": "simulcasts",
+      "description": "Add a simulcast target to a stream.\n\nConfigure the stream to rebroadcast to an external platform like YouTube, Twitch, or Facebook.\n\nRETURNS: { target: { targetId, platform, rtmpUrl, status, name, createdAt }, tokenName }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4891,8 +5018,8 @@
     "removeSimulcastTarget": {
       "name": "removeSimulcastTarget",
       "mcpTool": "gala_launchpad_remove_simulcast_target",
-      "category": "streaming",
-      "description": "Remove a simulcast target from a stream.\n\nStops rebroadcasting to the specified platform.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only).",
+      "category": "simulcasts",
+      "description": "Remove a simulcast target from a stream.\n\nStops rebroadcasting to the specified platform.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -4911,82 +5038,11 @@
       ],
       "topic": "streaming"
     },
-    "getGlobalStreamingStatus": {
-      "name": "getGlobalStreamingStatus",
-      "mcpTool": "gala_launchpad_get_global_streaming_status",
-      "category": "streaming",
-      "description": "Get global streaming status.\n\nReturns platform-wide streaming status including maintenance windows.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: None required (public endpoint).",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [],
-      "topic": "streaming"
-    },
-    "setGlobalStreamingEnabled": {
-      "name": "setGlobalStreamingEnabled",
-      "mcpTool": "gala_launchpad_set_global_streaming_enabled",
-      "category": "streaming",
-      "description": "Enable or disable streaming globally (Admin only).\n\nControls platform-wide streaming capability.\nWhen disabled, no new streams can be started.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration.",
-      "operationType": "write",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "enabled",
-          "type": "boolean",
-          "required": true,
-          "description": "Whether streaming should be enabled globally."
-        }
-      ],
-      "topic": "streaming"
-    },
-    "getStreamRole": {
-      "name": "getStreamRole",
-      "mcpTool": "gala_launchpad_get_stream_role",
-      "category": "streaming",
-      "description": "Get the authenticated user's role for a token's stream with associated permissions.\n\nReturns effective role (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR) with boolean permission flags.\nCanStream: Can start/stop streams. CanModerate: Can moderate chat/ban. CanManageTeam: Can manage moderator invites.\n\nRETURNS: { role: 'OWNER'|'MANAGER'|'TECHNICAL_PRODUCER'|'MODERATOR'|null, isOwner, permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast }, source, inviteScope }\n\nAuthentication: Optional JWT - returns limited data if not authenticated.",
-      "operationType": "read",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ],
-      "topic": "streaming"
-    },
-    "getAvailableRoles": {
-      "name": "getAvailableRoles",
-      "mcpTool": "gala_launchpad_get_available_roles",
-      "category": "streaming",
-      "description": "Get all available roles and permissions for token delegation.\n\nReturns reference data about the role system, including:\n- All available roles (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n- Role descriptions and hierarchy levels\n- Permissions assigned to each role\n- Complete list of all available permissions\n\n**Role Hierarchy (highest to lowest):**\n- OWNER (level 3): Full access to all token operations\n- MANAGER (level 2): Full moderator + tech producer + recordings + settings\n- TECHNICAL_PRODUCER (level 1): Stream setup and management\n- MODERATOR (level 0): Community and chat management\n\n**Available Permissions:**\n- MANAGE_COMMENTS: Create/delete comments\n- MANAGE_CHAT: Send/delete chat messages\n- BAN_USERS: Ban users from token streams\n- UNBAN_USERS: Remove bans from users\n- MANAGE_SIMULCAST: Add/remove simulcast targets\n- GET_STREAM_KEY: View the stream key\n- STOP_STREAM: Stop an active stream\n- RESET_STREAM_KEY: Generate a new stream key\n- START_STREAM: Start a new stream\n- DELETE_RECORDINGS: Delete stream recordings\n- MANAGE_STREAM_SETTINGS: Update stream settings (countdown, language)\n\nThis is static reference data - it doesn't change per user or token.\nUseful for building role selection UIs and understanding permission hierarchies.\n\nRETURNS: { roles: [...], permissions: [...] }\n\nAuthentication: None required (public endpoint).",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [],
-      "topic": "streaming"
-    },
-    "getTokenAccess": {
-      "name": "getTokenAccess",
-      "mcpTool": "gala_launchpad_get_token_access",
-      "category": "streaming",
-      "description": "Check if the authenticated user has Studio access for a token.\n\nReturns comprehensive access information combining:\n1. Token ownership check (OWNER role)\n2. Claimed moderator invite (MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n3. Platform overseer status (global access)\n\nThis is used by frontends to determine whether to show \"Click to Studio\" links.\n\n**Access Sources:**\n- ownership: User is the token owner (OWNER role)\n- moderator_invite: User has a claimed moderator invite\n- overseer: User has platform-wide overseer access\n\n**Permissions Returned:**\n- canStream: Can start/stop streams\n- canModerate: Can moderate chat and ban users\n- canManageTeam: Can manage moderator invites\n- canViewRecordings: Can view and download recordings\n- canSimulcast: Can manage simulcast targets\n- canViewAnalytics: Can view stream analytics\n\nRETURNS: {\n hasAccess: boolean,\n role: 'OWNER' | 'MANAGER' | 'TECHNICAL_PRODUCER' | 'MODERATOR' | 'OVERSEER' | null,\n permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast, canViewAnalytics },\n accessSource: 'ownership' | 'moderator_invite' | 'overseer' | null,\n inviteScope?: 'TOKEN' | 'ALL_OWNER_TOKENS' | null,\n isOwner: boolean,\n isOverseer: boolean\n}\n\nAuthentication: Optional JWT - returns limited data if not authenticated.",
-      "operationType": "read",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ],
-      "topic": "streaming"
-    },
     "getChatStatus": {
       "name": "getChatStatus",
       "mcpTool": "gala_launchpad_get_chat_status",
       "category": "chat",
-      "description": "Get chat status for a stream.\n\nReturns whether chat is enabled and the detailed status for the stream.\n\n**Status Values:**\n- ENABLED: Chat is on (default)\n- DISABLED: Owner disabled (owner can re-enable)\n- ADMIN_DISABLED: Admin disabled (owner locked out)\n\nRETURNS: { enabled, status, reason? }\n\nAuthentication: None required (public endpoint).",
+      "description": "Get chat status for a stream.\n\nReturns whether chat is enabled and the detailed status for the stream.\n\n**Status Values:**\n- ENABLED: Chat is on (default)\n- DISABLED: Owner disabled (owner can re-enable)\n- ADMIN_DISABLED: Admin disabled (owner locked out)\n\nRETURNS: { enabled, status, reason? }\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -5003,7 +5059,7 @@
       "name": "setChatEnabled",
       "mcpTool": "gala_launchpad_set_chat_enabled",
       "category": "chat",
-      "description": "Enable or disable chat for a specific token.\n\nDual-auth endpoint - supports both Admin API key and JWT (owner) auth.\n\n**Authorization:**\n- Admin (API key): Sets ADMIN_DISABLED when disabling - owner is locked out\n- Owner (JWT): Sets DISABLED when disabling - owner can re-enable later\n\nWhen ADMIN_DISABLED, only an admin can enable chat.\nOwners attempting to enable when ADMIN_DISABLED will get a 403 error.\n\nRETURNS: { enabled, tokenName, status }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
+      "description": "Enable or disable chat for a specific token.\n\nDual-auth endpoint - supports both Admin API key and JWT (owner) auth.\n\n**Authorization:**\n- Admin (API key): Sets ADMIN_DISABLED when disabling - owner is locked out\n- Owner (JWT): Sets DISABLED when disabling - owner can re-enable later\n\nWhen ADMIN_DISABLED, only an admin can enable chat.\nOwners attempting to enable when ADMIN_DISABLED will get a 403 error.\n\nRETURNS: { enabled, tokenName, status }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5025,7 +5081,7 @@
       "name": "getGlobalChatStatus",
       "mcpTool": "gala_launchpad_get_global_chat_status",
       "category": "chat",
-      "description": "Get global chat status.\n\nReturns platform-wide chat status.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: None required (public endpoint).",
+      "description": "Get global chat status.\n\nReturns platform-wide chat status.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
@@ -5035,7 +5091,7 @@
       "name": "setGlobalChatEnabled",
       "mcpTool": "gala_launchpad_set_global_chat_enabled",
       "category": "chat",
-      "description": "Enable or disable chat globally (Admin only).\n\nControls platform-wide chat capability.\nWhen disabled, no chat messages can be sent.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration.",
+      "description": "Enable or disable chat globally (Admin only).\n\nControls platform-wide chat capability.\nWhen disabled, no chat messages can be sent.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5052,7 +5108,7 @@
       "name": "getEngagementStats",
       "mcpTool": "gala_launchpad_get_engagement_stats",
       "category": "chat",
-      "description": "Get engagement statistics for a token.\n\nReturns aggregated engagement metrics including:\n- Chat: message count, unique chatters, session start time\n- Comments: total count, unique commenters\n\nChat stats are scoped to the current/last stream session.\nComment stats are all-time for the token.\n\nRETURNS: {\n tokenName: string,\n chat: { messageCount: number, uniqueChatters: number, since: string | null },\n comments: { count: number, uniqueCommenters: number }\n}.",
+      "description": "Get engagement statistics for a token.\n\nReturns aggregated engagement metrics including:\n- Chat: message count, unique chatters, session start time\n- Comments: total count, unique commenters\n\nChat stats are scoped to the current/last stream session.\nComment stats are all-time for the token.\n\nRETURNS: {\n  tokenName: string,\n  chat: { messageCount: number, uniqueChatters: number, since: string | null },\n  comments: { count: number, uniqueCommenters: number }\n}",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -5064,60 +5120,6 @@
         }
       ],
       "topic": "stream-chat"
-    },
-    "getPinnedChatMessage": {
-      "name": "getPinnedChatMessage",
-      "mcpTool": "gala_launchpad_get_pinned_chat_message",
-      "category": "chat",
-      "description": "Get the currently pinned chat message for a token.\n\nRetrieves the pinned message details including content, sender, and when it was pinned.\nReturns null if no message is currently pinned.\n\nRETURNS: { messageId, content, sender, pinnedAt, pinnedBy } or null\n\nAuthentication: None required (public endpoint).",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ]
-    },
-    "pinChatMessage": {
-      "name": "pinChatMessage",
-      "mcpTool": "gala_launchpad_pin_chat_message",
-      "category": "chat",
-      "description": "Pin a chat message to the top of a token's chat.\n\nPins a specific message, making it visible at the top of the chat.\nReplaces any previously pinned message for this token.\nRequires admin or manager access.\n\nRETURNS: { messageId, content, sender, pinnedAt, pinnedBy }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
-      "operationType": "read",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        },
-        {
-          "name": "messageId",
-          "type": "string",
-          "required": true,
-          "description": "ID of the message to pin."
-        }
-      ]
-    },
-    "unpinChatMessage": {
-      "name": "unpinChatMessage",
-      "mcpTool": "gala_launchpad_unpin_chat_message",
-      "category": "chat",
-      "description": "Unpin the currently pinned chat message for a token.\n\nRemoves the pinned message from the top of the chat.\nIf no message is currently pinned, this succeeds without error.\nRequires admin or manager access.\n\nRETURNS: { success: true }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
-      "operationType": "read",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ]
     },
     "connectStreamWebsocket": {
       "name": "connectStreamWebsocket",
@@ -5132,7 +5134,7 @@
       "name": "subscribeToStream",
       "mcpTool": "gala_launchpad_subscribe_to_stream",
       "category": "chat",
-      "description": "Subscribe to a stream's real-time events.\n\nMust be connected via gala_launchpad_connect_stream_websocket first - throws error if not connected.\nAfter subscribing, you will receive these events:\n- stream_status: Live/offline status changes\n- viewer_count: Real-time viewer count updates\n- chat_message: New chat messages\n- chat_status: Chat enable/disable events\n\nRETURNS: { tokenName, status, playbackId, isLive, subscribedAt }.",
+      "description": "Subscribe to a stream's real-time events.\n\nMust be connected via gala_launchpad_connect_stream_websocket first - throws error if not connected.\nAfter subscribing, you will receive these events:\n- stream_status: Live/offline status changes\n- viewer_count: Real-time viewer count updates\n- chat_message: New chat messages\n- chat_status: Chat enable/disable events\n\nRETURNS: { tokenName, status, playbackId, isLive, subscribedAt }",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -5375,7 +5377,7 @@
       "name": "listBans",
       "mcpTool": "gala_launchpad_list_bans",
       "category": "ban",
-      "description": "List all banned users for a token.\n\nReturns a paginated list of banned users with their ban details.\nSupports filtering by search query, name, or user address.\n\n**Filter Behavior:**\n- search: Combined search on userAddress OR fullName (partial match)\n- name: Filter by fullName only\n- userAddress: Filter by userAddress only\n\nRETURNS: { bans: [...], meta: { total, page, limit, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
+      "description": "List all banned users for a token.\n\nReturns a paginated list of banned users with their ban details using cursor-based pagination.\nSupports filtering by search query, name, or user address.\n\n**Filter Behavior:**\n- search: Combined search on userAddress OR fullName (partial match)\n- name: Filter by fullName only\n- userAddress: Filter by userAddress only\n\nRETURNS: { bans: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -5386,22 +5388,22 @@
           "description": "Token name."
         },
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         },
         {
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         },
         {
           "name": "name",
@@ -5469,7 +5471,7 @@
           "name": "search",
           "type": "any",
           "required": false,
-          "description": "Optional search query (fuzzy match filter)."
+          "description": "Optional search query (fuzzy match filter)"
         },
         {
           "name": "name",
@@ -5542,7 +5544,7 @@
       "name": "createApiKey",
       "mcpTool": "gala_launchpad_create_api_key",
       "category": "api-keys",
-      "description": "Create a new API key for delegating permissions.\n\n**CRITICAL**: The rawKey in the response is ONLY shown once!\nStore it securely immediately - it cannot be retrieved again.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast\n- MANAGER: Moderator + Technical Producer + recordings\n- OWNER: Full access\n\n**Token Delegation:**\n- delegateAllTokens=true: Access to all current and future tokens\n- delegateAllTokens=false + tokenNames: Access to specific tokens only\n\nRETURNS: { id, keyPrefix, rawKey, description, role, delegateAllTokens, tokenNames, expiresAt, createdAt, ... }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
+      "description": "Create a new API key for delegating permissions.\n\n**CRITICAL**: The rawKey in the response is ONLY shown once!\nStore it securely immediately - it cannot be retrieved again.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast\n- MANAGER: Moderator + Technical Producer + recordings\n- OWNER: Full access\n\n**Token Delegation:**\n- delegateAllTokens=true: Access to all current and future tokens\n- delegateAllTokens=false + tokenNames: Access to specific tokens only\n\nRETURNS: { id, keyPrefix, rawKey, description, role, delegateAllTokens, tokenNames, expiresAt, createdAt, ... }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5562,7 +5564,7 @@
           "name": "description",
           "type": "string",
           "required": false,
-          "description": "User's description/label for this API key (max 255 characters)."
+          "description": "User's description/label for this API key (max 255 characters)"
         },
         {
           "name": "delegateAllTokens",
@@ -5589,21 +5591,21 @@
       "name": "listApiKeys",
       "mcpTool": "gala_launchpad_list_api_keys",
       "category": "api-keys",
-      "description": "List all API keys for the authenticated user.\n\nReturns a paginated list of API keys. Raw keys are never included -\nthey are only shown once at creation time.\n\nRETURNS: { apiKeys: [...], meta: { offset, limit, total, totalPages } }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
+      "description": "List all API keys for the authenticated user.\n\nReturns a paginated list of API keys using cursor-based pagination.\nRaw keys are never included - they are only shown once at creation time.\n\nRETURNS: { apiKeys: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         }
       ],
       "topic": "api-key-management"
@@ -5612,7 +5614,7 @@
       "name": "getApiKey",
       "mcpTool": "gala_launchpad_get_api_key",
       "category": "api-keys",
-      "description": "Get a single API key by ID.\n\nReturns the API key metadata. Raw key is never included.\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
+      "description": "Get a single API key by ID.\n\nReturns the API key metadata. Raw key is never included.\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -5620,7 +5622,7 @@
           "name": "id",
           "type": "number",
           "required": true,
-          "description": "API key ID (positive integer)."
+          "description": "API key ID (positive integer)"
         }
       ],
       "topic": "api-key-management"
@@ -5629,7 +5631,7 @@
       "name": "updateApiKey",
       "mcpTool": "gala_launchpad_update_api_key",
       "category": "api-keys",
-      "description": "Update an API key's metadata and permissions.\n\nCannot change the key itself, only metadata and permissions.\nAt least one field must be provided.\n\n**Updatable fields:**\n- role: Change permission level\n- description: Update label/description\n- delegateAllTokens: Toggle all-token access\n- tokenNames: Update specific token delegations (replaces existing)\n- expiresAt: Update expiration (null to remove)\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
+      "description": "Update an API key's metadata and permissions.\n\nCannot change the key itself, only metadata and permissions.\nAt least one field must be provided.\n\n**Updatable fields:**\n- role: Change permission level\n- description: Update label/description\n- delegateAllTokens: Toggle all-token access\n- tokenNames: Update specific token delegations (replaces existing)\n- expiresAt: Update expiration (null to remove)\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5637,13 +5639,13 @@
           "name": "id",
           "type": "number",
           "required": true,
-          "description": "API key ID (positive integer)."
+          "description": "API key ID (positive integer)"
         },
         {
           "name": "role",
           "type": "string",
           "required": false,
-          "description": "New role for the API key (optional).",
+          "description": "New role for the API key (optional)",
           "enum": [
             "MODERATOR",
             "TECHNICAL_PRODUCER",
@@ -5655,19 +5657,19 @@
           "name": "description",
           "type": "string",
           "required": false,
-          "description": "Updated description (optional)."
+          "description": "Updated description (optional)"
         },
         {
           "name": "delegateAllTokens",
           "type": "boolean",
           "required": false,
-          "description": "Update all-token access (optional)."
+          "description": "Update all-token access (optional)"
         },
         {
           "name": "tokenNames",
           "type": "array",
           "required": false,
-          "description": "Updated token delegations - replaces existing (optional)."
+          "description": "Updated token delegations - replaces existing (optional)"
         },
         {
           "name": "expiresAt",
@@ -5682,7 +5684,7 @@
       "name": "revokeApiKey",
       "mcpTool": "gala_launchpad_revoke_api_key",
       "category": "api-keys",
-      "description": "Revoke an API key.\n\nThis performs a soft delete - the key becomes immediately unusable\nbut is retained for audit purposes.\n\nRETURNS: { success: true, message: \"API key revoked\" }\n\nAuthentication: Requires JWT auth (call SDK.login() first).",
+      "description": "Revoke an API key.\n\nThis performs a soft delete - the key becomes immediately unusable\nbut is retained for audit purposes.\n\nRETURNS: { success: true, message: \"API key revoked\" }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5690,7 +5692,7 @@
           "name": "id",
           "type": "number",
           "required": true,
-          "description": "API key ID (positive integer)."
+          "description": "API key ID (positive integer)"
         }
       ],
       "topic": "api-key-management"
@@ -5709,7 +5711,7 @@
       "name": "createModeratorInvite",
       "mcpTool": "gala_launchpad_create_moderator_invite",
       "category": "moderators",
-      "description": "Create a moderator invite for a token or all tokens.\n\nCreates a magic link invite that can be shared to grant moderator access.\nThe recipient claims the invite after logging in.\n\n**Invite Scopes:**\n- TOKEN (default): Access to a specific token only. TokenName is required.\n- ALL_OWNER_TOKENS: Blanket access to ALL tokens owned by the inviter.\n The moderator gains access to current AND future tokens. Omit tokenName.\n\n**Roles:**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast, stream key\n- MANAGER: All of the above + recordings + stream settings\n\n**Note:** OWNER role is not available for invites.\n\nRETURNS: { invite: { id, inviteScope, tokenName, role, inviteCode, inviteUrl, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires JWT auth as token owner.",
+      "description": "Create a moderator invite for a token or all tokens.\n\nCreates a magic link invite that can be shared to grant moderator access.\nThe recipient claims the invite after logging in.\n\n**Invite Scopes:**\n- TOKEN (default): Access to a specific token only. tokenName is required.\n- ALL_OWNER_TOKENS: Blanket access to ALL tokens owned by the inviter.\n  The moderator gains access to current AND future tokens. Omit tokenName.\n\n**Roles:**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast, stream key\n- MANAGER: All of the above + recordings + stream settings\n\n**Note:** OWNER role is not available for invites.\n\nRETURNS: { invite: { id, inviteScope, tokenName, role, inviteCode, inviteUrl, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires JWT auth as token owner.",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -5727,7 +5729,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Token name (required for TOKEN scope, omit for ALL_OWNER_TOKENS)."
+          "description": "Token name (required for TOKEN scope, omit for ALL_OWNER_TOKENS)"
         },
         {
           "name": "role",
@@ -5776,18 +5778,18 @@
       "name": "getModeratedTokens",
       "mcpTool": "gala_launchpad_get_moderated_tokens",
       "category": "moderators",
-      "description": "Get all tokens the current user moderates.\n\nReturns a paginated list of tokens where the authenticated user has claimed\na moderator invite and has active access. Used for the /studio dashboard.\n\nRETURNS: { tokens: [...], meta: { totalItems, currentPage, pageSize, totalPages } }\n\nAuthentication: Requires JWT auth.",
+      "description": "Get all tokens the current user moderates.\n\nReturns a paginated list of tokens where the authenticated user has claimed\na moderator invite and has active access using cursor-based pagination.\nUsed for the /studio dashboard.\n\nRETURNS: { tokens: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (default: 20, maximum: 50)."
@@ -5799,7 +5801,7 @@
       "name": "listModeratorInvites",
       "mcpTool": "gala_launchpad_list_moderator_invites",
       "category": "moderators",
-      "description": "List moderator invites.\n\nReturns a paginated list of moderator invites. Behavior depends on tokenName:\n- With tokenName: Returns invites for that specific token (verifies ownership)\n- Without tokenName: Returns ALL invites created by the authenticated user across all tokens\n\nRETURNS: { invites: [...], meta: { totalItems, currentPage, pageSize, totalPages } }\n\nAuthentication: Requires JWT auth.",
+      "description": "List moderator invites.\n\nReturns a paginated list of moderator invites using cursor-based pagination.\nBehavior depends on tokenName:\n- With tokenName: Returns invites for that specific token (verifies ownership)\n- Without tokenName: Returns ALL invites created by the authenticated user across all tokens\n\nRETURNS: { invites: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -5807,7 +5809,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Token name to filter by (optional - omit to list ALL invites across all tokens)."
+          "description": "Token name to filter by (optional - omit to list ALL invites across all tokens)"
         },
         {
           "name": "status",
@@ -5822,13 +5824,13 @@
           ]
         },
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (default: 20, maximum: 50)."
@@ -5848,7 +5850,7 @@
           "name": "inviteId",
           "type": "number",
           "required": true,
-          "description": "Moderator invite ID (positive integer)."
+          "description": "Moderator invite ID (positive integer)"
         }
       ],
       "topic": "moderator-invites"
@@ -5865,7 +5867,7 @@
           "name": "inviteId",
           "type": "number",
           "required": true,
-          "description": "Moderator invite ID (positive integer)."
+          "description": "Moderator invite ID (positive integer)"
         },
         {
           "name": "role",
@@ -5976,7 +5978,7 @@
           "name": "contentType",
           "type": "string",
           "required": true,
-          "description": "Type of content being flagged:\n- CHAT_MESSAGE: A chat message in the stream\n- COMMENT: A comment on the token page\n- STREAM: The live stream itself.",
+          "description": "Type of content being flagged:\n- CHAT_MESSAGE: A chat message in the stream\n- COMMENT: A comment on the token page\n- STREAM: The live stream itself",
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
@@ -5999,7 +6001,7 @@
           "name": "reason",
           "type": "string",
           "required": false,
-          "description": "Reason for the flag (required for STREAM, optional for others):\n- INAPPROPRIATE_CONTENT: Explicit, offensive, or unsuitable content\n- SPAM: Unsolicited promotional or repetitive content\n- HARASSMENT: Bullying, threats, or targeted attacks\n- SCAM: Fraudulent or deceptive content\n- OTHER: Other reason (specify in details).",
+          "description": "Reason for the flag (required for STREAM, optional for others):\n- INAPPROPRIATE_CONTENT: Explicit, offensive, or unsuitable content\n- SPAM: Unsolicited promotional or repetitive content\n- HARASSMENT: Bullying, threats, or targeted attacks\n- SCAM: Fraudulent or deceptive content\n- OTHER: Other reason (specify in details)",
           "enum": [
             "INAPPROPRIATE_CONTENT",
             "SPAM",
@@ -6021,7 +6023,7 @@
       "name": "listFlags",
       "mcpTool": "gala_launchpad_list_flags",
       "category": "content-flags",
-      "description": "List flags for a specific token with pagination and filtering.\n\nAuthorization varies by content type:\n- CHAT_MESSAGE/COMMENT: Token owner or moderator (JWT) can view\n- STREAM: Admin API key only\n\nUse to review pending flags for a specific token.\nFor global flags across all tokens, use gala_launchpad_list_global_flags.\n\nRETURNS: { flags: [...], meta: { page, limit, total, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
+      "description": "List flags for a specific token with pagination and filtering.\n\nAuthorization varies by content type:\n- CHAT_MESSAGE/COMMENT: Token owner or moderator (JWT) can view\n- STREAM: Admin API key only\n\nUse to review pending flags for a specific token.\nFor global flags across all tokens, use gala_launchpad_list_global_flags.\n\nRETURNS: { flags: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -6035,7 +6037,7 @@
           "name": "contentType",
           "type": "string",
           "required": false,
-          "description": "Filter by content type (optional).",
+          "description": "Filter by content type (optional)",
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
@@ -6046,7 +6048,7 @@
           "name": "status",
           "type": "string",
           "required": false,
-          "description": "Filter by flag status:\n- PENDING: Not yet reviewed\n- DISMISSED: Reviewed, no action taken\n- ACTIONED: Reviewed, action was taken.",
+          "description": "Filter by flag status:\n- PENDING: Not yet reviewed\n- DISMISSED: Reviewed, no action taken\n- ACTIONED: Reviewed, action was taken",
           "enum": [
             "PENDING",
             "DISMISSED",
@@ -6057,7 +6059,7 @@
           "name": "reason",
           "type": "string",
           "required": false,
-          "description": "Filter by flag reason (optional).",
+          "description": "Filter by flag reason (optional)",
           "enum": [
             "INAPPROPRIATE_CONTENT",
             "SPAM",
@@ -6070,25 +6072,25 @@
           "name": "reporterAddress",
           "type": "any",
           "required": false,
-          "description": "Filter by reporter address (optional)."
+          "description": "Filter by reporter address (optional)"
         },
         {
           "name": "reportedUserAddress",
           "type": "any",
           "required": false,
-          "description": "Filter by reported user address (optional)."
+          "description": "Filter by reported user address (optional)"
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         }
       ],
       "topic": "content-flag-management"
@@ -6097,7 +6099,7 @@
       "name": "listGlobalFlags",
       "mcpTool": "gala_launchpad_list_global_flags",
       "category": "content-flags",
-      "description": "List ALL flags globally across all tokens with pagination and filtering.\n\nFor overseers and admins to view flags across the entire platform.\nUse listFlags() for token-specific flag lists.\n\nFilter options:\n- tokenName: Filter to a specific token\n- contentType: Filter by CHAT_MESSAGE, COMMENT, or STREAM\n- status: Filter by PENDING, DISMISSED, or ACTIONED\n- reason: Filter by flag reason (SPAM, HARASSMENT, etc.)\n- reporterAddress: Filter by who submitted the flag\n- reportedUserAddress: Filter by the content author\n\nRETURNS: { flags: [...], meta: { page, limit, total, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "description": "List ALL flags globally across all tokens with pagination and filtering.\n\nFor overseers and admins to view flags across the entire platform.\nUse listFlags() for token-specific flag lists.\n\nFilter options:\n- tokenName: Filter to a specific token\n- contentType: Filter by CHAT_MESSAGE, COMMENT, or STREAM\n- status: Filter by PENDING, DISMISSED, or ACTIONED\n- reason: Filter by flag reason (SPAM, HARASSMENT, etc.)\n- reporterAddress: Filter by who submitted the flag\n- reportedUserAddress: Filter by the content author\n\nRETURNS: { flags: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -6105,13 +6107,13 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Filter by token name (optional - omit to show all tokens)."
+          "description": "Filter by token name (optional - omit to show all tokens)"
         },
         {
           "name": "contentType",
           "type": "string",
           "required": false,
-          "description": "Filter by content type (optional).",
+          "description": "Filter by content type (optional)",
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
@@ -6122,7 +6124,7 @@
           "name": "status",
           "type": "string",
           "required": false,
-          "description": "Filter by flag status:\n- PENDING: Not yet reviewed\n- DISMISSED: Reviewed, no action taken\n- ACTIONED: Reviewed, action was taken.",
+          "description": "Filter by flag status:\n- PENDING: Not yet reviewed\n- DISMISSED: Reviewed, no action taken\n- ACTIONED: Reviewed, action was taken",
           "enum": [
             "PENDING",
             "DISMISSED",
@@ -6133,7 +6135,7 @@
           "name": "reason",
           "type": "string",
           "required": false,
-          "description": "Filter by flag reason (optional).",
+          "description": "Filter by flag reason (optional)",
           "enum": [
             "INAPPROPRIATE_CONTENT",
             "SPAM",
@@ -6146,25 +6148,25 @@
           "name": "reporterAddress",
           "type": "any",
           "required": false,
-          "description": "Filter by reporter address (optional)."
+          "description": "Filter by reporter address (optional)"
         },
         {
           "name": "reportedUserAddress",
           "type": "any",
           "required": false,
-          "description": "Filter by reported user address (optional)."
+          "description": "Filter by reported user address (optional)"
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         }
       ],
       "topic": "content-flag-management"
@@ -6181,7 +6183,7 @@
           "name": "flagId",
           "type": "number",
           "required": true,
-          "description": "Flag ID (positive integer)."
+          "description": "Flag ID (positive integer)"
         }
       ],
       "topic": "content-flag-management"
@@ -6198,13 +6200,13 @@
           "name": "flagId",
           "type": "number",
           "required": true,
-          "description": "Flag ID (positive integer)."
+          "description": "Flag ID (positive integer)"
         },
         {
           "name": "action",
           "type": "string",
           "required": true,
-          "description": "Action to take on the flagged content:\n- DELETE_CONTENT: Remove the flagged content only\n- BAN_USER: Ban the reported user from the token\n- DELETE_AND_BAN: Delete content AND ban user.",
+          "description": "Action to take on the flagged content:\n- DELETE_CONTENT: Remove the flagged content only\n- BAN_USER: Ban the reported user from the token\n- DELETE_AND_BAN: Delete content AND ban user",
           "enum": [
             "DELETE_CONTENT",
             "BAN_USER",
@@ -6241,7 +6243,7 @@
       "name": "listOverseerInvites",
       "mcpTool": "gala_launchpad_list_overseer_invites",
       "category": "overseers",
-      "description": "List all overseer invites with pagination and filtering.\n\nReturns a paginated list of overseer invites that can be filtered by status.\n\nRETURNS: { invites: [...], meta: { totalItems, currentPage, pageSize, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
+      "description": "List all overseer invites with cursor-based pagination and filtering.\n\nReturns a paginated list of overseer invites that can be filtered by status.\n\nRETURNS: { invites: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -6258,13 +6260,13 @@
           ]
         },
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (default: 20, maximum: 50)."
@@ -6326,7 +6328,7 @@
       "name": "listOverseers",
       "mcpTool": "gala_launchpad_list_overseers",
       "category": "overseers",
-      "description": "List all overseers with pagination and filtering.\n\nReturns a paginated list of overseers that can be filtered by status.\n\nRETURNS: { overseers: [...], meta: { totalItems, currentPage, pageSize, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
+      "description": "List all overseers with cursor-based pagination and filtering.\n\nReturns a paginated list of overseers that can be filtered by status.\n\nRETURNS: { overseers: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -6341,13 +6343,13 @@
           ]
         },
         {
-          "name": "page",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "number",
           "required": false,
           "description": "Results per page (default: 20, maximum: 50)."
@@ -6396,7 +6398,7 @@
       "name": "listOverseerUsers",
       "mcpTool": "gala_launchpad_list_overseer_users",
       "category": "overseers",
-      "description": "List users with pagination and sorting (Overseer/Admin only).\n\nRetrieves a paginated list of users across the platform with optional filtering and sorting.\nUseful for overseer/admin dashboard user management.\n\n**Sort Options:**\n- address: User wallet address\n- flagsReceived: Content flags received\n- activeBans: Active bans count\n- createdAt: Account creation date (default)\n\nRETURNS: { items: [...], total: number, offset, limit, hasNext }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
+      "description": "List users with pagination and sorting (Overseer/Admin only).\n\nRetrieves a paginated list of users across the platform with optional filtering and sorting.\nUseful for overseer/admin dashboard user management.\n\n**Sort Options:**\n- address: User wallet address\n- flagsReceived: Content flags received\n- activeBans: Active bans count\n- createdAt: Account creation date (default)\n\nRETURNS: { items: [...], total: number, cursor?, pageSize }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
       "authRequired": true,
       "parameters": [
@@ -6429,16 +6431,16 @@
           ]
         },
         {
-          "name": "offset",
-          "type": "integer",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response for pagination (omit for first page)."
         },
         {
-          "name": "limit",
-          "type": "number",
+          "name": "pageSize",
+          "type": "integer",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 50)."
+          "description": "Results per page (max: 100, default: 20)."
         }
       ]
     },
@@ -6502,21 +6504,21 @@
       "name": "listTokenBans",
       "mcpTool": "gala_launchpad_list_token_bans",
       "category": "token-ban",
-      "description": "List all banned tokens (overseer only).\n\nReturns a paginated list of all banned tokens with their ban details.\nSupports searching by token name (partial match).\n\nRETURNS: { items: [{ id, tokenName, reason, bannedBy, createdAt, updatedAt }...], meta: { total, offset, limit, totalPages } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth with overseer status.",
+      "description": "List all banned tokens (overseer only).\n\nReturns a paginated list of all banned tokens with their ban details using cursor-based pagination.\nSupports searching by token name (partial match).\n\nRETURNS: { items: [{ id, tokenName, reason, bannedBy, createdAt, updatedAt }...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth with overseer status.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
+          "description": "Results per page (default: 20, maximum: 100)"
         },
         {
           "name": "search",
@@ -6599,141 +6601,190 @@
         }
       ]
     },
-    "getComments": {
-      "name": "getComments",
-      "mcpTool": "gala_launchpad_get_comments",
-      "category": "comments",
-      "description": "Query comments with tokenName/userAddress filters.\n\nReturns paginated list of comments matching the filter criteria.\nAt least one of tokenName or userAddress must be provided.\nPublic endpoint - no authentication required.\n\nEach comment includes:\n- id: Unique message ID (for updates/deletes)\n- tokenName, tokenImage: Pool information\n- userAddress, userProfile: Author information\n- content: Comment text\n- createdAt, updatedAt: Timestamps\n- reactions: Reaction counts by emoji type\n- flagCount: Number of flags against this comment\n- holderTier?: Token holder tier badge ({ tier: 0-5, tierName: string })\n\nRETURNS: { messages: [...], meta: { totalItems, currentPage, pageSize, totalPages } }.",
+    "fetchMessages": {
+      "name": "fetchMessages",
+      "mcpTool": "gala_launchpad_fetch_messages",
+      "category": "messages",
+      "description": "Query messages with type/tokenName/userAddress filters.\n\nReturns paginated list of messages using cursor-based pagination.\nAt least one of type, tokenName, or userAddress must be provided.\nPublic endpoint - no authentication required.\n\n**Filter Combinations:**\n- type=CHAT + tokenName → Chat messages for a token\n- type=COMMENT + tokenName → Comments for a token\n- userAddress → All messages from a user\n- type + userAddress → User's messages of a specific type\n\n**Message Fields:**\n- id: Unique message ID (for updates/deletes/reactions)\n- type: CHAT or COMMENT\n- tokenName, tokenImage: Pool information\n- userAddress, userProfile: Author information\n- content: Message text\n- createdAt, updatedAt: Timestamps\n- reactions: Reaction counts by emoji type\n- flagCount: Number of flags against this message\n- holderTier?: Token holder tier badge ({ tier: 0-5, tierName: string })\n- isPinned?: Whether this message is pinned (CHAT only)\n\nRETURNS: {\n  messages: [...],\n  pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor }\n}\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "description": "Message type filter (CHAT for chat messages, COMMENT for comments).",
+          "enum": [
+            "CHAT",
+            "COMMENT"
+          ]
+        },
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": false,
+          "description": "Token name to filter by (e.g., \"anime\")."
+        },
+        {
+          "name": "userAddress",
+          "type": "any",
+          "required": false,
+          "description": "User address to filter by (eth|... or 0x... format)."
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": "Cursor from previous response (omit for first page)."
+        },
+        {
+          "name": "pageSize",
+          "type": "any",
+          "required": false,
+          "description": "Results per page (default: 20, maximum: 100)"
+        }
+      ]
+    },
+    "createMessage": {
+      "name": "createMessage",
+      "mcpTool": "gala_launchpad_create_message",
+      "category": "messages",
+      "description": "Create a new message on a token pool.\n\nPosts a message to the specified token as either a CHAT message or COMMENT.\nMessages are stored in the unified pool_messages table.\n\n**Content Limits:**\n- CHAT: 1-500 characters\n- COMMENT: 1-2000 characters\n\nRETURNS: {\n  message: {\n    id, type, tokenName, tokenImage, userAddress, userProfile,\n    content, createdAt, deletedAt, flagCount, reactions, holderTier?\n  }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).\n\nUse the returned id with gala_launchpad_update_message or gala_launchpad_delete_message.\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "string",
+          "required": true,
+          "description": "Message type (CHAT for chat messages, COMMENT for comments).",
+          "enum": [
+            "CHAT",
+            "COMMENT"
+          ]
+        },
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to post the message to (e.g., \"anime\")."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Message content (1-500 chars for CHAT, 1-2000 chars for COMMENT)."
+        }
+      ]
+    },
+    "updateMessage": {
+      "name": "updateMessage",
+      "mcpTool": "gala_launchpad_update_message",
+      "category": "messages",
+      "description": "Update a message's content.\n\nUpdates the content of an existing message (CHAT or COMMENT).\nOnly the original author can update their message.\nThe message will have an updatedAt timestamp after editing.\n\nRETURNS: {\n  message: {\n    id, type, tokenName, tokenImage, userAddress, userProfile,\n    content, createdAt, updatedAt, deletedAt, flagCount, reactions\n  }\n}\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)\nAuthorization: Message author only.",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Updated message content (1-2000 characters)."
+        }
+      ]
+    },
+    "deleteMessage": {
+      "name": "deleteMessage",
+      "mcpTool": "gala_launchpad_delete_message",
+      "category": "messages",
+      "description": "Delete a message.\n\nSoft-deletes a message (CHAT or COMMENT) from the pool.\n\n**Authorization:**\n- Message author (JWT auth)\n- Pool owner (JWT auth)\n- Moderator with MANAGE_CHAT/MANAGE_COMMENTS permission (API key auth)\n- Platform overseer\n\nThe message remains in the database with deletedAt set (soft delete).\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session OR API key with MANAGE_CHAT or MANAGE_COMMENTS permission.",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        }
+      ]
+    },
+    "getPinnedMessage": {
+      "name": "getPinnedMessage",
+      "mcpTool": "gala_launchpad_get_pinned_message",
+      "category": "messages",
+      "description": "Get the currently pinned message for a token.\n\nRetrieves the pinned message details including content, sender, and when it was pinned.\nReturns null if no message is currently pinned.\n\nRETURNS: {\n  message: {\n    id, tokenName, content, userAddress, userProfile,\n    createdAt, pinnedAt, pinnedBy\n  } | null\n}\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
           "type": "any",
-          "required": false,
-          "description": "Filter by token name (e.g., \"anime\")."
-        },
-        {
-          "name": "userAddress",
-          "type": "any",
-          "required": false,
-          "description": "Filter by user wallet address (eth|... or 0x... format)."
-        },
-        {
-          "name": "offset",
-          "type": "number",
-          "required": false,
-          "description": "Offset for pagination (default: 0)."
-        },
-        {
-          "name": "limit",
-          "type": "any",
-          "required": false,
-          "description": "Results per page (default: 20, maximum: 100)."
-        }
-      ],
-      "topic": "content-flag-management"
-    },
-    "createComment": {
-      "name": "createComment",
-      "mcpTool": "gala_launchpad_create_comment",
-      "category": "comments",
-      "description": "Create a new comment on a token pool.\n\nAdds a new comment to the specified token's comment section.\nReturns the created comment with id for reactions and further operations.\n\nRETURNS: { comment: { id, tokenName, tokenImage, userAddress, userProfile, content, createdAt, reactions, flagCount, holderTier? } }\n\nholderTier is present if the author holds tokens (tier 0-5 based on % of max supply held).\n\nUse the returned id with gala_launchpad_update_comment or gala_launchpad_delete_comment.\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
-      "operationType": "write",
-      "authRequired": true,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
           "required": true,
           "description": "Token name."
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "Comment content (1-2000 characters)."
         }
-      ],
-      "topic": "content-flag-management"
+      ]
     },
-    "updateComment": {
-      "name": "updateComment",
-      "mcpTool": "gala_launchpad_update_comment",
-      "category": "comments",
-      "description": "Update a comment's content.\n\nUpdates the content of an existing comment.\nOnly the original author can update their comment.\n\nRETURNS: { comment: { id, tokenName, tokenImage, userAddress, userProfile, content, createdAt, updatedAt, reactions, flagCount } }\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)\nAuthorization: Comment author only.",
-      "operationType": "write",
+    "pinMessage": {
+      "name": "pinMessage",
+      "mcpTool": "gala_launchpad_pin_message",
+      "category": "messages",
+      "description": "Pin a message to a token's chat.\n\nOnly one message can be pinned per token at a time.\nPinning a new message automatically unpins any previously pinned message.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Moderator with MANAGER or MODERATOR role (JWT or API key)\n\nRETURNS: { success: true }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
+      "operationType": "read",
       "authRequired": true,
       "parameters": [
         {
           "name": "id",
           "type": "string",
           "required": true,
-          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "Comment content (1-2000 characters)."
+          "description": "ID of the message to pin."
         }
-      ],
-      "topic": "content-flag-management"
+      ]
     },
-    "deleteComment": {
-      "name": "deleteComment",
-      "mcpTool": "gala_launchpad_delete_comment",
-      "category": "comments",
-      "description": "Delete a comment.\n\nSoft-deletes a comment from the pool's comment section.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session or API key\nAuthorization: Comment author, pool creator, moderator with MANAGE_COMMENTS permission, or platform overseer.",
-      "operationType": "write",
+    "unpinMessage": {
+      "name": "unpinMessage",
+      "mcpTool": "gala_launchpad_unpin_message",
+      "category": "messages",
+      "description": "Unpin a message from a token's chat.\n\nRemoves the pinned status from a message.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Moderator with MANAGER or MODERATOR role (JWT or API key)\n\nRETURNS: { success: true }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
+      "operationType": "read",
       "authRequired": true,
       "parameters": [
         {
           "name": "id",
           "type": "string",
           "required": true,
-          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+          "description": "ID of the message to unpin."
         }
-      ],
-      "topic": "content-flag-management"
+      ]
     },
-    "onCommentCreated": {
-      "name": "onCommentCreated",
-      "mcpTool": "gala_launchpad_on_comment_created",
-      "category": "comments",
-      "description": "Watch for new pool comments in real-time.\n\nTriggers whenever a user posts a comment on a token's pool page. Includes:\n- Comment text and metadata\n- Author information\n- Timestamp\n- Token association\n\nReturns:\n- commentsCreated: Number of new comments detected\n- comments: Array of comment events with tokenName, authorAddress, text, timestamp, and ID\n\nFilter Options:\n- tokenName: Only watch comments for a specific token\n- authorAddress: Only watch comments from a specific user\n- minLength: Only notify about comments with at least this character length.",
+    "getRestrictedNames": {
+      "name": "getRestrictedNames",
+      "mcpTool": "gala_launchpad_get_restricted_names",
+      "category": "restricted-names",
+      "description": "Get the restricted token names content.\n\nReturns newline-separated words that cannot be used in token names.\nContains offensive words - API response not publicly exposed.\n\n**Authorization:** Overseer only (JWT)\n\nRETURNS: {\n  success: true,\n  data: { content: \"scam\\nrug\\nfake\\n...\" }\n}",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": []
+    },
+    "updateRestrictedNames": {
+      "name": "updateRestrictedNames",
+      "mcpTool": "gala_launchpad_update_restricted_names",
+      "category": "restricted-names",
+      "description": "Update the restricted token names content.\n\nReplaces the entire list with newline-separated words.\nNewlines separate individual words to restrict.\n\n**Authorization:** Overseer only (JWT)\n\nRETURNS: { success: true }",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
         {
-          "name": "tokenName",
+          "name": "content",
           "type": "string",
-          "required": false,
-          "description": "Only watch comments for this token (optional)."
-        },
-        {
-          "name": "authorAddress",
-          "type": "string",
-          "required": false,
-          "description": "Only watch comments from this author (optional)."
-        },
-        {
-          "name": "minLength",
-          "type": "number",
-          "required": false,
-          "description": "Only notify about comments with at least this character length (optional)."
-        },
-        {
-          "name": "intervalMs",
-          "type": "number",
-          "required": false,
-          "description": "Poll interval in milliseconds (default: 30000 / 30 seconds)."
-        },
-        {
-          "name": "durationSeconds",
-          "type": "number",
-          "required": false,
-          "description": "How long to watch for new events in seconds (default: 60)."
+          "required": true,
+          "description": "Newline-separated restricted words (e.g., \"scam\\nrug\\nfake\")"
         }
       ]
     },
@@ -6741,7 +6792,7 @@
       "name": "addContentReaction",
       "mcpTool": "gala_launchpad_add_content_reaction",
       "category": "content-reactions",
-      "description": "Add a reaction to a pool message (chat or comment).\n\nRequires JWT or API key authentication.\nAdding the same reaction type again is a no-op (idempotent).\nUsers can have multiple different reaction types on the same message.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Add a reaction to a pool message (chat or comment).\n\nRequires JWT or API key authentication.\nAdding the same reaction type again is a no-op (idempotent).\nUsers can have multiple different reaction types on the same message.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6777,7 +6828,7 @@
       "name": "removeContentReaction",
       "mcpTool": "gala_launchpad_remove_content_reaction",
       "category": "content-reactions",
-      "description": "Remove a reaction from a pool message.\n\nRequires JWT or API key authentication.\nOnly the user who created the reaction can remove it.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Remove a reaction from a pool message.\n\nRequires JWT or API key authentication.\nOnly the user who created the reaction can remove it.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6813,7 +6864,7 @@
       "name": "addReactionToChatMessage",
       "mcpTool": "gala_launchpad_add_reaction_to_chat_message",
       "category": "content-reactions",
-      "description": "Add a reaction to a chat message.\n\nConvenience wrapper for addContentReaction specifically for chat messages.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Add a reaction to a chat message.\n\nConvenience wrapper for addContentReaction specifically for chat messages.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6849,7 +6900,7 @@
       "name": "removeReactionFromChatMessage",
       "mcpTool": "gala_launchpad_remove_reaction_from_chat_message",
       "category": "content-reactions",
-      "description": "Remove a reaction from a chat message.\n\nConvenience wrapper for removeContentReaction specifically for chat messages.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Remove a reaction from a chat message.\n\nConvenience wrapper for removeContentReaction specifically for chat messages.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6885,7 +6936,7 @@
       "name": "addReactionToComment",
       "mcpTool": "gala_launchpad_add_reaction_to_comment",
       "category": "content-reactions",
-      "description": "Add a reaction to a comment.\n\nConvenience wrapper for addContentReaction specifically for comments.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Add a reaction to a comment.\n\nConvenience wrapper for addContentReaction specifically for comments.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6921,7 +6972,7 @@
       "name": "removeReactionFromComment",
       "mcpTool": "gala_launchpad_remove_reaction_from_comment",
       "category": "content-reactions",
-      "description": "Remove a reaction from a comment.\n\nConvenience wrapper for removeContentReaction specifically for comments.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call SDK.login() first).",
+      "description": "Remove a reaction from a comment.\n\nConvenience wrapper for removeContentReaction specifically for comments.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
@@ -6957,7 +7008,7 @@
       "name": "getTrades",
       "mcpTool": "gala_launchpad_get_trades",
       "category": "trades",
-      "description": "Query trades with flexible filtering options.\n\nReturns paginated list of trades with metadata.\nAt least one of tokenName or userAddress is required.\n\nFilters:\n- tokenName: Filter by token name (e.g., 'anime')\n- userAddress: Filter by user wallet address\n- txnType: Filter by trade direction ('BUY' or 'SELL')\n- startDate/endDate: Filter by date range (ISO 8601)\n- minAmount/maxAmount: Filter by trade amount range\n\nRETURNS: { trades: [{ txnId, txnType, inputAmount, outputAmount, userAddress, tokenName, tokenImage, createdAt }], meta: { totalItems, currentPage, pageSize, totalPages } }\n\nExamples:\n- Get all trades for a token: { tokenName: 'anime' }\n- Get all trades by a user: { userAddress: 'eth|123...' }\n- Get only buy trades: { tokenName: 'anime', txnType: 'BUY' }\n- Get trades in date range: { tokenName: 'anime', startDate: '2024-01-01', endDate: '2024-12-31' }\n- Get large trades: { tokenName: 'anime', minAmount: 1000 }\n\nPublic endpoint - no authentication required.",
+      "description": "Query trades with flexible filtering options.\n\nReturns paginated list of trades with metadata using cursor-based pagination.\nAt least one of tokenName or userAddress is required.\n\nFilters:\n- tokenName: Filter by token name (e.g., 'anime')\n- userAddress: Filter by user wallet address\n- txnType: Filter by trade direction ('BUY' or 'SELL')\n- startDate/endDate: Filter by date range (ISO 8601)\n- minAmount/maxAmount: Filter by trade amount range\n\nRETURNS: { trades: [{ txnId, txnType, inputAmount, outputAmount, userAddress, tokenName, tokenImage, createdAt }], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nExamples:\n- Get all trades for a token: { tokenName: 'anime' }\n- Get all trades by a user: { userAddress: 'eth|123...' }\n- Get only buy trades: { tokenName: 'anime', txnType: 'BUY' }\n- Get trades in date range: { tokenName: 'anime', startDate: '2024-01-01', endDate: '2024-12-31' }\n- Get large trades: { tokenName: 'anime', minAmount: 1000 }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -6974,16 +7025,16 @@
           "description": "User address to filter by (optional if tokenName provided)."
         },
         {
-          "name": "offset",
-          "type": "number",
+          "name": "cursor",
+          "type": "string",
           "required": false,
-          "description": "Offset for pagination (default: 0)."
+          "description": "Cursor from previous response (omit for first page)."
         },
         {
-          "name": "limit",
+          "name": "pageSize",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 20, maximum: 20)."
+          "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "txnType",
@@ -7106,114 +7157,144 @@
           "name": "limit",
           "type": "any",
           "required": false,
-          "description": "Results per page (default: 50, maximum: 20)."
+          "description": "Results per page (default: 50, maximum: 20)"
         }
       ]
     },
-    "getChatMessages": {
-      "name": "getChatMessages",
-      "mcpTool": "gala_launchpad_get_chat_messages",
-      "category": "chat-messages",
-      "description": "Query chat messages with tokenName/userAddress filters.\n\nReturns paginated list of chat messages from the unified pool_messages table.\nAt least one of tokenName or userAddress must be provided.\nPublic endpoint - no authentication required.\n\nRETURNS: {\n messages: [{\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, updatedAt?, deletedAt, flagCount, reactions, holderTier?\n }],\n meta: { totalItems, currentPage, pageSize, totalPages }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).",
+    "getHolderRank": {
+      "name": "getHolderRank",
+      "mcpTool": "gala_launchpad_get_holder_rank",
+      "category": "holders",
+      "description": "Get a user's holder rank and balance for a token.\n\nReturns the user's rank (1 = largest holder), balance, and total holder count.\nUseful for understanding a user's position in the holder distribution.\n\nReturns: { rank: number, balance: string, holderCount: number }\nReturns null if user is not a holder of the token.\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
           "type": "any",
-          "required": false,
-          "description": "Token name to filter by (e.g., \"anime\")."
+          "required": true,
+          "description": "Token name."
         },
         {
           "name": "userAddress",
           "type": "any",
-          "required": false,
-          "description": "User address to filter by (eth|... or 0x... format)."
-        },
-        {
-          "name": "page",
-          "type": "number",
-          "required": false,
-          "description": "Offset for pagination (default: 0)."
-        },
-        {
-          "name": "limit",
-          "type": "any",
-          "required": false,
-          "description": "Results per page (default: 50, maximum: 100)."
+          "required": true,
+          "description": "Wallet address."
         }
-      ],
-      "topic": "stream-chat"
+      ]
     },
-    "sendChatMessage": {
-      "name": "sendChatMessage",
-      "mcpTool": "gala_launchpad_send_chat_message",
-      "category": "chat-messages",
-      "description": "Send a new chat message on a token pool.\n\nPosts a message to the specified token's chat via REST API.\nMessages are stored in the unified pool_messages table.\n\nRETURNS: {\n message: {\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, deletedAt, flagCount, reactions, holderTier?\n }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
-      "operationType": "write",
-      "authRequired": true,
+    "getTopHolders": {
+      "name": "getTopHolders",
+      "mcpTool": "gala_launchpad_get_top_holders",
+      "category": "holders",
+      "description": "Get top token holders by balance.\n\nReturns a paginated list of the largest token holders, including their address,\nbalance, and percentage of total supply. Default returns top 10 holders.\n\nReturns: Array of { address: string, balance: string, percentage: number, rank: number }\n\nPublic endpoint - no authentication required.",
+      "operationType": "read",
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
           "type": "any",
           "required": true,
-          "description": "Token name to post the message to (e.g., \"anime\")."
+          "description": "Token name."
         },
         {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "Chat message content (1-500 characters)."
+          "name": "limit",
+          "type": "number",
+          "required": false,
+          "description": "Number of top holders to return (default: 10, max: 100)."
         }
-      ],
-      "topic": "stream-chat"
+      ]
     },
-    "updateChatMessage": {
-      "name": "updateChatMessage",
-      "mcpTool": "gala_launchpad_update_chat_message",
-      "category": "chat-messages",
-      "description": "Update a chat message's content (author only).\n\nEdits an existing chat message. Only the original author can update.\nThe message will have an updatedAt timestamp after editing.\n\nRETURNS: {\n message: {\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, updatedAt, deletedAt, flagCount, reactions\n }\n}\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
-      "operationType": "write",
-      "authRequired": true,
+    "getHolderCount": {
+      "name": "getHolderCount",
+      "mcpTool": "gala_launchpad_get_holder_count",
+      "category": "holders",
+      "description": "Get holder statistics for a token.\n\nReturns the total number of holders and the total supply across all holders.\n\nReturns: { count: number, totalBalance: string }\n\nPublic endpoint - no authentication required.",
+      "operationType": "read",
+      "authRequired": false,
       "parameters": [
         {
-          "name": "id",
-          "type": "string",
+          "name": "tokenName",
+          "type": "any",
           "required": true,
-          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+          "description": "Token name."
+        }
+      ]
+    },
+    "getHoldersByBalance": {
+      "name": "getHoldersByBalance",
+      "mcpTool": "gala_launchpad_get_holders_by_balance",
+      "category": "holders",
+      "description": "Query holders by balance range.\n\nReturns holders whose balance falls within the specified min/max range.\nUseful for analyzing holder distribution across different tiers.\n\nReturns: Array of { address: string, balance: string, percentage: number, rank: number }\n\nPublic endpoint - no authentication required.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name."
         },
         {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "Updated message content (1-500 characters)."
+          "name": "minBalance",
+          "type": "number",
+          "required": false,
+          "description": "Minimum balance (optional, no floor if not specified)."
+        },
+        {
+          "name": "maxBalance",
+          "type": "number",
+          "required": false,
+          "description": "Maximum balance (optional, no ceiling if not specified)."
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of holders to return (default: 100)."
         }
-      ],
-      "topic": "stream-chat"
+      ]
     },
-    "deleteChatMessage": {
-      "name": "deleteChatMessage",
-      "mcpTool": "gala_launchpad_delete_chat_message",
-      "category": "chat-messages",
-      "description": "Delete a chat message.\n\nRemoves a message from the chat. Supports multiple authorization methods:\n- Message author (JWT auth)\n- Pool owner (JWT auth)\n- Moderator with MANAGE_CHAT permission (API key auth)\n\nThe message remains in the database with deletedAt set (soft delete).\n\nRETURNS: void (success with no content)\n\nAuthentication: Requires JWT session OR API key with MANAGE_CHAT permission.",
-      "operationType": "write",
-      "authRequired": true,
+    "getHolderHistory": {
+      "name": "getHolderHistory",
+      "mcpTool": "gala_launchpad_get_holder_history",
+      "category": "holders",
+      "description": "Get recent trade history for a specific holder.\n\nReturns the most recent trades that affected a user's holdings for a token.\nUseful for understanding how a holder's position was built up.\n\nReturns: { trades: [{ txnId, txnType, inputAmount, outputAmount, createdAt }], pageInfo: { hasNextPage, endCursor } }\n\nPublic endpoint - no authentication required.",
+      "operationType": "read",
+      "authRequired": false,
       "parameters": [
         {
-          "name": "id",
-          "type": "string",
+          "name": "tokenName",
+          "type": "any",
           "required": true,
-          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+          "description": "Token name."
+        },
+        {
+          "name": "userAddress",
+          "type": "any",
+          "required": true,
+          "description": "Wallet address."
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "required": false,
+          "description": "Number of recent trades to return (default: 20)."
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": "Pagination cursor for fetching next set of trades."
         }
-      ],
-      "topic": "stream-chat"
+      ]
     }
   },
   "topics": {
     "buy-tokens": {
       "key": "buy-tokens",
       "label": "Buy tokens",
-      "description": "Buy tokens operations.",
+      "description": "Buy tokens operations",
       "methods": [
         "calculateBuyAmount",
         "buy"
@@ -7223,7 +7304,7 @@
     "sell-tokens": {
       "key": "sell-tokens",
       "label": "Sell tokens",
-      "description": "Sell tokens operations.",
+      "description": "Sell tokens operations",
       "methods": [
         "calculateSellAmount",
         "sell"
@@ -7233,7 +7314,7 @@
     "pool-graduation": {
       "key": "pool-graduation",
       "label": "Pool graduation",
-      "description": "Pool graduation operations.",
+      "description": "Pool graduation operations",
       "methods": [
         "calculateBuyAmountForGraduation",
         "graduateToken"
@@ -7243,7 +7324,7 @@
     "fetch-pools": {
       "key": "fetch-pools",
       "label": "Fetch pools",
-      "description": "Fetch pools operations.",
+      "description": "Fetch pools operations",
       "methods": [
         "fetchPools",
         "fetchAllPools",
@@ -7261,7 +7342,7 @@
     "balances": {
       "key": "balances",
       "label": "Balances",
-      "description": "Balances operations.",
+      "description": "Balances operations",
       "methods": [
         "fetchGalaBalance",
         "fetchTokenBalance",
@@ -7274,7 +7355,7 @@
     "token-creation": {
       "key": "token-creation",
       "label": "Token creation",
-      "description": "Token creation operations.",
+      "description": "Token creation operations",
       "methods": [
         "isTokenNameAvailable",
         "isTokenSymbolAvailable",
@@ -7282,12 +7363,12 @@
         "uploadTokenImage",
         "launchToken"
       ],
-      "category": "utils"
+      "category": "pools"
     },
     "token-details": {
       "key": "token-details",
       "label": "Token details",
-      "description": "Token details operations.",
+      "description": "Token details operations",
       "methods": [
         "fetchTokenDetails"
       ],
@@ -7296,7 +7377,7 @@
     "token-distribution": {
       "key": "token-distribution",
       "label": "Token distribution",
-      "description": "Token distribution operations.",
+      "description": "Token distribution operations",
       "methods": [
         "fetchTokenDistribution",
         "fetchUserHolderContext"
@@ -7306,7 +7387,7 @@
     "token-status": {
       "key": "token-status",
       "label": "Token status",
-      "description": "Token status operations.",
+      "description": "Token status operations",
       "methods": [
         "isTokenGraduated",
         "onDexPoolCreation",
@@ -7317,7 +7398,7 @@
     "multi-wallet": {
       "key": "multi-wallet",
       "label": "Multi wallet",
-      "description": "Multi wallet operations.",
+      "description": "Multi wallet operations",
       "methods": [
         "getAddress"
       ],
@@ -7326,7 +7407,7 @@
     "transfers": {
       "key": "transfers",
       "label": "Transfers",
-      "description": "Transfers operations.",
+      "description": "Transfers operations",
       "methods": [
         "transferGala",
         "transferToken"
@@ -7336,7 +7417,7 @@
     "locks": {
       "key": "locks",
       "label": "Locks",
-      "description": "Locks operations.",
+      "description": "Locks operations",
       "methods": [
         "lockTokens",
         "unlockTokens",
@@ -7348,7 +7429,7 @@
     "dex-trading": {
       "key": "dex-trading",
       "label": "Dex trading",
-      "description": "Dex trading operations.",
+      "description": "Dex trading operations",
       "methods": [
         "getSwapQuoteExactInput",
         "getSwapQuoteExactOutput",
@@ -7362,7 +7443,7 @@
     "error-handling": {
       "key": "error-handling",
       "label": "Error handling",
-      "description": "Error handling operations.",
+      "description": "Error handling operations",
       "methods": [
         "getBundlerTransactionResult"
       ],
@@ -7371,7 +7452,7 @@
     "installation": {
       "key": "installation",
       "label": "Installation",
-      "description": "Installation operations.",
+      "description": "Installation operations",
       "methods": [
         "getVersion"
       ],
@@ -7380,7 +7461,7 @@
     "local-calculations": {
       "key": "local-calculations",
       "label": "Local calculations",
-      "description": "Local calculations operations.",
+      "description": "Local calculations operations",
       "methods": [
         "calculateBuyAmountLocal",
         "calculateSellAmountLocal",
@@ -7393,7 +7474,7 @@
     "price-history": {
       "key": "price-history",
       "label": "Price history",
-      "description": "Price history operations.",
+      "description": "Price history operations",
       "methods": [
         "fetchPriceHistory",
         "fetchAllPriceHistory"
@@ -7403,17 +7484,17 @@
     "spot-prices-smart-routing": {
       "key": "spot-prices-smart-routing",
       "label": "Spot prices smart routing",
-      "description": "Spot prices smart routing operations.",
+      "description": "Spot prices smart routing operations",
       "methods": [
         "fetchTokenPrice",
         "getSwapPoolPrice"
       ],
-      "category": "utils"
+      "category": "pools"
     },
     "profile-management": {
       "key": "profile-management",
       "label": "Profile management",
-      "description": "Profile management operations.",
+      "description": "Profile management operations",
       "methods": [
         "fetchProfile",
         "updateProfile",
@@ -7425,7 +7506,7 @@
     "liquidity-positions": {
       "key": "liquidity-positions",
       "label": "Liquidity positions",
-      "description": "Liquidity positions operations.",
+      "description": "Liquidity positions operations",
       "methods": [
         "getSwapUserLiquidityPositions",
         "getAllSwapUserLiquidityPositions",
@@ -7437,12 +7518,12 @@
         "removeSwapLiquidity",
         "collectSwapPositionFees"
       ],
-      "category": "utils"
+      "category": "dex-liquidity"
     },
     "advanced-dex-analysis": {
       "key": "advanced-dex-analysis",
       "label": "Advanced dex analysis",
-      "description": "Advanced DEX analysis operations.",
+      "description": "Advanced dex analysis operations",
       "methods": [
         "fetchCompositePoolData",
         "calculateDexPoolQuoteExactAmountLocal",
@@ -7454,7 +7535,7 @@
     "trading-analytics": {
       "key": "trading-analytics",
       "label": "Trading analytics",
-      "description": "Trading analytics operations.",
+      "description": "Trading analytics operations",
       "methods": [
         "fetchTrades",
         "getTrades"
@@ -7464,7 +7545,7 @@
     "utilities-and-helpers": {
       "key": "utilities-and-helpers",
       "label": "Utilities and helpers",
-      "description": "Utilities and helpers operations.",
+      "description": "Utilities and helpers operations",
       "methods": [
         "fetchGalaPrice",
         "fetchTokenClassesWithSupply",
@@ -7477,12 +7558,12 @@
         "clearCache",
         "getCacheInfo"
       ],
-      "category": "utils"
+      "category": "pools"
     },
     "utilities-system": {
       "key": "utilities-system",
       "label": "Utilities system",
-      "description": "Utilities system operations.",
+      "description": "Utilities system operations",
       "methods": [
         "getAddress",
         "getConfig",
@@ -7501,7 +7582,7 @@
     "fetch-all-dex-seasons": {
       "key": "fetch-all-dex-seasons",
       "label": "Fetch all dex seasons",
-      "description": "Fetch all DEX seasons operations.",
+      "description": "Fetch all dex seasons operations",
       "methods": [
         "fetchAllDexSeasons"
       ],
@@ -7510,7 +7591,7 @@
     "fetch-current-dex-season": {
       "key": "fetch-current-dex-season",
       "label": "Fetch current dex season",
-      "description": "Fetch current DEX season operations.",
+      "description": "Fetch current dex season operations",
       "methods": [
         "fetchCurrentDexSeason"
       ],
@@ -7519,7 +7600,7 @@
     "fetch-dex-leaderboard-by-season-id": {
       "key": "fetch-dex-leaderboard-by-season-id",
       "label": "Fetch dex leaderboard by season id",
-      "description": "Fetch DEX leaderboard by season id operations.",
+      "description": "Fetch dex leaderboard by season id operations",
       "methods": [
         "fetchDexLeaderboardBySeasonId"
       ],
@@ -7528,7 +7609,7 @@
     "fetch-current-dex-leaderboard": {
       "key": "fetch-current-dex-leaderboard",
       "label": "Fetch current dex leaderboard",
-      "description": "Fetch current DEX leaderboard operations.",
+      "description": "Fetch current dex leaderboard operations",
       "methods": [
         "fetchCurrentDexLeaderboard"
       ],
@@ -7537,7 +7618,7 @@
     "fetch-dex-aggregated-volume-summary": {
       "key": "fetch-dex-aggregated-volume-summary",
       "label": "Fetch dex aggregated volume summary",
-      "description": "Fetch DEX aggregated volume summary operations.",
+      "description": "Fetch dex aggregated volume summary operations",
       "methods": [
         "fetchDexAggregatedVolumeSummary"
       ],
@@ -7546,7 +7627,7 @@
     "fetch-dex-pools": {
       "key": "fetch-dex-pools",
       "label": "Fetch dex pools",
-      "description": "Fetch DEX pools operations.",
+      "description": "Fetch dex pools operations",
       "methods": [
         "fetchDexPools",
         "fetchAllDexPools"
@@ -7556,7 +7637,7 @@
     "event-subscriptions": {
       "key": "event-subscriptions",
       "label": "Event subscriptions",
-      "description": "Event subscriptions operations.",
+      "description": "Event subscriptions operations",
       "methods": [
         "subscribeToStream",
         "unsubscribeFromStream",
@@ -7597,7 +7678,7 @@
     "mcp-to-sdk-mapping": {
       "key": "mcp-to-sdk-mapping",
       "label": "Mcp to sdk mapping",
-      "description": "Mcp to SDK mapping operations.",
+      "description": "Mcp to sdk mapping operations",
       "methods": [
         "explainSdkUsage"
       ],
@@ -7606,7 +7687,7 @@
     "bridge-operations": {
       "key": "bridge-operations",
       "label": "Bridge operations",
-      "description": "Bridge operations operations.",
+      "description": "Bridge operations operations",
       "methods": [
         "estimateBridgeFee",
         "bridgeOut",
@@ -7635,7 +7716,7 @@
     "dex-token-discovery": {
       "key": "dex-token-discovery",
       "label": "Dex token discovery",
-      "description": "Dex token discovery operations.",
+      "description": "Dex token discovery operations",
       "methods": [
         "fetchAvailableDexTokens",
         "fetchAllAvailableDexTokens"
@@ -7645,7 +7726,7 @@
     "wrap-unwrap-operations": {
       "key": "wrap-unwrap-operations",
       "label": "Wrap unwrap operations",
-      "description": "Wrap unwrap operations operations.",
+      "description": "Wrap unwrap operations operations",
       "methods": [
         "wrapToken",
         "unwrapToken",
@@ -7663,7 +7744,7 @@
     "referral-system": {
       "key": "referral-system",
       "label": "Referral system",
-      "description": "Referral system operations.",
+      "description": "Referral system operations",
       "methods": [
         "fetchReferralUrl",
         "fetchReferrals",
@@ -7675,7 +7756,7 @@
     "account-management": {
       "key": "account-management",
       "label": "Account management",
-      "description": "Account management operations.",
+      "description": "Account management operations",
       "methods": [
         "registerAccount"
       ],
@@ -7684,7 +7765,7 @@
     "session-auth": {
       "key": "session-auth",
       "label": "Session auth",
-      "description": "Session auth operations.",
+      "description": "Session auth operations",
       "methods": [
         "login",
         "logout",
@@ -7700,7 +7781,7 @@
     "streaming": {
       "key": "streaming",
       "label": "Streaming",
-      "description": "Streaming operations.",
+      "description": "Streaming operations",
       "methods": [
         "startStream",
         "stopStream",
@@ -7725,12 +7806,8 @@
     "stream-chat": {
       "key": "stream-chat",
       "label": "Stream chat",
-      "description": "Stream chat operations.",
+      "description": "Stream chat operations",
       "methods": [
-        "getChatMessages",
-        "sendChatMessage",
-        "updateChatMessage",
-        "deleteChatMessage",
         "getChatStatus",
         "disableChat",
         "enableChat",
@@ -7746,12 +7823,12 @@
         "isStreamWebSocketConnected",
         "getEngagementStats"
       ],
-      "category": "chat-messages"
+      "category": "chat"
     },
     "ban-management": {
       "key": "ban-management",
       "label": "Ban management",
-      "description": "Ban management operations.",
+      "description": "Ban management operations",
       "methods": [
         "createBan",
         "removeBan",
@@ -7764,7 +7841,7 @@
     "api-key-management": {
       "key": "api-key-management",
       "label": "Api key management",
-      "description": "Api key management operations.",
+      "description": "Api key management operations",
       "methods": [
         "createApiKey",
         "listApiKeys",
@@ -7778,7 +7855,7 @@
     "moderator-invites": {
       "key": "moderator-invites",
       "label": "Moderator invites",
-      "description": "Moderator invites operations.",
+      "description": "Moderator invites operations",
       "methods": [
         "createModeratorInvite",
         "claimModeratorInvite",
@@ -7793,7 +7870,7 @@
     "overseer-invites": {
       "key": "overseer-invites",
       "label": "Overseer invites",
-      "description": "Overseer invites operations.",
+      "description": "Overseer invites operations",
       "methods": [
         "createOverseerInvite",
         "claimOverseerInvite",
@@ -7810,7 +7887,7 @@
     "content-flag-management": {
       "key": "content-flag-management",
       "label": "Content flag management",
-      "description": "Content flag management operations.",
+      "description": "Content flag management operations",
       "methods": [
         "createFlag",
         "listFlags",
@@ -7827,7 +7904,7 @@
     "content-reactions": {
       "key": "content-reactions",
       "label": "Content reactions",
-      "description": "Content reactions operations.",
+      "description": "Content reactions operations",
       "methods": [
         "addContentReaction",
         "removeContentReaction",
@@ -7841,7 +7918,7 @@
     "trade-history": {
       "key": "trade-history",
       "label": "Trade history",
-      "description": "Trade history operations.",
+      "description": "Trade history operations",
       "methods": [
         "getTrades"
       ],
@@ -7850,7 +7927,7 @@
     "token-ban-management": {
       "key": "token-ban-management",
       "label": "Token ban management",
-      "description": "Token ban management operations.",
+      "description": "Token ban management operations",
       "methods": [
         "banToken",
         "unbanToken",
@@ -7863,7 +7940,7 @@
     "nft-collection-management": {
       "key": "nft-collection-management",
       "label": "Nft collection management",
-      "description": "Nft collection management operations.",
+      "description": "Nft collection management operations",
       "methods": [
         "getNftCollectionClaimFee",
         "getNftTokenClassCreateFee",
@@ -7925,6 +8002,7 @@
       "fetchLaunchTokenFee",
       "fetchLaunchpadTokenSpotPrice",
       "fetchLockedTokens",
+      "fetchMessages",
       "fetchNftBalances",
       "fetchNftCollections",
       "fetchNftTokenClasses",
@@ -7960,9 +8038,7 @@
       "getBridgeStatus",
       "getBundlerTransactionResult",
       "getCacheInfo",
-      "getChatMessages",
       "getChatStatus",
-      "getComments",
       "getConfig",
       "getEngagementStats",
       "getEnvironment",
@@ -7971,18 +8047,22 @@
       "getEventSchema",
       "getGlobalChatStatus",
       "getGlobalStreamingStatus",
+      "getHolderCount",
+      "getHolderHistory",
+      "getHolderRank",
+      "getHoldersByBalance",
       "getLiquidityPosition",
       "getLiquidityPositionById",
       "getNftCollectionClaimFee",
       "getNftTokenClassCreateFee",
-      "getPinnedChatMessage",
+      "getPinnedMessage",
       "getPlatformStatus",
       "getPoolRealtimeState",
       "getRecentTrades",
       "getRecordingDownload",
+      "getRestrictedNames",
       "getSimulcastTargets",
       "getSolanaTransactionStatus",
-      "getStreamInfo",
       "getStreamRecordings",
       "getSupportedBridgeTokens",
       "getSwapPoolInfo",
@@ -7991,6 +8071,7 @@
       "getSwapQuoteExactOutput",
       "getSwapUserAssets",
       "getTokenBan",
+      "getTopHolders",
       "getTrades",
       "getUrlByTokenName",
       "getUserLiquidityPositions",
@@ -8035,15 +8116,14 @@
       "connectStreamWebsocket",
       "createApiKey",
       "createBan",
-      "createComment",
       "createFlag",
+      "createMessage",
       "createModeratorInvite",
       "createNftTokenClass",
       "createOverseerInvite",
       "createSolanaWallet",
       "createWallet",
-      "deleteChatMessage",
-      "deleteComment",
+      "deleteMessage",
       "deleteRecording",
       "dismissFlag",
       "ensureValidToken",
@@ -8084,7 +8164,6 @@
       "logout",
       "mintNft",
       "onBanEnforcement",
-      "onCommentCreated",
       "onDexPoolCreation",
       "onHolderCountChanged",
       "onLaunchpadTokenCreation",
@@ -8092,7 +8171,7 @@
       "onPoolUpdated",
       "onTokenBanChanged",
       "onTradeExecuted",
-      "pinChatMessage",
+      "pinMessage",
       "refreshToken",
       "registerAccount",
       "removeBan",
@@ -8108,7 +8187,6 @@
       "revokeOverseer",
       "revokeOverseerInvite",
       "sell",
-      "sendChatMessage",
       "sendStreamChatViaWebSocket",
       "sendStreamReaction",
       "sendTypingIndicator",
@@ -8127,16 +8205,18 @@
       "transferToken",
       "unbanToken",
       "unlockTokens",
-      "unpinChatMessage",
+      "unpinMessage",
       "unwrapToken",
       "updateApiKey",
-      "updateChatMessage",
-      "updateComment",
+      "updateMessage",
       "updateModeratorInviteRole",
       "updateProfile",
+      "updateRestrictedNames",
+      "updateTokenConfig",
       "updateTokenSocials",
       "uploadProfileImage",
       "uploadTokenImage",
+      "validateToken",
       "wrapToken"
     ]
   },
@@ -8197,7 +8277,7 @@
       "wrap-unwrap-operations"
     ],
     "topicCount": 49,
-    "methodCount": 254,
+    "methodCount": 257,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   }
 }
