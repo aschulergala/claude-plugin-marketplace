@@ -1,0 +1,363 @@
+{
+  "meta": {
+    "version": "5.0.4-beta.1",
+    "generatedAt": "2026-01-21T04:22:30.151Z",
+    "toolCount": 257,
+    "categoryCount": 32
+  },
+  "categories": {
+    "pools": {
+      "key": "pools",
+      "label": "Pools",
+      "description": "Pool management, pricing, and token availability",
+      "icon": "🏊",
+      "count": 28
+    },
+    "trading": {
+      "key": "trading",
+      "label": "Trading",
+      "description": "Buy, sell, and calculate token amounts",
+      "icon": "📈",
+      "count": 13
+    },
+    "dex": {
+      "key": "dex",
+      "label": "DEX Trading",
+      "description": "GalaSwap quotes, swaps, and user assets",
+      "icon": "🔄",
+      "count": 7
+    },
+    "dex-pools": {
+      "key": "dex-pools",
+      "label": "DEX Pools",
+      "description": "DEX pool discovery and information",
+      "icon": "🌊",
+      "count": 7
+    },
+    "dex-liquidity": {
+      "key": "dex-liquidity",
+      "label": "DEX Liquidity",
+      "description": "Liquidity position management",
+      "icon": "💧",
+      "count": 10
+    },
+    "dex-analytics": {
+      "key": "dex-analytics",
+      "label": "DEX Analytics",
+      "description": "Leaderboards and volume metrics",
+      "icon": "📊",
+      "count": 5
+    },
+    "balance": {
+      "key": "balance",
+      "label": "Balances",
+      "description": "Balance queries and portfolio management",
+      "icon": "💰",
+      "count": 10
+    },
+    "referrals": {
+      "key": "referrals",
+      "label": "Referrals",
+      "description": "Referral program and rewards tracking",
+      "icon": "🔗",
+      "count": 4
+    },
+    "creation": {
+      "key": "creation",
+      "label": "Token Creation",
+      "description": "Launch new tokens on Launchpad",
+      "icon": "🪙",
+      "count": 4
+    },
+    "nft": {
+      "key": "nft",
+      "label": "NFTs",
+      "description": "NFT collection management and operations",
+      "icon": "🖼️",
+      "count": 11
+    },
+    "transfers": {
+      "key": "transfers",
+      "label": "Transfers",
+      "description": "GALA and token transfers",
+      "icon": "📤",
+      "count": 2
+    },
+    "locks": {
+      "key": "locks",
+      "label": "Locks",
+      "description": "Token lock and unlock operations",
+      "icon": "🔒",
+      "count": 2
+    },
+    "burns": {
+      "key": "burns",
+      "label": "Burns",
+      "description": "Permanently destroy tokens (irreversible)",
+      "icon": "🔥",
+      "count": 1
+    },
+    "wallet": {
+      "key": "wallet",
+      "label": "Wallet",
+      "description": "Wallet creation and key derivation",
+      "icon": "👛",
+      "count": 6
+    },
+    "utils": {
+      "key": "utils",
+      "label": "Utilities",
+      "description": "SDK configuration and helpers",
+      "icon": "🛠️",
+      "count": 16
+    },
+    "bridge": {
+      "key": "bridge",
+      "label": "Bridge",
+      "description": "Cross-chain bridging operations",
+      "icon": "🌉",
+      "count": 31
+    },
+    "streaming": {
+      "key": "streaming",
+      "label": "Live Stream",
+      "description": "Live streaming management and control",
+      "icon": "📺",
+      "count": 10
+    },
+    "recordings": {
+      "key": "recordings",
+      "label": "Recordings",
+      "description": "Stream recording management - list, download, and delete recordings",
+      "icon": "🎥",
+      "count": 3
+    },
+    "simulcasts": {
+      "key": "simulcasts",
+      "label": "Simulcasts",
+      "description": "Multi-platform streaming - YouTube, Twitch, Facebook rebroadcasting",
+      "icon": "📡",
+      "count": 3
+    },
+    "chat": {
+      "key": "chat",
+      "label": "Chat",
+      "description": "Stream chat and messaging",
+      "icon": "💬",
+      "count": 10
+    },
+    "auth": {
+      "key": "auth",
+      "label": "Auth",
+      "description": "JWT session authentication",
+      "icon": "🔐",
+      "count": 8
+    },
+    "ban": {
+      "key": "ban",
+      "label": "Ban Management",
+      "description": "User bans and moderation",
+      "icon": "🚫",
+      "count": 6
+    },
+    "api-keys": {
+      "key": "api-keys",
+      "label": "API Keys",
+      "description": "API key management",
+      "icon": "🔑",
+      "count": 6
+    },
+    "moderators": {
+      "key": "moderators",
+      "label": "Moderators",
+      "description": "Moderator invites and access",
+      "icon": "👮",
+      "count": 9
+    },
+    "content-flags": {
+      "key": "content-flags",
+      "label": "Content Flags",
+      "description": "Report and moderate content",
+      "icon": "🚩",
+      "count": 5
+    },
+    "overseers": {
+      "key": "overseers",
+      "label": "Overseers",
+      "description": "Global platform oversight",
+      "icon": "👁️",
+      "count": 11
+    },
+    "token-ban": {
+      "key": "token-ban",
+      "label": "Token Ban",
+      "description": "Platform-wide token bans",
+      "icon": "⛔",
+      "count": 6
+    },
+    "messages": {
+      "key": "messages",
+      "label": "Messages",
+      "description": "Messages operations",
+      "icon": "📦",
+      "count": 7
+    },
+    "restricted-names": {
+      "key": "restricted-names",
+      "label": "Restricted-names",
+      "description": "Restricted-names operations",
+      "icon": "📦",
+      "count": 2
+    },
+    "content-reactions": {
+      "key": "content-reactions",
+      "label": "Reactions",
+      "description": "Content reactions on messages and comments",
+      "icon": "❤️",
+      "count": 6
+    },
+    "trades": {
+      "key": "trades",
+      "label": "Trade History",
+      "description": "View and analyze trading history",
+      "icon": "📋",
+      "count": 3
+    },
+    "holders": {
+      "key": "holders",
+      "label": "Holders",
+      "description": "Holders operations",
+      "icon": "📦",
+      "count": 5
+    }
+  },
+  "categoryGroups": [
+    {
+      "key": "core",
+      "label": "Core Trading",
+      "categories": [
+        "nft",
+        "pools",
+        "trading",
+        "trades",
+        "balance",
+        "creation",
+        "referrals"
+      ]
+    },
+    {
+      "key": "dex",
+      "label": "DEX / GalaSwap",
+      "categories": [
+        "dex",
+        "dex-pools",
+        "dex-liquidity",
+        "dex-analytics"
+      ]
+    },
+    {
+      "key": "operations",
+      "label": "Operations",
+      "categories": [
+        "transfers",
+        "locks",
+        "burns",
+        "bridge"
+      ]
+    },
+    {
+      "key": "community",
+      "label": "Community",
+      "categories": [
+        "streaming",
+        "recordings",
+        "simulcasts",
+        "chat",
+        "chat-messages",
+        "comments",
+        "content-reactions"
+      ]
+    },
+    {
+      "key": "admin",
+      "label": "Administration",
+      "categories": [
+        "auth",
+        "ban",
+        "token-ban",
+        "api-keys",
+        "moderators",
+        "content-flags",
+        "overseers"
+      ]
+    },
+    {
+      "key": "utils",
+      "label": "Utilities",
+      "categories": [
+        "wallet",
+        "utils"
+      ]
+    }
+  ],
+  "explainSdkTeacher": {
+    "name": "ExplainSDK Teacher",
+    "mcpTool": "gala_launchpad_explain_sdk_usage",
+    "description": "Get detailed SDK code examples for all SDK methods organized into composite workflow topics. Acts as an interactive teacher that provides working code examples, best practices, and detailed explanations for any SDK feature.",
+    "icon": "🤖🍎",
+    "topics": [
+      "account-management",
+      "advanced-dex-analysis",
+      "api-key-management",
+      "balances",
+      "ban-management",
+      "bridge-operations",
+      "buy-tokens",
+      "content-flag-management",
+      "content-reactions",
+      "dex-token-discovery",
+      "dex-trading",
+      "error-handling",
+      "event-subscriptions",
+      "fetch-all-dex-seasons",
+      "fetch-current-dex-leaderboard",
+      "fetch-current-dex-season",
+      "fetch-dex-aggregated-volume-summary",
+      "fetch-dex-leaderboard-by-season-id",
+      "fetch-dex-pools",
+      "fetch-pools",
+      "installation",
+      "liquidity-positions",
+      "local-calculations",
+      "locks",
+      "mcp-to-sdk-mapping",
+      "moderator-invites",
+      "multi-wallet",
+      "nft-collection-management",
+      "overseer-invites",
+      "pool-graduation",
+      "price-history",
+      "profile-management",
+      "referral-system",
+      "sell-tokens",
+      "session-auth",
+      "spot-prices-smart-routing",
+      "stream-chat",
+      "streaming",
+      "token-ban-management",
+      "token-creation",
+      "token-details",
+      "token-distribution",
+      "token-status",
+      "trade-history",
+      "trading-analytics",
+      "transfers",
+      "utilities-and-helpers",
+      "utilities-system",
+      "wrap-unwrap-operations"
+    ],
+    "topicCount": 49,
+    "methodCount": 257,
+    "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
+  }
+}
