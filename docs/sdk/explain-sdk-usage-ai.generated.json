@@ -1,9 +1,9 @@
 {
   "meta": {
     "version": "0.0.0",
-    "generatedAt": "2026-01-21T06:10:58.759Z",
-    "topicCount": 49,
-    "methodCount": 257
+    "generatedAt": "2026-01-28T18:59:51.777Z",
+    "topicCount": 51,
+    "methodCount": 286
   },
   "topics": {
     "buy-tokens": {
@@ -1308,6 +1308,55 @@
         "Explain the nft collection management workflow",
         "What methods do I need for nft collection management?"
       ]
+    },
+    "token-identification": {
+      "key": "token-identification",
+      "label": "Token identification",
+      "description": "Token identification operations",
+      "category": "pools",
+      "methods": [
+        "fetchPools",
+        "isTokenGraduated",
+        "resolveTokenClassKey",
+        "fetchTokenPrice"
+      ],
+      "mcpTools": [
+        "gala_launchpad_fetch_pools",
+        "gala_launchpad_is_token_graduated",
+        "gala_launchpad_resolve_token_class_key"
+      ],
+      "explanation": "\n# Token Identification in Launchpad SDK\n\nThe SDK uses **TWO distinct token identifier formats**. Using the wrong format causes errors.\n\n## Format 1: Token Name (Launchpad/Bonding Curve Tokens)\n\n- **Format**: Simple lowercase string, 3-20 alphanumeric characters\n- **Examples**: `\"anime\"`, `\"demonkpop\"`, `\"shoewars\"`\n- **Parameter**: Usually `tokenName`\n- **Used for**: Bonding curve operations (before graduation)\n\n```typescript\n// ✅ CORRECT - Bonding curve buy\nawait sdk.buy({ tokenName: 'anime', amount: '100', type: 'native' });\n\n// ✅ CORRECT - Bonding curve sell\nawait sdk.sell({ tokenName: 'anime', amount: '50', type: 'tokens' });\n\n// ✅ CORRECT - Check pool status\nconst pool = await sdk.fetchPools({ tokenName: 'anime' });\n```\n\n## Format 2: TokenClassKey (GalaChain/DEX Tokens)\n\n- **Format**: Pipe-delimited string: `collection|category|type|additionalKey`\n- **Examples**: `\"GALA|Unit|none|none\"`, `\"GUSDC|Unit|none|eth:0xa0b...\"`\n- **Parameter**: Usually `tokenId`, `fromToken`, `toToken`\n- **Used for**: DEX swaps, LP operations, standard GalaChain tokens\n\n```typescript\n// ✅ CORRECT - DEX swap (requires full tokenClassKey)\nconst quote = await sdk.getSwapQuoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|eth:0xa0b...', '100');\nawait sdk.executeSwap('GALA|Unit|none|none', 'GUSDC|Unit|none|eth:0xa0b...', '100', quote.estimatedOutput, quote.feeTier);\n\n// ✅ CORRECT - Add DEX liquidity\nawait sdk.addSwapLiquidityByPrice({\n  token0: 'GALA|Unit|none|none',\n  token1: 'GUSDC|Unit|none|eth:0xa0b...',\n  fee: 3000,\n  minPrice: '0.01',\n  maxPrice: '0.05',\n  amount0Desired: '1000',\n  amount1Desired: '50'\n});\n```\n\n## Common Mistakes\n\n```typescript\n// ❌ WRONG - Bare symbol for DEX (throws ValidationError)\nawait sdk.executeSwap('GALA', 'GUSDC', '100', output, fee);\n\n// ❌ WRONG - TokenClassKey for bonding curve\nawait sdk.buy({ tokenName: 'Token|Unit|ANIME|client:gala-launchpad', amount: '100' });\n\n// ❌ WRONG - Simple name for DEX quote\nawait sdk.getSwapQuoteExactInput('anime', 'GALA|Unit|none|none', '100');\n```\n\n## Method-to-Format Quick Reference\n\n| Method | tokenName | tokenClassKey | Notes |\n|--------|:---------:|:-------------:|-------|\n| `buy()` | ✅ | ❌ | Bonding curve only |\n| `sell()` | ✅ | ❌ | Bonding curve only |\n| `graduateToken()` | ✅ | ❌ | Triggers DEX migration |\n| `executeSwap()` | ❌ | ✅ | DEX only |\n| `getSwapQuote*()` | ❌ | ✅ | DEX quotes |\n| `addSwapLiquidity*()` | ❌ | ✅ | LP operations |\n| `transferToken()` | ✅ | ✅ | Both work |\n| `fetchTokenPrice()` | ✅ | ✅ | Smart router |\n\n## Getting TokenClassKey for a Graduated Token\n\n**⚠️ IMPORTANT: Never construct a tokenClassKey manually!**\n\nThe tokenClassKey contains the token's **symbol** (set at creation), which may differ\nfrom the tokenName. Always query for it:\n\n```typescript\n// From pool data after graduation (RECOMMENDED)\nconst pool = await sdk.fetchPools({ tokenName: 'anime' });\nconst tokenClassKey = pool.items[0]?.tokenClassKey;\n// → Returns the actual tokenClassKey (symbol may differ from tokenName!)\n\n// Or use the resolver\nconst resolved = await sdk.resolveTokenClassKey('anime');\n// → Queries backend for the correct tokenClassKey\n```\n\n## Well-Known Token Constants\n\n```typescript\nconst GALA = 'GALA|Unit|none|none';\nconst GUSDC = 'GUSDC|Unit|none|eth:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';\nconst WETH = 'GETH|Unit|none|eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';\n```\n\n**See Also:** `src/types/token.types.ts` for full type definitions and utilities.\n",
+      "samplePrompts": [
+        "How do I token identification?",
+        "Show me how to token identification with the SDK",
+        "Explain the token identification workflow",
+        "What methods do I need for token identification?"
+      ]
+    },
+    "graduation-detection": {
+      "key": "graduation-detection",
+      "label": "Graduation detection",
+      "description": "Graduation detection operations",
+      "category": "utils",
+      "methods": [
+        "isTokenGraduated",
+        "fetchPools",
+        "onDexPoolCreation",
+        "onLaunchpadTokenCreation"
+      ],
+      "mcpTools": [
+        "gala_launchpad_is_token_graduated",
+        "gala_launchpad_fetch_pools",
+        "gala_launchpad_on_dex_pool_creation",
+        "gala_launchpad_on_launchpad_token_creation"
+      ],
+      "explanation": "\n# Detecting Token Graduation Status\n\nLaunchpad tokens transition from bonding curve to DEX when they \"graduate.\"\nThis affects which SDK methods work and which token format to use.\n\n## Checking Graduation Status\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function checkGraduationStatus(tokenName: string) {\n  const sdk = createLaunchpadSDK();\n\n  // Method 1: Check via pool data (recommended)\n  const pool = await sdk.fetchPools({ tokenName });\n  const isGraduated = pool.items[0]?.isGraduated ?? false;\n\n  // Method 2: Use the helper method\n  const graduated = await sdk.isTokenGraduated(tokenName);\n\n  return graduated;\n}\n```\n\n## Handling Graduated vs Non-Graduated Tokens\n\n```typescript\nasync function tradeToken(tokenName: string, galaAmount: string) {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Check graduation status first\n  const pool = await sdk.fetchPools({ tokenName });\n  const isGraduated = pool.items[0]?.isGraduated ?? false;\n\n  if (isGraduated) {\n    // Token is on DEX - use tokenClassKey format\n    const tokenClassKey = pool.items[0]?.tokenClassKey;\n    if (!tokenClassKey) throw new Error('Token graduated but no tokenClassKey found');\n\n    const quote = await sdk.getSwapQuoteExactInput(\n      'GALA|Unit|none|none',\n      tokenClassKey,\n      galaAmount\n    );\n\n    const result = await sdk.executeSwap(\n      'GALA|Unit|none|none',\n      tokenClassKey,\n      galaAmount,\n      quote.estimatedOutput,\n      quote.feeTier\n    );\n\n    return { method: 'DEX', result };\n  } else {\n    // Token is on bonding curve - use simple tokenName\n    const calc = await sdk.calculateBuyAmount({\n      tokenName,\n      amount: galaAmount,\n      type: 'native'\n    });\n\n    const result = await sdk.buy({\n      tokenName,\n      amount: galaAmount,\n      type: 'native',\n      expectedAmount: calc.amount,\n      slippageToleranceFactor: 0.01\n    });\n\n    return { method: 'BondingCurve', result };\n  }\n}\n```\n\n## Subscribing to Graduation Events\n\n```typescript\n// Listen for new DEX pool creation (graduation event)\nsdk.onDexPoolCreation((event) => {\n  console.log(`Token graduated: ${event.tokenName}`);\n  console.log(`New tokenClassKey: ${event.tokenClassKey}`);\n  // Update your local state to use DEX trading\n});\n\n// Listen for new launchpad token creation\nsdk.onLaunchpadTokenCreation((event) => {\n  console.log(`New token launched: ${event.tokenName}`);\n  // This token is on bonding curve, use tokenName\n});\n```\n\n## Key Differences: Pre vs Post Graduation\n\n| Aspect | Pre-Graduation | Post-Graduation |\n|--------|----------------|-----------------|\n| Trading venue | Bonding curve | GalaSwap DEX |\n| Token format | `tokenName` (\"anime\") | `tokenClassKey` (\"Token\\|Unit\\|ANIME\\|...\") |\n| Buy method | `sdk.buy()` | `sdk.executeSwap()` |\n| Sell method | `sdk.sell()` | `sdk.executeSwap()` |\n| Liquidity | None | LP positions available |\n| Price source | Bonding curve formula | DEX pool |\n\n## Why This Matters\n\n- **Wrong format = Error**: Using tokenName for DEX throws `ValidationError`\n- **Wrong method = Error**: Using `buy()` for graduated token may fail\n- **Performance**: Checking graduation once avoids repeated API calls\n- **User experience**: Show appropriate UI based on trading venue\n\n**Related Topics:** `token-identification`, `dex-trading`, `buy-tokens`, `pool-graduation`\n",
+      "samplePrompts": [
+        "How do I graduation detection?",
+        "Show me how to graduation detection with the SDK",
+        "Explain the graduation detection workflow",
+        "What methods do I need for graduation detection?"
+      ]
     }
   },
   "categories": {
@@ -1328,7 +1377,8 @@
         "fetch-pools",
         "token-details",
         "token-distribution",
-        "price-history"
+        "price-history",
+        "token-identification"
       ]
     },
     "balance": {
@@ -1348,7 +1398,8 @@
         "spot-prices-smart-routing",
         "liquidity-positions",
         "utilities-and-helpers",
-        "mcp-to-sdk-mapping"
+        "mcp-to-sdk-mapping",
+        "graduation-detection"
       ]
     },
     "wallet": {
@@ -2846,6 +2897,35 @@
       ]
     },
     {
+      "topicKey": "token-identification",
+      "label": "Token identification",
+      "category": "pools",
+      "description": "Pool management, pricing, and token availability",
+      "methodCount": 4,
+      "exchanges": [
+        {
+          "userQuestion": "How do I token identification?",
+          "assistantResponse": "\n# Token Identification in Launchpad SDK\n\nThe SDK uses **TWO distinct token identifier formats**. Using the wrong format causes errors.\n\n## Format 1: Token Name (Launchpad/Bonding Curve Tokens)\n\n- **Format**: Simple lowercase string, 3-20 alphanumeric characters\n- **Examples**: `\"anime\"`, `\"demonkpop\"`, `\"shoewars\"`\n- **Parameter**: Usually `tokenName`\n- **Used for**: Bonding curve operations (before graduation)\n\n```typescript\n// ✅ CORRECT - Bonding curve buy\nawait sdk.buy({ tokenName: 'anime', amount: '100', type: 'native' });\n\n// ✅ CORRECT - Bonding curve sell\nawait sdk.sell({ tokenName: 'anime', amount: '50', type: 'tokens' });\n\n// ✅ CORRECT - Check pool status\nconst pool = await sdk.fetchPools({ tokenName: 'anime' });\n```\n\n## Format 2: TokenClassKey (GalaChain/DEX Tokens)\n\n- **Format**: Pipe-delimited string: `collection|category|type|additionalKey`\n- **Examples**: `\"GALA|Unit|none|none\"`, `\"GUSDC|Unit|none|eth:0xa0b...\"`\n- **Parameter**: Usually `tokenId`, `fromToken`, `toToken`\n- **Used for**: DEX swaps, LP operations, standard GalaChain tokens\n\n```typescript\n// ✅ CORRECT - DEX swap (requires full tokenClassKey)\nconst quote = await sdk.getSwapQuoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|eth:0xa0b...', '100');\nawait sdk.executeSwap('GALA|Unit|none|none', 'GUSDC|Unit|none|eth:0xa0b...', '100', quote.estimatedOutput, quote.feeTier);\n\n// ✅ CORRECT - Add DEX liquidity\nawait sdk.addSwapLiquidityByPrice({\n  token0: 'GALA|Unit|none|none',\n  token1: 'GUSDC|Unit|none|eth:0xa0b...',\n  fee: 3000,\n  minPrice: '0.01',\n  maxPrice: '0.05',\n  amount0Desired: '1000',\n  amount1Desired: '50'\n});\n```\n\n## Common Mistakes\n\n```typescript\n// ❌ WRONG - Bare symbol for DEX (throws ValidationError)\nawait sdk.executeSwap('GALA', 'GUSDC', '100', output, fee);\n\n// ❌ WRONG - TokenClassKey for bonding curve\nawait sdk.buy({ tokenName: 'Token|Unit|ANIME|client:gala-launchpad', amount: '100' });\n\n// ❌ WRONG - Simple name for DEX quote\nawait sdk.getSwapQuoteExactInput('anime', 'GALA|Unit|none|none', '100');\n```\n\n## Method-to-Format Quick Reference\n\n| Method | tokenName | tokenClassKey | Notes |\n|--------|:---------:|:-------------:|-------|\n| `buy()` | ✅ | ❌ | Bonding curve only |\n| `sell()` | ✅ | ❌ | Bonding curve only |\n| `graduateToken()` | ✅ | ❌ | Triggers DEX migration |\n| `executeSwap()` | ❌ | ✅ | DEX only |\n| `getSwapQuote*()` | ❌ | ✅ | DEX quotes |\n| `addSwapLiquidity*()` | ❌ | ✅ | LP operations |\n| `transferToken()` | ✅ | ✅ | Both work |\n| `fetchTokenPrice()` | ✅ | ✅ | Smart router |\n\n## Getting TokenClassKey for a Graduated Token\n\n**⚠️ IMPORTANT: Never construct a tokenClassKey manually!**\n\nThe tokenClassKey contains the token's **symbol** (set at creation), which may differ\nfrom the tokenName. Always query for it:\n\n```typescript\n// From pool data after graduation (RECOMMENDED)\nconst pool = await sdk.fetchPools({ tokenName: 'anime' });\nconst tokenClassKey = pool.items[0]?.tokenClassKey;\n// → Returns the actual tokenClassKey (symbol may differ from tokenName!)\n\n// Or use the resolver\nconst resolved = await sdk.resolveTokenClassKey('anime');\n// → Queries backend for the correct tokenClassKey\n```\n\n## Well-Known Token Constants\n\n```typescript\nconst GALA = 'GALA|Unit|none|none';\nconst GUSDC = 'GUSDC|Unit|none|eth:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';\nconst WETH = 'GETH|Unit|none|eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';\n```\n\n**See Also:** `src/types/token.types.ts` for full type definitions and utilities.\n"
+        },
+        {
+          "userQuestion": "What parameters does fetchPools() accept?",
+          "assistantResponse": "The primary methods for Token identification are `fetchPools()`, `isTokenGraduated()`, `resolveTokenClassKey()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for token identification?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete token identification example?",
+          "assistantResponse": "**Complete Workflow: Token identification**\n\nHere's the typical flow: `fetchPools()` → `isTokenGraduated()` → `resolveTokenClassKey()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after token identification?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "referral-system",
       "label": "Referral system",
       "category": "referrals",
@@ -3205,6 +3285,35 @@
         {
           "userQuestion": "What should I learn next after transfer tokens?",
           "assistantResponse": "**Related Topics:**\n\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Locks**: `explainSdkUsage({ topic: 'locks' })`\n- **Bridge operations**: `explainSdkUsage({ topic: 'bridge-operations' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "graduation-detection",
+      "label": "Graduation detection",
+      "category": "utils",
+      "description": "SDK configuration and helpers",
+      "methodCount": 4,
+      "exchanges": [
+        {
+          "userQuestion": "How do I graduation detection?",
+          "assistantResponse": "\n# Detecting Token Graduation Status\n\nLaunchpad tokens transition from bonding curve to DEX when they \"graduate.\"\nThis affects which SDK methods work and which token format to use.\n\n## Checking Graduation Status\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function checkGraduationStatus(tokenName: string) {\n  const sdk = createLaunchpadSDK();\n\n  // Method 1: Check via pool data (recommended)\n  const pool = await sdk.fetchPools({ tokenName });\n  const isGraduated = pool.items[0]?.isGraduated ?? false;\n\n  // Method 2: Use the helper method\n  const graduated = await sdk.isTokenGraduated(tokenName);\n\n  return graduated;\n}\n```\n\n## Handling Graduated vs Non-Graduated Tokens\n\n```typescript\nasync function tradeToken(tokenName: string, galaAmount: string) {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Check graduation status first\n  const pool = await sdk.fetchPools({ tokenName });\n  const isGraduated = pool.items[0]?.isGraduated ?? false;\n\n  if (isGraduated) {\n    // Token is on DEX - use tokenClassKey format\n    const tokenClassKey = pool.items[0]?.tokenClassKey;\n    if (!tokenClassKey) throw new Error('Token graduated but no tokenClassKey found');\n\n    const quote = await sdk.getSwapQuoteExactInput(\n      'GALA|Unit|none|none',\n      tokenClassKey,\n      galaAmount\n    );\n\n    const result = await sdk.executeSwap(\n      'GALA|Unit|none|none',\n      tokenClassKey,\n      galaAmount,\n      quote.estimatedOutput,\n      quote.feeTier\n    );\n\n    return { method: 'DEX', result };\n  } else {\n    // Token is on bonding curve - use simple tokenName\n    const calc = await sdk.calculateBuyAmount({\n      tokenName,\n      amount: galaAmount,\n      type: 'native'\n    });\n\n    const result = await sdk.buy({\n      tokenName,\n      amount: galaAmount,\n      type: 'native',\n      expectedAmount: calc.amount,\n      slippageToleranceFactor: 0.01\n    });\n\n    return { method: 'BondingCurve', result };\n  }\n}\n```\n\n## Subscribing to Graduation Events\n\n```typescript\n// Listen for new DEX pool creation (graduation event)\nsdk.onDexPoolCreation((event) => {\n  console.log(`Token graduated: ${event.tokenName}`);\n  console.log(`New tokenClassKey: ${event.tokenClassKey}`);\n  // Update your local state to use DEX trading\n});\n\n// Listen for new launchpad token creation\nsdk.onLaunchpadTokenCreation((event) => {\n  console.log(`New token launched: ${event.tokenName}`);\n  // This token is on bonding curve, use tokenName\n});\n```\n\n## Key Differences: Pre vs Post Graduation\n\n| Aspect | Pre-Graduation | Post-Graduation |\n|--------|----------------|-----------------|\n| Trading venue | Bonding curve | GalaSwap DEX |\n| Token format | `tokenName` (\"anime\") | `tokenClassKey` (\"Token\\|Unit\\|ANIME\\|...\") |\n| Buy method | `sdk.buy()` | `sdk.executeSwap()` |\n| Sell method | `sdk.sell()` | `sdk.executeSwap()` |\n| Liquidity | None | LP positions available |\n| Price source | Bonding curve formula | DEX pool |\n\n## Why This Matters\n\n- **Wrong format = Error**: Using tokenName for DEX throws `ValidationError`\n- **Wrong method = Error**: Using `buy()` for graduated token may fail\n- **Performance**: Checking graduation once avoids repeated API calls\n- **User experience**: Show appropriate UI based on trading venue\n\n**Related Topics:** `token-identification`, `dex-trading`, `buy-tokens`, `pool-graduation`\n"
+        },
+        {
+          "userQuestion": "What parameters does isTokenGraduated() accept?",
+          "assistantResponse": "The primary methods for Graduation detection are `isTokenGraduated()`, `fetchPools()`, `onDexPoolCreation()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for graduation detection?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete graduation detection example?",
+          "assistantResponse": "**Complete Workflow: Graduation detection**\n\nHere's the typical flow: `isTokenGraduated()` → `fetchPools()` → `onDexPoolCreation()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after graduation detection?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
