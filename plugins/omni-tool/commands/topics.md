@@ -1,9 +1,9 @@
 ---
 name: galachain:topics
-description: List all 41 teaching topics organized by category
+description: List all 51 teaching topics organized by category
 arguments:
   - name: category
-    description: "Filter by category (trading, liquidity, tokens, bridge, streaming, advanced, or 'all')"
+    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all')"
     required: false
   - name: format
     description: "Output format: list (default), detailed, or tree"
@@ -12,7 +12,7 @@ arguments:
 
 # GalaChain Topics Command
 
-Browse all 41 teaching topics organized by domain. Each topic includes:
+Browse all 51 teaching topics organized by domain. Each topic includes:
 - **Description** - What this feature does
 - **Difficulty** - Beginner, intermediate, or advanced
 - **Prerequisites** - Recommended topics to learn first
@@ -26,7 +26,7 @@ Browse all 41 teaching topics organized by domain. Each topic includes:
 
 # Filter by category
 /galachain:topics trading
-/galachain:topics liquidity
+/galachain:topics dex-pools
 /galachain:topics bridge
 
 # Different formats
@@ -37,138 +37,190 @@ Browse all 41 teaching topics organized by domain. Each topic includes:
 
 ## All Topics by Category
 
-### 🏪 Trading (8 topics)
+### 🏪 Trading (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `buy-tokens` | Beginner | Purchase tokens on bonding curves | 3 |
-| `sell-tokens` | Beginner | Sell tokens back to bonding curves | 3 |
-| `token-graduation` | Intermediate | Transition tokens from bonding curve to DEX | 4 |
-| `dex-swap-exact-input` | Beginner | Trade with fixed input amount | 3 |
-| `dex-swap-exact-output` | Intermediate | Trade with fixed output amount | 3 |
-| `price-impact` | Intermediate | Understanding slippage and fees | 2 |
-| `token-holders` | Beginner | Analyze token distribution and holders | 2 |
-| `token-metadata` | Beginner | Token details and verification | 2 |
+| `buy-tokens` | Beginner | Purchase tokens on bonding curves | 2 |
+| `sell-tokens` | Beginner | Sell tokens on bonding curves | 2 |
+| `pool-graduation` | Intermediate | Transition from bonding curve to DEX | 2 |
+| `error-handling` | Intermediate | Error recovery patterns | 1 |
+| `local-calculations` | Intermediate | Local computation methods | 4 |
+| `trading-analytics` | Beginner | Trading analytics and metrics | 2 |
 
-### 💰 Liquidity & DEX (8 topics)
+### 🔍 Pools & Token Info (5 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `dex-pool-discovery` | Beginner | Find and filter liquidity pools by TVL/volume/fees | 4 |
-| `liquidity-add-by-price` | Intermediate | Add concentrated LP positions by price range | 5 |
-| `liquidity-add-by-tick` | Advanced | Advanced tick-based LP position management | 4 |
-| `liquidity-remove` | Intermediate | Close positions and withdraw liquidity | 3 |
-| `liquidity-fee-collection` | Intermediate | Collect earned trading fees from positions | 3 |
-| `dex-leaderboard` | Beginner | Top traders and pools rankings | 2 |
-| `dex-volume-summary` | Beginner | Trading volume analytics and metrics | 2 |
-| `dex-token-discovery` | Beginner | Find tokens trading on DEX | 3 |
+| `fetch-pools` | Beginner | Query and filter token pools | 9 |
+| `token-details` | Beginner | Token metadata and verification | 1 |
+| `token-distribution` | Beginner | Token holder analysis | 2 |
+| `price-history` | Beginner | Historical price data | 2 |
+| `token-identification` | Intermediate | Token format concepts (tokenName vs tokenClassKey) | 3 |
 
-### 🎫 Token Management (7 topics)
+### 💰 Balances & Accounts (3 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `token-creation` | Intermediate | Launch new tokens with bonding curves | 4 |
-| `token-supply` | Beginner | Check total supply and circulation | 2 |
-| `token-price-history` | Beginner | Historical price data and analysis | 3 |
-| `token-transfers` | Beginner | Send tokens to addresses | 2 |
-| `token-locks` | Intermediate | Lock tokens for vesting or escrow | 4 |
-| `token-unlocks` | Intermediate | Release locked tokens | 3 |
-| `wrapped-tokens` | Advanced | Cross-channel token wrapping (MUSIC ↔ GMUSIC) | 4 |
+| `balances` | Beginner | Balance queries and portfolio | 5 |
+| `profile-management` | Beginner | User profile operations | 4 |
+| `account-management` | Beginner | Account registration and management | 1 |
 
-### 🌉 Bridging (6 topics)
+### 🎫 Token Operations (4 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `bridge-to-ethereum` | Intermediate | Move tokens to Ethereum | 4 |
-| `bridge-from-ethereum` | Intermediate | Import tokens from Ethereum | 4 |
-| `bridge-to-solana` | Intermediate | Move tokens to Solana | 4 |
-| `bridge-from-solana` | Intermediate | Import tokens from Solana | 4 |
-| `bridge-fees` | Beginner | Estimate bridge costs | 2 |
-| `bridge-status` | Intermediate | Track bridge transaction status | 3 |
+| `token-creation` | Intermediate | Launch new tokens with bonding curves | 3 |
+| `token-status` | Beginner | Token supply and status | 3 |
+| `transfers` | Beginner | Send tokens to addresses | 2 |
+| `locks` | Intermediate | Lock/unlock tokens | 3 |
 
-### 📡 Streaming & Social (8 topics)
+### 🔄 DEX Trading (2 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `stream-start-stop` | Beginner | Manage RTMP streaming (start/stop) | 4 |
-| `stream-key-management` | Beginner | Reset and manage stream keys | 2 |
-| `stream-recordings` | Beginner | Record and manage video-on-demand (VODs) | 5 |
-| `simulcast-management` | Intermediate | Broadcast to multiple platforms simultaneously | 5 |
-| `stream-chat` | Beginner | Real-time chat integration (REST + WebSocket) | 6 |
-| `chat-moderation` | Intermediate | Ban/unban users and manage chat | 4 |
-| `content-moderation` | Intermediate | Flag inappropriate content | 3 |
-| `moderator-management` | Intermediate | Invite and manage moderators | 5 |
+| `dex-trading` | Intermediate | DEX swaps and quotes | 6 |
+| `dex-token-discovery` | Beginner | Find tokens trading on DEX | 2 |
 
-### ⚡ Advanced Features (4 topics)
+### 💧 DEX Pools & Liquidity (3 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
-| `nft-collections` | Advanced | Manage NFT collections and minting | 6 |
-| `overseer-system` | Advanced | Platform-wide governance and oversight | 3 |
-| `api-keys` | Beginner | Manage API credentials | 3 |
-| `monitoring-events` | Advanced | Real-time event subscriptions and monitoring | 8 |
+| `fetch-dex-pools` | Beginner | DEX pool discovery | 2 |
+| `liquidity-positions` | Advanced | LP position management | - |
+| `advanced-dex-analysis` | Advanced | Advanced pool analysis | 1 |
+
+### 📊 DEX Analytics (5 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `fetch-all-dex-seasons` | Beginner | All DEX seasons data | 1 |
+| `fetch-current-dex-season` | Beginner | Current season info | 1 |
+| `fetch-dex-leaderboard-by-season-id` | Beginner | Season leaderboards | 1 |
+| `fetch-current-dex-leaderboard` | Beginner | Current leaderboard | 1 |
+| `fetch-dex-aggregated-volume-summary` | Beginner | Volume analytics | 1 |
+
+### 🌉 Bridging (2 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `bridge-operations` | Intermediate | All bridge operations (Ethereum, Solana, fees, status) | 15 |
+| `wrap-unwrap-operations` | Advanced | Cross-channel token wrapping | 10 |
+
+### 📡 Streaming & Chat (2 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `streaming` | Beginner | RTMP streaming, recordings, simulcast | 14 |
+| `stream-chat` | Beginner | Real-time chat integration (REST + WebSocket) | 7 |
+
+### 🛡️ Community & Moderation (5 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `ban-management` | Intermediate | Ban/unban users | 5 |
+| `content-flag-management` | Intermediate | Content moderation | 5 |
+| `content-reactions` | Beginner | Reaction management | 6 |
+| `moderator-invites` | Intermediate | Moderator management | 6 |
+| `token-ban-management` | Intermediate | Token-level bans | 5 |
+
+### ⚡ Governance & Admin (3 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `overseer-invites` | Advanced | Platform governance | 8 |
+| `api-key-management` | Beginner | API credentials | 6 |
+| `event-subscriptions` | Advanced | Real-time event monitoring | 4 |
+
+### 🔑 Wallet & Auth (2 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `multi-wallet` | Beginner | Multi-wallet management | 1 |
+| `session-auth` | Intermediate | JWT authentication | 8 |
+
+### 🔧 Utilities & Reference (6 topics)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `installation` | Beginner | SDK setup guide | 1 |
+| `spot-prices-smart-routing` | Intermediate | Price routing | 1 |
+| `utilities-and-helpers` | Intermediate | Helper functions | 8 |
+| `utilities-system` | Beginner | System utilities | 8 |
+| `mcp-to-sdk-mapping` | Beginner | MCP-to-SDK method mapping | 1 |
+| `graduation-detection` | Intermediate | Detect token graduation | 4 |
+
+### 🎁 Referrals (1 topic)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `referral-system` | Beginner | Referral tracking | 4 |
+
+### 📜 Trade History (1 topic)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `trade-history` | Beginner | Trade history queries | 1 |
+
+### 🎨 NFTs (1 topic)
+
+| Topic | Difficulty | Description | MCP Tools |
+|-------|-----------|-------------|-----------|
+| `nft-collection-management` | Advanced | NFT collections and minting | 10 |
 
 ## Learning Paths
 
-### Path 1: Token Trading Essentials (3-4 hours)
-1. Start: `token-metadata` - Understand what tokens are
+### Path 1: Token Trading Essentials
+1. Start: `token-details` - Understand what tokens are
 2. Learn: `buy-tokens` - How to purchase
 3. Learn: `sell-tokens` - How to exit
-4. Learn: `token-holders` - Analyze distribution
-5. Advanced: `token-graduation` - Move to DEX
+4. Learn: `trading-analytics` - Analyze trades
+5. Advanced: `pool-graduation` - Move to DEX
 
-### Path 2: Liquidity Management (4-5 hours)
-1. Start: `dex-pool-discovery` - Find pools
-2. Learn: `liquidity-add-by-price` - Add LP positions
-3. Learn: `liquidity-fee-collection` - Collect earnings
-4. Learn: `liquidity-remove` - Close positions
-5. Advanced: `liquidity-add-by-tick` - Advanced strategies
+### Path 2: Liquidity Management
+1. Start: `fetch-dex-pools` - Find DEX pools
+2. Learn: `liquidity-positions` - Add LP positions
+3. Learn: `advanced-dex-analysis` - Analyze pool data
+4. Advanced: `fetch-all-dex-seasons` - Seasonal analytics
 
-### Path 3: DEX Swapping (2-3 hours)
+### Path 3: DEX Swapping
 1. Start: `dex-token-discovery` - Find tokens
-2. Learn: `dex-swap-exact-input` - Fixed input swaps
-3. Learn: `dex-swap-exact-output` - Fixed output swaps
-4. Advanced: `price-impact` - Slippage and fees
+2. Learn: `dex-trading` - Execute swaps
+3. Advanced: `spot-prices-smart-routing` - Price routing
 
-### Path 4: Cross-Chain Bridging (3-4 hours)
-1. Start: `bridge-fees` - Understand costs
-2. Learn: `bridge-to-ethereum` - Move to ETH
-3. Learn: `bridge-from-ethereum` - Bring back
-4. Advanced: `bridge-to-solana` - SOL chain
-5. Expert: `wrapped-tokens` - Internal wrapping
+### Path 4: Cross-Chain Bridging
+1. Start: `bridge-operations` - Bridge to Ethereum & Solana
+2. Advanced: `wrap-unwrap-operations` - Token wrapping
 
-### Path 5: Live Streaming & Community (4-5 hours)
-1. Start: `stream-start-stop` - Begin streaming
+### Path 5: Live Streaming & Community
+1. Start: `streaming` - Begin streaming (RTMP, recordings, simulcast)
 2. Learn: `stream-chat` - Add live chat
-3. Learn: `stream-recordings` - Record VODs
-4. Learn: `chat-moderation` - Manage community
-5. Advanced: `simulcast-management` - Multi-platform
-6. Expert: `moderator-management` - Team building
+3. Learn: `ban-management` - Manage community
+4. Advanced: `moderator-invites` - Build mod team
 
-### Path 6: Platform Master (8-10 hours)
+### Path 6: Platform Master
 Complete all paths 1-5, then:
 1. `token-creation` - Create your own token
-2. `nft-collections` - Add NFT support
-3. `overseer-system` - Governance
-4. `monitoring-events` - Real-time analytics
-5. `api-keys` - Secure integrations
+2. `nft-collection-management` - Add NFT support
+3. `overseer-invites` - Governance
+4. `event-subscriptions` - Real-time analytics
 
 ## Quick Reference by Use Case
 
 **"I want to trade tokens"**
-→ `buy-tokens` → `sell-tokens` → `dex-swap-exact-input` → `price-impact`
+→ `buy-tokens` → `sell-tokens` → `dex-trading` → `trading-analytics`
 
 **"I want to provide liquidity"**
-→ `dex-pool-discovery` → `liquidity-add-by-price` → `liquidity-fee-collection`
+→ `fetch-dex-pools` → `liquidity-positions` → `advanced-dex-analysis`
 
 **"I want to bridge tokens"**
-→ `bridge-fees` → `bridge-to-ethereum` → `bridge-status`
+→ `bridge-operations` → `wrap-unwrap-operations`
 
 **"I want to launch a token"**
-→ `token-creation` → `token-metadata` → `token-graduation` → `dex-swap-exact-input`
+→ `token-creation` → `token-details` → `pool-graduation` → `dex-trading`
 
 **"I want to stream live"**
-→ `stream-start-stop` → `stream-chat` → `simulcast-management` → `stream-recordings`
+→ `streaming` → `stream-chat` → `ban-management` → `moderator-invites`
 
 **"I want complete mastery"**
 → Start with Path 1 → Continue to Path 5 → Master with Path 6
@@ -223,7 +275,7 @@ Complete all paths 1-5, then:
 /galachain:ask buy-tokens
 
 # See more advanced topics in a category
-/galachain:topics advanced --format=detailed
+/galachain:topics governance --format=detailed
 
 # Get the full teaching system
 /galachain:topics --format=tree

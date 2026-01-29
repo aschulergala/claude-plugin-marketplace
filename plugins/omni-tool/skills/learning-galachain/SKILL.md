@@ -1,6 +1,6 @@
 ---
 name: learning-galachain
-description: Comprehensive learning system for GalaChain development with 41 topics and 254+ SDK methods
+description: Comprehensive learning system for GalaChain development with 51 topics and 286 SDK methods
 triggers:
   - "How do I learn GalaChain?"
   - "Teach me about GalaChain"
@@ -17,16 +17,21 @@ Welcome! This skill teaches you everything about GalaChain development using our
 
 ## What You'll Learn
 
-The GalaChain OmniTool includes **41 carefully organized teaching topics** covering:
+The GalaChain OmniTool includes **51 carefully organized teaching topics** covering:
 
-- **Trading**: Buying, selling, swaps, graduations
-- **Liquidity**: Adding positions, collecting fees, managing pools
-- **Tokens**: Creating, analyzing, transferring, locking
-- **Bridging**: Moving tokens to Ethereum, Solana
-- **Streaming**: RTMP, recordings, simulcast
-- **Social**: Chat, moderation, community management
-- **Advanced**: NFTs, governance, monitoring
-- **And more**: 254+ SDK methods fully documented
+- **Trading**: Buying, selling, graduation, analytics, error handling
+- **Pools & Info**: Pool discovery, token details, price history, distribution
+- **Balances**: Balance queries, profiles, account management
+- **Token Operations**: Creating, status, transfers, locks
+- **DEX**: Swaps, token discovery, pool analysis, liquidity positions
+- **DEX Analytics**: Seasons, leaderboards, volume summaries
+- **Bridging**: Cross-chain operations, token wrapping
+- **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat
+- **Community**: Bans, content flags, reactions, moderators, token bans
+- **Governance**: Overseers, API keys, event subscriptions
+- **Wallet & Auth**: Multi-wallet, JWT sessions
+- **Utilities**: Installation, helpers, system utils, MCP mapping
+- **And more**: 286 SDK methods fully documented
 
 ## The Teaching System
 
@@ -38,7 +43,7 @@ The GalaChain OmniTool includes **41 carefully organized teaching topics** cover
 4. **Execute Safely** - Use MCP tools to practice what you learned
 5. **Build Confidence** - Move from concepts to real applications
 
-### The 41 Topics
+### The 51 Topics
 
 All topics are accessible via `/galachain:ask [topic]`:
 
@@ -54,11 +59,11 @@ Each topic includes:
 
 ## Learning Paths
 
-### 🏪 Path 1: Trading Essentials (3-4 hours)
+### 🏪 Path 1: Trading Essentials
 
 Learn to buy, sell, and manage tokens on bonding curves and DEX.
 
-1. **Token Basics** - `/galachain:ask token-metadata`
+1. **Token Basics** - `/galachain:ask token-details`
    - What tokens are
    - How to verify them
    - Metadata importance
@@ -73,46 +78,41 @@ Learn to buy, sell, and manage tokens on bonding curves and DEX.
    - Fee implications
    - Timing considerations
 
-4. **Token Distribution** - `/galachain:ask token-holders`
-   - Analyze who owns what
-   - Whale identification
-   - Distribution health
+4. **Trading Analytics** - `/galachain:ask trading-analytics`
+   - Analyze trade history
+   - Metrics and trends
+   - Performance tracking
 
-5. **Graduation** - `/galachain:ask token-graduation`
+5. **Graduation** - `/galachain:ask pool-graduation`
    - Move from bonding curve to DEX
    - Preparation steps
    - What happens after graduation
 
-### 💰 Path 2: Liquidity Management (4-5 hours)
+### 💰 Path 2: Liquidity Management
 
 Become an LP (liquidity provider) and earn trading fees.
 
-1. **Pool Discovery** - `/galachain:ask dex-pool-discovery`
-   - Find pools by TVL, volume, fees
+1. **DEX Pool Discovery** - `/galachain:ask fetch-dex-pools`
+   - Find DEX pools
    - Filter and sort options
    - Risk assessment
 
-2. **Adding Liquidity** - `/galachain:ask liquidity-add-by-price`
+2. **LP Positions** - `/galachain:ask liquidity-positions`
    - Concentrated liquidity strategy
-   - Price range selection
-   - Position initialization
+   - Position management
+   - Adding and removing liquidity
 
-3. **Fee Collection** - `/galachain:ask liquidity-fee-collection`
-   - How fees accumulate
-   - Collection process
-   - Earning optimization
+3. **Advanced Analysis** - `/galachain:ask advanced-dex-analysis`
+   - Composite pool data
+   - Deep analytics
+   - Strategy optimization
 
-4. **Position Management** - `/galachain:ask liquidity-remove`
-   - Closing positions
-   - Withdrawal process
-   - Partial vs complete exits
+4. **Seasonal Analytics** - `/galachain:ask fetch-all-dex-seasons`
+   - DEX season data
+   - Leaderboard tracking
+   - Volume trends
 
-5. **Advanced Positioning** - `/galachain:ask liquidity-add-by-tick`
-   - Tick-based fine-tuning
-   - Advanced strategies
-   - Risk management
-
-### 🔄 Path 3: DEX Swapping (2-3 hours)
+### 🔄 Path 3: DEX Swapping
 
 Trade tokens on the decentralized exchange.
 
@@ -121,95 +121,62 @@ Trade tokens on the decentralized exchange.
    - Check liquidity
    - Verify trading pairs
 
-2. **Exact Input Swaps** - `/galachain:ask dex-swap-exact-input`
-   - You know how much input
-   - Output is calculated
-   - Best for fixed budgets
+2. **DEX Trading** - `/galachain:ask dex-trading`
+   - Execute swaps (exact input and output)
+   - Get swap quotes
+   - Manage slippage
 
-3. **Exact Output Swaps** - `/galachain:ask dex-swap-exact-output`
-   - You know how much output
-   - Input is calculated
-   - Best for fixed targets
+3. **Price Routing** - `/galachain:ask spot-prices-smart-routing`
+   - Spot prices
+   - Smart routing
+   - Optimal execution
 
-4. **Understanding Slippage** - `/galachain:ask price-impact`
-   - What is slippage?
-   - Fee implications
-   - Tolerance settings
-
-### 🌉 Path 4: Bridging & Cross-Chain (3-4 hours)
+### 🌉 Path 4: Bridging & Cross-Chain
 
 Move tokens between GalaChain and other blockchains.
 
-1. **Bridge Fees** - `/galachain:ask bridge-fees`
-   - Cost estimation
-   - Supported tokens
-   - Fee factors
+1. **Bridge Operations** - `/galachain:ask bridge-operations`
+   - Bridge to Ethereum and Solana
+   - Estimate fees
+   - Track bridge status
+   - Supported tokens and networks
 
-2. **To Ethereum** - `/galachain:ask bridge-to-ethereum`
-   - Supported tokens (GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC)
-   - Bridge process
-   - Time and confirmation
+2. **Token Wrapping** - `/galachain:ask wrap-unwrap-operations`
+   - Cross-channel wrapping
+   - Wrap/unwrap fees
+   - Wrappable token discovery
 
-3. **From Ethereum** - `/galachain:ask bridge-from-ethereum`
-   - Reverse process
-   - Wallet setup
-   - Verification steps
-
-4. **To Solana** - `/galachain:ask bridge-to-solana`
-   - Supported tokens (GALA, GSOL)
-   - Different mechanics
-   - Solana specifics
-
-5. **From Solana** - `/galachain:ask bridge-from-solana`
-   - Bringing back from SOL
-   - Confirmation process
-   - Troubleshooting
-
-6. **Bridge Monitoring** - `/galachain:ask bridge-status`
-   - Track pending bridging
-   - Check confirmations
-   - Resolve issues
-
-### 📡 Path 5: Streaming & Community (4-5 hours)
+### 📡 Path 5: Streaming & Community
 
 Build a streaming community with chat and moderation.
 
-1. **Start Streaming** - `/galachain:ask stream-start-stop`
-   - RTMP setup
-   - Stream keys
+1. **Start Streaming** - `/galachain:ask streaming`
+   - RTMP setup and stream keys
    - Start/stop operations
+   - Recordings and VODs
+   - Simulcast to multiple platforms
 
 2. **Live Chat** - `/galachain:ask stream-chat`
    - REST API for history
    - WebSocket for real-time
-   - Moderation basics
+   - Chat status and engagement
 
-3. **Video Recording** - `/galachain:ask stream-recordings`
-   - Automatic VOD capture
-   - Download URLs
-   - Deletion policies
-
-4. **Multi-Platform** - `/galachain:ask simulcast-management`
-   - Broadcast to YouTube, Twitch, Facebook
-   - Simultaneous streaming
-   - Failover handling
-
-5. **Community Management** - `/galachain:ask chat-moderation`
+3. **Ban Management** - `/galachain:ask ban-management`
    - Ban/unban users
-   - Chat cleanup
-   - User management
+   - List and check bans
+   - Active user tracking
 
-6. **Content Moderation** - `/galachain:ask content-moderation`
+4. **Content Moderation** - `/galachain:ask content-flag-management`
    - Flag inappropriate content
-   - Automatic detection
-   - Manual flagging
+   - Review and action flags
+   - Global flag management
 
-7. **Moderator Team** - `/galachain:ask moderator-management`
+5. **Moderator Team** - `/galachain:ask moderator-invites`
    - Invite moderators
    - Role assignment
    - Invite management
 
-### 🎫 Path 6: Token Creation (3-4 hours)
+### 🎫 Path 6: Token Creation
 
 Launch your own token with bonding curves.
 
@@ -218,58 +185,58 @@ Launch your own token with bonding curves.
    - Bonding curve configuration
    - Initial setup
 
-2. **Token Metadata** - `/galachain:ask token-metadata`
-   - Set token details
-   - Verification
-   - Image/description
+2. **Token Status** - `/galachain:ask token-status`
+   - Check graduation status
+   - Monitor supply
+   - Track events
 
-3. **Monitor Supply** - `/galachain:ask token-supply`
-   - Check circulation
-   - Track total supply
-   - Holder analysis
+3. **Token Distribution** - `/galachain:ask token-distribution`
+   - Analyze who owns what
+   - Holder context
+   - Distribution health
 
-4. **Price History** - `/galachain:ask token-price-history`
+4. **Price History** - `/galachain:ask price-history`
    - Historical data access
    - Charting data
    - Analytics
 
-5. **Token Graduation** - `/galachain:ask token-graduation`
+5. **Token Graduation** - `/galachain:ask pool-graduation`
    - Transition to DEX
-   - Liquidity requirements
+   - Graduation detection
    - Next steps after graduation
 
-### ⚡ Path 7: Advanced Features (2-3 hours)
+### ⚡ Path 7: Advanced Features
 
 Expert-level capabilities for sophisticated applications.
 
-1. **NFT Collections** - `/galachain:ask nft-collections`
+1. **NFT Collections** - `/galachain:ask nft-collection-management`
    - Create collections
    - Mint NFTs
    - Manage inventory
 
-2. **Wrapped Tokens** - `/galachain:ask wrapped-tokens`
+2. **Token Wrapping** - `/galachain:ask wrap-unwrap-operations`
    - Cross-channel wrapping
-   - MUSIC ↔ GMUSIC example
-   - Channel bridge operations
+   - Fee estimation
+   - Wrappable token discovery
 
-3. **API Management** - `/galachain:ask api-keys`
+3. **API Management** - `/galachain:ask api-key-management`
    - Create API credentials
    - Secure storage
    - Rotation policies
 
-4. **Event Monitoring** - `/galachain:ask monitoring-events`
+4. **Event Monitoring** - `/galachain:ask event-subscriptions`
    - Real-time subscriptions
    - Event filtering
    - Event-driven architecture
 
-5. **Governance** - `/galachain:ask overseer-system`
+5. **Governance** - `/galachain:ask overseer-invites`
    - Platform-wide controls
    - Oversight functions
    - Admin operations
 
-### 👑 Path 8: Mastery (8-10 hours)
+### 👑 Path 8: Mastery
 
-Complete all 41 topics and build a sophisticated application.
+Complete all 51 topics and build a sophisticated application.
 
 Recommended order:
 1. Complete Path 1: Trading Essentials
@@ -285,7 +252,7 @@ Recommended order:
 
 ### "I want to trade"
 ```
-1. /galachain:ask token-metadata
+1. /galachain:ask token-details
 2. /galachain:ask buy-tokens
 3. /galachain:ask sell-tokens
 4. Start trading with confidence!
@@ -293,38 +260,36 @@ Recommended order:
 
 ### "I want to be an LP and earn fees"
 ```
-1. /galachain:ask dex-pool-discovery
-2. /galachain:ask liquidity-add-by-price
-3. /galachain:ask liquidity-fee-collection
-4. /galachain:ask liquidity-remove
+1. /galachain:ask fetch-dex-pools
+2. /galachain:ask liquidity-positions
+3. /galachain:ask advanced-dex-analysis
 ```
 
 ### "I want to create a token"
 ```
 1. /galachain:ask token-creation
-2. /galachain:ask token-metadata
-3. /galachain:ask token-holders (to track distribution)
-4. /galachain:ask token-graduation (next phase)
+2. /galachain:ask token-details
+3. /galachain:ask token-distribution (to track distribution)
+4. /galachain:ask pool-graduation (next phase)
 ```
 
 ### "I want to stream with chat"
 ```
-1. /galachain:ask stream-start-stop
+1. /galachain:ask streaming
 2. /galachain:ask stream-chat
-3. /galachain:ask chat-moderation
-4. /galachain:ask stream-recordings
+3. /galachain:ask ban-management
+4. /galachain:ask moderator-invites
 ```
 
 ### "I want to bridge tokens to Ethereum"
 ```
-1. /galachain:ask bridge-fees
-2. /galachain:ask bridge-to-ethereum
-3. /galachain:ask bridge-status
+1. /galachain:ask bridge-operations
+2. /galachain:ask wrap-unwrap-operations
 ```
 
 ## How to Learn Effectively
 
-### ✅ Do This
+### Do This
 
 1. **Follow learning paths** - Concepts build on each other
 2. **Ask one topic at a time** - Deep understanding beats breadth
@@ -334,7 +299,7 @@ Recommended order:
 6. **Ask follow-up questions** - Each response suggests related topics
 7. **Build projects** - Combine topics into complete applications
 
-### ❌ Avoid This
+### Avoid This
 
 1. **Jumping around randomly** - Learn dependencies first
 2. **Large trades without practice** - Start small, scale up
@@ -348,7 +313,7 @@ Recommended order:
 For every topic, we show you:
 
 1. **SDK code** - TypeScript examples using the SDK
-2. **MCP tool** - Equivalent command using the 247-tool MCP server
+2. **MCP tool** - Equivalent command using the 286-tool MCP server
 
 Example for "buy-tokens":
 ```typescript
@@ -390,17 +355,17 @@ Options:
 
 ### Commands
 - `/galachain:ask [topic]` - Learn about any topic
-- `/galachain:topics` - Browse all 41 topics
+- `/galachain:topics` - Browse all 51 topics
 - `/galachain:setup` - Configure your preferences
 
 ### Agent
 - `galachain-builder` - Ask the agent for help building apps
 
 ### Teaching Content
-- 41 comprehensive topics
-- 254+ SDK methods documented
+- 51 comprehensive topics
+- 286 SDK methods documented
 - Hundreds of code examples
-- 247 MCP tools available
+- 286 MCP tools available
 
 ## Next Steps
 
@@ -409,16 +374,16 @@ Options:
 3. **Explore related topics** as suggested
 4. **Practice with MCP tools** to build confidence
 5. **Build your first project** combining multiple concepts
-6. **Master all 41 topics** and become a GalaChain expert
+6. **Master all 51 topics** and become a GalaChain expert
 
 ## Pro Tips
 
-💡 **Mix learning and doing** - Read 5 minutes, practice 10 minutes
-💡 **Use the agent** - Ask `galachain-builder` for guidance
-💡 **Start with what interests you** - Motivation is fuel
-💡 **Join the community** - Share what you build
-💡 **Revisit basics** - Solid foundations enable advanced work
-💡 **Automate with MCP** - Use MCP tools for repetitive tasks
+- **Mix learning and doing** - Read 5 minutes, practice 10 minutes
+- **Use the agent** - Ask `galachain-builder` for guidance
+- **Start with what interests you** - Motivation is fuel
+- **Join the community** - Share what you build
+- **Revisit basics** - Solid foundations enable advanced work
+- **Automate with MCP** - Use MCP tools for repetitive tasks
 
 ---
 

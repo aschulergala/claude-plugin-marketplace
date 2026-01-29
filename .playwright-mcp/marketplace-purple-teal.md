@@ -28,13 +28,13 @@
     - heading "Transform Claude into a GalaChain Expert" [level=1] [ref=e44]:
       - text: Transform Claude into a
       - text: GalaChain Expert
-    - paragraph [ref=e45]: The ultimate Claude Code plugin for GalaChain development. 247 MCP tools, 41 teaching topics, one command installation.
+    - paragraph [ref=e45]: The ultimate Claude Code plugin for GalaChain development. 286 MCP tools, 51 teaching topics, one command installation.
     - generic [ref=e46]:
       - generic [ref=e47]:
-        - generic [ref=e48]: "247"
+        - generic [ref=e48]: "286"
         - text: MCP TOOLS
       - generic [ref=e49]:
-        - generic [ref=e50]: "29"
+        - generic [ref=e50]: "34"
         - text: CATEGORIES
       - generic [ref=e51]:
         - generic [ref=e52]: MCP
@@ -83,7 +83,7 @@
       - generic [ref=e96]:
         - generic [ref=e97]: 🎓
         - heading "Learning" [level=3] [ref=e98]
-        - generic [ref=e99]: 41 topics
+        - generic [ref=e99]: 51 topics
         - paragraph [ref=e100]: AI-powered tutoring on GalaChain concepts. From basics to advanced topics, learn at your own pace with interactive guidance.
   - generic [ref=e102]:
     - generic [ref=e103]:

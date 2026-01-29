@@ -5,7 +5,7 @@
       "hooks": [
         {
           "type": "prompt",
-          "prompt": "If the gala_launchpad_* MCP tool call failed or returned an error, automatically help the user by: (1) identifying which topic/feature failed, (2) calling gala_launchpad_explain_sdk_usage with the most relevant topic (choose from: buy-tokens, sell-tokens, dex-swap-exact-input, dex-swap-exact-output, liquidity-add-by-price, liquidity-remove, token-creation, bridge-to-ethereum, bridge-to-solana, stream-start-stop, stream-chat, or the most semantically similar topic), (3) presenting the teaching content to help them understand what went wrong and how to fix it. If the tool succeeded, skip this and let the normal flow continue."
+          "prompt": "If the gala_launchpad_* MCP tool call failed or returned an error, automatically help the user by: (1) identifying which topic/feature failed, (2) calling gala_launchpad_explain_sdk_usage with the most relevant topic (choose from: buy-tokens, sell-tokens, pool-graduation, dex-trading, trading-analytics, error-handling, balances, transfers, locks, token-creation, bridge-operations, wrap-unwrap-operations, streaming, stream-chat, liquidity-positions, fetch-dex-pools, or the most semantically similar topic), (3) presenting the teaching content to help them understand what went wrong and how to fix it. If the tool succeeded, skip this and let the normal flow continue."
         }
       ]
     }

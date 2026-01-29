@@ -15,7 +15,7 @@ arguments:
 
 # GalaChain Ask Command
 
-Ask any question about GalaChain development. The system automatically maps your question to the 41 built-in teaching topics and provides comprehensive answers.
+Ask any question about GalaChain development. The system automatically maps your question to the 51 built-in teaching topics and provides comprehensive answers.
 
 ## Usage Examples
 
@@ -27,35 +27,59 @@ Ask any question about GalaChain development. The system automatically maps your
 
 # Direct topic name (faster)
 /galachain:ask buy-tokens
-/galachain:ask dex-pool-discovery
-/galachain:ask bridge-to-ethereum
+/galachain:ask fetch-dex-pools
+/galachain:ask bridge-operations
 
 # With options
 /galachain:ask token-creation --examples=no
-/galachain:ask stream-start-stop --personality=expert
+/galachain:ask streaming --personality=expert
 ```
 
 ## Supported Topics
 
-The system recognizes all 41 teaching topics:
+The system recognizes all 51 teaching topics:
 
-### Trading (8)
-buy-tokens, sell-tokens, token-graduation, dex-swap-exact-input, dex-swap-exact-output, price-impact, token-holders, token-metadata
+### Trading (6)
+buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics
 
-### Liquidity (8)
-dex-pool-discovery, liquidity-add-by-price, liquidity-add-by-tick, liquidity-remove, liquidity-fee-collection, dex-leaderboard, dex-volume-summary, dex-token-discovery
+### Pools & Token Info (5)
+fetch-pools, token-details, token-distribution, price-history, token-identification
 
-### Tokens (7)
-token-creation, token-supply, token-price-history, token-transfers, token-locks, token-unlocks, wrapped-tokens
+### Balances & Accounts (3)
+balances, profile-management, account-management
 
-### Bridging (6)
-bridge-to-ethereum, bridge-from-ethereum, bridge-to-solana, bridge-from-solana, bridge-fees, bridge-status
+### Token Operations (4)
+token-creation, token-status, transfers, locks
 
-### Streaming (8)
-stream-start-stop, stream-key-management, stream-recordings, simulcast-management, stream-chat, chat-moderation, content-moderation, moderator-management
+### DEX Trading (2)
+dex-trading, dex-token-discovery
 
-### Advanced (4)
-nft-collections, overseer-system, api-keys, monitoring-events
+### DEX Pools & Liquidity (3)
+fetch-dex-pools, liquidity-positions, advanced-dex-analysis
+
+### DEX Analytics (5)
+fetch-all-dex-seasons, fetch-current-dex-season, fetch-dex-leaderboard-by-season-id, fetch-current-dex-leaderboard, fetch-dex-aggregated-volume-summary
+
+### Bridging (2)
+bridge-operations, wrap-unwrap-operations
+
+### Streaming & Chat (2)
+streaming, stream-chat
+
+### Community & Moderation (5)
+ban-management, content-flag-management, content-reactions, moderator-invites, token-ban-management
+
+### Governance & Admin (3)
+overseer-invites, api-key-management, event-subscriptions
+
+### Wallet & Auth (2)
+multi-wallet, session-auth
+
+### Utilities & Reference (6)
+installation, spot-prices-smart-routing, utilities-and-helpers, utilities-system, mcp-to-sdk-mapping, graduation-detection
+
+### Referrals, Trade History, NFTs (3)
+referral-system, trade-history, nft-collection-management
 
 ## How It Works
 
@@ -72,7 +96,7 @@ Each response includes:
 - **Concept explanation** - What this feature does and why it matters
 - **When to use** - Real-world scenarios and use cases
 - **Code example** - Working TypeScript example with your SDK
-- **MCP Tool equivalent** - How to use the 247-tool MCP server
+- **MCP Tool equivalent** - How to use the 286-tool MCP server
 - **Key parameters** - Important options and what they do
 - **Common pitfalls** - Things people get wrong
 - **Related topics** - Suggested follow-up learning
@@ -87,13 +111,13 @@ Question: "How do I create a new token?"
 → Matches: token-creation
 
 Question: "I want to bridge to Ethereum"
-→ Matches: bridge-to-ethereum
+→ Matches: bridge-operations
 
 Question: "What's the difference between buy and sell?"
 → Suggests: buy-tokens, sell-tokens (both relevant)
 
-Question: "Tell me about fees on swaps"
-→ Matches: price-impact (which covers fees)
+Question: "Tell me about DEX swaps"
+→ Matches: dex-trading (covers swaps and quotes)
 ```
 
 ## Personality Modes
@@ -102,16 +126,16 @@ Override the default personality for this response:
 
 ```bash
 # Expert mode - fast and direct
-/galachain:ask dex-pool-discovery --personality=expert
+/galachain:ask fetch-dex-pools --personality=expert
 
 # Socratic mode - learn through questions
 /galachain:ask token-creation --personality=socratic
 
 # Tutor mode - patient and thorough
-/galachain:ask bridge-to-ethereum --personality=tutor
+/galachain:ask bridge-operations --personality=tutor
 
 # Pragmatist mode - balanced approach
-/galachain:ask liquidity-add-by-price --personality=pragmatist
+/galachain:ask liquidity-positions --personality=pragmatist
 ```
 
 ## Integration with Agent
@@ -154,9 +178,9 @@ $ /galachain:ask how do I buy tokens?
 
 ### Example 2: Complex Liquidity Strategy
 ```bash
-$ /galachain:ask liquidity-add-by-price --personality=expert
+$ /galachain:ask liquidity-positions --personality=expert
 
-→ Fetches: liquidity-add-by-price topic
+→ Fetches: liquidity-positions topic
 → Fast-paced: Assumes DEX knowledge
 → Shows: Advanced parameters and optimization
 → Offers: Set up position now
@@ -166,7 +190,7 @@ $ /galachain:ask liquidity-add-by-price --personality=expert
 ```bash
 $ /galachain:ask I want to move GALA to Ethereum
 
-→ Fuzzy matches: bridge-to-ethereum
+→ Fuzzy matches: bridge-operations
 → Explains: What bridging is and why
 → Shows: Code for Ethereum bridge
 → Lists: Fees, supported tokens, requirements
@@ -175,7 +199,7 @@ $ /galachain:ask I want to move GALA to Ethereum
 
 ## Next Steps
 
-- Try `/galachain:topics` to browse all 41 topics
+- Try `/galachain:topics` to browse all 51 topics
 - Run `/galachain:setup` to configure your preferences
 - Ask the agent directly: "Help me build a trading bot"
 - Explore complete workflows with the skill: `learning-galachain`
