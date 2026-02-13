@@ -1,0 +1,376 @@
+---
+name: galachain:setup
+description: Interactive setup wizard for configuring the GalaChain OmniTool plugin
+arguments: []
+---
+
+# GalaChain Setup Command
+
+Interactive wizard to configure the GalaChain OmniTool plugin for your workflow.
+
+## Usage
+
+```bash
+# Run the interactive setup
+/galachain:setup
+
+# Or configure specific setting directly
+/galachain:setup --personality=expert
+/galachain:setup --environment=staging
+/galachain:setup --wallet-mode=full-access
+```
+
+## Configuration Options
+
+### 1. Agent Personality (Default: tutor)
+
+How Claude teaches and interacts with you:
+
+**🎓 Tutor Mode**
+- Patient and thorough
+- Explains everything in detail
+- Includes best practices
+- Suggests related topics
+- Best for: Beginners and learning
+
+**⚡ Expert Mode**
+- Fast and direct
+- Assumes DeFi knowledge
+- Focuses on optimization
+- Advanced patterns
+- Best for: Experienced developers
+
+**⚙️ Pragmatist Mode**
+- Balanced approach
+- Explains key concepts
+- Shows working code immediately
+- Practical examples
+- Best for: Getting things done
+
+**❓ Socratic Mode**
+- Asks questions first
+- Guides discovery
+- Builds understanding gradually
+- Encourages experimentation
+- Best for: Deep learning
+
+### 2. Wallet Configuration (Default: read-only)
+
+**Read-Only Mode**
+- Browse tokens, pools, prices
+- Query balances and holdings
+- No wallet required
+- No transactions possible
+- Best for: Testing and learning
+
+**Full-Access Mode**
+- Execute trades and transfers
+- Create and manage tokens
+- Add liquidity positions
+- Bridge tokens
+- Requires: `GALACHAIN_PRIVATE_KEY` environment variable
+
+### 3. Environment (Default: production)
+
+**Production**
+- Real GalaChain network
+- Real tokens and transactions
+- Real money (⚠️ careful!)
+- Most features available
+
+**Staging**
+- Test network with unlimited fake tokens
+- Practice trading safely
+- Same API contracts as production
+- Perfect for testing workflows
+
+**Development**
+- Local backend at localhost:4000
+- Requires backend service running
+- For SDK and MCP server development
+
+### 4. Learning Preferences
+
+**Show Advanced Topics**
+- Include advanced complexity options
+- Show optimization techniques
+- Suggest expert patterns
+- Default: true
+
+**Include Best Practices**
+- Security recommendations
+- Error handling patterns
+- Performance tips
+- Default: true
+
+**Include Error Handling**
+- Common mistakes explained
+- How to debug errors
+- Recovery strategies
+- Default: true
+
+**Code Style**
+- TypeScript (default)
+- JavaScript alternatives
+- Pseudocode option
+- Default: TypeScript
+
+### 5. Auto Features
+
+**Auto-Explain Errors**
+- When MCP tools fail, automatically provide guidance
+- Fetches relevant teaching content
+- Shows common fixes
+- Default: true
+
+**Auto-Suggest Examples**
+- Automatically provide code examples
+- Multiple approaches shown
+- Relevant patterns highlighted
+- Default: true
+
+## Interactive Setup Flow
+
+```
+Welcome to GalaChain OmniTool! 👋
+
+Let's configure your experience.
+
+1. Agent Personality
+   Select your preferred teaching style:
+   → Tutor (patient, thorough)
+   → Expert (fast, direct)
+   → Pragmatist (balanced)
+   → Socratic (questions first)
+   [Current: tutor]
+
+2. Wallet Configuration
+   How do you want to interact with GalaChain?
+   → Read-Only (browse, query only)
+   → Full-Access (requires PRIVATE_KEY env var)
+   [Current: read-only]
+
+3. Environment
+   Which network should we connect to?
+   → Production (real GalaChain network)
+   → Staging (test network, unlimited fake tokens)
+   → Development (localhost:4000)
+   [Current: production]
+
+4. Learning Preferences
+   How should Claude teach you?
+   ☑ Show advanced topics
+   ☑ Include best practices
+   ☑ Include error handling
+   [Code style: TypeScript]
+
+5. Auto Features
+   ☑ Auto-explain errors from MCP tools
+   ☑ Auto-suggest code examples
+
+✅ Configuration saved to .claude/galachain-omnitool.local.md
+```
+
+## Generated Configuration File
+
+The setup creates `.claude/galachain-omnitool.local.md`:
+
+```yaml
+---
+# GalaChain OmniTool Configuration
+
+# Agent personality: tutor, expert, pragmatist, socratic
+agent_personality: tutor
+
+# Wallet configuration: read-only or full-access
+wallet_mode: read-only
+# private_key: ${GALACHAIN_PRIVATE_KEY}
+
+# Environment: production, staging, development
+environment: production
+
+# Learning preferences
+show_advanced_topics: true
+include_best_practices: true
+include_error_handling: true
+code_style: typescript
+
+# Auto features
+auto_explain_errors: true
+auto_suggest_examples: true
+---
+
+# Your custom notes...
+```
+
+## Environment Variables
+
+### Production/Staging Access
+```bash
+# Required for full-access mode
+export GALACHAIN_PRIVATE_KEY=your_private_key_hex
+
+# Optional: override environment
+export GALACHAIN_ENVIRONMENT=staging
+```
+
+### Development (localhost)
+```bash
+# Backend service must be running
+export LAUNCHPAD_API_URL=http://localhost:4000
+
+# Optional wallet for testing
+export GALACHAIN_PRIVATE_KEY=your_test_key
+```
+
+## Configuration Examples
+
+### Beginner Learning Setup
+```bash
+/galachain:setup
+# Select: Tutor, Read-Only, Production
+# Enable all learning options
+```
+
+→ Result: Patient teaching with examples, no risk of transactions
+
+### Experienced Trader Setup
+```bash
+/galachain:setup
+# Select: Expert, Full-Access, Production
+# Disable redundant explanations
+```
+
+→ Result: Fast guidance, execute trades immediately
+
+### Safe Testing Setup
+```bash
+/galachain:setup
+# Select: Pragmatist, Full-Access, Staging
+# Enable all learning options
+```
+
+→ Result: Practical examples with unlimited fake tokens for testing
+
+### Developer Setup
+```bash
+/galachain:setup
+# Select: Expert, Full-Access, Development
+# Show advanced topics and error handling
+```
+
+→ Result: Direct API interaction with localhost backend
+
+## After Setup
+
+Once configured, you can:
+
+1. **Ask questions naturally**
+   - "How do I buy tokens?"
+   - Agent responds in your chosen personality style
+
+2. **Use commands with confidence**
+   - `/galachain:ask buy-tokens`
+   - `/galachain:topics`
+   - Explanations match your preferences
+
+3. **Execute operations**
+   - Agent offers to run MCP tools
+   - Follows your wallet mode
+   - Uses configured environment
+
+4. **Get personalized help**
+   - Errors explained with your code style
+   - Advanced topics if enabled
+   - Best practices included if selected
+
+## Changing Configuration Later
+
+You can:
+
+1. **Re-run setup**
+   ```bash
+   /galachain:setup
+   ```
+
+2. **Edit directly**
+   - Edit `.claude/galachain-omnitool.local.md`
+   - Changes take effect immediately
+
+3. **Override temporarily**
+   - `/galachain:ask topic --personality=expert`
+   - Overrides setting for that query only
+
+## Quick Configuration Presets
+
+### 🎓 Learning Mode
+```
+Personality: Tutor
+Wallet: Read-Only
+Environment: Production
+Learning: All enabled
+Auto: All enabled
+```
+Perfect for beginners.
+
+### ⚡ Trader Mode
+```
+Personality: Expert
+Wallet: Full-Access
+Environment: Production
+Learning: Minimal
+Auto: Error explanations only
+```
+Fast and direct for experienced traders.
+
+### 🧪 Testing Mode
+```
+Personality: Pragmatist
+Wallet: Full-Access
+Environment: Staging
+Learning: All enabled
+Auto: All enabled
+```
+Safe practice with real operations.
+
+### 🛠️ Developer Mode
+```
+Personality: Expert
+Wallet: Full-Access
+Environment: Development
+Learning: Advanced only
+Auto: Errors and examples
+```
+Direct localhost backend access.
+
+## Troubleshooting Setup
+
+### "I can't find the configuration file"
+- Setup creates `.claude/galachain-omnitool.local.md`
+- Check if `.claude/` directory exists in your project
+- Run setup again to recreate
+
+### "Private key isn't being recognized"
+- Check `GALACHAIN_PRIVATE_KEY` environment variable
+- Verify it's a valid hex string (0x... or just hex)
+- Make sure it's set before running operations
+
+### "I want to reset everything"
+- Delete `.claude/galachain-omnitool.local.md`
+- Run `/galachain:setup` again
+- All defaults will be reapplied
+
+### "Staging seems broken"
+- Verify `LAUNCHPAD_API_URL` environment variable
+- Staging backend might be under maintenance
+- Check `/galachain:topics` to verify MCP connection
+
+## Next Steps
+
+1. **Run setup**: `/galachain:setup`
+2. **Choose your personality**: Pick what feels right
+3. **Try a question**: `/galachain:ask token-creation`
+4. **Browse topics**: `/galachain:topics`
+5. **Build something**: Ask the agent to help you create your first token or trade!
+
+Welcome to GalaChain development! 🚀
