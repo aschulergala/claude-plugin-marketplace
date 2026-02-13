@@ -650,18 +650,20 @@
   <nav class="sidebar">
     <div class="sidebar__header">
       <div class="sidebar__title">Behavior Walkthrough</div>
-      <div class="sidebar__subtitle">33/55 behaviors captured &mdash; 2026-02-12</div>
+      <div class="sidebar__subtitle">52/71 behaviors captured &mdash; 2026-02-13</div>
     </div>
     
         <div class="sidebar__group" data-phase="trading">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">💰</span>
             <span class="sidebar__group-label">Trading</span>
-            <span class="sidebar__group-count">2/3</span>
+            <span class="sidebar__group-count">4/5</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-buy-token" data-phase="trading">Buy Token</a>
 <a class="sidebar__item " href="#behavior-sell-token" data-phase="trading">Sell Token</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-graduate-token" data-phase="trading">Graduate Token</a></div>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-graduate-token" data-phase="trading">Graduate Token</a>
+<a class="sidebar__item " href="#behavior-trade-update-notify" data-phase="trading">Trade Update Notification</a>
+<a class="sidebar__item " href="#behavior-stats-updated" data-phase="trading">Stats Updated</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="comments">
@@ -695,16 +697,21 @@
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🎥</span>
             <span class="sidebar__group-label">Streaming</span>
-            <span class="sidebar__group-count">2/8</span>
+            <span class="sidebar__group-count">8/13</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-disable-stream" data-phase="streaming">Disable Streaming</a>
 <a class="sidebar__item " href="#behavior-enable-stream" data-phase="streaming">Enable Streaming</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-start-stream" data-phase="streaming">Start Live Stream</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-stop-stream" data-phase="streaming">Stop Live Stream</a>
+<a class="sidebar__item " href="#behavior-start-stream" data-phase="streaming">Start Live Stream</a>
+<a class="sidebar__item " href="#behavior-stop-stream" data-phase="streaming">Stop Live Stream</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-viewer-count-update" data-phase="streaming">Viewer Count Update</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-recording-ready" data-phase="streaming">Recording Ready</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-stream-credentials" data-phase="streaming">Stream Credentials</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-stream-active-indicator" data-phase="streaming">Stream Active Indicator</a></div>
+<a class="sidebar__item " href="#behavior-stream-credentials" data-phase="streaming">Stream Credentials</a>
+<a class="sidebar__item " href="#behavior-stream-active-indicator" data-phase="streaming">Stream Active Indicator</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-recordings-count-updated" data-phase="streaming">Recordings Count Updated</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-download-ready" data-phase="streaming">Recording Download Ready</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-simulcast-status" data-phase="streaming">Simulcast Status Update</a>
+<a class="sidebar__item " href="#behavior-stream-countdown-updated" data-phase="streaming">Stream Countdown Updated</a>
+<a class="sidebar__item " href="#behavior-stream-language-updated" data-phase="streaming">Stream Language Updated</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="bans">
@@ -735,57 +742,63 @@
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🤖</span>
             <span class="sidebar__group-label">AI Moderation</span>
-            <span class="sidebar__group-count">1/4</span>
+            <span class="sidebar__group-count">2/5</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item sidebar__item--uncaptured" href="#behavior-ai-flag-auto" data-phase="ai-moderation">AI Auto-Analyze Flagged Content</a>
 <a class="sidebar__item " href="#behavior-ai-moderation-config" data-phase="ai-moderation">AI Moderation Config Toggle</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-ai-verdict-realtime" data-phase="ai-moderation">AI Verdict Real-Time Update</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-ai-verdict-detail-modal" data-phase="ai-moderation">AI Verdict Detail Modal</a></div>
+<a class="sidebar__item " href="#behavior-ai-verdict-detail-modal" data-phase="ai-moderation">AI Verdict Detail Modal</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-ai-moderation-failed" data-phase="ai-moderation">AI Moderation Failed</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="moderators">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">👮</span>
             <span class="sidebar__group-label">Moderators</span>
-            <span class="sidebar__group-count">3/5</span>
+            <span class="sidebar__group-count">5/8</span>
           </div>
-          <div class="sidebar__group-items"><a class="sidebar__item sidebar__item--uncaptured" href="#behavior-add-moderator" data-phase="moderators">Add Moderator</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-remove-moderator" data-phase="moderators">Remove Moderator</a>
+          <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-add-moderator" data-phase="moderators">Add Moderator</a>
+<a class="sidebar__item " href="#behavior-remove-moderator" data-phase="moderators">Remove Moderator</a>
 <a class="sidebar__item " href="#behavior-moderator-invite-created" data-phase="moderators">Create Moderator Invite</a>
 <a class="sidebar__item " href="#behavior-overseer-message-stats" data-phase="moderators">Overseer Message Stats</a>
-<a class="sidebar__item " href="#behavior-overseer-dashboard-live" data-phase="moderators">Overseer Dashboard Live</a></div>
+<a class="sidebar__item " href="#behavior-overseer-dashboard-live" data-phase="moderators">Overseer Dashboard Live</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-moderator-role-updated" data-phase="moderators">Moderator Role Updated</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-overseer-added" data-phase="moderators">Overseer Added</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-overseer-removed" data-phase="moderators">Overseer Removed</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="pool-metadata">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🏷</span>
             <span class="sidebar__group-label">Pool Metadata</span>
-            <span class="sidebar__group-count">0/4</span>
+            <span class="sidebar__group-count">3/6</span>
           </div>
-          <div class="sidebar__group-items"><a class="sidebar__item sidebar__item--uncaptured" href="#behavior-update-token-description" data-phase="pool-metadata">Update Token Description</a>
+          <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-update-token-description" data-phase="pool-metadata">Update Token Description</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-update-token-image" data-phase="pool-metadata">Update Token Image</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-update-token-links" data-phase="pool-metadata">Update Token Links</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-update-bonding-curve-fees" data-phase="pool-metadata">Update Bonding Curve Fees</a></div>
+<a class="sidebar__item " href="#behavior-update-token-links" data-phase="pool-metadata">Update Token Links</a>
+<a class="sidebar__item " href="#behavior-token-config-updated" data-phase="pool-metadata">Token Config Updated (Global Feed)</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-holder-count-updated" data-phase="pool-metadata">Holder Count Updated</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-pool-badge-assigned" data-phase="pool-metadata">Pool Badge Assigned</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="pool-lifecycle">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🚀</span>
             <span class="sidebar__group-label">Pool Lifecycle</span>
-            <span class="sidebar__group-count">0/1</span>
+            <span class="sidebar__group-count">1/1</span>
           </div>
-          <div class="sidebar__group-items"><a class="sidebar__item sidebar__item--uncaptured" href="#behavior-token-launched" data-phase="pool-lifecycle">Token Launched</a></div>
+          <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-token-launched" data-phase="pool-lifecycle">Token Launched</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="user-events">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">👤</span>
             <span class="sidebar__group-label">User Events</span>
-            <span class="sidebar__group-count">1/6</span>
+            <span class="sidebar__group-count">2/6</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item sidebar__item--uncaptured" href="#behavior-user-typing-indicator" data-phase="user-events">User Typing Indicator</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-user-online-status" data-phase="user-events">User Online Status</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-balance-updated" data-phase="user-events">Balance Updated</a>
+<a class="sidebar__item " href="#behavior-balance-updated" data-phase="user-events">Balance Updated</a>
 <a class="sidebar__item " href="#behavior-user-profile-updated" data-phase="user-events">User Profile Updated</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-wallet-connect" data-phase="user-events">Connect Wallet</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-wallet-disconnect" data-phase="user-events">Disconnect Wallet</a></div>
@@ -803,6 +816,17 @@
 <a class="sidebar__item " href="#behavior-toggle-webhooks" data-phase="site-config">Toggle Webhooks</a>
 <a class="sidebar__item " href="#behavior-events-firehose" data-phase="site-config">Events Firehose</a></div>
         </div>
+
+        <div class="sidebar__group" data-phase="api-keys">
+          <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
+            <span class="sidebar__group-icon">🔑</span>
+            <span class="sidebar__group-label">API Keys</span>
+            <span class="sidebar__group-count">3/3</span>
+          </div>
+          <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-api-key-created" data-phase="api-keys">API Key Created</a>
+<a class="sidebar__item " href="#behavior-api-key-updated" data-phase="api-keys">API Key Updated</a>
+<a class="sidebar__item " href="#behavior-api-key-revoked" data-phase="api-keys">API Key Revoked</a></div>
+        </div>
   </nav>
 
   <main class="main">
@@ -813,14 +837,14 @@
     
     <div class="stats-bar">
       <div class="stats__overall">
-        <div class="stats__overall-number">33<span class="stats__overall-slash">/</span>55</div>
-        <div class="stats__overall-label">GIFs Captured (60%)</div>
-        <div class="stats__overall-bar"><div class="stats__overall-bar-fill" style="width: 60%"></div></div>
+        <div class="stats__overall-number">52<span class="stats__overall-slash">/</span>71</div>
+        <div class="stats__overall-label">GIFs Captured (73%)</div>
+        <div class="stats__overall-bar"><div class="stats__overall-bar-fill" style="width: 73%"></div></div>
       </div>
       <div class="stats__phases"><div class="stats__phase">
         <span class="stats__phase-label">💰 Trading</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 67%; background: #22c55e"></div></div>
-        <span class="stats__phase-count">2/3</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 80%; background: #22c55e"></div></div>
+        <span class="stats__phase-count">4/5</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">💬 Comments</span>
@@ -834,8 +858,8 @@
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🎥 Streaming</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 25%; background: #ef4444"></div></div>
-        <span class="stats__phase-count">2/8</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 62%; background: #ef4444"></div></div>
+        <span class="stats__phase-count">8/13</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🚫 Bans &amp; Moderation</span>
@@ -849,33 +873,38 @@
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🤖 AI Moderation</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 25%; background: #14b8a6"></div></div>
-        <span class="stats__phase-count">1/4</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 40%; background: #14b8a6"></div></div>
+        <span class="stats__phase-count">2/5</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">👮 Moderators</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 60%; background: #6366f1"></div></div>
-        <span class="stats__phase-count">3/5</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 63%; background: #6366f1"></div></div>
+        <span class="stats__phase-count">5/8</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🏷 Pool Metadata</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 0%; background: #f97316"></div></div>
-        <span class="stats__phase-count">0/4</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 50%; background: #f97316"></div></div>
+        <span class="stats__phase-count">3/6</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🚀 Pool Lifecycle</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 0%; background: #a855f7"></div></div>
-        <span class="stats__phase-count">0/1</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 100%; background: #a855f7"></div></div>
+        <span class="stats__phase-count">1/1</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">👤 User Events</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 17%; background: #06b6d4"></div></div>
-        <span class="stats__phase-count">1/6</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 33%; background: #06b6d4"></div></div>
+        <span class="stats__phase-count">2/6</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">⚙ Site Config</span>
         <div class="stats__bar"><div class="stats__bar-fill" style="width: 100%; background: #64748b"></div></div>
         <span class="stats__phase-count">5/5</span>
+      </div>
+<div class="stats__phase">
+        <span class="stats__phase-label">🔑 API Keys</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 100%; background: #78716c"></div></div>
+        <span class="stats__phase-count">3/3</span>
       </div></div>
     </div>
     
@@ -896,6 +925,7 @@
 <button class="filter-btn filter-btn--phase" data-filter-phase="pool-lifecycle" style="--btn-color: #a855f7">🚀 Pool Lifecycle</button>
 <button class="filter-btn filter-btn--phase" data-filter-phase="user-events" style="--btn-color: #06b6d4">👤 User Events</button>
 <button class="filter-btn filter-btn--phase" data-filter-phase="site-config" style="--btn-color: #64748b">⚙ Site Config</button>
+<button class="filter-btn filter-btn--phase" data-filter-phase="api-keys" style="--btn-color: #78716c">🔑 API Keys</button>
         </div>
       </div>
       <div class="filter-section">
@@ -911,7 +941,11 @@
         <div class="filter-btns filter-btns--scrollable">
           <button class="filter-btn filter-btn--ws filter-btn--active" data-filter-ws="all">All</button>
           <button class="filter-btn filter-btn--ws" data-filter-ws="AI_MODERATION_COMPLETE">AI_MODERATION_COMPLETE</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="AI_MODERATION_STATUS_CHANGED">AI_MODERATION_STATUS_CHANGED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="AI_MODERATION_FAILED">AI_MODERATION_FAILED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="AI_MODERATION_GLOBAL_STATUS">AI_MODERATION_GLOBAL_STATUS</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="API_KEY_CREATED">API_KEY_CREATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="API_KEY_REVOKED">API_KEY_REVOKED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="API_KEY_UPDATED">API_KEY_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="BALANCE_UPDATED">BALANCE_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="BAN_CREATED">BAN_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="BAN_REMOVED">BAN_REMOVED</button>
@@ -923,25 +957,38 @@
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONTENT_FLAGGED">CONTENT_FLAGGED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONTENT_REACTION_ADDED">CONTENT_REACTION_ADDED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONTENT_REACTION_REMOVED">CONTENT_REACTION_REMOVED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="DOWNLOAD_READY">DOWNLOAD_READY</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="EVENTS_FIREHOSE">EVENTS_FIREHOSE</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="FLAG_RESOLVED">FLAG_RESOLVED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="HOLDER_COUNT_UPDATED">HOLDER_COUNT_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_DELETED">MESSAGE_DELETED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_PINNED">MESSAGE_PINNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_UNPINNED">MESSAGE_UNPINNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_ADDED">MODERATOR_ADDED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_INVITED">MODERATOR_INVITED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_REMOVED">MODERATOR_REMOVED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_ROLE_UPDATED">MODERATOR_ROLE_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="OVERSEER_ADDED">OVERSEER_ADDED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="OVERSEER_REMOVED">OVERSEER_REMOVED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="POOL_BADGE_ASSIGNED">POOL_BADGE_ASSIGNED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="POOL_CREATED">POOL_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="POOL_METADATA_UPDATED">POOL_METADATA_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="PRICE_UPDATE">PRICE_UPDATE</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="RECORDINGS_COUNT_UPDATED">RECORDINGS_COUNT_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="RECORDING_STATUS">RECORDING_STATUS</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="SIMULCAST_STATUS">SIMULCAST_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="SITE_CONFIG_CHANGED">SITE_CONFIG_CHANGED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STATS_UPDATED">STATS_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CONTROL_STATUS_CHANGED">STREAM_CONTROL_STATUS_CHANGED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_COUNTDOWN_UPDATED">STREAM_COUNTDOWN_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_LANGUAGE_UPDATED">STREAM_LANGUAGE_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_STATUS">STREAM_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_BANNED">TOKEN_BANNED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_CONFIG_UPDATED">TOKEN_CONFIG_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_GRADUATED">TOKEN_GRADUATED</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_LAUNCHED">TOKEN_LAUNCHED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_UNBANNED">TOKEN_UNBANNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TRADE_EXECUTED">TRADE_EXECUTED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="TRADE_UPDATE_NOTIFY">TRADE_UPDATE_NOTIFY</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="USER_BANNED">USER_BANNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="USER_CONNECTED">USER_CONNECTED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="USER_DISCONNECTED">USER_DISCONNECTED</button>
@@ -1139,19 +1186,129 @@
       </div>
     </article>
 
-    <article class="card" id="behavior-post-comment"
-             data-phase="comments"
+    <article class="card" id="behavior-trade-update-notify"
+             data-phase="trading"
              data-captured="true"
-             data-ws-events="COMMENT_CREATED"
+             data-ws-events="TRADE_UPDATE_NOTIFY"
              data-index="3">
       <div class="card__gif" onclick="openLightbox(3)" title="Click to view fullscreen">
-         <img src="gifs/sweep-03-post-comment.gif" alt="Post Comment" loading="lazy" />
+         <img src="gifs/behavior-trade-update-notify.gif" alt="Trade Update Notification" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
             <span class="card__number">4</span>
+            <h3 class="card__title">Trade Update Notification</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #22c55e">💰 Trading</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">After a trade executes, a broadcast notification is sent to all connected clients for portfolio/activity tracking.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time trade notification broadcast
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">TRADE_UPDATE_NOTIFY</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>global:tokens</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Home Page</span>
+       <span class="tab-setup__route">/</span>
+       <span class="tab-setup__desc">Watch activity feed or token cards for trade notification</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Execute a buy/sell trade which triggers broadcast</div>
+            <code class="trigger-sdk">sdk.buyToken()</code>
+            <code class="trigger-api">POST /v1/tokens/:tokenName/buy</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Trade notification broadcast reaches all connected clients
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Side-effect of any trade execution. Overlaps with buy-token/sell-token behaviors.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-stats-updated"
+             data-phase="trading"
+             data-captured="true"
+             data-ws-events="STATS_UPDATED"
+             data-index="4">
+      <div class="card__gif" onclick="openLightbox(4)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stats-updated.gif" alt="Stats Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">5</span>
+            <h3 class="card__title">Stats Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #22c55e">💰 Trading</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">After a trade executes, token statistics (volume, market cap, etc.) are recalculated and broadcast.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time stats update on token page
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">STATS_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch stats panel update (volume, market cap, etc.)</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Execute a trade which triggers stats recalculation</div>
+            <code class="trigger-sdk">sdk.buyToken()</code>
+            <code class="trigger-api">POST /v1/tokens/:tokenName/buy</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Token stats (24h volume, market cap, holder count) update in real-time
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Side-effect of trade execution. Stats recalc happens async on backend.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-post-comment"
+             data-phase="comments"
+             data-captured="true"
+             data-ws-events="COMMENT_CREATED"
+             data-index="5">
+      <div class="card__gif" onclick="openLightbox(5)" title="Click to view fullscreen">
+         <img src="gifs/sweep-03-post-comment.gif" alt="Post Comment" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">6</span>
             <h3 class="card__title">Post Comment</h3>
           </div>
           <div class="card__badges">
@@ -1203,15 +1360,15 @@
              data-phase="comments"
              data-captured="true"
              data-ws-events="COMMENT_DELETED"
-             data-index="4">
-      <div class="card__gif" onclick="openLightbox(4)" title="Click to view fullscreen">
+             data-index="6">
+      <div class="card__gif" onclick="openLightbox(6)" title="Click to view fullscreen">
          <img src="gifs/sweep-04-delete-comment.gif" alt="Delete Comment" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">5</span>
+            <span class="card__number">7</span>
             <h3 class="card__title">Delete Comment</h3>
           </div>
           <div class="card__badges">
@@ -1263,15 +1420,15 @@
              data-phase="comments"
              data-captured="true"
              data-ws-events="CONTENT_REACTION_ADDED"
-             data-index="5">
-      <div class="card__gif" onclick="openLightbox(5)" title="Click to view fullscreen">
+             data-index="7">
+      <div class="card__gif" onclick="openLightbox(7)" title="Click to view fullscreen">
          <img src="gifs/behavior-react-to-comment.gif" alt="React to Comment" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">6</span>
+            <span class="card__number">8</span>
             <h3 class="card__title">React to Comment</h3>
           </div>
           <div class="card__badges">
@@ -1323,15 +1480,15 @@
              data-phase="comments"
              data-captured="true"
              data-ws-events="CONTENT_REACTION_REMOVED"
-             data-index="6">
-      <div class="card__gif" onclick="openLightbox(6)" title="Click to view fullscreen">
+             data-index="8">
+      <div class="card__gif" onclick="openLightbox(8)" title="Click to view fullscreen">
          <img src="gifs/behavior-remove-comment-reaction.gif" alt="Remove Comment Reaction" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">7</span>
+            <span class="card__number">9</span>
             <h3 class="card__title">Remove Comment Reaction</h3>
           </div>
           <div class="card__badges">
@@ -1383,15 +1540,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="CHAT_MESSAGE"
-             data-index="7">
-      <div class="card__gif" onclick="openLightbox(7)" title="Click to view fullscreen">
+             data-index="9">
+      <div class="card__gif" onclick="openLightbox(9)" title="Click to view fullscreen">
          <img src="gifs/sweep-05-send-chat.gif" alt="Send Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">8</span>
+            <span class="card__number">10</span>
             <h3 class="card__title">Send Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1443,15 +1600,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="MESSAGE_DELETED"
-             data-index="8">
-      <div class="card__gif" onclick="openLightbox(8)" title="Click to view fullscreen">
+             data-index="10">
+      <div class="card__gif" onclick="openLightbox(10)" title="Click to view fullscreen">
          <img src="gifs/sweep-06-delete-chat.gif" alt="Delete Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">9</span>
+            <span class="card__number">11</span>
             <h3 class="card__title">Delete Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1503,15 +1660,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="MESSAGE_PINNED"
-             data-index="9">
-      <div class="card__gif" onclick="openLightbox(9)" title="Click to view fullscreen">
+             data-index="11">
+      <div class="card__gif" onclick="openLightbox(11)" title="Click to view fullscreen">
          <img src="gifs/sweep-07-pin-chat.gif" alt="Pin Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">10</span>
+            <span class="card__number">12</span>
             <h3 class="card__title">Pin Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1563,15 +1720,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="MESSAGE_UNPINNED"
-             data-index="10">
-      <div class="card__gif" onclick="openLightbox(10)" title="Click to view fullscreen">
+             data-index="12">
+      <div class="card__gif" onclick="openLightbox(12)" title="Click to view fullscreen">
          <img src="gifs/sweep-08-unpin-chat.gif" alt="Unpin Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">11</span>
+            <span class="card__number">13</span>
             <h3 class="card__title">Unpin Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1623,15 +1780,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="CHAT_STATUS_CHANGED"
-             data-index="11">
-      <div class="card__gif" onclick="openLightbox(11)" title="Click to view fullscreen">
+             data-index="13">
+      <div class="card__gif" onclick="openLightbox(13)" title="Click to view fullscreen">
          <img src="gifs/sweep-09-disable-chat.gif" alt="Disable Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">12</span>
+            <span class="card__number">14</span>
             <h3 class="card__title">Disable Chat</h3>
           </div>
           <div class="card__badges">
@@ -1683,15 +1840,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="CHAT_STATUS_CHANGED"
-             data-index="12">
-      <div class="card__gif" onclick="openLightbox(12)" title="Click to view fullscreen">
+             data-index="14">
+      <div class="card__gif" onclick="openLightbox(14)" title="Click to view fullscreen">
          <img src="gifs/sweep-10-enable-chat.gif" alt="Enable Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">13</span>
+            <span class="card__number">15</span>
             <h3 class="card__title">Enable Chat</h3>
           </div>
           <div class="card__badges">
@@ -1743,15 +1900,15 @@
              data-phase="chat"
              data-captured="true"
              data-ws-events="CONTENT_REACTION_ADDED"
-             data-index="13">
-      <div class="card__gif" onclick="openLightbox(13)" title="Click to view fullscreen">
+             data-index="15">
+      <div class="card__gif" onclick="openLightbox(15)" title="Click to view fullscreen">
          <img src="gifs/behavior-react-to-chat.gif" alt="React to Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">14</span>
+            <span class="card__number">16</span>
             <h3 class="card__title">React to Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1803,15 +1960,15 @@
              data-phase="streaming"
              data-captured="true"
              data-ws-events="STREAM_CONTROL_STATUS_CHANGED"
-             data-index="14">
-      <div class="card__gif" onclick="openLightbox(14)" title="Click to view fullscreen">
+             data-index="16">
+      <div class="card__gif" onclick="openLightbox(16)" title="Click to view fullscreen">
          <img src="gifs/sweep-11-disable-stream.gif" alt="Disable Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">15</span>
+            <span class="card__number">17</span>
             <h3 class="card__title">Disable Streaming</h3>
           </div>
           <div class="card__badges">
@@ -1863,15 +2020,15 @@
              data-phase="streaming"
              data-captured="true"
              data-ws-events="STREAM_CONTROL_STATUS_CHANGED"
-             data-index="15">
-      <div class="card__gif" onclick="openLightbox(15)" title="Click to view fullscreen">
+             data-index="17">
+      <div class="card__gif" onclick="openLightbox(17)" title="Click to view fullscreen">
          <img src="gifs/sweep-12-enable-stream.gif" alt="Enable Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">16</span>
+            <span class="card__number">18</span>
             <h3 class="card__title">Enable Streaming</h3>
           </div>
           <div class="card__badges">
@@ -1921,27 +2078,24 @@
 
     <article class="card" id="behavior-start-stream"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="STREAM_STATUS"
-             data-index="16">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🎥</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-start-stream.gif</div>
-         </div>
+             data-index="18">
+      <div class="card__gif" onclick="openLightbox(18)" title="Click to view fullscreen">
+         <img src="gifs/behavior-start-stream.gif" alt="Start Live Stream" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">17</span>
+            <span class="card__number">19</span>
             <h3 class="card__title">Start Live Stream</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Start a live stream via OBS/RTMP and observe the stream going live on the token page.</p>
@@ -1977,34 +2131,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Live video appears in stream player, LIVE badge on token card
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires Mux streaming infrastructure. Cannot capture in local dev without RTMP source.</div>
+        <div class="card__notes"><strong>Notes:</strong> Captured via FFmpeg → Mux → ngrok → backend → WebSocket flow.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-stop-stream"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="STREAM_STATUS"
-             data-index="17">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🎥</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-stop-stream.gif</div>
-         </div>
+             data-index="19">
+      <div class="card__gif" onclick="openLightbox(19)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stop-stream.gif" alt="Stop Live Stream" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">18</span>
+            <span class="card__number">20</span>
             <h3 class="card__title">Stop Live Stream</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Stop a live stream and observe the stream going offline on the token page.</p>
@@ -2040,7 +2191,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Stream player shows offline state, LIVE badge removed from token card
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires active Mux stream to stop.</div>
+        <div class="card__notes"><strong>Notes:</strong> Captured via FFmpeg stop → Mux webhook → backend → WebSocket flow.</div>
         
       </div>
     </article>
@@ -2049,7 +2200,7 @@
              data-phase="streaming"
              data-captured="false"
              data-ws-events="VIEWER_COUNT"
-             data-index="18">
+             data-index="20">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">🎥</div>
@@ -2060,7 +2211,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">19</span>
+            <span class="card__number">21</span>
             <h3 class="card__title">Viewer Count Update</h3>
           </div>
           <div class="card__badges">
@@ -2098,7 +2249,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Viewer count badge increments/decrements in real-time
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires Mux webhook for viewer count updates.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires 10+ concurrent viewers to display badge (ViewerCountBadge hidden below 10). Badge shows on homepage cards. Not feasible in local dev without traffic simulation.</div>
         
       </div>
     </article>
@@ -2107,7 +2258,7 @@
              data-phase="streaming"
              data-captured="false"
              data-ws-events="RECORDING_STATUS"
-             data-index="19">
+             data-index="21">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">🎥</div>
@@ -2118,7 +2269,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">20</span>
+            <span class="card__number">22</span>
             <h3 class="card__title">Recording Ready</h3>
           </div>
           <div class="card__badges">
@@ -2156,34 +2307,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> New recording entry appears in studio recordings tab with playback link
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires Mux recording webhook callback.</div>
+        <div class="card__notes"><strong>Notes:</strong> Mux recording processed (recordingsCount=1) but recordings list endpoint returns empty. Recording asset may need additional Mux processing time. Studio/recordings page requires authenticated session. Frontend Streams section shows &quot;No streams yet&quot; despite API having 1 recording.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-stream-credentials"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-ws-events=""
-             data-index="20">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🎥</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-stream-credentials.gif</div>
-         </div>
+             data-index="22">
+      <div class="card__gif" onclick="openLightbox(22)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stream-credentials.gif" alt="Stream Credentials" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">21</span>
+            <span class="card__number">23</span>
             <h3 class="card__title">Stream Credentials</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Fetch RTMP credentials for streaming setup (API-only, no WebSocket event).</p>
@@ -2214,34 +2362,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> RTMP URL and stream key displayed in studio controls
         </div>
-        <div class="card__notes"><strong>Notes:</strong> API-only response, no visible UI change.</div>
+        <div class="card__notes"><strong>Notes:</strong> Captured via studio controls tab showing RTMP URL + stream key.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-stream-active-indicator"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="STREAM_STATUS"
-             data-index="21">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🎥</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-stream-active-indicator.gif</div>
-         </div>
+             data-index="23">
+      <div class="card__gif" onclick="openLightbox(23)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stream-active-indicator.gif" alt="Stream Active Indicator" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">22</span>
+            <span class="card__number">24</span>
             <h3 class="card__title">Stream Active Indicator</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Observe the LIVE badge appearing on token cards in the home grid when a stream starts.</p>
@@ -2272,7 +2417,291 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> LIVE badge appears on token card in the home grid
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires active live stream for grid indicator.</div>
+        <div class="card__notes"><strong>Notes:</strong> Captured showing LIVE badge on token card in home grid during active stream.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-recordings-count-updated"
+             data-phase="streaming"
+             data-captured="false"
+             data-ws-events="RECORDINGS_COUNT_UPDATED"
+             data-index="24">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">🎥</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-recordings-count-updated.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">25</span>
+            <h3 class="card__title">Recordings Count Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">After a stream ends and Mux processes the recording, the recordings count updates in real-time.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time recordings count badge in studio
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">RECORDINGS_COUNT_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Studio Recordings Tab</span>
+       <span class="tab-setup__route">/studio/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch recordings count badge increment</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Mux asset webhook fires after recording is processed</div>
+            
+            <code class="trigger-api">Mux webhook → POST /v1/webhooks/mux</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Recordings count badge increments in studio tab
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Side-effect of Mux video.asset.ready webhook. recordingsCount incremented to 1 but recording list endpoint returns empty — asset still processing. Would show in Studio recordings tab when ready.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-download-ready"
+             data-phase="streaming"
+             data-captured="false"
+             data-ws-events="DOWNLOAD_READY"
+             data-index="25">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">🎥</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-download-ready.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">26</span>
+            <h3 class="card__title">Recording Download Ready</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">Initiate a recording download and observe the download URL becoming available.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time download status in studio recordings tab
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">DOWNLOAD_READY</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Studio Recordings Tab</span>
+       <span class="tab-setup__route">/studio/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch download button state change to ready</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Request recording download via SDK</div>
+            <code class="trigger-sdk">sdk.getRecordingDownload()</code>
+            <code class="trigger-api">GET /v1/tokens/:tokenName/recordings/:recordingId/download</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Download button becomes active with downloadable URL
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires a READY recording from a completed stream. Mux processing produced recordingsCount=1 but asset not yet fully ready for download. Studio page requires authenticated session.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-simulcast-status"
+             data-phase="streaming"
+             data-captured="false"
+             data-ws-events="SIMULCAST_STATUS"
+             data-index="26">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">🎥</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-simulcast-status.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">27</span>
+            <h3 class="card__title">Simulcast Status Update</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">Add a simulcast target and observe the status change in real-time.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time simulcast target status in studio
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">SIMULCAST_STATUS</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Studio Simulcast Tab</span>
+       <span class="tab-setup__route">/studio/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch simulcast target status update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Add simulcast target via SDK</div>
+            <code class="trigger-sdk">sdk.addSimulcastTarget()</code>
+            <code class="trigger-api">POST /v1/tokens/:tokenName/stream/simulcast</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Simulcast target appears with status indicator in studio
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires active stream + Mux simulcast config (paid feature). Studio page requires authenticated session. Not feasible in local dev without Mux Enterprise plan.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-stream-countdown-updated"
+             data-phase="streaming"
+             data-captured="true"
+             data-ws-events="STREAM_COUNTDOWN_UPDATED"
+             data-index="27">
+      <div class="card__gif" onclick="openLightbox(27)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stream-countdown-updated.gif" alt="Stream Countdown Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">28</span>
+            <h3 class="card__title">Stream Countdown Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Set a &quot;Next Live&quot; countdown timer and observe it appearing on the token page.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time countdown timer on token page
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_COUNTDOWN_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch countdown timer appear/update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Set next live stream countdown via SDK</div>
+            <code class="trigger-sdk">sdk.setNextLiveStreamCountdown()</code>
+            <code class="trigger-api">PUT /v1/tokens/:tokenName/stream/countdown</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Countdown timer appears on token page showing time until next stream
+        </div>
+        
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-stream-language-updated"
+             data-phase="streaming"
+             data-captured="true"
+             data-ws-events="STREAM_LANGUAGE_UPDATED"
+             data-index="28">
+      <div class="card__gif" onclick="openLightbox(28)" title="Click to view fullscreen">
+         <img src="gifs/behavior-stream-language-updated.gif" alt="Stream Language Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">29</span>
+            <h3 class="card__title">Stream Language Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Update stream language setting and observe it reflected in the studio.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time stream language badge update
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_LANGUAGE_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Studio Settings</span>
+       <span class="tab-setup__route">/studio/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch language indicator update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Update stream language via SDK</div>
+            
+            <code class="trigger-api">PUT /v1/tokens/:tokenName/stream/settings</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Language indicator updates in studio settings
+        </div>
+        
         
       </div>
     </article>
@@ -2281,15 +2710,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="BAN_CREATED"
-             data-index="22">
-      <div class="card__gif" onclick="openLightbox(22)" title="Click to view fullscreen">
+             data-index="29">
+      <div class="card__gif" onclick="openLightbox(29)" title="Click to view fullscreen">
          <img src="gifs/sweep-15-create-ban.gif" alt="Create Per-Token Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">23</span>
+            <span class="card__number">30</span>
             <h3 class="card__title">Create Per-Token Ban</h3>
           </div>
           <div class="card__badges">
@@ -2341,15 +2770,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="BAN_REMOVED"
-             data-index="23">
-      <div class="card__gif" onclick="openLightbox(23)" title="Click to view fullscreen">
+             data-index="30">
+      <div class="card__gif" onclick="openLightbox(30)" title="Click to view fullscreen">
          <img src="gifs/sweep-16-remove-ban.gif" alt="Remove Per-Token Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">24</span>
+            <span class="card__number">31</span>
             <h3 class="card__title">Remove Per-Token Ban</h3>
           </div>
           <div class="card__badges">
@@ -2396,15 +2825,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="TOKEN_BANNED"
-             data-index="24">
-      <div class="card__gif" onclick="openLightbox(24)" title="Click to view fullscreen">
+             data-index="31">
+      <div class="card__gif" onclick="openLightbox(31)" title="Click to view fullscreen">
          <img src="gifs/sweep-17-delist-token.gif" alt="Delist Token" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">25</span>
+            <span class="card__number">32</span>
             <h3 class="card__title">Delist Token</h3>
           </div>
           <div class="card__badges">
@@ -2456,15 +2885,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="TOKEN_UNBANNED"
-             data-index="25">
-      <div class="card__gif" onclick="openLightbox(25)" title="Click to view fullscreen">
+             data-index="32">
+      <div class="card__gif" onclick="openLightbox(32)" title="Click to view fullscreen">
          <img src="gifs/sweep-18-relist-token.gif" alt="Relist Token" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">26</span>
+            <span class="card__number">33</span>
             <h3 class="card__title">Relist Token</h3>
           </div>
           <div class="card__badges">
@@ -2516,15 +2945,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="USER_BANNED"
-             data-index="26">
-      <div class="card__gif" onclick="openLightbox(26)" title="Click to view fullscreen">
+             data-index="33">
+      <div class="card__gif" onclick="openLightbox(33)" title="Click to view fullscreen">
          <img src="gifs/sweep-19-create-global-ban.gif" alt="Create Global Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">27</span>
+            <span class="card__number">34</span>
             <h3 class="card__title">Create Global Ban</h3>
           </div>
           <div class="card__badges">
@@ -2571,15 +3000,15 @@
              data-phase="bans"
              data-captured="true"
              data-ws-events="USER_UNBANNED"
-             data-index="27">
-      <div class="card__gif" onclick="openLightbox(27)" title="Click to view fullscreen">
+             data-index="34">
+      <div class="card__gif" onclick="openLightbox(34)" title="Click to view fullscreen">
          <img src="gifs/sweep-20-remove-global-ban.gif" alt="Remove Global Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">28</span>
+            <span class="card__number">35</span>
             <h3 class="card__title">Remove Global Ban</h3>
           </div>
           <div class="card__badges">
@@ -2626,15 +3055,15 @@
              data-phase="content-flags"
              data-captured="true"
              data-ws-events="CONTENT_FLAGGED"
-             data-index="28">
-      <div class="card__gif" onclick="openLightbox(28)" title="Click to view fullscreen">
+             data-index="35">
+      <div class="card__gif" onclick="openLightbox(35)" title="Click to view fullscreen">
          <img src="gifs/sweep-13-create-flag.gif" alt="Create Content Flag" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">29</span>
+            <span class="card__number">36</span>
             <h3 class="card__title">Create Content Flag</h3>
           </div>
           <div class="card__badges">
@@ -2686,15 +3115,15 @@
              data-phase="content-flags"
              data-captured="true"
              data-ws-events="FLAG_RESOLVED"
-             data-index="29">
-      <div class="card__gif" onclick="openLightbox(29)" title="Click to view fullscreen">
+             data-index="36">
+      <div class="card__gif" onclick="openLightbox(36)" title="Click to view fullscreen">
          <img src="gifs/sweep-14-resolve-flag.gif" alt="Resolve Content Flag" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">30</span>
+            <span class="card__number">37</span>
             <h3 class="card__title">Resolve Content Flag</h3>
           </div>
           <div class="card__badges">
@@ -2741,7 +3170,7 @@
              data-phase="ai-moderation"
              data-captured="false"
              data-ws-events="AI_MODERATION_COMPLETE"
-             data-index="30">
+             data-index="37">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">🤖</div>
@@ -2752,7 +3181,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">31</span>
+            <span class="card__number">38</span>
             <h3 class="card__title">AI Auto-Analyze Flagged Content</h3>
           </div>
           <div class="card__badges">
@@ -2790,7 +3219,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Flag row shows AI verdict badge with recommendation label and confidence percentage in the AI Verdict column
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires AI moderation enabled. Frontend hot-patches flag cache via useOverseerRealtimeInvalidation when AI_MODERATION_COMPLETE event arrives.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires AI moderation enabled + content flag + Overwatch auth. The AI_MODERATION_COMPLETE event is emitted to global:overseer room which requires authenticated overseer WebSocket session. See behavior-ai-verdict-detail-modal for the AI analysis result display.</div>
         
       </div>
     </article>
@@ -2798,16 +3227,16 @@
     <article class="card" id="behavior-ai-moderation-config"
              data-phase="ai-moderation"
              data-captured="true"
-             data-ws-events="AI_MODERATION_STATUS_CHANGED"
-             data-index="31">
-      <div class="card__gif" onclick="openLightbox(31)" title="Click to view fullscreen">
+             data-ws-events="AI_MODERATION_GLOBAL_STATUS"
+             data-index="38">
+      <div class="card__gif" onclick="openLightbox(38)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-moderation-config.gif" alt="AI Moderation Config Toggle" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">32</span>
+            <span class="card__number">39</span>
             <h3 class="card__title">AI Moderation Config Toggle</h3>
           </div>
           <div class="card__badges">
@@ -2823,7 +3252,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">AI_MODERATION_STATUS_CHANGED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">AI_MODERATION_GLOBAL_STATUS</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:overseer</code></div>
         </div>
         <details class="card__details">
@@ -2854,7 +3283,7 @@
              data-phase="ai-moderation"
              data-captured="false"
              data-ws-events="AI_MODERATION_COMPLETE"
-             data-index="32">
+             data-index="39">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">🤖</div>
@@ -2865,7 +3294,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">33</span>
+            <span class="card__number">40</span>
             <h3 class="card__title">AI Verdict Real-Time Update</h3>
           </div>
           <div class="card__badges">
@@ -2908,34 +3337,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Flag appears with &quot;Processing...&quot; spinner badge, then updates to AI recommendation (e.g., &quot;Safe 97%&quot;) within 2-5 seconds via WebSocket hot-patch
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Two-tab flow: flag in Tab A, observe in Tab B. AI_MODERATION_COMPLETE event hot-patches InfiniteData cache via useOverseerRealtimeInvalidation.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires overseer WebSocket auth + AI moderation enabled + flagged content. Two-tab flow: flag in Tab A, observe in Tab B. Overwatch pages require authenticated overseer session.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-ai-verdict-detail-modal"
              data-phase="ai-moderation"
-             data-captured="false"
+             data-captured="true"
              data-ws-events=""
-             data-index="33">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🤖</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-ai-verdict-detail-modal.gif</div>
-         </div>
+             data-index="40">
+      <div class="card__gif" onclick="openLightbox(40)" title="Click to view fullscreen">
+         <img src="gifs/behavior-ai-verdict-detail-modal.gif" alt="AI Verdict Detail Modal" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">34</span>
+            <span class="card__number">41</span>
             <h3 class="card__title">AI Verdict Detail Modal</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #14b8a6">🤖 AI Moderation</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Open a flag detail modal to see the full AI moderation analysis: recommendation, confidence bar, summary, detected categories, and expandable reasoning.</p>
@@ -2971,29 +3397,84 @@
       </div>
     </article>
 
-    <article class="card" id="behavior-add-moderator"
-             data-phase="moderators"
+    <article class="card" id="behavior-ai-moderation-failed"
+             data-phase="ai-moderation"
              data-captured="false"
-             data-ws-events="MODERATOR_ADDED"
-             data-index="34">
+             data-ws-events="AI_MODERATION_FAILED"
+             data-index="41">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
-           <div class="placeholder-icon">👮</div>
+           <div class="placeholder-icon">🤖</div>
            <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-add-moderator.gif</div>
+           <div class="placeholder-filename">behavior-ai-moderation-failed.gif</div>
          </div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">35</span>
+            <span class="card__number">42</span>
+            <h3 class="card__title">AI Moderation Failed</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #14b8a6">🤖 AI Moderation</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">When AI moderation encounters an error processing content, a failure event is emitted.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> AI moderation error indicator in flags table
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">AI_MODERATION_FAILED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>global:overseer</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Overwatch Flags</span>
+       <span class="tab-setup__route">/overwatch/flags</span>
+       <span class="tab-setup__desc">Watch AI verdict column show error state</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">AI moderation pipeline encounters processing error</div>
+            
+            <code class="trigger-api">Internal: AI moderation pipeline error</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Flag row shows AI error indicator instead of verdict badge
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Occurs when AI pipeline encounters timeout, rate limit, or model error. Not easily triggerable on demand.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-add-moderator"
+             data-phase="moderators"
+             data-captured="true"
+             data-ws-events="MODERATOR_ADDED"
+             data-index="42">
+      <div class="card__gif" onclick="openLightbox(42)" title="Click to view fullscreen">
+         <img src="gifs/behavior-add-moderator.gif" alt="Add Moderator" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">43</span>
             <h3 class="card__title">Add Moderator</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #6366f1">👮 Moderators</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Add a moderator to a token and see the change reflected in the team list.</p>
@@ -3031,27 +3512,24 @@
 
     <article class="card" id="behavior-remove-moderator"
              data-phase="moderators"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="MODERATOR_REMOVED"
-             data-index="35">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">👮</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-remove-moderator.gif</div>
-         </div>
+             data-index="43">
+      <div class="card__gif" onclick="openLightbox(43)" title="Click to view fullscreen">
+         <img src="gifs/behavior-remove-moderator.gif" alt="Remove Moderator" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">36</span>
+            <span class="card__number">44</span>
             <h3 class="card__title">Remove Moderator</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #6366f1">👮 Moderators</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Remove a moderator from a token team.</p>
@@ -3091,15 +3569,15 @@
              data-phase="moderators"
              data-captured="true"
              data-ws-events="MODERATOR_INVITED"
-             data-index="36">
-      <div class="card__gif" onclick="openLightbox(36)" title="Click to view fullscreen">
+             data-index="44">
+      <div class="card__gif" onclick="openLightbox(44)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-invite-created.gif" alt="Create Moderator Invite" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">37</span>
+            <span class="card__number">45</span>
             <h3 class="card__title">Create Moderator Invite</h3>
           </div>
           <div class="card__badges">
@@ -3146,15 +3624,15 @@
              data-phase="moderators"
              data-captured="true"
              data-ws-events=""
-             data-index="37">
-      <div class="card__gif" onclick="openLightbox(37)" title="Click to view fullscreen">
+             data-index="45">
+      <div class="card__gif" onclick="openLightbox(45)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-message-stats.gif" alt="Overseer Message Stats" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">38</span>
+            <span class="card__number">46</span>
             <h3 class="card__title">Overseer Message Stats</h3>
           </div>
           <div class="card__badges">
@@ -3201,15 +3679,15 @@
              data-phase="moderators"
              data-captured="true"
              data-ws-events="CONTENT_FLAGGED,FLAG_RESOLVED,BAN_CREATED,TRADE_EXECUTED,STREAM_STATUS"
-             data-index="38">
-      <div class="card__gif" onclick="openLightbox(38)" title="Click to view fullscreen">
+             data-index="46">
+      <div class="card__gif" onclick="openLightbox(46)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-dashboard-live.gif" alt="Overseer Dashboard Live" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">39</span>
+            <span class="card__number">47</span>
             <h3 class="card__title">Overseer Dashboard Live</h3>
           </div>
           <div class="card__badges">
@@ -3256,29 +3734,200 @@
       </div>
     </article>
 
-    <article class="card" id="behavior-update-token-description"
-             data-phase="pool-metadata"
+    <article class="card" id="behavior-moderator-role-updated"
+             data-phase="moderators"
              data-captured="false"
-             data-ws-events="POOL_METADATA_UPDATED"
-             data-index="39">
+             data-ws-events="MODERATOR_ROLE_UPDATED"
+             data-index="47">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🏷</div>
+           <div class="placeholder-icon">👮</div>
            <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-update-description.gif</div>
+           <div class="placeholder-filename">behavior-moderator-role-updated.gif</div>
          </div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">40</span>
+            <span class="card__number">48</span>
+            <h3 class="card__title">Moderator Role Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #6366f1">👮 Moderators</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">Update a moderator&#039;s role (e.g., from MODERATOR to ADMIN) and see it reflected in real-time.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time moderator role change in team list
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">MODERATOR_ROLE_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">My Profile Team Tab</span>
+       <span class="tab-setup__route">/my-profile</span>
+       <span class="tab-setup__desc">Watch moderator role badge update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Update moderator role via SDK</div>
+            <code class="trigger-sdk">sdk.updateModeratorRole()</code>
+            <code class="trigger-api">PUT /v1/tokens/:tokenName/moderators/:moderatorId/role</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Moderator role badge updates in team list
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires authenticated wallet session + existing moderator + My Profile Team tab access. Role update API: PUT /v1/tokens/:tokenName/moderators/:moderatorId/role.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-overseer-added"
+             data-phase="moderators"
+             data-captured="false"
+             data-ws-events="OVERSEER_ADDED"
+             data-index="48">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">👮</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-overseer-added.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">49</span>
+            <h3 class="card__title">Overseer Added</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #6366f1">👮 Moderators</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">Add a new overseer to the platform and see them appear in the overseers list.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time overseer addition in overwatch invites
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">OVERSEER_ADDED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>global:overseer</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Overwatch Invites</span>
+       <span class="tab-setup__route">/overwatch/invites</span>
+       <span class="tab-setup__desc">Watch new overseer appear in the list</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Create overseer invite and have it accepted</div>
+            
+            <code class="trigger-api">POST /v1/admin/overseer-invites</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> New overseer entry appears in the overwatch invites/overseers list
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires admin auth + invite creation + acceptance by another user. Multi-user flow not feasible in single-browser automation.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-overseer-removed"
+             data-phase="moderators"
+             data-captured="false"
+             data-ws-events="OVERSEER_REMOVED"
+             data-index="49">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">👮</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-overseer-removed.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">50</span>
+            <h3 class="card__title">Overseer Removed</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #6366f1">👮 Moderators</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">Remove an overseer from the platform.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time overseer removal in overwatch invites
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">OVERSEER_REMOVED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>global:overseer</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Overwatch Invites</span>
+       <span class="tab-setup__route">/overwatch/invites</span>
+       <span class="tab-setup__desc">Watch overseer disappear from the list</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Revoke overseer access</div>
+            
+            <code class="trigger-api">DELETE /v1/admin/overseers/:overseerId</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Overseer entry removed from the overwatch list
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires admin auth + existing overseer. Overwatch pages require authenticated overseer session.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-update-token-description"
+             data-phase="pool-metadata"
+             data-captured="true"
+             data-ws-events="POOL_METADATA_UPDATED"
+             data-index="50">
+      <div class="card__gif" onclick="openLightbox(50)" title="Click to view fullscreen">
+         <img src="gifs/behavior-update-description.gif" alt="Update Token Description" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">51</span>
             <h3 class="card__title">Update Token Description</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Update a token description in studio and see it reflected on the token page.</p>
@@ -3323,7 +3972,7 @@
              data-phase="pool-metadata"
              data-captured="false"
              data-ws-events="POOL_METADATA_UPDATED"
-             data-index="40">
+             data-index="51">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">🏷</div>
@@ -3334,7 +3983,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">41</span>
+            <span class="card__number">52</span>
             <h3 class="card__title">Update Token Image</h3>
           </div>
           <div class="card__badges">
@@ -3377,34 +4026,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Token image updates on public token page and grid without refresh
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires pool ownership for image upload.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires pool ownership + authenticated Studio session + multipart image upload. Studio page requires browser wallet connection.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-update-token-links"
              data-phase="pool-metadata"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="POOL_METADATA_UPDATED"
-             data-index="41">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🏷</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-update-links.gif</div>
-         </div>
+             data-index="52">
+      <div class="card__gif" onclick="openLightbox(52)" title="Click to view fullscreen">
+         <img src="gifs/behavior-update-links.gif" alt="Update Token Links" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">42</span>
+            <span class="card__number">53</span>
             <h3 class="card__title">Update Token Links</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Update social links (Twitter, Discord, Telegram, website) in studio.</p>
@@ -3445,92 +4091,202 @@
       </div>
     </article>
 
-    <article class="card" id="behavior-update-bonding-curve-fees"
+    <article class="card" id="behavior-token-config-updated"
              data-phase="pool-metadata"
-             data-captured="false"
-             data-ws-events="POOL_METADATA_UPDATED"
-             data-index="42">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🏷</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-update-fees.gif</div>
-         </div>
+             data-captured="true"
+             data-ws-events="TOKEN_CONFIG_UPDATED"
+             data-index="53">
+      <div class="card__gif" onclick="openLightbox(53)" title="Click to view fullscreen">
+         <img src="gifs/behavior-token-config-updated.gif" alt="Token Config Updated (Global Feed)" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">43</span>
-            <h3 class="card__title">Update Bonding Curve Fees</h3>
+            <span class="card__number">54</span>
+            <h3 class="card__title">Token Config Updated (Global Feed)</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
             
-            <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
-        <p class="card__description">Update bonding curve fee configuration for a token.</p>
+        <p class="card__description">When token config is updated (countdown, language, toggles, social links), a unified TOKEN_CONFIG_UPDATED event broadcasts to the global feed, patching homepage token cards in real-time.</p>
         <div class="card__feature-target">
-          <strong>Feature Target:</strong> Real-time pool metadata update (fees)
+          <strong>Feature Target:</strong> Real-time unified config update on global feed for homepage hot-patching
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">POOL_METADATA_UPDATED</span></div>
-          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+          <div class="ws-events-list"><span class="badge badge--ws">TOKEN_CONFIG_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>global:feed + token:{tokenName}</code></div>
         </div>
         <details class="card__details">
           <summary>Tab Setup (2 tabs)</summary>
           <div class="tabs-list"><div class="tab-setup">
-       <span class="tab-setup__label">Token Page</span>
-       <span class="tab-setup__route">/t/{TOKEN}</span>
-       <span class="tab-setup__desc">Watch fee display update</span>
+       <span class="tab-setup__label">Homepage</span>
+       <span class="tab-setup__route">/</span>
+       <span class="tab-setup__desc">Watch token card update in real-time (countdown, language)</span>
      </div>
 <div class="tab-setup">
-       <span class="tab-setup__label">Studio Page</span>
-       <span class="tab-setup__route">/studio/{TOKEN}</span>
-       <span class="tab-setup__desc">Edit fee settings</span>
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">See config reflected on detail page</span>
      </div></div>
         </details>
         <details class="card__details">
           <summary>Trigger</summary>
           <div class="trigger-info">
-            <div class="trigger-desc">Adjust fee sliders in Studio and save</div>
-            <code class="trigger-sdk">sdk.updatePoolMetadata()</code>
-            <code class="trigger-api">PUT /v1/tokens/:tokenName/metadata</code>
+            <div class="trigger-desc">Update token config via SDK (countdown + language in single call)</div>
+            <code class="trigger-sdk">sdk.updateTokenConfig()</code>
+            <code class="trigger-api">PATCH /v1/tokens/:tokenName</code>
           </div>
         </details>
         <div class="card__expected">
-          <strong>Expected Outcome:</strong> Fee configuration updates reflected on token trading page
+          <strong>Expected Outcome:</strong> Homepage token card hot-patches with new countdown/language without page refresh
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires pool ownership for fee configuration.</div>
+        <div class="card__notes"><strong>Notes:</strong> Unified event replaces individual broadcasts to global feed. Individual events (STREAM_COUNTDOWN_UPDATED, STREAM_LANGUAGE_UPDATED) still fire for backward compatibility on token room.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-holder-count-updated"
+             data-phase="pool-metadata"
+             data-captured="false"
+             data-ws-events="HOLDER_COUNT_UPDATED"
+             data-index="54">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">🏷</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-holder-count-updated.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">55</span>
+            <h3 class="card__title">Holder Count Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">After a trade changes the holder set, the holder count updates in real-time on the token page.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time holder count badge on token page
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">HOLDER_COUNT_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch holder count badge update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Backend recalculates holder count after trade changes holder set</div>
+            
+            <code class="trigger-api">Internal: post-trade holder recalculation</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Holder count badge updates on token page stats panel
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Side-effect of trades that add/remove holders. HOLDER_COUNT_UPDATED is emitted to token room but requires authenticated WS session to receive. Page shows holder count from API on load.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-pool-badge-assigned"
+             data-phase="pool-metadata"
+             data-captured="false"
+             data-ws-events="POOL_BADGE_ASSIGNED"
+             data-index="55">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">🏷</div>
+           <div class="placeholder-text">GIF not yet captured</div>
+           <div class="placeholder-filename">behavior-pool-badge-assigned.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">56</span>
+            <h3 class="card__title">Pool Badge Assigned</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
+            <span class="badge badge--uncaptured">Uncaptured</span>
+          </div>
+        </div>
+        <p class="card__description">When a token reaches a milestone, a badge is automatically assigned and displayed.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time badge assignment notification on token page
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">POOL_BADGE_ASSIGNED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch for new badge appearing on token card</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Backend automatically assigns badge when milestone criteria are met</div>
+            
+            <code class="trigger-api">Internal: badge assignment pipeline</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> New badge icon appears on token card and detail page
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Automatic backend process triggered by volume/holder milestones. Not easily triggerable on demand. Token walktestbffl already has 1k and 10k volume badges.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-token-launched"
              data-phase="pool-lifecycle"
-             data-captured="false"
-             data-ws-events="TOKEN_LAUNCHED"
-             data-index="43">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">🚀</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-token-launched.gif</div>
-         </div>
+             data-captured="true"
+             data-ws-events="POOL_CREATED"
+             data-index="56">
+      <div class="card__gif" onclick="openLightbox(56)" title="Click to view fullscreen">
+         <img src="gifs/behavior-token-launched.gif" alt="Token Launched" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">44</span>
+            <span class="card__number">57</span>
             <h3 class="card__title">Token Launched</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #a855f7">🚀 Pool Lifecycle</span>
             
             <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">A new token is launched and appears in the token grid in real-time.</p>
@@ -3539,7 +4295,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">TOKEN_LAUNCHED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">POOL_CREATED</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:tokens</code></div>
         </div>
         <details class="card__details">
@@ -3570,7 +4326,7 @@
              data-phase="user-events"
              data-captured="false"
              data-ws-events="USER_TYPING"
-             data-index="44">
+             data-index="57">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">👤</div>
@@ -3581,7 +4337,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">45</span>
+            <span class="card__number">58</span>
             <h3 class="card__title">User Typing Indicator</h3>
           </div>
           <div class="card__badges">
@@ -3624,7 +4380,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> &quot;User is typing...&quot; indicator appears below chat messages
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires multiple concurrent users typing.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires two authenticated users in the same token chat room. Multi-user WS interaction not feasible in single-browser automation.</div>
         
       </div>
     </article>
@@ -3633,7 +4389,7 @@
              data-phase="user-events"
              data-captured="false"
              data-ws-events="USER_CONNECTED,USER_DISCONNECTED"
-             data-index="45">
+             data-index="58">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">👤</div>
@@ -3644,7 +4400,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">46</span>
+            <span class="card__number">59</span>
             <h3 class="card__title">User Online Status</h3>
           </div>
           <div class="card__badges">
@@ -3683,34 +4439,31 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> User presence dot changes from green (online) to gray (offline)
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires multiple users connecting/disconnecting.</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires multiple authenticated users + WS presence tracking. User presence dots only shown for chat participants in the same token room.</div>
         
       </div>
     </article>
 
     <article class="card" id="behavior-balance-updated"
              data-phase="user-events"
-             data-captured="false"
+             data-captured="true"
              data-ws-events="BALANCE_UPDATED"
-             data-index="46">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">👤</div>
-           <div class="placeholder-text">GIF not yet captured</div>
-           <div class="placeholder-filename">behavior-balance-updated.gif</div>
-         </div>
+             data-index="59">
+      <div class="card__gif" onclick="openLightbox(59)" title="Click to view fullscreen">
+         <img src="gifs/behavior-balance-updated.gif" alt="Balance Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">47</span>
+            <span class="card__number">60</span>
             <h3 class="card__title">Balance Updated</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #06b6d4">👤 User Events</span>
             
             <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
-            <span class="badge badge--uncaptured">Uncaptured</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Observe wallet balance updating in real-time after a trade.</p>
@@ -3750,15 +4503,15 @@
              data-phase="user-events"
              data-captured="true"
              data-ws-events="USER_PROFILE_UPDATED"
-             data-index="47">
-      <div class="card__gif" onclick="openLightbox(47)" title="Click to view fullscreen">
+             data-index="60">
+      <div class="card__gif" onclick="openLightbox(60)" title="Click to view fullscreen">
          <img src="gifs/behavior-user-profile-updated.gif" alt="User Profile Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">48</span>
+            <span class="card__number">61</span>
             <h3 class="card__title">User Profile Updated</h3>
           </div>
           <div class="card__badges">
@@ -3810,7 +4563,7 @@
              data-phase="user-events"
              data-captured="false"
              data-ws-events="CONNECTION_ESTABLISHED"
-             data-index="48">
+             data-index="61">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">👤</div>
@@ -3821,7 +4574,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">49</span>
+            <span class="card__number">62</span>
             <h3 class="card__title">Connect Wallet</h3>
           </div>
           <div class="card__badges">
@@ -3859,7 +4612,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Wallet connects, modal closes, header shows truncated address, balance loads, user dropdown accessible
         </div>
-        <div class="card__notes"><strong>Notes:</strong> Requires browser wallet extension (MetaMask, GalaConnect, etc.).</div>
+        <div class="card__notes"><strong>Notes:</strong> Requires browser wallet extension (MetaMask, GalaConnect). Claude-in-Chrome cannot interact with wallet extension popups.</div>
         
       </div>
     </article>
@@ -3868,7 +4621,7 @@
              data-phase="user-events"
              data-captured="false"
              data-ws-events=""
-             data-index="49">
+             data-index="62">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">👤</div>
@@ -3879,7 +4632,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">50</span>
+            <span class="card__number">63</span>
             <h3 class="card__title">Disconnect Wallet</h3>
           </div>
           <div class="card__badges">
@@ -3917,7 +4670,7 @@
         <div class="card__expected">
           <strong>Expected Outcome:</strong> Wallet disconnects, header reverts to &quot;Connect Wallet&quot; button, protected routes redirect
         </div>
-        <div class="card__notes"><strong>Notes:</strong> No WebSocket event — purely client-side state change.</div>
+        <div class="card__notes"><strong>Notes:</strong> No WebSocket event — purely client-side state change. Requires wallet to be connected first (see wallet-connect notes).</div>
         
       </div>
     </article>
@@ -3926,15 +4679,15 @@
              data-phase="site-config"
              data-captured="true"
              data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="50">
-      <div class="card__gif" onclick="openLightbox(50)" title="Click to view fullscreen">
+             data-index="63">
+      <div class="card__gif" onclick="openLightbox(63)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-streaming-global.gif" alt="Toggle Global Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">51</span>
+            <span class="card__number">64</span>
             <h3 class="card__title">Toggle Global Streaming</h3>
           </div>
           <div class="card__badges">
@@ -3986,15 +4739,15 @@
              data-phase="site-config"
              data-captured="true"
              data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="51">
-      <div class="card__gif" onclick="openLightbox(51)" title="Click to view fullscreen">
+             data-index="64">
+      <div class="card__gif" onclick="openLightbox(64)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-chat-global.gif" alt="Toggle Global Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">52</span>
+            <span class="card__number">65</span>
             <h3 class="card__title">Toggle Global Chat</h3>
           </div>
           <div class="card__badges">
@@ -4046,15 +4799,15 @@
              data-phase="site-config"
              data-captured="true"
              data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="52">
-      <div class="card__gif" onclick="openLightbox(52)" title="Click to view fullscreen">
+             data-index="65">
+      <div class="card__gif" onclick="openLightbox(65)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-comments-global.gif" alt="Toggle Global Comments" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">53</span>
+            <span class="card__number">66</span>
             <h3 class="card__title">Toggle Global Comments</h3>
           </div>
           <div class="card__badges">
@@ -4106,15 +4859,15 @@
              data-phase="site-config"
              data-captured="true"
              data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="53">
-      <div class="card__gif" onclick="openLightbox(53)" title="Click to view fullscreen">
+             data-index="66">
+      <div class="card__gif" onclick="openLightbox(66)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-webhooks.gif" alt="Toggle Webhooks" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">54</span>
+            <span class="card__number">67</span>
             <h3 class="card__title">Toggle Webhooks</h3>
           </div>
           <div class="card__badges">
@@ -4157,19 +4910,184 @@
       </div>
     </article>
 
+    <article class="card" id="behavior-api-key-created"
+             data-phase="api-keys"
+             data-captured="true"
+             data-ws-events="API_KEY_CREATED"
+             data-index="67">
+      <div class="card__gif" onclick="openLightbox(67)" title="Click to view fullscreen">
+         <img src="gifs/behavior-api-key-created.gif" alt="API Key Created" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">68</span>
+            <h3 class="card__title">API Key Created</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #78716c">🔑 API Keys</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Create a new API key and observe it appearing in the API keys list on the profile page.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time API key creation in profile API keys tab
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">API_KEY_CREATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>user:{walletAddress}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">My Profile API Keys</span>
+       <span class="tab-setup__route">/my-profile</span>
+       <span class="tab-setup__desc">Watch new API key appear in the keys list</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Create API key via SDK</div>
+            <code class="trigger-sdk">sdk.createApiKey()</code>
+            <code class="trigger-api">POST /v1/api-keys</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> New API key entry appears in the profile API keys tab
+        </div>
+        
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-api-key-updated"
+             data-phase="api-keys"
+             data-captured="true"
+             data-ws-events="API_KEY_UPDATED"
+             data-index="68">
+      <div class="card__gif" onclick="openLightbox(68)" title="Click to view fullscreen">
+         <img src="gifs/behavior-api-key-updated.gif" alt="API Key Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">69</span>
+            <h3 class="card__title">API Key Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #78716c">🔑 API Keys</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Update an API key name/settings and see the change reflected in real-time.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time API key update in profile API keys tab
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">API_KEY_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>user:{walletAddress}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">My Profile API Keys</span>
+       <span class="tab-setup__route">/my-profile</span>
+       <span class="tab-setup__desc">Watch API key name/details update</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Update API key via SDK</div>
+            <code class="trigger-sdk">sdk.updateApiKey()</code>
+            <code class="trigger-api">PUT /v1/api-keys/:keyId</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> API key entry updates with new name/settings in the keys list
+        </div>
+        
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-api-key-revoked"
+             data-phase="api-keys"
+             data-captured="true"
+             data-ws-events="API_KEY_REVOKED"
+             data-index="69">
+      <div class="card__gif" onclick="openLightbox(69)" title="Click to view fullscreen">
+         <img src="gifs/behavior-api-key-revoked.gif" alt="API Key Revoked" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">70</span>
+            <h3 class="card__title">API Key Revoked</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #78716c">🔑 API Keys</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Revoke an API key and see it removed or marked as revoked in the keys list.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time API key revocation in profile API keys tab
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">API_KEY_REVOKED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>user:{walletAddress}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">My Profile API Keys</span>
+       <span class="tab-setup__route">/my-profile</span>
+       <span class="tab-setup__desc">Watch API key become revoked/removed</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Revoke API key via SDK</div>
+            <code class="trigger-sdk">sdk.revokeApiKey()</code>
+            <code class="trigger-api">DELETE /v1/api-keys/:keyId</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> API key entry removed or shown as revoked in the keys list
+        </div>
+        
+        
+      </div>
+    </article>
+
     <article class="card" id="behavior-events-firehose"
              data-phase="site-config"
              data-captured="true"
              data-ws-events="EVENTS_FIREHOSE"
-             data-index="54">
-      <div class="card__gif" onclick="openLightbox(54)" title="Click to view fullscreen">
+             data-index="70">
+      <div class="card__gif" onclick="openLightbox(70)" title="Click to view fullscreen">
          <img src="gifs/behavior-events-firehose.gif" alt="Events Firehose" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">55</span>
+            <span class="card__number">71</span>
             <h3 class="card__title">Events Firehose</h3>
           </div>
           <div class="card__badges">
@@ -4227,7 +5145,7 @@
 
   <script>
     // ─── Data ─────────────────────────────────────
-    const behaviors = [{"id":"buy-token","title":"Buy Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-01-buy-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"]},{"id":"sell-token","title":"Sell Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-02-sell-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"]},{"id":"graduate-token","title":"Graduate Token","phase":"trading","gifCaptured":false,"gifFilename":"sweep-03-graduate-token.gif","wsEvents":["TOKEN_GRADUATED"]},{"id":"post-comment","title":"Post Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-03-post-comment.gif","wsEvents":["COMMENT_CREATED"]},{"id":"delete-comment","title":"Delete Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-04-delete-comment.gif","wsEvents":["COMMENT_DELETED"]},{"id":"react-to-comment","title":"React to Comment","phase":"comments","gifCaptured":true,"gifFilename":"behavior-react-to-comment.gif","wsEvents":["CONTENT_REACTION_ADDED"]},{"id":"remove-comment-reaction","title":"Remove Comment Reaction","phase":"comments","gifCaptured":true,"gifFilename":"behavior-remove-comment-reaction.gif","wsEvents":["CONTENT_REACTION_REMOVED"]},{"id":"send-chat","title":"Send Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-05-send-chat.gif","wsEvents":["CHAT_MESSAGE"]},{"id":"delete-chat","title":"Delete Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-06-delete-chat.gif","wsEvents":["MESSAGE_DELETED"]},{"id":"pin-chat","title":"Pin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-07-pin-chat.gif","wsEvents":["MESSAGE_PINNED"]},{"id":"unpin-chat","title":"Unpin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-08-unpin-chat.gif","wsEvents":["MESSAGE_UNPINNED"]},{"id":"disable-chat","title":"Disable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-09-disable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"]},{"id":"enable-chat","title":"Enable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-10-enable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"]},{"id":"react-to-chat","title":"React to Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"behavior-react-to-chat.gif","wsEvents":["CONTENT_REACTION_ADDED"]},{"id":"disable-stream","title":"Disable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-11-disable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"]},{"id":"enable-stream","title":"Enable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-12-enable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"]},{"id":"start-stream","title":"Start Live Stream","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-start-stream.gif","wsEvents":["STREAM_STATUS"]},{"id":"stop-stream","title":"Stop Live Stream","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-stop-stream.gif","wsEvents":["STREAM_STATUS"]},{"id":"viewer-count-update","title":"Viewer Count Update","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-viewer-count.gif","wsEvents":["VIEWER_COUNT"]},{"id":"recording-ready","title":"Recording Ready","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-recording-ready.gif","wsEvents":["RECORDING_STATUS"]},{"id":"stream-credentials","title":"Stream Credentials","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-stream-credentials.gif","wsEvents":[]},{"id":"stream-active-indicator","title":"Stream Active Indicator","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-stream-active-indicator.gif","wsEvents":["STREAM_STATUS"]},{"id":"create-per-token-ban","title":"Create Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-15-create-ban.gif","wsEvents":["BAN_CREATED"]},{"id":"remove-per-token-ban","title":"Remove Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-16-remove-ban.gif","wsEvents":["BAN_REMOVED"]},{"id":"delist-token","title":"Delist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-17-delist-token.gif","wsEvents":["TOKEN_BANNED"]},{"id":"relist-token","title":"Relist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-18-relist-token.gif","wsEvents":["TOKEN_UNBANNED"]},{"id":"create-global-ban","title":"Create Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-19-create-global-ban.gif","wsEvents":["USER_BANNED"]},{"id":"remove-global-ban","title":"Remove Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-20-remove-global-ban.gif","wsEvents":["USER_UNBANNED"]},{"id":"create-content-flag","title":"Create Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-13-create-flag.gif","wsEvents":["CONTENT_FLAGGED"]},{"id":"resolve-content-flag","title":"Resolve Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-14-resolve-flag.gif","wsEvents":["FLAG_RESOLVED"]},{"id":"ai-flag-auto","title":"AI Auto-Analyze Flagged Content","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-flag-auto.gif","wsEvents":["AI_MODERATION_COMPLETE"]},{"id":"ai-moderation-config","title":"AI Moderation Config Toggle","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-config.gif","wsEvents":["AI_MODERATION_STATUS_CHANGED"]},{"id":"ai-verdict-realtime","title":"AI Verdict Real-Time Update","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-verdict-realtime.gif","wsEvents":["AI_MODERATION_COMPLETE"]},{"id":"ai-verdict-detail-modal","title":"AI Verdict Detail Modal","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-verdict-detail-modal.gif","wsEvents":[]},{"id":"add-moderator","title":"Add Moderator","phase":"moderators","gifCaptured":false,"gifFilename":"behavior-add-moderator.gif","wsEvents":["MODERATOR_ADDED"]},{"id":"remove-moderator","title":"Remove Moderator","phase":"moderators","gifCaptured":false,"gifFilename":"behavior-remove-moderator.gif","wsEvents":["MODERATOR_REMOVED"]},{"id":"moderator-invite-created","title":"Create Moderator Invite","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-invite-created.gif","wsEvents":["MODERATOR_INVITED"]},{"id":"overseer-message-stats","title":"Overseer Message Stats","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-message-stats.gif","wsEvents":[]},{"id":"overseer-dashboard-live","title":"Overseer Dashboard Live","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-dashboard-live.gif","wsEvents":["CONTENT_FLAGGED","FLAG_RESOLVED","BAN_CREATED","TRADE_EXECUTED","STREAM_STATUS"]},{"id":"update-token-description","title":"Update Token Description","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-description.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"update-token-image","title":"Update Token Image","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-image.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"update-token-links","title":"Update Token Links","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-links.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"update-bonding-curve-fees","title":"Update Bonding Curve Fees","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-fees.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"token-launched","title":"Token Launched","phase":"pool-lifecycle","gifCaptured":false,"gifFilename":"behavior-token-launched.gif","wsEvents":["TOKEN_LAUNCHED"]},{"id":"user-typing-indicator","title":"User Typing Indicator","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-typing-indicator.gif","wsEvents":["USER_TYPING"]},{"id":"user-online-status","title":"User Online Status","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-online-status.gif","wsEvents":["USER_CONNECTED","USER_DISCONNECTED"]},{"id":"balance-updated","title":"Balance Updated","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-balance-updated.gif","wsEvents":["BALANCE_UPDATED"]},{"id":"user-profile-updated","title":"User Profile Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-user-profile-updated.gif","wsEvents":["USER_PROFILE_UPDATED"]},{"id":"wallet-connect","title":"Connect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-connect.gif","wsEvents":["CONNECTION_ESTABLISHED"]},{"id":"wallet-disconnect","title":"Disconnect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-disconnect.gif","wsEvents":[]},{"id":"toggle-streaming-global","title":"Toggle Global Streaming","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-streaming-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-chat-global","title":"Toggle Global Chat","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-chat-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-comments-global","title":"Toggle Global Comments","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-comments-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-webhooks","title":"Toggle Webhooks","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-webhooks.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"events-firehose","title":"Events Firehose","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-events-firehose.gif","wsEvents":["EVENTS_FIREHOSE"]}];
+    const behaviors = [{"id":"buy-token","title":"Buy Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-01-buy-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"]},{"id":"sell-token","title":"Sell Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-02-sell-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"]},{"id":"graduate-token","title":"Graduate Token","phase":"trading","gifCaptured":false,"gifFilename":"sweep-03-graduate-token.gif","wsEvents":["TOKEN_GRADUATED"]},{"id":"trade-update-notify","title":"Trade Update Notification","phase":"trading","gifCaptured":true,"gifFilename":"behavior-trade-update-notify.gif","wsEvents":["TRADE_UPDATE_NOTIFY"]},{"id":"stats-updated","title":"Stats Updated","phase":"trading","gifCaptured":true,"gifFilename":"behavior-stats-updated.gif","wsEvents":["STATS_UPDATED"]},{"id":"post-comment","title":"Post Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-03-post-comment.gif","wsEvents":["COMMENT_CREATED"]},{"id":"delete-comment","title":"Delete Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-04-delete-comment.gif","wsEvents":["COMMENT_DELETED"]},{"id":"react-to-comment","title":"React to Comment","phase":"comments","gifCaptured":true,"gifFilename":"behavior-react-to-comment.gif","wsEvents":["CONTENT_REACTION_ADDED"]},{"id":"remove-comment-reaction","title":"Remove Comment Reaction","phase":"comments","gifCaptured":true,"gifFilename":"behavior-remove-comment-reaction.gif","wsEvents":["CONTENT_REACTION_REMOVED"]},{"id":"send-chat","title":"Send Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-05-send-chat.gif","wsEvents":["CHAT_MESSAGE"]},{"id":"delete-chat","title":"Delete Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-06-delete-chat.gif","wsEvents":["MESSAGE_DELETED"]},{"id":"pin-chat","title":"Pin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-07-pin-chat.gif","wsEvents":["MESSAGE_PINNED"]},{"id":"unpin-chat","title":"Unpin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-08-unpin-chat.gif","wsEvents":["MESSAGE_UNPINNED"]},{"id":"disable-chat","title":"Disable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-09-disable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"]},{"id":"enable-chat","title":"Enable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-10-enable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"]},{"id":"react-to-chat","title":"React to Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"behavior-react-to-chat.gif","wsEvents":["CONTENT_REACTION_ADDED"]},{"id":"disable-stream","title":"Disable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-11-disable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"]},{"id":"enable-stream","title":"Enable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-12-enable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"]},{"id":"start-stream","title":"Start Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-start-stream.gif","wsEvents":["STREAM_STATUS"]},{"id":"stop-stream","title":"Stop Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stop-stream.gif","wsEvents":["STREAM_STATUS"]},{"id":"viewer-count-update","title":"Viewer Count Update","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-viewer-count.gif","wsEvents":["VIEWER_COUNT"]},{"id":"recording-ready","title":"Recording Ready","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-recording-ready.gif","wsEvents":["RECORDING_STATUS"]},{"id":"stream-credentials","title":"Stream Credentials","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-credentials.gif","wsEvents":[]},{"id":"stream-active-indicator","title":"Stream Active Indicator","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-active-indicator.gif","wsEvents":["STREAM_STATUS"]},{"id":"recordings-count-updated","title":"Recordings Count Updated","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-recordings-count-updated.gif","wsEvents":["RECORDINGS_COUNT_UPDATED"]},{"id":"download-ready","title":"Recording Download Ready","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-download-ready.gif","wsEvents":["DOWNLOAD_READY"]},{"id":"simulcast-status","title":"Simulcast Status Update","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-simulcast-status.gif","wsEvents":["SIMULCAST_STATUS"]},{"id":"stream-countdown-updated","title":"Stream Countdown Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-countdown-updated.gif","wsEvents":["STREAM_COUNTDOWN_UPDATED"]},{"id":"stream-language-updated","title":"Stream Language Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-language-updated.gif","wsEvents":["STREAM_LANGUAGE_UPDATED"]},{"id":"create-per-token-ban","title":"Create Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-15-create-ban.gif","wsEvents":["BAN_CREATED"]},{"id":"remove-per-token-ban","title":"Remove Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-16-remove-ban.gif","wsEvents":["BAN_REMOVED"]},{"id":"delist-token","title":"Delist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-17-delist-token.gif","wsEvents":["TOKEN_BANNED"]},{"id":"relist-token","title":"Relist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-18-relist-token.gif","wsEvents":["TOKEN_UNBANNED"]},{"id":"create-global-ban","title":"Create Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-19-create-global-ban.gif","wsEvents":["USER_BANNED"]},{"id":"remove-global-ban","title":"Remove Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-20-remove-global-ban.gif","wsEvents":["USER_UNBANNED"]},{"id":"create-content-flag","title":"Create Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-13-create-flag.gif","wsEvents":["CONTENT_FLAGGED"]},{"id":"resolve-content-flag","title":"Resolve Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-14-resolve-flag.gif","wsEvents":["FLAG_RESOLVED"]},{"id":"ai-flag-auto","title":"AI Auto-Analyze Flagged Content","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-flag-auto.gif","wsEvents":["AI_MODERATION_COMPLETE"]},{"id":"ai-moderation-config","title":"AI Moderation Config Toggle","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-config.gif","wsEvents":["AI_MODERATION_GLOBAL_STATUS"]},{"id":"ai-verdict-realtime","title":"AI Verdict Real-Time Update","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-verdict-realtime.gif","wsEvents":["AI_MODERATION_COMPLETE"]},{"id":"ai-verdict-detail-modal","title":"AI Verdict Detail Modal","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-verdict-detail-modal.gif","wsEvents":[]},{"id":"ai-moderation-failed","title":"AI Moderation Failed","phase":"ai-moderation","gifCaptured":false,"gifFilename":"behavior-ai-moderation-failed.gif","wsEvents":["AI_MODERATION_FAILED"]},{"id":"add-moderator","title":"Add Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-add-moderator.gif","wsEvents":["MODERATOR_ADDED"]},{"id":"remove-moderator","title":"Remove Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-remove-moderator.gif","wsEvents":["MODERATOR_REMOVED"]},{"id":"moderator-invite-created","title":"Create Moderator Invite","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-invite-created.gif","wsEvents":["MODERATOR_INVITED"]},{"id":"overseer-message-stats","title":"Overseer Message Stats","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-message-stats.gif","wsEvents":[]},{"id":"overseer-dashboard-live","title":"Overseer Dashboard Live","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-dashboard-live.gif","wsEvents":["CONTENT_FLAGGED","FLAG_RESOLVED","BAN_CREATED","TRADE_EXECUTED","STREAM_STATUS"]},{"id":"moderator-role-updated","title":"Moderator Role Updated","phase":"moderators","gifCaptured":false,"gifFilename":"behavior-moderator-role-updated.gif","wsEvents":["MODERATOR_ROLE_UPDATED"]},{"id":"overseer-added","title":"Overseer Added","phase":"moderators","gifCaptured":false,"gifFilename":"behavior-overseer-added.gif","wsEvents":["OVERSEER_ADDED"]},{"id":"overseer-removed","title":"Overseer Removed","phase":"moderators","gifCaptured":false,"gifFilename":"behavior-overseer-removed.gif","wsEvents":["OVERSEER_REMOVED"]},{"id":"update-token-description","title":"Update Token Description","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-description.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"update-token-image","title":"Update Token Image","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-image.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"update-token-links","title":"Update Token Links","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-links.gif","wsEvents":["POOL_METADATA_UPDATED"]},{"id":"token-config-updated","title":"Token Config Updated (Global Feed)","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-token-config-updated.gif","wsEvents":["TOKEN_CONFIG_UPDATED"]},{"id":"holder-count-updated","title":"Holder Count Updated","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-holder-count-updated.gif","wsEvents":["HOLDER_COUNT_UPDATED"]},{"id":"pool-badge-assigned","title":"Pool Badge Assigned","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-pool-badge-assigned.gif","wsEvents":["POOL_BADGE_ASSIGNED"]},{"id":"token-launched","title":"Token Launched","phase":"pool-lifecycle","gifCaptured":true,"gifFilename":"behavior-token-launched.gif","wsEvents":["POOL_CREATED"]},{"id":"user-typing-indicator","title":"User Typing Indicator","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-typing-indicator.gif","wsEvents":["USER_TYPING"]},{"id":"user-online-status","title":"User Online Status","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-online-status.gif","wsEvents":["USER_CONNECTED","USER_DISCONNECTED"]},{"id":"balance-updated","title":"Balance Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-balance-updated.gif","wsEvents":["BALANCE_UPDATED"]},{"id":"user-profile-updated","title":"User Profile Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-user-profile-updated.gif","wsEvents":["USER_PROFILE_UPDATED"]},{"id":"wallet-connect","title":"Connect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-connect.gif","wsEvents":["CONNECTION_ESTABLISHED"]},{"id":"wallet-disconnect","title":"Disconnect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-disconnect.gif","wsEvents":[]},{"id":"toggle-streaming-global","title":"Toggle Global Streaming","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-streaming-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-chat-global","title":"Toggle Global Chat","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-chat-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-comments-global","title":"Toggle Global Comments","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-comments-global.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"toggle-webhooks","title":"Toggle Webhooks","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-webhooks.gif","wsEvents":["SITE_CONFIG_CHANGED"]},{"id":"api-key-created","title":"API Key Created","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-created.gif","wsEvents":["API_KEY_CREATED"]},{"id":"api-key-updated","title":"API Key Updated","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-updated.gif","wsEvents":["API_KEY_UPDATED"]},{"id":"api-key-revoked","title":"API Key Revoked","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-revoked.gif","wsEvents":["API_KEY_REVOKED"]},{"id":"events-firehose","title":"Events Firehose","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-events-firehose.gif","wsEvents":["EVENTS_FIREHOSE"]}];
     const gifsDir = "gifs";
 
     // ─── Filter Logic ─────────────────────────────
