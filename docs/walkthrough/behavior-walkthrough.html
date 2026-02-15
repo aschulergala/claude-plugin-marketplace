@@ -663,7 +663,7 @@
   <nav class="sidebar">
     <div class="sidebar__header">
       <div class="sidebar__title">Behavior Walkthrough</div>
-      <div class="sidebar__subtitle">73/79 behaviors captured &mdash; 2026-02-15</div>
+      <div class="sidebar__subtitle">77/85 behaviors captured &mdash; 2026-02-15</div>
     </div>
     
         <div class="sidebar__group" data-phase="trading">
@@ -683,19 +683,20 @@
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">💬</span>
             <span class="sidebar__group-label">Comments</span>
-            <span class="sidebar__group-count">4/4</span>
+            <span class="sidebar__group-count">5/5</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-post-comment" data-phase="comments">Post Comment</a>
 <a class="sidebar__item " href="#behavior-delete-comment" data-phase="comments">Delete Comment</a>
 <a class="sidebar__item " href="#behavior-react-to-comment" data-phase="comments">React to Comment</a>
-<a class="sidebar__item " href="#behavior-remove-comment-reaction" data-phase="comments">Remove Comment Reaction</a></div>
+<a class="sidebar__item " href="#behavior-remove-comment-reaction" data-phase="comments">Remove Comment Reaction</a>
+<a class="sidebar__item " href="#behavior-comment-edited" data-phase="comments">Comment Edited</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="chat">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">📨</span>
             <span class="sidebar__group-label">Chat</span>
-            <span class="sidebar__group-count">7/7</span>
+            <span class="sidebar__group-count">8/9</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-send-chat" data-phase="chat">Send Chat Message</a>
 <a class="sidebar__item " href="#behavior-delete-chat" data-phase="chat">Delete Chat Message</a>
@@ -703,14 +704,16 @@
 <a class="sidebar__item " href="#behavior-unpin-chat" data-phase="chat">Unpin Chat Message</a>
 <a class="sidebar__item " href="#behavior-disable-chat" data-phase="chat">Disable Chat</a>
 <a class="sidebar__item " href="#behavior-enable-chat" data-phase="chat">Enable Chat</a>
-<a class="sidebar__item " href="#behavior-react-to-chat" data-phase="chat">React to Chat Message</a></div>
+<a class="sidebar__item " href="#behavior-react-to-chat" data-phase="chat">React to Chat Message</a>
+<a class="sidebar__item " href="#behavior-chat-message-edited" data-phase="chat">Chat Message Edited</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-stream-reaction" data-phase="chat">Stream Reaction (Ephemeral)</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="streaming">
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🎥</span>
             <span class="sidebar__group-label">Streaming</span>
-            <span class="sidebar__group-count">10/13</span>
+            <span class="sidebar__group-count">12/13</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-disable-stream" data-phase="streaming">Disable Streaming</a>
 <a class="sidebar__item " href="#behavior-enable-stream" data-phase="streaming">Enable Streaming</a>
@@ -720,8 +723,8 @@
 <a class="sidebar__item " href="#behavior-recording-ready" data-phase="streaming">Recording Ready</a>
 <a class="sidebar__item " href="#behavior-stream-credentials" data-phase="streaming">Stream Credentials</a>
 <a class="sidebar__item " href="#behavior-stream-active-indicator" data-phase="streaming">Stream Active Indicator</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-recordings-count-updated" data-phase="streaming">Recordings Count Updated</a>
-<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-download-ready" data-phase="streaming">Recording Download Ready</a>
+<a class="sidebar__item " href="#behavior-recordings-count-updated" data-phase="streaming">Recordings Count Updated</a>
+<a class="sidebar__item " href="#behavior-download-ready" data-phase="streaming">Recording Download Ready</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-simulcast-status" data-phase="streaming">Simulcast Status Update</a>
 <a class="sidebar__item " href="#behavior-stream-countdown-updated" data-phase="streaming">Stream Countdown Updated</a>
 <a class="sidebar__item " href="#behavior-stream-language-updated" data-phase="streaming">Stream Language Updated</a></div>
@@ -793,14 +796,16 @@
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">🏷</span>
             <span class="sidebar__group-label">Pool Metadata</span>
-            <span class="sidebar__group-count">5/6</span>
+            <span class="sidebar__group-count">5/8</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-update-token-description" data-phase="pool-metadata">Update Token Description</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-update-token-image" data-phase="pool-metadata">Update Token Image</a>
 <a class="sidebar__item " href="#behavior-update-token-links" data-phase="pool-metadata">Update Token Links</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-pool-social-links-updated" data-phase="pool-metadata">Pool Social Links Updated</a>
 <a class="sidebar__item " href="#behavior-token-config-updated" data-phase="pool-metadata">Token Config Updated (Global Feed)</a>
 <a class="sidebar__item " href="#behavior-holder-count-updated" data-phase="pool-metadata">Holder Count Updated</a>
-<a class="sidebar__item " href="#behavior-pool-badge-assigned" data-phase="pool-metadata">Pool Badge Assigned</a></div>
+<a class="sidebar__item " href="#behavior-pool-badge-assigned" data-phase="pool-metadata">Pool Badge Assigned</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-pool-badge-assigned-ws" data-phase="pool-metadata">Pool Badge Assigned (WS Admin)</a></div>
         </div>
 
         <div class="sidebar__group" data-phase="pool-lifecycle">
@@ -816,11 +821,12 @@
           <div class="sidebar__group-header" onclick="this.parentElement.classList.toggle('collapsed')">
             <span class="sidebar__group-icon">👤</span>
             <span class="sidebar__group-label">User Events</span>
-            <span class="sidebar__group-count">4/5</span>
+            <span class="sidebar__group-count">4/6</span>
           </div>
           <div class="sidebar__group-items"><a class="sidebar__item " href="#behavior-user-typing-indicator" data-phase="user-events">User Typing Indicator</a>
 <a class="sidebar__item " href="#behavior-balance-updated" data-phase="user-events">Balance Updated</a>
 <a class="sidebar__item " href="#behavior-user-profile-updated" data-phase="user-events">User Profile Updated</a>
+<a class="sidebar__item sidebar__item--uncaptured" href="#behavior-holder-count-updated-ws" data-phase="user-events">Holder Count Updated (WS Admin)</a>
 <a class="sidebar__item sidebar__item--uncaptured" href="#behavior-wallet-connect" data-phase="user-events">Connect Wallet</a>
 <a class="sidebar__item " href="#behavior-wallet-disconnect" data-phase="user-events">Disconnect Wallet</a></div>
         </div>
@@ -858,12 +864,12 @@
     
     <div class="stats-bar">
       <div class="stats__overall">
-        <div class="stats__overall-number">73<span class="stats__overall-slash">/</span>79</div>
-        <div class="stats__overall-label">GIFs Captured (92%)</div>
-        <div class="stats__overall-bar"><div class="stats__overall-bar-fill" style="width: 92%"></div></div>
+        <div class="stats__overall-number">77<span class="stats__overall-slash">/</span>85</div>
+        <div class="stats__overall-label">GIFs Captured (91%)</div>
+        <div class="stats__overall-bar"><div class="stats__overall-bar-fill" style="width: 91%"></div></div>
         <div class="stats__status-breakdown"><span class="stats__status-chip" style="color: #ef4444">&#x26A0; Destructive / Irreversible: 1</span>
-<span class="stats__status-chip" style="color: #f59e0b">&#x23F3; Pending Capture: 2</span>
-<span class="stats__status-chip" style="color: #06b6d4">&#x2601; External Service: 1</span></div>
+<span class="stats__status-chip" style="color: #06b6d4">&#x2601; External Service: 2</span>
+<span class="stats__status-chip" style="color: #f59e0b">&#x23F3; Pending Capture: 3</span></div>
       </div>
       <div class="stats__phases"><div class="stats__phase">
         <span class="stats__phase-label">💰 Trading</span>
@@ -873,17 +879,17 @@
 <div class="stats__phase">
         <span class="stats__phase-label">💬 Comments</span>
         <div class="stats__bar"><div class="stats__bar-fill" style="width: 100%; background: #3b82f6"></div></div>
-        <span class="stats__phase-count">4/4</span>
+        <span class="stats__phase-count">5/5</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">📨 Chat</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 100%; background: #8b5cf6"></div></div>
-        <span class="stats__phase-count">7/7</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 89%; background: #8b5cf6"></div></div>
+        <span class="stats__phase-count">8/9</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🎥 Streaming</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 77%; background: #ef4444"></div></div>
-        <span class="stats__phase-count">10/13</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 92%; background: #ef4444"></div></div>
+        <span class="stats__phase-count">12/13</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🚫 Bans &amp; Moderation</span>
@@ -907,8 +913,8 @@
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🏷 Pool Metadata</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 83%; background: #f97316"></div></div>
-        <span class="stats__phase-count">5/6</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 63%; background: #f97316"></div></div>
+        <span class="stats__phase-count">5/8</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">🚀 Pool Lifecycle</span>
@@ -917,8 +923,8 @@
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">👤 User Events</span>
-        <div class="stats__bar"><div class="stats__bar-fill" style="width: 80%; background: #06b6d4"></div></div>
-        <span class="stats__phase-count">4/5</span>
+        <div class="stats__bar"><div class="stats__bar-fill" style="width: 67%; background: #06b6d4"></div></div>
+        <span class="stats__phase-count">4/6</span>
       </div>
 <div class="stats__phase">
         <span class="stats__phase-label">⚙ Site Config</span>
@@ -978,10 +984,11 @@
 <button class="filter-btn filter-btn--ws" data-filter-ws="BALANCE_UPDATED">BALANCE_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="BAN_CREATED">BAN_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="BAN_REMOVED">BAN_REMOVED</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="CHAT_MESSAGE">CHAT_MESSAGE</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CHAT_STATUS_CHANGED">CHAT_STATUS_CHANGED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="COMMENTS_GLOBAL_STATUS">COMMENTS_GLOBAL_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="COMMENT_CREATED">COMMENT_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="COMMENT_DELETED">COMMENT_DELETED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="COMMENT_UPDATED">COMMENT_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONNECTION_ESTABLISHED">CONNECTION_ESTABLISHED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONTENT_FLAGGED">CONTENT_FLAGGED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="CONTENT_REACTION_ADDED">CONTENT_REACTION_ADDED</button>
@@ -990,9 +997,6 @@
 <button class="filter-btn filter-btn--ws" data-filter-ws="EVENTS_FIREHOSE">EVENTS_FIREHOSE</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="FLAG_RESOLVED">FLAG_RESOLVED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="HOLDER_COUNT_UPDATED">HOLDER_COUNT_UPDATED</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_DELETED">MESSAGE_DELETED</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_PINNED">MESSAGE_PINNED</button>
-<button class="filter-btn filter-btn--ws" data-filter-ws="MESSAGE_UNPINNED">MESSAGE_UNPINNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_ADDED">MODERATOR_ADDED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_INVITE_CREATED">MODERATOR_INVITE_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="MODERATOR_REMOVED">MODERATOR_REMOVED</button>
@@ -1002,15 +1006,24 @@
 <button class="filter-btn filter-btn--ws" data-filter-ws="POOL_BADGE_ASSIGNED">POOL_BADGE_ASSIGNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="POOL_CREATED">POOL_CREATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="POOL_METADATA_UPDATED">POOL_METADATA_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="POOL_SOCIAL_LINKS_UPDATED">POOL_SOCIAL_LINKS_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="PRICE_UPDATE">PRICE_UPDATE</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="RECORDINGS_COUNT_UPDATED">RECORDINGS_COUNT_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="RECORDING_STATUS">RECORDING_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="SIMULCAST_STATUS">SIMULCAST_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="SITE_CONFIG_CHANGED">SITE_CONFIG_CHANGED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STATS_UPDATED">STATS_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_DELETED">STREAM_CHAT_DELETED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_GLOBAL_STATUS">STREAM_CHAT_GLOBAL_STATUS</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_MESSAGE">STREAM_CHAT_MESSAGE</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_PINNED">STREAM_CHAT_PINNED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_UNPINNED">STREAM_CHAT_UNPINNED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CHAT_UPDATED">STREAM_CHAT_UPDATED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_CONTROL_STATUS_CHANGED">STREAM_CONTROL_STATUS_CHANGED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_COUNTDOWN_UPDATED">STREAM_COUNTDOWN_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_GLOBAL_STATUS">STREAM_GLOBAL_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_LANGUAGE_UPDATED">STREAM_LANGUAGE_UPDATED</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_REACTION">STREAM_REACTION</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="STREAM_STATUS">STREAM_STATUS</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_BANNED">TOKEN_BANNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="TOKEN_CONFIG_UPDATED">TOKEN_CONFIG_UPDATED</button>
@@ -1023,6 +1036,7 @@
 <button class="filter-btn filter-btn--ws" data-filter-ws="USER_TYPING">USER_TYPING</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="USER_UNBANNED">USER_UNBANNED</button>
 <button class="filter-btn filter-btn--ws" data-filter-ws="VIEWER_COUNT">VIEWER_COUNT</button>
+<button class="filter-btn filter-btn--ws" data-filter-ws="WEBHOOKS_GLOBAL_STATUS">WEBHOOKS_GLOBAL_STATUS</button>
         </div>
       </div>
       <div class="filter-section">
@@ -1572,20 +1586,81 @@
       </div>
     </article>
 
-    <article class="card" id="behavior-send-chat"
-             data-phase="chat"
+    <article class="card" id="behavior-comment-edited"
+             data-phase="comments"
              data-captured="true"
-             data-capture-status="captured"
-             data-ws-events="CHAT_MESSAGE"
+             data-capture-status="pending"
+             data-ws-events="COMMENT_UPDATED"
              data-index="9">
       <div class="card__gif" onclick="openLightbox(9)" title="Click to view fullscreen">
-         <img src="gifs/sweep-05-send-chat.gif" alt="Send Chat Message" loading="lazy" />
+         <img src="gifs/behavior-comment-edited.gif" alt="Comment Edited" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
             <span class="card__number">10</span>
+            <h3 class="card__title">Comment Edited</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #3b82f6">💬 Comments</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Edit an existing comment and see the text update in real-time for all viewers.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time comment edit update
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">COMMENT_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (2 tabs)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Viewer)</span>
+       <span class="tab-setup__route">/t/{TOKEN}/comments</span>
+       <span class="tab-setup__desc">Watch comment text update in-place</span>
+     </div>
+<div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Editor)</span>
+       <span class="tab-setup__route">/t/{TOKEN}/comments</span>
+       <span class="tab-setup__desc">Edit comment via API</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Edit comment via API with bypass auth</div>
+            
+            <code class="trigger-api">PATCH /v1/tokens/:tokenName/comments/:commentId</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Comment text updates in-place for all viewers without page reload
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires bypass auth to post initial comment, then API call to edit. COMMENT_UPDATED event fires to token room.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-send-chat"
+             data-phase="chat"
+             data-captured="true"
+             data-capture-status="captured"
+             data-ws-events="STREAM_CHAT_MESSAGE"
+             data-index="10">
+      <div class="card__gif" onclick="openLightbox(10)" title="Click to view fullscreen">
+         <img src="gifs/sweep-05-send-chat.gif" alt="Send Chat Message" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">11</span>
             <h3 class="card__title">Send Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1601,7 +1676,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">CHAT_MESSAGE</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_MESSAGE</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
         </div>
         <details class="card__details">
@@ -1637,16 +1712,16 @@
              data-phase="chat"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="MESSAGE_DELETED"
-             data-index="10">
-      <div class="card__gif" onclick="openLightbox(10)" title="Click to view fullscreen">
+             data-ws-events="STREAM_CHAT_DELETED"
+             data-index="11">
+      <div class="card__gif" onclick="openLightbox(11)" title="Click to view fullscreen">
          <img src="gifs/sweep-06-delete-chat.gif" alt="Delete Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">11</span>
+            <span class="card__number">12</span>
             <h3 class="card__title">Delete Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1662,7 +1737,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">MESSAGE_DELETED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_DELETED</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
         </div>
         <details class="card__details">
@@ -1698,16 +1773,16 @@
              data-phase="chat"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="MESSAGE_PINNED"
-             data-index="11">
-      <div class="card__gif" onclick="openLightbox(11)" title="Click to view fullscreen">
+             data-ws-events="STREAM_CHAT_PINNED"
+             data-index="12">
+      <div class="card__gif" onclick="openLightbox(12)" title="Click to view fullscreen">
          <img src="gifs/sweep-07-pin-chat.gif" alt="Pin Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">12</span>
+            <span class="card__number">13</span>
             <h3 class="card__title">Pin Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1723,7 +1798,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">MESSAGE_PINNED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_PINNED</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
         </div>
         <details class="card__details">
@@ -1759,16 +1834,16 @@
              data-phase="chat"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="MESSAGE_UNPINNED"
-             data-index="12">
-      <div class="card__gif" onclick="openLightbox(12)" title="Click to view fullscreen">
+             data-ws-events="STREAM_CHAT_UNPINNED"
+             data-index="13">
+      <div class="card__gif" onclick="openLightbox(13)" title="Click to view fullscreen">
          <img src="gifs/sweep-08-unpin-chat.gif" alt="Unpin Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">13</span>
+            <span class="card__number">14</span>
             <h3 class="card__title">Unpin Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1784,7 +1859,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">MESSAGE_UNPINNED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_UNPINNED</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
         </div>
         <details class="card__details">
@@ -1821,15 +1896,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="CHAT_STATUS_CHANGED"
-             data-index="13">
-      <div class="card__gif" onclick="openLightbox(13)" title="Click to view fullscreen">
+             data-index="14">
+      <div class="card__gif" onclick="openLightbox(14)" title="Click to view fullscreen">
          <img src="gifs/sweep-09-disable-chat.gif" alt="Disable Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">14</span>
+            <span class="card__number">15</span>
             <h3 class="card__title">Disable Chat</h3>
           </div>
           <div class="card__badges">
@@ -1882,15 +1957,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="CHAT_STATUS_CHANGED"
-             data-index="14">
-      <div class="card__gif" onclick="openLightbox(14)" title="Click to view fullscreen">
+             data-index="15">
+      <div class="card__gif" onclick="openLightbox(15)" title="Click to view fullscreen">
          <img src="gifs/sweep-10-enable-chat.gif" alt="Enable Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">15</span>
+            <span class="card__number">16</span>
             <h3 class="card__title">Enable Chat</h3>
           </div>
           <div class="card__badges">
@@ -1943,15 +2018,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="CONTENT_REACTION_ADDED"
-             data-index="15">
-      <div class="card__gif" onclick="openLightbox(15)" title="Click to view fullscreen">
+             data-index="16">
+      <div class="card__gif" onclick="openLightbox(16)" title="Click to view fullscreen">
          <img src="gifs/behavior-react-to-chat.gif" alt="React to Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">16</span>
+            <span class="card__number">17</span>
             <h3 class="card__title">React to Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -1999,20 +2074,145 @@
       </div>
     </article>
 
+    <article class="card" id="behavior-chat-message-edited"
+             data-phase="chat"
+             data-captured="true"
+             data-capture-status="pending"
+             data-ws-events="STREAM_CHAT_UPDATED"
+             data-index="17">
+      <div class="card__gif" onclick="openLightbox(17)" title="Click to view fullscreen">
+         <img src="gifs/behavior-chat-message-edited.gif" alt="Chat Message Edited" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">18</span>
+            <h3 class="card__title">Chat Message Edited</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #8b5cf6">📨 Chat</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--captured">Captured</span>
+          </div>
+        </div>
+        <p class="card__description">Edit an existing chat message and see the text update in real-time for all viewers.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time chat message edit update
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (2 tabs)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Viewer)</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch chat message text update in-place</span>
+     </div>
+<div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Editor)</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Edit message via context menu or API</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Edit chat message via API with bypass auth</div>
+            
+            <code class="trigger-api">PATCH /v1/tokens/:tokenName/chat/:messageId</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Chat message text updates in-place for all viewers without page reload
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires bypass auth to send initial message, then API call to edit. STREAM_CHAT_UPDATED event fires to token room.</div>
+        
+      </div>
+    </article>
+
+    <article class="card" id="behavior-stream-reaction"
+             data-phase="chat"
+             data-captured="false"
+             data-capture-status="external-service"
+             data-ws-events="STREAM_REACTION"
+             data-index="18">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">&#x2601;</div>
+           <div class="placeholder-text" style="color: #06b6d4">External Service</div>
+           <div class="placeholder-filename">behavior-stream-reaction.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">19</span>
+            <h3 class="card__title">Stream Reaction (Ephemeral)</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #8b5cf6">📨 Chat</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #22c55e">ui-click</span>
+            <span class="badge badge--uncaptured" style="--badge-color: #06b6d4">External Service</span>
+          </div>
+        </div>
+        <p class="card__description">Send an ephemeral stream reaction (floating emoji) that broadcasts to all viewers without persisting.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time ephemeral reaction animation in stream player
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_REACTION</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (2 tabs)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Viewer)</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch floating emoji reaction appear over stream</span>
+     </div>
+<div class="tab-setup">
+       <span class="tab-setup__label">Token Page (Sender)</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Click reaction button during live stream</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Click reaction emoji during live stream</div>
+            
+            <code class="trigger-api">WS emit: SEND_STREAM_REACTION</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Floating emoji animation appears over stream player for all viewers, then fades out
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Requires active Mux live stream for reaction UI to appear. Ephemeral WS event (not persisted). Client-to-server via SEND_STREAM_REACTION, server broadcasts STREAM_REACTION to room.</div>
+        
+      </div>
+    </article>
+
     <article class="card" id="behavior-disable-stream"
              data-phase="streaming"
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_CONTROL_STATUS_CHANGED"
-             data-index="16">
-      <div class="card__gif" onclick="openLightbox(16)" title="Click to view fullscreen">
+             data-index="19">
+      <div class="card__gif" onclick="openLightbox(19)" title="Click to view fullscreen">
          <img src="gifs/sweep-11-disable-stream.gif" alt="Disable Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">17</span>
+            <span class="card__number">20</span>
             <h3 class="card__title">Disable Streaming</h3>
           </div>
           <div class="card__badges">
@@ -2065,15 +2265,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_CONTROL_STATUS_CHANGED"
-             data-index="17">
-      <div class="card__gif" onclick="openLightbox(17)" title="Click to view fullscreen">
+             data-index="20">
+      <div class="card__gif" onclick="openLightbox(20)" title="Click to view fullscreen">
          <img src="gifs/sweep-12-enable-stream.gif" alt="Enable Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">18</span>
+            <span class="card__number">21</span>
             <h3 class="card__title">Enable Streaming</h3>
           </div>
           <div class="card__badges">
@@ -2126,15 +2326,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_STATUS"
-             data-index="18">
-      <div class="card__gif" onclick="openLightbox(18)" title="Click to view fullscreen">
+             data-index="21">
+      <div class="card__gif" onclick="openLightbox(21)" title="Click to view fullscreen">
          <img src="gifs/behavior-start-stream.gif" alt="Start Live Stream" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">19</span>
+            <span class="card__number">22</span>
             <h3 class="card__title">Start Live Stream</h3>
           </div>
           <div class="card__badges">
@@ -2187,15 +2387,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_STATUS"
-             data-index="19">
-      <div class="card__gif" onclick="openLightbox(19)" title="Click to view fullscreen">
+             data-index="22">
+      <div class="card__gif" onclick="openLightbox(22)" title="Click to view fullscreen">
          <img src="gifs/behavior-stop-stream.gif" alt="Stop Live Stream" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">20</span>
+            <span class="card__number">23</span>
             <h3 class="card__title">Stop Live Stream</h3>
           </div>
           <div class="card__badges">
@@ -2248,15 +2448,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="VIEWER_COUNT"
-             data-index="20">
-      <div class="card__gif" onclick="openLightbox(20)" title="Click to view fullscreen">
+             data-index="23">
+      <div class="card__gif" onclick="openLightbox(23)" title="Click to view fullscreen">
          <img src="gifs/behavior-viewer-count.gif" alt="Viewer Count Update" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">21</span>
+            <span class="card__number">24</span>
             <h3 class="card__title">Viewer Count Update</h3>
           </div>
           <div class="card__badges">
@@ -2304,15 +2504,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="RECORDING_STATUS"
-             data-index="21">
-      <div class="card__gif" onclick="openLightbox(21)" title="Click to view fullscreen">
+             data-index="24">
+      <div class="card__gif" onclick="openLightbox(24)" title="Click to view fullscreen">
          <img src="gifs/behavior-recording-ready.gif" alt="Recording Ready" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">22</span>
+            <span class="card__number">25</span>
             <h3 class="card__title">Recording Ready</h3>
           </div>
           <div class="card__badges">
@@ -2360,15 +2560,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events=""
-             data-index="22">
-      <div class="card__gif" onclick="openLightbox(22)" title="Click to view fullscreen">
+             data-index="25">
+      <div class="card__gif" onclick="openLightbox(25)" title="Click to view fullscreen">
          <img src="gifs/behavior-stream-credentials.gif" alt="Stream Credentials" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">23</span>
+            <span class="card__number">26</span>
             <h3 class="card__title">Stream Credentials</h3>
           </div>
           <div class="card__badges">
@@ -2416,15 +2616,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_STATUS"
-             data-index="23">
-      <div class="card__gif" onclick="openLightbox(23)" title="Click to view fullscreen">
+             data-index="26">
+      <div class="card__gif" onclick="openLightbox(26)" title="Click to view fullscreen">
          <img src="gifs/behavior-stream-active-indicator.gif" alt="Stream Active Indicator" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">24</span>
+            <span class="card__number">27</span>
             <h3 class="card__title">Stream Active Indicator</h3>
           </div>
           <div class="card__badges">
@@ -2469,28 +2669,25 @@
 
     <article class="card" id="behavior-recordings-count-updated"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-capture-status="pending"
              data-ws-events="RECORDINGS_COUNT_UPDATED"
-             data-index="24">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">&#x23F3;</div>
-           <div class="placeholder-text" style="color: #f59e0b">Pending Capture</div>
-           <div class="placeholder-filename">behavior-recordings-count-updated.gif</div>
-         </div>
+             data-index="27">
+      <div class="card__gif" onclick="openLightbox(27)" title="Click to view fullscreen">
+         <img src="gifs/behavior-recordings-count-updated.gif" alt="Recordings Count Updated" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">25</span>
+            <span class="card__number">28</span>
             <h3 class="card__title">Recordings Count Updated</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #ef4444">backend-event</span>
-            <span class="badge badge--uncaptured" style="--badge-color: #f59e0b">Pending Capture</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">After a stream ends and Mux processes the recording, the recordings count updates in real-time.</p>
@@ -2528,28 +2725,25 @@
 
     <article class="card" id="behavior-download-ready"
              data-phase="streaming"
-             data-captured="false"
+             data-captured="true"
              data-capture-status="pending"
              data-ws-events="DOWNLOAD_READY"
-             data-index="25">
-      <div class="card__gif card__gif--missing">
-         <div class="card__gif-placeholder">
-           <div class="placeholder-icon">&#x23F3;</div>
-           <div class="placeholder-text" style="color: #f59e0b">Pending Capture</div>
-           <div class="placeholder-filename">behavior-download-ready.gif</div>
-         </div>
+             data-index="28">
+      <div class="card__gif" onclick="openLightbox(28)" title="Click to view fullscreen">
+         <img src="gifs/behavior-download-ready.gif" alt="Recording Download Ready" loading="lazy" />
+         <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">26</span>
+            <span class="card__number">29</span>
             <h3 class="card__title">Recording Download Ready</h3>
           </div>
           <div class="card__badges">
             <span class="badge badge--phase" style="--badge-color: #ef4444">🎥 Streaming</span>
             
             <span class="badge badge--trigger" style="--badge-color: #3b82f6">sdk-script</span>
-            <span class="badge badge--uncaptured" style="--badge-color: #f59e0b">Pending Capture</span>
+            <span class="badge badge--captured">Captured</span>
           </div>
         </div>
         <p class="card__description">Initiate a recording download and observe the download URL becoming available.</p>
@@ -2590,7 +2784,7 @@
              data-captured="false"
              data-capture-status="blocked"
              data-ws-events="SIMULCAST_STATUS"
-             data-index="26">
+             data-index="29">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">&#x23F3;</div>
@@ -2601,7 +2795,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">27</span>
+            <span class="card__number">30</span>
             <h3 class="card__title">Simulcast Status Update</h3>
           </div>
           <div class="card__badges">
@@ -2649,15 +2843,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_COUNTDOWN_UPDATED"
-             data-index="27">
-      <div class="card__gif" onclick="openLightbox(27)" title="Click to view fullscreen">
+             data-index="30">
+      <div class="card__gif" onclick="openLightbox(30)" title="Click to view fullscreen">
          <img src="gifs/behavior-stream-countdown-updated.gif" alt="Stream Countdown Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">28</span>
+            <span class="card__number">31</span>
             <h3 class="card__title">Stream Countdown Updated</h3>
           </div>
           <div class="card__badges">
@@ -2705,15 +2899,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="STREAM_LANGUAGE_UPDATED"
-             data-index="28">
-      <div class="card__gif" onclick="openLightbox(28)" title="Click to view fullscreen">
+             data-index="31">
+      <div class="card__gif" onclick="openLightbox(31)" title="Click to view fullscreen">
          <img src="gifs/behavior-stream-language-updated.gif" alt="Stream Language Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">29</span>
+            <span class="card__number">32</span>
             <h3 class="card__title">Stream Language Updated</h3>
           </div>
           <div class="card__badges">
@@ -2761,15 +2955,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="BAN_CREATED"
-             data-index="29">
-      <div class="card__gif" onclick="openLightbox(29)" title="Click to view fullscreen">
+             data-index="32">
+      <div class="card__gif" onclick="openLightbox(32)" title="Click to view fullscreen">
          <img src="gifs/sweep-15-create-ban.gif" alt="Create Per-Token Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">30</span>
+            <span class="card__number">33</span>
             <h3 class="card__title">Create Per-Token Ban</h3>
           </div>
           <div class="card__badges">
@@ -2822,15 +3016,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="BAN_REMOVED"
-             data-index="30">
-      <div class="card__gif" onclick="openLightbox(30)" title="Click to view fullscreen">
+             data-index="33">
+      <div class="card__gif" onclick="openLightbox(33)" title="Click to view fullscreen">
          <img src="gifs/sweep-16-remove-ban.gif" alt="Remove Per-Token Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">31</span>
+            <span class="card__number">34</span>
             <h3 class="card__title">Remove Per-Token Ban</h3>
           </div>
           <div class="card__badges">
@@ -2878,15 +3072,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="TOKEN_BANNED"
-             data-index="31">
-      <div class="card__gif" onclick="openLightbox(31)" title="Click to view fullscreen">
+             data-index="34">
+      <div class="card__gif" onclick="openLightbox(34)" title="Click to view fullscreen">
          <img src="gifs/sweep-17-delist-token.gif" alt="Delist Token" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">32</span>
+            <span class="card__number">35</span>
             <h3 class="card__title">Delist Token</h3>
           </div>
           <div class="card__badges">
@@ -2939,15 +3133,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="TOKEN_UNBANNED"
-             data-index="32">
-      <div class="card__gif" onclick="openLightbox(32)" title="Click to view fullscreen">
+             data-index="35">
+      <div class="card__gif" onclick="openLightbox(35)" title="Click to view fullscreen">
          <img src="gifs/sweep-18-relist-token.gif" alt="Relist Token" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">33</span>
+            <span class="card__number">36</span>
             <h3 class="card__title">Relist Token</h3>
           </div>
           <div class="card__badges">
@@ -3000,15 +3194,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="USER_BANNED"
-             data-index="33">
-      <div class="card__gif" onclick="openLightbox(33)" title="Click to view fullscreen">
+             data-index="36">
+      <div class="card__gif" onclick="openLightbox(36)" title="Click to view fullscreen">
          <img src="gifs/sweep-19-create-global-ban.gif" alt="Create Global Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">34</span>
+            <span class="card__number">37</span>
             <h3 class="card__title">Create Global Ban</h3>
           </div>
           <div class="card__badges">
@@ -3056,15 +3250,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="USER_UNBANNED"
-             data-index="34">
-      <div class="card__gif" onclick="openLightbox(34)" title="Click to view fullscreen">
+             data-index="37">
+      <div class="card__gif" onclick="openLightbox(37)" title="Click to view fullscreen">
          <img src="gifs/sweep-20-remove-global-ban.gif" alt="Remove Global Ban" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">35</span>
+            <span class="card__number">38</span>
             <h3 class="card__title">Remove Global Ban</h3>
           </div>
           <div class="card__badges">
@@ -3112,15 +3306,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="CONTENT_FLAGGED"
-             data-index="35">
-      <div class="card__gif" onclick="openLightbox(35)" title="Click to view fullscreen">
+             data-index="38">
+      <div class="card__gif" onclick="openLightbox(38)" title="Click to view fullscreen">
          <img src="gifs/sweep-13-create-flag.gif" alt="Create Content Flag" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">36</span>
+            <span class="card__number">39</span>
             <h3 class="card__title">Create Content Flag</h3>
           </div>
           <div class="card__badges">
@@ -3173,15 +3367,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="FLAG_RESOLVED"
-             data-index="36">
-      <div class="card__gif" onclick="openLightbox(36)" title="Click to view fullscreen">
+             data-index="39">
+      <div class="card__gif" onclick="openLightbox(39)" title="Click to view fullscreen">
          <img src="gifs/sweep-14-resolve-flag.gif" alt="Resolve Content Flag" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">37</span>
+            <span class="card__number">40</span>
             <h3 class="card__title">Resolve Content Flag</h3>
           </div>
           <div class="card__badges">
@@ -3229,15 +3423,15 @@
              data-captured="true"
              data-capture-status="blocked"
              data-ws-events="AI_MODERATION_COMPLETE"
-             data-index="37">
-      <div class="card__gif" onclick="openLightbox(37)" title="Click to view fullscreen">
+             data-index="40">
+      <div class="card__gif" onclick="openLightbox(40)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-flag-auto.gif" alt="AI Auto-Analyze Flagged Content" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">38</span>
+            <span class="card__number">41</span>
             <h3 class="card__title">AI Auto-Analyze Flagged Content</h3>
           </div>
           <div class="card__badges">
@@ -3285,15 +3479,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="AI_MODERATION_GLOBAL_STATUS"
-             data-index="38">
-      <div class="card__gif" onclick="openLightbox(38)" title="Click to view fullscreen">
+             data-index="41">
+      <div class="card__gif" onclick="openLightbox(41)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-moderation-config.gif" alt="AI Moderation Config Toggle" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">39</span>
+            <span class="card__number">42</span>
             <h3 class="card__title">AI Moderation Config Toggle</h3>
           </div>
           <div class="card__badges">
@@ -3341,15 +3535,15 @@
              data-captured="true"
              data-capture-status="blocked"
              data-ws-events="AI_MODERATION_COMPLETE"
-             data-index="39">
-      <div class="card__gif" onclick="openLightbox(39)" title="Click to view fullscreen">
+             data-index="42">
+      <div class="card__gif" onclick="openLightbox(42)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-verdict-realtime.gif" alt="AI Verdict Real-Time Update" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">40</span>
+            <span class="card__number">43</span>
             <h3 class="card__title">AI Verdict Real-Time Update</h3>
           </div>
           <div class="card__badges">
@@ -3402,15 +3596,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events=""
-             data-index="40">
-      <div class="card__gif" onclick="openLightbox(40)" title="Click to view fullscreen">
+             data-index="43">
+      <div class="card__gif" onclick="openLightbox(43)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-verdict-detail-modal.gif" alt="AI Verdict Detail Modal" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">41</span>
+            <span class="card__number">44</span>
             <h3 class="card__title">AI Verdict Detail Modal</h3>
           </div>
           <div class="card__badges">
@@ -3458,15 +3652,15 @@
              data-captured="true"
              data-capture-status="internal-event"
              data-ws-events="AI_MODERATION_FAILED"
-             data-index="41">
-      <div class="card__gif" onclick="openLightbox(41)" title="Click to view fullscreen">
+             data-index="44">
+      <div class="card__gif" onclick="openLightbox(44)" title="Click to view fullscreen">
          <img src="gifs/behavior-ai-moderation-failed.gif" alt="AI Moderation Failed" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">42</span>
+            <span class="card__number">45</span>
             <h3 class="card__title">AI Moderation Failed</h3>
           </div>
           <div class="card__badges">
@@ -3514,15 +3708,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="MODERATOR_ADDED"
-             data-index="42">
-      <div class="card__gif" onclick="openLightbox(42)" title="Click to view fullscreen">
+             data-index="45">
+      <div class="card__gif" onclick="openLightbox(45)" title="Click to view fullscreen">
          <img src="gifs/behavior-add-moderator.gif" alt="Add Moderator" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">43</span>
+            <span class="card__number">46</span>
             <h3 class="card__title">Add Moderator</h3>
           </div>
           <div class="card__badges">
@@ -3570,15 +3764,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="MODERATOR_REMOVED"
-             data-index="43">
-      <div class="card__gif" onclick="openLightbox(43)" title="Click to view fullscreen">
+             data-index="46">
+      <div class="card__gif" onclick="openLightbox(46)" title="Click to view fullscreen">
          <img src="gifs/behavior-remove-moderator.gif" alt="Remove Moderator" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">44</span>
+            <span class="card__number">47</span>
             <h3 class="card__title">Remove Moderator</h3>
           </div>
           <div class="card__badges">
@@ -3626,15 +3820,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="MODERATOR_INVITE_CREATED"
-             data-index="44">
-      <div class="card__gif" onclick="openLightbox(44)" title="Click to view fullscreen">
+             data-index="47">
+      <div class="card__gif" onclick="openLightbox(47)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-invite-created.gif" alt="Create Moderator Invite" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">45</span>
+            <span class="card__number">48</span>
             <h3 class="card__title">Create Moderator Invite</h3>
           </div>
           <div class="card__badges">
@@ -3682,15 +3876,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events=""
-             data-index="45">
-      <div class="card__gif" onclick="openLightbox(45)" title="Click to view fullscreen">
+             data-index="48">
+      <div class="card__gif" onclick="openLightbox(48)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-message-stats.gif" alt="Overseer Message Stats" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">46</span>
+            <span class="card__number">49</span>
             <h3 class="card__title">Overseer Message Stats</h3>
           </div>
           <div class="card__badges">
@@ -3738,15 +3932,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="CONTENT_FLAGGED,FLAG_RESOLVED,BAN_CREATED,TRADE_EXECUTED,STREAM_STATUS"
-             data-index="46">
-      <div class="card__gif" onclick="openLightbox(46)" title="Click to view fullscreen">
+             data-index="49">
+      <div class="card__gif" onclick="openLightbox(49)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-dashboard-live.gif" alt="Overseer Dashboard Live" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">47</span>
+            <span class="card__number">50</span>
             <h3 class="card__title">Overseer Dashboard Live</h3>
           </div>
           <div class="card__badges">
@@ -3798,15 +3992,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="MODERATOR_ROLE_UPDATED"
-             data-index="47">
-      <div class="card__gif" onclick="openLightbox(47)" title="Click to view fullscreen">
+             data-index="50">
+      <div class="card__gif" onclick="openLightbox(50)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-role-updated.gif" alt="Moderator Role Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">48</span>
+            <span class="card__number">51</span>
             <h3 class="card__title">Moderator Role Updated</h3>
           </div>
           <div class="card__badges">
@@ -3854,15 +4048,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="OVERSEER_ADDED"
-             data-index="48">
-      <div class="card__gif" onclick="openLightbox(48)" title="Click to view fullscreen">
+             data-index="51">
+      <div class="card__gif" onclick="openLightbox(51)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-added.gif" alt="Overseer Added" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">49</span>
+            <span class="card__number">52</span>
             <h3 class="card__title">Overseer Added</h3>
           </div>
           <div class="card__badges">
@@ -3910,15 +4104,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="OVERSEER_REMOVED"
-             data-index="49">
-      <div class="card__gif" onclick="openLightbox(49)" title="Click to view fullscreen">
+             data-index="52">
+      <div class="card__gif" onclick="openLightbox(52)" title="Click to view fullscreen">
          <img src="gifs/behavior-overseer-removed.gif" alt="Overseer Removed" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">50</span>
+            <span class="card__number">53</span>
             <h3 class="card__title">Overseer Removed</h3>
           </div>
           <div class="card__badges">
@@ -3964,17 +4158,17 @@
     <article class="card" id="behavior-moderator-delete-comment"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events="COMMENT_DELETED"
-             data-index="50">
-      <div class="card__gif" onclick="openLightbox(50)" title="Click to view fullscreen">
+             data-index="53">
+      <div class="card__gif" onclick="openLightbox(53)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-delete-comment.gif" alt="Moderator Deletes Comment" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">51</span>
+            <span class="card__number">54</span>
             <h3 class="card__title">Moderator Deletes Comment</h3>
           </div>
           <div class="card__badges">
@@ -4025,17 +4219,17 @@
     <article class="card" id="behavior-moderator-ban-from-comments"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events="BAN_CREATED"
-             data-index="51">
-      <div class="card__gif" onclick="openLightbox(51)" title="Click to view fullscreen">
+             data-index="54">
+      <div class="card__gif" onclick="openLightbox(54)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-ban-from-comments.gif" alt="Moderator Bans User from Comments" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">52</span>
+            <span class="card__number">55</span>
             <h3 class="card__title">Moderator Bans User from Comments</h3>
           </div>
           <div class="card__badges">
@@ -4081,17 +4275,17 @@
     <article class="card" id="behavior-moderator-delete-chat"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
-             data-ws-events="MESSAGE_DELETED"
-             data-index="52">
-      <div class="card__gif" onclick="openLightbox(52)" title="Click to view fullscreen">
+             data-capture-status="captured"
+             data-ws-events="STREAM_CHAT_DELETED"
+             data-index="55">
+      <div class="card__gif" onclick="openLightbox(55)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-delete-chat.gif" alt="Moderator Deletes Chat Message" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">53</span>
+            <span class="card__number">56</span>
             <h3 class="card__title">Moderator Deletes Chat Message</h3>
           </div>
           <div class="card__badges">
@@ -4107,7 +4301,7 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">MESSAGE_DELETED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">STREAM_CHAT_DELETED</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
         </div>
         <details class="card__details">
@@ -4142,17 +4336,17 @@
     <article class="card" id="behavior-moderator-ban-from-chat"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events="BAN_CREATED"
-             data-index="53">
-      <div class="card__gif" onclick="openLightbox(53)" title="Click to view fullscreen">
+             data-index="56">
+      <div class="card__gif" onclick="openLightbox(56)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-ban-from-chat.gif" alt="Moderator Bans User from Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">54</span>
+            <span class="card__number">57</span>
             <h3 class="card__title">Moderator Bans User from Chat</h3>
           </div>
           <div class="card__badges">
@@ -4198,17 +4392,17 @@
     <article class="card" id="behavior-studio-role-owner-view"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events=""
-             data-index="54">
-      <div class="card__gif" onclick="openLightbox(54)" title="Click to view fullscreen">
+             data-index="57">
+      <div class="card__gif" onclick="openLightbox(57)" title="Click to view fullscreen">
          <img src="gifs/behavior-studio-role-owner.gif" alt="Studio: Owner View" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">55</span>
+            <span class="card__number">58</span>
             <h3 class="card__title">Studio: Owner View</h3>
           </div>
           <div class="card__badges">
@@ -4254,17 +4448,17 @@
     <article class="card" id="behavior-studio-role-manager-view"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events=""
-             data-index="55">
-      <div class="card__gif" onclick="openLightbox(55)" title="Click to view fullscreen">
+             data-index="58">
+      <div class="card__gif" onclick="openLightbox(58)" title="Click to view fullscreen">
          <img src="gifs/behavior-studio-role-manager.gif" alt="Studio: Manager View" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">56</span>
+            <span class="card__number">59</span>
             <h3 class="card__title">Studio: Manager View</h3>
           </div>
           <div class="card__badges">
@@ -4310,17 +4504,17 @@
     <article class="card" id="behavior-studio-role-techproducer-view"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events=""
-             data-index="56">
-      <div class="card__gif" onclick="openLightbox(56)" title="Click to view fullscreen">
+             data-index="59">
+      <div class="card__gif" onclick="openLightbox(59)" title="Click to view fullscreen">
          <img src="gifs/behavior-studio-role-techproducer.gif" alt="Studio: Technical Producer View" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">57</span>
+            <span class="card__number">60</span>
             <h3 class="card__title">Studio: Technical Producer View</h3>
           </div>
           <div class="card__badges">
@@ -4366,17 +4560,17 @@
     <article class="card" id="behavior-studio-role-moderator-view"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events=""
-             data-index="57">
-      <div class="card__gif" onclick="openLightbox(57)" title="Click to view fullscreen">
+             data-index="60">
+      <div class="card__gif" onclick="openLightbox(60)" title="Click to view fullscreen">
          <img src="gifs/behavior-studio-role-moderator.gif" alt="Studio: Moderator View" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">58</span>
+            <span class="card__number">61</span>
             <h3 class="card__title">Studio: Moderator View</h3>
           </div>
           <div class="card__badges">
@@ -4422,17 +4616,17 @@
     <article class="card" id="behavior-moderator-role-change-access-loss"
              data-phase="moderators"
              data-captured="true"
-             data-capture-status="uncaptured"
+             data-capture-status="captured"
              data-ws-events="MODERATOR_ROLE_UPDATED"
-             data-index="58">
-      <div class="card__gif" onclick="openLightbox(58)" title="Click to view fullscreen">
+             data-index="61">
+      <div class="card__gif" onclick="openLightbox(61)" title="Click to view fullscreen">
          <img src="gifs/behavior-moderator-role-change-access-loss.gif" alt="Moderator Role Removed — Instant Access Loss" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">59</span>
+            <span class="card__number">62</span>
             <h3 class="card__title">Moderator Role Removed — Instant Access Loss</h3>
           </div>
           <div class="card__badges">
@@ -4480,15 +4674,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="POOL_METADATA_UPDATED"
-             data-index="59">
-      <div class="card__gif" onclick="openLightbox(59)" title="Click to view fullscreen">
+             data-index="62">
+      <div class="card__gif" onclick="openLightbox(62)" title="Click to view fullscreen">
          <img src="gifs/behavior-update-description.gif" alt="Update Token Description" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">60</span>
+            <span class="card__number">63</span>
             <h3 class="card__title">Update Token Description</h3>
           </div>
           <div class="card__badges">
@@ -4541,7 +4735,7 @@
              data-captured="false"
              data-capture-status="blocked"
              data-ws-events="POOL_METADATA_UPDATED"
-             data-index="60">
+             data-index="63">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">&#x23F3;</div>
@@ -4552,7 +4746,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">61</span>
+            <span class="card__number">64</span>
             <h3 class="card__title">Update Token Image</h3>
           </div>
           <div class="card__badges">
@@ -4605,15 +4799,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="POOL_METADATA_UPDATED"
-             data-index="61">
-      <div class="card__gif" onclick="openLightbox(61)" title="Click to view fullscreen">
+             data-index="64">
+      <div class="card__gif" onclick="openLightbox(64)" title="Click to view fullscreen">
          <img src="gifs/behavior-update-links.gif" alt="Update Token Links" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">62</span>
+            <span class="card__number">65</span>
             <h3 class="card__title">Update Token Links</h3>
           </div>
           <div class="card__badges">
@@ -4661,20 +4855,84 @@
       </div>
     </article>
 
+    <article class="card" id="behavior-pool-social-links-updated"
+             data-phase="pool-metadata"
+             data-captured="false"
+             data-capture-status="pending"
+             data-ws-events="POOL_SOCIAL_LINKS_UPDATED"
+             data-index="65">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">&#x23F3;</div>
+           <div class="placeholder-text" style="color: #f59e0b">Pending Capture</div>
+           <div class="placeholder-filename">behavior-pool-social-links-updated.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">66</span>
+            <h3 class="card__title">Pool Social Links Updated</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--uncaptured" style="--badge-color: #f59e0b">Pending Capture</span>
+          </div>
+        </div>
+        <p class="card__description">Update token social links (Twitter, Discord, Telegram, website) via dedicated endpoint and observe the POOL_SOCIAL_LINKS_UPDATED event.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time social links update via dedicated endpoint
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">POOL_SOCIAL_LINKS_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (2 tabs)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch social link icons update</span>
+     </div>
+<div class="tab-setup">
+       <span class="tab-setup__label">Studio Settings</span>
+       <span class="tab-setup__route">/studio/{TOKEN}</span>
+       <span class="tab-setup__desc">Edit social links in settings</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Update social links via dedicated endpoint</div>
+            
+            <code class="trigger-api">PUT /v1/tokens/:tokenName/social-links</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Social link icons update on token page without refresh. Separate event from POOL_METADATA_UPDATED.
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Dedicated POOL_SOCIAL_LINKS_UPDATED event separate from POOL_METADATA_UPDATED. Bypass auth as pool owner.</div>
+        
+      </div>
+    </article>
+
     <article class="card" id="behavior-token-config-updated"
              data-phase="pool-metadata"
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="TOKEN_CONFIG_UPDATED"
-             data-index="62">
-      <div class="card__gif" onclick="openLightbox(62)" title="Click to view fullscreen">
+             data-index="66">
+      <div class="card__gif" onclick="openLightbox(66)" title="Click to view fullscreen">
          <img src="gifs/behavior-token-config-updated.gif" alt="Token Config Updated (Global Feed)" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">63</span>
+            <span class="card__number">67</span>
             <h3 class="card__title">Token Config Updated (Global Feed)</h3>
           </div>
           <div class="card__badges">
@@ -4727,15 +4985,15 @@
              data-captured="true"
              data-capture-status="internal-event"
              data-ws-events="HOLDER_COUNT_UPDATED"
-             data-index="63">
-      <div class="card__gif" onclick="openLightbox(63)" title="Click to view fullscreen">
+             data-index="67">
+      <div class="card__gif" onclick="openLightbox(67)" title="Click to view fullscreen">
          <img src="gifs/behavior-holder-count-updated.gif" alt="Holder Count Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">64</span>
+            <span class="card__number">68</span>
             <h3 class="card__title">Holder Count Updated</h3>
           </div>
           <div class="card__badges">
@@ -4783,15 +5041,15 @@
              data-captured="true"
              data-capture-status="internal-event"
              data-ws-events="POOL_BADGE_ASSIGNED"
-             data-index="64">
-      <div class="card__gif" onclick="openLightbox(64)" title="Click to view fullscreen">
+             data-index="68">
+      <div class="card__gif" onclick="openLightbox(68)" title="Click to view fullscreen">
          <img src="gifs/behavior-pool-badge-assigned.gif" alt="Pool Badge Assigned" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">65</span>
+            <span class="card__number">69</span>
             <h3 class="card__title">Pool Badge Assigned</h3>
           </div>
           <div class="card__badges">
@@ -4834,20 +5092,79 @@
       </div>
     </article>
 
+    <article class="card" id="behavior-pool-badge-assigned-ws"
+             data-phase="pool-metadata"
+             data-captured="false"
+             data-capture-status="pending"
+             data-ws-events="POOL_BADGE_ASSIGNED"
+             data-index="69">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">&#x23F3;</div>
+           <div class="placeholder-text" style="color: #f59e0b">Pending Capture</div>
+           <div class="placeholder-filename">behavior-pool-badge-assigned-ws.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">70</span>
+            <h3 class="card__title">Pool Badge Assigned (WS Admin)</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #f97316">🏷 Pool Metadata</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--uncaptured" style="--badge-color: #f59e0b">Pending Capture</span>
+          </div>
+        </div>
+        <p class="card__description">Demonstrate the POOL_BADGE_ASSIGNED event via WS admin endpoint to show a badge appearing on the token page.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time badge assignment demonstration
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">POOL_BADGE_ASSIGNED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch new badge icon appear on token card</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Emit POOL_BADGE_ASSIGNED via WS admin endpoint</div>
+            
+            <code class="trigger-api">POST /v1/websocket</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> New badge icon appears on token card and detail page
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Uses WS admin fake endpoint to demonstrate the event without requiring actual milestone criteria to be met.</div>
+        
+      </div>
+    </article>
+
     <article class="card" id="behavior-token-launched"
              data-phase="pool-lifecycle"
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="POOL_CREATED"
-             data-index="65">
-      <div class="card__gif" onclick="openLightbox(65)" title="Click to view fullscreen">
+             data-index="70">
+      <div class="card__gif" onclick="openLightbox(70)" title="Click to view fullscreen">
          <img src="gifs/behavior-token-launched.gif" alt="Token Launched" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">66</span>
+            <span class="card__number">71</span>
             <h3 class="card__title">Token Launched</h3>
           </div>
           <div class="card__badges">
@@ -4895,15 +5212,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="USER_TYPING"
-             data-index="66">
-      <div class="card__gif" onclick="openLightbox(66)" title="Click to view fullscreen">
+             data-index="71">
+      <div class="card__gif" onclick="openLightbox(71)" title="Click to view fullscreen">
          <img src="gifs/behavior-typing-indicator.gif" alt="User Typing Indicator" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">67</span>
+            <span class="card__number">72</span>
             <h3 class="card__title">User Typing Indicator</h3>
           </div>
           <div class="card__badges">
@@ -4956,15 +5273,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="BALANCE_UPDATED"
-             data-index="67">
-      <div class="card__gif" onclick="openLightbox(67)" title="Click to view fullscreen">
+             data-index="72">
+      <div class="card__gif" onclick="openLightbox(72)" title="Click to view fullscreen">
          <img src="gifs/behavior-balance-updated.gif" alt="Balance Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">68</span>
+            <span class="card__number">73</span>
             <h3 class="card__title">Balance Updated</h3>
           </div>
           <div class="card__badges">
@@ -5012,15 +5329,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="USER_PROFILE_UPDATED"
-             data-index="68">
-      <div class="card__gif" onclick="openLightbox(68)" title="Click to view fullscreen">
+             data-index="73">
+      <div class="card__gif" onclick="openLightbox(73)" title="Click to view fullscreen">
          <img src="gifs/behavior-user-profile-updated.gif" alt="User Profile Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">69</span>
+            <span class="card__number">74</span>
             <h3 class="card__title">User Profile Updated</h3>
           </div>
           <div class="card__badges">
@@ -5068,12 +5385,71 @@
       </div>
     </article>
 
+    <article class="card" id="behavior-holder-count-updated-ws"
+             data-phase="user-events"
+             data-captured="false"
+             data-capture-status="pending"
+             data-ws-events="HOLDER_COUNT_UPDATED"
+             data-index="74">
+      <div class="card__gif card__gif--missing">
+         <div class="card__gif-placeholder">
+           <div class="placeholder-icon">&#x23F3;</div>
+           <div class="placeholder-text" style="color: #f59e0b">Pending Capture</div>
+           <div class="placeholder-filename">behavior-holder-count-updated-ws.gif</div>
+         </div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <div class="card__title-row">
+            <span class="card__number">75</span>
+            <h3 class="card__title">Holder Count Updated (WS Admin)</h3>
+          </div>
+          <div class="card__badges">
+            <span class="badge badge--phase" style="--badge-color: #06b6d4">👤 User Events</span>
+            
+            <span class="badge badge--trigger" style="--badge-color: #f59e0b">api-call</span>
+            <span class="badge badge--uncaptured" style="--badge-color: #f59e0b">Pending Capture</span>
+          </div>
+        </div>
+        <p class="card__description">Demonstrate the HOLDER_COUNT_UPDATED event via WS admin endpoint to show the token page holder count badge updating.</p>
+        <div class="card__feature-target">
+          <strong>Feature Target:</strong> Real-time holder count badge update demonstration
+        </div>
+        <div class="card__ws-events">
+          <strong>WS Events:</strong>
+          <div class="ws-events-list"><span class="badge badge--ws">HOLDER_COUNT_UPDATED</span></div>
+          <div class="ws-room"><strong>Room:</strong> <code>token:{tokenName}</code></div>
+        </div>
+        <details class="card__details">
+          <summary>Tab Setup (1 tab)</summary>
+          <div class="tabs-list"><div class="tab-setup">
+       <span class="tab-setup__label">Token Page</span>
+       <span class="tab-setup__route">/t/{TOKEN}</span>
+       <span class="tab-setup__desc">Watch holder count badge update in real-time</span>
+     </div></div>
+        </details>
+        <details class="card__details">
+          <summary>Trigger</summary>
+          <div class="trigger-info">
+            <div class="trigger-desc">Emit HOLDER_COUNT_UPDATED via WS admin endpoint</div>
+            
+            <code class="trigger-api">POST /v1/websocket</code>
+          </div>
+        </details>
+        <div class="card__expected">
+          <strong>Expected Outcome:</strong> Holder count badge updates on token page stats panel
+        </div>
+        <div class="card__notes"><strong>Notes:</strong> Uses WS admin fake endpoint to demonstrate the event without requiring an actual trade that changes the holder set.</div>
+        
+      </div>
+    </article>
+
     <article class="card" id="behavior-wallet-connect"
              data-phase="user-events"
              data-captured="false"
              data-capture-status="external-service"
              data-ws-events="CONNECTION_ESTABLISHED"
-             data-index="69">
+             data-index="75">
       <div class="card__gif card__gif--missing">
          <div class="card__gif-placeholder">
            <div class="placeholder-icon">&#x2601;</div>
@@ -5084,7 +5460,7 @@
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">70</span>
+            <span class="card__number">76</span>
             <h3 class="card__title">Connect Wallet</h3>
           </div>
           <div class="card__badges">
@@ -5132,15 +5508,15 @@
              data-captured="true"
              data-capture-status="external-service"
              data-ws-events=""
-             data-index="70">
-      <div class="card__gif" onclick="openLightbox(70)" title="Click to view fullscreen">
+             data-index="76">
+      <div class="card__gif" onclick="openLightbox(76)" title="Click to view fullscreen">
          <img src="gifs/behavior-wallet-disconnect.gif" alt="Disconnect Wallet" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">71</span>
+            <span class="card__number">77</span>
             <h3 class="card__title">Disconnect Wallet</h3>
           </div>
           <div class="card__badges">
@@ -5187,16 +5563,16 @@
              data-phase="site-config"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="71">
-      <div class="card__gif" onclick="openLightbox(71)" title="Click to view fullscreen">
+             data-ws-events="SITE_CONFIG_CHANGED,STREAM_GLOBAL_STATUS"
+             data-index="77">
+      <div class="card__gif" onclick="openLightbox(77)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-streaming-global.gif" alt="Toggle Global Streaming" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">72</span>
+            <span class="card__number">78</span>
             <h3 class="card__title">Toggle Global Streaming</h3>
           </div>
           <div class="card__badges">
@@ -5212,7 +5588,8 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span>
+<span class="badge badge--ws">STREAM_GLOBAL_STATUS</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:config</code></div>
         </div>
         <details class="card__details">
@@ -5248,16 +5625,16 @@
              data-phase="site-config"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="72">
-      <div class="card__gif" onclick="openLightbox(72)" title="Click to view fullscreen">
+             data-ws-events="SITE_CONFIG_CHANGED,STREAM_CHAT_GLOBAL_STATUS"
+             data-index="78">
+      <div class="card__gif" onclick="openLightbox(78)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-chat-global.gif" alt="Toggle Global Chat" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">73</span>
+            <span class="card__number">79</span>
             <h3 class="card__title">Toggle Global Chat</h3>
           </div>
           <div class="card__badges">
@@ -5273,7 +5650,8 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span>
+<span class="badge badge--ws">STREAM_CHAT_GLOBAL_STATUS</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:config</code></div>
         </div>
         <details class="card__details">
@@ -5309,16 +5687,16 @@
              data-phase="site-config"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="73">
-      <div class="card__gif" onclick="openLightbox(73)" title="Click to view fullscreen">
+             data-ws-events="SITE_CONFIG_CHANGED,COMMENTS_GLOBAL_STATUS"
+             data-index="79">
+      <div class="card__gif" onclick="openLightbox(79)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-comments-global.gif" alt="Toggle Global Comments" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">74</span>
+            <span class="card__number">80</span>
             <h3 class="card__title">Toggle Global Comments</h3>
           </div>
           <div class="card__badges">
@@ -5334,7 +5712,8 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span>
+<span class="badge badge--ws">COMMENTS_GLOBAL_STATUS</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:config</code></div>
         </div>
         <details class="card__details">
@@ -5370,16 +5749,16 @@
              data-phase="site-config"
              data-captured="true"
              data-capture-status="captured"
-             data-ws-events="SITE_CONFIG_CHANGED"
-             data-index="74">
-      <div class="card__gif" onclick="openLightbox(74)" title="Click to view fullscreen">
+             data-ws-events="SITE_CONFIG_CHANGED,WEBHOOKS_GLOBAL_STATUS"
+             data-index="80">
+      <div class="card__gif" onclick="openLightbox(80)" title="Click to view fullscreen">
          <img src="gifs/behavior-toggle-webhooks.gif" alt="Toggle Webhooks" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">75</span>
+            <span class="card__number">81</span>
             <h3 class="card__title">Toggle Webhooks</h3>
           </div>
           <div class="card__badges">
@@ -5395,7 +5774,8 @@
         </div>
         <div class="card__ws-events">
           <strong>WS Events:</strong>
-          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span></div>
+          <div class="ws-events-list"><span class="badge badge--ws">SITE_CONFIG_CHANGED</span>
+<span class="badge badge--ws">WEBHOOKS_GLOBAL_STATUS</span></div>
           <div class="ws-room"><strong>Room:</strong> <code>global:config</code></div>
         </div>
         <details class="card__details">
@@ -5425,17 +5805,17 @@
     <article class="card" id="behavior-api-key-created"
              data-phase="api-keys"
              data-captured="true"
-             data-capture-status="pending"
+             data-capture-status="captured"
              data-ws-events="API_KEY_CREATED"
-             data-index="75">
-      <div class="card__gif" onclick="openLightbox(75)" title="Click to view fullscreen">
+             data-index="81">
+      <div class="card__gif" onclick="openLightbox(81)" title="Click to view fullscreen">
          <img src="gifs/behavior-api-key-created.gif" alt="API Key Created" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">76</span>
+            <span class="card__number">82</span>
             <h3 class="card__title">API Key Created</h3>
           </div>
           <div class="card__badges">
@@ -5481,17 +5861,17 @@
     <article class="card" id="behavior-api-key-updated"
              data-phase="api-keys"
              data-captured="true"
-             data-capture-status="pending"
+             data-capture-status="captured"
              data-ws-events="API_KEY_UPDATED"
-             data-index="76">
-      <div class="card__gif" onclick="openLightbox(76)" title="Click to view fullscreen">
+             data-index="82">
+      <div class="card__gif" onclick="openLightbox(82)" title="Click to view fullscreen">
          <img src="gifs/behavior-api-key-updated.gif" alt="API Key Updated" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">77</span>
+            <span class="card__number">83</span>
             <h3 class="card__title">API Key Updated</h3>
           </div>
           <div class="card__badges">
@@ -5537,17 +5917,17 @@
     <article class="card" id="behavior-api-key-revoked"
              data-phase="api-keys"
              data-captured="true"
-             data-capture-status="pending"
+             data-capture-status="captured"
              data-ws-events="API_KEY_REVOKED"
-             data-index="77">
-      <div class="card__gif" onclick="openLightbox(77)" title="Click to view fullscreen">
+             data-index="83">
+      <div class="card__gif" onclick="openLightbox(83)" title="Click to view fullscreen">
          <img src="gifs/behavior-api-key-revoked.gif" alt="API Key Revoked" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">78</span>
+            <span class="card__number">84</span>
             <h3 class="card__title">API Key Revoked</h3>
           </div>
           <div class="card__badges">
@@ -5595,15 +5975,15 @@
              data-captured="true"
              data-capture-status="captured"
              data-ws-events="EVENTS_FIREHOSE"
-             data-index="78">
-      <div class="card__gif" onclick="openLightbox(78)" title="Click to view fullscreen">
+             data-index="84">
+      <div class="card__gif" onclick="openLightbox(84)" title="Click to view fullscreen">
          <img src="gifs/behavior-events-firehose.gif" alt="Events Firehose" loading="lazy" />
          <div class="card__gif-overlay">Click to zoom</div>
        </div>
       <div class="card__content">
         <div class="card__header">
           <div class="card__title-row">
-            <span class="card__number">79</span>
+            <span class="card__number">85</span>
             <h3 class="card__title">Events Firehose</h3>
           </div>
           <div class="card__badges">
@@ -5661,7 +6041,7 @@
 
   <script>
     // ─── Data ─────────────────────────────────────
-    const behaviors = [{"id":"buy-token","title":"Buy Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-01-buy-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"],"captureStatus":"captured"},{"id":"sell-token","title":"Sell Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-02-sell-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"],"captureStatus":"captured"},{"id":"graduate-token","title":"Graduate Token","phase":"trading","gifCaptured":false,"gifFilename":"sweep-03-graduate-token.gif","wsEvents":["TOKEN_GRADUATED"],"captureStatus":"destructive"},{"id":"trade-update-notify","title":"Trade Update Notification","phase":"trading","gifCaptured":true,"gifFilename":"behavior-trade-update-notify.gif","wsEvents":["TRADE_UPDATE_NOTIFY"],"captureStatus":"captured"},{"id":"stats-updated","title":"Stats Updated","phase":"trading","gifCaptured":true,"gifFilename":"behavior-stats-updated.gif","wsEvents":["STATS_UPDATED"],"captureStatus":"captured"},{"id":"post-comment","title":"Post Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-03-post-comment.gif","wsEvents":["COMMENT_CREATED"],"captureStatus":"captured"},{"id":"delete-comment","title":"Delete Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-04-delete-comment.gif","wsEvents":["COMMENT_DELETED"],"captureStatus":"captured"},{"id":"react-to-comment","title":"React to Comment","phase":"comments","gifCaptured":true,"gifFilename":"behavior-react-to-comment.gif","wsEvents":["CONTENT_REACTION_ADDED"],"captureStatus":"captured"},{"id":"remove-comment-reaction","title":"Remove Comment Reaction","phase":"comments","gifCaptured":true,"gifFilename":"behavior-remove-comment-reaction.gif","wsEvents":["CONTENT_REACTION_REMOVED"],"captureStatus":"captured"},{"id":"send-chat","title":"Send Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-05-send-chat.gif","wsEvents":["CHAT_MESSAGE"],"captureStatus":"captured"},{"id":"delete-chat","title":"Delete Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-06-delete-chat.gif","wsEvents":["MESSAGE_DELETED"],"captureStatus":"captured"},{"id":"pin-chat","title":"Pin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-07-pin-chat.gif","wsEvents":["MESSAGE_PINNED"],"captureStatus":"captured"},{"id":"unpin-chat","title":"Unpin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-08-unpin-chat.gif","wsEvents":["MESSAGE_UNPINNED"],"captureStatus":"captured"},{"id":"disable-chat","title":"Disable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-09-disable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"enable-chat","title":"Enable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-10-enable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"react-to-chat","title":"React to Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"behavior-react-to-chat.gif","wsEvents":["CONTENT_REACTION_ADDED"],"captureStatus":"captured"},{"id":"disable-stream","title":"Disable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-11-disable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"enable-stream","title":"Enable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-12-enable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"start-stream","title":"Start Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-start-stream.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"stop-stream","title":"Stop Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stop-stream.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"viewer-count-update","title":"Viewer Count Update","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-viewer-count.gif","wsEvents":["VIEWER_COUNT"],"captureStatus":"captured"},{"id":"recording-ready","title":"Recording Ready","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-recording-ready.gif","wsEvents":["RECORDING_STATUS"],"captureStatus":"captured"},{"id":"stream-credentials","title":"Stream Credentials","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-credentials.gif","wsEvents":[],"captureStatus":"captured"},{"id":"stream-active-indicator","title":"Stream Active Indicator","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-active-indicator.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"recordings-count-updated","title":"Recordings Count Updated","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-recordings-count-updated.gif","wsEvents":["RECORDINGS_COUNT_UPDATED"],"captureStatus":"pending"},{"id":"download-ready","title":"Recording Download Ready","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-download-ready.gif","wsEvents":["DOWNLOAD_READY"],"captureStatus":"pending"},{"id":"simulcast-status","title":"Simulcast Status Update","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-simulcast-status.gif","wsEvents":["SIMULCAST_STATUS"],"captureStatus":"blocked"},{"id":"stream-countdown-updated","title":"Stream Countdown Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-countdown-updated.gif","wsEvents":["STREAM_COUNTDOWN_UPDATED"],"captureStatus":"captured"},{"id":"stream-language-updated","title":"Stream Language Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-language-updated.gif","wsEvents":["STREAM_LANGUAGE_UPDATED"],"captureStatus":"captured"},{"id":"create-per-token-ban","title":"Create Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-15-create-ban.gif","wsEvents":["BAN_CREATED"],"captureStatus":"captured"},{"id":"remove-per-token-ban","title":"Remove Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-16-remove-ban.gif","wsEvents":["BAN_REMOVED"],"captureStatus":"captured"},{"id":"delist-token","title":"Delist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-17-delist-token.gif","wsEvents":["TOKEN_BANNED"],"captureStatus":"captured"},{"id":"relist-token","title":"Relist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-18-relist-token.gif","wsEvents":["TOKEN_UNBANNED"],"captureStatus":"captured"},{"id":"create-global-ban","title":"Create Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-19-create-global-ban.gif","wsEvents":["USER_BANNED"],"captureStatus":"captured"},{"id":"remove-global-ban","title":"Remove Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-20-remove-global-ban.gif","wsEvents":["USER_UNBANNED"],"captureStatus":"captured"},{"id":"create-content-flag","title":"Create Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-13-create-flag.gif","wsEvents":["CONTENT_FLAGGED"],"captureStatus":"captured"},{"id":"resolve-content-flag","title":"Resolve Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-14-resolve-flag.gif","wsEvents":["FLAG_RESOLVED"],"captureStatus":"captured"},{"id":"ai-flag-auto","title":"AI Auto-Analyze Flagged Content","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-flag-auto.gif","wsEvents":["AI_MODERATION_COMPLETE"],"captureStatus":"blocked"},{"id":"ai-moderation-config","title":"AI Moderation Config Toggle","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-config.gif","wsEvents":["AI_MODERATION_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"ai-verdict-realtime","title":"AI Verdict Real-Time Update","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-verdict-realtime.gif","wsEvents":["AI_MODERATION_COMPLETE"],"captureStatus":"blocked"},{"id":"ai-verdict-detail-modal","title":"AI Verdict Detail Modal","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-verdict-detail-modal.gif","wsEvents":[],"captureStatus":"captured"},{"id":"ai-moderation-failed","title":"AI Moderation Failed","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-failed.gif","wsEvents":["AI_MODERATION_FAILED"],"captureStatus":"internal-event"},{"id":"add-moderator","title":"Add Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-add-moderator.gif","wsEvents":["MODERATOR_ADDED"],"captureStatus":"captured"},{"id":"remove-moderator","title":"Remove Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-remove-moderator.gif","wsEvents":["MODERATOR_REMOVED"],"captureStatus":"captured"},{"id":"moderator-invite-created","title":"Create Moderator Invite","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-invite-created.gif","wsEvents":["MODERATOR_INVITE_CREATED"],"captureStatus":"captured"},{"id":"overseer-message-stats","title":"Overseer Message Stats","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-message-stats.gif","wsEvents":[],"captureStatus":"captured"},{"id":"overseer-dashboard-live","title":"Overseer Dashboard Live","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-dashboard-live.gif","wsEvents":["CONTENT_FLAGGED","FLAG_RESOLVED","BAN_CREATED","TRADE_EXECUTED","STREAM_STATUS"],"captureStatus":"captured"},{"id":"moderator-role-updated","title":"Moderator Role Updated","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-role-updated.gif","wsEvents":["MODERATOR_ROLE_UPDATED"],"captureStatus":"captured"},{"id":"overseer-added","title":"Overseer Added","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-added.gif","wsEvents":["OVERSEER_ADDED"],"captureStatus":"captured"},{"id":"overseer-removed","title":"Overseer Removed","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-removed.gif","wsEvents":["OVERSEER_REMOVED"],"captureStatus":"captured"},{"id":"moderator-delete-comment","title":"Moderator Deletes Comment","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-delete-comment.gif","wsEvents":["COMMENT_DELETED"],"captureStatus":"uncaptured"},{"id":"moderator-ban-from-comments","title":"Moderator Bans User from Comments","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-ban-from-comments.gif","wsEvents":["BAN_CREATED"],"captureStatus":"uncaptured"},{"id":"moderator-delete-chat","title":"Moderator Deletes Chat Message","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-delete-chat.gif","wsEvents":["MESSAGE_DELETED"],"captureStatus":"uncaptured"},{"id":"moderator-ban-from-chat","title":"Moderator Bans User from Chat","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-ban-from-chat.gif","wsEvents":["BAN_CREATED"],"captureStatus":"uncaptured"},{"id":"studio-role-owner-view","title":"Studio: Owner View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-owner.gif","wsEvents":[],"captureStatus":"uncaptured"},{"id":"studio-role-manager-view","title":"Studio: Manager View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-manager.gif","wsEvents":[],"captureStatus":"uncaptured"},{"id":"studio-role-techproducer-view","title":"Studio: Technical Producer View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-techproducer.gif","wsEvents":[],"captureStatus":"uncaptured"},{"id":"studio-role-moderator-view","title":"Studio: Moderator View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-moderator.gif","wsEvents":[],"captureStatus":"uncaptured"},{"id":"moderator-role-change-access-loss","title":"Moderator Role Removed — Instant Access Loss","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-role-change-access-loss.gif","wsEvents":["MODERATOR_ROLE_UPDATED"],"captureStatus":"uncaptured"},{"id":"update-token-description","title":"Update Token Description","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-description.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"captured"},{"id":"update-token-image","title":"Update Token Image","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-image.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"blocked"},{"id":"update-token-links","title":"Update Token Links","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-links.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"captured"},{"id":"token-config-updated","title":"Token Config Updated (Global Feed)","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-token-config-updated.gif","wsEvents":["TOKEN_CONFIG_UPDATED"],"captureStatus":"captured"},{"id":"holder-count-updated","title":"Holder Count Updated","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-holder-count-updated.gif","wsEvents":["HOLDER_COUNT_UPDATED"],"captureStatus":"internal-event"},{"id":"pool-badge-assigned","title":"Pool Badge Assigned","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-pool-badge-assigned.gif","wsEvents":["POOL_BADGE_ASSIGNED"],"captureStatus":"internal-event"},{"id":"token-launched","title":"Token Launched","phase":"pool-lifecycle","gifCaptured":true,"gifFilename":"behavior-token-launched.gif","wsEvents":["POOL_CREATED"],"captureStatus":"captured"},{"id":"user-typing-indicator","title":"User Typing Indicator","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-typing-indicator.gif","wsEvents":["USER_TYPING"],"captureStatus":"captured"},{"id":"balance-updated","title":"Balance Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-balance-updated.gif","wsEvents":["BALANCE_UPDATED"],"captureStatus":"captured"},{"id":"user-profile-updated","title":"User Profile Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-user-profile-updated.gif","wsEvents":["USER_PROFILE_UPDATED"],"captureStatus":"captured"},{"id":"wallet-connect","title":"Connect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-connect.gif","wsEvents":["CONNECTION_ESTABLISHED"],"captureStatus":"external-service"},{"id":"wallet-disconnect","title":"Disconnect Wallet","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-wallet-disconnect.gif","wsEvents":[],"captureStatus":"external-service"},{"id":"toggle-streaming-global","title":"Toggle Global Streaming","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-streaming-global.gif","wsEvents":["SITE_CONFIG_CHANGED"],"captureStatus":"captured"},{"id":"toggle-chat-global","title":"Toggle Global Chat","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-chat-global.gif","wsEvents":["SITE_CONFIG_CHANGED"],"captureStatus":"captured"},{"id":"toggle-comments-global","title":"Toggle Global Comments","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-comments-global.gif","wsEvents":["SITE_CONFIG_CHANGED"],"captureStatus":"captured"},{"id":"toggle-webhooks","title":"Toggle Webhooks","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-webhooks.gif","wsEvents":["SITE_CONFIG_CHANGED"],"captureStatus":"captured"},{"id":"api-key-created","title":"API Key Created","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-created.gif","wsEvents":["API_KEY_CREATED"],"captureStatus":"pending"},{"id":"api-key-updated","title":"API Key Updated","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-updated.gif","wsEvents":["API_KEY_UPDATED"],"captureStatus":"pending"},{"id":"api-key-revoked","title":"API Key Revoked","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-revoked.gif","wsEvents":["API_KEY_REVOKED"],"captureStatus":"pending"},{"id":"events-firehose","title":"Events Firehose","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-events-firehose.gif","wsEvents":["EVENTS_FIREHOSE"],"captureStatus":"captured"}];
+    const behaviors = [{"id":"buy-token","title":"Buy Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-01-buy-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"],"captureStatus":"captured"},{"id":"sell-token","title":"Sell Token","phase":"trading","gifCaptured":true,"gifFilename":"sweep-02-sell-token.gif","wsEvents":["TRADE_EXECUTED","PRICE_UPDATE"],"captureStatus":"captured"},{"id":"graduate-token","title":"Graduate Token","phase":"trading","gifCaptured":false,"gifFilename":"sweep-03-graduate-token.gif","wsEvents":["TOKEN_GRADUATED"],"captureStatus":"destructive"},{"id":"trade-update-notify","title":"Trade Update Notification","phase":"trading","gifCaptured":true,"gifFilename":"behavior-trade-update-notify.gif","wsEvents":["TRADE_UPDATE_NOTIFY"],"captureStatus":"captured"},{"id":"stats-updated","title":"Stats Updated","phase":"trading","gifCaptured":true,"gifFilename":"behavior-stats-updated.gif","wsEvents":["STATS_UPDATED"],"captureStatus":"captured"},{"id":"post-comment","title":"Post Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-03-post-comment.gif","wsEvents":["COMMENT_CREATED"],"captureStatus":"captured"},{"id":"delete-comment","title":"Delete Comment","phase":"comments","gifCaptured":true,"gifFilename":"sweep-04-delete-comment.gif","wsEvents":["COMMENT_DELETED"],"captureStatus":"captured"},{"id":"react-to-comment","title":"React to Comment","phase":"comments","gifCaptured":true,"gifFilename":"behavior-react-to-comment.gif","wsEvents":["CONTENT_REACTION_ADDED"],"captureStatus":"captured"},{"id":"remove-comment-reaction","title":"Remove Comment Reaction","phase":"comments","gifCaptured":true,"gifFilename":"behavior-remove-comment-reaction.gif","wsEvents":["CONTENT_REACTION_REMOVED"],"captureStatus":"captured"},{"id":"comment-edited","title":"Comment Edited","phase":"comments","gifCaptured":true,"gifFilename":"behavior-comment-edited.gif","wsEvents":["COMMENT_UPDATED"],"captureStatus":"pending"},{"id":"send-chat","title":"Send Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-05-send-chat.gif","wsEvents":["STREAM_CHAT_MESSAGE"],"captureStatus":"captured"},{"id":"delete-chat","title":"Delete Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-06-delete-chat.gif","wsEvents":["STREAM_CHAT_DELETED"],"captureStatus":"captured"},{"id":"pin-chat","title":"Pin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-07-pin-chat.gif","wsEvents":["STREAM_CHAT_PINNED"],"captureStatus":"captured"},{"id":"unpin-chat","title":"Unpin Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"sweep-08-unpin-chat.gif","wsEvents":["STREAM_CHAT_UNPINNED"],"captureStatus":"captured"},{"id":"disable-chat","title":"Disable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-09-disable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"enable-chat","title":"Enable Chat","phase":"chat","gifCaptured":true,"gifFilename":"sweep-10-enable-chat.gif","wsEvents":["CHAT_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"react-to-chat","title":"React to Chat Message","phase":"chat","gifCaptured":true,"gifFilename":"behavior-react-to-chat.gif","wsEvents":["CONTENT_REACTION_ADDED"],"captureStatus":"captured"},{"id":"chat-message-edited","title":"Chat Message Edited","phase":"chat","gifCaptured":true,"gifFilename":"behavior-chat-message-edited.gif","wsEvents":["STREAM_CHAT_UPDATED"],"captureStatus":"pending"},{"id":"stream-reaction","title":"Stream Reaction (Ephemeral)","phase":"chat","gifCaptured":false,"gifFilename":"behavior-stream-reaction.gif","wsEvents":["STREAM_REACTION"],"captureStatus":"external-service"},{"id":"disable-stream","title":"Disable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-11-disable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"enable-stream","title":"Enable Streaming","phase":"streaming","gifCaptured":true,"gifFilename":"sweep-12-enable-stream.gif","wsEvents":["STREAM_CONTROL_STATUS_CHANGED"],"captureStatus":"captured"},{"id":"start-stream","title":"Start Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-start-stream.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"stop-stream","title":"Stop Live Stream","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stop-stream.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"viewer-count-update","title":"Viewer Count Update","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-viewer-count.gif","wsEvents":["VIEWER_COUNT"],"captureStatus":"captured"},{"id":"recording-ready","title":"Recording Ready","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-recording-ready.gif","wsEvents":["RECORDING_STATUS"],"captureStatus":"captured"},{"id":"stream-credentials","title":"Stream Credentials","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-credentials.gif","wsEvents":[],"captureStatus":"captured"},{"id":"stream-active-indicator","title":"Stream Active Indicator","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-active-indicator.gif","wsEvents":["STREAM_STATUS"],"captureStatus":"captured"},{"id":"recordings-count-updated","title":"Recordings Count Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-recordings-count-updated.gif","wsEvents":["RECORDINGS_COUNT_UPDATED"],"captureStatus":"pending"},{"id":"download-ready","title":"Recording Download Ready","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-download-ready.gif","wsEvents":["DOWNLOAD_READY"],"captureStatus":"pending"},{"id":"simulcast-status","title":"Simulcast Status Update","phase":"streaming","gifCaptured":false,"gifFilename":"behavior-simulcast-status.gif","wsEvents":["SIMULCAST_STATUS"],"captureStatus":"blocked"},{"id":"stream-countdown-updated","title":"Stream Countdown Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-countdown-updated.gif","wsEvents":["STREAM_COUNTDOWN_UPDATED"],"captureStatus":"captured"},{"id":"stream-language-updated","title":"Stream Language Updated","phase":"streaming","gifCaptured":true,"gifFilename":"behavior-stream-language-updated.gif","wsEvents":["STREAM_LANGUAGE_UPDATED"],"captureStatus":"captured"},{"id":"create-per-token-ban","title":"Create Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-15-create-ban.gif","wsEvents":["BAN_CREATED"],"captureStatus":"captured"},{"id":"remove-per-token-ban","title":"Remove Per-Token Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-16-remove-ban.gif","wsEvents":["BAN_REMOVED"],"captureStatus":"captured"},{"id":"delist-token","title":"Delist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-17-delist-token.gif","wsEvents":["TOKEN_BANNED"],"captureStatus":"captured"},{"id":"relist-token","title":"Relist Token","phase":"bans","gifCaptured":true,"gifFilename":"sweep-18-relist-token.gif","wsEvents":["TOKEN_UNBANNED"],"captureStatus":"captured"},{"id":"create-global-ban","title":"Create Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-19-create-global-ban.gif","wsEvents":["USER_BANNED"],"captureStatus":"captured"},{"id":"remove-global-ban","title":"Remove Global Ban","phase":"bans","gifCaptured":true,"gifFilename":"sweep-20-remove-global-ban.gif","wsEvents":["USER_UNBANNED"],"captureStatus":"captured"},{"id":"create-content-flag","title":"Create Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-13-create-flag.gif","wsEvents":["CONTENT_FLAGGED"],"captureStatus":"captured"},{"id":"resolve-content-flag","title":"Resolve Content Flag","phase":"content-flags","gifCaptured":true,"gifFilename":"sweep-14-resolve-flag.gif","wsEvents":["FLAG_RESOLVED"],"captureStatus":"captured"},{"id":"ai-flag-auto","title":"AI Auto-Analyze Flagged Content","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-flag-auto.gif","wsEvents":["AI_MODERATION_COMPLETE"],"captureStatus":"blocked"},{"id":"ai-moderation-config","title":"AI Moderation Config Toggle","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-config.gif","wsEvents":["AI_MODERATION_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"ai-verdict-realtime","title":"AI Verdict Real-Time Update","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-verdict-realtime.gif","wsEvents":["AI_MODERATION_COMPLETE"],"captureStatus":"blocked"},{"id":"ai-verdict-detail-modal","title":"AI Verdict Detail Modal","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-verdict-detail-modal.gif","wsEvents":[],"captureStatus":"captured"},{"id":"ai-moderation-failed","title":"AI Moderation Failed","phase":"ai-moderation","gifCaptured":true,"gifFilename":"behavior-ai-moderation-failed.gif","wsEvents":["AI_MODERATION_FAILED"],"captureStatus":"internal-event"},{"id":"add-moderator","title":"Add Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-add-moderator.gif","wsEvents":["MODERATOR_ADDED"],"captureStatus":"captured"},{"id":"remove-moderator","title":"Remove Moderator","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-remove-moderator.gif","wsEvents":["MODERATOR_REMOVED"],"captureStatus":"captured"},{"id":"moderator-invite-created","title":"Create Moderator Invite","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-invite-created.gif","wsEvents":["MODERATOR_INVITE_CREATED"],"captureStatus":"captured"},{"id":"overseer-message-stats","title":"Overseer Message Stats","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-message-stats.gif","wsEvents":[],"captureStatus":"captured"},{"id":"overseer-dashboard-live","title":"Overseer Dashboard Live","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-dashboard-live.gif","wsEvents":["CONTENT_FLAGGED","FLAG_RESOLVED","BAN_CREATED","TRADE_EXECUTED","STREAM_STATUS"],"captureStatus":"captured"},{"id":"moderator-role-updated","title":"Moderator Role Updated","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-role-updated.gif","wsEvents":["MODERATOR_ROLE_UPDATED"],"captureStatus":"captured"},{"id":"overseer-added","title":"Overseer Added","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-added.gif","wsEvents":["OVERSEER_ADDED"],"captureStatus":"captured"},{"id":"overseer-removed","title":"Overseer Removed","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-overseer-removed.gif","wsEvents":["OVERSEER_REMOVED"],"captureStatus":"captured"},{"id":"moderator-delete-comment","title":"Moderator Deletes Comment","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-delete-comment.gif","wsEvents":["COMMENT_DELETED"],"captureStatus":"captured"},{"id":"moderator-ban-from-comments","title":"Moderator Bans User from Comments","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-ban-from-comments.gif","wsEvents":["BAN_CREATED"],"captureStatus":"captured"},{"id":"moderator-delete-chat","title":"Moderator Deletes Chat Message","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-delete-chat.gif","wsEvents":["STREAM_CHAT_DELETED"],"captureStatus":"captured"},{"id":"moderator-ban-from-chat","title":"Moderator Bans User from Chat","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-ban-from-chat.gif","wsEvents":["BAN_CREATED"],"captureStatus":"captured"},{"id":"studio-role-owner-view","title":"Studio: Owner View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-owner.gif","wsEvents":[],"captureStatus":"captured"},{"id":"studio-role-manager-view","title":"Studio: Manager View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-manager.gif","wsEvents":[],"captureStatus":"captured"},{"id":"studio-role-techproducer-view","title":"Studio: Technical Producer View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-techproducer.gif","wsEvents":[],"captureStatus":"captured"},{"id":"studio-role-moderator-view","title":"Studio: Moderator View","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-studio-role-moderator.gif","wsEvents":[],"captureStatus":"captured"},{"id":"moderator-role-change-access-loss","title":"Moderator Role Removed — Instant Access Loss","phase":"moderators","gifCaptured":true,"gifFilename":"behavior-moderator-role-change-access-loss.gif","wsEvents":["MODERATOR_ROLE_UPDATED"],"captureStatus":"captured"},{"id":"update-token-description","title":"Update Token Description","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-description.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"captured"},{"id":"update-token-image","title":"Update Token Image","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-update-image.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"blocked"},{"id":"update-token-links","title":"Update Token Links","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-update-links.gif","wsEvents":["POOL_METADATA_UPDATED"],"captureStatus":"captured"},{"id":"pool-social-links-updated","title":"Pool Social Links Updated","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-pool-social-links-updated.gif","wsEvents":["POOL_SOCIAL_LINKS_UPDATED"],"captureStatus":"pending"},{"id":"token-config-updated","title":"Token Config Updated (Global Feed)","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-token-config-updated.gif","wsEvents":["TOKEN_CONFIG_UPDATED"],"captureStatus":"captured"},{"id":"holder-count-updated","title":"Holder Count Updated","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-holder-count-updated.gif","wsEvents":["HOLDER_COUNT_UPDATED"],"captureStatus":"internal-event"},{"id":"pool-badge-assigned","title":"Pool Badge Assigned","phase":"pool-metadata","gifCaptured":true,"gifFilename":"behavior-pool-badge-assigned.gif","wsEvents":["POOL_BADGE_ASSIGNED"],"captureStatus":"internal-event"},{"id":"pool-badge-assigned-ws","title":"Pool Badge Assigned (WS Admin)","phase":"pool-metadata","gifCaptured":false,"gifFilename":"behavior-pool-badge-assigned-ws.gif","wsEvents":["POOL_BADGE_ASSIGNED"],"captureStatus":"pending"},{"id":"token-launched","title":"Token Launched","phase":"pool-lifecycle","gifCaptured":true,"gifFilename":"behavior-token-launched.gif","wsEvents":["POOL_CREATED"],"captureStatus":"captured"},{"id":"user-typing-indicator","title":"User Typing Indicator","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-typing-indicator.gif","wsEvents":["USER_TYPING"],"captureStatus":"captured"},{"id":"balance-updated","title":"Balance Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-balance-updated.gif","wsEvents":["BALANCE_UPDATED"],"captureStatus":"captured"},{"id":"user-profile-updated","title":"User Profile Updated","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-user-profile-updated.gif","wsEvents":["USER_PROFILE_UPDATED"],"captureStatus":"captured"},{"id":"holder-count-updated-ws","title":"Holder Count Updated (WS Admin)","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-holder-count-updated-ws.gif","wsEvents":["HOLDER_COUNT_UPDATED"],"captureStatus":"pending"},{"id":"wallet-connect","title":"Connect Wallet","phase":"user-events","gifCaptured":false,"gifFilename":"behavior-wallet-connect.gif","wsEvents":["CONNECTION_ESTABLISHED"],"captureStatus":"external-service"},{"id":"wallet-disconnect","title":"Disconnect Wallet","phase":"user-events","gifCaptured":true,"gifFilename":"behavior-wallet-disconnect.gif","wsEvents":[],"captureStatus":"external-service"},{"id":"toggle-streaming-global","title":"Toggle Global Streaming","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-streaming-global.gif","wsEvents":["SITE_CONFIG_CHANGED","STREAM_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"toggle-chat-global","title":"Toggle Global Chat","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-chat-global.gif","wsEvents":["SITE_CONFIG_CHANGED","STREAM_CHAT_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"toggle-comments-global","title":"Toggle Global Comments","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-comments-global.gif","wsEvents":["SITE_CONFIG_CHANGED","COMMENTS_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"toggle-webhooks","title":"Toggle Webhooks","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-toggle-webhooks.gif","wsEvents":["SITE_CONFIG_CHANGED","WEBHOOKS_GLOBAL_STATUS"],"captureStatus":"captured"},{"id":"api-key-created","title":"API Key Created","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-created.gif","wsEvents":["API_KEY_CREATED"],"captureStatus":"captured"},{"id":"api-key-updated","title":"API Key Updated","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-updated.gif","wsEvents":["API_KEY_UPDATED"],"captureStatus":"captured"},{"id":"api-key-revoked","title":"API Key Revoked","phase":"api-keys","gifCaptured":true,"gifFilename":"behavior-api-key-revoked.gif","wsEvents":["API_KEY_REVOKED"],"captureStatus":"captured"},{"id":"events-firehose","title":"Events Firehose","phase":"site-config","gifCaptured":true,"gifFilename":"behavior-events-firehose.gif","wsEvents":["EVENTS_FIREHOSE"],"captureStatus":"captured"}];
     const gifsDir = "gifs";
 
     // ─── Filter Logic ─────────────────────────────

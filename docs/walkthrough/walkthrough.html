@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gala Launchpad Walkthrough - 2026-02-13 14:56:50 UTC</title>
+  <title>Gala Launchpad Walkthrough - 2026-02-15 20:31:12 UTC</title>
   <style>
     :root {
       --sidebar-bg: #1a1a2e;
@@ -629,8 +629,8 @@
       <div class="sidebar__header">
         <h1 class="sidebar__title">Launchpad<br/>Walkthrough</h1>
         <div class="sidebar__meta">
-          <div>2026-02-13 14:56:50 UTC</div>
-          <div>83 pages</div>
+          <div>2026-02-15 20:31:12 UTC</div>
+          <div>103 pages</div>
           <div>http://localhost:3000</div>
         </div>
       </div>
@@ -644,19 +644,26 @@
         <div class="sidebar__section">
           <div class="sidebar__section-header" style="--section-color: #22c55e">
             <span class="sidebar__section-dot"></span>
-            Public Pages (27)
+            Public Pages (41)
           </div>
           <div class="sidebar__page-list">
             <a class="sidebar__page-link" href="#page-home" data-target="home">Home / Token Grid</a>
 <a class="sidebar__page-link" href="#page-home-with-streams" data-target="home-with-streams">Home with Live Streams</a>
+<a class="sidebar__page-link" href="#page-home-filters-expanded" data-target="home-filters-expanded">Home — Filters Expanded</a>
 <a class="sidebar__page-link" href="#page-wallet-connect-modal" data-target="wallet-connect-modal">Connect Wallet Modal — Wallet List</a>
 <a class="sidebar__page-link" href="#page-wallet-connected-header" data-target="wallet-connected-header">Connected Wallet — Header Dropdown</a>
 <a class="sidebar__page-link" href="#page-token-detail" data-target="token-detail">Token Detail Page</a>
 <a class="sidebar__page-link" href="#page-token-detail-live" data-target="token-detail-live">Token Detail with Live Stream</a>
 <a class="sidebar__page-link" href="#page-token-detail-countdown" data-target="token-detail-countdown">Token Detail (Countdown Timer)</a>
 <a class="sidebar__page-link" href="#page-token-detail-chat-live" data-target="token-detail-chat-live">Token Detail - Chat and Stream Section (Scrolled)</a>
+<a class="sidebar__page-link" href="#page-token-detail-chat-edit-toolbar" data-target="token-detail-chat-edit-toolbar">Chat Message — Edit Toolbar</a>
+<a class="sidebar__page-link" href="#page-token-detail-chat-edit-mode" data-target="token-detail-chat-edit-mode">Chat Message — Inline Edit Mode</a>
 <a class="sidebar__page-link" href="#page-token-detail-badges" data-target="token-detail-badges">Token Detail - Badges Section</a>
 <a class="sidebar__page-link" href="#page-token-comments" data-target="token-comments">Token Detail - Comments Tab</a>
+<a class="sidebar__page-link" href="#page-token-comments-edit-toolbar" data-target="token-comments-edit-toolbar">Comment — Edit Toolbar</a>
+<a class="sidebar__page-link" href="#page-token-comments-edit-mode" data-target="token-comments-edit-mode">Comment — Inline Edit Mode</a>
+<a class="sidebar__page-link" href="#page-token-detail-transactions" data-target="token-detail-transactions">Token Detail — Transactions Tab</a>
+<a class="sidebar__page-link" href="#page-token-detail-holder-distribution" data-target="token-detail-holder-distribution">Token Detail — Holder Distribution</a>
 <a class="sidebar__page-link" href="#page-token-report-modal" data-target="token-report-modal">Report Modal (Not Captured)</a>
 <a class="sidebar__page-link" href="#page-launch" data-target="launch">Token Launch Form</a>
 <a class="sidebar__page-link" href="#page-launch-form-filled" data-target="launch-form-filled">Token Launch Form (Filled)</a>
@@ -666,9 +673,16 @@
 <a class="sidebar__page-link" href="#page-my-profile-api-keys" data-target="my-profile-api-keys">User Profile - API Keys</a>
 <a class="sidebar__page-link" href="#page-my-profile-team" data-target="my-profile-team">User Profile - Team Management</a>
 <a class="sidebar__page-link" href="#page-my-profile-access" data-target="my-profile-access">User Profile - Access Control</a>
+<a class="sidebar__page-link" href="#page-my-profile-token-balances" data-target="my-profile-token-balances">My Profile — Token Balances</a>
+<a class="sidebar__page-link" href="#page-my-profile-trade-activity" data-target="my-profile-trade-activity">My Profile — Trade Activity</a>
 <a class="sidebar__page-link" href="#page-my-profile-create-api-key-modal" data-target="my-profile-create-api-key-modal">Create Access Token Modal</a>
 <a class="sidebar__page-link" href="#page-my-profile-create-team-invite-modal" data-target="my-profile-create-team-invite-modal">Invite Team Member Modal</a>
 <a class="sidebar__page-link" href="#page-my-profile-edit-modal" data-target="my-profile-edit-modal">Complete Profile Modal</a>
+<a class="sidebar__page-link" href="#page-launch-form-success-modal" data-target="launch-form-success-modal">Token Launch Success Modal</a>
+<a class="sidebar__page-link" href="#page-my-profile-edit-api-key-modal" data-target="my-profile-edit-api-key-modal">Edit API Key Modal</a>
+<a class="sidebar__page-link" href="#page-my-profile-revoke-api-key-modal" data-target="my-profile-revoke-api-key-modal">Revoke API Key Modal</a>
+<a class="sidebar__page-link" href="#page-my-profile-edit-team-member-modal" data-target="my-profile-edit-team-member-modal">Edit Team Member Modal</a>
+<a class="sidebar__page-link" href="#page-my-profile-revoke-team-access-modal" data-target="my-profile-revoke-team-access-modal">Revoke Team Access Modal</a>
 <a class="sidebar__page-link" href="#page-public-profile" data-target="public-profile">Public User Profile</a>
 <a class="sidebar__page-link" href="#page-token-shorthand" data-target="token-shorthand">Token Shorthand URL</a>
 <a class="sidebar__page-link" href="#page-token-shorthand-comments" data-target="token-shorthand-comments">Token Shorthand URL - Comments</a>
@@ -680,10 +694,12 @@
         <div class="sidebar__section">
           <div class="sidebar__section-header" style="--section-color: #f59e0b">
             <span class="sidebar__section-dot"></span>
-            Studio (Creator) (10)
+            Studio (Creator) (15)
           </div>
           <div class="sidebar__page-list">
-            <a class="sidebar__page-link" href="#page-studio-landing" data-target="studio-landing">Studio Welcome</a>
+            <a class="sidebar__page-link" href="#page-studio-credentials-modal" data-target="studio-credentials-modal">Studio — Stream Credentials Modal</a>
+<a class="sidebar__page-link" href="#page-studio-add-simulcast-modal" data-target="studio-add-simulcast-modal">Studio — Add Simulcast Modal</a>
+<a class="sidebar__page-link" href="#page-studio-landing" data-target="studio-landing">Studio Welcome</a>
 <a class="sidebar__page-link" href="#page-studio-detail" data-target="studio-detail">Studio Dashboard (Offline)</a>
 <a class="sidebar__page-link" href="#page-studio-settings-modal" data-target="studio-settings-modal">Studio Settings Modal (Not Captured)</a>
 <a class="sidebar__page-link" href="#page-studio-detail-live" data-target="studio-detail-live">Studio Dashboard (Live)</a>
@@ -692,6 +708,9 @@
 <a class="sidebar__page-link" href="#page-studio-recordings-tab" data-target="studio-recordings-tab">Studio Dashboard - Recordings/Transactions Tab</a>
 <a class="sidebar__page-link" href="#page-studio-recordings-download" data-target="studio-recordings-download">Studio — Recording Download State</a>
 <a class="sidebar__page-link" href="#page-studio-simulcast-tab" data-target="studio-simulcast-tab">Studio Dashboard - Simulcast Tab</a>
+<a class="sidebar__page-link" href="#page-studio-participants-tab" data-target="studio-participants-tab">Studio — Participants Tab</a>
+<a class="sidebar__page-link" href="#page-studio-comments-tab" data-target="studio-comments-tab">Studio — Comments Tab</a>
+<a class="sidebar__page-link" href="#page-studio-team-tab" data-target="studio-team-tab">Studio — Team Tab</a>
 <a class="sidebar__page-link" href="#page-studio-chat-live" data-target="studio-chat-live">Studio Dashboard - Chat Focus (Live)</a>
           </div>
         </div>
@@ -715,10 +734,11 @@
         <div class="sidebar__section">
           <div class="sidebar__section-header" style="--section-color: #ef4444">
             <span class="sidebar__section-dot"></span>
-            Overwatch (Admin) (34)
+            Overwatch (Admin) (35)
           </div>
           <div class="sidebar__page-list">
             <a class="sidebar__page-link" href="#page-overwatch-dashboard" data-target="overwatch-dashboard">Overwatch Dashboard</a>
+<a class="sidebar__page-link" href="#page-overwatch-dashboard-quick-actions" data-target="overwatch-dashboard-quick-actions">Dashboard — Quick Actions</a>
 <a class="sidebar__page-link" href="#page-overwatch-streams" data-target="overwatch-streams">Stream Monitoring (Multiple Streams)</a>
 <a class="sidebar__page-link" href="#page-overwatch-streams-live" data-target="overwatch-streams-live">Stream Monitoring (Fewer Streams)</a>
 <a class="sidebar__page-link" href="#page-overwatch-flags" data-target="overwatch-flags">Content Flags</a>
@@ -789,7 +809,7 @@
   <main class="main">
     <div class="main__header">
       <h2>Gala Launchpad Application Walkthrough</h2>
-      <p>Generated 2026-02-13 14:56:50 UTC from http://localhost:3000 &mdash; 83 pages captured at 1440&times;900</p>
+      <p>Generated 2026-02-15 20:31:12 UTC from http://localhost:3000 &mdash; 103 pages captured at 1440&times;900</p>
     </div>
 
     
@@ -888,8 +908,34 @@
       </div>
     </article>
 
-    <article class="card" id="page-wallet-connect-modal" data-section="public" data-title="connect wallet modal — wallet list" data-index="2">
+    <article class="card" id="page-home-filters-expanded" data-section="public" data-title="home — filters expanded" data-index="2">
       <div class="card__screenshot" onclick="openLightbox(2)">
+         <img src="screenshots/public-home-filters-expanded.png" alt="Home — Filters Expanded" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Home — Filters Expanded</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Filter Panels</span>
+        </div>
+        <div class="card__route">
+          <code>/</code>
+        </div>
+        <div class="card__overview">
+          Home — Filters Expanded page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Home page with filter/sort dropdown expanded</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-wallet-connect-modal" data-section="public" data-title="connect wallet modal — wallet list" data-index="3">
+      <div class="card__screenshot" onclick="openLightbox(3)">
          <img src="screenshots/public-wallet-connect-modal.png" alt="Connect Wallet Modal — Wallet List" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -914,8 +960,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-wallet-connected-header" data-section="public" data-title="connected wallet — header dropdown" data-index="3">
-      <div class="card__screenshot" onclick="openLightbox(3)">
+    <article class="card" id="page-wallet-connected-header" data-section="public" data-title="connected wallet — header dropdown" data-index="4">
+      <div class="card__screenshot" onclick="openLightbox(4)">
          <img src="screenshots/public-wallet-connected-header.png" alt="Connected Wallet — Header Dropdown" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -940,8 +986,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-detail" data-section="public" data-title="token detail page" data-index="4">
-      <div class="card__screenshot" onclick="openLightbox(4)">
+    <article class="card" id="page-token-detail" data-section="public" data-title="token detail page" data-index="5">
+      <div class="card__screenshot" onclick="openLightbox(5)">
          <img src="screenshots/public-token-detail.png" alt="Token Detail Page" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -988,8 +1034,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-detail-live" data-section="public" data-title="token detail with live stream" data-index="5">
-      <div class="card__screenshot" onclick="openLightbox(5)">
+    <article class="card" id="page-token-detail-live" data-section="public" data-title="token detail with live stream" data-index="6">
+      <div class="card__screenshot" onclick="openLightbox(6)">
          <img src="screenshots/public-token-detail-live.png" alt="Token Detail with Live Stream" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1033,8 +1079,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-detail-countdown" data-section="public" data-title="token detail (countdown timer)" data-index="6">
-      <div class="card__screenshot" onclick="openLightbox(6)">
+    <article class="card" id="page-token-detail-countdown" data-section="public" data-title="token detail (countdown timer)" data-index="7">
+      <div class="card__screenshot" onclick="openLightbox(7)">
          <img src="screenshots/public-token-detail-countdown.png" alt="Token Detail (Countdown Timer)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1059,8 +1105,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-detail-chat-live" data-section="public" data-title="token detail - chat and stream section (scrolled)" data-index="7">
-      <div class="card__screenshot" onclick="openLightbox(7)">
+    <article class="card" id="page-token-detail-chat-live" data-section="public" data-title="token detail - chat and stream section (scrolled)" data-index="8">
+      <div class="card__screenshot" onclick="openLightbox(8)">
          <img src="screenshots/public-token-detail-chat-live.png" alt="Token Detail - Chat and Stream Section (Scrolled)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1102,8 +1148,60 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-detail-badges" data-section="public" data-title="token detail - badges section" data-index="8">
-      <div class="card__screenshot" onclick="openLightbox(8)">
+    <article class="card" id="page-token-detail-chat-edit-toolbar" data-section="public" data-title="chat message — edit toolbar" data-index="9">
+      <div class="card__screenshot" onclick="openLightbox(9)">
+         <img src="screenshots/public-token-detail-chat-edit-toolbar.png" alt="Chat Message — Edit Toolbar" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Chat Message — Edit Toolbar</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Inline Editing</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{streamingTokenName}</code>
+        </div>
+        <div class="card__overview">
+          Chat Message — Edit Toolbar page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Hover over a chat message to reveal the toolbar with Edit, Report, Ban, and Delete actions</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-detail-chat-edit-mode" data-section="public" data-title="chat message — inline edit mode" data-index="10">
+      <div class="card__screenshot" onclick="openLightbox(10)">
+         <img src="screenshots/public-token-detail-chat-edit-mode.png" alt="Chat Message — Inline Edit Mode" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Chat Message — Inline Edit Mode</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Inline Editing</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{streamingTokenName}</code>
+        </div>
+        <div class="card__overview">
+          Chat Message — Inline Edit Mode page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Inline edit textarea with Save/Cancel buttons, character counter, and keyboard shortcut hints</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-detail-badges" data-section="public" data-title="token detail - badges section" data-index="11">
+      <div class="card__screenshot" onclick="openLightbox(11)">
          <img src="screenshots/public-token-detail-badges.png" alt="Token Detail - Badges Section" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1140,8 +1238,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-comments" data-section="public" data-title="token detail - comments tab" data-index="9">
-      <div class="card__screenshot" onclick="openLightbox(9)">
+    <article class="card" id="page-token-comments" data-section="public" data-title="token detail - comments tab" data-index="12">
+      <div class="card__screenshot" onclick="openLightbox(12)">
          <img src="screenshots/public-token-comments.png" alt="Token Detail - Comments Tab" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1181,8 +1279,112 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-report-modal" data-section="public" data-title="report modal (not captured)" data-index="10">
-      <div class="card__screenshot" onclick="openLightbox(10)">
+    <article class="card" id="page-token-comments-edit-toolbar" data-section="public" data-title="comment — edit toolbar" data-index="13">
+      <div class="card__screenshot" onclick="openLightbox(13)">
+         <img src="screenshots/public-token-comments-edit-toolbar.png" alt="Comment — Edit Toolbar" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Comment — Edit Toolbar</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Inline Editing</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{tokenName}/comments</code>
+        </div>
+        <div class="card__overview">
+          Comment — Edit Toolbar page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Hover over a comment to reveal moderation toolbar with Edit (pencil), Report, Ban, and Delete actions</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-comments-edit-mode" data-section="public" data-title="comment — inline edit mode" data-index="14">
+      <div class="card__screenshot" onclick="openLightbox(14)">
+         <img src="screenshots/public-token-comments-edit-mode.png" alt="Comment — Inline Edit Mode" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Comment — Inline Edit Mode</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Inline Editing</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{tokenName}/comments</code>
+        </div>
+        <div class="card__overview">
+          Comment — Inline Edit Mode page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Inline edit textarea for comments with Save/Cancel buttons, character counter, and keyboard hints</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-detail-transactions" data-section="public" data-title="token detail — transactions tab" data-index="15">
+      <div class="card__screenshot" onclick="openLightbox(15)">
+         <img src="screenshots/public-token-detail-transactions.png" alt="Token Detail — Transactions Tab" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Token Detail — Transactions Tab</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Token Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{tokenName}</code>
+        </div>
+        <div class="card__overview">
+          Token Detail — Transactions Tab page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Transactions tab showing trade history for this token</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-detail-holder-distribution" data-section="public" data-title="token detail — holder distribution" data-index="16">
+      <div class="card__screenshot" onclick="openLightbox(16)">
+         <img src="screenshots/public-token-detail-holder-distribution.png" alt="Token Detail — Holder Distribution" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Token Detail — Holder Distribution</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Token Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/buy-sell/{tokenName}</code>
+        </div>
+        <div class="card__overview">
+          Token Detail — Holder Distribution page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Holder distribution tab showing ownership breakdown</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-token-report-modal" data-section="public" data-title="report modal (not captured)" data-index="17">
+      <div class="card__screenshot" onclick="openLightbox(17)">
          <img src="screenshots/public-token-report-modal.png" alt="Report Modal (Not Captured)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1216,8 +1418,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-launch" data-section="public" data-title="token launch form" data-index="11">
-      <div class="card__screenshot" onclick="openLightbox(11)">
+    <article class="card" id="page-launch" data-section="public" data-title="token launch form" data-index="18">
+      <div class="card__screenshot" onclick="openLightbox(18)">
          <img src="screenshots/public-launch.png" alt="Token Launch Form" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1266,8 +1468,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-launch-form-filled" data-section="public" data-title="token launch form (filled)" data-index="12">
-      <div class="card__screenshot" onclick="openLightbox(12)">
+    <article class="card" id="page-launch-form-filled" data-section="public" data-title="token launch form (filled)" data-index="19">
+      <div class="card__screenshot" onclick="openLightbox(19)">
          <img src="screenshots/public-launch-form-filled.png" alt="Token Launch Form (Filled)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1308,8 +1510,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-fees" data-section="public" data-title="fee schedule" data-index="13">
-      <div class="card__screenshot" onclick="openLightbox(13)">
+    <article class="card" id="page-fees" data-section="public" data-title="fee schedule" data-index="20">
+      <div class="card__screenshot" onclick="openLightbox(20)">
          <img src="screenshots/public-fees.png" alt="Fee Schedule" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1348,8 +1550,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-how-it-works" data-section="public" data-title="how it works" data-index="14">
-      <div class="card__screenshot" onclick="openLightbox(14)">
+    <article class="card" id="page-how-it-works" data-section="public" data-title="how it works" data-index="21">
+      <div class="card__screenshot" onclick="openLightbox(21)">
          <img src="screenshots/public-how-it-works.png" alt="How It Works" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1389,8 +1591,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile" data-section="public" data-title="user profile" data-index="15">
-      <div class="card__screenshot" onclick="openLightbox(15)">
+    <article class="card" id="page-my-profile" data-section="public" data-title="user profile" data-index="22">
+      <div class="card__screenshot" onclick="openLightbox(22)">
          <img src="screenshots/public-my-profile.png" alt="User Profile" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1431,8 +1633,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-api-keys" data-section="public" data-title="user profile - api keys" data-index="16">
-      <div class="card__screenshot" onclick="openLightbox(16)">
+    <article class="card" id="page-my-profile-api-keys" data-section="public" data-title="user profile - api keys" data-index="23">
+      <div class="card__screenshot" onclick="openLightbox(23)">
          <img src="screenshots/public-my-profile-api-keys.png" alt="User Profile - API Keys" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1474,8 +1676,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-team" data-section="public" data-title="user profile - team management" data-index="17">
-      <div class="card__screenshot" onclick="openLightbox(17)">
+    <article class="card" id="page-my-profile-team" data-section="public" data-title="user profile - team management" data-index="24">
+      <div class="card__screenshot" onclick="openLightbox(24)">
          <img src="screenshots/public-my-profile-team.png" alt="User Profile - Team Management" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1517,8 +1719,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-access" data-section="public" data-title="user profile - access control" data-index="18">
-      <div class="card__screenshot" onclick="openLightbox(18)">
+    <article class="card" id="page-my-profile-access" data-section="public" data-title="user profile - access control" data-index="25">
+      <div class="card__screenshot" onclick="openLightbox(25)">
          <img src="screenshots/public-my-profile-access.png" alt="User Profile - Access Control" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1557,8 +1759,60 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-create-api-key-modal" data-section="public" data-title="create access token modal" data-index="19">
-      <div class="card__screenshot" onclick="openLightbox(19)">
+    <article class="card" id="page-my-profile-token-balances" data-section="public" data-title="my profile — token balances" data-index="26">
+      <div class="card__screenshot" onclick="openLightbox(26)">
+         <img src="screenshots/public-my-profile-token-balances.png" alt="My Profile — Token Balances" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">My Profile — Token Balances</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Profile Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          My Profile — Token Balances page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Token balances/holdings tab on profile page</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-trade-activity" data-section="public" data-title="my profile — trade activity" data-index="27">
+      <div class="card__screenshot" onclick="openLightbox(27)">
+         <img src="screenshots/public-my-profile-trade-activity.png" alt="My Profile — Trade Activity" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">My Profile — Trade Activity</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Profile Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          My Profile — Trade Activity page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Trade activity/history tab on profile page</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-create-api-key-modal" data-section="public" data-title="create access token modal" data-index="28">
+      <div class="card__screenshot" onclick="openLightbox(28)">
          <img src="screenshots/public-my-profile-create-api-key-modal.png" alt="Create Access Token Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1602,8 +1856,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-create-team-invite-modal" data-section="public" data-title="invite team member modal" data-index="20">
-      <div class="card__screenshot" onclick="openLightbox(20)">
+    <article class="card" id="page-my-profile-create-team-invite-modal" data-section="public" data-title="invite team member modal" data-index="29">
+      <div class="card__screenshot" onclick="openLightbox(29)">
          <img src="screenshots/public-my-profile-create-team-invite-modal.png" alt="Invite Team Member Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1647,8 +1901,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-my-profile-edit-modal" data-section="public" data-title="complete profile modal" data-index="21">
-      <div class="card__screenshot" onclick="openLightbox(21)">
+    <article class="card" id="page-my-profile-edit-modal" data-section="public" data-title="complete profile modal" data-index="30">
+      <div class="card__screenshot" onclick="openLightbox(30)">
          <img src="screenshots/public-my-profile-edit-modal.png" alt="Complete Profile Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1687,8 +1941,138 @@
       </div>
     </article>
 
-    <article class="card" id="page-public-profile" data-section="public" data-title="public user profile" data-index="22">
-      <div class="card__screenshot" onclick="openLightbox(22)">
+    <article class="card" id="page-launch-form-success-modal" data-section="public" data-title="token launch success modal" data-index="31">
+      <div class="card__screenshot" onclick="openLightbox(31)">
+         <img src="screenshots/public-launch-form-success-modal.png" alt="Token Launch Success Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Token Launch Success Modal</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/launch?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Token Launch Success Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Success modal after token launch - triggered via NiceModal.show()</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-edit-api-key-modal" data-section="public" data-title="edit api key modal" data-index="32">
+      <div class="card__screenshot" onclick="openLightbox(32)">
+         <img src="screenshots/public-my-profile-edit-api-key-modal.png" alt="Edit API Key Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Edit API Key Modal</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Edit API Key Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Modal for editing an existing API key name/settings</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-revoke-api-key-modal" data-section="public" data-title="revoke api key modal" data-index="33">
+      <div class="card__screenshot" onclick="openLightbox(33)">
+         <img src="screenshots/public-my-profile-revoke-api-key-modal.png" alt="Revoke API Key Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Revoke API Key Modal</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Revoke API Key Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Confirmation modal for revoking an API key</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-edit-team-member-modal" data-section="public" data-title="edit team member modal" data-index="34">
+      <div class="card__screenshot" onclick="openLightbox(34)">
+         <img src="screenshots/public-my-profile-edit-team-member-modal.png" alt="Edit Team Member Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Edit Team Member Modal</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Edit Team Member Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Modal for editing a team member role/permissions</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-my-profile-revoke-team-access-modal" data-section="public" data-title="revoke team access modal" data-index="35">
+      <div class="card__screenshot" onclick="openLightbox(35)">
+         <img src="screenshots/public-my-profile-revoke-team-access-modal.png" alt="Revoke Team Access Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Revoke Team Access Modal</h3>
+          <span class="badge" style="--badge-color: #22c55e">Public Pages</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/my-profile?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Revoke Team Access Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Confirmation modal for revoking team member access</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-public-profile" data-section="public" data-title="public user profile" data-index="36">
+      <div class="card__screenshot" onclick="openLightbox(36)">
          <img src="screenshots/public-public-profile.png" alt="Public User Profile" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1728,8 +2112,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-shorthand" data-section="public" data-title="token shorthand url" data-index="23">
-      <div class="card__screenshot" onclick="openLightbox(23)">
+    <article class="card" id="page-token-shorthand" data-section="public" data-title="token shorthand url" data-index="37">
+      <div class="card__screenshot" onclick="openLightbox(37)">
          <img src="screenshots/public-token-shorthand.png" alt="Token Shorthand URL" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1766,8 +2150,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-token-shorthand-comments" data-section="public" data-title="token shorthand url - comments" data-index="24">
-      <div class="card__screenshot" onclick="openLightbox(24)">
+    <article class="card" id="page-token-shorthand-comments" data-section="public" data-title="token shorthand url - comments" data-index="38">
+      <div class="card__screenshot" onclick="openLightbox(38)">
          <img src="screenshots/public-token-shorthand-comments.png" alt="Token Shorthand URL - Comments" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1807,8 +2191,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-invite-claim" data-section="public" data-title="team invite claim" data-index="25">
-      <div class="card__screenshot" onclick="openLightbox(25)">
+    <article class="card" id="page-invite-claim" data-section="public" data-title="team invite claim" data-index="39">
+      <div class="card__screenshot" onclick="openLightbox(39)">
          <img src="screenshots/public-invite-claim.png" alt="Team Invite Claim" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1848,8 +2232,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overseer-invite-claim" data-section="public" data-title="overseer invite claim" data-index="26">
-      <div class="card__screenshot" onclick="openLightbox(26)">
+    <article class="card" id="page-overseer-invite-claim" data-section="public" data-title="overseer invite claim" data-index="40">
+      <div class="card__screenshot" onclick="openLightbox(40)">
          <img src="screenshots/public-overseer-invite-claim.png" alt="Overseer Invite Claim" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1896,8 +2280,60 @@
           </h2>
         </div>
 
-    <article class="card" id="page-studio-landing" data-section="studio" data-title="studio welcome" data-index="27">
-      <div class="card__screenshot" onclick="openLightbox(27)">
+    <article class="card" id="page-studio-credentials-modal" data-section="studio" data-title="studio — stream credentials modal" data-index="41">
+      <div class="card__screenshot" onclick="openLightbox(41)">
+         <img src="screenshots/studio-studio-credentials-modal.png" alt="Studio — Stream Credentials Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Studio — Stream Credentials Modal</h3>
+          <span class="badge" style="--badge-color: #f59e0b">Studio (Creator)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/studio/{tokenName}?bypass=eth|{tokenCreatorAddress}</code>
+        </div>
+        <div class="card__overview">
+          Studio — Stream Credentials Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> RTMPS/SRT stream credentials display modal</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-studio-add-simulcast-modal" data-section="studio" data-title="studio — add simulcast modal" data-index="42">
+      <div class="card__screenshot" onclick="openLightbox(42)">
+         <img src="screenshots/studio-studio-add-simulcast-modal.png" alt="Studio — Add Simulcast Modal" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Studio — Add Simulcast Modal</h3>
+          <span class="badge" style="--badge-color: #f59e0b">Studio (Creator)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Modals</span>
+        </div>
+        <div class="card__route">
+          <code>/studio/{tokenName}?bypass=eth|{tokenCreatorAddress}</code>
+        </div>
+        <div class="card__overview">
+          Studio — Add Simulcast Modal page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Modal for adding RTMPS/SRT simulcast targets (YouTube, Twitch, etc.)</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-studio-landing" data-section="studio" data-title="studio welcome" data-index="43">
+      <div class="card__screenshot" onclick="openLightbox(43)">
          <img src="screenshots/studio-studio-landing.png" alt="Studio Welcome" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1937,8 +2373,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-detail" data-section="studio" data-title="studio dashboard (offline)" data-index="28">
-      <div class="card__screenshot" onclick="openLightbox(28)">
+    <article class="card" id="page-studio-detail" data-section="studio" data-title="studio dashboard (offline)" data-index="44">
+      <div class="card__screenshot" onclick="openLightbox(44)">
          <img src="screenshots/studio-studio-detail.png" alt="Studio Dashboard (Offline)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -1985,8 +2421,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-settings-modal" data-section="studio" data-title="studio settings modal (not captured)" data-index="29">
-      <div class="card__screenshot" onclick="openLightbox(29)">
+    <article class="card" id="page-studio-settings-modal" data-section="studio" data-title="studio settings modal (not captured)" data-index="45">
+      <div class="card__screenshot" onclick="openLightbox(45)">
          <img src="screenshots/studio-studio-settings-modal.png" alt="Studio Settings Modal (Not Captured)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2020,8 +2456,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-detail-live" data-section="studio" data-title="studio dashboard (live)" data-index="30">
-      <div class="card__screenshot" onclick="openLightbox(30)">
+    <article class="card" id="page-studio-detail-live" data-section="studio" data-title="studio dashboard (live)" data-index="46">
+      <div class="card__screenshot" onclick="openLightbox(46)">
          <img src="screenshots/studio-studio-detail-live.png" alt="Studio Dashboard (Live)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2064,8 +2500,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-controls-tab" data-section="studio" data-title="studio dashboard - controls tab area" data-index="31">
-      <div class="card__screenshot" onclick="openLightbox(31)">
+    <article class="card" id="page-studio-controls-tab" data-section="studio" data-title="studio dashboard - controls tab area" data-index="47">
+      <div class="card__screenshot" onclick="openLightbox(47)">
          <img src="screenshots/studio-studio-controls-tab.png" alt="Studio Dashboard - Controls Tab Area" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2105,8 +2541,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-analytics-tab" data-section="studio" data-title="studio dashboard - analytics focus" data-index="32">
-      <div class="card__screenshot" onclick="openLightbox(32)">
+    <article class="card" id="page-studio-analytics-tab" data-section="studio" data-title="studio dashboard - analytics focus" data-index="48">
+      <div class="card__screenshot" onclick="openLightbox(48)">
          <img src="screenshots/studio-studio-analytics-tab.png" alt="Studio Dashboard - Analytics Focus" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2146,8 +2582,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-recordings-tab" data-section="studio" data-title="studio dashboard - recordings/transactions tab" data-index="33">
-      <div class="card__screenshot" onclick="openLightbox(33)">
+    <article class="card" id="page-studio-recordings-tab" data-section="studio" data-title="studio dashboard - recordings/transactions tab" data-index="49">
+      <div class="card__screenshot" onclick="openLightbox(49)">
          <img src="screenshots/studio-studio-recordings-tab.png" alt="Studio Dashboard - Recordings/Transactions Tab" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2187,8 +2623,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-recordings-download" data-section="studio" data-title="studio — recording download state" data-index="34">
-      <div class="card__screenshot" onclick="openLightbox(34)">
+    <article class="card" id="page-studio-recordings-download" data-section="studio" data-title="studio — recording download state" data-index="50">
+      <div class="card__screenshot" onclick="openLightbox(50)">
          <img src="screenshots/studio-studio-recordings-download.png" alt="Studio — Recording Download State" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2213,8 +2649,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-simulcast-tab" data-section="studio" data-title="studio dashboard - simulcast tab" data-index="35">
-      <div class="card__screenshot" onclick="openLightbox(35)">
+    <article class="card" id="page-studio-simulcast-tab" data-section="studio" data-title="studio dashboard - simulcast tab" data-index="51">
+      <div class="card__screenshot" onclick="openLightbox(51)">
          <img src="screenshots/studio-studio-simulcast-tab.png" alt="Studio Dashboard - Simulcast Tab" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2253,8 +2689,86 @@
       </div>
     </article>
 
-    <article class="card" id="page-studio-chat-live" data-section="studio" data-title="studio dashboard - chat focus (live)" data-index="36">
-      <div class="card__screenshot" onclick="openLightbox(36)">
+    <article class="card" id="page-studio-participants-tab" data-section="studio" data-title="studio — participants tab" data-index="52">
+      <div class="card__screenshot" onclick="openLightbox(52)">
+         <img src="screenshots/studio-studio-participants-tab.png" alt="Studio — Participants Tab" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Studio — Participants Tab</h3>
+          <span class="badge" style="--badge-color: #f59e0b">Studio (Creator)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Studio Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/studio/{tokenName}?bypass=eth|{tokenCreatorAddress}</code>
+        </div>
+        <div class="card__overview">
+          Studio — Participants Tab page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Participants tab showing active chat users with ban/moderation controls</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-studio-comments-tab" data-section="studio" data-title="studio — comments tab" data-index="53">
+      <div class="card__screenshot" onclick="openLightbox(53)">
+         <img src="screenshots/studio-studio-comments-tab.png" alt="Studio — Comments Tab" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Studio — Comments Tab</h3>
+          <span class="badge" style="--badge-color: #f59e0b">Studio (Creator)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Studio Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/studio/{tokenName}?bypass=eth|{tokenCreatorAddress}</code>
+        </div>
+        <div class="card__overview">
+          Studio — Comments Tab page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Comments tab with moderation controls for token owner</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-studio-team-tab" data-section="studio" data-title="studio — team tab" data-index="54">
+      <div class="card__screenshot" onclick="openLightbox(54)">
+         <img src="screenshots/studio-studio-team-tab.png" alt="Studio — Team Tab" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Studio — Team Tab</h3>
+          <span class="badge" style="--badge-color: #f59e0b">Studio (Creator)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Studio Tabs</span>
+        </div>
+        <div class="card__route">
+          <code>/studio/{tokenName}?bypass=eth|{tokenCreatorAddress}</code>
+        </div>
+        <div class="card__overview">
+          Studio — Team Tab page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Team management tab for inviting moderators, managers, tech producers</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-studio-chat-live" data-section="studio" data-title="studio dashboard - chat focus (live)" data-index="55">
+      <div class="card__screenshot" onclick="openLightbox(55)">
          <img src="screenshots/studio-studio-chat-live.png" alt="Studio Dashboard - Chat Focus (Live)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2302,8 +2816,8 @@
           </h2>
         </div>
 
-    <article class="card" id="page-docs-getting-started" data-section="docs" data-title="sdk documentation - getting started" data-index="37">
-      <div class="card__screenshot" onclick="openLightbox(37)">
+    <article class="card" id="page-docs-getting-started" data-section="docs" data-title="sdk documentation - getting started" data-index="56">
+      <div class="card__screenshot" onclick="openLightbox(56)">
          <img src="screenshots/docs-docs-getting-started.png" alt="SDK Documentation - Getting Started" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2345,8 +2859,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-mcp" data-section="docs" data-title="mcp server / ai integration" data-index="38">
-      <div class="card__screenshot" onclick="openLightbox(38)">
+    <article class="card" id="page-docs-mcp" data-section="docs" data-title="mcp server / ai integration" data-index="57">
+      <div class="card__screenshot" onclick="openLightbox(57)">
          <img src="screenshots/docs-docs-mcp.png" alt="MCP Server / AI Integration" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2388,8 +2902,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-ai" data-section="docs" data-title="ai-ready documentation" data-index="39">
-      <div class="card__screenshot" onclick="openLightbox(39)">
+    <article class="card" id="page-docs-ai" data-section="docs" data-title="ai-ready documentation" data-index="58">
+      <div class="card__screenshot" onclick="openLightbox(58)">
          <img src="screenshots/docs-docs-ai.png" alt="AI-Ready Documentation" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2429,8 +2943,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-websocket" data-section="docs" data-title="websocket events reference" data-index="40">
-      <div class="card__screenshot" onclick="openLightbox(40)">
+    <article class="card" id="page-docs-websocket" data-section="docs" data-title="websocket events reference" data-index="59">
+      <div class="card__screenshot" onclick="openLightbox(59)">
          <img src="screenshots/docs-docs-websocket.png" alt="WebSocket Events Reference" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2471,8 +2985,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-sdk-explorer" data-section="docs" data-title="sdk explorer" data-index="41">
-      <div class="card__screenshot" onclick="openLightbox(41)">
+    <article class="card" id="page-docs-sdk-explorer" data-section="docs" data-title="sdk explorer" data-index="60">
+      <div class="card__screenshot" onclick="openLightbox(60)">
          <img src="screenshots/docs-docs-sdk-explorer.png" alt="SDK Explorer" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2513,8 +3027,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-sdk-examples" data-section="docs" data-title="code examples" data-index="42">
-      <div class="card__screenshot" onclick="openLightbox(42)">
+    <article class="card" id="page-docs-sdk-examples" data-section="docs" data-title="code examples" data-index="61">
+      <div class="card__screenshot" onclick="openLightbox(61)">
          <img src="screenshots/docs-docs-sdk-examples.png" alt="Code Examples" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2556,8 +3070,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-docs-sdk-category" data-section="docs" data-title="sdk category detail (trading)" data-index="43">
-      <div class="card__screenshot" onclick="openLightbox(43)">
+    <article class="card" id="page-docs-sdk-category" data-section="docs" data-title="sdk category detail (trading)" data-index="62">
+      <div class="card__screenshot" onclick="openLightbox(62)">
          <img src="screenshots/docs-docs-sdk-category.png" alt="SDK Category Detail (Trading)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2605,8 +3119,8 @@
           </h2>
         </div>
 
-    <article class="card" id="page-overwatch-dashboard" data-section="overwatch" data-title="overwatch dashboard" data-index="44">
-      <div class="card__screenshot" onclick="openLightbox(44)">
+    <article class="card" id="page-overwatch-dashboard" data-section="overwatch" data-title="overwatch dashboard" data-index="63">
+      <div class="card__screenshot" onclick="openLightbox(63)">
          <img src="screenshots/overwatch-overwatch-dashboard.png" alt="Overwatch Dashboard" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2650,8 +3164,34 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-streams" data-section="overwatch" data-title="stream monitoring (multiple streams)" data-index="45">
-      <div class="card__screenshot" onclick="openLightbox(45)">
+    <article class="card" id="page-overwatch-dashboard-quick-actions" data-section="overwatch" data-title="dashboard — quick actions" data-index="64">
+      <div class="card__screenshot" onclick="openLightbox(64)">
+         <img src="screenshots/overwatch-overwatch-dashboard-quick-actions.png" alt="Dashboard — Quick Actions" loading="lazy" />
+         <div class="card__screenshot-overlay">Click to zoom</div>
+       </div>
+      <div class="card__content">
+        <div class="card__header">
+          <h3 class="card__title">Dashboard — Quick Actions</h3>
+          <span class="badge" style="--badge-color: #ef4444">Overwatch (Admin)</span>
+          <span class="badge badge--sub" style="--badge-color: #6366f1">Interactive States</span>
+        </div>
+        <div class="card__route">
+          <code>/overwatch/dashboard?bypass=eth|0x36C9266E97F0e3dbe80E8b4aDC2E623cD9e0f06E</code>
+        </div>
+        <div class="card__overview">
+          Dashboard — Quick Actions page of the Gala Launchpad application.
+        </div>
+        
+        
+        
+        
+        
+        <div class="card__notes"><strong>Notes:</strong> Overwatch dashboard scrolled to quick actions section</div>
+      </div>
+    </article>
+
+    <article class="card" id="page-overwatch-streams" data-section="overwatch" data-title="stream monitoring (multiple streams)" data-index="65">
+      <div class="card__screenshot" onclick="openLightbox(65)">
          <img src="screenshots/overwatch-overwatch-streams.png" alt="Stream Monitoring (Multiple Streams)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2694,8 +3234,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-streams-live" data-section="overwatch" data-title="stream monitoring (fewer streams)" data-index="46">
-      <div class="card__screenshot" onclick="openLightbox(46)">
+    <article class="card" id="page-overwatch-streams-live" data-section="overwatch" data-title="stream monitoring (fewer streams)" data-index="66">
+      <div class="card__screenshot" onclick="openLightbox(66)">
          <img src="screenshots/overwatch-overwatch-streams-live.png" alt="Stream Monitoring (Fewer Streams)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2736,8 +3276,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-flags" data-section="overwatch" data-title="content flags" data-index="47">
-      <div class="card__screenshot" onclick="openLightbox(47)">
+    <article class="card" id="page-overwatch-flags" data-section="overwatch" data-title="content flags" data-index="67">
+      <div class="card__screenshot" onclick="openLightbox(67)">
          <img src="screenshots/overwatch-overwatch-flags.png" alt="Content Flags" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2782,8 +3322,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-flags-filters" data-section="overwatch" data-title="content flags (filters open)" data-index="48">
-      <div class="card__screenshot" onclick="openLightbox(48)">
+    <article class="card" id="page-overwatch-flags-filters" data-section="overwatch" data-title="content flags (filters open)" data-index="68">
+      <div class="card__screenshot" onclick="openLightbox(68)">
          <img src="screenshots/overwatch-overwatch-flags-filters.png" alt="Content Flags (Filters Open)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2826,8 +3366,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-flags-review-modal" data-section="overwatch" data-title="flag details modal" data-index="49">
-      <div class="card__screenshot" onclick="openLightbox(49)">
+    <article class="card" id="page-overwatch-flags-review-modal" data-section="overwatch" data-title="flag details modal" data-index="69">
+      <div class="card__screenshot" onclick="openLightbox(69)">
          <img src="screenshots/overwatch-overwatch-flags-review-modal.png" alt="Flag Details Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2868,8 +3408,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-flags-ai-verdicts" data-section="overwatch" data-title="overwatch flags — ai verdict column" data-index="50">
-      <div class="card__screenshot" onclick="openLightbox(50)">
+    <article class="card" id="page-overwatch-flags-ai-verdicts" data-section="overwatch" data-title="overwatch flags — ai verdict column" data-index="70">
+      <div class="card__screenshot" onclick="openLightbox(70)">
          <img src="screenshots/overwatch-overwatch-flags-ai-verdicts.png" alt="Overwatch Flags — AI Verdict Column" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2894,8 +3434,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-flag-detail-ai" data-section="overwatch" data-title="flag detail — ai analysis section" data-index="51">
-      <div class="card__screenshot" onclick="openLightbox(51)">
+    <article class="card" id="page-overwatch-flag-detail-ai" data-section="overwatch" data-title="flag detail — ai analysis section" data-index="71">
+      <div class="card__screenshot" onclick="openLightbox(71)">
          <img src="screenshots/overwatch-overwatch-flag-detail-ai.png" alt="Flag Detail — AI Analysis Section" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2920,8 +3460,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-users" data-section="overwatch" data-title="user management" data-index="52">
-      <div class="card__screenshot" onclick="openLightbox(52)">
+    <article class="card" id="page-overwatch-users" data-section="overwatch" data-title="user management" data-index="72">
+      <div class="card__screenshot" onclick="openLightbox(72)">
          <img src="screenshots/overwatch-overwatch-users.png" alt="User Management" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -2966,8 +3506,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-users-filters" data-section="overwatch" data-title="user management (filters open)" data-index="53">
-      <div class="card__screenshot" onclick="openLightbox(53)">
+    <article class="card" id="page-overwatch-users-filters" data-section="overwatch" data-title="user management (filters open)" data-index="73">
+      <div class="card__screenshot" onclick="openLightbox(73)">
          <img src="screenshots/overwatch-overwatch-users-filters.png" alt="User Management (Filters Open)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3006,8 +3546,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-user-detail" data-section="overwatch" data-title="user details" data-index="54">
-      <div class="card__screenshot" onclick="openLightbox(54)">
+    <article class="card" id="page-overwatch-user-detail" data-section="overwatch" data-title="user details" data-index="74">
+      <div class="card__screenshot" onclick="openLightbox(74)">
          <img src="screenshots/overwatch-overwatch-user-detail.png" alt="User Details" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3049,8 +3589,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-tokens" data-section="overwatch" data-title="token pools" data-index="55">
-      <div class="card__screenshot" onclick="openLightbox(55)">
+    <article class="card" id="page-overwatch-tokens" data-section="overwatch" data-title="token pools" data-index="75">
+      <div class="card__screenshot" onclick="openLightbox(75)">
          <img src="screenshots/overwatch-overwatch-tokens.png" alt="Token Pools" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3094,8 +3634,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-tokens-filters" data-section="overwatch" data-title="token pools (filters open)" data-index="56">
-      <div class="card__screenshot" onclick="openLightbox(56)">
+    <article class="card" id="page-overwatch-tokens-filters" data-section="overwatch" data-title="token pools (filters open)" data-index="76">
+      <div class="card__screenshot" onclick="openLightbox(76)">
          <img src="screenshots/overwatch-overwatch-tokens-filters.png" alt="Token Pools (Filters Open)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3135,8 +3675,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-token-detail" data-section="overwatch" data-title="token details (admin)" data-index="57">
-      <div class="card__screenshot" onclick="openLightbox(57)">
+    <article class="card" id="page-overwatch-token-detail" data-section="overwatch" data-title="token details (admin)" data-index="77">
+      <div class="card__screenshot" onclick="openLightbox(77)">
          <img src="screenshots/overwatch-overwatch-token-detail.png" alt="Token Details (Admin)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3183,8 +3723,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-delisted" data-section="overwatch" data-title="delisted tokens" data-index="58">
-      <div class="card__screenshot" onclick="openLightbox(58)">
+    <article class="card" id="page-overwatch-delisted" data-section="overwatch" data-title="delisted tokens" data-index="78">
+      <div class="card__screenshot" onclick="openLightbox(78)">
          <img src="screenshots/overwatch-overwatch-delisted.png" alt="Delisted Tokens" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3224,8 +3764,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-delist-modal" data-section="overwatch" data-title="delist token modal" data-index="59">
-      <div class="card__screenshot" onclick="openLightbox(59)">
+    <article class="card" id="page-overwatch-delist-modal" data-section="overwatch" data-title="delist token modal" data-index="79">
+      <div class="card__screenshot" onclick="openLightbox(79)">
          <img src="screenshots/overwatch-overwatch-delist-modal.png" alt="Delist Token Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3267,8 +3807,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-delist-relist-confirm" data-section="overwatch" data-title="relist token confirmation (empty state)" data-index="60">
-      <div class="card__screenshot" onclick="openLightbox(60)">
+    <article class="card" id="page-overwatch-delist-relist-confirm" data-section="overwatch" data-title="relist token confirmation (empty state)" data-index="80">
+      <div class="card__screenshot" onclick="openLightbox(80)">
          <img src="screenshots/overwatch-overwatch-delist-relist-confirm.png" alt="Relist Token Confirmation (Empty State)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3304,8 +3844,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-bans" data-section="overwatch" data-title="banned users" data-index="61">
-      <div class="card__screenshot" onclick="openLightbox(61)">
+    <article class="card" id="page-overwatch-bans" data-section="overwatch" data-title="banned users" data-index="81">
+      <div class="card__screenshot" onclick="openLightbox(81)">
          <img src="screenshots/overwatch-overwatch-bans.png" alt="Banned Users" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3348,8 +3888,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-bans-modal" data-section="overwatch" data-title="ban user modal" data-index="62">
-      <div class="card__screenshot" onclick="openLightbox(62)">
+    <article class="card" id="page-overwatch-bans-modal" data-section="overwatch" data-title="ban user modal" data-index="82">
+      <div class="card__screenshot" onclick="openLightbox(82)">
          <img src="screenshots/overwatch-overwatch-bans-modal.png" alt="Ban User Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3391,8 +3931,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-bans-unban-confirm" data-section="overwatch" data-title="remove user ban confirmation" data-index="63">
-      <div class="card__screenshot" onclick="openLightbox(63)">
+    <article class="card" id="page-overwatch-bans-unban-confirm" data-section="overwatch" data-title="remove user ban confirmation" data-index="83">
+      <div class="card__screenshot" onclick="openLightbox(83)">
          <img src="screenshots/overwatch-overwatch-bans-unban-confirm.png" alt="Remove User Ban Confirmation" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3431,8 +3971,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-trades" data-section="overwatch" data-title="trade activity" data-index="64">
-      <div class="card__screenshot" onclick="openLightbox(64)">
+    <article class="card" id="page-overwatch-trades" data-section="overwatch" data-title="trade activity" data-index="84">
+      <div class="card__screenshot" onclick="openLightbox(84)">
          <img src="screenshots/overwatch-overwatch-trades.png" alt="Trade Activity" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3473,8 +4013,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-trades-filters" data-section="overwatch" data-title="trade activity (filters open)" data-index="65">
-      <div class="card__screenshot" onclick="openLightbox(65)">
+    <article class="card" id="page-overwatch-trades-filters" data-section="overwatch" data-title="trade activity (filters open)" data-index="85">
+      <div class="card__screenshot" onclick="openLightbox(85)">
          <img src="screenshots/overwatch-overwatch-trades-filters.png" alt="Trade Activity (Filters Open)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3516,8 +4056,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-trades-detail-modal" data-section="overwatch" data-title="trade activity filters (no modal)" data-index="66">
-      <div class="card__screenshot" onclick="openLightbox(66)">
+    <article class="card" id="page-overwatch-trades-detail-modal" data-section="overwatch" data-title="trade activity filters (no modal)" data-index="86">
+      <div class="card__screenshot" onclick="openLightbox(86)">
          <img src="screenshots/overwatch-overwatch-trades-detail-modal.png" alt="Trade Activity Filters (No Modal)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3558,8 +4098,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-invites" data-section="overwatch" data-title="overseer invites" data-index="67">
-      <div class="card__screenshot" onclick="openLightbox(67)">
+    <article class="card" id="page-overwatch-invites" data-section="overwatch" data-title="overseer invites" data-index="87">
+      <div class="card__screenshot" onclick="openLightbox(87)">
          <img src="screenshots/overwatch-overwatch-invites.png" alt="Overseer Invites" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3605,8 +4145,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-invites-create-modal" data-section="overwatch" data-title="invite platform overseer modal" data-index="68">
-      <div class="card__screenshot" onclick="openLightbox(68)">
+    <article class="card" id="page-overwatch-invites-create-modal" data-section="overwatch" data-title="invite platform overseer modal" data-index="88">
+      <div class="card__screenshot" onclick="openLightbox(88)">
          <img src="screenshots/overwatch-overwatch-invites-create-modal.png" alt="Invite Platform Overseer Modal" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3648,8 +4188,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-invites-revoke-confirm" data-section="overwatch" data-title="revoke overseer invite confirmation" data-index="69">
-      <div class="card__screenshot" onclick="openLightbox(69)">
+    <article class="card" id="page-overwatch-invites-revoke-confirm" data-section="overwatch" data-title="revoke overseer invite confirmation" data-index="89">
+      <div class="card__screenshot" onclick="openLightbox(89)">
          <img src="screenshots/overwatch-overwatch-invites-revoke-confirm.png" alt="Revoke Overseer Invite Confirmation" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3688,8 +4228,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-websocket" data-section="overwatch" data-title="websocket control (emit events)" data-index="70">
-      <div class="card__screenshot" onclick="openLightbox(70)">
+    <article class="card" id="page-overwatch-websocket" data-section="overwatch" data-title="websocket control (emit events)" data-index="90">
+      <div class="card__screenshot" onclick="openLightbox(90)">
          <img src="screenshots/overwatch-overwatch-websocket.png" alt="WebSocket Control (Emit Events)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3731,8 +4271,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-websocket-emitter" data-section="overwatch" data-title="websocket control (emitter focused)" data-index="71">
-      <div class="card__screenshot" onclick="openLightbox(71)">
+    <article class="card" id="page-overwatch-websocket-emitter" data-section="overwatch" data-title="websocket control (emitter focused)" data-index="91">
+      <div class="card__screenshot" onclick="openLightbox(91)">
          <img src="screenshots/overwatch-overwatch-websocket-emitter.png" alt="WebSocket Control (Emitter Focused)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3771,8 +4311,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-events" data-section="overwatch" data-title="event monitoring" data-index="72">
-      <div class="card__screenshot" onclick="openLightbox(72)">
+    <article class="card" id="page-overwatch-events" data-section="overwatch" data-title="event monitoring" data-index="92">
+      <div class="card__screenshot" onclick="openLightbox(92)">
          <img src="screenshots/overwatch-overwatch-events.png" alt="Event Monitoring" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3816,8 +4356,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-events-detail-modal" data-section="overwatch" data-title="event detail modal (token buy)" data-index="73">
-      <div class="card__screenshot" onclick="openLightbox(73)">
+    <article class="card" id="page-overwatch-events-detail-modal" data-section="overwatch" data-title="event detail modal (token buy)" data-index="93">
+      <div class="card__screenshot" onclick="openLightbox(93)">
          <img src="screenshots/overwatch-overwatch-events-detail-modal.png" alt="Event Detail Modal (Token Buy)" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3858,8 +4398,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-messages" data-section="overwatch" data-title="messages monitor" data-index="74">
-      <div class="card__screenshot" onclick="openLightbox(74)">
+    <article class="card" id="page-overwatch-messages" data-section="overwatch" data-title="messages monitor" data-index="94">
+      <div class="card__screenshot" onclick="openLightbox(94)">
          <img src="screenshots/overwatch-overwatch-messages.png" alt="Messages Monitor" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3900,8 +4440,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-cache" data-section="overwatch" data-title="cache management" data-index="75">
-      <div class="card__screenshot" onclick="openLightbox(75)">
+    <article class="card" id="page-overwatch-cache" data-section="overwatch" data-title="cache management" data-index="95">
+      <div class="card__screenshot" onclick="openLightbox(95)">
          <img src="screenshots/overwatch-overwatch-cache.png" alt="Cache Management" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3944,8 +4484,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-platform-config" data-section="overwatch" data-title="platform configuration" data-index="76">
-      <div class="card__screenshot" onclick="openLightbox(76)">
+    <article class="card" id="page-overwatch-platform-config" data-section="overwatch" data-title="platform configuration" data-index="96">
+      <div class="card__screenshot" onclick="openLightbox(96)">
          <img src="screenshots/overwatch-overwatch-platform-config.png" alt="Platform Configuration" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -3987,8 +4527,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-overwatch-restricted-names" data-section="overwatch" data-title="restricted token names" data-index="77">
-      <div class="card__screenshot" onclick="openLightbox(77)">
+    <article class="card" id="page-overwatch-restricted-names" data-section="overwatch" data-title="restricted token names" data-index="97">
+      <div class="card__screenshot" onclick="openLightbox(97)">
          <img src="screenshots/overwatch-overwatch-restricted-names.png" alt="Restricted Token Names" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4036,8 +4576,8 @@
           </h2>
         </div>
 
-    <article class="card" id="page-terms" data-section="legal" data-title="terms and conditions" data-index="78">
-      <div class="card__screenshot" onclick="openLightbox(78)">
+    <article class="card" id="page-terms" data-section="legal" data-title="terms and conditions" data-index="98">
+      <div class="card__screenshot" onclick="openLightbox(98)">
          <img src="screenshots/legal-terms.png" alt="Terms and Conditions" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4077,8 +4617,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-privacy" data-section="legal" data-title="privacy policy" data-index="79">
-      <div class="card__screenshot" onclick="openLightbox(79)">
+    <article class="card" id="page-privacy" data-section="legal" data-title="privacy policy" data-index="99">
+      <div class="card__screenshot" onclick="openLightbox(99)">
          <img src="screenshots/legal-privacy.png" alt="Privacy Policy" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4125,8 +4665,8 @@
           </h2>
         </div>
 
-    <article class="card" id="page-server-down" data-section="misc" data-title="connection error page" data-index="80">
-      <div class="card__screenshot" onclick="openLightbox(80)">
+    <article class="card" id="page-server-down" data-section="misc" data-title="connection error page" data-index="100">
+      <div class="card__screenshot" onclick="openLightbox(100)">
          <img src="screenshots/misc-server-down.png" alt="Connection Error Page" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4167,8 +4707,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-restricted-jurisdiction" data-section="misc" data-title="restricted jurisdiction" data-index="81">
-      <div class="card__screenshot" onclick="openLightbox(81)">
+    <article class="card" id="page-restricted-jurisdiction" data-section="misc" data-title="restricted jurisdiction" data-index="101">
+      <div class="card__screenshot" onclick="openLightbox(101)">
          <img src="screenshots/misc-restricted-jurisdiction.png" alt="Restricted Jurisdiction" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4207,8 +4747,8 @@
       </div>
     </article>
 
-    <article class="card" id="page-404" data-section="misc" data-title="404 not found" data-index="82">
-      <div class="card__screenshot" onclick="openLightbox(82)">
+    <article class="card" id="page-404" data-section="misc" data-title="404 not found" data-index="102">
+      <div class="card__screenshot" onclick="openLightbox(102)">
          <img src="screenshots/misc-404.png" alt="404 Not Found" loading="lazy" />
          <div class="card__screenshot-overlay">Click to zoom</div>
        </div>
@@ -4278,7 +4818,7 @@
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
     let currentLightboxIndex = -1;
-    const totalPages = 83;
+    const totalPages = 103;
 
     function getVisibleCards() {
       return Array.from(document.querySelectorAll('.card:not(.hidden)'));
