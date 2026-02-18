@@ -1,7 +1,7 @@
 {
   "name": "omni-tool",
-  "version": "1.0.0",
-  "description": "Transform Claude into a GalaChain Expert Developer Agent with 286 MCP tools and 51 teaching topics. Covers trading, liquidity, bridging, token management, DeFi operations, and comprehensive GalaChain learning paths.",
+  "version": "1.1.0",
+  "description": "Transform Claude into a GalaChain Expert Developer Agent with 306 MCP tools and 59 teaching topics. Covers trading, liquidity, bridging, token management, DeFi operations, and comprehensive GalaChain learning paths.",
   "author": {
     "name": "Gala Launchpad Team",
     "email": "aschuler@gala.games"

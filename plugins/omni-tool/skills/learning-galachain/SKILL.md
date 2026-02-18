@@ -1,6 +1,6 @@
 ---
 name: learning-galachain
-description: Comprehensive learning system for GalaChain development with 51 topics and 286 SDK methods
+description: Comprehensive learning system for GalaChain development with 59 topics and 306 SDK methods
 triggers:
   - "How do I learn GalaChain?"
   - "Teach me about GalaChain"
@@ -17,7 +17,7 @@ Welcome! This skill teaches you everything about GalaChain development using our
 
 ## What You'll Learn
 
-The GalaChain OmniTool includes **51 carefully organized teaching topics** covering:
+The GalaChain OmniTool includes **59 carefully organized teaching topics** covering:
 
 - **Trading**: Buying, selling, graduation, analytics, error handling
 - **Pools & Info**: Pool discovery, token details, price history, distribution
@@ -27,11 +27,14 @@ The GalaChain OmniTool includes **51 carefully organized teaching topics** cover
 - **DEX Analytics**: Seasons, leaderboards, volume summaries
 - **Bridging**: Cross-chain operations, token wrapping
 - **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat
-- **Community**: Bans, content flags, reactions, moderators, token bans
-- **Governance**: Overseers, API keys, event subscriptions
+- **Community**: Bans, content flags, reactions, moderators, token bans, AI moderation
+- **Governance**: Overseers, API keys, event subscriptions, restricted names, WebSocket admin
 - **Wallet & Auth**: Multi-wallet, JWT sessions
-- **Utilities**: Installation, helpers, system utils, MCP mapping
-- **And more**: 286 SDK methods fully documented
+- **Utilities**: Installation, helpers, system utils, MCP mapping, platform stats, OEmbed
+- **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat, unified messages
+- **Pools & Token Info**: Pool discovery, token details, price history, distribution, holders
+- **DEX Analytics**: Seasons, leaderboards, volume summaries, weekly challenges
+- **And more**: 306 SDK methods fully documented
 
 ## The Teaching System
 
@@ -43,7 +46,7 @@ The GalaChain OmniTool includes **51 carefully organized teaching topics** cover
 4. **Execute Safely** - Use MCP tools to practice what you learned
 5. **Build Confidence** - Move from concepts to real applications
 
-### The 51 Topics
+### The 59 Topics
 
 All topics are accessible via `/galachain:ask [topic]`:
 
@@ -236,7 +239,7 @@ Expert-level capabilities for sophisticated applications.
 
 ### 👑 Path 8: Mastery
 
-Complete all 51 topics and build a sophisticated application.
+Complete all 59 topics and build a sophisticated application.
 
 Recommended order:
 1. Complete Path 1: Trading Essentials
@@ -313,7 +316,7 @@ Recommended order:
 For every topic, we show you:
 
 1. **SDK code** - TypeScript examples using the SDK
-2. **MCP tool** - Equivalent command using the 286-tool MCP server
+2. **MCP tool** - Equivalent command using the 306-tool MCP server
 
 Example for "buy-tokens":
 ```typescript
@@ -355,17 +358,17 @@ Options:
 
 ### Commands
 - `/galachain:ask [topic]` - Learn about any topic
-- `/galachain:topics` - Browse all 51 topics
+- `/galachain:topics` - Browse all 59 topics
 - `/galachain:setup` - Configure your preferences
 
 ### Agent
 - `galachain-builder` - Ask the agent for help building apps
 
 ### Teaching Content
-- 51 comprehensive topics
-- 286 SDK methods documented
+- 59 comprehensive topics
+- 306 SDK methods documented
 - Hundreds of code examples
-- 286 MCP tools available
+- 306 MCP tools available
 
 ## Next Steps
 
@@ -374,7 +377,7 @@ Options:
 3. **Explore related topics** as suggested
 4. **Practice with MCP tools** to build confidence
 5. **Build your first project** combining multiple concepts
-6. **Master all 51 topics** and become a GalaChain expert
+6. **Master all 59 topics** and become a GalaChain expert
 
 ## Pro Tips
 

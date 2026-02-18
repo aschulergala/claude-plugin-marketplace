@@ -1,9 +1,9 @@
 ---
 name: galachain:topics
-description: List all 51 teaching topics organized by category
+description: List all 59 teaching topics organized by category
 arguments:
   - name: category
-    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all')"
+    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all'). Includes messages, holders, restricted-names, websocket-admin, platform-stats, oembed, ai-moderation, weekly-challenge."
     required: false
   - name: format
     description: "Output format: list (default), detailed, or tree"
@@ -12,7 +12,7 @@ arguments:
 
 # GalaChain Topics Command
 
-Browse all 51 teaching topics organized by domain. Each topic includes:
+Browse all 59 teaching topics organized by domain. Each topic includes:
 - **Description** - What this feature does
 - **Difficulty** - Beginner, intermediate, or advanced
 - **Prerequisites** - Recommended topics to learn first
@@ -48,7 +48,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `local-calculations` | Intermediate | Local computation methods | 4 |
 | `trading-analytics` | Beginner | Trading analytics and metrics | 2 |
 
-### 🔍 Pools & Token Info (5 topics)
+### 🔍 Pools & Token Info (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -57,6 +57,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `token-distribution` | Beginner | Token holder analysis | 2 |
 | `price-history` | Beginner | Historical price data | 2 |
 | `token-identification` | Intermediate | Token format concepts (tokenName vs tokenClassKey) | 3 |
+| `holders` | Beginner | Token holder lists and distribution | 3 |
 
 ### 💰 Balances & Accounts (3 topics)
 
@@ -90,7 +91,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `liquidity-positions` | Advanced | LP position management | - |
 | `advanced-dex-analysis` | Advanced | Advanced pool analysis | 1 |
 
-### 📊 DEX Analytics (5 topics)
+### 📊 DEX Analytics (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -99,6 +100,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `fetch-dex-leaderboard-by-season-id` | Beginner | Season leaderboards | 1 |
 | `fetch-current-dex-leaderboard` | Beginner | Current leaderboard | 1 |
 | `fetch-dex-aggregated-volume-summary` | Beginner | Volume analytics | 1 |
+| `weekly-challenge` | Beginner | Weekly challenge leaderboards and token history | 3 |
 
 ### 🌉 Bridging (2 topics)
 
@@ -107,14 +109,15 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `bridge-operations` | Intermediate | All bridge operations (Ethereum, Solana, fees, status) | 15 |
 | `wrap-unwrap-operations` | Advanced | Cross-channel token wrapping | 10 |
 
-### 📡 Streaming & Chat (2 topics)
+### 📡 Streaming & Chat (3 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `streaming` | Beginner | RTMP streaming, recordings, simulcast | 14 |
 | `stream-chat` | Beginner | Real-time chat integration (REST + WebSocket) | 7 |
+| `messages` | Intermediate | Unified messages API (fetch, create, update, pin) | 5 |
 
-### 🛡️ Community & Moderation (5 topics)
+### 🛡️ Community & Moderation (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -123,14 +126,17 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `content-reactions` | Beginner | Reaction management | 6 |
 | `moderator-invites` | Intermediate | Moderator management | 6 |
 | `token-ban-management` | Intermediate | Token-level bans | 5 |
+| `ai-moderation` | Advanced | AI content moderation config and results | 4 |
 
-### ⚡ Governance & Admin (3 topics)
+### ⚡ Governance & Admin (5 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `overseer-invites` | Advanced | Platform governance | 8 |
 | `api-key-management` | Beginner | API credentials | 6 |
 | `event-subscriptions` | Advanced | Real-time event monitoring | 4 |
+| `restricted-names` | Advanced | Restricted token name management (admin) | 4 |
+| `websocket-admin` | Advanced | WebSocket admin emit tools | 4 |
 
 ### 🔑 Wallet & Auth (2 topics)
 
@@ -139,7 +145,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `multi-wallet` | Beginner | Multi-wallet management | 1 |
 | `session-auth` | Intermediate | JWT authentication | 8 |
 
-### 🔧 Utilities & Reference (6 topics)
+### 🔧 Utilities & Reference (8 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -149,6 +155,8 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `utilities-system` | Beginner | System utilities | 8 |
 | `mcp-to-sdk-mapping` | Beginner | MCP-to-SDK method mapping | 1 |
 | `graduation-detection` | Intermediate | Detect token graduation | 4 |
+| `platform-stats` | Beginner | Platform-wide statistics and metrics | 2 |
+| `oembed` | Beginner | OEmbed embeds for pools, profiles, home | 3 |
 
 ### 🎁 Referrals (1 topic)
 
