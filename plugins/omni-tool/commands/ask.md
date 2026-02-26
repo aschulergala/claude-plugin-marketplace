@@ -1,5 +1,5 @@
 ---
-name: galachain:ask
+name: omni-tool:ask
 description: Ask about any GalaChain topic - accepts natural language questions or topic names
 arguments:
   - name: query
@@ -21,18 +21,18 @@ Ask any question about GalaChain development. The system automatically maps your
 
 ```bash
 # Natural language question
-/galachain:ask how do I buy tokens?
-/galachain:ask what's the difference between swaps and graduations?
-/galachain:ask I need to create a token and enable trading
+/omni-tool:ask how do I buy tokens?
+/omni-tool:ask what's the difference between swaps and graduations?
+/omni-tool:ask I need to create a token and enable trading
 
 # Direct topic name (faster)
-/galachain:ask buy-tokens
-/galachain:ask fetch-dex-pools
-/galachain:ask bridge-operations
+/omni-tool:ask buy-tokens
+/omni-tool:ask fetch-dex-pools
+/omni-tool:ask bridge-operations
 
 # With options
-/galachain:ask token-creation --examples=no
-/galachain:ask streaming --personality=expert
+/omni-tool:ask token-creation --examples=no
+/omni-tool:ask streaming --personality=expert
 ```
 
 ## Supported Topics
@@ -94,7 +94,7 @@ referral-system, trade-history, nft-collection-management
 If `gala_launchpad_explain_sdk_usage` fails with "unknown tool" or "not found":
 - Do NOT retry the tool call
 - Answer from built-in knowledge about the topic instead
-- Note at the end: "(Note: MCP server not installed — for live tool execution, see `/galachain:setup`)"
+- Note at the end: "(Note: MCP server not installed — for live tool execution, see `/omni-tool:setup`)"
 - This gives users value immediately while guiding them toward installation
 
 ## Response Format
@@ -134,16 +134,16 @@ Override the default personality for this response:
 
 ```bash
 # Expert mode - fast and direct
-/galachain:ask fetch-dex-pools --personality=expert
+/omni-tool:ask fetch-dex-pools --personality=expert
 
 # Socratic mode - learn through questions
-/galachain:ask token-creation --personality=socratic
+/omni-tool:ask token-creation --personality=socratic
 
 # Tutor mode - patient and thorough
-/galachain:ask bridge-operations --personality=tutor
+/omni-tool:ask bridge-operations --personality=tutor
 
 # Pragmatist mode - balanced approach
-/galachain:ask liquidity-positions --personality=pragmatist
+/omni-tool:ask liquidity-positions --personality=pragmatist
 ```
 
 ## Integration with Agent
@@ -151,7 +151,7 @@ Override the default personality for this response:
 When you're using the `galachain-builder` agent, this command runs automatically under the hood. You can:
 
 - Ask the agent directly: "How do I add liquidity?"
-- Agent calls `/galachain:ask` internally
+- Agent calls `/omni-tool:ask` internally
 - Get comprehensive teaching response
 - Continue the conversation naturally
 
@@ -176,7 +176,7 @@ The `learning-galachain` skill uses this command to teach you:
 
 ### Example 1: Basic Token Purchase
 ```bash
-$ /galachain:ask how do I buy tokens?
+$ /omni-tool:ask how do I buy tokens?
 
 → Fetches: buy-tokens topic
 → Explains: Bonding curve token purchases
@@ -186,7 +186,7 @@ $ /galachain:ask how do I buy tokens?
 
 ### Example 2: Complex Liquidity Strategy
 ```bash
-$ /galachain:ask liquidity-positions --personality=expert
+$ /omni-tool:ask liquidity-positions --personality=expert
 
 → Fetches: liquidity-positions topic
 → Fast-paced: Assumes DEX knowledge
@@ -196,7 +196,7 @@ $ /galachain:ask liquidity-positions --personality=expert
 
 ### Example 3: Bridging to Ethereum
 ```bash
-$ /galachain:ask I want to move GALA to Ethereum
+$ /omni-tool:ask I want to move GALA to Ethereum
 
 → Fuzzy matches: bridge-operations
 → Explains: What bridging is and why
@@ -207,8 +207,8 @@ $ /galachain:ask I want to move GALA to Ethereum
 
 ## Next Steps
 
-- Try `/galachain:topics` to browse all 59 topics
-- Run `/galachain:setup` to configure your preferences
+- Try `/omni-tool:topics` to browse all 59 topics
+- Run `/omni-tool:setup` to configure your preferences
 - Ask the agent directly: "Help me build a trading bot"
 - Explore complete workflows with the skill: `learning-galachain`
 

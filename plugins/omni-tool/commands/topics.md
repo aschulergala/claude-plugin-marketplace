@@ -1,5 +1,5 @@
 ---
-name: galachain:topics
+name: omni-tool:topics
 description: List all 59 teaching topics organized by category
 arguments:
   - name: category
@@ -22,17 +22,17 @@ Browse all 59 teaching topics organized by domain. Each topic includes:
 
 ```bash
 # List all topics
-/galachain:topics
+/omni-tool:topics
 
 # Filter by category
-/galachain:topics trading
-/galachain:topics dex-pools
-/galachain:topics bridge
+/omni-tool:topics trading
+/omni-tool:topics dex-pools
+/omni-tool:topics bridge
 
 # Different formats
-/galachain:topics --format=detailed
-/galachain:topics --format=tree
-/galachain:topics trading --format=detailed
+/omni-tool:topics --format=detailed
+/omni-tool:topics --format=tree
+/omni-tool:topics trading --format=detailed
 ```
 
 ## All Topics by Category
@@ -262,7 +262,7 @@ Complete all paths 1-5, then:
 1. Pick a use case that excites you
 2. Find the recommended learning path
 3. Start with beginner topics
-4. Use `/galachain:ask [topic]` to learn
+4. Use `/omni-tool:ask [topic]` to learn
 
 ### Practice
 1. After learning theory, execute with MCP tools
@@ -280,22 +280,22 @@ Complete all paths 1-5, then:
 
 ```bash
 # Learn about a specific topic
-/galachain:ask buy-tokens
+/omni-tool:ask buy-tokens
 
 # See more advanced topics in a category
-/galachain:topics governance --format=detailed
+/omni-tool:topics governance --format=detailed
 
 # Get the full teaching system
-/galachain:topics --format=tree
+/omni-tool:topics --format=tree
 
 # Set your learning preferences
-/galachain:setup
+/omni-tool:setup
 ```
 
 ## Next Steps
 
 - Pick a learning path that matches your goals
-- Ask about the first topic: `/galachain:ask [topic-name]`
+- Ask about the first topic: `/omni-tool:ask [topic-name]`
 - Set your personality mode for personalized teaching
 - Join the community to share what you build!
 

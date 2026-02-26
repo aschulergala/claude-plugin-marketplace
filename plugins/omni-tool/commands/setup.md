@@ -1,5 +1,5 @@
 ---
-name: galachain:setup
+name: omni-tool:setup
 description: Interactive setup wizard for configuring the GalaChain OmniTool plugin
 arguments: []
 ---
@@ -12,12 +12,12 @@ Interactive wizard to configure the GalaChain OmniTool plugin for your workflow.
 
 ```bash
 # Run the interactive setup
-/galachain:setup
+/omni-tool:setup
 
 # Or configure specific setting directly
-/galachain:setup --personality=expert
-/galachain:setup --environment=staging
-/galachain:setup --wallet-mode=full-access
+/omni-tool:setup --personality=expert
+/omni-tool:setup --environment=staging
+/omni-tool:setup --wallet-mode=full-access
 ```
 
 ## Configuration Options
@@ -159,7 +159,7 @@ Before configuring preferences, verify the MCP server is reachable:
 >   }
 > }
 > ```
-> After restarting Claude Code, run `/galachain:setup` again.
+> After restarting Claude Code, run `/omni-tool:setup` again.
 
 ## Interactive Setup Flow
 
@@ -291,7 +291,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Beginner Learning Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Tutor, Read-Only, Production
 # Enable all learning options
 ```
@@ -300,7 +300,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Experienced Trader Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Expert, Full-Access, Production
 # Disable redundant explanations
 ```
@@ -309,7 +309,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### QA1 Integration Testing Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Expert, Full-Access, QA1
 # Show advanced topics and error handling
 ```
@@ -318,7 +318,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Safe Testing Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Pragmatist, Full-Access, Staging
 # Enable all learning options
 ```
@@ -327,7 +327,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Developer Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Expert, Full-Access, Development
 # Show advanced topics and error handling
 ```
@@ -345,8 +345,8 @@ Once configured, you can:
    - Agent responds in your chosen personality style
 
 2. **Use commands with confidence**
-   - `/galachain:ask buy-tokens`
-   - `/galachain:topics`
+   - `/omni-tool:ask buy-tokens`
+   - `/omni-tool:topics`
    - Explanations match your preferences
 
 3. **Execute operations**
@@ -365,7 +365,7 @@ You can:
 
 1. **Re-run setup**
    ```bash
-   /galachain:setup
+   /omni-tool:setup
    ```
 
 2. **Edit directly**
@@ -373,7 +373,7 @@ You can:
    - Changes take effect immediately
 
 3. **Override temporarily**
-   - `/galachain:ask topic --personality=expert`
+   - `/omni-tool:ask topic --personality=expert`
    - Overrides setting for that query only
 
 ## Quick Configuration Presets
@@ -442,25 +442,25 @@ Direct localhost backend access.
 
 ### "I want to reset everything"
 - Delete `.claude/galachain-omnitool.local.md`
-- Run `/galachain:setup` again
+- Run `/omni-tool:setup` again
 - All defaults will be reapplied
 
 ### "MCP tools aren't available after setup"
 - You need to **restart Claude Code** after setup writes the config
 - Verify `~/.claude/claude_desktop_config.json` contains the `gala-launchpad` entry
-- Re-run `/galachain:setup` to rewrite the config if needed
+- Re-run `/omni-tool:setup` to rewrite the config if needed
 
 ### "Staging or QA1 seems broken"
 - Staging/QA1 backends may occasionally be under maintenance
-- Check `/galachain:topics` to verify MCP connection
-- Try switching to `production` with `/galachain:setup` if blocked
+- Check `/omni-tool:topics` to verify MCP connection
+- Try switching to `production` with `/omni-tool:setup` if blocked
 
 ## Next Steps
 
-1. **Run setup**: `/galachain:setup`
+1. **Run setup**: `/omni-tool:setup`
 2. **Choose your personality**: Pick what feels right
-3. **Try a question**: `/galachain:ask token-creation`
-4. **Browse topics**: `/galachain:topics`
+3. **Try a question**: `/omni-tool:ask token-creation`
+4. **Browse topics**: `/omni-tool:topics`
 5. **Build something**: Ask the agent to help you create your first token or trade!
 
 Welcome to GalaChain development! 🚀
