@@ -129,6 +129,32 @@ How Claude teaches and interacts with you:
 - Relevant patterns highlighted
 - Default: true
 
+## Step 0: Verify MCP Connection
+
+Before configuring preferences, verify the MCP server is reachable:
+
+1. Attempt `gala_launchpad_explain_sdk_usage` with topic `installation`
+2. **Success** → "✅ MCP server connected (307 tools available)" — proceed to Step 1
+3. **Failure** (unknown tool / not found) → Show installation instructions and STOP:
+
+> ❌ **MCP server not found.**
+>
+> The GalaChain MCP server needs to be added to your Claude Code config before setup can complete.
+>
+> Add to `~/.claude/claude_desktop_config.json`:
+> ```json
+> {
+>   "mcpServers": {
+>     "gala-launchpad": {
+>       "command": "npx",
+>       "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+>       "env": { "ENVIRONMENT": "production" }
+>     }
+>   }
+> }
+> ```
+> After restarting Claude Code, run `/galachain:setup` again.
+
 ## Interactive Setup Flow
 
 ```

@@ -89,6 +89,14 @@ referral-system, trade-history, nft-collection-management
 4. **Personalize response** - Adapt explanation style based on your personality preference
 5. **Offer next steps** - Suggest related topics or MCP tool execution
 
+## MCP Availability
+
+If `gala_launchpad_explain_sdk_usage` fails with "unknown tool" or "not found":
+- Do NOT retry the tool call
+- Answer from built-in knowledge about the topic instead
+- Note at the end: "(Note: MCP server not installed — for live tool execution, see `/galachain:setup`)"
+- This gives users value immediately while guiding them toward installation
+
 ## Response Format
 
 Each response includes:

@@ -26,6 +26,37 @@ Transform Claude into a GalaChain developer by:
 3. **Building** - Execute operations using 307 MCP tools
 4. **Reasoning** - Explain trade-offs and best practices
 
+## Startup Check (Run Once)
+
+On your **first interaction** in a session, silently verify the MCP server is available:
+- Attempt `gala_launchpad_explain_sdk_usage` with topic `installation`
+- If it **succeeds**: proceed normally with full 307-tool capability
+- If it **fails** with "unknown tool" / "not found": immediately surface this before doing anything else
+
+**When MCP is not installed**, respond with:
+
+> ⚠️ **MCP Server Not Installed**
+>
+> I can see you want to use GalaChain tools, but the MCP server isn't connected to this Claude Code session. Without it, I can teach concepts but can't execute operations.
+>
+> **Quick fix** — add this to `~/.claude/claude_desktop_config.json`:
+> ```json
+> {
+>   "mcpServers": {
+>     "gala-launchpad": {
+>       "command": "npx",
+>       "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+>       "env": { "ENVIRONMENT": "production" }
+>     }
+>   }
+> }
+> ```
+> Then restart Claude Code.
+>
+> **Meanwhile**: I can still answer your question from built-in knowledge. What would you like to learn?
+
+Once you've shown this message once per session, don't repeat it — just note "(MCP not available)" when suggesting tool execution.
+
 ## Core Workflow
 
 ### 1. Understand What They Want
