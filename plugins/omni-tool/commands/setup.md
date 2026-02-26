@@ -147,7 +147,7 @@ Before configuring preferences, verify the MCP server is reachable:
 >
 > The GalaChain MCP server needs to be added to your Claude Code config before setup can complete.
 >
-> Add to `~/.claude/claude_desktop_config.json`:
+> Add to `~/.claude.json`:
 > ```json
 > {
 >   "mcpServers": {
@@ -201,14 +201,14 @@ Let's configure your experience.
    ☑ Auto-explain errors from MCP tools
    ☑ Auto-suggest code examples
 
-✅ MCP server config written to ~/.claude/claude_desktop_config.json
+✅ MCP server config written to ~/.claude.json
 ✅ Plugin preferences saved to .claude/galachain-omnitool.local.md
 ⚠️  Restart Claude Code to activate the MCP server
 ```
 
 ## Writing the MCP Server Config
 
-After collecting preferences, **automatically write the MCP server config** to `~/.claude/claude_desktop_config.json`:
+After collecting preferences, **automatically write the MCP server config** to `~/.claude.json`:
 
 1. Read the file if it exists (to preserve other MCP server entries)
 2. Merge or add the `gala-launchpad` entry with the chosen environment
@@ -447,7 +447,7 @@ Direct localhost backend access.
 
 ### "MCP tools aren't available after setup"
 - You need to **restart Claude Code** after setup writes the config
-- Verify `~/.claude/claude_desktop_config.json` contains the `gala-launchpad` entry
+- Verify `~/.claude.json` contains the `gala-launchpad` entry
 - Re-run `/omni-tool:setup` to rewrite the config if needed
 
 ### "Staging or QA1 seems broken"

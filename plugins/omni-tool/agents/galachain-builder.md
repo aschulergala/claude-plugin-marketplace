@@ -39,7 +39,7 @@ On your **first interaction** in a session, silently verify the MCP server is av
 >
 > I can see you want to use GalaChain tools, but the MCP server isn't connected to this Claude Code session. Without it, I can teach concepts but can't execute operations.
 >
-> **Quick fix** — add this to `~/.claude/claude_desktop_config.json`:
+> **Quick fix** — add this to `~/.claude.json`:
 > ```json
 > {
 >   "mcpServers": {
