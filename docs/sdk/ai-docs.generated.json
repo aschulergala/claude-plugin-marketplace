@@ -1,9 +1,9 @@
 {
   "meta": {
     "version": "0.0.0",
-    "generatedAt": "2026-01-28T19:03:12.607Z",
-    "toolCount": 286,
-    "categoryCount": 34
+    "generatedAt": "2026-02-26T11:57:22.628Z",
+    "toolCount": 306,
+    "categoryCount": 38
   },
   "categories": {
     "pools": {
@@ -236,8 +236,8 @@
       "label": "Overseers",
       "description": "Global platform oversight",
       "icon": "👁️",
-      "count": 15,
-      "read": 9,
+      "count": 20,
+      "read": 14,
       "write": 6
     },
     "token-ban": {
@@ -254,8 +254,8 @@
       "label": "Messages",
       "description": "Messages operations",
       "icon": "📦",
-      "count": 7,
-      "read": 4,
+      "count": 8,
+      "read": 5,
       "write": 3
     },
     "restricted-names": {
@@ -308,9 +308,45 @@
       "label": "Websocket-admin",
       "description": "Websocket-admin operations",
       "icon": "📦",
-      "count": 21,
-      "read": 16,
-      "write": 5
+      "count": 24,
+      "read": 18,
+      "write": 6
+    },
+    "ai-moderation": {
+      "key": "ai-moderation",
+      "label": "Ai-moderation",
+      "description": "Ai-moderation operations",
+      "icon": "📦",
+      "count": 5,
+      "read": 4,
+      "write": 1
+    },
+    "weekly-challenge": {
+      "key": "weekly-challenge",
+      "label": "Weekly-challenge",
+      "description": "Weekly-challenge operations",
+      "icon": "📦",
+      "count": 2,
+      "read": 2,
+      "write": 0
+    },
+    "oembed": {
+      "key": "oembed",
+      "label": "Oembed",
+      "description": "Oembed operations",
+      "icon": "📦",
+      "count": 3,
+      "read": 3,
+      "write": 0
+    },
+    "platform-stats": {
+      "key": "platform-stats",
+      "label": "Platform-stats",
+      "description": "Platform-stats operations",
+      "icon": "📦",
+      "count": 1,
+      "read": 1,
+      "write": 0
     }
   },
   "categoryGroups": [
@@ -405,7 +441,7 @@
         },
         {
           "name": "creatorAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by creator address (optional)."
         },
@@ -452,7 +488,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         }
@@ -469,7 +505,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional token name (exact match filter)."
         },
@@ -533,7 +569,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -550,7 +586,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -584,12 +620,12 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
       ],
-      "topic": "token-distribution"
+      "topic": "holders"
     },
     "fetchUserHolderContext": {
       "name": "fetchUserHolderContext",
@@ -601,13 +637,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "User wallet address to lookup holder context for."
         }
@@ -624,7 +660,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -641,7 +677,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -684,7 +720,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Launchpad token name (e.g., \"galadog\", \"anime\") - auto-detects graduation status."
         },
@@ -696,7 +732,7 @@
         },
         {
           "name": "currentSupply",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Current token supply (optional - only used for local mode, auto-fetched if missing)."
         },
@@ -731,7 +767,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name (e.g., \"dragnrkti\", \"rocketri\", \"unicornri\")."
         },
@@ -747,7 +783,7 @@
         },
         {
           "name": "currentSupply",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Current token supply (optional - only used for local mode, auto-fetched if missing)."
         }
@@ -763,7 +799,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Simple token name for convenience (e.g., \"demonkpop\", \"shoewars\") - automatically resolves to full token ID. Use this OR tokenId, not both."
         },
@@ -803,7 +839,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 10, maximum: 50)"
         }
@@ -820,7 +856,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Simple token name for convenience (e.g., \"demonkpop\", \"shoewars\") - automatically resolves to full token ID. Use this OR tokenId, not both."
         },
@@ -865,7 +901,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -881,7 +917,7 @@
       "parameters": [
         {
           "name": "symbol",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token symbol."
         }
@@ -897,13 +933,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name to validate (optional)."
         },
         {
           "name": "symbol",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token symbol to validate (optional)."
         }
@@ -919,7 +955,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -936,7 +972,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -1034,13 +1070,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name to check (e.g., \"anime\", \"galadog\")."
         },
         {
           "name": "symbol",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token symbol to check (e.g., \"MT\", \"LG\")."
         }
@@ -1095,7 +1131,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "The token name to get state for."
         }
@@ -1145,7 +1181,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name to update configuration for (e.g., \"anime\")."
         },
@@ -1233,13 +1269,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
@@ -1266,13 +1302,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)"
         },
@@ -1299,13 +1335,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to spend/buy."
         },
@@ -1321,13 +1357,13 @@
         },
         {
           "name": "expectedAmount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Expected token output amount from calculateBuyAmount (REQUIRED).\n\nCRITICAL: This is the 'amount' field from calculateBuyAmount result, NOT your input amount.\n\nWORKFLOW:\n1. Call calculateBuyAmount({ tokenName, amount, type })\n2. Extract result.amount from the response\n3. Use result.amount as this expectedAmount parameter\n\nEXAMPLE:\nconst calc = await calculateBuyAmount({ tokenName: 'woohoo', amount: '10', type: 'native' });\n// calc.amount = \"16843.7579794843252\"\nawait buy({ tokenName: 'woohoo', amount: '10', type: 'native', expectedAmount: calc.amount, ... });\n// Use calc.amount (\"16843.7579794843252\"), NOT the input '10'"
         },
         {
           "name": "maxAcceptableReverseBondingCurveFee",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "RECOMMENDED: Base reverse bonding curve fee from calculateBuyAmount (GALA). Use result.reverseBondingCurveFee. Omitting this may cause transaction failures. Works with maxAcceptableReverseBondingCurveFeeSlippageFactor for automatic slippage adjustment."
         },
@@ -1345,7 +1381,7 @@
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -1362,13 +1398,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to sell/receive."
         },
@@ -1384,13 +1420,13 @@
         },
         {
           "name": "expectedAmount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Expected GALA output amount from calculateSellAmount (REQUIRED).\n\nCRITICAL: This is the 'amount' field from calculateSellAmount result, NOT your input amount.\n\nWORKFLOW:\n1. Call calculateSellAmount({ tokenName, amount, type })\n2. Extract result.amount from the response\n3. Use result.amount as this expectedAmount parameter\n\nEXAMPLE:\nconst calc = await calculateSellAmount({ tokenName: 'woohoo', amount: '10', type: 'native' });\n// calc.amount = \"16843.7579794843252\"\nawait sell({ tokenName: 'woohoo', amount: '10', type: 'native', expectedAmount: calc.amount, ... });\n// Use calc.amount (\"16843.7579794843252\"), NOT the input '10'"
         },
         {
           "name": "maxAcceptableReverseBondingCurveFee",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "RECOMMENDED: Base reverse bonding curve fee from calculateSellAmount (GALA). Use result.reverseBondingCurveFee. Omitting this may cause transaction failures. Works with maxAcceptableReverseBondingCurveFeeSlippageFactor for automatic slippage adjustment."
         },
@@ -1408,7 +1444,7 @@
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -1425,7 +1461,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name."
         },
@@ -1441,7 +1477,7 @@
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by user address."
         },
@@ -1453,19 +1489,19 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "startDate",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by start date."
         },
         {
           "name": "endDate",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by end date."
         },
@@ -1492,7 +1528,7 @@
       "parameters": [
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "GALA amount to spend for initial buy (standard decimal format, e.g., \"100\" for 100 GALA)."
         }
@@ -1508,7 +1544,7 @@
       "parameters": [
         {
           "name": "transactionId",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Transaction ID (UUID format) from buy(), sell(), or launchToken()"
         }
@@ -1525,7 +1561,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -1541,7 +1577,7 @@
         },
         {
           "name": "currentSupply",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Current token supply (optional - only used for local mode, auto-fetched if missing)."
         }
@@ -1558,7 +1594,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -1576,7 +1612,7 @@
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         },
@@ -1592,7 +1628,7 @@
         },
         {
           "name": "currentSupply",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Current token supply (optional - only used for local mode, auto-fetched if missing)."
         }
@@ -1609,13 +1645,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
@@ -1642,13 +1678,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
@@ -1675,13 +1711,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to sell/receive."
         },
@@ -1697,7 +1733,7 @@
         },
         {
           "name": "maxSupply",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token maximum supply (get from fetchPoolDetails)."
         },
@@ -1726,13 +1762,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to sell/receive."
         },
@@ -1771,7 +1807,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of source token to spend."
         }
@@ -1800,7 +1836,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Desired amount of destination token to receive."
         }
@@ -1852,7 +1888,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of fromToken to swap."
         },
@@ -1909,7 +1945,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of fromToken to swap."
         }
@@ -1937,13 +1973,13 @@
         },
         {
           "name": "inputAmount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of source token to spend."
         },
         {
           "name": "estimatedOutput",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Expected output amount from quote (for slippage calculation)."
         },
@@ -1977,7 +2013,7 @@
       "parameters": [
         {
           "name": "walletAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
         }
@@ -1994,7 +2030,7 @@
       "parameters": [
         {
           "name": "walletAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
         }
@@ -2044,7 +2080,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 10, maximum: 100)"
         }
@@ -2196,13 +2232,13 @@
       "parameters": [
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         },
@@ -2225,7 +2261,7 @@
       "parameters": [
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         }
@@ -2242,7 +2278,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2276,7 +2312,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2298,7 +2334,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2320,7 +2356,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2406,13 +2442,13 @@
         },
         {
           "name": "liquidity",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Liquidity amount to estimate removal for."
         },
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         }
@@ -2463,25 +2499,25 @@
         },
         {
           "name": "amount0Desired",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Desired amount of token0 to provide."
         },
         {
           "name": "amount1Desired",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Desired amount of token1 to provide."
         },
         {
           "name": "amount0Min",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Minimum acceptable amount0 (optional, defaults to 0)."
         },
         {
           "name": "amount1Min",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Minimum acceptable amount1 (optional, defaults to 0)."
         }
@@ -2532,25 +2568,25 @@
         },
         {
           "name": "amount0Desired",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Desired amount of token0 to provide."
         },
         {
           "name": "amount1Desired",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Desired amount of token1 to provide."
         },
         {
           "name": "amount0Min",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Minimum acceptable amount0 (optional, defaults to 0)."
         },
         {
           "name": "amount1Min",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Minimum acceptable amount1 (optional, defaults to 0)."
         }
@@ -2566,7 +2602,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2578,19 +2614,19 @@
         },
         {
           "name": "liquidity",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of liquidity to remove (full liquidity to close position)."
         },
         {
           "name": "amount0Min",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Minimum acceptable amount of token0 to receive."
         },
         {
           "name": "amount1Min",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Minimum acceptable amount of token1 to receive."
         },
@@ -2647,7 +2683,7 @@
         },
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         }
@@ -2664,7 +2700,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
         },
@@ -2676,13 +2712,13 @@
         },
         {
           "name": "amount0Max",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Maximum amount of token0 fees to collect (optional)."
         },
         {
           "name": "amount1Max",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Maximum amount of token1 fees to collect (optional)."
         }
@@ -2755,7 +2791,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address (optional, defaults to SDK wallet)."
         }
@@ -2772,13 +2808,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         }
@@ -2795,13 +2831,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -2823,7 +2859,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -2835,19 +2871,19 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional token name (exact match filter)."
         },
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         }
@@ -2864,7 +2900,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -2876,19 +2912,19 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional token name (exact match filter)."
         },
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         }
@@ -2905,7 +2941,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address (optional, defaults to SDK wallet)."
         }
@@ -2922,7 +2958,7 @@
       "parameters": [
         {
           "name": "fullName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Full name."
         },
@@ -2934,13 +2970,13 @@
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -2957,7 +2993,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address to register (defaults to SDK wallet). Supports eth|..., 0x..., or client|... formats."
         }
@@ -2974,13 +3010,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         }
@@ -3003,7 +3039,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         }
@@ -3030,7 +3066,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address to fetch referrals for (defaults to SDK wallet). Supports eth|..., 0x..., or client|... formats."
         },
@@ -3042,7 +3078,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 100, maximum: 20)"
         },
@@ -3078,7 +3114,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address to fetch referrals for (defaults to SDK wallet). Supports eth|..., 0x..., or client|... formats."
         },
@@ -3114,7 +3150,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Wallet address to fetch summary for (defaults to SDK wallet). Supports eth|..., 0x..., or client|... formats."
         }
@@ -3131,49 +3167,49 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "tokenSymbol",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token symbol."
         },
         {
           "name": "tokenDescription",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token description"
         },
         {
           "name": "tokenImage",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token image URL."
         },
         {
           "name": "preBuyQuantity",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Pre-buy quantity as decimal string (defaults to \"0\")"
         },
         {
           "name": "websiteUrl",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Website URL (optional)."
         },
         {
           "name": "telegramUrl",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Telegram channel URL (optional)."
         },
         {
           "name": "twitterUrl",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Twitter profile URL (optional)."
         },
@@ -3196,8 +3232,14 @@
           "description": "Reverse bonding curve configuration (optional, defaults: minFee=0.1, maxFee=0.5). When provided: minFee >= 0.1, maxFee >= minFee, maxFee <= 0.5."
         },
         {
+          "name": "saleStartTime",
+          "type": "number",
+          "required": false,
+          "description": "Unix timestamp (seconds) for when the sale should start. If omitted, the sale starts immediately. Must be a future timestamp."
+        },
+        {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3214,7 +3256,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name (2-20 lowercase alphanumeric)."
         },
@@ -3226,7 +3268,7 @@
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3249,13 +3291,13 @@
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional wallet address (defaults to authenticated user)."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3326,7 +3368,7 @@
         },
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Owner wallet address."
         }
@@ -3399,7 +3441,7 @@
       "parameters": [
         {
           "name": "walletAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         }
@@ -3546,7 +3588,7 @@
         },
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -3569,7 +3611,7 @@
       "parameters": [
         {
           "name": "ownerAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -3592,25 +3634,25 @@
       "parameters": [
         {
           "name": "recipientAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Recipient wallet address."
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)"
         },
         {
           "name": "uniqueKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional idempotency key."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3627,13 +3669,13 @@
       "parameters": [
         {
           "name": "to",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Recipient wallet address."
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -3645,13 +3687,13 @@
         },
         {
           "name": "uniqueKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional idempotency key."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3674,13 +3716,13 @@
         },
         {
           "name": "uniqueKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional idempotency key."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3703,13 +3745,13 @@
         },
         {
           "name": "uniqueKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional idempotency key."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3732,13 +3774,13 @@
         },
         {
           "name": "uniqueKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional idempotency key."
         },
         {
           "name": "privateKey",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
@@ -3835,7 +3877,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -3846,7 +3888,7 @@
       "name": "explainSdkUsage",
       "mcpTool": "gala_launchpad_explain_sdk_usage",
       "category": "utils",
-      "description": "Get detailed SDK code examples for all 224 MCP tools (mapping to ~208 SDK methods) organized into 51 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, nft-collection-management, token-identification (explains tokenName vs tokenClassKey formats), and graduation-detection (how to check if a token has graduated from bonding curve to DEX).",
+      "description": "Get detailed SDK code examples for all 303 MCP tools (mapping to ~270 SDK methods) organized into 60 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, nft-collection-management, token-identification, graduation-detection, ai-moderation (AI content analysis - overseer only), weekly-challenge (weekly token competition leaderboard), platform-stats (platform-wide trading metrics), restricted-names (blocked token names list - overseer only), websocket-admin (real-time event broadcasting - admin/overseer), oembed (social media link preview metadata), messages (unified CHAT+COMMENT messages API), and holders (token holder distribution and whale analysis).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -3861,33 +3903,33 @@
             "pool-graduation",
             "fetch-pools",
             "balances",
-            "dex-trading",
-            "liquidity-positions",
-            "advanced-dex-analysis",
-            "price-history",
-            "token-details",
-            "token-distribution",
-            "token-status",
             "token-creation",
-            "profile-management",
             "multi-wallet",
             "transfers",
             "locks",
-            "trading-analytics",
-            "utilities-and-helpers",
-            "utilities-system",
+            "dex-trading",
             "error-handling",
             "installation",
             "local-calculations",
+            "price-history",
+            "token-details",
             "spot-prices-smart-routing",
-            "event-subscriptions",
-            "mcp-to-sdk-mapping",
+            "profile-management",
+            "token-distribution",
+            "liquidity-positions",
+            "advanced-dex-analysis",
+            "trading-analytics",
+            "utilities-and-helpers",
             "fetch-all-dex-seasons",
-            "fetch-current-dex-season",
             "fetch-dex-leaderboard-by-season-id",
-            "fetch-current-dex-leaderboard",
             "fetch-dex-aggregated-volume-summary",
             "fetch-dex-pools",
+            "token-status",
+            "utilities-system",
+            "event-subscriptions",
+            "mcp-to-sdk-mapping",
+            "fetch-current-dex-season",
+            "fetch-current-dex-leaderboard",
             "bridge-operations",
             "dex-token-discovery",
             "wrap-unwrap-operations",
@@ -3906,7 +3948,15 @@
             "token-ban-management",
             "nft-collection-management",
             "token-identification",
-            "graduation-detection"
+            "graduation-detection",
+            "ai-moderation",
+            "weekly-challenge",
+            "platform-stats",
+            "restricted-names",
+            "websocket-admin",
+            "oembed",
+            "messages",
+            "holders"
           ]
         }
       ],
@@ -3922,7 +3972,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -3949,7 +3999,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional launchpad token name to clear (clears ALL caches including bridgeable tokens if not provided)."
         }
@@ -4056,7 +4106,7 @@
       "name": "explainWebsocketEvents",
       "mcpTool": "gala_launchpad_explain_websocket_events",
       "category": "utils",
-      "description": "Get comprehensive documentation of all WebSocket events.\n\nLists and explains all 32+ real-time WebSocket events available on the Launchpad platform, including:\n\nEVENT CATEGORIES:\n1. Stream Events (STREAM_STATUS, RECORDING_STATUS, etc.)\n2. Chat Events (STREAM_CHAT_SENT, CONTENT_REACTION_ADDED, etc.)\n3. Trading Events (TRADE_EXECUTED)\n4. Pool Events (POOL_METADATA_UPDATED, POOL_BADGE_ASSIGNED, HOLDER_COUNT_UPDATED)\n5. Moderator Events (MODERATOR_ADDED, MODERATOR_REMOVED, MODERATOR_ROLE_UPDATED)\n6. Moderation Events (USER_BANNED, USER_UNBANNED, BAN_ENFORCEMENT)\n7. Ban Events (TOKEN_BANNED, TOKEN_UNBANNED)\n8. Overseer Events (OVERSEER_ADDED, OVERSEER_REMOVED)\n9. Comment Events (COMMENT_CREATED)\n10. User Events (USER_PROFILE_UPDATED)\n11. API Key Events (API_KEY_CREATED, API_KEY_UPDATED, API_KEY_REVOKED)\n\nFor each event:\n- Description of what triggers it\n- Room scope (token-specific, global, user-specific)\n- Event payload structure\n- Example JSON\n- SDK subscription method\n- MCP watcher tool\n- Recommended filters\n\nReturns: Detailed documentation of all events with examples and usage patterns.",
+      "description": "Get comprehensive documentation of all WebSocket events.\n\nLists and explains all 35+ real-time WebSocket events available on the Launchpad platform, including:\n\nEVENT CATEGORIES:\n1. Stream Events (STREAM_STATUS, RECORDING_STATUS, etc.)\n2. Chat Events (STREAM_CHAT_SENT, CONTENT_REACTION_ADDED, etc.)\n3. Trading Events (TRADE_EXECUTED)\n4. Pool Events (POOL_METADATA_UPDATED, POOL_BADGE_ASSIGNED, HOLDER_COUNT_UPDATED, TOKEN_CONFIG_UPDATED)\n5. Moderator Events (MODERATOR_ADDED, MODERATOR_REMOVED, MODERATOR_ROLE_UPDATED)\n6. Moderation Events (USER_BANNED, USER_UNBANNED, BAN_ENFORCEMENT)\n7. Ban Events (TOKEN_BANNED, TOKEN_UNBANNED)\n8. Overseer Events (OVERSEER_ADDED, OVERSEER_REMOVED)\n9. Comment Events (COMMENT_CREATED)\n10. User Events (USER_PROFILE_UPDATED)\n11. API Key Events (API_KEY_CREATED, API_KEY_UPDATED, API_KEY_REVOKED)\n12. Platform Stats Events (STATS_UPDATED)\n\nFor each event:\n- Description of what triggers it\n- Room scope (token-specific, global, user-specific)\n- Event payload structure\n- Example JSON\n- SDK subscription method\n- MCP watcher tool\n- Recommended filters\n\nReturns: Detailed documentation of all events with examples and usage patterns.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4097,7 +4147,7 @@
       "name": "getEventSchema",
       "mcpTool": "gala_launchpad_get_event_schema",
       "category": "utils",
-      "description": "Get detailed schema/interface for a specific WebSocket event.\n\nReturns TypeScript interface, JSON Schema validation, example payload, and documentation for any event.\n\nEVENTS AVAILABLE:\nStream: STREAM_STATUS, RECORDING_STATUS, SIMULCAST_STATUS, DOWNLOAD_READY, STREAM_COUNTDOWN_UPDATED, STREAM_LANGUAGE_UPDATED\nChat: STREAM_CHAT_SENT, STREAM_CHAT_DELETED, STREAM_CHAT_PINNED, STREAM_CHAT_UNPINNED, CHAT_STATUS_CHANGED, STREAM_CONTROL_STATUS_CHANGED, CONTENT_REACTION_ADDED, CONTENT_REACTION_REMOVED, USER_TYPING, CONTENT_FLAGGED, FLAG_RESOLVED\nTrading: TRADE_EXECUTED\nPool: POOL_METADATA_UPDATED, POOL_SOCIAL_LINKS_UPDATED, POOL_BADGE_ASSIGNED, HOLDER_COUNT_UPDATED\nModeration: MODERATOR_ADDED, MODERATOR_REMOVED, MODERATOR_ROLE_UPDATED, USER_BANNED, USER_UNBANNED, BAN_ENFORCEMENT\nBan: TOKEN_BANNED, TOKEN_UNBANNED\nOverseer: OVERSEER_ADDED, OVERSEER_REMOVED\nComment: COMMENT_CREATED\nUser: USER_PROFILE_UPDATED\nAPI Key: API_KEY_CREATED, API_KEY_UPDATED, API_KEY_REVOKED\n\nReturns:\n- TypeScript interface\n- JSON Schema\n- Example payload (minimum + full)\n- Room scope (which room(s) this event is emitted to)\n- Subscription method name\n- Description and use cases.",
+      "description": "Get detailed schema/interface for a specific WebSocket event.\n\nReturns TypeScript interface, JSON Schema validation, example payload, and documentation for any event.\n\nEVENTS AVAILABLE:\nStream: STREAM_STATUS, RECORDING_STATUS, SIMULCAST_STATUS, DOWNLOAD_READY, STREAM_COUNTDOWN_UPDATED, STREAM_LANGUAGE_UPDATED\nChat: STREAM_CHAT_SENT, STREAM_CHAT_DELETED, STREAM_CHAT_PINNED, STREAM_CHAT_UNPINNED, CHAT_STATUS_CHANGED, STREAM_CONTROL_STATUS_CHANGED, CONTENT_REACTION_ADDED, CONTENT_REACTION_REMOVED, USER_TYPING, CONTENT_FLAGGED, FLAG_RESOLVED\nTrading: TRADE_EXECUTED\nPool: POOL_METADATA_UPDATED, POOL_SOCIAL_LINKS_UPDATED, POOL_BADGE_ASSIGNED, HOLDER_COUNT_UPDATED, TOKEN_CONFIG_UPDATED\nModeration: MODERATOR_ADDED, MODERATOR_REMOVED, MODERATOR_ROLE_UPDATED, USER_BANNED, USER_UNBANNED, BAN_ENFORCEMENT\nBan: TOKEN_BANNED, TOKEN_UNBANNED\nOverseer: OVERSEER_ADDED, OVERSEER_REMOVED\nComment: COMMENT_CREATED\nUser: USER_PROFILE_UPDATED\nAPI Key: API_KEY_CREATED, API_KEY_UPDATED, API_KEY_REVOKED\nPlatform Stats: STATS_UPDATED\n\nReturns:\n- TypeScript interface\n- JSON Schema\n- Example payload (minimum + full)\n- Room scope (which room(s) this event is emitted to)\n- Subscription method name\n- Description and use cases.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4152,7 +4202,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Amount to bridge (optional, for more accurate fee estimation)."
         }
@@ -4175,7 +4225,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to bridge."
         },
@@ -4191,7 +4241,7 @@
         },
         {
           "name": "recipientAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Recipient address on the destination chain (Ethereum: 0x... format, Solana: base58 format)."
         }
@@ -4214,7 +4264,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to bridge."
         },
@@ -4279,9 +4329,9 @@
       ],
       "topic": "bridge-operations"
     },
-    "fetchEthereumWalletTokenBalance.": {
-      "name": "fetchEthereumWalletTokenBalance.",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_token_balance.",
+    "fetchEthereumWalletTokenBalance": {
+      "name": "fetchEthereumWalletTokenBalance",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_token_balance",
       "category": "bridge",
       "description": "Get a single ERC-20 token balance on Ethereum (GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC). Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4289,21 +4339,22 @@
       "parameters": [
         {
           "name": "symbol",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token symbol (GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC)."
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
-    "fetchEthereumWalletNativeBalance.": {
-      "name": "fetchEthereumWalletNativeBalance.",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_native_balance.",
+    "fetchEthereumWalletNativeBalance": {
+      "name": "fetchEthereumWalletNativeBalance",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_native_balance",
       "category": "bridge",
       "description": "Get native ETH balance on Ethereum. Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4311,15 +4362,16 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
-    "fetchEthereumWalletAllBalances.": {
-      "name": "fetchEthereumWalletAllBalances.",
-      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_all_balances.",
+    "fetchEthereumWalletAllBalances": {
+      "name": "fetchEthereumWalletAllBalances",
+      "mcpTool": "gala_launchpad_fetch_ethereum_wallet_all_balances",
       "category": "bridge",
       "description": "Get ALL supported token balances on Ethereum for a wallet (ETH, GALA, GWETH, GUSDC, GUSDT, GWTRX, GWBTC). Returns native ETH and all supported ERC-20 token balances. Note: Makes 7 RPC calls.",
       "operationType": "read",
@@ -4327,15 +4379,16 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
-    "fetchSolanaWalletTokenBalance.": {
-      "name": "fetchSolanaWalletTokenBalance.",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_token_balance.",
+    "fetchSolanaWalletTokenBalance": {
+      "name": "fetchSolanaWalletTokenBalance",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_token_balance",
       "category": "bridge",
       "description": "Get a single SPL token balance on Solana (GALA, GSOL). Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4343,21 +4396,22 @@
       "parameters": [
         {
           "name": "symbol",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token symbol (GALA, GSOL)."
         },
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
-    "fetchSolanaWalletNativeBalance.": {
-      "name": "fetchSolanaWalletNativeBalance.",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_native_balance.",
+    "fetchSolanaWalletNativeBalance": {
+      "name": "fetchSolanaWalletNativeBalance",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_native_balance",
       "category": "bridge",
       "description": "Get native SOL balance on Solana. Fast: only 1 RPC call.",
       "operationType": "read",
@@ -4365,15 +4419,16 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
-    "fetchSolanaWalletAllBalances.": {
-      "name": "fetchSolanaWalletAllBalances.",
-      "mcpTool": "gala_launchpad_fetch_solana_wallet_all_balances.",
+    "fetchSolanaWalletAllBalances": {
+      "name": "fetchSolanaWalletAllBalances",
+      "mcpTool": "gala_launchpad_fetch_solana_wallet_all_balances",
       "category": "bridge",
       "description": "Get ALL supported token balances on Solana for a wallet (SOL, GALA, GSOL). Returns native SOL and all supported SPL token balances. Note: Makes 3 RPC calls.",
       "operationType": "read",
@@ -4381,11 +4436,12 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ]
+      ],
+      "topic": "bridge-operations"
     },
     "fetchBridgeableTokensByNetwork": {
       "name": "fetchBridgeableTokensByNetwork",
@@ -4679,13 +4735,13 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")."
         },
         {
           "name": "recipient",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional recipient address (defaults to sender)."
         },
@@ -4714,13 +4770,13 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to wrap/unwrap (decimal string, e.g., \"100.5\")."
         },
         {
           "name": "recipient",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional recipient address (defaults to sender)."
         },
@@ -4749,7 +4805,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to wrap for fee estimation."
         }
@@ -4772,7 +4828,7 @@
         },
         {
           "name": "amount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount to unwrap for fee estimation."
         }
@@ -4800,13 +4856,13 @@
       "name": "startStream",
       "mcpTool": "gala_launchpad_start_stream",
       "category": "streaming",
-      "description": "Start a live stream for a token.\n\nCreates a new stream session and returns streaming credentials.\nrtmpUrl is the RTMP server endpoint; use with streamKey in OBS or compatible software.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, playbackId, playbackUrl, status, createdAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
+      "description": "Start a live stream for a token.\n\nCreates a new stream session and returns streaming credentials.\nrtmpsUrl is the full RTMPS ingest URL; srtUrl is the full SRT ingest URL.\nUse streamKey + srtPassphrase for manual encoder configuration.\n\nRETURNS: { tokenName, streamKey, rtmpsUrl, srtUrl, srtPassphrase, playbackId, playbackUrl, status, createdAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -4823,7 +4879,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -4840,7 +4896,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -4856,13 +4912,13 @@
       "name": "resetStreamKey",
       "mcpTool": "gala_launchpad_reset_stream_key",
       "category": "streaming",
-      "description": "Reset the stream key for a token.\n\nGenerates a new stream key, invalidating the previous one.\nUse this if the stream key has been compromised.\n\nRETURNS: { tokenName, streamKey, rtmpUrl, resetAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
+      "description": "Reset the stream key for a token.\n\nGenerates a new stream key, invalidating the previous one.\nUse this if the stream key has been compromised.\n\nRETURNS: { tokenName, streamKey, rtmpsUrl, srtUrl, srtPassphrase, playbackId, resetAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -4873,13 +4929,13 @@
       "name": "setNextLiveStreamCountdown",
       "mcpTool": "gala_launchpad_set_next_live_stream_countdown",
       "category": "streaming",
-      "description": "Set the next live stream countdown time for a token.\n\nSchedules a future live stream for this token. The countdown can be displayed on the pool page\nto let viewers know when the stream will go live.\n\nCan be called multiple times to update the scheduled time.\nPass null as nextLiveStreamAt to clear the countdown.\n\nRETURNS: { tokenName, nextLiveStreamAt, streamLanguage, recordingEnabled }\n\nAuthentication: Requires wallet signature (stream creator only)",
+      "description": "Set the next live stream countdown time for a token.\n\nSchedules a future live stream for this token. The countdown can be displayed on the pool page\nto let viewers know when the stream will go live.\n\nCan be called multiple times to update the scheduled time.\nPass null as nextLiveStreamAt to clear the countdown.\n\nRETURNS: { success: true, message: \"...\" }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
       "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -4928,7 +4984,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -4955,7 +5011,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -4972,7 +5028,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -4984,7 +5040,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         }
@@ -5001,7 +5057,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5024,7 +5080,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5047,7 +5103,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -5064,7 +5120,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5111,7 +5167,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5134,7 +5190,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -5151,7 +5207,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5200,7 +5256,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -5226,7 +5282,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -5243,7 +5299,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5266,7 +5322,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5295,7 +5351,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5411,13 +5467,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of user to ban."
         },
@@ -5446,13 +5502,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of user to unban."
         }
@@ -5469,7 +5525,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5481,13 +5537,13 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         },
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         },
@@ -5516,13 +5572,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of user to check."
         }
@@ -5539,7 +5595,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -5555,7 +5611,7 @@
         },
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional search query (fuzzy match filter)"
         },
@@ -5689,7 +5745,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         }
@@ -5813,7 +5869,7 @@
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name (required for TOKEN scope, omit for ALL_OWNER_TOKENS)"
         },
@@ -5893,7 +5949,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name to filter by (optional - omit to list ALL invites across all tokens)"
         },
@@ -6040,7 +6096,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "The token name to get moderators for."
         }
@@ -6056,7 +6112,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -6068,7 +6124,8 @@
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
-            "STREAM"
+            "STREAM",
+            "RECORDING"
           ]
         },
         {
@@ -6079,7 +6136,7 @@
         },
         {
           "name": "reportedUserAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of the user who created the flagged content."
         },
@@ -6109,13 +6166,13 @@
       "name": "listFlags",
       "mcpTool": "gala_launchpad_list_flags",
       "category": "content-flags",
-      "description": "List flags for a specific token with pagination and filtering.\n\nAuthorization varies by content type:\n- CHAT_MESSAGE/COMMENT: Token owner or moderator (JWT) can view\n- STREAM: Admin API key only\n\nUse to review pending flags for a specific token.\nFor global flags across all tokens, use gala_launchpad_list_global_flags.\n\nRETURNS: { flags: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
+      "description": "List flags for a specific token with pagination and filtering.\n\nAuthorization varies by content type:\n- CHAT_MESSAGE/COMMENT: Token owner or moderator (JWT) can view\n- STREAM: Admin API key only\n\nUse to review pending flags for a specific token.\nFor global flags across all tokens, use gala_launchpad_list_global_flags.\n\nEach flag includes an optional `aiModeration` field with AI analysis results:\n- status: PENDING | PROCESSING | COMPLETED | FAILED\n- recommendation: NO_ACTION | REVIEW_REQUIRED | DELETE_CONTENT | BAN_USER | DELETE_AND_BAN\n- confidence: 0.0-1.0\n- summary, categories, reasoning\n\nRETURNS: { flags: [{ ..., aiModeration?: { status, recommendation, confidence, summary, categories, reasoning, provider, completedAt, errorMessage } }], pageInfo: { hasNextPage, endCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -6127,7 +6184,8 @@
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
-            "STREAM"
+            "STREAM",
+            "RECORDING"
           ]
         },
         {
@@ -6156,13 +6214,13 @@
         },
         {
           "name": "reporterAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by reporter address (optional)"
         },
         {
           "name": "reportedUserAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by reported user address (optional)"
         },
@@ -6174,7 +6232,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         }
@@ -6185,13 +6243,13 @@
       "name": "listGlobalFlags",
       "mcpTool": "gala_launchpad_list_global_flags",
       "category": "content-flags",
-      "description": "List ALL flags globally across all tokens with pagination and filtering.\n\nFor overseers and admins to view flags across the entire platform.\nUse listFlags() for token-specific flag lists.\n\nFilter options:\n- tokenName: Filter to a specific token\n- contentType: Filter by CHAT_MESSAGE, COMMENT, or STREAM\n- status: Filter by PENDING, DISMISSED, or ACTIONED\n- reason: Filter by flag reason (SPAM, HARASSMENT, etc.)\n- reporterAddress: Filter by who submitted the flag\n- reportedUserAddress: Filter by the content author\n\nRETURNS: { flags: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "description": "List ALL flags globally across all tokens with pagination and filtering.\n\nFor overseers and admins to view flags across the entire platform.\nUse listFlags() for token-specific flag lists.\n\nFilter options:\n- tokenName: Filter to a specific token\n- contentType: Filter by CHAT_MESSAGE, COMMENT, or STREAM\n- status: Filter by PENDING, DISMISSED, or ACTIONED\n- reason: Filter by flag reason (SPAM, HARASSMENT, etc.)\n- reporterAddress: Filter by who submitted the flag\n- reportedUserAddress: Filter by the content author\n\nEach flag includes an optional `aiModeration` field with AI analysis results when AI moderation is enabled.\n\nRETURNS: { flags: [{ ..., aiModeration?: { status, recommendation, confidence, summary, categories, reasoning, provider } }], pageInfo: { hasNextPage, endCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by token name (optional - omit to show all tokens)"
         },
@@ -6203,7 +6261,8 @@
           "enum": [
             "CHAT_MESSAGE",
             "COMMENT",
-            "STREAM"
+            "STREAM",
+            "RECORDING"
           ]
         },
         {
@@ -6232,13 +6291,13 @@
         },
         {
           "name": "reporterAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by reporter address (optional)"
         },
         {
           "name": "reportedUserAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by reported user address (optional)"
         },
@@ -6250,7 +6309,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         }
@@ -6453,7 +6512,7 @@
       "parameters": [
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address to promote to overseer (eth|... or 0x... format)."
         },
@@ -6475,7 +6534,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of the overseer to revoke (eth|... or 0x... format)."
         }
@@ -6502,6 +6561,56 @@
       "parameters": [],
       "topic": "overseer-invites"
     },
+    "getBanStats": {
+      "name": "getBanStats",
+      "mcpTool": "gala_launchpad_get_ban_stats",
+      "category": "overseers",
+      "description": "Get global user ban statistics.\n\nReturns the total count of active global user bans on the platform.\n\nRETURNS: { total: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [],
+      "topic": "overseer-invites"
+    },
+    "getTokenBanStats": {
+      "name": "getTokenBanStats",
+      "mcpTool": "gala_launchpad_get_token_ban_stats",
+      "category": "overseers",
+      "description": "Get token ban (delisted tokens) statistics.\n\nReturns the total count of delisted/banned tokens on the platform.\n\nRETURNS: { total: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [],
+      "topic": "overseer-invites"
+    },
+    "getInviteStats": {
+      "name": "getInviteStats",
+      "mcpTool": "gala_launchpad_get_invite_stats",
+      "category": "overseers",
+      "description": "Get overseer invite statistics.\n\nReturns counts for each invite status: total, pending, claimed, and revoked.\n\nRETURNS: { total: number, pending: number, claimed: number, revoked: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "overseer-invites"
+    },
+    "getFlagStats": {
+      "name": "getFlagStats",
+      "mcpTool": "gala_launchpad_get_flag_stats",
+      "category": "overseers",
+      "description": "Get content flag statistics.\n\nReturns counts for each flag status: total, pending, actioned, and dismissed.\n\nRETURNS: { total: number, pending: number, actioned: number, dismissed: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "overseer-invites"
+    },
+    "getUserStats": {
+      "name": "getUserStats",
+      "mcpTool": "gala_launchpad_get_user_stats",
+      "category": "overseers",
+      "description": "Get user management statistics.\n\nReturns counts for total users, flagged users (with pending content flags), and banned users (with active global bans).\n\nRETURNS: { totalUsers: number, flaggedUsers: number, bannedUsers: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "overseer-invites"
+    },
     "listOverseerUsers": {
       "name": "listOverseerUsers",
       "mcpTool": "gala_launchpad_list_overseer_users",
@@ -6512,7 +6621,7 @@
       "parameters": [
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Search by user address or name."
         },
@@ -6562,7 +6671,7 @@
       "parameters": [
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "User wallet address to get summary for."
         }
@@ -6578,7 +6687,7 @@
       "parameters": [
         {
           "name": "address",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address to flush cache for (eth|... or 0x... format)."
         }
@@ -6594,7 +6703,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name to flush cache for (case-insensitive)."
         }
@@ -6626,7 +6735,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -6649,7 +6758,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -6672,13 +6781,13 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         },
         {
           "name": "search",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Search by token name (partial match, case-insensitive)."
         }
@@ -6695,7 +6804,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -6712,7 +6821,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -6777,15 +6886,21 @@
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name to filter by (e.g., \"anime\")."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "User address to filter by (eth|... or 0x... format)."
+        },
+        {
+          "name": "search",
+          "type": "string",
+          "required": false,
+          "description": "Full-text search on message content (case-insensitive partial match)."
         },
         {
           "name": "cursor",
@@ -6795,11 +6910,12 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 100)"
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "createMessage": {
       "name": "createMessage",
@@ -6821,7 +6937,7 @@
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name to post the message to (e.g., \"anime\")."
         },
@@ -6831,7 +6947,8 @@
           "required": true,
           "description": "Message content (1-500 chars for CHAT, 1-2000 chars for COMMENT)."
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "updateMessage": {
       "name": "updateMessage",
@@ -6853,7 +6970,8 @@
           "required": true,
           "description": "Updated message content (1-2000 characters)."
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "deleteMessage": {
       "name": "deleteMessage",
@@ -6869,7 +6987,8 @@
           "required": true,
           "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "getPinnedMessage": {
       "name": "getPinnedMessage",
@@ -6881,11 +7000,12 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "pinMessage": {
       "name": "pinMessage",
@@ -6901,7 +7021,8 @@
           "required": true,
           "description": "ID of the message to pin."
         }
-      ]
+      ],
+      "topic": "messages"
     },
     "unpinMessage": {
       "name": "unpinMessage",
@@ -6917,7 +7038,18 @@
           "required": true,
           "description": "ID of the message to unpin."
         }
-      ]
+      ],
+      "topic": "messages"
+    },
+    "getMessageStats": {
+      "name": "getMessageStats",
+      "mcpTool": "gala_launchpad_get_message_stats",
+      "category": "messages",
+      "description": "Get platform-wide message statistics.\n\nReturns aggregated metrics across all messages on the platform:\n- Total message count\n- Messages created today\n- Unique user authors\n- Unique tokens with messages\n- Breakdown by message type (CHAT vs COMMENT)\n\nRETURNS: {\n  stats: {\n    totalMessages: number,\n    todayMessages: number,\n    uniqueUsers: number,\n    uniqueTokens: number,\n    messagesByType: { CHAT: number, COMMENT: number }\n  }\n}\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "messages"
     },
     "getRestrictedNames": {
       "name": "getRestrictedNames",
@@ -6926,7 +7058,8 @@
       "description": "Get the restricted token names content.\n\nReturns newline-separated words that cannot be used in token names.\nContains offensive words - API response not publicly exposed.\n\n**Authorization:** Overseer only (JWT)\n\nRETURNS: {\n  success: true,\n  data: { content: \"scam\\nrug\\nfake\\n...\" }\n}",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "restricted-names"
     },
     "updateRestrictedNames": {
       "name": "updateRestrictedNames",
@@ -6942,7 +7075,8 @@
           "required": true,
           "description": "Newline-separated restricted words (e.g., \"scam\\nrug\\nfake\")"
         }
-      ]
+      ],
+      "topic": "restricted-names"
     },
     "addContentReaction": {
       "name": "addContentReaction",
@@ -6954,8 +7088,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -6990,8 +7124,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -7026,8 +7160,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -7062,8 +7196,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -7098,8 +7232,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -7134,8 +7268,8 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
-          "required": true,
+          "type": "any",
+          "required": false,
           "description": "Token name."
         },
         {
@@ -7164,21 +7298,27 @@
       "name": "getTrades",
       "mcpTool": "gala_launchpad_get_trades",
       "category": "trades",
-      "description": "Query trades with flexible filtering options.\n\nReturns paginated list of trades with metadata using cursor-based pagination.\nAt least one of tokenName or userAddress is required.\n\nFilters:\n- tokenName: Filter by token name (e.g., 'anime')\n- userAddress: Filter by user wallet address\n- txnType: Filter by trade direction ('BUY' or 'SELL')\n- startDate/endDate: Filter by date range (ISO 8601)\n- minAmount/maxAmount: Filter by trade amount range\n\nRETURNS: { trades: [{ txnId, txnType, inputAmount, outputAmount, userAddress, tokenName, tokenImage, createdAt }], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nExamples:\n- Get all trades for a token: { tokenName: 'anime' }\n- Get all trades by a user: { userAddress: 'eth|123...' }\n- Get only buy trades: { tokenName: 'anime', txnType: 'BUY' }\n- Get trades in date range: { tokenName: 'anime', startDate: '2024-01-01', endDate: '2024-12-31' }\n- Get large trades: { tokenName: 'anime', minAmount: 1000 }\n\nPublic endpoint - no authentication required.",
+      "description": "Query trades with flexible filtering options.\n\nReturns paginated list of trades with metadata using cursor-based pagination.\nAt least one of tokenName or userAddress is required.\n\nFilters:\n- tokenName: Filter by exact token name (e.g., 'anime')\n- userAddress: Filter by user wallet address\n- search: Fuzzy search by token name (ignored when tokenName is provided)\n- txnType: Filter by trade direction ('BUY' or 'SELL')\n- startDate/endDate: Filter by date range (ISO 8601)\n- minAmount/maxAmount: Filter by trade amount range\n\nRETURNS: { trades: [{ txnId, txnType, inputAmount, outputAmount, userAddress, tokenName, tokenImage, createdAt }], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nExamples:\n- Get all trades for a token: { tokenName: 'anime' }\n- Get all trades by a user: { userAddress: 'eth|123...' }\n- Get only buy trades: { tokenName: 'anime', txnType: 'BUY' }\n- Get trades in date range: { tokenName: 'anime', startDate: '2024-01-01', endDate: '2024-12-31' }\n- Get large trades: { tokenName: 'anime', minAmount: 1000 }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Token name to filter by (optional if userAddress provided)."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "User address to filter by (optional if tokenName provided)."
+        },
+        {
+          "name": "search",
+          "type": "string",
+          "required": false,
+          "description": "Fuzzy search by token name (LIKE %search%). Ignored when tokenName is provided (exact match takes precedence)."
         },
         {
           "name": "cursor",
@@ -7188,7 +7328,7 @@
         },
         {
           "name": "pageSize",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 20, maximum: 20)"
         },
@@ -7204,13 +7344,13 @@
         },
         {
           "name": "startDate",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by date range start (ISO 8601 format, e.g., \"2024-01-01\")."
         },
         {
           "name": "endDate",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by date range end (ISO 8601 format, e.g., \"2024-12-31\")."
         },
@@ -7227,7 +7367,7 @@
           "description": "Filter by maximum trade amount."
         }
       ],
-      "topic": "trade-history"
+      "topic": "holders"
     },
     "onTradeExecuted": {
       "name": "onTradeExecuted",
@@ -7289,13 +7429,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by token name (optional)."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Filter by user address (optional)."
         },
@@ -7311,7 +7451,7 @@
         },
         {
           "name": "limit",
-          "type": "integer",
+          "type": "any",
           "required": false,
           "description": "Results per page (default: 50, maximum: 20)"
         }
@@ -7327,13 +7467,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         }
@@ -7349,7 +7489,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -7371,7 +7511,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         }
@@ -7387,7 +7527,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
@@ -7421,13 +7561,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address."
         },
@@ -7476,7 +7616,7 @@
       "name": "monitorGlobalFeedEventsReference",
       "mcpTool": "gala_launchpad_monitor_global_feed_events_reference",
       "category": "global-feed",
-      "description": "Reference: Monitor and filter global feed events.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Event monitoring happens in your client code.\n\n## Available Event Types\n\n### Token Events (broadcast to all subscribers):\n- **stream_status**: Stream active/idle/disabled status changed\n- **trade_executed**: Buy/sell trade on bonding curve\n- **holder_count_updated**: Holder count increased/decreased\n- **pool_badge_assigned**: Pool earned a badge\n- **viewer_count**: Live viewer count updated\n\n### Site Config Events (global feature flags):\n- **site_config_changed**: Generic config change event\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Monitoring Events\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Monitor specific event types on specific tokens\nconst { events } = useGlobalFeedFiltered({\n  tokenNames: ['bitcoin', 'ethereum'],\n  eventTypes: ['trade_executed', 'stream_status'],\n  maxBufferSize: 100\n});\n\n// Process buffered events\nevents.forEach(event => {\n  console.log(`Event: ${event.type}`, event.data);\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onTradeExecuted: (data) => {\n    console.log(`Trade on ${data.tokenName}: ${data.side}`);\n  },\n  onStreamStatus: (data) => {\n    console.log(`Stream status: ${data.status}`);\n  },\n  onViewerCount: (data) => {\n    console.log(`Viewers: ${data.count}`);\n  },\n  onStreamGlobalStatus: (data) => {\n    console.log(`Streaming globally ${data.enabled ? 'enabled' : 'disabled'}`);\n  },\n});\n```\n\n## Client-Side Filtering\n\nFor better performance, filter events on the client side:\n\n```typescript\n// Only process trades for visible tokens\nconst visibleTokens = new Set(['bitcoin', 'ethereum']);\n\nsocket.on('trade_executed', (data) => {\n  if (visibleTokens.has(data.tokenName)) {\n    updateTokenCard(data);\n  }\n});\n\n// Only process site config events\nsocket.on('stream_global_status', (data) => {\n  updateGlobalUI(data);\n});\n```\n\n## Use Cases\n\n1. **Homepage Card Updates**: Monitor stream_status, trade_executed, viewer_count, holder_count\n2. **Real-Time Charts**: Monitor price and volume data\n3. **Feature Availability**: Monitor site_config_changed events\n4. **Activity Feed**: Buffer and display recent events to users\n5. **Analytics**: Count and aggregate event types\n\n## Best Practices\n\n- **Buffer management**: Keep maxBufferSize reasonable (100-1000 events)\n- **Unsubscribe cleanup**: Leave the feed when the component unmounts\n- **Client-side filtering**: Filter by tokenNames to reduce processing\n- **Selective subscriptions**: Only listen to event types you need\n- **Error handling**: Handle connection drops and reconnection\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint)",
+      "description": "Reference: Monitor and filter global feed events.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Event monitoring happens in your client code.\n\n## Available Event Types\n\n### Token Events (broadcast to all subscribers):\n- **stream_status**: Stream active/idle/disabled status changed\n- **trade_executed**: Buy/sell trade on bonding curve\n- **holder_count_updated**: Holder count increased/decreased\n- **pool_badge_assigned**: Pool earned a badge\n- **viewer_count**: Live viewer count updated\n- **token_config_updated**: Unified config change (countdown, language, toggles, social links)\n- **stats_updated**: Token stats update (price, market cap, bonding curve after trades)\n\n### Site Config Events (global feature flags):\n- **site_config_changed**: Generic config change event\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Monitoring Events\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Monitor specific event types on specific tokens\nconst { events } = useGlobalFeedFiltered({\n  tokenNames: ['bitcoin', 'ethereum'],\n  eventTypes: ['trade_executed', 'stream_status'],\n  maxBufferSize: 100\n});\n\n// Process buffered events\nevents.forEach(event => {\n  console.log(`Event: ${event.type}`, event.data);\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onTradeExecuted: (data) => {\n    console.log(`Trade on ${data.tokenName}: ${data.tradeType}`);\n  },\n  onStreamStatus: (data) => {\n    console.log(`Stream status: ${data.status}`);\n  },\n  onViewerCount: (data) => {\n    console.log(`Viewers: ${data.viewerCount}`);\n  },\n  onTokenConfigUpdated: (data) => {\n    console.log(`Config updated for ${data.tokenName}`);\n  },\n  onStatsUpdated: (data) => {\n    console.log(`Stats: ${data.tokenName} price=${data.galaPrice}`);\n  },\n  onStreamGlobalStatus: (data) => {\n    console.log(`Streaming globally ${data.enabled ? 'enabled' : 'disabled'}`);\n  },\n});\n```\n\n## Client-Side Filtering\n\nFor better performance, filter events on the client side:\n\n```typescript\n// Only process trades for visible tokens\nconst visibleTokens = new Set(['bitcoin', 'ethereum']);\n\nsocket.on('trade_executed', (data) => {\n  if (visibleTokens.has(data.tokenName)) {\n    updateTokenCard(data);\n  }\n});\n\n// Only process site config events\nsocket.on('stream_global_status', (data) => {\n  updateGlobalUI(data);\n});\n```\n\n## Use Cases\n\n1. **Homepage Card Updates**: Monitor stream_status, trade_executed, viewer_count, holder_count, stats_updated\n2. **Real-Time Charts**: Monitor stats_updated for price and volume data\n3. **Token Config Changes**: Monitor token_config_updated for countdown, language, toggle changes\n4. **Feature Availability**: Monitor site_config_changed events\n5. **Activity Feed**: Buffer and display recent events to users\n6. **Analytics**: Count and aggregate event types\n\n## Best Practices\n\n- **Buffer management**: Keep maxBufferSize reasonable (100-1000 events)\n- **Unsubscribe cleanup**: Leave the feed when the component unmounts\n- **Client-side filtering**: Filter by tokenNames to reduce processing\n- **Selective subscriptions**: Only listen to event types you need\n- **Error handling**: Handle connection drops and reconnection\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
       "authRequired": true,
       "parameters": []
@@ -7500,7 +7640,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the trade event (e.g., \"anime\")."
         },
@@ -7516,17 +7656,18 @@
         },
         {
           "name": "inputAmount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of input token/currency used."
         },
         {
           "name": "outputAmount",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Amount of output token received."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitBalanceUpdated": {
       "name": "emitBalanceUpdated",
@@ -7538,25 +7679,25 @@
       "parameters": [
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "User wallet address to receive the balance update."
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the balance update (e.g., \"anime\")."
         },
         {
           "name": "galaBalance",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Updated GALA balance."
         },
         {
           "name": "tokenBalance",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Updated token balance."
         },
@@ -7566,7 +7707,8 @@
           "required": false,
           "description": "Optional reason for the balance change (e.g., \"Trade executed\", \"Transfer received\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitStreamStatus": {
       "name": "emitStreamStatus",
@@ -7578,7 +7720,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the stream status (e.g., \"anime\")."
         },
@@ -7593,7 +7735,8 @@
             "DISABLED"
           ]
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitViewerCount": {
       "name": "emitViewerCount",
@@ -7605,7 +7748,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the viewer count update (e.g., \"anime\")."
         },
@@ -7615,7 +7758,8 @@
           "required": true,
           "description": "Current number of viewers."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitStreamCountdown": {
       "name": "emitStreamCountdown",
@@ -7627,7 +7771,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the stream countdown (e.g., \"anime\")."
         },
@@ -7643,7 +7787,8 @@
           "required": false,
           "description": "Optional number of seconds until the stream goes live."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitChatMessage": {
       "name": "emitChatMessage",
@@ -7655,7 +7800,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the chat message (e.g., \"anime\")."
         },
@@ -7671,7 +7816,8 @@
           "required": true,
           "description": "Sender address or \"system\" for system messages."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitChatStatus": {
       "name": "emitChatStatus",
@@ -7683,7 +7829,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the chat status change (e.g., \"anime\")."
         },
@@ -7699,7 +7845,8 @@
           "required": false,
           "description": "Optional reason for the status change (e.g., \"Moderation pause\", \"Maintenance complete\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitTypingIndicator": {
       "name": "emitTypingIndicator",
@@ -7711,7 +7858,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the chat room (e.g., \"anime\")."
         },
@@ -7727,7 +7874,8 @@
           "required": false,
           "description": "Optional count of typing users (computed from typingUsers length if not provided)."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitTokenBanned": {
       "name": "emitTokenBanned",
@@ -7739,7 +7887,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name being banned (e.g., \"badtoken\")."
         },
@@ -7751,7 +7899,7 @@
         },
         {
           "name": "bannedBy",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional wallet address of the admin/moderator who imposed the ban."
         },
@@ -7761,7 +7909,8 @@
           "required": false,
           "description": "Optional ISO 8601 timestamp - if provided, indicates when token can be unbanned (for temporary bans)."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitTokenUnbanned": {
       "name": "emitTokenUnbanned",
@@ -7773,7 +7922,7 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name being unbanned (e.g., \"goodtoken\")."
         },
@@ -7785,11 +7934,12 @@
         },
         {
           "name": "unbannedBy",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional wallet address of the admin/moderator who lifted the ban."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitModeratorAdded": {
       "name": "emitModeratorAdded",
@@ -7801,13 +7951,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the moderator addition (e.g., \"anime\")."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of the user being added as moderator."
         },
@@ -7828,7 +7978,8 @@
           "required": false,
           "description": "Optional reason for adding the moderator (e.g., \"Trusted community member\", \"Promoted for good behavior\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitModeratorRemoved": {
       "name": "emitModeratorRemoved",
@@ -7840,13 +7991,13 @@
       "parameters": [
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Token name for the moderator removal (e.g., \"anime\")."
         },
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "Wallet address of the user being removed as moderator."
         },
@@ -7856,7 +8007,8 @@
           "required": false,
           "description": "Optional reason for removing the moderator (e.g., \"Inactive for 60 days\", \"Misconduct\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitUserProfileUpdated": {
       "name": "emitUserProfileUpdated",
@@ -7868,7 +8020,7 @@
       "parameters": [
         {
           "name": "userAddress",
-          "type": "string",
+          "type": "any",
           "required": true,
           "description": "User wallet address to receive the profile update notification."
         },
@@ -7884,7 +8036,8 @@
           "required": false,
           "description": "Optional human-readable summary of the changes (e.g., \"Profile updated successfully\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitSiteConfigChanged": {
       "name": "emitSiteConfigChanged",
@@ -7912,7 +8065,8 @@
           "required": false,
           "description": "Optional human-readable description of the config change (e.g., \"Scheduled maintenance 3am-4am UTC\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "emitFeatureStatus": {
       "name": "emitFeatureStatus",
@@ -7945,6 +8099,138 @@
           "type": "string",
           "required": false,
           "description": "Optional ISO 8601 timestamp indicating when the feature will come back online (if disabled)."
+        }
+      ],
+      "topic": "websocket-admin"
+    },
+    "emitRecordingStatus": {
+      "name": "emitRecordingStatus",
+      "mcpTool": "gala_launchpad_emit_recording_status",
+      "category": "websocket-admin",
+      "description": "Emit a recording status change event.\n\nNotifies all connected clients subscribed to a token that a Mux recording has changed status.\nUse this when a recording is created, becomes ready for playback, or is deleted.\n\n**Status Values:**\n- CREATED: Recording has been created (processing)\n- READY: Recording is ready for playback\n- DELETED: Recording has been removed\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Recording status event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to notify (e.g., \"anime\")."
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "description": "Recording status: CREATED (processing), READY (available for playback), DELETED (removed).",
+          "enum": [
+            "CREATED",
+            "READY",
+            "DELETED"
+          ]
+        },
+        {
+          "name": "assetId",
+          "type": "string",
+          "required": false,
+          "description": "Mux asset ID for the recording."
+        },
+        {
+          "name": "playbackId",
+          "type": "string",
+          "required": false,
+          "description": "Mux playback ID for streaming."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Recording duration in seconds."
+        },
+        {
+          "name": "playbackUrl",
+          "type": "string",
+          "required": false,
+          "description": "URL for streaming playback."
+        }
+      ]
+    },
+    "emitRecordingsCountUpdated": {
+      "name": "emitRecordingsCountUpdated",
+      "mcpTool": "gala_launchpad_emit_recordings_count_updated",
+      "category": "websocket-admin",
+      "description": "Emit a recordings count updated event.\n\nNotifies all connected clients subscribed to a token that the number of available recordings has changed.\nUse this when recordings are added, removed, or become available to update UI counters.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Recordings count updated event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to notify (e.g., \"anime\")."
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "required": true,
+          "description": "Current total number of recordings available."
+        },
+        {
+          "name": "previousCount",
+          "type": "number",
+          "required": false,
+          "description": "Previous recording count before the update."
+        }
+      ]
+    },
+    "emitDownloadReady": {
+      "name": "emitDownloadReady",
+      "mcpTool": "gala_launchpad_emit_download_ready",
+      "category": "websocket-admin",
+      "description": "Emit a download ready event.\n\nNotifies all connected clients subscribed to a token that a recording download is ready.\nUse this when Mux has finished processing a recording and made it available for download.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Download ready event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to notify (e.g., \"anime\")."
+        },
+        {
+          "name": "assetId",
+          "type": "string",
+          "required": true,
+          "description": "Mux asset ID for the recording."
+        },
+        {
+          "name": "recordingId",
+          "type": "string",
+          "required": true,
+          "description": "Internal recording ID."
+        },
+        {
+          "name": "downloadUrl",
+          "type": "string",
+          "required": false,
+          "description": "URL where the recording can be downloaded."
+        },
+        {
+          "name": "fileSize",
+          "type": "number",
+          "required": false,
+          "description": "File size in bytes."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Recording duration in seconds."
+        },
+        {
+          "name": "readyAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp when the download became ready."
         }
       ]
     },
@@ -7981,7 +8267,7 @@
         },
         {
           "name": "tokenName",
-          "type": "string",
+          "type": "any",
           "required": false,
           "description": "Optional token name for token-scoped events."
         },
@@ -8067,7 +8353,8 @@
           "required": false,
           "description": "Page size (default: 25, max: 100)."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "isUserOnline": {
       "name": "isUserOnline",
@@ -8083,7 +8370,8 @@
           "required": true,
           "description": "User wallet address (e.g., \"eth|0x123...\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "getOnlineUsers": {
       "name": "getOnlineUsers",
@@ -8099,7 +8387,8 @@
           "required": true,
           "description": "Comma-separated list of user addresses (e.g., \"eth|0x123,eth|0x456\")."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "getTokenViewers": {
       "name": "getTokenViewers",
@@ -8127,7 +8416,8 @@
           "required": false,
           "description": "Maximum viewers to return (default: 25, max: 100)."
         }
-      ]
+      ],
+      "topic": "websocket-admin"
     },
     "getOnlineOverseers": {
       "name": "getOnlineOverseers",
@@ -8136,7 +8426,175 @@
       "description": "Get list of currently online overseers and admins.\n\nUseful for:\n- Finding active admins to notify about urgent issues\n- Checking if any overseers are online before admin events\n- Broadcasting to all online admins\n\nRETURNS: {\n  clients: [list of overseer clients],\n  count: total overseer count\n}\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
       "authRequired": true,
+      "parameters": [],
+      "topic": "websocket-admin"
+    },
+    "getAiModerationSettings": {
+      "name": "getAiModerationSettings",
+      "mcpTool": "gala_launchpad_get_ai_moderation_settings",
+      "category": "ai-moderation",
+      "description": "Get current AI moderation settings.\n\nReturns configuration for AI-powered content moderation including:\n- Whether AI moderation is enabled\n- Moderation mode (DISABLED, ADVISORY)\n- Provider configuration\n- Tiered analysis settings (frames, resolution, escalation threshold)\n\nRETURNS: { settings: { enabled, mode, provider, maxFrames, frameInterval, tieredAnalysisEnabled, quickScanFrames, quickScanWidth, escalationConfidenceThreshold, escalationRecommendations } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "read",
+      "authRequired": false,
       "parameters": []
+    },
+    "updateAiModerationSettings": {
+      "name": "updateAiModerationSettings",
+      "mcpTool": "gala_launchpad_update_ai_moderation_settings",
+      "category": "ai-moderation",
+      "description": "Update AI moderation settings.\n\nConfigure AI-powered content moderation behavior.\nOnly provided fields will be updated.\n\nRETURNS: { settings: { enabled, mode, provider, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable or disable AI moderation"
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "required": false,
+          "description": "AI moderation mode:\n- DISABLED: AI moderation is completely disabled\n- ADVISORY: AI provides recommendations but human always makes final decision",
+          "enum": [
+            "DISABLED",
+            "ADVISORY"
+          ]
+        },
+        {
+          "name": "provider",
+          "type": "string",
+          "required": false,
+          "description": "AI provider name (e.g., \"claude\")"
+        }
+      ]
+    },
+    "getAiModerationResult": {
+      "name": "getAiModerationResult",
+      "mcpTool": "gala_launchpad_get_ai_moderation_result",
+      "category": "ai-moderation",
+      "description": "Get AI moderation result for a specific content flag.\n\nRetrieves the AI moderation results for flagged content, including:\n- Recommendation (NO_ACTION, REVIEW_REQUIRED, DELETE_CONTENT, BAN_USER, DELETE_AND_BAN)\n- Confidence score (0-1)\n- Detected categories with individual confidence scores\n- Summary and reasoning for the recommendation\n- Tiered analysis metadata (tier used, escalation info, token usage)\n\nRETURNS: { moderation: { id, flagId, status, analysisType, provider, recommendation, confidence, categories, summary, reasoning, analysisTier, escalatedFromQuick, tokensUsed, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "flagId",
+          "type": "number",
+          "required": true,
+          "description": "Flag ID to moderate (positive integer)"
+        }
+      ]
+    },
+    "triggerAiModeration": {
+      "name": "triggerAiModeration",
+      "mcpTool": "gala_launchpad_trigger_ai_moderation",
+      "category": "ai-moderation",
+      "description": "Trigger AI moderation for a content flag.\n\nQueues flagged content for AI moderation. Moderation runs asynchronously -\nuse gala_launchpad_get_ai_moderation_result to poll for results or listen\nfor the AI_MODERATION_COMPLETE WebSocket event.\n\nFor video content with tiered analysis enabled:\n- Quick scan runs first (5 frames at 480px)\n- If concerns found, detailed scan runs (20 frames at 640px)\n\nRETURNS: { queued: boolean, message: string }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "flagId",
+          "type": "number",
+          "required": true,
+          "description": "Flag ID to moderate (positive integer)"
+        }
+      ]
+    },
+    "getAiModerationStatus": {
+      "name": "getAiModerationStatus",
+      "mcpTool": "gala_launchpad_get_ai_moderation_status",
+      "category": "ai-moderation",
+      "description": "Get AI system status.\n\nReturns the current status of the AI moderation system:\n- Whether AI is enabled globally\n- Current mode (DISABLED, ADVISORY)\n- Provider availability (e.g., Claude API accessible)\n\nUseful for checking if AI moderation is operational before\ntriggering moderation for flagged content.\n\nRETURNS: { status: { enabled, mode, providerAvailable, providers: [{ name, available }] } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": []
+    },
+    "getWeeklyChallengeLeaderboard": {
+      "name": "getWeeklyChallengeLeaderboard",
+      "mcpTool": "gala_launchpad_get_weekly_challenge_leaderboard",
+      "category": "weekly-challenge",
+      "description": "Get the weekly challenge leaderboard.\n\nReturns tokens ranked by market cap increase for the current challenge week.\nThe challenge week runs Saturday to Friday, with Saturday being the baseline.\n\nRETURNS: { leaderboard: { tokens: [{rank, tokenName, symbol, marketCapGala, marketCapIncreaseGala, ...}], weekStart, weekEnd, snapshotDate, count } }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "limit",
+          "type": "number",
+          "required": false,
+          "description": "Number of tokens to return (1-50, default: 10)"
+        }
+      ],
+      "topic": "weekly-challenge"
+    },
+    "getTokenWeeklyHistory": {
+      "name": "getTokenWeeklyHistory",
+      "mcpTool": "gala_launchpad_get_token_weekly_history",
+      "category": "weekly-challenge",
+      "description": "Get weekly snapshot history for a specific token.\n\nReturns the last 4 weeks of snapshot data for tracking token performance over time.\nEach snapshot includes market cap and price data for that week.\n\nRETURNS: { snapshots: [{vaultAddress, snapshotDate, weekStart, weekEnd, marketCapGala, marketCapUsd, priceGala, priceUsd, isFinalized}] }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "vaultAddress",
+          "type": "string",
+          "required": true,
+          "description": "Token vault address (e.g., \"eth|0xabc123...\")"
+        }
+      ],
+      "topic": "weekly-challenge"
+    },
+    "getHomeOembed": {
+      "name": "getHomeOembed",
+      "mcpTool": "gala_launchpad_get_home_oembed",
+      "category": "oembed",
+      "description": "Get oEmbed metadata for the home page.\n\nReturns oEmbed JSON data featuring the top/live token for social media previews.\nUsed by Twitter Cards, Open Graph, and other social preview consumers.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, featuredToken?, featuredSymbol?, featuredImage?, featuredIsLive? } }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": []
+    },
+    "getPoolOembed": {
+      "name": "getPoolOembed",
+      "mcpTool": "gala_launchpad_get_pool_oembed",
+      "category": "oembed",
+      "description": "Get oEmbed metadata for a pool/token page.\n\nReturns oEmbed JSON data for a token's buy/sell page, including\nlive stream status if applicable.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, tokenName, symbol, image, isLive?, viewerCount? } }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name (case-insensitive)"
+        }
+      ]
+    },
+    "getProfileOembed": {
+      "name": "getProfileOembed",
+      "mcpTool": "gala_launchpad_get_profile_oembed",
+      "category": "oembed",
+      "description": "Get oEmbed metadata for a user profile page.\n\nReturns oEmbed JSON data for a user's profile including stats like\ntokens created, graduation rate, and total volume.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, address, displayName?, avatarUrl?, tokensCreated, tokensGraduated, graduationRate, totalVolumeGala, isLiveStreaming?, liveStreamToken? } }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "address",
+          "type": "string",
+          "required": true,
+          "description": "User wallet address (e.g., \"eth|0x123...\")"
+        }
+      ]
+    },
+    "getPlatformStats": {
+      "name": "getPlatformStats",
+      "mcpTool": "gala_launchpad_get_platform_stats",
+      "category": "platform-stats",
+      "description": "Get platform-wide statistics.\n\nReturns aggregated platform metrics including:\n- GALA trading volume over 1h, 24h, 7d\n- Total number of tokens on the platform\n\nBackend caches stats for 3 minutes.\n\nRETURNS: { stats: { galaVolume1h, galaVolume24h, galaVolume7d, totalTokens, timestamp } }\n\nAuthentication: None required (public endpoint)",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [],
+      "topic": "platform-stats"
     }
   },
   "topics": {
@@ -8729,7 +9187,12 @@
         "listOverseers",
         "revokeOverseer",
         "getMyOverseerStatus",
-        "getOverseerSummary"
+        "getOverseerSummary",
+        "getBanStats",
+        "getTokenBanStats",
+        "getInviteStats",
+        "getFlagStats",
+        "getUserStats"
       ],
       "category": "overseers"
     },
@@ -8828,6 +9291,113 @@
         "onLaunchpadTokenCreation"
       ],
       "category": "utils"
+    },
+    "ai-moderation": {
+      "key": "ai-moderation",
+      "label": "Ai moderation",
+      "description": "Ai moderation operations",
+      "methods": [
+        "getAIModerationSettings",
+        "updateAIModerationSettings",
+        "getAIModeration",
+        "triggerAIModeration",
+        "getAIModerationStatus"
+      ],
+      "category": "utils"
+    },
+    "weekly-challenge": {
+      "key": "weekly-challenge",
+      "label": "Weekly challenge",
+      "description": "Weekly challenge operations",
+      "methods": [
+        "getWeeklyChallengeLeaderboard",
+        "getTokenWeeklyHistory"
+      ],
+      "category": "weekly-challenge"
+    },
+    "platform-stats": {
+      "key": "platform-stats",
+      "label": "Platform stats",
+      "description": "Platform stats operations",
+      "methods": [
+        "getPlatformStats"
+      ],
+      "category": "platform-stats"
+    },
+    "restricted-names": {
+      "key": "restricted-names",
+      "label": "Restricted names",
+      "description": "Restricted names operations",
+      "methods": [
+        "getRestrictedNames",
+        "updateRestrictedNames"
+      ],
+      "category": "restricted-names"
+    },
+    "websocket-admin": {
+      "key": "websocket-admin",
+      "label": "Websocket admin",
+      "description": "Websocket admin operations",
+      "methods": [
+        "emitTradeExecuted",
+        "emitBalanceUpdated",
+        "emitStreamStatus",
+        "emitViewerCount",
+        "emitStreamCountdown",
+        "emitChatMessage",
+        "emitChatStatus",
+        "emitTypingIndicator",
+        "emitTokenBanned",
+        "emitTokenUnbanned",
+        "emitModeratorAdded",
+        "emitModeratorRemoved",
+        "emitUserProfileUpdated",
+        "emitSiteConfigChanged",
+        "emitFeatureStatus",
+        "getConnectedClients",
+        "isUserOnline",
+        "getOnlineUsers",
+        "getTokenViewers",
+        "getOnlineOverseers"
+      ],
+      "category": "websocket-admin"
+    },
+    "oembed": {
+      "key": "oembed",
+      "label": "Oembed",
+      "description": "Oembed operations",
+      "methods": [
+        "getHomeOEmbed",
+        "getPoolOEmbed",
+        "getProfileOEmbed"
+      ],
+      "category": "utils"
+    },
+    "messages": {
+      "key": "messages",
+      "label": "Messages",
+      "description": "Messages operations",
+      "methods": [
+        "fetchMessages",
+        "createMessage",
+        "updateMessage",
+        "deleteMessage",
+        "getPinnedMessage",
+        "pinMessage",
+        "unpinMessage",
+        "getMessageStats"
+      ],
+      "category": "messages"
+    },
+    "holders": {
+      "key": "holders",
+      "label": "Holders",
+      "description": "Holders operations",
+      "methods": [
+        "fetchTokenDistribution",
+        "getTrades"
+      ],
+      "category": "pools"
     }
   },
   "authMatrix": {
@@ -8848,6 +9418,7 @@
       "checkTokenSymbol",
       "emitChatStatus",
       "emitFeatureStatus",
+      "emitRecordingStatus",
       "emitStreamStatus",
       "explainSdkUsage",
       "explainWebsocketEvents",
@@ -8870,9 +9441,9 @@
       "fetchDexAggregatedVolumeSummary",
       "fetchDexLeaderboardBySeasonId",
       "fetchDexPools",
-      "fetchEthereumWalletAllBalances.",
-      "fetchEthereumWalletNativeBalance.",
-      "fetchEthereumWalletTokenBalance.",
+      "fetchEthereumWalletAllBalances",
+      "fetchEthereumWalletNativeBalance",
+      "fetchEthereumWalletTokenBalance",
       "fetchGalaBalance",
       "fetchGalaSpotPrice",
       "fetchLaunchTokenFee",
@@ -8889,9 +9460,9 @@
       "fetchProfile",
       "fetchReferrals",
       "fetchReferralsSummary",
-      "fetchSolanaWalletAllBalances.",
-      "fetchSolanaWalletNativeBalance.",
-      "fetchSolanaWalletTokenBalance.",
+      "fetchSolanaWalletAllBalances",
+      "fetchSolanaWalletNativeBalance",
+      "fetchSolanaWalletTokenBalance",
       "fetchSwapPositionDirect",
       "fetchTokenBadges",
       "fetchTokenBalance",
@@ -8908,6 +9479,9 @@
       "getAccessToken",
       "getActiveUsers",
       "getAddress",
+      "getAiModerationResult",
+      "getAiModerationSettings",
+      "getAiModerationStatus",
       "getAllSwapUserAssets",
       "getAllUserLiquidityPositions",
       "getAvailableRoles",
@@ -8922,20 +9496,27 @@
       "getEthereumAddress",
       "getEthereumTransactionStatus",
       "getEventSchema",
+      "getFlagStats",
       "getGlobalChatStatus",
       "getGlobalStreamingStatus",
       "getHolderCount",
       "getHolderHistory",
       "getHolderRank",
       "getHoldersByBalance",
+      "getHomeOembed",
+      "getInviteStats",
       "getLiquidityPosition",
       "getLiquidityPositionById",
+      "getMessageStats",
       "getNftCollectionClaimFee",
       "getNftTokenClassCreateFee",
       "getOnlineUsers",
       "getPinnedMessage",
+      "getPlatformStats",
       "getPlatformStatus",
+      "getPoolOembed",
       "getPoolRealtimeState",
+      "getProfileOembed",
       "getRecentTrades",
       "getRecordingDownload",
       "getRestrictedNames",
@@ -8950,12 +9531,15 @@
       "getSwapUserAssets",
       "getTokenBan",
       "getTokenViewers",
+      "getTokenWeeklyHistory",
       "getTopHolders",
       "getTrades",
       "getUrlByTokenName",
       "getUserLiquidityPositions",
+      "getUserStats",
       "getVersion",
       "getWallet",
+      "getWeeklyChallengeLeaderboard",
       "getWrapCounterpart",
       "getWrapStatus",
       "getWrappableToken",
@@ -9009,8 +9593,10 @@
       "dismissFlag",
       "emitBalanceUpdated",
       "emitChatMessage",
+      "emitDownloadReady",
       "emitModeratorAdded",
       "emitModeratorRemoved",
+      "emitRecordingsCountUpdated",
       "emitSiteConfigChanged",
       "emitStreamCountdown",
       "emitTokenBanned",
@@ -9035,6 +9621,7 @@
       "getActiveModerators",
       "getApiKey",
       "getApiKeyRoles",
+      "getBanStats",
       "getBanStatus",
       "getEthereumAddressFromPrivateKey",
       "getManagedTokens",
@@ -9049,6 +9636,7 @@
       "getSession",
       "getStreamRole",
       "getTokenAccess",
+      "getTokenBanStats",
       "globalFeedReference",
       "globalFeedStatusReference",
       "graduateToken",
@@ -9105,11 +9693,13 @@
       "switchEnvironment",
       "transferGala",
       "transferToken",
+      "triggerAiModeration",
       "unbanToken",
       "unlockTokens",
       "unpinMessage",
       "unsubscribeFromGlobalFeedReference",
       "unwrapToken",
+      "updateAiModerationSettings",
       "updateApiKey",
       "updateMessage",
       "updateModeratorInviteRole",
@@ -9130,6 +9720,7 @@
     "topics": [
       "account-management",
       "advanced-dex-analysis",
+      "ai-moderation",
       "api-key-management",
       "balances",
       "ban-management",
@@ -9149,19 +9740,24 @@
       "fetch-dex-pools",
       "fetch-pools",
       "graduation-detection",
+      "holders",
       "installation",
       "liquidity-positions",
       "local-calculations",
       "locks",
       "mcp-to-sdk-mapping",
+      "messages",
       "moderator-invites",
       "multi-wallet",
       "nft-collection-management",
+      "oembed",
       "overseer-invites",
+      "platform-stats",
       "pool-graduation",
       "price-history",
       "profile-management",
       "referral-system",
+      "restricted-names",
       "sell-tokens",
       "session-auth",
       "spot-prices-smart-routing",
@@ -9178,10 +9774,12 @@
       "transfers",
       "utilities-and-helpers",
       "utilities-system",
+      "websocket-admin",
+      "weekly-challenge",
       "wrap-unwrap-operations"
     ],
-    "topicCount": 51,
-    "methodCount": 286,
+    "topicCount": 59,
+    "methodCount": 306,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   },
   "walletModule": {

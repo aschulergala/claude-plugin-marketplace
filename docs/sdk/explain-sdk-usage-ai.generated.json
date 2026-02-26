@@ -1,9 +1,9 @@
 {
   "meta": {
     "version": "0.0.0",
-    "generatedAt": "2026-01-28T19:03:12.607Z",
-    "topicCount": 51,
-    "methodCount": 286
+    "generatedAt": "2026-02-26T11:57:22.628Z",
+    "topicCount": 59,
+    "methodCount": 306
   },
   "topics": {
     "buy-tokens": {
@@ -650,7 +650,7 @@
       "mcpTools": [
         "gala_launchpad_fetch_current_dex_leaderboard"
       ],
-      "explanation": "",
+      "explanation": "\n## Fetch Current DEX Leaderboard\n\n**Covers Methods:**\n- `fetchCurrentDexLeaderboard()`\n\nConvenience method to fetch the leaderboard for the current active DEX season.\nThis is a shortcut that combines `fetchCurrentDexSeason()` and `fetchDexLeaderboardBySeasonId()`.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function viewCurrentLeaderboard() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Fetch current season leaderboard directly\n  const leaderboard = await sdk.fetchCurrentDexLeaderboard();\n\n  if (leaderboard) {\n    console.log('Current Season:', leaderboard.season.name);\n    console.log('Total Participants:', leaderboard.entries.length);\n\n    // Display top 10 traders\n    console.log('\\nTop 10 Traders:');\n    leaderboard.entries.slice(0, 10).forEach((entry, rank) => {\n      console.log(`#${rank + 1}: ${entry.wallet}`);\n      console.log(`   XP: ${entry.xp}, Volume: $${entry.totalVolume}`);\n\n      // Display mastery titles\n      if (entry.masteryTitles.length > 0) {\n        console.log(`   Titles: ${entry.masteryTitles.join(', ')}`);\n      }\n    });\n\n    // Find your own position\n    const myAddress = sdk.getAddress();\n    const myPosition = leaderboard.entries.findIndex(e => e.wallet === myAddress);\n\n    if (myPosition !== -1) {\n      const myEntry = leaderboard.entries[myPosition];\n      console.log(`\\nYour position: #${myPosition + 1}`);\n      console.log(`XP: ${myEntry.xp}, Volume: $${myEntry.totalVolume}`);\n    } else {\n      console.log('\\nYou have not participated in this season yet.');\n    }\n  } else {\n    console.log('No active season currently running.');\n  }\n}\n```\n\n**Use Cases:**\n- Quick access to current season standings\n- Display leaderboard in UI without multiple API calls\n- Check your competitive position\n- Show top traders on dashboard\n\n**Related Methods:**\n- `fetchCurrentDexSeason()` - Get season metadata only\n- `fetchDexLeaderboardBySeasonId()` - Get leaderboard for any season\n\n**MCP Tool Equivalent:** `gala_launchpad_fetch_current_dex_leaderboard`\n",
       "samplePrompts": [
         "How do I view current DEX leaderboard?",
         "Show me how to view current DEX leaderboard with the SDK",
@@ -804,6 +804,12 @@
         "gala_launchpad_bridge_out",
         "gala_launchpad_bridge_in",
         "gala_launchpad_get_bridge_status",
+        "gala_launchpad_fetch_ethereum_wallet_token_balance",
+        "gala_launchpad_fetch_ethereum_wallet_native_balance",
+        "gala_launchpad_fetch_ethereum_wallet_all_balances",
+        "gala_launchpad_fetch_solana_wallet_token_balance",
+        "gala_launchpad_fetch_solana_wallet_native_balance",
+        "gala_launchpad_fetch_solana_wallet_all_balances",
         "gala_launchpad_get_supported_bridge_tokens",
         "gala_launchpad_get_ethereum_transaction_status",
         "gala_launchpad_get_solana_transaction_status",
@@ -951,7 +957,7 @@
         "gala_launchpad_get_access_token",
         "gala_launchpad_ensure_valid_token"
       ],
-      "explanation": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset RTMP key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n",
+      "explanation": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset stream key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n",
       "samplePrompts": [
         "How do I manage JWT authentication?",
         "Show me how to manage JWT authentication with the SDK",
@@ -999,7 +1005,7 @@
         "gala_launchpad_get_stream_role",
         "gala_launchpad_get_token_access"
       ],
-      "explanation": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // Use stream.streamKey in OBS or other RTMP software\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n",
+      "explanation": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // stream.rtmpsUrl — full RTMPS ingest URL for OBS or compatible software\n  // stream.srtUrl — full SRT ingest URL for low-latency encoders\n  // stream.streamKey — raw key for manual RTMPS configuration\n  // stream.srtPassphrase — raw passphrase for manual SRT configuration\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n",
       "samplePrompts": [
         "How do I manage live streams?",
         "Show me how to manage live streams with the SDK",
@@ -1145,7 +1151,12 @@
         "listOverseers",
         "revokeOverseer",
         "getMyOverseerStatus",
-        "getOverseerSummary"
+        "getOverseerSummary",
+        "getBanStats",
+        "getTokenBanStats",
+        "getInviteStats",
+        "getFlagStats",
+        "getUserStats"
       ],
       "mcpTools": [
         "gala_launchpad_create_overseer_invite",
@@ -1155,7 +1166,12 @@
         "gala_launchpad_list_overseers",
         "gala_launchpad_revoke_overseer",
         "gala_launchpad_get_my_overseer_status",
-        "gala_launchpad_get_overseer_summary"
+        "gala_launchpad_get_overseer_summary",
+        "gala_launchpad_get_ban_stats",
+        "gala_launchpad_get_token_ban_stats",
+        "gala_launchpad_get_invite_stats",
+        "gala_launchpad_get_flag_stats",
+        "gala_launchpad_get_user_stats"
       ],
       "explanation": "\n# Overseer System - SDK v5.9.0+\n\nGlobal platform oversight via magic link invites. Overseers have MANAGER-level\naccess to ALL tokens (current and future), unlike moderators who have token-scoped access.\n\n## Key Differences from Moderators\n\n| Feature | Moderator | Overseer |\n|---------|-----------|----------|\n| Scope | Per-token or blanket (owner's tokens) | ALL tokens on platform |\n| Access Level | MODERATOR, TECHNICAL_PRODUCER, or MANAGER | Always MANAGER |\n| Grant Authority | Token owner | Admin or existing Overseer |\n| Use Case | Stream management delegation | Platform-wide oversight |\n\n## Creating Overseer Invites\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  streamAdminApiKey: process.env.STREAM_ADMIN_API_KEY, // Admin key OR JWT auth\n});\n\n// Option 1: Using Admin API key\nconst result = await sdk.createOverseerInvite({\n  description: 'John - Platform Support Team.',\n  expiresAt: '2025-12-31T23:59:59Z', // Optional\n});\n\n// Option 2: Using JWT (as existing Overseer)\nawait sdk.login();\nconst result = await sdk.createOverseerInvite({\n  description: 'Platform team member.',\n});\n\n```\n\n## Claiming Overseer Invites\n\n```typescript\n// Recipient must be authenticated\nawait sdk.login();\n\n// Claim the invite\nconst claimed = await sdk.claimOverseerInvite('abc123...');\n\n// Check own status\nconst status = await sdk.getMyOverseerStatus();\n\n```\n\n## Listing Overseers and Invites\n\n```typescript\n// List all overseer invites (paginated)\nconst invites = await sdk.listOverseerInvites({\n  status: 'PENDING', // PENDING, CLAIMED, REVOKED, EXPIRED\n  page: 1,\n  limit: 20,\n});\n\nfor (const invite of invites.invites) {\n\n}\n\n// List all active overseers\nconst overseers = await sdk.listOverseers({\n  status: 'ACTIVE', // ACTIVE or REVOKED\n  page: 1,\n  limit: 20,\n});\n\nfor (const overseer of overseers.overseers) {\n\n}\n```\n\n## Public Invite Preview\n\n```typescript\n// Get public info about an invite (no auth required)\nconst preview = await sdk.getOverseerInviteByCode('abc123...');\n\n```\n\n## Revoking Access\n\n```typescript\n// Revoke an invite by ID\nawait sdk.revokeOverseerInvite(123);\n\n// Revoke an overseer by wallet address\nawait sdk.revokeOverseer('eth|1234567890abcdef...');\n\n```\n\n## SDK Methods Reference\n\n| Method | Description | Auth |\n|--------|-------------|------|\n| `createOverseerInvite(options?)` | Create magic link invite | Admin API key OR JWT (Overseer) |\n| `claimOverseerInvite(code)` | Claim invite with code | JWT |\n| `listOverseerInvites(options?)` | List all overseer invites | Admin API key OR JWT (Overseer) |\n| `getOverseerInviteByCode(code)` | Preview invite details | None (public) |\n| `revokeOverseerInvite(id)` | Revoke invite by ID | Admin API key OR JWT (Overseer) |\n| `listOverseers(options?)` | List all overseers | Admin API key OR JWT (Overseer) |\n| `revokeOverseer(address)` | Revoke overseer by address | Admin API key OR JWT (Overseer) |\n| `getMyOverseerStatus()` | Check own overseer status | JWT |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_create_overseer_invite`\n- `gala_launchpad_claim_overseer_invite`\n- `gala_launchpad_list_overseer_invites`\n- `gala_launchpad_get_overseer_invite`\n- `gala_launchpad_revoke_overseer_invite`\n- `gala_launchpad_list_overseers`\n- `gala_launchpad_revoke_overseer`\n- `gala_launchpad_get_my_overseer_status`\n- `gala_launchpad_get_overseer_summary`\n",
       "samplePrompts": [
@@ -1217,7 +1233,7 @@
         "gala_launchpad_add_reaction_to_comment",
         "gala_launchpad_remove_reaction_from_comment"
       ],
-      "explanation": "",
+      "explanation": "\n## Content Reactions - SDK v5.13.0+\n\nAdd and remove reactions on chat messages and pool comments. Reactions provide\nsocial engagement features for community interaction.\n\n**Covers Methods:**\n- `addContentReaction()` - Add reaction to any content\n- `removeContentReaction()` - Remove reaction from any content\n- `addReactionToChatMessage()` - Add reaction specifically to chat message\n- `removeReactionFromChatMessage()` - Remove reaction from chat message\n- `addReactionToComment()` - Add reaction specifically to pool comment\n- `removeReactionFromComment()` - Remove reaction from pool comment\n\n## Adding Reactions\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n});\n\nawait sdk.login();\n\n// Generic method - works for any content type\nawait sdk.addContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n  tokenName: 'mytoken', // optional - backend can resolve from messageId\n});\n\n// Specific method for chat messages\nawait sdk.addReactionToChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.addReactionToComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Removing Reactions\n\n```typescript\n// Generic method\nawait sdk.removeContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n});\n\n// Specific method for chat messages\nawait sdk.removeReactionFromChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.removeReactionFromComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Common Reaction Types\n\n| Emoji | Meaning |\n|-------|---------|\n| 👍 | Thumbs up / Like |\n| ❤️ | Love |\n| 🔥 | Fire / Hot |\n| 🚀 | Rocket / Moon |\n| 😂 | Laughing |\n\n## SDK Methods Reference\n\n| Method | Description | Auth |\n|--------|-------------|------|\n| `addContentReaction(options)` | Add reaction to any content | JWT |\n| `removeContentReaction(options)` | Remove reaction from content | JWT |\n| `addReactionToChatMessage(options)` | Add reaction to chat message | JWT |\n| `removeReactionFromChatMessage(options)` | Remove reaction from chat message | JWT |\n| `addReactionToComment(options)` | Add reaction to pool comment | JWT |\n| `removeReactionFromComment(options)` | Remove reaction from pool comment | JWT |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_add_content_reaction`\n- `gala_launchpad_remove_content_reaction`\n- `gala_launchpad_add_reaction_to_chat_message`\n- `gala_launchpad_remove_reaction_from_chat_message`\n- `gala_launchpad_add_reaction_to_comment`\n- `gala_launchpad_remove_reaction_from_comment`\n",
       "samplePrompts": [
         "How do I manage content reactions?",
         "Show me how to manage content reactions with the SDK",
@@ -1357,6 +1373,218 @@
         "Explain the graduation detection workflow",
         "What methods do I need for graduation detection?"
       ]
+    },
+    "ai-moderation": {
+      "key": "ai-moderation",
+      "label": "Ai moderation",
+      "description": "Ai moderation operations",
+      "category": "utils",
+      "methods": [
+        "getAIModerationSettings",
+        "updateAIModerationSettings",
+        "getAIModeration",
+        "triggerAIModeration",
+        "getAIModerationStatus"
+      ],
+      "mcpTools": [],
+      "explanation": "\n## AI Moderation with SDK\n\n**Covers Methods:**\n- `getAIModerationSettings()` - Get current AI moderation configuration\n- `updateAIModerationSettings()` - Update AI moderation settings\n- `getAIModeration()` - Get AI analysis result for a message/content\n- `triggerAIModeration()` - Manually trigger AI analysis on content\n- `getAIModerationStatus()` - Check AI moderation service status\n\n**Auth Required:** Admin API key or Overseer JWT token\n\n### Get AI Moderation Settings\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ apiKey: 'your-admin-api-key' });\n\n// Get current AI moderation configuration\nconst settings = await sdk.getAIModerationSettings();\nconsole.log('AI Moderation Settings:', settings);\n// Returns: { enabled, sensitivityLevel, autoAction, actionThreshold, ... }\n```\n\n### Update AI Moderation Settings\n\n```typescript\nconst result = await sdk.updateAIModerationSettings({\n  enabled: true,\n  sensitivityLevel: 'medium',   // 'low' | 'medium' | 'high'\n  autoAction: 'flag',           // 'none' | 'flag' | 'hide' | 'delete'\n  actionThreshold: 0.8,         // 0.0 - 1.0 confidence threshold\n});\nconsole.log('Settings updated:', result);\n```\n\n### Get AI Moderation Result for Content\n\n```typescript\n// Get AI analysis for a specific message\nconst result = await sdk.getAIModeration({\n  contentId: 'message-uuid-here',\n  contentType: 'CHAT',   // 'CHAT' | 'COMMENT'\n});\nconsole.log('AI Score:', result.score);\nconsole.log('AI Action:', result.suggestedAction);\nconsole.log('Categories:', result.categories); // spam, toxicity, explicit, etc.\n```\n\n### Trigger Manual AI Analysis\n\n```typescript\n// Manually trigger AI analysis on content that hasn't been analyzed yet\nconst result = await sdk.triggerAIModeration({\n  contentId: 'message-uuid-here',\n  contentType: 'COMMENT',\n});\nconsole.log('Moderation triggered:', result.jobId);\n```\n\n### Check AI Service Status\n\n```typescript\n// Check if the AI moderation service is operational\nconst status = await sdk.getAIModerationStatus();\nconsole.log('AI Service:', status.status); // 'operational' | 'degraded' | 'offline'\nconsole.log('Queue Size:', status.queueSize);\nconsole.log('Processing Rate:', status.processingRate);\n```\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`\n",
+      "samplePrompts": [
+        "How do I ai moderation?",
+        "Show me how to ai moderation with the SDK",
+        "Explain the ai moderation workflow",
+        "What methods do I need for ai moderation?"
+      ]
+    },
+    "weekly-challenge": {
+      "key": "weekly-challenge",
+      "label": "Weekly challenge",
+      "description": "Weekly challenge operations",
+      "category": "weekly-challenge",
+      "methods": [
+        "getWeeklyChallengeLeaderboard",
+        "getTokenWeeklyHistory"
+      ],
+      "mcpTools": [
+        "gala_launchpad_get_weekly_challenge_leaderboard",
+        "gala_launchpad_get_token_weekly_history"
+      ],
+      "explanation": "\n## Weekly Challenge with SDK\n\n**Covers Methods:**\n- `getWeeklyChallengeLeaderboard()` - Get tokens ranked by market cap increase\n- `getTokenWeeklyHistory()` - Get historical weekly challenge results for a token\n\n**Challenge Rules:**\n- Week runs Saturday to Friday (UTC)\n- Baseline market cap taken Saturday at 00:00 UTC\n- Tokens ranked by percentage market cap increase from baseline\n- Results available after each week closes\n\n### Get Weekly Challenge Leaderboard\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get current week's leaderboard\nconst leaderboard = await sdk.getWeeklyChallengeLeaderboard();\nconsole.log('Top tokens this week:', leaderboard.tokens.slice(0, 10));\n\n// Get leaderboard with pagination\nconst page2 = await sdk.getWeeklyChallengeLeaderboard({\n  limit: 20,\n  page: 2,\n});\nconsole.log('Week Period:', page2.weekStart, '-', page2.weekEnd);\n\n// Get a specific past week by timestamp\nconst pastWeek = await sdk.getWeeklyChallengeLeaderboard({\n  weekTimestamp: '2026-01-01T00:00:00Z',\n});\n```\n\n### Get Token's Weekly History\n\n```typescript\n// Get how a specific token has performed in past weekly challenges\nconst history = await sdk.getTokenWeeklyHistory({\n  tokenName: 'anime',\n  limit: 10,   // Last 10 weeks\n});\n\nhistory.weeks.forEach((week) => {\n  console.log(`Week ${week.weekStart}: Rank #${week.rank}, +${week.percentageIncrease}%`);\n});\n```\n\n**Related Topics:** `trading-analytics`, `token-details`, `fetch-pools`\n",
+      "samplePrompts": [
+        "How do I weekly challenge?",
+        "Show me how to weekly challenge with the SDK",
+        "Explain the weekly challenge workflow",
+        "What methods do I need for weekly challenge?"
+      ]
+    },
+    "platform-stats": {
+      "key": "platform-stats",
+      "label": "Platform stats",
+      "description": "Platform stats operations",
+      "category": "platform-stats",
+      "methods": [
+        "getPlatformStats"
+      ],
+      "mcpTools": [
+        "gala_launchpad_get_platform_stats"
+      ],
+      "explanation": "\n## Platform Statistics with SDK\n\n**Covers Methods:**\n- `getPlatformStats()` - Get platform-wide trading statistics\n\n**Auth Required:** None (public endpoint)\n\n### Get Platform Statistics\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get platform-wide statistics\nconst stats = await sdk.getPlatformStats();\n\nconsole.log('GALA Volume (1h):', stats.galaVolume1h);\nconsole.log('GALA Volume (24h):', stats.galaVolume24h);\nconsole.log('GALA Volume (7d):', stats.galaVolume7d);\nconsole.log('Total Tokens:', stats.totalTokens);\n```\n\n### Display Trading Dashboard\n\n```typescript\nasync function displayPlatformDashboard() {\n  const stats = await sdk.getPlatformStats();\n\n  return {\n    tradingVolume: {\n      lastHour: `${stats.galaVolume1h} GALA`,\n      last24Hours: `${stats.galaVolume24h} GALA`,\n      last7Days: `${stats.galaVolume7d} GALA`,\n    },\n    tokens: {\n      total: stats.totalTokens,\n    },\n  };\n}\n```\n\n**Related Topics:** `weekly-challenge`, `trading-analytics`, `fetch-pools`\n",
+      "samplePrompts": [
+        "How do I platform stats?",
+        "Show me how to platform stats with the SDK",
+        "Explain the platform stats workflow",
+        "What methods do I need for platform stats?"
+      ]
+    },
+    "restricted-names": {
+      "key": "restricted-names",
+      "label": "Restricted names",
+      "description": "Restricted names operations",
+      "category": "restricted-names",
+      "methods": [
+        "getRestrictedNames",
+        "updateRestrictedNames"
+      ],
+      "mcpTools": [
+        "gala_launchpad_get_restricted_names",
+        "gala_launchpad_update_restricted_names"
+      ],
+      "explanation": "\n## Restricted Names with SDK\n\n**Covers Methods:**\n- `getRestrictedNames()` - Get the list of restricted token names\n- `updateRestrictedNames()` - Update the restricted names list\n\n**Auth Required:** Overseer JWT token only\n\n### Get Restricted Names\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-overseer-jwt' });\n\n// Get current restricted names list\nconst result = await sdk.getRestrictedNames();\n\n// Names are stored as a newline-separated text blob\nconst namesList = result.names.split('\\n').filter(Boolean);\nconsole.log('Restricted names:', namesList);\nconsole.log('Total count:', namesList.length);\n```\n\n### Update Restricted Names\n\n```typescript\n// Add new restricted names to the list\nconst currentResult = await sdk.getRestrictedNames();\nconst currentNames = currentResult.names.split('\\n').filter(Boolean);\n\n// Add new names\nconst updatedNames = [...currentNames, 'badword1', 'badword2'];\nconst newNamesBlob = updatedNames.join('\\n');\n\nconst result = await sdk.updateRestrictedNames({\n  names: newNamesBlob,\n});\nconsole.log('Updated successfully:', result);\n```\n\n### Check If a Name Would Be Restricted\n\n```typescript\n// Check if a token name would be blocked before creating\nasync function isNameRestricted(tokenName: string): Promise<boolean> {\n  const result = await sdk.getRestrictedNames();\n  const restrictedList = result.names.split('\\n').filter(Boolean);\n  return restrictedList.some(\n    (name) => name.toLowerCase() === tokenName.toLowerCase()\n  );\n}\n\nconst blocked = await isNameRestricted('badword1');\nconsole.log('Name is restricted:', blocked);\n```\n\n**Related Topics:** `token-creation`, `overseer-invites`, `token-ban-management`\n",
+      "samplePrompts": [
+        "How do I restricted names?",
+        "Show me how to restricted names with the SDK",
+        "Explain the restricted names workflow",
+        "What methods do I need for restricted names?"
+      ]
+    },
+    "websocket-admin": {
+      "key": "websocket-admin",
+      "label": "Websocket admin",
+      "description": "Websocket admin operations",
+      "category": "websocket-admin",
+      "methods": [
+        "emitTradeExecuted",
+        "emitBalanceUpdated",
+        "emitStreamStatus",
+        "emitViewerCount",
+        "emitStreamCountdown",
+        "emitChatMessage",
+        "emitChatStatus",
+        "emitTypingIndicator",
+        "emitTokenBanned",
+        "emitTokenUnbanned",
+        "emitModeratorAdded",
+        "emitModeratorRemoved",
+        "emitUserProfileUpdated",
+        "emitSiteConfigChanged",
+        "emitFeatureStatus",
+        "getConnectedClients",
+        "isUserOnline",
+        "getOnlineUsers",
+        "getTokenViewers",
+        "getOnlineOverseers"
+      ],
+      "mcpTools": [
+        "gala_launchpad_emit_trade_executed",
+        "gala_launchpad_emit_balance_updated",
+        "gala_launchpad_emit_stream_status",
+        "gala_launchpad_emit_viewer_count",
+        "gala_launchpad_emit_stream_countdown",
+        "gala_launchpad_emit_chat_message",
+        "gala_launchpad_emit_chat_status",
+        "gala_launchpad_emit_typing_indicator",
+        "gala_launchpad_emit_token_banned",
+        "gala_launchpad_emit_token_unbanned",
+        "gala_launchpad_emit_moderator_added",
+        "gala_launchpad_emit_moderator_removed",
+        "gala_launchpad_emit_user_profile_updated",
+        "gala_launchpad_emit_site_config_changed",
+        "gala_launchpad_emit_feature_status",
+        "gala_launchpad_get_connected_clients",
+        "gala_launchpad_is_user_online",
+        "gala_launchpad_get_online_users",
+        "gala_launchpad_get_token_viewers",
+        "gala_launchpad_get_online_overseers"
+      ],
+      "explanation": "\n## WebSocket Admin with SDK\n\n**Covers Methods:**\n- **Connection Monitoring:** `getConnectedClients()`, `isUserOnline()`, `getOnlineUsers()`, `getTokenViewers()`, `getOnlineOverseers()`\n- **Event Emission:** `emitTradeExecuted()`, `emitBalanceUpdated()`, `emitStreamStatus()`, `emitViewerCount()`, `emitStreamCountdown()`, `emitChatMessage()`, `emitChatStatus()`, `emitTypingIndicator()`, `emitTokenBanned()`, `emitTokenUnbanned()`, `emitModeratorAdded()`, `emitModeratorRemoved()`, `emitUserProfileUpdated()`, `emitSiteConfigChanged()`, `emitFeatureStatus()`\n\n**Auth Required:** Admin API key or Overseer JWT token\n\n### Monitor Connected Clients\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ apiKey: 'your-admin-api-key' });\n\n// Get all connected WebSocket clients\nconst clients = await sdk.getConnectedClients();\nconsole.log('Total connected:', clients.total);\nconsole.log('By token:', clients.byToken);\n\n// Check if a specific user is online\nconst onlineStatus = await sdk.isUserOnline('eth|0x1234...');\nconsole.log('User online:', onlineStatus.isOnline);\nconsole.log('Connected since:', onlineStatus.connectedSince);\n\n// Check multiple users at once\nconst statuses = await sdk.getOnlineUsers(['eth|0x1111...', 'eth|0x2222...']);\nstatuses.forEach((s) => console.log(`${s.address}: ${s.isOnline}`));\n\n// Get viewers of a specific token stream\nconst viewers = await sdk.getTokenViewers({\n  tokenName: 'anime',\n  limit: 50,\n});\nconsole.log('Current viewers:', viewers.count);\n\n// Get all online overseers\nconst overseers = await sdk.getOnlineOverseers();\nconsole.log('Online overseers:', overseers.addresses);\n```\n\n### Emit WebSocket Events\n\n```typescript\n// Emit a trade executed event (triggers real-time UI updates)\nawait sdk.emitTradeExecuted('anime', {\n  tradeType: 'BUY',\n  amount: '100',\n  price: '0.05',\n  userAddress: 'eth|0x1234...',\n});\n\n// Emit stream status change\nawait sdk.emitStreamStatus('anime', {\n  isLive: true,\n  viewerCount: 150,\n});\n\n// Emit a chat message to all viewers\nawait sdk.emitChatMessage('anime', {\n  messageId: 'uuid-here',\n  content: 'Hello from admin!',\n  authorAddress: 'eth|0x1234...',\n  timestamp: Date.now(),\n});\n\n// Broadcast site-wide config change\nawait sdk.emitSiteConfigChanged({\n  key: 'maintenance_mode',\n  value: false,\n});\n\n// Emit feature flag change\nawait sdk.emitFeatureStatus({\n  feature: 'trading',\n  enabled: true,\n});\n```\n\n**Related Topics:** `streaming`, `stream-chat`, `ban-management`, `overseer-invites`\n",
+      "samplePrompts": [
+        "How do I websocket admin?",
+        "Show me how to websocket admin with the SDK",
+        "Explain the websocket admin workflow",
+        "What methods do I need for websocket admin?"
+      ]
+    },
+    "oembed": {
+      "key": "oembed",
+      "label": "Oembed",
+      "description": "Oembed operations",
+      "category": "utils",
+      "methods": [
+        "getHomeOEmbed",
+        "getPoolOEmbed",
+        "getProfileOEmbed"
+      ],
+      "mcpTools": [],
+      "explanation": "\n## OEmbed Metadata with SDK\n\n**Covers Methods:**\n- `getHomeOEmbed()` - Get oEmbed metadata for the Launchpad home page\n- `getPoolOEmbed()` - Get oEmbed metadata for a token pool page\n- `getProfileOEmbed()` - Get oEmbed metadata for a user profile page\n\n**Auth Required:** None (public endpoint)\n\nOEmbed is a format that allows embedding rich content when sharing links on social media platforms (Twitter/X, Discord, Slack, etc.). These methods return JSON metadata used to generate link previews.\n\n### Get Home Page OEmbed\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get metadata for the Launchpad home page\nconst homeEmbed = await sdk.getHomeOEmbed();\nconsole.log('Title:', homeEmbed.title);\nconsole.log('Description:', homeEmbed.description);\nconsole.log('Thumbnail:', homeEmbed.thumbnail_url);\nconsole.log('Provider:', homeEmbed.provider_name);\n```\n\n### Get Token Pool OEmbed\n\n```typescript\n// Get metadata for a specific token's pool page\nconst poolEmbed = await sdk.getPoolOEmbed({\n  tokenName: 'anime',\n});\nconsole.log('Token Title:', poolEmbed.title);  // e.g., \"Anime Token - Gala Launchpad\"\nconsole.log('Token Image:', poolEmbed.thumbnail_url);\nconsole.log('Description:', poolEmbed.description);  // Price, volume, etc.\n\n// For social sharing: generate the shareable URL\nconst shareUrl = `https://launchpad.gala.com/pools/${tokenName}`;\n```\n\n### Get User Profile OEmbed\n\n```typescript\n// Get metadata for a user's profile page\nconst profileEmbed = await sdk.getProfileOEmbed({\n  userAddress: 'eth|0x1234...',\n});\nconsole.log('User Name:', profileEmbed.title);\nconsole.log('Avatar:', profileEmbed.thumbnail_url);\n```\n\n### Integration with Social Sharing\n\n```typescript\n// Generate open graph meta tags from oEmbed data\nasync function generateMetaTags(tokenName: string) {\n  const embed = await sdk.getPoolOEmbed({ tokenName });\n  return {\n    'og:title': embed.title,\n    'og:description': embed.description,\n    'og:image': embed.thumbnail_url,\n    'og:type': 'website',\n  };\n}\n```\n\n**Related Topics:** `token-details`, `profile-management`, `fetch-pools`\n",
+      "samplePrompts": [
+        "How do I oembed?",
+        "Show me how to oembed with the SDK",
+        "Explain the oembed workflow",
+        "What methods do I need for oembed?"
+      ]
+    },
+    "messages": {
+      "key": "messages",
+      "label": "Messages",
+      "description": "Messages operations",
+      "category": "messages",
+      "methods": [
+        "fetchMessages",
+        "createMessage",
+        "updateMessage",
+        "deleteMessage",
+        "getPinnedMessage",
+        "pinMessage",
+        "unpinMessage",
+        "getMessageStats"
+      ],
+      "mcpTools": [
+        "gala_launchpad_fetch_messages",
+        "gala_launchpad_create_message",
+        "gala_launchpad_update_message",
+        "gala_launchpad_delete_message",
+        "gala_launchpad_get_pinned_message",
+        "gala_launchpad_pin_message",
+        "gala_launchpad_unpin_message",
+        "gala_launchpad_get_message_stats"
+      ],
+      "explanation": "\n## Unified Messages API with SDK\n\n**Covers Methods:**\n- `fetchMessages()` - Query messages with type/token/user filters\n- `createMessage()` - Create a CHAT or COMMENT message\n- `updateMessage()` - Update message content (author only)\n- `deleteMessage()` - Delete a message (author/owner/moderator)\n- `getPinnedMessage()` - Get the pinned message for a token\n- `pinMessage()` - Pin a message (owner/moderator)\n- `unpinMessage()` - Unpin the current pinned message\n- `getMessageStats()` - Get platform-wide message statistics\n\nThe unified messages API handles both `CHAT` (live stream chat) and `COMMENT` (token page comments) message types through a single /v1/messages endpoint.\n\n### Fetch Messages\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-jwt-token' });\n\n// Fetch chat messages for a token\nconst chatMessages = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'CHAT',\n  limit: 50,\n  page: 1,\n});\n\n// Fetch comment-type messages for a token\nconst comments = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'COMMENT',\n  limit: 20,\n});\n\n// Fetch messages by a specific user\nconst userMessages = await sdk.fetchMessages({\n  userAddress: 'eth|0x1234...',\n  type: 'CHAT',\n});\n```\n\n### Create Messages\n\n```typescript\n// Create a chat message (live stream chat)\nconst chatMsg = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'This token is amazing!',\n  type: 'CHAT',\n});\nconsole.log('Created chat message:', chatMsg.id);\n\n// Create a comment (token page)\nconst comment = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'Great project, bullish on this!',\n  type: 'COMMENT',\n});\nconsole.log('Created comment:', comment.id);\n```\n\n### Update and Delete Messages\n\n```typescript\n// Update your own message\nconst updated = await sdk.updateMessage('message-uuid', {\n  content: 'Updated message content',\n});\n\n// Delete a message (must be author, or have moderator/owner role)\nawait sdk.deleteMessage('message-uuid');\n```\n\n### Pin/Unpin Messages\n\n```typescript\n// Get the currently pinned message for a token\nconst pinned = await sdk.getPinnedMessage('anime');\nif (pinned) {\n  console.log('Pinned message:', pinned.content);\n  console.log('Pinned by:', pinned.pinnedBy);\n}\n\n// Pin a message (requires owner or moderator role)\nawait sdk.pinMessage('message-uuid');\n\n// Unpin the current pinned message\nawait sdk.unpinMessage('message-uuid');\n```\n\n### Get Message Statistics\n\n```typescript\n// Get platform-wide message statistics (admin/overseer only)\nconst stats = await sdk.getMessageStats();\nconsole.log('Total CHAT messages:', stats.chatCount);\nconsole.log('Total COMMENT messages:', stats.commentCount);\nconsole.log('Messages today:', stats.todayCount);\n```\n\n**Related Topics:** `stream-chat`, `content-reactions`, `content-flag-management`, `moderator-invites`\n",
+      "samplePrompts": [
+        "How do I messages?",
+        "Show me how to messages with the SDK",
+        "Explain the messages workflow",
+        "What methods do I need for messages?"
+      ]
+    },
+    "holders": {
+      "key": "holders",
+      "label": "Holders",
+      "description": "Holders operations",
+      "category": "pools",
+      "methods": [
+        "fetchTokenDistribution",
+        "getTrades"
+      ],
+      "mcpTools": [
+        "gala_launchpad_fetch_token_distribution",
+        "gala_launchpad_get_trades"
+      ],
+      "explanation": "\n## Token Holder Data with SDK\n\n**Covers Methods (via MCP tools):**\n- `gala_launchpad_get_holder_rank` - Get rank of a specific holder\n- `gala_launchpad_get_top_holders` - Get top N token holders\n- `gala_launchpad_get_holder_count` - Get total holder count and statistics\n- `gala_launchpad_get_holders_by_balance` - Get holders in a balance range\n- `gala_launchpad_get_holder_history` - Get holder count over time\n\nThese tools derive holder insights from `fetchTokenDistribution()` and `getTrades()` SDK methods.\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Underlying SDK method for holder data\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\n// Find rank of a specific holder\nconst holder = distribution.holders.find(\n  (h) => h.address === 'eth|0x1234...'\n);\nconsole.log('Holder rank:', distribution.holders.indexOf(holder) + 1);\nconsole.log('Balance:', holder?.balance);\nconsole.log('Percentage:', holder?.percentage);\n```\n\n### Get Top Holders\n\n```typescript\n// Get top holders list\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\nconst top10 = distribution.holders.slice(0, 10);\ntop10.forEach((holder, i) => {\n  console.log(`#${i + 1}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Whale Detection\n\n```typescript\nasync function detectWhales(tokenName: string, threshold = 5) {\n  const distribution = await sdk.fetchTokenDistribution(tokenName);\n\n  const whales = distribution.holders.filter(\n    (h) => parseFloat(h.percentage) >= threshold\n  );\n\n  return {\n    whaleCount: whales.length,\n    whalePercentage: whales.reduce((sum, h) => sum + parseFloat(h.percentage), 0),\n    topWhale: whales[0],\n  };\n}\n\nconst analysis = await detectWhales('anime', 5);\nconsole.log('Whale analysis:', analysis);\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`\n",
+      "samplePrompts": [
+        "How do I holders?",
+        "Show me how to holders with the SDK",
+        "Explain the holders workflow",
+        "What methods do I need for holders?"
+      ]
     }
   },
   "categories": {
@@ -1378,7 +1606,8 @@
         "token-details",
         "token-distribution",
         "price-history",
-        "token-identification"
+        "token-identification",
+        "holders"
       ]
     },
     "balance": {
@@ -1399,7 +1628,9 @@
         "liquidity-positions",
         "utilities-and-helpers",
         "mcp-to-sdk-mapping",
-        "graduation-detection"
+        "graduation-detection",
+        "ai-moderation",
+        "oembed"
       ]
     },
     "wallet": {
@@ -1529,6 +1760,36 @@
       "label": "NFTs",
       "topics": [
         "nft-collection-management"
+      ]
+    },
+    "weekly-challenge": {
+      "label": "Weekly-challenge",
+      "topics": [
+        "weekly-challenge"
+      ]
+    },
+    "platform-stats": {
+      "label": "Platform-stats",
+      "topics": [
+        "platform-stats"
+      ]
+    },
+    "restricted-names": {
+      "label": "Restricted-names",
+      "topics": [
+        "restricted-names"
+      ]
+    },
+    "websocket-admin": {
+      "label": "Websocket-admin",
+      "topics": [
+        "websocket-admin"
+      ]
+    },
+    "messages": {
+      "label": "Messages",
+      "topics": [
+        "messages"
       ]
     }
   },
@@ -1739,7 +2000,7 @@
         },
         {
           "role": "assistant",
-          "content": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset RTMP key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n"
+          "content": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset stream key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n"
         }
       ]
     },
@@ -1754,7 +2015,7 @@
         },
         {
           "role": "assistant",
-          "content": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // Use stream.streamKey in OBS or other RTMP software\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n"
+          "content": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // stream.rtmpsUrl — full RTMPS ingest URL for OBS or compatible software\n  // stream.srtUrl — full SRT ingest URL for low-latency encoders\n  // stream.streamKey — raw key for manual RTMPS configuration\n  // stream.srtPassphrase — raw passphrase for manual SRT configuration\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n"
         }
       ]
     },
@@ -1844,7 +2105,7 @@
         },
         {
           "role": "assistant",
-          "content": "Learn about Content reactions"
+          "content": "\n## Content Reactions - SDK v5.13.0+\n\nAdd and remove reactions on chat messages and pool comments. Reactions provide\nsocial engagement features for community interaction.\n\n**Covers Methods:**\n- `addContentReaction()` - Add reaction to any content\n- `removeContentReaction()` - Remove reaction from any content\n- `addReactionToChatMessage()` - Add reaction specifically to chat message\n- `removeReactionFromChatMessage()` - Remove reaction from chat message\n- `addReactionToComment()` - Add reaction specifically to pool comment\n- `removeReactionFromComment()` - Remove reaction from pool comment\n\n## Adding Reactions\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n});\n\nawait sdk.login();\n\n// Generic method - works for any content type\nawait sdk.addContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n  tokenName: 'mytoken', // optional - backend can resolve from messageId\n});\n\n// Specific method for chat messages\nawait sdk.addReactionToChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.addReactionToComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Removing Reactions\n\n```typescript\n// Generic method\nawait sdk.removeContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n});\n\n// Specific method for chat messages\nawait sdk.removeReactionFromChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.removeReactionFromComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Common Reaction Types\n\n| Emoji | Meaning |\n|-------|---------|\n| 👍 | Thumbs up / Like |\n| ❤️ | Love |\n| 🔥 | Fire / Hot |\n| 🚀 | Rocket / Moon |\n| 😂 | Laughing |\n\n## SDK Methods Reference\n\n| Method | Description | Auth |\n|--------|-------------|------|\n| `addContentReaction(options)` | Add reaction to any content | JWT |\n| `removeContentReaction(options)` | Remove reaction from content | JWT |\n| `addReactionToChatMessage(options)` | Add reaction to chat message | JWT |\n| `removeReactionFromChatMessage(options)` | Remove reaction from chat message | JWT |\n| `addReactionToComment(options)` | Add reaction to pool comment | JWT |\n| `removeReactionFromComment(options)` | Remove reaction from pool comment | JWT |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_add_content_reaction`\n- `gala_launchpad_remove_content_reaction`\n- `gala_launchpad_add_reaction_to_chat_message`\n- `gala_launchpad_remove_reaction_from_chat_message`\n- `gala_launchpad_add_reaction_to_comment`\n- `gala_launchpad_remove_reaction_from_comment`\n"
         }
       ]
     },
@@ -1890,6 +2151,81 @@
         {
           "role": "assistant",
           "content": "\n# NFT Collection Management - SDK v5.12.0+\n\nCreate and manage NFT collections, token classes, and mint NFTs on GalaChain.\n\n**Key Concepts:**\n- **Collection**: A named grouping for NFT token classes (claimed for 10,000 GALA)\n- **Token Class**: A specific type/rarity within a collection (created for 1,000 GALA)\n- **NFT Instance**: Individual NFT minted from a token class (dynamic fee based on quantity)\n\n## Check Collection Availability\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ privateKey: 'your-private-key' });\n\n// Check if a collection name is available\nconst available = await sdk.isNftCollectionAvailable('MyEpicNFTs');\n\n// Get fee for claiming a collection\nconst claimFee = await sdk.getNftCollectionClaimFee();\n\n```\n\n## Claim a Collection\n\n```typescript\n// Claim an available collection name\nconst result = await sdk.claimNftCollection({\n  collectionName: 'MyEpicNFTs',\n  description: 'Epic NFT collection for gaming.',\n});\n\n// Fetch your owned collections\nconst collections = await sdk.fetchNftCollections(walletAddress);\nfor (const collection of collections) {\n\n}\n```\n\n## Create Token Classes (Rarities)\n\n```typescript\n// Get fee for creating a token class\nconst classCreateFee = await sdk.getNftTokenClassCreateFee();\n\n// Create a token class (rarity tier)\nconst classResult = await sdk.createNftTokenClass({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'LegendaryWizard',\n  description: 'Ultra-rare legendary wizard NFTs.',\n  maximumSupply: '100',  // Max NFTs of this type\n  data: {\n    rarity: 'legendary',\n    class: 'wizard',\n    power: '9000',\n  },\n});\n\n// Fetch token classes for your collection\nconst classes = await sdk.fetchNftTokenClasses({\n  collectionName: 'MyEpicNFTs',\n});\nfor (const tokenClass of classes) {\n\n}\n```\n\n## Estimate Mint Fees\n\n```typescript\n// Estimate fee for minting multiple NFTs\nconst mintFeeEstimate = await sdk.estimateNftMintFee({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'LegendaryWizard',\n  quantity: 5,\n});\n\n// Estimate multiple operations at once\nconst bundleFee = await sdk.estimateNftOperationFees({\n  operations: [\n    { type: 'claim_collection' },\n    { type: 'create_token_class', collectionName: 'MyEpicNFTs' },\n    { type: 'mint', quantity: 10 },\n  ],\n});\n\nfor (const op of bundleFee.breakdown) {\n\n}\n```\n\n## Mint NFTs\n\n```typescript\n// Mint NFT instances from a token class\nconst mintResult = await sdk.mintNft({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'LegendaryWizard',\n  quantity: 5,\n  to: 'eth|0x...', // Recipient wallet\n  metadata: {\n    attributes: [\n      { name: 'level', value: '50' },\n      { name: 'element', value: 'fire' },\n    ],\n  },\n});\n\n// Check NFT balances\nconst balances = await sdk.fetchNftBalances(walletAddress);\nfor (const balance of balances) {\n\n}\n\n// Filter by collection\nconst collectionBalances = await sdk.fetchNftBalances(walletAddress, 'MyEpicNFTs');\n```\n\n## Complete Workflow\n\n```typescript\n// 1. Check availability\nconst available = await sdk.isNftCollectionAvailable('MyEpicNFTs');\nif (!available) throw new Error('Collection name taken');\n\n// 2. Claim collection (10,000 GALA)\nconst claimResult = await sdk.claimNftCollection({\n  collectionName: 'MyEpicNFTs',\n  description: 'My epic NFT collection.',\n});\n\n// 3. Create token class (1,000 GALA)\nconst classResult = await sdk.createNftTokenClass({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'Legendary',\n  description: 'Legendary tier NFTs.',\n  maximumSupply: '1000',\n});\n\n// 4. Estimate mint fee\nconst fee = await sdk.estimateNftMintFee({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'Legendary',\n  quantity: 100,\n});\n\n// 5. Mint NFTs\nconst mintResult = await sdk.mintNft({\n  collectionName: 'MyEpicNFTs',\n  tokenClassName: 'Legendary',\n  quantity: 100,\n  to: userWallet,\n});\n\n// 6. Verify ownership\nconst balances = await sdk.fetchNftBalances(userWallet, 'MyEpicNFTs');\n\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_nft_collection_claim_fee`\n- `gala_launchpad_get_nft_token_class_create_fee`\n- `gala_launchpad_estimate_nft_mint_fee`\n- `gala_launchpad_estimate_nft_operation_fees`\n- `gala_launchpad_check_nft_collection_available`\n- `gala_launchpad_claim_nft_collection`\n- `gala_launchpad_fetch_nft_collections`\n- `gala_launchpad_create_nft_token_class`\n- `gala_launchpad_fetch_nft_token_classes`\n- `gala_launchpad_mint_nft`\n- `gala_launchpad_fetch_nft_balances`\n"
+        }
+      ]
+    },
+    {
+      "id": "weekly-challenge-demo",
+      "title": "Example: Weekly challenge",
+      "topic": "weekly-challenge",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I weekly challenge?"
+        },
+        {
+          "role": "assistant",
+          "content": "\n## Weekly Challenge with SDK\n\n**Covers Methods:**\n- `getWeeklyChallengeLeaderboard()` - Get tokens ranked by market cap increase\n- `getTokenWeeklyHistory()` - Get historical weekly challenge results for a token\n\n**Challenge Rules:**\n- Week runs Saturday to Friday (UTC)\n- Baseline market cap taken Saturday at 00:00 UTC\n- Tokens ranked by percentage market cap increase from baseline\n- Results available after each week closes\n\n### Get Weekly Challenge Leaderboard\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get current week's leaderboard\nconst leaderboard = await sdk.getWeeklyChallengeLeaderboard();\nconsole.log('Top tokens this week:', leaderboard.tokens.slice(0, 10));\n\n// Get leaderboard with pagination\nconst page2 = await sdk.getWeeklyChallengeLeaderboard({\n  limit: 20,\n  page: 2,\n});\nconsole.log('Week Period:', page2.weekStart, '-', page2.weekEnd);\n\n// Get a specific past week by timestamp\nconst pastWeek = await sdk.getWeeklyChallengeLeaderboard({\n  weekTimestamp: '2026-01-01T00:00:00Z',\n});\n```\n\n### Get Token's Weekly History\n\n```typescript\n// Get how a specific token has performed in past weekly challenges\nconst history = await sdk.getTokenWeeklyHistory({\n  tokenName: 'anime',\n  limit: 10,   // Last 10 weeks\n});\n\nhistory.weeks.forEach((week) => {\n  console.log(`Week ${week.weekStart}: Rank #${week.rank}, +${week.percentageIncrease}%`);\n});\n```\n\n**Related Topics:** `trading-analytics`, `token-details`, `fetch-pools`\n"
+        }
+      ]
+    },
+    {
+      "id": "platform-stats-demo",
+      "title": "Example: Platform stats",
+      "topic": "platform-stats",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I platform stats?"
+        },
+        {
+          "role": "assistant",
+          "content": "\n## Platform Statistics with SDK\n\n**Covers Methods:**\n- `getPlatformStats()` - Get platform-wide trading statistics\n\n**Auth Required:** None (public endpoint)\n\n### Get Platform Statistics\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get platform-wide statistics\nconst stats = await sdk.getPlatformStats();\n\nconsole.log('GALA Volume (1h):', stats.galaVolume1h);\nconsole.log('GALA Volume (24h):', stats.galaVolume24h);\nconsole.log('GALA Volume (7d):', stats.galaVolume7d);\nconsole.log('Total Tokens:', stats.totalTokens);\n```\n\n### Display Trading Dashboard\n\n```typescript\nasync function displayPlatformDashboard() {\n  const stats = await sdk.getPlatformStats();\n\n  return {\n    tradingVolume: {\n      lastHour: `${stats.galaVolume1h} GALA`,\n      last24Hours: `${stats.galaVolume24h} GALA`,\n      last7Days: `${stats.galaVolume7d} GALA`,\n    },\n    tokens: {\n      total: stats.totalTokens,\n    },\n  };\n}\n```\n\n**Related Topics:** `weekly-challenge`, `trading-analytics`, `fetch-pools`\n"
+        }
+      ]
+    },
+    {
+      "id": "restricted-names-demo",
+      "title": "Example: Restricted names",
+      "topic": "restricted-names",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I restricted names?"
+        },
+        {
+          "role": "assistant",
+          "content": "\n## Restricted Names with SDK\n\n**Covers Methods:**\n- `getRestrictedNames()` - Get the list of restricted token names\n- `updateRestrictedNames()` - Update the restricted names list\n\n**Auth Required:** Overseer JWT token only\n\n### Get Restricted Names\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-overseer-jwt' });\n\n// Get current restricted names list\nconst result = await sdk.getRestrictedNames();\n\n// Names are stored as a newline-separated text blob\nconst namesList = result.names.split('\\n').filter(Boolean);\nconsole.log('Restricted names:', namesList);\nconsole.log('Total count:', namesList.length);\n```\n\n### Update Restricted Names\n\n```typescript\n// Add new restricted names to the list\nconst currentResult = await sdk.getRestrictedNames();\nconst currentNames = currentResult.names.split('\\n').filter(Boolean);\n\n// Add new names\nconst updatedNames = [...currentNames, 'badword1', 'badword2'];\nconst newNamesBlob = updatedNames.join('\\n');\n\nconst result = await sdk.updateRestrictedNames({\n  names: newNamesBlob,\n});\nconsole.log('Updated successfully:', result);\n```\n\n### Check If a Name Would Be Restricted\n\n```typescript\n// Check if a token name would be blocked before creating\nasync function isNameRestricted(tokenName: string): Promise<boolean> {\n  const result = await sdk.getRestrictedNames();\n  const restrictedList = result.names.split('\\n').filter(Boolean);\n  return restrictedList.some(\n    (name) => name.toLowerCase() === tokenName.toLowerCase()\n  );\n}\n\nconst blocked = await isNameRestricted('badword1');\nconsole.log('Name is restricted:', blocked);\n```\n\n**Related Topics:** `token-creation`, `overseer-invites`, `token-ban-management`\n"
+        }
+      ]
+    },
+    {
+      "id": "websocket-admin-demo",
+      "title": "Example: Websocket admin",
+      "topic": "websocket-admin",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I websocket admin?"
+        },
+        {
+          "role": "assistant",
+          "content": "\n## WebSocket Admin with SDK\n\n**Covers Methods:**\n- **Connection Monitoring:** `getConnectedClients()`, `isUserOnline()`, `getOnlineUsers()`, `getTokenViewers()`, `getOnlineOverseers()`\n- **Event Emission:** `emitTradeExecuted()`, `emitBalanceUpdated()`, `emitStreamStatus()`, `emitViewerCount()`, `emitStreamCountdown()`, `emitChatMessage()`, `emitChatStatus()`, `emitTypingIndicator()`, `emitTokenBanned()`, `emitTokenUnbanned()`, `emitModeratorAdded()`, `emitModeratorRemoved()`, `emitUserProfileUpdated()`, `emitSiteConfigChanged()`, `emitFeatureStatus()`\n\n**Auth Required:** Admin API key or Overseer JWT token\n\n### Monitor Connected Clients\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ apiKey: 'your-admin-api-key' });\n\n// Get all connected WebSocket clients\nconst clients = await sdk.getConnectedClients();\nconsole.log('Total connected:', clients.total);\nconsole.log('By token:', clients.byToken);\n\n// Check if a specific user is online\nconst onlineStatus = await sdk.isUserOnline('eth|0x1234...');\nconsole.log('User online:', onlineStatus.isOnline);\nconsole.log('Connected since:', onlineStatus.connectedSince);\n\n// Check multiple users at once\nconst statuses = await sdk.getOnlineUsers(['eth|0x1111...', 'eth|0x2222...']);\nstatuses.forEach((s) => console.log(`${s.address}: ${s.isOnline}`));\n\n// Get viewers of a specific token stream\nconst viewers = await sdk.getTokenViewers({\n  tokenName: 'anime',\n  limit: 50,\n});\nconsole.log('Current viewers:', viewers.count);\n\n// Get all online overseers\nconst overseers = await sdk.getOnlineOverseers();\nconsole.log('Online overseers:', overseers.addresses);\n```\n\n### Emit WebSocket Events\n\n```typescript\n// Emit a trade executed event (triggers real-time UI updates)\nawait sdk.emitTradeExecuted('anime', {\n  tradeType: 'BUY',\n  amount: '100',\n  price: '0.05',\n  userAddress: 'eth|0x1234...',\n});\n\n// Emit stream status change\nawait sdk.emitStreamStatus('anime', {\n  isLive: true,\n  viewerCount: 150,\n});\n\n// Emit a chat message to all viewers\nawait sdk.emitChatMessage('anime', {\n  messageId: 'uuid-here',\n  content: 'Hello from admin!',\n  authorAddress: 'eth|0x1234...',\n  timestamp: Date.now(),\n});\n\n// Broadcast site-wide config change\nawait sdk.emitSiteConfigChanged({\n  key: 'maintenance_mode',\n  value: false,\n});\n\n// Emit feature flag change\nawait sdk.emitFeatureStatus({\n  feature: 'trading',\n  enabled: true,\n});\n```\n\n**Related Topics:** `streaming`, `stream-chat`, `ban-management`, `overseer-invites`\n"
+        }
+      ]
+    },
+    {
+      "id": "messages-demo",
+      "title": "Example: Messages",
+      "topic": "messages",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I messages?"
+        },
+        {
+          "role": "assistant",
+          "content": "\n## Unified Messages API with SDK\n\n**Covers Methods:**\n- `fetchMessages()` - Query messages with type/token/user filters\n- `createMessage()` - Create a CHAT or COMMENT message\n- `updateMessage()` - Update message content (author only)\n- `deleteMessage()` - Delete a message (author/owner/moderator)\n- `getPinnedMessage()` - Get the pinned message for a token\n- `pinMessage()` - Pin a message (owner/moderator)\n- `unpinMessage()` - Unpin the current pinned message\n- `getMessageStats()` - Get platform-wide message statistics\n\nThe unified messages API handles both `CHAT` (live stream chat) and `COMMENT` (token page comments) message types through a single /v1/messages endpoint.\n\n### Fetch Messages\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-jwt-token' });\n\n// Fetch chat messages for a token\nconst chatMessages = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'CHAT',\n  limit: 50,\n  page: 1,\n});\n\n// Fetch comment-type messages for a token\nconst comments = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'COMMENT',\n  limit: 20,\n});\n\n// Fetch messages by a specific user\nconst userMessages = await sdk.fetchMessages({\n  userAddress: 'eth|0x1234...',\n  type: 'CHAT',\n});\n```\n\n### Create Messages\n\n```typescript\n// Create a chat message (live stream chat)\nconst chatMsg = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'This token is amazing!',\n  type: 'CHAT',\n});\nconsole.log('Created chat message:', chatMsg.id);\n\n// Create a comment (token page)\nconst comment = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'Great project, bullish on this!',\n  type: 'COMMENT',\n});\nconsole.log('Created comment:', comment.id);\n```\n\n### Update and Delete Messages\n\n```typescript\n// Update your own message\nconst updated = await sdk.updateMessage('message-uuid', {\n  content: 'Updated message content',\n});\n\n// Delete a message (must be author, or have moderator/owner role)\nawait sdk.deleteMessage('message-uuid');\n```\n\n### Pin/Unpin Messages\n\n```typescript\n// Get the currently pinned message for a token\nconst pinned = await sdk.getPinnedMessage('anime');\nif (pinned) {\n  console.log('Pinned message:', pinned.content);\n  console.log('Pinned by:', pinned.pinnedBy);\n}\n\n// Pin a message (requires owner or moderator role)\nawait sdk.pinMessage('message-uuid');\n\n// Unpin the current pinned message\nawait sdk.unpinMessage('message-uuid');\n```\n\n### Get Message Statistics\n\n```typescript\n// Get platform-wide message statistics (admin/overseer only)\nconst stats = await sdk.getMessageStats();\nconsole.log('Total CHAT messages:', stats.chatCount);\nconsole.log('Total COMMENT messages:', stats.commentCount);\nconsole.log('Messages today:', stats.todayCount);\n```\n\n**Related Topics:** `stream-chat`, `content-reactions`, `content-flag-management`, `moderator-invites`\n"
         }
       ]
     }
@@ -1945,7 +2281,7 @@
       "exchanges": [
         {
           "userQuestion": "How do I manage JWT authentication?",
-          "assistantResponse": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset RTMP key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n"
+          "assistantResponse": "\n# Session Authentication (JWT) - SDK v5.1.0+\n\nJWT-based session authentication for protected operations (streaming, chat, profile updates).\n\n## Authentication Flow\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'production',\n});\n\n// 1. Login to get JWT token\nconst session = await sdk.login();\n\n// 2. Check authentication status\nif (sdk.isAuthenticated()) {\n\n}\n\n// 3. Get current session info\nconst info = await sdk.getSession();\n\n// 4. Access token directly (for custom requests)\nconst token = sdk.getAccessToken();\n\n// 5. Refresh token before expiry\nif (sdk.shouldRefreshToken()) {\n  const refreshed = await sdk.refreshToken();\n\n}\n\n// 6. Ensure valid token (auto-refreshes if needed)\nconst validToken = await sdk.ensureValidToken();\n\n// 7. Logout when done\nsdk.logout();\n\n```\n\n## Auto-Refresh Behavior\n\nThe SDK automatically refreshes tokens when:\n- Token expires within 5 minutes (default threshold)\n- Making requests to JWT-protected endpoints\n\n```typescript\n// Manual refresh threshold check\nconst shouldRefresh = sdk.shouldRefreshToken(10 * 60 * 1000); // 10 min threshold\n\n// ensureValidToken auto-refreshes if needed\nconst token = await sdk.ensureValidToken(5 * 60 * 1000); // 5 min threshold\n```\n\n## Protected Endpoints\n\nThese operations require JWT authentication (call \\`login()\\` first):\n\n**Streaming:**\n- \\`startStream()\\` - Start live stream\n- \\`resetStreamKey()\\` - Reset stream key\n- \\`getRecordingDownload()\\` - Download recordings\n- \\`deleteRecording()\\` - Delete recordings\n- \\`addSimulcastTarget()\\` - Add simulcast\n- \\`removeSimulcastTarget()\\` - Remove simulcast\n\n**Chat:**\n- \\`sendChatMessage()\\` - Send chat messages\n\n**Profile:**\n- \\`updateProfile()\\` - Update user profile\n\n**Uploads:**\n- \\`uploadTokenImage()\\` - Upload token images\n- \\`uploadProfileImage()\\` - Upload profile images\n\n## Error Handling\n\n```typescript\ntry {\n  await sdk.login();\n} catch (error) {\n  if (error.message.includes('signature')) {\n    console.error('Wallet signature failed');\n  } else if (error.message.includes('network')) {\n    console.error('Network error during login');\n  }\n}\n\n// Check auth before protected operations\nif (!sdk.isAuthenticated()) {\n  await sdk.login();\n}\n\ntry {\n  await sdk.startStream('mytoken');\n} catch (error) {\n  if (error.message.includes('JWT') || error.message.includes('token')) {\n    // Re-authenticate and retry\n    await sdk.login();\n    await sdk.startStream('mytoken');\n  }\n}\n```\n\n## Session Methods Reference\n\n| Method | Description | Returns |\n|--------|-------------|---------|\n| \\`login()\\` | Authenticate with wallet signature | \\`{ accessToken, expiresIn, address }\\` |\n| \\`logout()\\` | Clear JWT token (client-side) | \\`void\\` |\n| \\`refreshToken()\\` | Get new JWT token | \\`{ accessToken, expiresIn, address }\\` |\n| \\`getSession()\\` | Get session info | \\`{ address, issuedAt, expiresAt }\\` |\n| \\`isAuthenticated()\\` | Check if token exists and valid | \\`boolean\\` |\n| \\`shouldRefreshToken(threshold?)\\` | Check if refresh needed | \\`boolean\\` |\n| \\`getAccessToken()\\` | Get raw JWT token | \\`string | null\\` |\n| \\`ensureValidToken(threshold?)\\` | Auto-refresh if needed | \\`Promise<string>\\` |\n\n## Dev Bypass (STAGE Only)\n\nFor testing in STAGE environment without JWT:\n\n```typescript\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n  environment: 'development',\n  devBypass: true, // Skip JWT auth in STAGE\n});\n\n// Protected methods work without login() in STAGE\nawait sdk.startStream('testtoken');\n```\n\n**Note:** Dev bypass only works in STAGE/development environments.\n"
         },
         {
           "userQuestion": "What parameters does login() accept?",
@@ -2323,7 +2659,7 @@
       "exchanges": [
         {
           "userQuestion": "How do I manage content reactions?",
-          "assistantResponse": "Learn about Content reactions with the SDK. This topic covers various methods for manage content reactions."
+          "assistantResponse": "\n## Content Reactions - SDK v5.13.0+\n\nAdd and remove reactions on chat messages and pool comments. Reactions provide\nsocial engagement features for community interaction.\n\n**Covers Methods:**\n- `addContentReaction()` - Add reaction to any content\n- `removeContentReaction()` - Remove reaction from any content\n- `addReactionToChatMessage()` - Add reaction specifically to chat message\n- `removeReactionFromChatMessage()` - Remove reaction from chat message\n- `addReactionToComment()` - Add reaction specifically to pool comment\n- `removeReactionFromComment()` - Remove reaction from pool comment\n\n## Adding Reactions\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  privateKey: process.env.PRIVATE_KEY,\n});\n\nawait sdk.login();\n\n// Generic method - works for any content type\nawait sdk.addContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n  tokenName: 'mytoken', // optional - backend can resolve from messageId\n});\n\n// Specific method for chat messages\nawait sdk.addReactionToChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.addReactionToComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Removing Reactions\n\n```typescript\n// Generic method\nawait sdk.removeContentReaction({\n  messageId: 'msg-123',\n  reactionType: '👍',\n});\n\n// Specific method for chat messages\nawait sdk.removeReactionFromChatMessage({\n  tokenName: 'mytoken',\n  messageId: 'chat-msg-456',\n  reactionType: '🔥',\n});\n\n// Specific method for pool comments\nawait sdk.removeReactionFromComment({\n  tokenName: 'mytoken',\n  messageId: 'comment-789',\n  reactionType: '❤️',\n});\n```\n\n## Common Reaction Types\n\n| Emoji | Meaning |\n|-------|---------|\n| 👍 | Thumbs up / Like |\n| ❤️ | Love |\n| 🔥 | Fire / Hot |\n| 🚀 | Rocket / Moon |\n| 😂 | Laughing |\n\n## SDK Methods Reference\n\n| Method | Description | Auth |\n|--------|-------------|------|\n| `addContentReaction(options)` | Add reaction to any content | JWT |\n| `removeContentReaction(options)` | Remove reaction from content | JWT |\n| `addReactionToChatMessage(options)` | Add reaction to chat message | JWT |\n| `removeReactionFromChatMessage(options)` | Remove reaction from chat message | JWT |\n| `addReactionToComment(options)` | Add reaction to pool comment | JWT |\n| `removeReactionFromComment(options)` | Remove reaction from pool comment | JWT |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_add_content_reaction`\n- `gala_launchpad_remove_content_reaction`\n- `gala_launchpad_add_reaction_to_chat_message`\n- `gala_launchpad_remove_reaction_from_chat_message`\n- `gala_launchpad_add_reaction_to_comment`\n- `gala_launchpad_remove_reaction_from_comment`\n"
         },
         {
           "userQuestion": "What parameters does addContentReaction() accept?",
@@ -2430,7 +2766,7 @@
       "exchanges": [
         {
           "userQuestion": "How do I view current DEX leaderboard?",
-          "assistantResponse": "Learn about Fetch current dex leaderboard with the SDK. This topic covers various methods for view current DEX leaderboard."
+          "assistantResponse": "\n## Fetch Current DEX Leaderboard\n\n**Covers Methods:**\n- `fetchCurrentDexLeaderboard()`\n\nConvenience method to fetch the leaderboard for the current active DEX season.\nThis is a shortcut that combines `fetchCurrentDexSeason()` and `fetchDexLeaderboardBySeasonId()`.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function viewCurrentLeaderboard() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Fetch current season leaderboard directly\n  const leaderboard = await sdk.fetchCurrentDexLeaderboard();\n\n  if (leaderboard) {\n    console.log('Current Season:', leaderboard.season.name);\n    console.log('Total Participants:', leaderboard.entries.length);\n\n    // Display top 10 traders\n    console.log('\\nTop 10 Traders:');\n    leaderboard.entries.slice(0, 10).forEach((entry, rank) => {\n      console.log(`#${rank + 1}: ${entry.wallet}`);\n      console.log(`   XP: ${entry.xp}, Volume: $${entry.totalVolume}`);\n\n      // Display mastery titles\n      if (entry.masteryTitles.length > 0) {\n        console.log(`   Titles: ${entry.masteryTitles.join(', ')}`);\n      }\n    });\n\n    // Find your own position\n    const myAddress = sdk.getAddress();\n    const myPosition = leaderboard.entries.findIndex(e => e.wallet === myAddress);\n\n    if (myPosition !== -1) {\n      const myEntry = leaderboard.entries[myPosition];\n      console.log(`\\nYour position: #${myPosition + 1}`);\n      console.log(`XP: ${myEntry.xp}, Volume: $${myEntry.totalVolume}`);\n    } else {\n      console.log('\\nYou have not participated in this season yet.');\n    }\n  } else {\n    console.log('No active season currently running.');\n  }\n}\n```\n\n**Use Cases:**\n- Quick access to current season standings\n- Display leaderboard in UI without multiple API calls\n- Check your competitive position\n- Show top traders on dashboard\n\n**Related Methods:**\n- `fetchCurrentDexSeason()` - Get season metadata only\n- `fetchDexLeaderboardBySeasonId()` - Get leaderboard for any season\n\n**MCP Tool Equivalent:** `gala_launchpad_fetch_current_dex_leaderboard`\n"
         },
         {
           "userQuestion": "What parameters does fetchCurrentDexLeaderboard() accept?",
@@ -2658,6 +2994,39 @@
       ]
     },
     {
+      "topicKey": "messages",
+      "label": "Messages",
+      "category": "messages",
+      "description": "Messages operations",
+      "methodCount": 8,
+      "exchanges": [
+        {
+          "userQuestion": "How do I messages?",
+          "assistantResponse": "\n## Unified Messages API with SDK\n\n**Covers Methods:**\n- `fetchMessages()` - Query messages with type/token/user filters\n- `createMessage()` - Create a CHAT or COMMENT message\n- `updateMessage()` - Update message content (author only)\n- `deleteMessage()` - Delete a message (author/owner/moderator)\n- `getPinnedMessage()` - Get the pinned message for a token\n- `pinMessage()` - Pin a message (owner/moderator)\n- `unpinMessage()` - Unpin the current pinned message\n- `getMessageStats()` - Get platform-wide message statistics\n\nThe unified messages API handles both `CHAT` (live stream chat) and `COMMENT` (token page comments) message types through a single /v1/messages endpoint.\n\n### Fetch Messages\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-jwt-token' });\n\n// Fetch chat messages for a token\nconst chatMessages = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'CHAT',\n  limit: 50,\n  page: 1,\n});\n\n// Fetch comment-type messages for a token\nconst comments = await sdk.fetchMessages({\n  tokenName: 'anime',\n  type: 'COMMENT',\n  limit: 20,\n});\n\n// Fetch messages by a specific user\nconst userMessages = await sdk.fetchMessages({\n  userAddress: 'eth|0x1234...',\n  type: 'CHAT',\n});\n```\n\n### Create Messages\n\n```typescript\n// Create a chat message (live stream chat)\nconst chatMsg = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'This token is amazing!',\n  type: 'CHAT',\n});\nconsole.log('Created chat message:', chatMsg.id);\n\n// Create a comment (token page)\nconst comment = await sdk.createMessage({\n  tokenName: 'anime',\n  content: 'Great project, bullish on this!',\n  type: 'COMMENT',\n});\nconsole.log('Created comment:', comment.id);\n```\n\n### Update and Delete Messages\n\n```typescript\n// Update your own message\nconst updated = await sdk.updateMessage('message-uuid', {\n  content: 'Updated message content',\n});\n\n// Delete a message (must be author, or have moderator/owner role)\nawait sdk.deleteMessage('message-uuid');\n```\n\n### Pin/Unpin Messages\n\n```typescript\n// Get the currently pinned message for a token\nconst pinned = await sdk.getPinnedMessage('anime');\nif (pinned) {\n  console.log('Pinned message:', pinned.content);\n  console.log('Pinned by:', pinned.pinnedBy);\n}\n\n// Pin a message (requires owner or moderator role)\nawait sdk.pinMessage('message-uuid');\n\n// Unpin the current pinned message\nawait sdk.unpinMessage('message-uuid');\n```\n\n### Get Message Statistics\n\n```typescript\n// Get platform-wide message statistics (admin/overseer only)\nconst stats = await sdk.getMessageStats();\nconsole.log('Total CHAT messages:', stats.chatCount);\nconsole.log('Total COMMENT messages:', stats.commentCount);\nconsole.log('Messages today:', stats.todayCount);\n```\n\n**Related Topics:** `stream-chat`, `content-reactions`, `content-flag-management`, `moderator-invites`\n"
+        },
+        {
+          "userQuestion": "What parameters does fetchMessages() accept?",
+          "assistantResponse": "The primary methods for Messages are `fetchMessages()`, `createMessage()`, `updateMessage()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for messages?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete messages example?",
+          "assistantResponse": "**Complete Workflow: Messages**\n\nHere's the typical flow: `fetchMessages()` → `createMessage()` → `updateMessage()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Messages?",
+          "assistantResponse": "**Additional Methods:**\n\n- `deleteMessage()`\n- `getPinnedMessage()`\n- `pinMessage()`\n- `unpinMessage()`\n\n**Total methods in this topic:** 8\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after messages?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "moderator-invites",
       "label": "Moderator invites",
       "category": "moderators",
@@ -2740,7 +3109,7 @@
       "label": "Overseer invites",
       "category": "overseers",
       "description": "Global platform oversight",
-      "methodCount": 9,
+      "methodCount": 14,
       "exchanges": [
         {
           "userQuestion": "How do I manage overseer invites?",
@@ -2764,11 +3133,44 @@
         },
         {
           "userQuestion": "What other methods are available for Overseer invites?",
-          "assistantResponse": "**Additional Methods:**\n\n- `getOverseerInviteByCode()`\n- `revokeOverseerInvite()`\n- `listOverseers()`\n- `revokeOverseer()`\n\n**Total methods in this topic:** 9\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+          "assistantResponse": "**Additional Methods:**\n\n- `getOverseerInviteByCode()`\n- `revokeOverseerInvite()`\n- `listOverseers()`\n- `revokeOverseer()`\n\n**Total methods in this topic:** 14\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
         },
         {
           "userQuestion": "What should I learn next after manage overseer invites?",
           "assistantResponse": "**Related Topics:**\n\n- **Moderator invites**: `explainSdkUsage({ topic: 'moderator-invites' })`\n- **Token ban management**: `explainSdkUsage({ topic: 'token-ban-management' })`\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Are there any advanced patterns for this topic?",
+          "assistantResponse": "**Advanced Patterns:**\n\n1. **Batching**: Combine multiple operations for efficiency\n2. **Caching**: Cache frequently-accessed data locally\n3. **Event-Driven**: Use subscriptions for real-time updates\n4. **Error Recovery**: Implement retry logic with exponential backoff\n5. **Monitoring**: Track operation success rates and latencies\n\n**Performance Tip:** For high-volume operations, consider using the local calculation methods where available to reduce network calls."
+        }
+      ]
+    },
+    {
+      "topicKey": "platform-stats",
+      "label": "Platform stats",
+      "category": "platform-stats",
+      "description": "Platform stats operations",
+      "methodCount": 1,
+      "exchanges": [
+        {
+          "userQuestion": "How do I platform stats?",
+          "assistantResponse": "\n## Platform Statistics with SDK\n\n**Covers Methods:**\n- `getPlatformStats()` - Get platform-wide trading statistics\n\n**Auth Required:** None (public endpoint)\n\n### Get Platform Statistics\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get platform-wide statistics\nconst stats = await sdk.getPlatformStats();\n\nconsole.log('GALA Volume (1h):', stats.galaVolume1h);\nconsole.log('GALA Volume (24h):', stats.galaVolume24h);\nconsole.log('GALA Volume (7d):', stats.galaVolume7d);\nconsole.log('Total Tokens:', stats.totalTokens);\n```\n\n### Display Trading Dashboard\n\n```typescript\nasync function displayPlatformDashboard() {\n  const stats = await sdk.getPlatformStats();\n\n  return {\n    tradingVolume: {\n      lastHour: `${stats.galaVolume1h} GALA`,\n      last24Hours: `${stats.galaVolume24h} GALA`,\n      last7Days: `${stats.galaVolume7d} GALA`,\n    },\n    tokens: {\n      total: stats.totalTokens,\n    },\n  };\n}\n```\n\n**Related Topics:** `weekly-challenge`, `trading-analytics`, `fetch-pools`\n"
+        },
+        {
+          "userQuestion": "What parameters does getPlatformStats() accept?",
+          "assistantResponse": "The primary methods for Platform stats are `getPlatformStats()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for platform stats?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after platform stats?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for platform stats?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
     },
@@ -2806,6 +3208,35 @@
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
           "assistantResponse": "**Advanced Patterns:**\n\n1. **Batching**: Combine multiple operations for efficiency\n2. **Caching**: Cache frequently-accessed data locally\n3. **Event-Driven**: Use subscriptions for real-time updates\n4. **Error Recovery**: Implement retry logic with exponential backoff\n5. **Monitoring**: Track operation success rates and latencies\n\n**Performance Tip:** For high-volume operations, consider using the local calculation methods where available to reduce network calls."
+        }
+      ]
+    },
+    {
+      "topicKey": "holders",
+      "label": "Holders",
+      "category": "pools",
+      "description": "Pool management, pricing, and token availability",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I holders?",
+          "assistantResponse": "\n## Token Holder Data with SDK\n\n**Covers Methods (via MCP tools):**\n- `gala_launchpad_get_holder_rank` - Get rank of a specific holder\n- `gala_launchpad_get_top_holders` - Get top N token holders\n- `gala_launchpad_get_holder_count` - Get total holder count and statistics\n- `gala_launchpad_get_holders_by_balance` - Get holders in a balance range\n- `gala_launchpad_get_holder_history` - Get holder count over time\n\nThese tools derive holder insights from `fetchTokenDistribution()` and `getTrades()` SDK methods.\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Underlying SDK method for holder data\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\n// Find rank of a specific holder\nconst holder = distribution.holders.find(\n  (h) => h.address === 'eth|0x1234...'\n);\nconsole.log('Holder rank:', distribution.holders.indexOf(holder) + 1);\nconsole.log('Balance:', holder?.balance);\nconsole.log('Percentage:', holder?.percentage);\n```\n\n### Get Top Holders\n\n```typescript\n// Get top holders list\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\nconst top10 = distribution.holders.slice(0, 10);\ntop10.forEach((holder, i) => {\n  console.log(`#${i + 1}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Whale Detection\n\n```typescript\nasync function detectWhales(tokenName: string, threshold = 5) {\n  const distribution = await sdk.fetchTokenDistribution(tokenName);\n\n  const whales = distribution.holders.filter(\n    (h) => parseFloat(h.percentage) >= threshold\n  );\n\n  return {\n    whaleCount: whales.length,\n    whalePercentage: whales.reduce((sum, h) => sum + parseFloat(h.percentage), 0),\n    topWhale: whales[0],\n  };\n}\n\nconst analysis = await detectWhales('anime', 5);\nconsole.log('Whale analysis:', analysis);\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`\n"
+        },
+        {
+          "userQuestion": "What parameters does fetchTokenDistribution() accept?",
+          "assistantResponse": "The primary methods for Holders are `fetchTokenDistribution()`, `getTrades()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for holders?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after holders?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for holders?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
     },
@@ -2955,6 +3386,35 @@
       ]
     },
     {
+      "topicKey": "restricted-names",
+      "label": "Restricted names",
+      "category": "restricted-names",
+      "description": "Restricted names operations",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I restricted names?",
+          "assistantResponse": "\n## Restricted Names with SDK\n\n**Covers Methods:**\n- `getRestrictedNames()` - Get the list of restricted token names\n- `updateRestrictedNames()` - Update the restricted names list\n\n**Auth Required:** Overseer JWT token only\n\n### Get Restricted Names\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ jwtToken: 'your-overseer-jwt' });\n\n// Get current restricted names list\nconst result = await sdk.getRestrictedNames();\n\n// Names are stored as a newline-separated text blob\nconst namesList = result.names.split('\\n').filter(Boolean);\nconsole.log('Restricted names:', namesList);\nconsole.log('Total count:', namesList.length);\n```\n\n### Update Restricted Names\n\n```typescript\n// Add new restricted names to the list\nconst currentResult = await sdk.getRestrictedNames();\nconst currentNames = currentResult.names.split('\\n').filter(Boolean);\n\n// Add new names\nconst updatedNames = [...currentNames, 'badword1', 'badword2'];\nconst newNamesBlob = updatedNames.join('\\n');\n\nconst result = await sdk.updateRestrictedNames({\n  names: newNamesBlob,\n});\nconsole.log('Updated successfully:', result);\n```\n\n### Check If a Name Would Be Restricted\n\n```typescript\n// Check if a token name would be blocked before creating\nasync function isNameRestricted(tokenName: string): Promise<boolean> {\n  const result = await sdk.getRestrictedNames();\n  const restrictedList = result.names.split('\\n').filter(Boolean);\n  return restrictedList.some(\n    (name) => name.toLowerCase() === tokenName.toLowerCase()\n  );\n}\n\nconst blocked = await isNameRestricted('badword1');\nconsole.log('Name is restricted:', blocked);\n```\n\n**Related Topics:** `token-creation`, `overseer-invites`, `token-ban-management`\n"
+        },
+        {
+          "userQuestion": "What parameters does getRestrictedNames() accept?",
+          "assistantResponse": "The primary methods for Restricted names are `getRestrictedNames()`, `updateRestrictedNames()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for restricted names?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after restricted names?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for restricted names?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
       "topicKey": "streaming",
       "label": "Streaming",
       "category": "streaming",
@@ -2963,7 +3423,7 @@
       "exchanges": [
         {
           "userQuestion": "How do I manage live streams?",
-          "assistantResponse": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // Use stream.streamKey in OBS or other RTMP software\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n"
+          "assistantResponse": "\n# Live Streaming SDK\n\nThe SDK provides comprehensive live streaming management including stream control,\nrecordings management, and simulcast to external platforms.\n\n## Starting a Stream\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function manageStream() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamWebSocketUrl: 'wss://stream.example.com',  // Required for streaming\n    streamAdminApiKey: 'your-admin-key',  // Optional: for admin operations\n  });\n\n  // Start a stream for your token\n  const stream = await sdk.startStream('mytoken');\n\n  // stream.rtmpsUrl — full RTMPS ingest URL for OBS or compatible software\n  // stream.srtUrl — full SRT ingest URL for low-latency encoders\n  // stream.streamKey — raw key for manual RTMPS configuration\n  // stream.srtPassphrase — raw passphrase for manual SRT configuration\n\n  // Get stream info (public endpoint)\n  const info = await sdk.getStreamInfo('mytoken');\n\n  // Stop the stream when done\n  await sdk.stopStream('mytoken');\n\n  // Reset stream key if compromised\n  const newKey = await sdk.resetStreamKey('mytoken');\n\n}\n```\n\n## Recordings Management\n\n```typescript\nasync function manageRecordings() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // List recordings (paginated)\n  const recordings = await sdk.getStreamRecordings({\n    tokenName: 'mytoken',\n    page: 1,\n    limit: 20,\n  });\n\n  for (const rec of recordings.recordings) {\n\n  }\n\n  // Get download URL for a recording\n  const download = await sdk.getRecordingDownload('mytoken', 'asset-123');\n\n  // Delete a recording\n  await sdk.deleteRecording('mytoken', 'asset-123');\n}\n```\n\n## Simulcast Management\n\nRebroadcast your stream to external platforms (YouTube, Twitch, Facebook).\n\n```typescript\nasync function manageSimulcast() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Get existing simulcast targets\n  const targets = await sdk.getSimulcastTargets('mytoken');\n\n  // Add YouTube simulcast\n  const youtube = await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'YOUTUBE',\n    rtmpUrl: 'rtmp://a.rtmp.youtube.com/live2',\n    streamKey: 'your-youtube-stream-key',\n    name: 'My YouTube Channel',\n  });\n\n  // Add Twitch simulcast\n  await sdk.addSimulcastTarget({\n    tokenName: 'mytoken',\n    platform: 'TWITCH',\n    rtmpUrl: 'rtmp://live.twitch.tv/app',\n    streamKey: 'live_123456_abcdef',\n    name: 'Twitch Stream',\n  });\n\n  // Remove a simulcast target\n  await sdk.removeSimulcastTarget('mytoken', youtube.target.targetId);\n}\n```\n\n## Admin Operations\n\nEnable/disable streaming globally or per-token (requires admin API key).\n\n```typescript\nasync function adminOperations() {\n  const sdk = createLaunchpadSDK({\n    wallet: 'your-private-key',\n    streamAdminApiKey: 'your-admin-key',\n  });\n\n  // Disable streaming for a specific token (admin-only)\n  await sdk.disableStream('mytoken');\n\n  // Re-enable streaming for a token (admin-only)\n  await sdk.enableStream('mytoken');\n\n  // Get global streaming status\n  const globalStatus = await sdk.getGlobalStreamingStatus();\n\n  // Enable/disable streaming globally (maintenance mode)\n  await sdk.setGlobalStreamingEnabled(false);  // Disable all streams\n  await sdk.setGlobalStreamingEnabled(true);   // Re-enable\n}\n```\n\n**Available SDK Methods:**\n| Method | Description | Auth |\n|--------|-------------|------|\n| `startStream(tokenName)` | Start a stream (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `stopStream(tokenName)` | Stop a stream | Wallet |\n| `getStreamInfo(tokenName)` | Get stream status | Public |\n| `resetStreamKey(tokenName)` | Generate new stream key (returns rtmpsUrl, srtUrl, streamKey, srtPassphrase) | Wallet |\n| `disableStream(tokenName)` | Disable token streaming | Admin |\n| `enableStream(tokenName)` | Enable token streaming | Admin |\n| `getStreamRecordings(options)` | List recordings | Public |\n| `getRecordingDownload(tokenName, assetId)` | Get download URL | Wallet |\n| `deleteRecording(tokenName, assetId)` | Delete recording | Wallet |\n| `getSimulcastTargets(tokenName)` | List simulcast targets | Public |\n| `addSimulcastTarget(options)` | Add simulcast target | Wallet |\n| `removeSimulcastTarget(tokenName, targetId)` | Remove target | Wallet |\n| `getGlobalStreamingStatus()` | Get global status | Public |\n| `setGlobalStreamingEnabled(enabled)` | Enable/disable globally | Admin |\n| `getAvailableRoles()` | Get list of available streaming roles | Public |\n| `getStreamRole(options)` | Get user's role for a token | JWT |\n| `getTokenAccess(options)` | Check user's access to a token stream | JWT (optional) |\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_start_stream`\n- `gala_launchpad_stop_stream`\n- `gala_launchpad_get_stream_info`\n- `gala_launchpad_reset_stream_key`\n- `gala_launchpad_disable_stream`\n- `gala_launchpad_enable_stream`\n- `gala_launchpad_get_stream_recordings`\n- `gala_launchpad_get_recording_download`\n- `gala_launchpad_delete_recording`\n- `gala_launchpad_get_simulcast_targets`\n- `gala_launchpad_add_simulcast_target`\n- `gala_launchpad_remove_simulcast_target`\n- `gala_launchpad_get_global_streaming_status`\n- `gala_launchpad_set_global_streaming_enabled`\n- `gala_launchpad_get_available_roles`\n- `gala_launchpad_get_stream_role`\n- `gala_launchpad_get_token_access`\n"
         },
         {
           "userQuestion": "What parameters does startStream() accept?",
@@ -3289,6 +3749,39 @@
       ]
     },
     {
+      "topicKey": "ai-moderation",
+      "label": "Ai moderation",
+      "category": "utils",
+      "description": "SDK configuration and helpers",
+      "methodCount": 5,
+      "exchanges": [
+        {
+          "userQuestion": "How do I ai moderation?",
+          "assistantResponse": "\n## AI Moderation with SDK\n\n**Covers Methods:**\n- `getAIModerationSettings()` - Get current AI moderation configuration\n- `updateAIModerationSettings()` - Update AI moderation settings\n- `getAIModeration()` - Get AI analysis result for a message/content\n- `triggerAIModeration()` - Manually trigger AI analysis on content\n- `getAIModerationStatus()` - Check AI moderation service status\n\n**Auth Required:** Admin API key or Overseer JWT token\n\n### Get AI Moderation Settings\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ apiKey: 'your-admin-api-key' });\n\n// Get current AI moderation configuration\nconst settings = await sdk.getAIModerationSettings();\nconsole.log('AI Moderation Settings:', settings);\n// Returns: { enabled, sensitivityLevel, autoAction, actionThreshold, ... }\n```\n\n### Update AI Moderation Settings\n\n```typescript\nconst result = await sdk.updateAIModerationSettings({\n  enabled: true,\n  sensitivityLevel: 'medium',   // 'low' | 'medium' | 'high'\n  autoAction: 'flag',           // 'none' | 'flag' | 'hide' | 'delete'\n  actionThreshold: 0.8,         // 0.0 - 1.0 confidence threshold\n});\nconsole.log('Settings updated:', result);\n```\n\n### Get AI Moderation Result for Content\n\n```typescript\n// Get AI analysis for a specific message\nconst result = await sdk.getAIModeration({\n  contentId: 'message-uuid-here',\n  contentType: 'CHAT',   // 'CHAT' | 'COMMENT'\n});\nconsole.log('AI Score:', result.score);\nconsole.log('AI Action:', result.suggestedAction);\nconsole.log('Categories:', result.categories); // spam, toxicity, explicit, etc.\n```\n\n### Trigger Manual AI Analysis\n\n```typescript\n// Manually trigger AI analysis on content that hasn't been analyzed yet\nconst result = await sdk.triggerAIModeration({\n  contentId: 'message-uuid-here',\n  contentType: 'COMMENT',\n});\nconsole.log('Moderation triggered:', result.jobId);\n```\n\n### Check AI Service Status\n\n```typescript\n// Check if the AI moderation service is operational\nconst status = await sdk.getAIModerationStatus();\nconsole.log('AI Service:', status.status); // 'operational' | 'degraded' | 'offline'\nconsole.log('Queue Size:', status.queueSize);\nconsole.log('Processing Rate:', status.processingRate);\n```\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`\n"
+        },
+        {
+          "userQuestion": "What parameters does getAIModerationSettings() accept?",
+          "assistantResponse": "The primary methods for Ai moderation are `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for ai moderation?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete ai moderation example?",
+          "assistantResponse": "**Complete Workflow: Ai moderation**\n\nHere's the typical flow: `getAIModerationSettings()` → `updateAIModerationSettings()` → `getAIModeration()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Ai moderation?",
+          "assistantResponse": "**Additional Methods:**\n\n- `triggerAIModeration()`\n- `getAIModerationStatus()`\n\n**Total methods in this topic:** 5\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after ai moderation?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "graduation-detection",
       "label": "Graduation detection",
       "category": "utils",
@@ -3413,6 +3906,35 @@
         {
           "userQuestion": "Any final tips for map MCP tools to SDK methods?",
           "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "oembed",
+      "label": "Oembed",
+      "category": "utils",
+      "description": "SDK configuration and helpers",
+      "methodCount": 3,
+      "exchanges": [
+        {
+          "userQuestion": "How do I oembed?",
+          "assistantResponse": "\n## OEmbed Metadata with SDK\n\n**Covers Methods:**\n- `getHomeOEmbed()` - Get oEmbed metadata for the Launchpad home page\n- `getPoolOEmbed()` - Get oEmbed metadata for a token pool page\n- `getProfileOEmbed()` - Get oEmbed metadata for a user profile page\n\n**Auth Required:** None (public endpoint)\n\nOEmbed is a format that allows embedding rich content when sharing links on social media platforms (Twitter/X, Discord, Slack, etc.). These methods return JSON metadata used to generate link previews.\n\n### Get Home Page OEmbed\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get metadata for the Launchpad home page\nconst homeEmbed = await sdk.getHomeOEmbed();\nconsole.log('Title:', homeEmbed.title);\nconsole.log('Description:', homeEmbed.description);\nconsole.log('Thumbnail:', homeEmbed.thumbnail_url);\nconsole.log('Provider:', homeEmbed.provider_name);\n```\n\n### Get Token Pool OEmbed\n\n```typescript\n// Get metadata for a specific token's pool page\nconst poolEmbed = await sdk.getPoolOEmbed({\n  tokenName: 'anime',\n});\nconsole.log('Token Title:', poolEmbed.title);  // e.g., \"Anime Token - Gala Launchpad\"\nconsole.log('Token Image:', poolEmbed.thumbnail_url);\nconsole.log('Description:', poolEmbed.description);  // Price, volume, etc.\n\n// For social sharing: generate the shareable URL\nconst shareUrl = `https://launchpad.gala.com/pools/${tokenName}`;\n```\n\n### Get User Profile OEmbed\n\n```typescript\n// Get metadata for a user's profile page\nconst profileEmbed = await sdk.getProfileOEmbed({\n  userAddress: 'eth|0x1234...',\n});\nconsole.log('User Name:', profileEmbed.title);\nconsole.log('Avatar:', profileEmbed.thumbnail_url);\n```\n\n### Integration with Social Sharing\n\n```typescript\n// Generate open graph meta tags from oEmbed data\nasync function generateMetaTags(tokenName: string) {\n  const embed = await sdk.getPoolOEmbed({ tokenName });\n  return {\n    'og:title': embed.title,\n    'og:description': embed.description,\n    'og:image': embed.thumbnail_url,\n    'og:type': 'website',\n  };\n}\n```\n\n**Related Topics:** `token-details`, `profile-management`, `fetch-pools`\n"
+        },
+        {
+          "userQuestion": "What parameters does getHomeOEmbed() accept?",
+          "assistantResponse": "The primary methods for Oembed are `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for oembed?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete oembed example?",
+          "assistantResponse": "**Complete Workflow: Oembed**\n\nHere's the typical flow: `getHomeOEmbed()` → `getPoolOEmbed()` → `getProfileOEmbed()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after oembed?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3619,6 +4141,72 @@
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
           "assistantResponse": "**Advanced Patterns:**\n\n1. **Batching**: Combine multiple operations for efficiency\n2. **Caching**: Cache frequently-accessed data locally\n3. **Event-Driven**: Use subscriptions for real-time updates\n4. **Error Recovery**: Implement retry logic with exponential backoff\n5. **Monitoring**: Track operation success rates and latencies\n\n**Performance Tip:** For high-volume operations, consider using the local calculation methods where available to reduce network calls."
+        }
+      ]
+    },
+    {
+      "topicKey": "websocket-admin",
+      "label": "Websocket admin",
+      "category": "websocket-admin",
+      "description": "Websocket admin operations",
+      "methodCount": 20,
+      "exchanges": [
+        {
+          "userQuestion": "How do I websocket admin?",
+          "assistantResponse": "\n## WebSocket Admin with SDK\n\n**Covers Methods:**\n- **Connection Monitoring:** `getConnectedClients()`, `isUserOnline()`, `getOnlineUsers()`, `getTokenViewers()`, `getOnlineOverseers()`\n- **Event Emission:** `emitTradeExecuted()`, `emitBalanceUpdated()`, `emitStreamStatus()`, `emitViewerCount()`, `emitStreamCountdown()`, `emitChatMessage()`, `emitChatStatus()`, `emitTypingIndicator()`, `emitTokenBanned()`, `emitTokenUnbanned()`, `emitModeratorAdded()`, `emitModeratorRemoved()`, `emitUserProfileUpdated()`, `emitSiteConfigChanged()`, `emitFeatureStatus()`\n\n**Auth Required:** Admin API key or Overseer JWT token\n\n### Monitor Connected Clients\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ apiKey: 'your-admin-api-key' });\n\n// Get all connected WebSocket clients\nconst clients = await sdk.getConnectedClients();\nconsole.log('Total connected:', clients.total);\nconsole.log('By token:', clients.byToken);\n\n// Check if a specific user is online\nconst onlineStatus = await sdk.isUserOnline('eth|0x1234...');\nconsole.log('User online:', onlineStatus.isOnline);\nconsole.log('Connected since:', onlineStatus.connectedSince);\n\n// Check multiple users at once\nconst statuses = await sdk.getOnlineUsers(['eth|0x1111...', 'eth|0x2222...']);\nstatuses.forEach((s) => console.log(`${s.address}: ${s.isOnline}`));\n\n// Get viewers of a specific token stream\nconst viewers = await sdk.getTokenViewers({\n  tokenName: 'anime',\n  limit: 50,\n});\nconsole.log('Current viewers:', viewers.count);\n\n// Get all online overseers\nconst overseers = await sdk.getOnlineOverseers();\nconsole.log('Online overseers:', overseers.addresses);\n```\n\n### Emit WebSocket Events\n\n```typescript\n// Emit a trade executed event (triggers real-time UI updates)\nawait sdk.emitTradeExecuted('anime', {\n  tradeType: 'BUY',\n  amount: '100',\n  price: '0.05',\n  userAddress: 'eth|0x1234...',\n});\n\n// Emit stream status change\nawait sdk.emitStreamStatus('anime', {\n  isLive: true,\n  viewerCount: 150,\n});\n\n// Emit a chat message to all viewers\nawait sdk.emitChatMessage('anime', {\n  messageId: 'uuid-here',\n  content: 'Hello from admin!',\n  authorAddress: 'eth|0x1234...',\n  timestamp: Date.now(),\n});\n\n// Broadcast site-wide config change\nawait sdk.emitSiteConfigChanged({\n  key: 'maintenance_mode',\n  value: false,\n});\n\n// Emit feature flag change\nawait sdk.emitFeatureStatus({\n  feature: 'trading',\n  enabled: true,\n});\n```\n\n**Related Topics:** `streaming`, `stream-chat`, `ban-management`, `overseer-invites`\n"
+        },
+        {
+          "userQuestion": "What parameters does emitTradeExecuted() accept?",
+          "assistantResponse": "The primary methods for Websocket admin are `emitTradeExecuted()`, `emitBalanceUpdated()`, `emitStreamStatus()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for websocket admin?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete websocket admin example?",
+          "assistantResponse": "**Complete Workflow: Websocket admin**\n\nHere's the typical flow: `emitTradeExecuted()` → `emitBalanceUpdated()` → `emitStreamStatus()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Websocket admin?",
+          "assistantResponse": "**Additional Methods:**\n\n- `emitViewerCount()`\n- `emitStreamCountdown()`\n- `emitChatMessage()`\n- `emitChatStatus()`\n\n**Total methods in this topic:** 20\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after websocket admin?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Are there any advanced patterns for this topic?",
+          "assistantResponse": "**Advanced Patterns:**\n\n1. **Batching**: Combine multiple operations for efficiency\n2. **Caching**: Cache frequently-accessed data locally\n3. **Event-Driven**: Use subscriptions for real-time updates\n4. **Error Recovery**: Implement retry logic with exponential backoff\n5. **Monitoring**: Track operation success rates and latencies\n\n**Performance Tip:** For high-volume operations, consider using the local calculation methods where available to reduce network calls."
+        }
+      ]
+    },
+    {
+      "topicKey": "weekly-challenge",
+      "label": "Weekly challenge",
+      "category": "weekly-challenge",
+      "description": "Weekly challenge operations",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I weekly challenge?",
+          "assistantResponse": "\n## Weekly Challenge with SDK\n\n**Covers Methods:**\n- `getWeeklyChallengeLeaderboard()` - Get tokens ranked by market cap increase\n- `getTokenWeeklyHistory()` - Get historical weekly challenge results for a token\n\n**Challenge Rules:**\n- Week runs Saturday to Friday (UTC)\n- Baseline market cap taken Saturday at 00:00 UTC\n- Tokens ranked by percentage market cap increase from baseline\n- Results available after each week closes\n\n### Get Weekly Challenge Leaderboard\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get current week's leaderboard\nconst leaderboard = await sdk.getWeeklyChallengeLeaderboard();\nconsole.log('Top tokens this week:', leaderboard.tokens.slice(0, 10));\n\n// Get leaderboard with pagination\nconst page2 = await sdk.getWeeklyChallengeLeaderboard({\n  limit: 20,\n  page: 2,\n});\nconsole.log('Week Period:', page2.weekStart, '-', page2.weekEnd);\n\n// Get a specific past week by timestamp\nconst pastWeek = await sdk.getWeeklyChallengeLeaderboard({\n  weekTimestamp: '2026-01-01T00:00:00Z',\n});\n```\n\n### Get Token's Weekly History\n\n```typescript\n// Get how a specific token has performed in past weekly challenges\nconst history = await sdk.getTokenWeeklyHistory({\n  tokenName: 'anime',\n  limit: 10,   // Last 10 weeks\n});\n\nhistory.weeks.forEach((week) => {\n  console.log(`Week ${week.weekStart}: Rank #${week.rank}, +${week.percentageIncrease}%`);\n});\n```\n\n**Related Topics:** `trading-analytics`, `token-details`, `fetch-pools`\n"
+        },
+        {
+          "userQuestion": "What parameters does getWeeklyChallengeLeaderboard() accept?",
+          "assistantResponse": "The primary methods for Weekly challenge are `getWeeklyChallengeLeaderboard()`, `getTokenWeeklyHistory()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for weekly challenge?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after weekly challenge?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for weekly challenge?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
     }
