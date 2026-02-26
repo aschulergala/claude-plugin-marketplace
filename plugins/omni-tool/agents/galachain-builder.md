@@ -51,7 +51,7 @@ On your **first interaction** in a session, silently verify the MCP server is av
 >   }
 > }
 > ```
-> Then restart Claude Code.
+> Change `"production"` to `"qa1"`, `"staging"`, or `"development"` as needed. Then restart Claude Code.
 >
 > **Meanwhile**: I can still answer your question from built-in knowledge. What would you like to learn?
 

@@ -78,6 +78,12 @@ How Claude teaches and interacts with you:
 - Real money (⚠️ careful!)
 - Most features available
 
+**QA1**
+- QA environment for pre-release testing
+- Mirrors production contracts
+- Safe for integration testing
+- Use when testing against latest builds
+
 **Staging**
 - Test network with unlimited fake tokens
 - Practice trading safely
@@ -179,6 +185,7 @@ Let's configure your experience.
 3. Environment
    Which network should we connect to?
    → Production (real GalaChain network)
+   → QA1 (pre-release QA environment)
    → Staging (test network, unlimited fake tokens)
    → Development (localhost:4000)
    [Current: production]
@@ -194,12 +201,43 @@ Let's configure your experience.
    ☑ Auto-explain errors from MCP tools
    ☑ Auto-suggest code examples
 
-✅ Configuration saved to .claude/galachain-omnitool.local.md
+✅ MCP server config written to ~/.claude/claude_desktop_config.json
+✅ Plugin preferences saved to .claude/galachain-omnitool.local.md
+⚠️  Restart Claude Code to activate the MCP server
 ```
 
-## Generated Configuration File
+## Writing the MCP Server Config
 
-The setup creates `.claude/galachain-omnitool.local.md`:
+After collecting preferences, **automatically write the MCP server config** to `~/.claude/claude_desktop_config.json`:
+
+1. Read the file if it exists (to preserve other MCP server entries)
+2. Merge or add the `gala-launchpad` entry with the chosen environment
+3. Write the file back
+
+The `ENVIRONMENT` value maps directly to the chosen environment:
+- `production` → `"ENVIRONMENT": "production"`
+- `qa1` → `"ENVIRONMENT": "qa1"`
+- `staging` → `"ENVIRONMENT": "staging"`
+- `development` → `"ENVIRONMENT": "development"`
+
+Example result for qa1:
+```json
+{
+  "mcpServers": {
+    "gala-launchpad": {
+      "command": "npx",
+      "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+      "env": { "ENVIRONMENT": "qa1" }
+    }
+  }
+}
+```
+
+After writing, remind the user to **restart Claude Code** for the MCP server to activate.
+
+## Generated Plugin Preferences File
+
+The setup also creates `.claude/galachain-omnitool.local.md`:
 
 ```yaml
 ---
@@ -212,7 +250,7 @@ agent_personality: tutor
 wallet_mode: read-only
 # private_key: ${GALACHAIN_PRIVATE_KEY}
 
-# Environment: production, staging, development
+# Environment: production, qa1, staging, development
 environment: production
 
 # Learning preferences
@@ -269,6 +307,15 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 → Result: Fast guidance, execute trades immediately
 
+### QA1 Integration Testing Setup
+```bash
+/galachain:setup
+# Select: Expert, Full-Access, QA1
+# Show advanced topics and error handling
+```
+
+→ Result: Full access against QA1 pre-release environment for integration testing
+
 ### Safe Testing Setup
 ```bash
 /galachain:setup
@@ -288,6 +335,8 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 → Result: Direct API interaction with localhost backend
 
 ## After Setup
+
+> ⚠️ **Restart Claude Code** after setup to activate the MCP server. The 307 tools won't be available until you restart.
 
 Once configured, you can:
 
@@ -349,6 +398,16 @@ Auto: Error explanations only
 ```
 Fast and direct for experienced traders.
 
+### 🔬 QA Mode
+```
+Personality: Expert
+Wallet: Full-Access
+Environment: QA1
+Learning: Advanced only
+Auto: Errors and examples
+```
+Integration testing against pre-release builds.
+
 ### 🧪 Testing Mode
 ```
 Personality: Pragmatist
@@ -386,10 +445,15 @@ Direct localhost backend access.
 - Run `/galachain:setup` again
 - All defaults will be reapplied
 
-### "Staging seems broken"
-- Verify `LAUNCHPAD_API_URL` environment variable
-- Staging backend might be under maintenance
+### "MCP tools aren't available after setup"
+- You need to **restart Claude Code** after setup writes the config
+- Verify `~/.claude/claude_desktop_config.json` contains the `gala-launchpad` entry
+- Re-run `/galachain:setup` to rewrite the config if needed
+
+### "Staging or QA1 seems broken"
+- Staging/QA1 backends may occasionally be under maintenance
 - Check `/galachain:topics` to verify MCP connection
+- Try switching to `production` with `/galachain:setup` if blocked
 
 ## Next Steps
 
