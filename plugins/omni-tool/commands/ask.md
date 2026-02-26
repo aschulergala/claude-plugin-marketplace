@@ -15,7 +15,7 @@ arguments:
 
 # GalaChain Ask Command
 
-Ask any question about GalaChain development. The system automatically maps your question to the 51 built-in teaching topics and provides comprehensive answers.
+Ask any question about GalaChain development. The system automatically maps your question to the 59 built-in teaching topics and provides comprehensive answers.
 
 ## Usage Examples
 
@@ -37,7 +37,7 @@ Ask any question about GalaChain development. The system automatically maps your
 
 ## Supported Topics
 
-The system recognizes all 51 teaching topics:
+The system recognizes all 59 teaching topics:
 
 ### Trading (6)
 buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics
@@ -96,7 +96,7 @@ Each response includes:
 - **Concept explanation** - What this feature does and why it matters
 - **When to use** - Real-world scenarios and use cases
 - **Code example** - Working TypeScript example with your SDK
-- **MCP Tool equivalent** - How to use the 286-tool MCP server
+- **MCP Tool equivalent** - How to use the 307-tool MCP server
 - **Key parameters** - Important options and what they do
 - **Common pitfalls** - Things people get wrong
 - **Related topics** - Suggested follow-up learning
@@ -199,7 +199,7 @@ $ /galachain:ask I want to move GALA to Ethereum
 
 ## Next Steps
 
-- Try `/galachain:topics` to browse all 51 topics
+- Try `/galachain:topics` to browse all 59 topics
 - Run `/galachain:setup` to configure your preferences
 - Ask the agent directly: "Help me build a trading bot"
 - Explore complete workflows with the skill: `learning-galachain`

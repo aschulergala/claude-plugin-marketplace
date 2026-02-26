@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "gala-chain",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Official marketplace for GalaChain Claude Code plugins",
   "owner": {
     "name": "Gala Launchpad Team",
@@ -10,10 +10,10 @@
   "plugins": [
     {
       "name": "omni-tool",
-      "description": "Transform Claude into a GalaChain Expert Developer Agent with 286 MCP tools and 51 teaching topics.",
+      "description": "Transform Claude into a GalaChain Expert Developer Agent with 307 MCP tools and 59 teaching topics.",
       "source": "./plugins/omni-tool",
       "category": "development",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "author": {
         "name": "Gala Launchpad Team",
         "email": "aschuler@gala.games"
