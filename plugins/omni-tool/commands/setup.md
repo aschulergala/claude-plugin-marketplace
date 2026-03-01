@@ -1,5 +1,5 @@
 ---
-name: galachain:setup
+name: omni-tool:setup
 description: Interactive setup wizard for configuring the GalaChain OmniTool plugin
 arguments: []
 ---
@@ -12,12 +12,12 @@ Interactive wizard to configure the GalaChain OmniTool plugin for your workflow.
 
 ```bash
 # Run the interactive setup
-/galachain:setup
+/omni-tool:setup
 
 # Or configure specific setting directly
-/galachain:setup --personality=expert
-/galachain:setup --environment=staging
-/galachain:setup --wallet-mode=full-access
+/omni-tool:setup --personality=expert
+/omni-tool:setup --environment=staging
+/omni-tool:setup --wallet-mode=full-access
 ```
 
 ## Configuration Options
@@ -78,6 +78,12 @@ How Claude teaches and interacts with you:
 - Real money (⚠️ careful!)
 - Most features available
 
+**QA1**
+- QA environment for pre-release testing
+- Mirrors production contracts
+- Safe for integration testing
+- Use when testing against latest builds
+
 **Staging**
 - Test network with unlimited fake tokens
 - Practice trading safely
@@ -129,6 +135,32 @@ How Claude teaches and interacts with you:
 - Relevant patterns highlighted
 - Default: true
 
+## Step 0: Verify MCP Connection
+
+Before configuring preferences, verify the MCP server is reachable:
+
+1. Attempt `gala_launchpad_explain_sdk_usage` with topic `installation`
+2. **Success** → "✅ MCP server connected (310 tools available)" — proceed to Step 1
+3. **Failure** (unknown tool / not found) → Show installation instructions and STOP:
+
+> ❌ **MCP server not found.**
+>
+> The GalaChain MCP server needs to be added to your Claude Code config before setup can complete.
+>
+> Add to `~/.claude.json`:
+> ```json
+> {
+>   "mcpServers": {
+>     "gala-launchpad": {
+>       "command": "npx",
+>       "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+>       "env": { "ENVIRONMENT": "production" }
+>     }
+>   }
+> }
+> ```
+> After restarting Claude Code, run `/omni-tool:setup` again.
+
 ## Interactive Setup Flow
 
 ```
@@ -153,6 +185,7 @@ Let's configure your experience.
 3. Environment
    Which network should we connect to?
    → Production (real GalaChain network)
+   → QA1 (pre-release QA environment)
    → Staging (test network, unlimited fake tokens)
    → Development (localhost:4000)
    [Current: production]
@@ -168,12 +201,43 @@ Let's configure your experience.
    ☑ Auto-explain errors from MCP tools
    ☑ Auto-suggest code examples
 
-✅ Configuration saved to .claude/galachain-omnitool.local.md
+✅ MCP server config written to ~/.claude.json
+✅ Plugin preferences saved to .claude/galachain-omnitool.local.md
+⚠️  Restart Claude Code to activate the MCP server
 ```
 
-## Generated Configuration File
+## Writing the MCP Server Config
 
-The setup creates `.claude/galachain-omnitool.local.md`:
+After collecting preferences, **automatically write the MCP server config** to `~/.claude.json`:
+
+1. Read the file if it exists (to preserve other MCP server entries)
+2. Merge or add the `gala-launchpad` entry with the chosen environment
+3. Write the file back
+
+The `ENVIRONMENT` value maps directly to the chosen environment:
+- `production` → `"ENVIRONMENT": "production"`
+- `qa1` → `"ENVIRONMENT": "qa1"`
+- `staging` → `"ENVIRONMENT": "staging"`
+- `development` → `"ENVIRONMENT": "development"`
+
+Example result for qa1:
+```json
+{
+  "mcpServers": {
+    "gala-launchpad": {
+      "command": "npx",
+      "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+      "env": { "ENVIRONMENT": "qa1" }
+    }
+  }
+}
+```
+
+After writing, remind the user to **restart Claude Code** for the MCP server to activate.
+
+## Generated Plugin Preferences File
+
+The setup also creates `.claude/galachain-omnitool.local.md`:
 
 ```yaml
 ---
@@ -186,7 +250,7 @@ agent_personality: tutor
 wallet_mode: read-only
 # private_key: ${GALACHAIN_PRIVATE_KEY}
 
-# Environment: production, staging, development
+# Environment: production, qa1, staging, development
 environment: production
 
 # Learning preferences
@@ -227,7 +291,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Beginner Learning Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Tutor, Read-Only, Production
 # Enable all learning options
 ```
@@ -236,16 +300,25 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Experienced Trader Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Expert, Full-Access, Production
 # Disable redundant explanations
 ```
 
 → Result: Fast guidance, execute trades immediately
 
+### QA1 Integration Testing Setup
+```bash
+/omni-tool:setup
+# Select: Expert, Full-Access, QA1
+# Show advanced topics and error handling
+```
+
+→ Result: Full access against QA1 pre-release environment for integration testing
+
 ### Safe Testing Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Pragmatist, Full-Access, Staging
 # Enable all learning options
 ```
@@ -254,7 +327,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ### Developer Setup
 ```bash
-/galachain:setup
+/omni-tool:setup
 # Select: Expert, Full-Access, Development
 # Show advanced topics and error handling
 ```
@@ -263,6 +336,8 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ## After Setup
 
+> ⚠️ **Restart Claude Code** after setup to activate the MCP server. The 310 tools won't be available until you restart.
+
 Once configured, you can:
 
 1. **Ask questions naturally**
@@ -270,8 +345,8 @@ Once configured, you can:
    - Agent responds in your chosen personality style
 
 2. **Use commands with confidence**
-   - `/galachain:ask buy-tokens`
-   - `/galachain:topics`
+   - `/omni-tool:ask buy-tokens`
+   - `/omni-tool:topics`
    - Explanations match your preferences
 
 3. **Execute operations**
@@ -290,7 +365,7 @@ You can:
 
 1. **Re-run setup**
    ```bash
-   /galachain:setup
+   /omni-tool:setup
    ```
 
 2. **Edit directly**
@@ -298,7 +373,7 @@ You can:
    - Changes take effect immediately
 
 3. **Override temporarily**
-   - `/galachain:ask topic --personality=expert`
+   - `/omni-tool:ask topic --personality=expert`
    - Overrides setting for that query only
 
 ## Quick Configuration Presets
@@ -322,6 +397,16 @@ Learning: Minimal
 Auto: Error explanations only
 ```
 Fast and direct for experienced traders.
+
+### 🔬 QA Mode
+```
+Personality: Expert
+Wallet: Full-Access
+Environment: QA1
+Learning: Advanced only
+Auto: Errors and examples
+```
+Integration testing against pre-release builds.
 
 ### 🧪 Testing Mode
 ```
@@ -357,20 +442,25 @@ Direct localhost backend access.
 
 ### "I want to reset everything"
 - Delete `.claude/galachain-omnitool.local.md`
-- Run `/galachain:setup` again
+- Run `/omni-tool:setup` again
 - All defaults will be reapplied
 
-### "Staging seems broken"
-- Verify `LAUNCHPAD_API_URL` environment variable
-- Staging backend might be under maintenance
-- Check `/galachain:topics` to verify MCP connection
+### "MCP tools aren't available after setup"
+- You need to **restart Claude Code** after setup writes the config
+- Verify `~/.claude.json` contains the `gala-launchpad` entry
+- Re-run `/omni-tool:setup` to rewrite the config if needed
+
+### "Staging or QA1 seems broken"
+- Staging/QA1 backends may occasionally be under maintenance
+- Check `/omni-tool:topics` to verify MCP connection
+- Try switching to `production` with `/omni-tool:setup` if blocked
 
 ## Next Steps
 
-1. **Run setup**: `/galachain:setup`
+1. **Run setup**: `/omni-tool:setup`
 2. **Choose your personality**: Pick what feels right
-3. **Try a question**: `/galachain:ask token-creation`
-4. **Browse topics**: `/galachain:topics`
+3. **Try a question**: `/omni-tool:ask token-creation`
+4. **Browse topics**: `/omni-tool:topics`
 5. **Build something**: Ask the agent to help you create your first token or trade!
 
 Welcome to GalaChain development! 🚀

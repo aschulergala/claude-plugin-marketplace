@@ -1,9 +1,9 @@
 ---
-name: galachain:topics
-description: List all 51 teaching topics organized by category
+name: omni-tool:topics
+description: List all 63 teaching topics organized by category
 arguments:
   - name: category
-    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all')"
+    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all'). Includes messages, holders, restricted-names, websocket-admin, platform-stats, oembed, ai-moderation, weekly-challenge, events-tracking, trading-quotes, global-bans, global-feed-subscription, recent-trades."
     required: false
   - name: format
     description: "Output format: list (default), detailed, or tree"
@@ -12,7 +12,7 @@ arguments:
 
 # GalaChain Topics Command
 
-Browse all 51 teaching topics organized by domain. Each topic includes:
+Browse all 63 teaching topics organized by domain. Each topic includes:
 - **Description** - What this feature does
 - **Difficulty** - Beginner, intermediate, or advanced
 - **Prerequisites** - Recommended topics to learn first
@@ -22,22 +22,22 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 
 ```bash
 # List all topics
-/galachain:topics
+/omni-tool:topics
 
 # Filter by category
-/galachain:topics trading
-/galachain:topics dex-pools
-/galachain:topics bridge
+/omni-tool:topics trading
+/omni-tool:topics dex-pools
+/omni-tool:topics bridge
 
 # Different formats
-/galachain:topics --format=detailed
-/galachain:topics --format=tree
-/galachain:topics trading --format=detailed
+/omni-tool:topics --format=detailed
+/omni-tool:topics --format=tree
+/omni-tool:topics trading --format=detailed
 ```
 
 ## All Topics by Category
 
-### 🏪 Trading (6 topics)
+### 🏪 Trading (7 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -47,8 +47,9 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `error-handling` | Intermediate | Error recovery patterns | 1 |
 | `local-calculations` | Intermediate | Local computation methods | 4 |
 | `trading-analytics` | Beginner | Trading analytics and metrics | 2 |
+| `trading-quotes` | Intermediate | Buy/sell cost estimation via getTradeQuote() | 4 |
 
-### 🔍 Pools & Token Info (5 topics)
+### 🔍 Pools & Token Info (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -57,14 +58,14 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `token-distribution` | Beginner | Token holder analysis | 2 |
 | `price-history` | Beginner | Historical price data | 2 |
 | `token-identification` | Intermediate | Token format concepts (tokenName vs tokenClassKey) | 3 |
+| `holders` | Beginner | Token holder lists and distribution | 3 |
 
-### 💰 Balances & Accounts (3 topics)
+### 💰 Balances & Accounts (2 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `balances` | Beginner | Balance queries and portfolio | 5 |
 | `profile-management` | Beginner | User profile operations | 4 |
-| `account-management` | Beginner | Account registration and management | 1 |
 
 ### 🎫 Token Operations (4 topics)
 
@@ -90,7 +91,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `liquidity-positions` | Advanced | LP position management | - |
 | `advanced-dex-analysis` | Advanced | Advanced pool analysis | 1 |
 
-### 📊 DEX Analytics (5 topics)
+### 📊 DEX Analytics (6 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -99,6 +100,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `fetch-dex-leaderboard-by-season-id` | Beginner | Season leaderboards | 1 |
 | `fetch-current-dex-leaderboard` | Beginner | Current leaderboard | 1 |
 | `fetch-dex-aggregated-volume-summary` | Beginner | Volume analytics | 1 |
+| `weekly-challenge` | Beginner | Weekly challenge leaderboards and token history | 3 |
 
 ### 🌉 Bridging (2 topics)
 
@@ -107,30 +109,36 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `bridge-operations` | Intermediate | All bridge operations (Ethereum, Solana, fees, status) | 15 |
 | `wrap-unwrap-operations` | Advanced | Cross-channel token wrapping | 10 |
 
-### 📡 Streaming & Chat (2 topics)
+### 📡 Streaming & Chat (3 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `streaming` | Beginner | RTMP streaming, recordings, simulcast | 14 |
 | `stream-chat` | Beginner | Real-time chat integration (REST + WebSocket) | 7 |
+| `messages` | Intermediate | Unified messages API (fetch, create, update, pin) | 5 |
 
-### 🛡️ Community & Moderation (5 topics)
+### 🛡️ Community & Moderation (8 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `ban-management` | Intermediate | Ban/unban users | 5 |
+| `global-bans` | Intermediate | Platform-wide ban management | - |
 | `content-flag-management` | Intermediate | Content moderation | 5 |
 | `content-reactions` | Beginner | Reaction management | 6 |
 | `moderator-invites` | Intermediate | Moderator management | 6 |
 | `token-ban-management` | Intermediate | Token-level bans | 5 |
+| `ai-moderation` | Advanced | AI content moderation config and results | 4 |
+| `global-feed-subscription` | Intermediate | Subscribe to platform-wide event feed | 1 |
 
-### ⚡ Governance & Admin (3 topics)
+### ⚡ Governance & Admin (5 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `overseer-invites` | Advanced | Platform governance | 8 |
 | `api-key-management` | Beginner | API credentials | 6 |
 | `event-subscriptions` | Advanced | Real-time event monitoring | 4 |
+| `restricted-names` | Advanced | Restricted token name management (admin) | 4 |
+| `websocket-admin` | Advanced | WebSocket admin emit tools | 4 |
 
 ### 🔑 Wallet & Auth (2 topics)
 
@@ -139,7 +147,7 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `multi-wallet` | Beginner | Multi-wallet management | 1 |
 | `session-auth` | Intermediate | JWT authentication | 8 |
 
-### 🔧 Utilities & Reference (6 topics)
+### 🔧 Utilities & Reference (9 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
@@ -149,6 +157,9 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 | `utilities-system` | Beginner | System utilities | 8 |
 | `mcp-to-sdk-mapping` | Beginner | MCP-to-SDK method mapping | 1 |
 | `graduation-detection` | Intermediate | Detect token graduation | 4 |
+| `platform-stats` | Beginner | Platform-wide statistics and metrics | 2 |
+| `oembed` | Beginner | OEmbed embeds for pools, profiles, home | 3 |
+| `events-tracking` | Intermediate | SDK event batching and analytics ingestion | - |
 
 ### 🎁 Referrals (1 topic)
 
@@ -156,11 +167,12 @@ Browse all 51 teaching topics organized by domain. Each topic includes:
 |-------|-----------|-------------|-----------|
 | `referral-system` | Beginner | Referral tracking | 4 |
 
-### 📜 Trade History (1 topic)
+### 📜 Trade History (2 topics)
 
 | Topic | Difficulty | Description | MCP Tools |
 |-------|-----------|-------------|-----------|
 | `trade-history` | Beginner | Trade history queries | 1 |
+| `recent-trades` | Beginner | Recent trade queries across tokens | 2 |
 
 ### 🎨 NFTs (1 topic)
 
@@ -254,7 +266,7 @@ Complete all paths 1-5, then:
 1. Pick a use case that excites you
 2. Find the recommended learning path
 3. Start with beginner topics
-4. Use `/galachain:ask [topic]` to learn
+4. Use `/omni-tool:ask [topic]` to learn
 
 ### Practice
 1. After learning theory, execute with MCP tools
@@ -272,22 +284,22 @@ Complete all paths 1-5, then:
 
 ```bash
 # Learn about a specific topic
-/galachain:ask buy-tokens
+/omni-tool:ask buy-tokens
 
 # See more advanced topics in a category
-/galachain:topics governance --format=detailed
+/omni-tool:topics governance --format=detailed
 
 # Get the full teaching system
-/galachain:topics --format=tree
+/omni-tool:topics --format=tree
 
 # Set your learning preferences
-/galachain:setup
+/omni-tool:setup
 ```
 
 ## Next Steps
 
 - Pick a learning path that matches your goals
-- Ask about the first topic: `/galachain:ask [topic-name]`
+- Ask about the first topic: `/omni-tool:ask [topic-name]`
 - Set your personality mode for personalized teaching
 - Join the community to share what you build!
 

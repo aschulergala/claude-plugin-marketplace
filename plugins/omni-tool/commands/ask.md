@@ -1,5 +1,5 @@
 ---
-name: galachain:ask
+name: omni-tool:ask
 description: Ask about any GalaChain topic - accepts natural language questions or topic names
 arguments:
   - name: query
@@ -15,38 +15,38 @@ arguments:
 
 # GalaChain Ask Command
 
-Ask any question about GalaChain development. The system automatically maps your question to the 51 built-in teaching topics and provides comprehensive answers.
+Ask any question about GalaChain development. The system automatically maps your question to the 63 built-in teaching topics and provides comprehensive answers.
 
 ## Usage Examples
 
 ```bash
 # Natural language question
-/galachain:ask how do I buy tokens?
-/galachain:ask what's the difference between swaps and graduations?
-/galachain:ask I need to create a token and enable trading
+/omni-tool:ask how do I buy tokens?
+/omni-tool:ask what's the difference between swaps and graduations?
+/omni-tool:ask I need to create a token and enable trading
 
 # Direct topic name (faster)
-/galachain:ask buy-tokens
-/galachain:ask fetch-dex-pools
-/galachain:ask bridge-operations
+/omni-tool:ask buy-tokens
+/omni-tool:ask fetch-dex-pools
+/omni-tool:ask bridge-operations
 
 # With options
-/galachain:ask token-creation --examples=no
-/galachain:ask streaming --personality=expert
+/omni-tool:ask token-creation --examples=no
+/omni-tool:ask streaming --personality=expert
 ```
 
 ## Supported Topics
 
-The system recognizes all 51 teaching topics:
+The system recognizes all 63 teaching topics:
 
-### Trading (6)
-buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics
+### Trading (7)
+buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics, trading-quotes
 
-### Pools & Token Info (5)
-fetch-pools, token-details, token-distribution, price-history, token-identification
+### Pools & Token Info (6)
+fetch-pools, token-details, token-distribution, price-history, token-identification, holders
 
-### Balances & Accounts (3)
-balances, profile-management, account-management
+### Balances & Accounts (2)
+balances, profile-management
 
 ### Token Operations (4)
 token-creation, token-status, transfers, locks
@@ -57,29 +57,29 @@ dex-trading, dex-token-discovery
 ### DEX Pools & Liquidity (3)
 fetch-dex-pools, liquidity-positions, advanced-dex-analysis
 
-### DEX Analytics (5)
-fetch-all-dex-seasons, fetch-current-dex-season, fetch-dex-leaderboard-by-season-id, fetch-current-dex-leaderboard, fetch-dex-aggregated-volume-summary
+### DEX Analytics (6)
+fetch-all-dex-seasons, fetch-current-dex-season, fetch-dex-leaderboard-by-season-id, fetch-current-dex-leaderboard, fetch-dex-aggregated-volume-summary, weekly-challenge
 
 ### Bridging (2)
 bridge-operations, wrap-unwrap-operations
 
-### Streaming & Chat (2)
-streaming, stream-chat
+### Streaming & Chat (3)
+streaming, stream-chat, messages
 
-### Community & Moderation (5)
-ban-management, content-flag-management, content-reactions, moderator-invites, token-ban-management
+### Community & Moderation (8)
+ban-management, global-bans, content-flag-management, content-reactions, moderator-invites, token-ban-management, ai-moderation, global-feed-subscription
 
-### Governance & Admin (3)
-overseer-invites, api-key-management, event-subscriptions
+### Governance & Admin (5)
+overseer-invites, api-key-management, event-subscriptions, restricted-names, websocket-admin
 
 ### Wallet & Auth (2)
 multi-wallet, session-auth
 
-### Utilities & Reference (6)
-installation, spot-prices-smart-routing, utilities-and-helpers, utilities-system, mcp-to-sdk-mapping, graduation-detection
+### Utilities & Reference (9)
+installation, spot-prices-smart-routing, utilities-and-helpers, utilities-system, mcp-to-sdk-mapping, graduation-detection, platform-stats, oembed, events-tracking
 
-### Referrals, Trade History, NFTs (3)
-referral-system, trade-history, nft-collection-management
+### Trade History & NFTs (4)
+referral-system, trade-history, recent-trades, nft-collection-management
 
 ## How It Works
 
@@ -89,6 +89,14 @@ referral-system, trade-history, nft-collection-management
 4. **Personalize response** - Adapt explanation style based on your personality preference
 5. **Offer next steps** - Suggest related topics or MCP tool execution
 
+## MCP Availability
+
+If `gala_launchpad_explain_sdk_usage` fails with "unknown tool" or "not found":
+- Do NOT retry the tool call
+- Answer from built-in knowledge about the topic instead
+- Note at the end: "(Note: MCP server not installed — for live tool execution, see `/omni-tool:setup`)"
+- This gives users value immediately while guiding them toward installation
+
 ## Response Format
 
 Each response includes:
@@ -96,7 +104,7 @@ Each response includes:
 - **Concept explanation** - What this feature does and why it matters
 - **When to use** - Real-world scenarios and use cases
 - **Code example** - Working TypeScript example with your SDK
-- **MCP Tool equivalent** - How to use the 286-tool MCP server
+- **MCP Tool equivalent** - How to use the 310-tool MCP server
 - **Key parameters** - Important options and what they do
 - **Common pitfalls** - Things people get wrong
 - **Related topics** - Suggested follow-up learning
@@ -126,16 +134,16 @@ Override the default personality for this response:
 
 ```bash
 # Expert mode - fast and direct
-/galachain:ask fetch-dex-pools --personality=expert
+/omni-tool:ask fetch-dex-pools --personality=expert
 
 # Socratic mode - learn through questions
-/galachain:ask token-creation --personality=socratic
+/omni-tool:ask token-creation --personality=socratic
 
 # Tutor mode - patient and thorough
-/galachain:ask bridge-operations --personality=tutor
+/omni-tool:ask bridge-operations --personality=tutor
 
 # Pragmatist mode - balanced approach
-/galachain:ask liquidity-positions --personality=pragmatist
+/omni-tool:ask liquidity-positions --personality=pragmatist
 ```
 
 ## Integration with Agent
@@ -143,7 +151,7 @@ Override the default personality for this response:
 When you're using the `galachain-builder` agent, this command runs automatically under the hood. You can:
 
 - Ask the agent directly: "How do I add liquidity?"
-- Agent calls `/galachain:ask` internally
+- Agent calls `/omni-tool:ask` internally
 - Get comprehensive teaching response
 - Continue the conversation naturally
 
@@ -168,7 +176,7 @@ The `learning-galachain` skill uses this command to teach you:
 
 ### Example 1: Basic Token Purchase
 ```bash
-$ /galachain:ask how do I buy tokens?
+$ /omni-tool:ask how do I buy tokens?
 
 → Fetches: buy-tokens topic
 → Explains: Bonding curve token purchases
@@ -178,7 +186,7 @@ $ /galachain:ask how do I buy tokens?
 
 ### Example 2: Complex Liquidity Strategy
 ```bash
-$ /galachain:ask liquidity-positions --personality=expert
+$ /omni-tool:ask liquidity-positions --personality=expert
 
 → Fetches: liquidity-positions topic
 → Fast-paced: Assumes DEX knowledge
@@ -188,7 +196,7 @@ $ /galachain:ask liquidity-positions --personality=expert
 
 ### Example 3: Bridging to Ethereum
 ```bash
-$ /galachain:ask I want to move GALA to Ethereum
+$ /omni-tool:ask I want to move GALA to Ethereum
 
 → Fuzzy matches: bridge-operations
 → Explains: What bridging is and why
@@ -199,8 +207,8 @@ $ /galachain:ask I want to move GALA to Ethereum
 
 ## Next Steps
 
-- Try `/galachain:topics` to browse all 51 topics
-- Run `/galachain:setup` to configure your preferences
+- Try `/omni-tool:topics` to browse all 63 topics
+- Run `/omni-tool:setup` to configure your preferences
 - Ask the agent directly: "Help me build a trading bot"
 - Explore complete workflows with the skill: `learning-galachain`
 
