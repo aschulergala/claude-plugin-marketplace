@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Gala Launchpad API",
-    "version": "5.0.4-beta.54",
-    "description": "Consolidated API documentation auto-generated from SDK source code.\n\nSupports multiple environments and backend services. This specification covers 118+ endpoints across 17 endpoint groups, with full request/response schemas derived from TypeScript types.\n\nUse the servers selector to switch between production, staging, and development environments. Per-endpoint server overrides are used for service-specific backends.",
+    "version": "5.0.4-beta.56",
+    "description": "Consolidated API documentation auto-generated from SDK source code.\n\nSupports multiple environments and backend services. This specification covers 150+ endpoints across 25 endpoint groups, with full request/response schemas derived from TypeScript types.\n\nUse the servers selector to switch between production, staging, and development environments. Per-endpoint server overrides are used for service-specific backends.",
     "contact": {
       "name": "Gala Games",
       "url": "https://gala.games"
@@ -715,6 +715,198 @@
         }
       }
     },
+    "/live/chat": {
+      "post": {
+        "operationId": "disableGlobalChat",
+        "summary": "Disable chat globally",
+        "description": "Disable chat globally\n\nAdmin endpoint - requires admin API key.",
+        "tags": [
+          "Chat Status"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalGlobalChatStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/live/{tokenName}/chat": {
+      "post": {
+        "operationId": "post_live_chat",
+        "summary": "Disable chat",
+        "description": "POST /live/:tokenName/chat - Disable chat (Admin or Owner)",
+        "tags": [
+          "Chat Status"
+        ],
+        "parameters": [
+          {
+            "name": "tokenName",
+            "in": "path",
+            "required": true,
+            "description": "The tokenName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/live/{tokenName}/chat/slow-mode": {
+      "patch": {
+        "operationId": "patch_live_chat_slow_mode",
+        "summary": "mode - Set slow mode interval",
+        "description": "PATCH /live/:tokenName/chat/slow-mode - Set slow mode interval (Mod/Manager/Owner)",
+        "tags": [
+          "Chat Status"
+        ],
+        "parameters": [
+          {
+            "name": "tokenName",
+            "in": "path",
+            "required": true,
+            "description": "The tokenName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/live/{tokenName}/engagement-stats": {
+      "get": {
+        "operationId": "get_live_engagement_stats",
+        "summary": "stats - Get engagement stats",
+        "description": "GET /live/:tokenName/engagement-stats - Get engagement stats (Public)",
+        "tags": [
+          "Chat Status"
+        ],
+        "parameters": [
+          {
+            "name": "tokenName",
+            "in": "path",
+            "required": true,
+            "description": "The tokenName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/oembed": {
       "get": {
         "operationId": "getHomeOEmbedJson",
@@ -1148,6 +1340,188 @@
         "description": "Fetch token list from DEX Backend /user/token-list endpoint\n\nThis is the unified endpoint for both token discovery and user assets:\n- **With address**: Returns tokens user owns, ordered by quantity (highest first)\n- **Without address**: Returns ALL available tokens, quantity always \"0\"\n\nReturns rich token data including image, name, description, verification status.\n\nEndpoint: GET /user/token-list",
         "tags": [
           "DexBackendClient"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/ai-moderation/flags/{flagId}": {
+      "get": {
+        "operationId": "get_v1_ai_moderation_flags",
+        "summary": "moderation/flags/:flagId - Get AI moderation for a flag",
+        "description": "GET /v1/ai-moderation/flags/:flagId - Get AI moderation for a flag",
+        "tags": [
+          "AI Moderation"
+        ],
+        "parameters": [
+          {
+            "name": "flagId",
+            "in": "path",
+            "required": true,
+            "description": "The flagId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/ai-moderation/flags/{flagId}/analyze": {
+      "post": {
+        "operationId": "post_v1_ai_moderation_flags_analyze",
+        "summary": "moderation/flags/:flagId/analyze - Trigger AI moderation for a flag",
+        "description": "POST /v1/ai-moderation/flags/:flagId/analyze - Trigger AI moderation for a flag",
+        "tags": [
+          "AI Moderation"
+        ],
+        "parameters": [
+          {
+            "name": "flagId",
+            "in": "path",
+            "required": true,
+            "description": "The flagId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/ai-moderation/settings": {
+      "post": {
+        "operationId": "updateSettings",
+        "summary": "Update AI moderation settings",
+        "description": "Update AI moderation settings\n\nConfigure AI-powered content moderation behavior.\nOnly provided fields will be updated.",
+        "tags": [
+          "AI Moderation"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAIModerationSettingsOptions"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ai-moderation/status": {
+      "get": {
+        "operationId": "getStatus",
+        "summary": "Get AI system status",
+        "description": "Get AI system status\n\nReturns the current status of the AI moderation system:\n- Whether AI is enabled globally\n- Current mode (DISABLED, ADVISORY)\n- Provider availability (e.g., Claude API accessible)\n\nUseful for checking if AI moderation is operational before\ntriggering moderation for flagged content.",
+        "tags": [
+          "AI Moderation"
         ],
         "parameters": [],
         "responses": {
@@ -1659,6 +2033,87 @@
         ]
       }
     },
+    "/v1/dev/webhooks/simulate": {
+      "post": {
+        "operationId": "post_v1_dev_webhooks_simulate",
+        "summary": "Simulate webhook for testing",
+        "description": "POST /v1/dev/webhooks/simulate - Simulate webhook for testing (JWT)",
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/events": {
+      "get": {
+        "operationId": "get_v1_events",
+        "summary": "Query historical events",
+        "description": "GET /v1/events - Query historical events (Overseer only)",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/v1/holders": {
       "get": {
         "operationId": "get_v1_holders",
@@ -1723,6 +2178,301 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InternalGetTokenDistributionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/messages": {
+      "post": {
+        "operationId": "createMessage",
+        "summary": "Create a new message",
+        "description": "Create a new message\n\nRequires JWT authentication.",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalCreateMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageOptions"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/pinned": {
+      "get": {
+        "operationId": "getPinnedMessage",
+        "summary": "Get the currently pinned message for a token",
+        "description": "Get the currently pinned message for a token\n\nPublic endpoint - no authentication required.",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "tokenName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalGetPinnedMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/messages/stats": {
+      "get": {
+        "operationId": "getMessageStats",
+        "summary": "Get platform-wide message statistics",
+        "description": "Get platform-wide message statistics\n\nAdmin or Overseer endpoint - requires admin API key or overseer JWT.\n\nReturns aggregated message metrics including:\n- Total message count\n- Today's message count\n- Unique users and tokens\n- Message counts by type (CHAT_MESSAGE, COMMENT)",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalMessageStatsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/{id}": {
+      "delete": {
+        "operationId": "delete_v1_messages",
+        "summary": "Delete a message",
+        "description": "DELETE /v1/messages/:id - Delete a message (JWT or API key)",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/messages/{id}/pin": {
+      "post": {
+        "operationId": "post_v1_messages_pin",
+        "summary": "Pin a message",
+        "description": "POST /v1/messages/:id/pin - Pin a message (Owner/Mod)",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/messages/{id}/unpin": {
+      "post": {
+        "operationId": "post_v1_messages_unpin",
+        "summary": "Unpin a message",
+        "description": "POST /v1/messages/:id/unpin - Unpin a message (Owner/Mod)",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
                 }
               }
             }
@@ -2642,13 +3392,13 @@
         ]
       }
     },
-    "/v1/registered": {
-      "get": {
-        "operationId": "get_v1_registered",
-        "summary": "Register Account",
-        "description": "Register account for trading",
+    "/v1/reactions": {
+      "delete": {
+        "operationId": "delete_v1_reactions",
+        "summary": "Remove reaction",
+        "description": "DELETE /v1/reactions - Remove reaction (JWT or API key)",
         "tags": [
-          "DEX"
+          "Token Reactions"
         ],
         "parameters": [],
         "responses": {
@@ -2677,6 +3427,59 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/restricted-token-names": {
+      "put": {
+        "operationId": "updateRestrictedNames",
+        "summary": "Update the restricted token names content (Overseer only)",
+        "description": "Update the restricted token names content (Overseer only)\n\nReplaces the entire list with newline-separated words.",
+        "tags": [
+          "Restricted Names"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRestrictedNamesRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2696,6 +3499,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InternalAvailableRolesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/stats": {
+      "get": {
+        "operationId": "getStats",
+        "summary": "Get platform-wide statistics",
+        "description": "Get platform-wide statistics\n\nReturns aggregated platform metrics including:\n- GALA trading volume over 1h, 24h, 7d\n- Total number of tokens on the platform",
+        "tags": [
+          "Stats"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalPlatformStatsResponse"
                 }
               }
             }
@@ -4002,7 +4843,7 @@
         "summary": "Gets trades for a token by its tokenName with pagination",
         "description": "Gets trades for a token by its tokenName with pagination\n\nFetches trade history for a specific token with comprehensive pagination\nsupport. Returns normalized trade data with metadata including price,\namount, timestamp, and trader information.\n\nThis method provides a clean, intuitive API for fetching token trades\nusing the token name. Follows the same pattern as CommentAPI for consistency.\n\nResponse includes:\n- Trade details (type, amount, price, timestamp)\n- Trader addresses and wallet information\n- Transaction hashes for verification\n- Full pagination metadata (page, totalPages, hasNext, hasPrevious)\n\nFiltering options (optional):\n- tradeType: Filter by 'buy' or 'sell'\n- userAddress: Filter by specific trader\n- startDate/endDate: Filter by date range\n- sortOrder: Sort by timestamp (asc/desc)",
         "tags": [
-          "Pool"
+          "Token Trades"
         ],
         "parameters": [
           {
@@ -4047,10 +4888,10 @@
     "/v1/trades": {
       "get": {
         "operationId": "get_v1_trades",
-        "summary": "Fetch trades with tokenName/userAddress filters",
-        "description": "GET /v1/trades - Fetch trades with tokenName/userAddress filters (Public)",
+        "summary": "Query trades globally",
+        "description": "GET /v1/trades - Query trades globally (Public)",
         "tags": [
-          "Trades"
+          "Global Trades"
         ],
         "parameters": [],
         "responses": {
@@ -4080,6 +4921,260 @@
             "description": "Internal server error"
           }
         }
+      }
+    },
+    "/v1/trading/fee": {
+      "get": {
+        "operationId": "get_v1_trading_fee",
+        "summary": "Fetch launchpad fee",
+        "description": "GET /v1/trading/fee - Fetch launchpad fee (cached 1 hour, Public)",
+        "tags": [
+          "Trading Quotes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/trading/premint-quote": {
+      "get": {
+        "operationId": "get_v1_trading_premint_quote",
+        "summary": "quote?amount= - Get pre-mint quote",
+        "description": "GET /v1/trading/premint-quote?amount= - Get pre-mint quote (supply=0, no chain call, Public)",
+        "tags": [
+          "Trading Quotes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/trading/quote": {
+      "get": {
+        "operationId": "get_v1_trading_quote",
+        "summary": "Get trade quote",
+        "description": "GET /v1/trading/quote?tokenName=&amount=&type=&method= - Get trade quote (local math, no chain call, Public)",
+        "tags": [
+          "Trading Quotes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/trading/sale-details": {
+      "get": {
+        "operationId": "get_v1_trading_sale_details",
+        "summary": "details?tokenName= - Fetch sale details",
+        "description": "GET /v1/trading/sale-details?tokenName= - Fetch sale details (cached 10s, Public)",
+        "tags": [
+          "Trading Quotes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/user-bans": {
+      "get": {
+        "operationId": "listGlobalBans",
+        "summary": "List all global bans on the platform",
+        "description": "List all global bans on the platform\n\nAdmin-only endpoint - requires admin API key or Overseer JWT.\nReturns paginated results with user profile information.",
+        "tags": [
+          "User Bans"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalListGlobalBansResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/user-bans/{userAddress}": {
+      "delete": {
+        "operationId": "delete_v1_user_bans",
+        "summary": "bans/:userAddress - Remove global ban",
+        "description": "DELETE /v1/user-bans/:userAddress - Remove global ban (Admin OR Overseer)",
+        "tags": [
+          "User Bans"
+        ],
+        "parameters": [
+          {
+            "name": "userAddress",
+            "in": "path",
+            "required": true,
+            "description": "The userAddress",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
+          }
+        ]
       }
     },
     "/v1/users": {
@@ -4668,6 +5763,130 @@
                 "$ref": "#/components/schemas/CheckPoolOptions"
               }
             }
+          }
+        }
+      }
+    },
+    "/v1/webhooks/mux": {
+      "post": {
+        "operationId": "post_v1_webhooks_mux",
+        "summary": "Mux streaming webhook",
+        "description": "POST /v1/webhooks/mux - Mux streaming webhook (Public)",
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/weekly-challenge": {
+      "get": {
+        "operationId": "getLeaderboard",
+        "summary": "Get weekly challenge leaderboard",
+        "description": "Get weekly challenge leaderboard\n\nReturns tokens ranked by market cap increase for the current week.\nWeek runs Saturday to Friday.",
+        "tags": [
+          "Weekly Challenges"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalWeeklyChallengeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/weekly-challenge/history/{vaultAddress}": {
+      "get": {
+        "operationId": "get_weekly_challenge_history",
+        "summary": "challenge/history/:vaultAddress - Get token's weekly history",
+        "description": "GET /weekly-challenge/history/:vaultAddress - Get token's weekly history",
+        "tags": [
+          "Weekly Challenges"
+        ],
+        "parameters": [
+          {
+            "name": "vaultAddress",
+            "in": "path",
+            "required": true,
+            "description": "The vaultAddress",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication"
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -13146,20 +14365,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1513": {
-                "$ref": "#/components/schemas/__@match@1513"
+              "__@match@1534": {
+                "$ref": "#/components/schemas/__@match@1534"
               },
-              "__@replace@1515": {
-                "$ref": "#/components/schemas/__@replace@1515"
+              "__@replace@1536": {
+                "$ref": "#/components/schemas/__@replace@1536"
               },
-              "__@search@1518": {
-                "$ref": "#/components/schemas/__@search@1518"
+              "__@search@1539": {
+                "$ref": "#/components/schemas/__@search@1539"
               },
-              "__@split@1520": {
-                "$ref": "#/components/schemas/__@split@1520"
+              "__@split@1541": {
+                "$ref": "#/components/schemas/__@split@1541"
               },
-              "__@matchAll@1522": {
-                "$ref": "#/components/schemas/__@matchAll@1522"
+              "__@matchAll@1543": {
+                "$ref": "#/components/schemas/__@matchAll@1543"
               }
             },
             "description": "Regex pattern for validation"
@@ -13265,20 +14484,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1513": {
-                "$ref": "#/components/schemas/__@match@1513"
+              "__@match@1534": {
+                "$ref": "#/components/schemas/__@match@1534"
               },
-              "__@replace@1515": {
-                "$ref": "#/components/schemas/__@replace@1515"
+              "__@replace@1536": {
+                "$ref": "#/components/schemas/__@replace@1536"
               },
-              "__@search@1518": {
-                "$ref": "#/components/schemas/__@search@1518"
+              "__@search@1539": {
+                "$ref": "#/components/schemas/__@search@1539"
               },
-              "__@split@1520": {
-                "$ref": "#/components/schemas/__@split@1520"
+              "__@split@1541": {
+                "$ref": "#/components/schemas/__@split@1541"
               },
-              "__@matchAll@1522": {
-                "$ref": "#/components/schemas/__@matchAll@1522"
+              "__@matchAll@1543": {
+                "$ref": "#/components/schemas/__@matchAll@1543"
               }
             },
             "description": "Regex pattern for validation"
@@ -28033,8 +29252,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             }
           }
@@ -28487,8 +29706,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true
@@ -28625,8 +29844,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true
@@ -29311,8 +30530,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             }
           }
@@ -29375,10 +30594,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             },
@@ -29863,7 +31082,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -29877,7 +31096,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -29947,10 +31166,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@671": {
-                    "$ref": "#/components/schemas/__@iterator@671"
+                  "__@iterator@692": {
+                    "$ref": "#/components/schemas/__@iterator@692"
                   },
-                  "__@toStringTag@2925": {
+                  "__@toStringTag@2946": {
                     "type": "string"
                   }
                 }
@@ -30656,6 +31875,80 @@
         ],
         "description": "Clean result for amount calculations"
       },
+      "TradeQuoteParams": {
+        "type": "object",
+        "properties": {
+          "tokenName": {
+            "type": "string",
+            "description": "Token name (e.g. 'anime')"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount as a string decimal"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "NATIVE",
+              "MEME"
+            ],
+            "description": "'MEME' = meme/launchpad token, 'NATIVE' = GALA"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "IN",
+              "OUT"
+            ],
+            "description": "'IN' = spend this amount, 'OUT' = receive this amount"
+          }
+        },
+        "required": [
+          "tokenName",
+          "amount",
+          "type",
+          "method"
+        ],
+        "description": "Parameters for getting a trade quote via the backend proxy"
+      },
+      "SaleDetailsResult": {
+        "type": "object",
+        "properties": {
+          "maxSupply": {
+            "type": "string",
+            "description": "Maximum token supply"
+          },
+          "sellingTokenQuantity": {
+            "type": "string",
+            "description": "Tokens currently listed for sale"
+          },
+          "nativeTokenQuantity": {
+            "type": "string",
+            "description": "Native (GALA) tokens in the pool"
+          },
+          "saleStatus": {
+            "type": "string",
+            "description": "Current sale status (e.g. 'ACTIVE', 'PENDING', 'COMPLETED')"
+          },
+          "saleStartTime": {
+            "type": "number",
+            "nullable": true,
+            "description": "Unix timestamp when the sale starts (optional)"
+          },
+          "timeUntilLaunch": {
+            "type": "number",
+            "nullable": true,
+            "description": "Milliseconds until launch (optional)"
+          }
+        },
+        "required": [
+          "maxSupply",
+          "sellingTokenQuantity",
+          "nativeTokenQuantity",
+          "saleStatus"
+        ],
+        "description": "Sale details result from the backend trading proxy"
+      },
       "GraduationCalculationResult": {
         "type": "object",
         "properties": {
@@ -30980,8 +32273,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "description": "Last updated timestamp"
@@ -31525,7 +32818,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -31539,7 +32832,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -31609,10 +32902,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@671": {
-                    "$ref": "#/components/schemas/__@iterator@671"
+                  "__@iterator@692": {
+                    "$ref": "#/components/schemas/__@iterator@692"
                   },
-                  "__@toStringTag@2925": {
+                  "__@toStringTag@2946": {
                     "type": "string"
                   }
                 }
@@ -32326,8 +33619,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "description": "Season start timestamp (parsed to Date object)"
@@ -32464,8 +33757,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "description": "Season end timestamp (parsed to Date object)"
@@ -36191,7 +37484,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@2925": {
+                              "__@toStringTag@2946": {
                                 "type": "string"
                               }
                             }
@@ -36205,7 +37498,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@2925": {
+                              "__@toStringTag@2946": {
                                 "type": "string"
                               }
                             }
@@ -36275,10 +37568,10 @@
                       "values": {
                         "$ref": "#/components/schemas/values"
                       },
-                      "__@iterator@671": {
-                        "$ref": "#/components/schemas/__@iterator@671"
+                      "__@iterator@692": {
+                        "$ref": "#/components/schemas/__@iterator@692"
                       },
-                      "__@toStringTag@2925": {
+                      "__@toStringTag@2946": {
                         "type": "string"
                       }
                     }
@@ -36459,8 +37752,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true,
@@ -36598,8 +37891,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true,
@@ -43032,8 +44325,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true,
@@ -43171,8 +44464,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "nullable": true,
@@ -43352,8 +44645,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "description": "Timestamp of the price snapshot (created_at from database)"
@@ -45570,10 +46863,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45608,10 +46901,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45646,10 +46939,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45684,10 +46977,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45722,10 +47015,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45760,10 +47053,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45798,10 +47091,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45836,10 +47129,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45874,10 +47167,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45912,10 +47205,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45950,10 +47243,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -45988,10 +47281,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46026,10 +47319,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46064,10 +47357,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46102,10 +47395,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46140,10 +47433,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46178,10 +47471,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46216,10 +47509,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46254,10 +47547,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46292,10 +47585,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46330,10 +47623,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46368,10 +47661,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46406,10 +47699,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46444,10 +47737,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46482,10 +47775,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46520,10 +47813,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46558,10 +47851,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46596,10 +47889,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46634,10 +47927,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -46672,10 +47965,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@671": {
-                "$ref": "#/components/schemas/__@iterator@671"
+              "__@iterator@692": {
+                "$ref": "#/components/schemas/__@iterator@692"
               },
-              "__@toStringTag@2925": {
+              "__@toStringTag@2946": {
                 "type": "string"
               }
             }
@@ -47634,8 +48927,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@2638": {
-                    "$ref": "#/components/schemas/__@toPrimitive@2638"
+                  "__@toPrimitive@2659": {
+                    "$ref": "#/components/schemas/__@toPrimitive@2659"
                   }
                 }
               }
@@ -48740,8 +50033,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@2638": {
-                    "$ref": "#/components/schemas/__@toPrimitive@2638"
+                  "__@toPrimitive@2659": {
+                    "$ref": "#/components/schemas/__@toPrimitive@2659"
                   }
                 }
               }
@@ -48990,8 +50283,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@2638": {
-                    "$ref": "#/components/schemas/__@toPrimitive@2638"
+                  "__@toPrimitive@2659": {
+                    "$ref": "#/components/schemas/__@toPrimitive@2659"
                   }
                 }
               },
@@ -49145,8 +50438,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@2638": {
-                    "$ref": "#/components/schemas/__@toPrimitive@2638"
+                  "__@toPrimitive@2659": {
+                    "$ref": "#/components/schemas/__@toPrimitive@2659"
                   }
                 }
               }
@@ -51072,8 +52365,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2638": {
-                "$ref": "#/components/schemas/__@toPrimitive@2638"
+              "__@toPrimitive@2659": {
+                "$ref": "#/components/schemas/__@toPrimitive@2659"
               }
             },
             "description": "Last update timestamp"
@@ -51477,7 +52770,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -51491,7 +52784,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@2925": {
+                          "__@toStringTag@2946": {
                             "type": "string"
                           }
                         }
@@ -51561,10 +52854,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@671": {
-                    "$ref": "#/components/schemas/__@iterator@671"
+                  "__@iterator@692": {
+                    "$ref": "#/components/schemas/__@iterator@692"
                   },
-                  "__@toStringTag@2925": {
+                  "__@toStringTag@2946": {
                     "type": "string"
                   }
                 }
@@ -52216,35 +53509,6 @@
           }
         },
         "description": "Options for fetching referrals summary"
-      },
-      "RegisterAccountResult": {
-        "type": "object",
-        "properties": {
-          "exists": {
-            "type": "boolean",
-            "description": "Whether the account exists/is registered"
-          },
-          "walletAlias": {
-            "type": "string",
-            "description": "The normalized wallet alias (e.g., \"client|...\" or \"eth|...\")"
-          }
-        },
-        "required": [
-          "exists",
-          "walletAlias"
-        ],
-        "description": "Result of registering an account for trading\n\nThis endpoint ensures a wallet is registered with the DEX API platform\nbefore trading operations. Should be called before the first purchase."
-      },
-      "RegisterAccountOptions": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "type": "string",
-            "nullable": true,
-            "description": "Wallet address to register\nSupports: eth|0x..., 0x..., or client|... formats\nDefaults to SDK wallet if not provided"
-          }
-        },
-        "description": "Options for registering an account"
       },
       "GetManagedTokensOptions": {
         "type": "object",
@@ -54706,6 +55970,49 @@
         ],
         "description": "Emitted when platform stats are updated after a trade.\nBroadcast globally to all connected clients.\nContains enriched token-specific stats for surgical cache updates."
       },
+      "EngagementStatsUpdatedEvent": {
+        "type": "object",
+        "properties": {
+          "tokenName": {
+            "type": "string",
+            "description": "Token name for which engagement stats were updated"
+          },
+          "chat": {
+            "type": "object",
+            "properties": {
+              "messageCount": {
+                "type": "number"
+              },
+              "uniqueChatters": {
+                "type": "number"
+              },
+              "since": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "description": "Chat statistics (live stream messages - scoped to current/last stream session)"
+          },
+          "comments": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "number"
+              },
+              "uniqueCommenters": {
+                "type": "number"
+              }
+            },
+            "description": "Comment statistics (token page comments - all-time)"
+          }
+        },
+        "required": [
+          "tokenName",
+          "chat",
+          "comments"
+        ],
+        "description": "Emitted after the chat flush job processes messages for a stream.\nContains updated engagement stats (chat + comment counts).\nBroadcast to token room every ~15 seconds when chat activity occurs."
+      },
       "WebSocketResponse": {
         "type": "object",
         "properties": {
@@ -55670,6 +56977,10 @@
   },
   "tags": [
     {
+      "name": "AI Moderation",
+      "description": "AI Moderation operations"
+    },
+    {
       "name": "API Keys",
       "description": "API Keys operations"
     },
@@ -55686,12 +56997,20 @@
       "description": "Bundle operations"
     },
     {
+      "name": "Chat Status",
+      "description": "Chat Status operations"
+    },
+    {
       "name": "DEX",
       "description": "DEX operations"
     },
     {
       "name": "DexBackendClient",
       "description": "DexBackendClient operations"
+    },
+    {
+      "name": "Events",
+      "description": "Events operations"
     },
     {
       "name": "Flags",
@@ -55708,6 +57027,14 @@
     {
       "name": "GalaChainTransfer",
       "description": "GalaChainTransfer operations"
+    },
+    {
+      "name": "Global Trades",
+      "description": "Global Trades operations"
+    },
+    {
+      "name": "Messages",
+      "description": "Messages operations"
     },
     {
       "name": "Moderators",
@@ -55730,6 +57057,14 @@
       "description": "Reactions operations"
     },
     {
+      "name": "Restricted Names",
+      "description": "Restricted Names operations"
+    },
+    {
+      "name": "Stats",
+      "description": "Stats operations"
+    },
+    {
       "name": "Streaming",
       "description": "Streaming operations"
     },
@@ -55738,8 +57073,28 @@
       "description": "Token Bans operations"
     },
     {
-      "name": "Trades",
-      "description": "Trades operations"
+      "name": "Token Reactions",
+      "description": "Token Reactions operations"
+    },
+    {
+      "name": "Token Trades",
+      "description": "Token Trades operations"
+    },
+    {
+      "name": "Trading Quotes",
+      "description": "Trading Quotes operations"
+    },
+    {
+      "name": "User Bans",
+      "description": "User Bans operations"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Webhooks operations"
+    },
+    {
+      "name": "Weekly Challenges",
+      "description": "Weekly Challenges operations"
     }
   ]
 }

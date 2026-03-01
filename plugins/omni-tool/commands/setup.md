@@ -140,7 +140,7 @@ How Claude teaches and interacts with you:
 Before configuring preferences, verify the MCP server is reachable:
 
 1. Attempt `gala_launchpad_explain_sdk_usage` with topic `installation`
-2. **Success** → "✅ MCP server connected (307 tools available)" — proceed to Step 1
+2. **Success** → "✅ MCP server connected (310 tools available)" — proceed to Step 1
 3. **Failure** (unknown tool / not found) → Show installation instructions and STOP:
 
 > ❌ **MCP server not found.**
@@ -336,7 +336,7 @@ export GALACHAIN_PRIVATE_KEY=your_test_key
 
 ## After Setup
 
-> ⚠️ **Restart Claude Code** after setup to activate the MCP server. The 307 tools won't be available until you restart.
+> ⚠️ **Restart Claude Code** after setup to activate the MCP server. The 310 tools won't be available until you restart.
 
 Once configured, you can:
 

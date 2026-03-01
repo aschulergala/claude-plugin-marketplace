@@ -10,9 +10,9 @@ claude plugins add omni-tool
 
 ## Features
 
-- **286 MCP Tools** - Comprehensive GalaChain operations
-- **34 Categories** - Trading, liquidity, bridging, and more
-- **51 Teaching Topics** - AI-powered learning
+- **310 MCP Tools** - Comprehensive GalaChain operations
+- **38 Categories** - Trading, liquidity, bridging, and more
+- **63 Teaching Topics** - AI-powered learning
 - **8 Learning Paths** - Structured skill development
 
 ## Categories
@@ -22,7 +22,7 @@ claude plugins add omni-tool
 | Trading | 20+ | Buy, sell, track tokens |
 | Liquidity | 15+ | DEX pools, fee collection |
 | Bridging | 18+ | Cross-chain operations |
-| Learning | 51 topics | AI-powered tutoring |
+| Learning | 63 topics | AI-powered tutoring |
 
 ## Links
 

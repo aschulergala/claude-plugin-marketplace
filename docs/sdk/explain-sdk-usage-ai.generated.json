@@ -1,9 +1,9 @@
 {
   "meta": {
-    "version": "5.0.4-beta.56",
-    "generatedAt": "2026-02-26T16:53:00.069Z",
-    "topicCount": 59,
-    "methodCount": 307
+    "version": "5.0.4-beta.58",
+    "generatedAt": "2026-03-01T20:38:08.312Z",
+    "topicCount": 63,
+    "methodCount": 310
   },
   "topics": {
     "buy-tokens": {
@@ -736,7 +736,8 @@
         "onRoomSubscribed",
         "onRoomLeft",
         "onDexPoolCreation",
-        "onLaunchpadTokenCreation"
+        "onLaunchpadTokenCreation",
+        "onEngagementStatsUpdated"
       ],
       "mcpTools": [
         "gala_launchpad_subscribe_to_stream",
@@ -744,7 +745,7 @@
         "gala_launchpad_on_dex_pool_creation",
         "gala_launchpad_on_launchpad_token_creation"
       ],
-      "explanation": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n",
+      "explanation": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n### Engagement Stats Updates (v8.5.0+)\n\n```typescript\n// Subscribe to engagement stats updates for a token stream\n// Fires every ~15 seconds when chat activity occurs\nawait sdk.connectStreamWebSocket();\nawait sdk.authenticateStreamWebSocket('jwt-token');\nawait sdk.subscribeToStream('anime');\n\n// Register global engagement stats callback\nconst unsubscribe = sdk.onEngagementStatsUpdated((event) => {\n  console.log(`${event.tokenName}: ${event.chat.messageCount} chat messages`);\n  console.log(`Unique chatters: ${event.chat.uniqueChatters}`);\n  console.log(`Comments: ${event.comments.count} from ${event.comments.uniqueCommenters} users`);\n});\n\n// Clean up when done\nunsubscribe();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n- `gala_launchpad_on_engagement_stats_updated`\n",
       "samplePrompts": [
         "How do I subscribe to real-time events?",
         "Show me how to subscribe to real-time events with the SDK",
@@ -911,25 +912,6 @@
         "Show me how to manage referral rewards with the SDK",
         "Explain the manage referral rewards workflow",
         "What methods do I need for manage referral rewards?"
-      ]
-    },
-    "account-management": {
-      "key": "account-management",
-      "label": "Account management",
-      "description": "Account management operations",
-      "category": "balance",
-      "methods": [
-        "registerAccount"
-      ],
-      "mcpTools": [
-        "gala_launchpad_register_account"
-      ],
-      "explanation": "\n# Account Management\n\nThe SDK provides methods for account registration and management.\n\n## Register Account\n\nRegister an account for trading on Gala. This should be called before the first purchase\nto ensure the wallet is ready for trading operations.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function registerAccount() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Register the SDK wallet\n  const result = await sdk.registerAccount();\n\n  // Register a specific address\n  const otherResult = await sdk.registerAccount({\n    address: '0x1234...'  // Supports eth|, 0x, or client| formats\n  });\n\n}\n```\n\n**Response Structure:**\n```typescript\ninterface RegisterAccountResult {\n  exists: boolean;       // Whether account is registered\n  walletAlias: string;   // Normalized wallet alias (client|...)\n}\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_register_account`\n",
-      "samplePrompts": [
-        "How do I manage your account?",
-        "Show me how to manage your account with the SDK",
-        "Explain the manage your account workflow",
-        "What methods do I need for manage your account?"
       ]
     },
     "session-auth": {
@@ -1247,10 +1229,12 @@
       "description": "Trade history operations",
       "category": "trades",
       "methods": [
-        "getTrades"
+        "getTrades",
+        "getRecentTrades"
       ],
       "mcpTools": [
-        "gala_launchpad_get_trades"
+        "gala_launchpad_get_trades",
+        "gala_launchpad_get_recent_trades"
       ],
       "explanation": "\n## Trade History\n\nQuery and analyze trading activity for tokens.\n\n### Basic Usage\n\n```typescript\nimport { LaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = new LaunchpadSDK({ environment: 'production' });\n\n// Get recent trades for a token\nconst result = await sdk.getTrades({\n  tokenName: 'anime',\n  limit: 10,\n  page: 1\n});\n\nfor (const trade of result.trades) {\n\n}\n```\n\n### Filter by Trade Type\n\n```typescript\n// Get only buy orders\nconst buyTrades = await sdk.getTrades({\n  tokenName: 'anime',\n  txnType: 'BUY',\n  limit: 50\n});\n\n// Get only sell orders\nconst sellTrades = await sdk.getTrades({\n  tokenName: 'anime',\n  txnType: 'SELL',\n  limit: 50\n});\n```\n\n### Date Range Queries\n\n```typescript\nconst oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);\nconst now = new Date();\n\nconst recentTrades = await sdk.getTrades({\n  tokenName: 'anime',\n  startDate: oneWeekAgo,\n  endDate: now,\n  limit: 50\n});\n```\n\n### Filter by User\n\n```typescript\n// Get trades for a specific wallet\nconst userTrades = await sdk.getTrades({\n  tokenName: 'anime',\n  userAddress: 'eth|0x1234...',\n  limit: 20\n});\n```\n\n### Pagination\n\n```typescript\n// Paginate through all trades using offset-based pagination\nlet offset = 0;\nlet hasMore = true;\n\nwhile (hasMore) {\n  const result = await sdk.getTrades({ tokenName: 'anime', offset, limit: 50 });\n\n  hasMore = result.trades.length === 50;\n  offset += 50;\n}\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_trades`\n",
       "samplePrompts": [
@@ -1572,18 +1556,130 @@
       "category": "pools",
       "methods": [
         "fetchTokenDistribution",
-        "getTrades"
+        "getTrades",
+        "getTopHolders",
+        "getHolderCount",
+        "getHolderRank",
+        "getHoldersByBalance",
+        "getHolderHistory"
       ],
       "mcpTools": [
         "gala_launchpad_fetch_token_distribution",
-        "gala_launchpad_get_trades"
+        "gala_launchpad_get_trades",
+        "gala_launchpad_get_top_holders",
+        "gala_launchpad_get_holder_count",
+        "gala_launchpad_get_holder_rank",
+        "gala_launchpad_get_holders_by_balance",
+        "gala_launchpad_get_holder_history"
       ],
-      "explanation": "\n## Token Holder Data with SDK\n\n**Covers Methods (via MCP tools):**\n- `gala_launchpad_get_holder_rank` - Get rank of a specific holder\n- `gala_launchpad_get_top_holders` - Get top N token holders\n- `gala_launchpad_get_holder_count` - Get total holder count and statistics\n- `gala_launchpad_get_holders_by_balance` - Get holders in a balance range\n- `gala_launchpad_get_holder_history` - Get holder count over time\n\nThese tools derive holder insights from `fetchTokenDistribution()` and `getTrades()` SDK methods.\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Underlying SDK method for holder data\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\n// Find rank of a specific holder\nconst holder = distribution.holders.find(\n  (h) => h.address === 'eth|0x1234...'\n);\nconsole.log('Holder rank:', distribution.holders.indexOf(holder) + 1);\nconsole.log('Balance:', holder?.balance);\nconsole.log('Percentage:', holder?.percentage);\n```\n\n### Get Top Holders\n\n```typescript\n// Get top holders list\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\nconst top10 = distribution.holders.slice(0, 10);\ntop10.forEach((holder, i) => {\n  console.log(`#${i + 1}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Whale Detection\n\n```typescript\nasync function detectWhales(tokenName: string, threshold = 5) {\n  const distribution = await sdk.fetchTokenDistribution(tokenName);\n\n  const whales = distribution.holders.filter(\n    (h) => parseFloat(h.percentage) >= threshold\n  );\n\n  return {\n    whaleCount: whales.length,\n    whalePercentage: whales.reduce((sum, h) => sum + parseFloat(h.percentage), 0),\n    topWhale: whales[0],\n  };\n}\n\nconst analysis = await detectWhales('anime', 5);\nconsole.log('Whale analysis:', analysis);\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`\n",
+      "explanation": "\n## Token Holder Data with SDK\n\n**Covers Methods:**\n- `getTopHolders(tokenName, limit?)` - Get top N token holders by balance (v9.2.0+)\n- `getHolderCount(tokenName)` - Get total holder count and combined balance (v9.2.0+)\n- `getHolderRank(tokenName, userAddress)` - Get a user's rank and balance (v9.2.0+)\n- `getHoldersByBalance(tokenName, options?)` - Filter holders by balance range (v9.2.0+)\n- `getHolderHistory(tokenName, userAddress, limit?)` - Get a holder's trade history (v9.2.0+)\n- `fetchTokenDistribution(tokenName)` - Raw distribution data (used internally by the above)\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Direct SDK convenience method (v9.2.0+)\nconst rank = await sdk.getHolderRank('anime', 'eth|0x1234...');\nif (rank) {\n  console.log(`Rank #${rank.rank} of ${rank.holderCount} holders`);\n  console.log(`Balance: ${rank.balance}`);\n} else {\n  console.log('User holds no tokens');\n}\n```\n\n### Get Top Holders\n\n```typescript\n// Get top 10 holders with rank enrichment\nconst top10 = await sdk.getTopHolders('anime', 10);\ntop10.forEach((holder) => {\n  console.log(`#${holder.rank}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Holder Statistics\n\n```typescript\nconst { count, totalBalance } = await sdk.getHolderCount('anime');\nconsole.log(`${count} holders, total supply: ${totalBalance}`);\n```\n\n### Filter Holders by Balance (Whale Detection)\n\n```typescript\n// Find all holders with ≥10,000 tokens\nconst whales = await sdk.getHoldersByBalance('anime', { minBalance: 10000 });\nconsole.log(`${whales.length} whales hold ≥10,000 tokens`);\nconsole.log('Top whale:', whales[0]?.address);\n```\n\n### Get a Holder's Trade History\n\n```typescript\n// Get last 20 trades for a specific holder\nconst history = await sdk.getHolderHistory('anime', 'eth|0x1234...', 20);\nhistory.trades.forEach((t) => {\n  console.log(`${t.txnType}: ${t.inputAmount} → ${t.outputAmount} at ${t.createdAt}`);\n});\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`, `recent-trades`\n",
       "samplePrompts": [
         "How do I holders?",
         "Show me how to holders with the SDK",
         "Explain the holders workflow",
         "What methods do I need for holders?"
+      ]
+    },
+    "trading-quotes": {
+      "key": "trading-quotes",
+      "label": "Trading quotes",
+      "description": "Trading quotes operations",
+      "category": "trading",
+      "methods": [
+        "fetchLaunchpadFee",
+        "fetchSaleDetails",
+        "getTradeQuote",
+        "getPremintQuote"
+      ],
+      "mcpTools": [
+        "gala_launchpad_fetch_launchpad_fee",
+        "gala_launchpad_fetch_sale_details",
+        "gala_launchpad_get_trade_quote",
+        "gala_launchpad_get_premint_quote"
+      ],
+      "explanation": "\n## Trading Quotes via Backend Proxy (v9.1.0+)\n\n**Covers Methods:**\n- `fetchLaunchpadFee()` — Backend-cached launchpad fee (1h TTL, @Public)\n- `fetchSaleDetails(tokenName)` — Backend-cached token sale details (10s TTL, @Public)\n- `getTradeQuote(params)` — Instant quote via local bonding curve math (no chain call, @Public)\n- `getPremintQuote(amount)` — Pre-mint quote assuming zero supply (token creation flow, @Public)\n\nAll endpoints are @Public() — no authentication required. These replace the deprecated\n`calculateBuyAmountExternal()` / `calculateSellAmountExternal()` chain-direct methods.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// 1. Fetch current launchpad fee (cached 1h on backend)\nconst fee = await sdk.fetchLaunchpadFee();\nconsole.log(`Launchpad fee: ${fee} GALA`);\n\n// 2. Fetch token sale details (cached 10s on backend)\nconst details = await sdk.fetchSaleDetails('anime');\nconsole.log(`Supply: ${details.sellingTokenQuantity} / ${details.maxSupply}`);\nconsole.log(`Status: ${details.saleStatus}`);\n\n// 3. Get a buy quote: how many tokens for 100 GALA?\nconst buyQuote = await sdk.getTradeQuote({\n  tokenName: 'anime',\n  amount: '100',\n  type: 'NATIVE',  // GALA input\n  method: 'IN',   // spending this amount\n});\nconsole.log(`You will receive: ${buyQuote.amount} tokens`);\nconsole.log(`Fee: ${buyQuote.reverseBondingCurveFee} GALA`);\n\n// 4. Get a sell quote: how much GALA for 500 tokens?\nconst sellQuote = await sdk.getTradeQuote({\n  tokenName: 'anime',\n  amount: '500',\n  type: 'MEME',   // token input\n  method: 'IN',  // selling this amount\n});\nconsole.log(`You will receive: ${sellQuote.amount} GALA`);\n\n// 5. Pre-mint quote for token creation flow (supply = 0)\nconst premintQuote = await sdk.getPremintQuote('500');\nconsole.log(`Initial purchase will yield: ${premintQuote.amount} tokens`);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_launch_token_fee`\n- `gala_launchpad_calculate_buy_amount_local`\n\n**Related Topics:** `buy-tokens`, `sell-tokens`, `local-calculations`\n",
+      "samplePrompts": [
+        "How do I trading quotes?",
+        "Show me how to trading quotes with the SDK",
+        "Explain the trading quotes workflow",
+        "What methods do I need for trading quotes?"
+      ]
+    },
+    "global-feed-subscription": {
+      "key": "global-feed-subscription",
+      "label": "Global feed subscription",
+      "description": "Global feed subscription operations",
+      "category": "chat",
+      "methods": [
+        "subscribeToStream"
+      ],
+      "mcpTools": [
+        "gala_launchpad_subscribe_to_stream"
+      ],
+      "explanation": "\n## Global Feed Reference Tools (MCP Documentation)\n\nThe global feed reference tools are **documentation/reference tools** in the MCP server, not\ndirect SDK API methods. They explain how to monitor platform-wide events (trades, token launches,\npool creations) via WebSocket subscriptions.\n\n**MCP Reference Tools:**\n- `gala_launchpad_global_feed_reference` — Overview of all global feed event types\n- `gala_launchpad_global_feed_status_reference` — Connection and authentication status patterns\n- `gala_launchpad_monitor_global_feed_events_reference` — Code examples for monitoring events\n- `gala_launchpad_site_config_state_reference` — Site configuration state management\n- `gala_launchpad_unsubscribe_from_global_feed_reference` — Cleanup patterns\n\n**SDK Equivalent (Direct Usage):**\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n// Subscribe to token creation events globally\nconst unsubscribeLaunch = sdk.onLaunchpadTokenCreation((token) => {\n  console.log('New token launched:', token.tokenName);\n});\n\n// Subscribe to DEX pool creation events\nconst unsubscribePool = sdk.onDexPoolCreation((pool) => {\n  console.log('New DEX pool:', pool.token0, '/', pool.token1);\n});\n\n// Subscribe to stream WebSocket for token-level events\nawait sdk.connectStreamWebSocket();\nawait sdk.authenticateStreamWebSocket('jwt-token');\nawait sdk.subscribeToStream('anime', {\n  onTradeExecuted: (trade) => console.log('Trade:', trade),\n  onStreamStatusChanged: (status) => console.log('Status:', status),\n});\n\n// Clean up\nunsubscribeLaunch();\nunsubscribePool();\n```\n\n**Related Topics:** `event-subscriptions`, `streaming`, `stream-chat`\n",
+      "samplePrompts": [
+        "How do I global feed subscription?",
+        "Show me how to global feed subscription with the SDK",
+        "Explain the global feed subscription workflow",
+        "What methods do I need for global feed subscription?"
+      ]
+    },
+    "events-tracking": {
+      "key": "events-tracking",
+      "label": "Events tracking",
+      "description": "Events tracking operations",
+      "category": "utils",
+      "methods": [
+        "queryEvents"
+      ],
+      "mcpTools": [],
+      "explanation": "\n## Client-Side Events Tracking (v8.2.0+)\n\n**Covers Methods:**\n- `sdk.events.track(eventType, payload, options?)` — Track an event (client-side batching)\n- `sdk.events.flush()` — Manually flush buffered events to backend\n- `sdk.events.getStats()` — Get buffering statistics\n- `sdk.events.shutdown(timeoutMs?)` — Graceful shutdown with final flush\n- `queryEvents(options)` — Query historical events (overseer only)\n\nEvents are batched client-side and flushed automatically on time (3s) or size (20 events) thresholds.\nThe backend accepts batches via POST /v1/events, persists via RabbitMQ → MySQL, and broadcasts\nto the WebSocket firehose for real-time overseer monitoring.\n\n```typescript\nimport { createLaunchpadSDK, EVENT_TYPES } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  wallet: 'your-private-key',\n  events: {\n    batchSize: 20,           // Flush after 20 events (default)\n    flushIntervalMs: 3000,   // Or after 3 seconds (default)\n    maxQueueSize: 1000       // Drop oldest if queue exceeds (default)\n  }\n});\n\n// Track trading events\nsdk.events.track(EVENT_TYPES.TOKEN_BUY, {\n  tokenName: 'anime',\n  amount: '100',\n  price: '0.05'\n});\n\nsdk.events.track(EVENT_TYPES.TOKEN_SELL, {\n  tokenName: 'anime',\n  amount: '50'\n});\n\n// Track page navigation\nsdk.events.track(EVENT_TYPES.PAGE_VIEW, {\n  path: '/tokens/anime',\n  referrer: 'homepage'\n});\n\n// Force immediate send for critical events\nawait sdk.events.track(EVENT_TYPES.LOGIN, { userAddress: 'eth|0x...' }, { immediate: true });\n\n// Get buffering statistics\nconst stats = sdk.events.getStats();\nconsole.log(`Buffered: ${stats.buffered}, Sent: ${stats.flushed}`);\n\n// Manually flush before page unload\nawait sdk.events.flush();\n\n// Graceful shutdown (waits up to 5 seconds)\nawait sdk.events.shutdown(5000);\n\n// Query historical events (overseer only)\nconst events = await sdk.queryEvents({\n  tokenName: 'anime',\n  eventTypes: ['TOKEN_BUY', 'TOKEN_SELL'],\n  startDate: '2025-01-20T00:00:00Z',\n  limit: 50\n});\nconsole.log(`Found ${events.items.length} events`);\n```\n\n**Available EVENT_TYPES Constants:**\n- `LOGIN`, `LOGOUT`\n- `TOKEN_BUY`, `TOKEN_SELL`, `TOKEN_SWAP`\n- `STREAM_START`, `STREAM_END`\n- `CHAT_MESSAGE_SENT`, `COMMENT_CREATED`\n- `PAGE_VIEW`, `PAGE_LEAVE`\n\n**Related Topics:** `stream-chat`, `streaming`, `overseer-invites`\n",
+      "samplePrompts": [
+        "How do I events tracking?",
+        "Show me how to events tracking with the SDK",
+        "Explain the events tracking workflow",
+        "What methods do I need for events tracking?"
+      ]
+    },
+    "global-bans": {
+      "key": "global-bans",
+      "label": "Global bans",
+      "description": "Global bans operations",
+      "category": "utils",
+      "methods": [
+        "createGlobalBan",
+        "removeGlobalBan",
+        "listGlobalBans",
+        "getGlobalBan"
+      ],
+      "mcpTools": [],
+      "explanation": "\n## Global Ban Management (Platform-wide, Overseer Only)\n\n**Covers Methods:**\n- `createGlobalBan(options)` — Create a platform-wide ban for a user address\n- `removeGlobalBan(options)` — Remove a global ban\n- `listGlobalBans(options?)` — List all platform-wide bans with pagination\n- `getGlobalBan(options)` — Check if a specific user is globally banned\n\n**Authentication:** All methods require overseer JWT session or admin API key.\n\n**Distinction from Per-Token Bans:**\n- **Global bans** (`createGlobalBan`) — Platform-wide, applied to ALL tokens\n- **Per-token bans** (`createBan`) — Scoped to a specific token's chat/moderation\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ wallet: 'overseer-private-key' });\n\n// Create a global ban (platform-wide)\nconst ban = await sdk.createGlobalBan({\n  userAddress: 'eth|0x1234...',\n  reason: 'Repeated platform policy violations',\n  expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days\n});\nconsole.log('Global ban created:', ban.id);\n\n// Check if a user is globally banned\nconst banStatus = await sdk.getGlobalBan({ userAddress: 'eth|0x1234...' });\nif (banStatus) {\n  console.log(`Banned until: ${banStatus.expiresAt ?? 'permanent'}`);\n  console.log(`Reason: ${banStatus.reason}`);\n}\n\n// List all global bans (paginated)\nconst bans = await sdk.listGlobalBans({ page: 1, limit: 20 });\nconsole.log(`${bans.meta.totalItems} total global bans`);\nbans.items.forEach((b) => {\n  console.log(`${b.userAddress}: ${b.reason}`);\n});\n\n// Remove a global ban\nawait sdk.removeGlobalBan({ userAddress: 'eth|0x1234...' });\nconsole.log('Global ban removed');\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_create_ban` (global scope)\n- `gala_launchpad_remove_ban` (global scope)\n- `gala_launchpad_list_global_flags`\n\n**Related Topics:** `ban-management`, `overseer-invites`, `content-flag-management`\n",
+      "samplePrompts": [
+        "How do I global bans?",
+        "Show me how to global bans with the SDK",
+        "Explain the global bans workflow",
+        "What methods do I need for global bans?"
+      ]
+    },
+    "recent-trades": {
+      "key": "recent-trades",
+      "label": "Recent trades",
+      "description": "Recent trades operations",
+      "category": "trades",
+      "methods": [
+        "getRecentTrades",
+        "getTrades"
+      ],
+      "mcpTools": [
+        "gala_launchpad_get_recent_trades",
+        "gala_launchpad_get_trades"
+      ],
+      "explanation": "\n## Recent Trades Query (v9.2.0+)\n\n**Covers Methods:**\n- `getRecentTrades(tokenName?, limit?)` — Get most recent trades (convenience wrapper)\n- `getTrades(options)` — Full paginated trades query with all filter options\n\n`getRecentTrades` is a convenience wrapper around `getTrades` for quick access to recent\nmarket activity. Use `getTrades` directly for advanced filtering (date ranges, addresses, etc.).\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get 50 most recent trades across all tokens\nconst { trades } = await sdk.getRecentTrades();\ntrades.forEach((t) => {\n  console.log(`${t.tokenName} ${t.txnType}: ${t.inputAmount} → ${t.outputAmount}`);\n});\n\n// Get last 10 trades for a specific token\nconst { trades: animeTrades } = await sdk.getRecentTrades('anime', 10);\nconsole.log(`Last 10 anime trades:`, animeTrades.length);\n\n// Advanced filtering with getTrades()\nconst { trades: filteredTrades, pageInfo } = await sdk.getTrades({\n  tokenName: 'anime',\n  txnType: 'BUY',\n  startDate: '2025-01-01',\n  endDate: '2025-01-31',\n  pageSize: 20,\n});\nconsole.log(`Page ${pageInfo.currentPage} of ${pageInfo.totalPages}`);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_recent_trades` — Recent trades with optional filtering\n- `gala_launchpad_get_trades` — Full trades query\n\n**Related Topics:** `trading-analytics`, `trade-history`, `holders`\n",
+      "samplePrompts": [
+        "How do I recent trades?",
+        "Show me how to recent trades with the SDK",
+        "Explain the recent trades workflow",
+        "What methods do I need for recent trades?"
       ]
     }
   },
@@ -1596,7 +1692,8 @@
         "pool-graduation",
         "error-handling",
         "local-calculations",
-        "trading-analytics"
+        "trading-analytics",
+        "trading-quotes"
       ]
     },
     "pools": {
@@ -1614,8 +1711,7 @@
       "label": "Balances",
       "topics": [
         "balances",
-        "profile-management",
-        "account-management"
+        "profile-management"
       ]
     },
     "utils": {
@@ -1630,7 +1726,9 @@
         "mcp-to-sdk-mapping",
         "graduation-detection",
         "ai-moderation",
-        "oembed"
+        "oembed",
+        "events-tracking",
+        "global-bans"
       ]
     },
     "wallet": {
@@ -1680,7 +1778,8 @@
       "label": "Chat",
       "topics": [
         "event-subscriptions",
-        "stream-chat"
+        "stream-chat",
+        "global-feed-subscription"
       ]
     },
     "bridge": {
@@ -1747,7 +1846,8 @@
     "trades": {
       "label": "Trade History",
       "topics": [
-        "trade-history"
+        "trade-history",
+        "recent-trades"
       ]
     },
     "token-ban": {
@@ -1955,7 +2055,7 @@
         },
         {
           "role": "assistant",
-          "content": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n"
+          "content": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n### Engagement Stats Updates (v8.5.0+)\n\n```typescript\n// Subscribe to engagement stats updates for a token stream\n// Fires every ~15 seconds when chat activity occurs\nawait sdk.connectStreamWebSocket();\nawait sdk.authenticateStreamWebSocket('jwt-token');\nawait sdk.subscribeToStream('anime');\n\n// Register global engagement stats callback\nconst unsubscribe = sdk.onEngagementStatsUpdated((event) => {\n  console.log(`${event.tokenName}: ${event.chat.messageCount} chat messages`);\n  console.log(`Unique chatters: ${event.chat.uniqueChatters}`);\n  console.log(`Comments: ${event.comments.count} from ${event.comments.uniqueCommenters} users`);\n});\n\n// Clean up when done\nunsubscribe();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n- `gala_launchpad_on_engagement_stats_updated`\n"
         }
       ]
     },
@@ -2318,35 +2418,6 @@
       ]
     },
     {
-      "topicKey": "account-management",
-      "label": "Account management",
-      "category": "balance",
-      "description": "Balance queries and portfolio management",
-      "methodCount": 1,
-      "exchanges": [
-        {
-          "userQuestion": "How do I manage your account?",
-          "assistantResponse": "\n# Account Management\n\nThe SDK provides methods for account registration and management.\n\n## Register Account\n\nRegister an account for trading on Gala. This should be called before the first purchase\nto ensure the wallet is ready for trading operations.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nasync function registerAccount() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // Register the SDK wallet\n  const result = await sdk.registerAccount();\n\n  // Register a specific address\n  const otherResult = await sdk.registerAccount({\n    address: '0x1234...'  // Supports eth|, 0x, or client| formats\n  });\n\n}\n```\n\n**Response Structure:**\n```typescript\ninterface RegisterAccountResult {\n  exists: boolean;       // Whether account is registered\n  walletAlias: string;   // Normalized wallet alias (client|...)\n}\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_register_account`\n"
-        },
-        {
-          "userQuestion": "What parameters does registerAccount() accept?",
-          "assistantResponse": "The primary methods for Account management are `registerAccount()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for manage your account?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
-        },
-        {
-          "userQuestion": "What should I learn next after manage your account?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for manage your account?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
       "topicKey": "balances",
       "label": "Balances",
       "category": "balance",
@@ -2540,11 +2611,11 @@
       "label": "Event subscriptions",
       "category": "chat",
       "description": "Stream chat and messaging",
-      "methodCount": 33,
+      "methodCount": 34,
       "exchanges": [
         {
           "userQuestion": "How do I subscribe to real-time events?",
-          "assistantResponse": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n"
+          "assistantResponse": "\n## Real-Time Event Subscriptions and Monitoring\n\n**Covers Methods:**\n- `subscribeToDexLiquidityAdded()`\n- `subscribeToDexLiquidityChanged()`\n- `subscribeToDexLiquidityRemoved()`\n- `subscribeToDexPoolAdded()`\n- `subscribeToDexSwapExecuted()`\n- `subscribeToTokenCreations()`\n\nSubscribe to real-time WebSocket events for DEX trading, liquidity changes, and token launches.\n\n```typescript\nimport { createLaunchpadSDK, compareAmounts } from '@gala-chain/launchpad-sdk';\n\nasync function subscribeToEvents() {\n  const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n  // ============================================================================\n  // LIQUIDITY EVENTS - Monitor position changes\n  // ============================================================================\n\n  // Subscribe to liquidity additions\n  const cleanupAdded = sdk.subscribeToDexLiquidityAdded((event) => {\n\n  });\n\n  // Subscribe to liquidity changes (compound events)\n  const cleanupChanged = sdk.subscribeToDexLiquidityChanged((event) => {\n\n  });\n\n  // Subscribe to liquidity removals\n  const cleanupRemoved = sdk.subscribeToDexLiquidityRemoved((event) => {\n\n  });\n\n  // ============================================================================\n  // POOL EVENTS - Monitor new DEX pools\n  // ============================================================================\n\n  // Subscribe to new DEX pool creation\n  const cleanupPool = sdk.subscribeToDexPoolAdded((pool) => {\n\n    // Auto-provide liquidity to new pools\n    sdk.addSwapLiquidityByPrice({\n      token0: pool.token0,\n      token1: pool.token1,\n      fee: pool.feeTier,\n      minPrice: '0.95',\n      maxPrice: '1.05',\n      amount0Desired: '1000',\n      amount1Desired: '1000'\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // SWAP EVENTS - Monitor all DEX swaps\n  // ============================================================================\n\n  // Subscribe to DEX swap executions\n  const cleanupSwap = sdk.subscribeToDexSwapExecuted((swap) => {\n\n    // Track volume and price impact\n    const priceImpact = calculatePriceImpact(swap.amountIn, swap.amountOut);\n\n  });\n\n  // ============================================================================\n  // TOKEN CREATION EVENTS - Monitor new token launches\n  // ============================================================================\n\n  // Subscribe to new token launches\n  const cleanupToken = sdk.subscribeToTokenCreations((token) => {\n\n    // Auto-buy new tokens\n    sdk.buy({\n      tokenName: token.tokenName,\n      amount: '100',\n      type: 'native',\n      slippageToleranceFactor: 0.01\n    }).then(() => );\n  });\n\n  // ============================================================================\n  // ARBITRAGE BOT EXAMPLE - Multi-event monitoring\n  // ============================================================================\n\n  async function arbitrageBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Track all swaps for arbitrage opportunities\n    sdk.subscribeToDexSwapExecuted(async (swap) => {\n      // Check if price divergence exists\n      const poolPrice = await sdk.getSwapPoolPrice(swap.tokenIn, swap.tokenOut);\n      const externalPrice = await getExternalPrice(swap.tokenIn, swap.tokenOut);\n\n      const divergence = Math.abs(poolPrice - externalPrice) / externalPrice;\n\n      if (divergence > 0.01) {\n        // 1% arbitrage opportunity\n\n        // Execute arbitrage trade\n        await sdk.executeSwap(\n          swap.tokenOut,\n          swap.tokenIn,\n          calculateArbitrageAmount(divergence),\n          '0', // min output\n          3000, // fee tier\n          0.01 // slippage\n        );\n      }\n    });\n\n    // Monitor liquidity additions for new opportunities\n    sdk.subscribeToDexLiquidityAdded(async (event) => {\n\n      // Check if pool has sufficient depth for arbitrage\n      const poolInfo = await sdk.getSwapPoolInfo(event.token0, event.token1);\n      // Use compareAmounts for precise liquidity threshold comparison\n      if (compareAmounts(poolInfo.liquidity, '100000') > 0) {\n\n      }\n    });\n  }\n\n  // ============================================================================\n  // LIQUIDITY PROVIDER BOT - Auto-manage positions\n  // ============================================================================\n\n  async function liquidityProviderBot() {\n    const sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n    // Auto-add liquidity to new pools\n    sdk.subscribeToDexPoolAdded(async (pool) => {\n\n      // Wait for some initial swaps to establish price\n      setTimeout(async () => {\n        const poolInfo = await sdk.getSwapPoolInfo(pool.token0, pool.token1);\n\n        // Add liquidity if TVL is high enough\n        // Use compareAmounts for precise liquidity threshold comparison\n        if (compareAmounts(poolInfo.liquidity, '50000') > 0) {\n          await sdk.addSwapLiquidityByPrice({\n            token0: pool.token0,\n            token1: pool.token1,\n            fee: pool.feeTier,\n            minPrice: '0.9',\n            maxPrice: '1.1',\n            amount0Desired: '10000',\n            amount1Desired: '10000'\n          });\n\n        }\n      }, 60000); // Wait 1 minute\n    });\n\n    // Monitor liquidity removals (potential exit signal)\n    sdk.subscribeToDexLiquidityRemoved((event) => {\n\n      // Check if we should also exit\n      if (isLargeRemoval(event)) {\n\n      }\n    });\n  }\n\n  // Keep subscriptions running\n\n  await new Promise(() => {}); // Run forever\n\n  // Cleanup when done\n  cleanupAdded();\n  cleanupChanged();\n  cleanupRemoved();\n  cleanupPool();\n  cleanupSwap();\n  cleanupToken();\n}\n```\n\n**Event Data Structures:**\n\n**LiquidityAdded:**\n- token0, token1, feeTier\n- amount0, amount1\n- owner, positionId\n- timestamp\n\n**LiquidityRemoved:**\n- token0, token1, feeTier\n- amount0, amount1\n- fees0, fees1\n- owner, positionId\n- timestamp\n\n**DexPoolAdded:**\n- tokenName, token0, token1\n- feeTier, TVL\n- timestamp\n\n**SwapExecuted:**\n- tokenIn, tokenOut\n- amountIn, amountOut\n- trader, feeTier\n- priceImpact\n- timestamp\n\n**TokenCreation:**\n- tokenName, tokenSymbol\n- creator, maxSupply\n- basePrice\n- timestamp\n\n**Use Cases:**\n- **Arbitrage Bots**: Monitor swaps for price divergence\n- **Liquidity Management**: Auto-provide liquidity to new pools\n- **Early Bird Trading**: Buy new tokens immediately after launch\n- **Position Monitoring**: Track liquidity changes in your positions\n- **Market Analysis**: Analyze trading patterns and volumes\n\n### WebSocket Connection Lifecycle\n\n```typescript\n// Handle connection lifecycle events\nawait sdk.connectStreamWebSocket({\n  onConnect: () => {\n\n  },\n  onDisconnect: (reason) => {\n\n    // Implement reconnection logic if needed\n  },\n  onError: (error) => {\n    console.error('WebSocket error:', error);\n  }\n});\n\n// Check connection state\nif (sdk.isStreamWebSocketConnected()) {\n\n}\n```\n\n### Typing Indicators\n\n```typescript\n// Subscribe to typing indicators in chat\nawait sdk.connectStreamWebSocket({\n  onTypingIndicator: (event) => {\n    if (event.isTyping) {\n\n    } else {\n\n    }\n  }\n});\n\n// Send typing start indicator\nawait sdk.sendTypingStart({\n  tokenName: 'anime'\n});\n\n// Later: Send typing stop indicator\nawait sdk.sendTypingStop({\n  tokenName: 'anime'\n});\n```\n\n### Engagement Stats Updates (v8.5.0+)\n\n```typescript\n// Subscribe to engagement stats updates for a token stream\n// Fires every ~15 seconds when chat activity occurs\nawait sdk.connectStreamWebSocket();\nawait sdk.authenticateStreamWebSocket('jwt-token');\nawait sdk.subscribeToStream('anime');\n\n// Register global engagement stats callback\nconst unsubscribe = sdk.onEngagementStatsUpdated((event) => {\n  console.log(`${event.tokenName}: ${event.chat.messageCount} chat messages`);\n  console.log(`Unique chatters: ${event.chat.uniqueChatters}`);\n  console.log(`Comments: ${event.comments.count} from ${event.comments.uniqueCommenters} users`);\n});\n\n// Clean up when done\nunsubscribe();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_subscribe_to_dex_liquidity_added`\n- `gala_launchpad_subscribe_to_dex_liquidity_changed`\n- `gala_launchpad_subscribe_to_dex_liquidity_removed`\n- `gala_launchpad_subscribe_to_dex_pool_added`\n- `gala_launchpad_subscribe_to_dex_swap_executed`\n- `gala_launchpad_subscribe_to_token_creations`\n- `gala_launchpad_on_engagement_stats_updated`\n"
         },
         {
           "userQuestion": "What parameters does subscribeToStream() accept?",
@@ -2560,7 +2631,7 @@
         },
         {
           "userQuestion": "What other methods are available for Event subscriptions?",
-          "assistantResponse": "**Additional Methods:**\n\n- `onUserBanned()`\n- `onUserUnbanned()`\n- `onBanEnforcement()`\n- `onContentFlagged()`\n\n**Total methods in this topic:** 33\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+          "assistantResponse": "**Additional Methods:**\n\n- `onUserBanned()`\n- `onUserUnbanned()`\n- `onBanEnforcement()`\n- `onContentFlagged()`\n\n**Total methods in this topic:** 34\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
         },
         {
           "userQuestion": "What should I learn next after subscribe to real-time events?",
@@ -2569,6 +2640,35 @@
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
           "assistantResponse": "**Advanced Patterns:**\n\n1. **Batching**: Combine multiple operations for efficiency\n2. **Caching**: Cache frequently-accessed data locally\n3. **Event-Driven**: Use subscriptions for real-time updates\n4. **Error Recovery**: Implement retry logic with exponential backoff\n5. **Monitoring**: Track operation success rates and latencies\n\n**Performance Tip:** For high-volume operations, consider using the local calculation methods where available to reduce network calls."
+        }
+      ]
+    },
+    {
+      "topicKey": "global-feed-subscription",
+      "label": "Global feed subscription",
+      "category": "chat",
+      "description": "Stream chat and messaging",
+      "methodCount": 1,
+      "exchanges": [
+        {
+          "userQuestion": "How do I global feed subscription?",
+          "assistantResponse": "\n## Global Feed Reference Tools (MCP Documentation)\n\nThe global feed reference tools are **documentation/reference tools** in the MCP server, not\ndirect SDK API methods. They explain how to monitor platform-wide events (trades, token launches,\npool creations) via WebSocket subscriptions.\n\n**MCP Reference Tools:**\n- `gala_launchpad_global_feed_reference` — Overview of all global feed event types\n- `gala_launchpad_global_feed_status_reference` — Connection and authentication status patterns\n- `gala_launchpad_monitor_global_feed_events_reference` — Code examples for monitoring events\n- `gala_launchpad_site_config_state_reference` — Site configuration state management\n- `gala_launchpad_unsubscribe_from_global_feed_reference` — Cleanup patterns\n\n**SDK Equivalent (Direct Usage):**\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ wallet: 'your-private-key' });\n\n// Subscribe to token creation events globally\nconst unsubscribeLaunch = sdk.onLaunchpadTokenCreation((token) => {\n  console.log('New token launched:', token.tokenName);\n});\n\n// Subscribe to DEX pool creation events\nconst unsubscribePool = sdk.onDexPoolCreation((pool) => {\n  console.log('New DEX pool:', pool.token0, '/', pool.token1);\n});\n\n// Subscribe to stream WebSocket for token-level events\nawait sdk.connectStreamWebSocket();\nawait sdk.authenticateStreamWebSocket('jwt-token');\nawait sdk.subscribeToStream('anime', {\n  onTradeExecuted: (trade) => console.log('Trade:', trade),\n  onStreamStatusChanged: (status) => console.log('Status:', status),\n});\n\n// Clean up\nunsubscribeLaunch();\nunsubscribePool();\n```\n\n**Related Topics:** `event-subscriptions`, `streaming`, `stream-chat`\n"
+        },
+        {
+          "userQuestion": "What parameters does subscribeToStream() accept?",
+          "assistantResponse": "The primary methods for Global feed subscription are `subscribeToStream()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for global feed subscription?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after global feed subscription?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for global feed subscription?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
     },
@@ -3216,27 +3316,31 @@
       "label": "Holders",
       "category": "pools",
       "description": "Pool management, pricing, and token availability",
-      "methodCount": 2,
+      "methodCount": 7,
       "exchanges": [
         {
           "userQuestion": "How do I holders?",
-          "assistantResponse": "\n## Token Holder Data with SDK\n\n**Covers Methods (via MCP tools):**\n- `gala_launchpad_get_holder_rank` - Get rank of a specific holder\n- `gala_launchpad_get_top_holders` - Get top N token holders\n- `gala_launchpad_get_holder_count` - Get total holder count and statistics\n- `gala_launchpad_get_holders_by_balance` - Get holders in a balance range\n- `gala_launchpad_get_holder_history` - Get holder count over time\n\nThese tools derive holder insights from `fetchTokenDistribution()` and `getTrades()` SDK methods.\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Underlying SDK method for holder data\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\n// Find rank of a specific holder\nconst holder = distribution.holders.find(\n  (h) => h.address === 'eth|0x1234...'\n);\nconsole.log('Holder rank:', distribution.holders.indexOf(holder) + 1);\nconsole.log('Balance:', holder?.balance);\nconsole.log('Percentage:', holder?.percentage);\n```\n\n### Get Top Holders\n\n```typescript\n// Get top holders list\nconst distribution = await sdk.fetchTokenDistribution('anime');\n\nconst top10 = distribution.holders.slice(0, 10);\ntop10.forEach((holder, i) => {\n  console.log(`#${i + 1}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Whale Detection\n\n```typescript\nasync function detectWhales(tokenName: string, threshold = 5) {\n  const distribution = await sdk.fetchTokenDistribution(tokenName);\n\n  const whales = distribution.holders.filter(\n    (h) => parseFloat(h.percentage) >= threshold\n  );\n\n  return {\n    whaleCount: whales.length,\n    whalePercentage: whales.reduce((sum, h) => sum + parseFloat(h.percentage), 0),\n    topWhale: whales[0],\n  };\n}\n\nconst analysis = await detectWhales('anime', 5);\nconsole.log('Whale analysis:', analysis);\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`\n"
+          "assistantResponse": "\n## Token Holder Data with SDK\n\n**Covers Methods:**\n- `getTopHolders(tokenName, limit?)` - Get top N token holders by balance (v9.2.0+)\n- `getHolderCount(tokenName)` - Get total holder count and combined balance (v9.2.0+)\n- `getHolderRank(tokenName, userAddress)` - Get a user's rank and balance (v9.2.0+)\n- `getHoldersByBalance(tokenName, options?)` - Filter holders by balance range (v9.2.0+)\n- `getHolderHistory(tokenName, userAddress, limit?)` - Get a holder's trade history (v9.2.0+)\n- `fetchTokenDistribution(tokenName)` - Raw distribution data (used internally by the above)\n\n### Check Holder Rank\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Direct SDK convenience method (v9.2.0+)\nconst rank = await sdk.getHolderRank('anime', 'eth|0x1234...');\nif (rank) {\n  console.log(`Rank #${rank.rank} of ${rank.holderCount} holders`);\n  console.log(`Balance: ${rank.balance}`);\n} else {\n  console.log('User holds no tokens');\n}\n```\n\n### Get Top Holders\n\n```typescript\n// Get top 10 holders with rank enrichment\nconst top10 = await sdk.getTopHolders('anime', 10);\ntop10.forEach((holder) => {\n  console.log(`#${holder.rank}: ${holder.address} - ${holder.balance} tokens (${holder.percentage}%)`);\n});\n```\n\n### Holder Statistics\n\n```typescript\nconst { count, totalBalance } = await sdk.getHolderCount('anime');\nconsole.log(`${count} holders, total supply: ${totalBalance}`);\n```\n\n### Filter Holders by Balance (Whale Detection)\n\n```typescript\n// Find all holders with ≥10,000 tokens\nconst whales = await sdk.getHoldersByBalance('anime', { minBalance: 10000 });\nconsole.log(`${whales.length} whales hold ≥10,000 tokens`);\nconsole.log('Top whale:', whales[0]?.address);\n```\n\n### Get a Holder's Trade History\n\n```typescript\n// Get last 20 trades for a specific holder\nconst history = await sdk.getHolderHistory('anime', 'eth|0x1234...', 20);\nhistory.trades.forEach((t) => {\n  console.log(`${t.txnType}: ${t.inputAmount} → ${t.outputAmount} at ${t.createdAt}`);\n});\n```\n\n**Related Topics:** `token-distribution`, `token-details`, `trading-analytics`, `recent-trades`\n"
         },
         {
           "userQuestion": "What parameters does fetchTokenDistribution() accept?",
-          "assistantResponse": "The primary methods for Holders are `fetchTokenDistribution()`, `getTrades()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+          "assistantResponse": "The primary methods for Holders are `fetchTokenDistribution()`, `getTrades()`, `getTopHolders()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
         },
         {
           "userQuestion": "What are best practices for holders?",
           "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
         },
         {
-          "userQuestion": "What should I learn next after holders?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "userQuestion": "Can you walk me through a complete holders example?",
+          "assistantResponse": "**Complete Workflow: Holders**\n\nHere's the typical flow: `fetchTokenDistribution()` → `getTrades()` → `getTopHolders()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
         },
         {
-          "userQuestion": "Any final tips for holders?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+          "userQuestion": "What other methods are available for Holders?",
+          "assistantResponse": "**Additional Methods:**\n\n- `getHolderCount()`\n- `getHolderRank()`\n- `getHoldersByBalance()`\n- `getHolderHistory()`\n\n**Total methods in this topic:** 7\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after holders?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3497,11 +3601,40 @@
       ]
     },
     {
+      "topicKey": "recent-trades",
+      "label": "Recent trades",
+      "category": "trades",
+      "description": "View and analyze trading history",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I recent trades?",
+          "assistantResponse": "\n## Recent Trades Query (v9.2.0+)\n\n**Covers Methods:**\n- `getRecentTrades(tokenName?, limit?)` — Get most recent trades (convenience wrapper)\n- `getTrades(options)` — Full paginated trades query with all filter options\n\n`getRecentTrades` is a convenience wrapper around `getTrades` for quick access to recent\nmarket activity. Use `getTrades` directly for advanced filtering (date ranges, addresses, etc.).\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// Get 50 most recent trades across all tokens\nconst { trades } = await sdk.getRecentTrades();\ntrades.forEach((t) => {\n  console.log(`${t.tokenName} ${t.txnType}: ${t.inputAmount} → ${t.outputAmount}`);\n});\n\n// Get last 10 trades for a specific token\nconst { trades: animeTrades } = await sdk.getRecentTrades('anime', 10);\nconsole.log(`Last 10 anime trades:`, animeTrades.length);\n\n// Advanced filtering with getTrades()\nconst { trades: filteredTrades, pageInfo } = await sdk.getTrades({\n  tokenName: 'anime',\n  txnType: 'BUY',\n  startDate: '2025-01-01',\n  endDate: '2025-01-31',\n  pageSize: 20,\n});\nconsole.log(`Page ${pageInfo.currentPage} of ${pageInfo.totalPages}`);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_recent_trades` — Recent trades with optional filtering\n- `gala_launchpad_get_trades` — Full trades query\n\n**Related Topics:** `trading-analytics`, `trade-history`, `holders`\n"
+        },
+        {
+          "userQuestion": "What parameters does getRecentTrades() accept?",
+          "assistantResponse": "The primary methods for Recent trades are `getRecentTrades()`, `getTrades()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for recent trades?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after recent trades?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for recent trades?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
       "topicKey": "trade-history",
       "label": "Trade history",
       "category": "trades",
       "description": "View and analyze trading history",
-      "methodCount": 1,
+      "methodCount": 2,
       "exchanges": [
         {
           "userQuestion": "How do I view trading history?",
@@ -3509,7 +3642,7 @@
         },
         {
           "userQuestion": "What parameters does getTrades() accept?",
-          "assistantResponse": "The primary methods for Trade history are `getTrades()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+          "assistantResponse": "The primary methods for Trade history are `getTrades()`, `getRecentTrades()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
         },
         {
           "userQuestion": "What are best practices for view trading history?",
@@ -3720,6 +3853,35 @@
       ]
     },
     {
+      "topicKey": "trading-quotes",
+      "label": "Trading quotes",
+      "category": "trading",
+      "description": "Buy, sell, and calculate token amounts",
+      "methodCount": 4,
+      "exchanges": [
+        {
+          "userQuestion": "How do I trading quotes?",
+          "assistantResponse": "\n## Trading Quotes via Backend Proxy (v9.1.0+)\n\n**Covers Methods:**\n- `fetchLaunchpadFee()` — Backend-cached launchpad fee (1h TTL, @Public)\n- `fetchSaleDetails(tokenName)` — Backend-cached token sale details (10s TTL, @Public)\n- `getTradeQuote(params)` — Instant quote via local bonding curve math (no chain call, @Public)\n- `getPremintQuote(amount)` — Pre-mint quote assuming zero supply (token creation flow, @Public)\n\nAll endpoints are @Public() — no authentication required. These replace the deprecated\n`calculateBuyAmountExternal()` / `calculateSellAmountExternal()` chain-direct methods.\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK();\n\n// 1. Fetch current launchpad fee (cached 1h on backend)\nconst fee = await sdk.fetchLaunchpadFee();\nconsole.log(`Launchpad fee: ${fee} GALA`);\n\n// 2. Fetch token sale details (cached 10s on backend)\nconst details = await sdk.fetchSaleDetails('anime');\nconsole.log(`Supply: ${details.sellingTokenQuantity} / ${details.maxSupply}`);\nconsole.log(`Status: ${details.saleStatus}`);\n\n// 3. Get a buy quote: how many tokens for 100 GALA?\nconst buyQuote = await sdk.getTradeQuote({\n  tokenName: 'anime',\n  amount: '100',\n  type: 'NATIVE',  // GALA input\n  method: 'IN',   // spending this amount\n});\nconsole.log(`You will receive: ${buyQuote.amount} tokens`);\nconsole.log(`Fee: ${buyQuote.reverseBondingCurveFee} GALA`);\n\n// 4. Get a sell quote: how much GALA for 500 tokens?\nconst sellQuote = await sdk.getTradeQuote({\n  tokenName: 'anime',\n  amount: '500',\n  type: 'MEME',   // token input\n  method: 'IN',  // selling this amount\n});\nconsole.log(`You will receive: ${sellQuote.amount} GALA`);\n\n// 5. Pre-mint quote for token creation flow (supply = 0)\nconst premintQuote = await sdk.getPremintQuote('500');\nconsole.log(`Initial purchase will yield: ${premintQuote.amount} tokens`);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_launch_token_fee`\n- `gala_launchpad_calculate_buy_amount_local`\n\n**Related Topics:** `buy-tokens`, `sell-tokens`, `local-calculations`\n"
+        },
+        {
+          "userQuestion": "What parameters does fetchLaunchpadFee() accept?",
+          "assistantResponse": "The primary methods for Trading quotes are `fetchLaunchpadFee()`, `fetchSaleDetails()`, `getTradeQuote()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for trading quotes?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete trading quotes example?",
+          "assistantResponse": "**Complete Workflow: Trading quotes**\n\nHere's the typical flow: `fetchLaunchpadFee()` → `fetchSaleDetails()` → `getTradeQuote()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after trading quotes?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "transfers",
       "label": "Transfers",
       "category": "transfers",
@@ -3777,6 +3939,64 @@
         },
         {
           "userQuestion": "What should I learn next after ai moderation?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "events-tracking",
+      "label": "Events tracking",
+      "category": "utils",
+      "description": "SDK configuration and helpers",
+      "methodCount": 1,
+      "exchanges": [
+        {
+          "userQuestion": "How do I events tracking?",
+          "assistantResponse": "\n## Client-Side Events Tracking (v8.2.0+)\n\n**Covers Methods:**\n- `sdk.events.track(eventType, payload, options?)` — Track an event (client-side batching)\n- `sdk.events.flush()` — Manually flush buffered events to backend\n- `sdk.events.getStats()` — Get buffering statistics\n- `sdk.events.shutdown(timeoutMs?)` — Graceful shutdown with final flush\n- `queryEvents(options)` — Query historical events (overseer only)\n\nEvents are batched client-side and flushed automatically on time (3s) or size (20 events) thresholds.\nThe backend accepts batches via POST /v1/events, persists via RabbitMQ → MySQL, and broadcasts\nto the WebSocket firehose for real-time overseer monitoring.\n\n```typescript\nimport { createLaunchpadSDK, EVENT_TYPES } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({\n  wallet: 'your-private-key',\n  events: {\n    batchSize: 20,           // Flush after 20 events (default)\n    flushIntervalMs: 3000,   // Or after 3 seconds (default)\n    maxQueueSize: 1000       // Drop oldest if queue exceeds (default)\n  }\n});\n\n// Track trading events\nsdk.events.track(EVENT_TYPES.TOKEN_BUY, {\n  tokenName: 'anime',\n  amount: '100',\n  price: '0.05'\n});\n\nsdk.events.track(EVENT_TYPES.TOKEN_SELL, {\n  tokenName: 'anime',\n  amount: '50'\n});\n\n// Track page navigation\nsdk.events.track(EVENT_TYPES.PAGE_VIEW, {\n  path: '/tokens/anime',\n  referrer: 'homepage'\n});\n\n// Force immediate send for critical events\nawait sdk.events.track(EVENT_TYPES.LOGIN, { userAddress: 'eth|0x...' }, { immediate: true });\n\n// Get buffering statistics\nconst stats = sdk.events.getStats();\nconsole.log(`Buffered: ${stats.buffered}, Sent: ${stats.flushed}`);\n\n// Manually flush before page unload\nawait sdk.events.flush();\n\n// Graceful shutdown (waits up to 5 seconds)\nawait sdk.events.shutdown(5000);\n\n// Query historical events (overseer only)\nconst events = await sdk.queryEvents({\n  tokenName: 'anime',\n  eventTypes: ['TOKEN_BUY', 'TOKEN_SELL'],\n  startDate: '2025-01-20T00:00:00Z',\n  limit: 50\n});\nconsole.log(`Found ${events.items.length} events`);\n```\n\n**Available EVENT_TYPES Constants:**\n- `LOGIN`, `LOGOUT`\n- `TOKEN_BUY`, `TOKEN_SELL`, `TOKEN_SWAP`\n- `STREAM_START`, `STREAM_END`\n- `CHAT_MESSAGE_SENT`, `COMMENT_CREATED`\n- `PAGE_VIEW`, `PAGE_LEAVE`\n\n**Related Topics:** `stream-chat`, `streaming`, `overseer-invites`\n"
+        },
+        {
+          "userQuestion": "What parameters does queryEvents() accept?",
+          "assistantResponse": "The primary methods for Events tracking are `queryEvents()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for events tracking?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "What should I learn next after events tracking?",
+          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for events tracking?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "global-bans",
+      "label": "Global bans",
+      "category": "utils",
+      "description": "SDK configuration and helpers",
+      "methodCount": 4,
+      "exchanges": [
+        {
+          "userQuestion": "How do I global bans?",
+          "assistantResponse": "\n## Global Ban Management (Platform-wide, Overseer Only)\n\n**Covers Methods:**\n- `createGlobalBan(options)` — Create a platform-wide ban for a user address\n- `removeGlobalBan(options)` — Remove a global ban\n- `listGlobalBans(options?)` — List all platform-wide bans with pagination\n- `getGlobalBan(options)` — Check if a specific user is globally banned\n\n**Authentication:** All methods require overseer JWT session or admin API key.\n\n**Distinction from Per-Token Bans:**\n- **Global bans** (`createGlobalBan`) — Platform-wide, applied to ALL tokens\n- **Per-token bans** (`createBan`) — Scoped to a specific token's chat/moderation\n\n```typescript\nimport { createLaunchpadSDK } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ wallet: 'overseer-private-key' });\n\n// Create a global ban (platform-wide)\nconst ban = await sdk.createGlobalBan({\n  userAddress: 'eth|0x1234...',\n  reason: 'Repeated platform policy violations',\n  expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days\n});\nconsole.log('Global ban created:', ban.id);\n\n// Check if a user is globally banned\nconst banStatus = await sdk.getGlobalBan({ userAddress: 'eth|0x1234...' });\nif (banStatus) {\n  console.log(`Banned until: ${banStatus.expiresAt ?? 'permanent'}`);\n  console.log(`Reason: ${banStatus.reason}`);\n}\n\n// List all global bans (paginated)\nconst bans = await sdk.listGlobalBans({ page: 1, limit: 20 });\nconsole.log(`${bans.meta.totalItems} total global bans`);\nbans.items.forEach((b) => {\n  console.log(`${b.userAddress}: ${b.reason}`);\n});\n\n// Remove a global ban\nawait sdk.removeGlobalBan({ userAddress: 'eth|0x1234...' });\nconsole.log('Global ban removed');\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_create_ban` (global scope)\n- `gala_launchpad_remove_ban` (global scope)\n- `gala_launchpad_list_global_flags`\n\n**Related Topics:** `ban-management`, `overseer-invites`, `content-flag-management`\n"
+        },
+        {
+          "userQuestion": "What parameters does createGlobalBan() accept?",
+          "assistantResponse": "The primary methods for Global bans are `createGlobalBan()`, `removeGlobalBan()`, `listGlobalBans()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for global bans?",
+          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete global bans example?",
+          "assistantResponse": "**Complete Workflow: Global bans**\n\nHere's the typical flow: `createGlobalBan()` → `removeGlobalBan()` → `listGlobalBans()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after global bans?",
           "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]

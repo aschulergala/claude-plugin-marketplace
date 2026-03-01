@@ -15,7 +15,7 @@ arguments:
 
 # GalaChain Ask Command
 
-Ask any question about GalaChain development. The system automatically maps your question to the 59 built-in teaching topics and provides comprehensive answers.
+Ask any question about GalaChain development. The system automatically maps your question to the 63 built-in teaching topics and provides comprehensive answers.
 
 ## Usage Examples
 
@@ -37,16 +37,16 @@ Ask any question about GalaChain development. The system automatically maps your
 
 ## Supported Topics
 
-The system recognizes all 59 teaching topics:
+The system recognizes all 63 teaching topics:
 
-### Trading (6)
-buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics
+### Trading (7)
+buy-tokens, sell-tokens, pool-graduation, error-handling, local-calculations, trading-analytics, trading-quotes
 
-### Pools & Token Info (5)
-fetch-pools, token-details, token-distribution, price-history, token-identification
+### Pools & Token Info (6)
+fetch-pools, token-details, token-distribution, price-history, token-identification, holders
 
-### Balances & Accounts (3)
-balances, profile-management, account-management
+### Balances & Accounts (2)
+balances, profile-management
 
 ### Token Operations (4)
 token-creation, token-status, transfers, locks
@@ -57,29 +57,29 @@ dex-trading, dex-token-discovery
 ### DEX Pools & Liquidity (3)
 fetch-dex-pools, liquidity-positions, advanced-dex-analysis
 
-### DEX Analytics (5)
-fetch-all-dex-seasons, fetch-current-dex-season, fetch-dex-leaderboard-by-season-id, fetch-current-dex-leaderboard, fetch-dex-aggregated-volume-summary
+### DEX Analytics (6)
+fetch-all-dex-seasons, fetch-current-dex-season, fetch-dex-leaderboard-by-season-id, fetch-current-dex-leaderboard, fetch-dex-aggregated-volume-summary, weekly-challenge
 
 ### Bridging (2)
 bridge-operations, wrap-unwrap-operations
 
-### Streaming & Chat (2)
-streaming, stream-chat
+### Streaming & Chat (3)
+streaming, stream-chat, messages
 
-### Community & Moderation (5)
-ban-management, content-flag-management, content-reactions, moderator-invites, token-ban-management
+### Community & Moderation (8)
+ban-management, global-bans, content-flag-management, content-reactions, moderator-invites, token-ban-management, ai-moderation, global-feed-subscription
 
-### Governance & Admin (3)
-overseer-invites, api-key-management, event-subscriptions
+### Governance & Admin (5)
+overseer-invites, api-key-management, event-subscriptions, restricted-names, websocket-admin
 
 ### Wallet & Auth (2)
 multi-wallet, session-auth
 
-### Utilities & Reference (6)
-installation, spot-prices-smart-routing, utilities-and-helpers, utilities-system, mcp-to-sdk-mapping, graduation-detection
+### Utilities & Reference (9)
+installation, spot-prices-smart-routing, utilities-and-helpers, utilities-system, mcp-to-sdk-mapping, graduation-detection, platform-stats, oembed, events-tracking
 
-### Referrals, Trade History, NFTs (3)
-referral-system, trade-history, nft-collection-management
+### Trade History & NFTs (4)
+referral-system, trade-history, recent-trades, nft-collection-management
 
 ## How It Works
 
@@ -104,7 +104,7 @@ Each response includes:
 - **Concept explanation** - What this feature does and why it matters
 - **When to use** - Real-world scenarios and use cases
 - **Code example** - Working TypeScript example with your SDK
-- **MCP Tool equivalent** - How to use the 307-tool MCP server
+- **MCP Tool equivalent** - How to use the 310-tool MCP server
 - **Key parameters** - Important options and what they do
 - **Common pitfalls** - Things people get wrong
 - **Related topics** - Suggested follow-up learning
@@ -207,7 +207,7 @@ $ /omni-tool:ask I want to move GALA to Ethereum
 
 ## Next Steps
 
-- Try `/omni-tool:topics` to browse all 59 topics
+- Try `/omni-tool:topics` to browse all 63 topics
 - Run `/omni-tool:setup` to configure your preferences
 - Ask the agent directly: "Help me build a trading bot"
 - Explore complete workflows with the skill: `learning-galachain`

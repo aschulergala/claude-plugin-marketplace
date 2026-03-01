@@ -2,7 +2,7 @@
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/launchpad-mcp-server"],
+      "args": ["-y", "@gala-chain/launchpad-mcp-server@beta"],
       "env": { "ENVIRONMENT": "qa1" }
     }
   }

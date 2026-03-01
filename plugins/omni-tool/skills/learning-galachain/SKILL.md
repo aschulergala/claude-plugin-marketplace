@@ -1,6 +1,6 @@
 ---
 name: learning-galachain
-description: Comprehensive learning system for GalaChain development with 59 topics and 307 SDK methods
+description: Comprehensive learning system for GalaChain development with 63 topics and 310 SDK methods
 triggers:
   - "How do I learn GalaChain?"
   - "Teach me about GalaChain"
@@ -17,7 +17,7 @@ Welcome! This skill teaches you everything about GalaChain development using our
 
 ## What You'll Learn
 
-The GalaChain OmniTool includes **59 carefully organized teaching topics** covering:
+The GalaChain OmniTool includes **63 carefully organized teaching topics** covering:
 
 - **Trading**: Buying, selling, graduation, analytics, error handling
 - **Pools & Info**: Pool discovery, token details, price history, distribution
@@ -34,7 +34,7 @@ The GalaChain OmniTool includes **59 carefully organized teaching topics** cover
 - **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat, unified messages
 - **Pools & Token Info**: Pool discovery, token details, price history, distribution, holders
 - **DEX Analytics**: Seasons, leaderboards, volume summaries, weekly challenges
-- **And more**: 307 SDK methods fully documented
+- **And more**: 310 SDK methods fully documented
 
 ## The Teaching System
 
@@ -46,7 +46,7 @@ The GalaChain OmniTool includes **59 carefully organized teaching topics** cover
 4. **Execute Safely** - Use MCP tools to practice what you learned
 5. **Build Confidence** - Move from concepts to real applications
 
-### The 59 Topics
+### The 63 Topics
 
 All topics are accessible via `/omni-tool:ask [topic]`:
 
@@ -239,7 +239,7 @@ Expert-level capabilities for sophisticated applications.
 
 ### 👑 Path 8: Mastery
 
-Complete all 59 topics and build a sophisticated application.
+Complete all 63 topics and build a sophisticated application.
 
 Recommended order:
 1. Complete Path 1: Trading Essentials
@@ -316,7 +316,7 @@ Recommended order:
 For every topic, we show you:
 
 1. **SDK code** - TypeScript examples using the SDK
-2. **MCP tool** - Equivalent command using the 307-tool MCP server
+2. **MCP tool** - Equivalent command using the 310-tool MCP server
 
 Example for "buy-tokens":
 ```typescript
@@ -358,17 +358,17 @@ Options:
 
 ### Commands
 - `/omni-tool:ask [topic]` - Learn about any topic
-- `/omni-tool:topics` - Browse all 59 topics
+- `/omni-tool:topics` - Browse all 63 topics
 - `/omni-tool:setup` - Configure your preferences
 
 ### Agent
 - `galachain-builder` - Ask the agent for help building apps
 
 ### Teaching Content
-- 59 comprehensive topics
-- 307 SDK methods documented
+- 63 comprehensive topics
+- 310 SDK methods documented
 - Hundreds of code examples
-- 307 MCP tools available
+- 310 MCP tools available
 
 ## Next Steps
 
@@ -377,7 +377,7 @@ Options:
 3. **Explore related topics** as suggested
 4. **Practice with MCP tools** to build confidence
 5. **Build your first project** combining multiple concepts
-6. **Master all 59 topics** and become a GalaChain expert
+6. **Master all 63 topics** and become a GalaChain expert
 
 ## Pro Tips
 
