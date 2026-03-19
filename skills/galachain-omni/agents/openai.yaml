@@ -1,0 +1,7 @@
+interface:
+  display_name: "GalaChain Omni"
+  short_description: "Learn and operate GalaChain from Codex."
+  default_prompt: "Use $galachain-omni to teach me GalaChain topics or configure the GalaChain MCP server."
+
+policy:
+  allow_implicit_invocation: true

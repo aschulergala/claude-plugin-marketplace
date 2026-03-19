@@ -1,0 +1,7 @@
+interface:
+  display_name: "GalaChain Builder"
+  short_description: "Build and operate GalaChain apps."
+  default_prompt: "Use $galachain-builder to plan or execute a GalaChain app workflow."
+
+policy:
+  allow_implicit_invocation: true
