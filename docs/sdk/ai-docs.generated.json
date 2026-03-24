@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "0.0.0",
-    "generatedAt": "2026-03-24T19:48:24.017Z",
+    "generatedAt": "2026-03-24T21:21:52.371Z",
     "toolCount": 312,
     "categoryCount": 38
   },
@@ -3978,6 +3978,7 @@
             "fetch-pools",
             "balances",
             "token-creation",
+            "wallet-connect",
             "multi-wallet",
             "transfers",
             "locks",
@@ -8857,6 +8858,17 @@
       ],
       "category": "utils"
     },
+    "wallet-connect": {
+      "key": "wallet-connect",
+      "label": "Wallet connect",
+      "description": "Wallet connect operations",
+      "methods": [
+        "getAddress",
+        "createWallet",
+        "getEthereumAddress"
+      ],
+      "category": "wallet"
+    },
     "multi-wallet": {
       "key": "multi-wallet",
       "label": "Multi wallet",
@@ -9985,11 +9997,12 @@
       "transfers",
       "utilities-and-helpers",
       "utilities-system",
+      "wallet-connect",
       "websocket-admin",
       "weekly-challenge",
       "wrap-unwrap-operations"
     ],
-    "topicCount": 63,
+    "topicCount": 64,
     "methodCount": 312,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   },
