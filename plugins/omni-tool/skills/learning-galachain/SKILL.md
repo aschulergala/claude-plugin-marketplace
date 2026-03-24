@@ -1,6 +1,6 @@
 ---
 name: learning-galachain
-description: Comprehensive learning system for GalaChain development with 63 topics and 310 SDK methods
+description: Comprehensive learning system for GalaChain development with 63 topics and 312 SDK methods
 triggers:
   - "How do I learn GalaChain?"
   - "Teach me about GalaChain"
@@ -34,7 +34,7 @@ The GalaChain OmniTool includes **63 carefully organized teaching topics** cover
 - **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat, unified messages
 - **Pools & Token Info**: Pool discovery, token details, price history, distribution, holders
 - **DEX Analytics**: Seasons, leaderboards, volume summaries, weekly challenges
-- **And more**: 310 SDK methods fully documented
+- **And more**: 312 SDK methods fully documented
 
 ## The Teaching System
 
@@ -316,7 +316,7 @@ Recommended order:
 For every topic, we show you:
 
 1. **SDK code** - TypeScript examples using the SDK
-2. **MCP tool** - Equivalent command using the 310-tool MCP server
+2. **MCP tool** - Equivalent command using the 312-tool MCP server
 
 Example for "buy-tokens":
 ```typescript
@@ -366,9 +366,9 @@ Options:
 
 ### Teaching Content
 - 63 comprehensive topics
-- 310 SDK methods documented
+- 312 SDK methods documented
 - Hundreds of code examples
-- 310 MCP tools available
+- 312 MCP tools available
 
 ## Next Steps
 

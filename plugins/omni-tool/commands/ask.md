@@ -104,7 +104,7 @@ Each response includes:
 - **Concept explanation** - What this feature does and why it matters
 - **When to use** - Real-world scenarios and use cases
 - **Code example** - Working TypeScript example with your SDK
-- **MCP Tool equivalent** - How to use the 310-tool MCP server
+- **MCP Tool equivalent** - How to use the 312-tool MCP server
 - **Key parameters** - Important options and what they do
 - **Common pitfalls** - Things people get wrong
 - **Related topics** - Suggested follow-up learning
