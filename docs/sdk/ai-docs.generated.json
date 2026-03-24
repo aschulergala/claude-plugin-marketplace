@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "0.0.0",
-    "generatedAt": "2026-03-24T19:23:49.229Z",
+    "generatedAt": "2026-03-24T19:48:24.017Z",
     "toolCount": 312,
     "categoryCount": 38
   },
@@ -3864,7 +3864,8 @@
       "description": "Create a new wallet with a random private key. Returns wallet address and private key. ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
       "authRequired": true,
-      "parameters": []
+      "parameters": [],
+      "topic": "multi-wallet"
     },
     "createSolanaWallet": {
       "name": "createSolanaWallet",
@@ -3873,7 +3874,8 @@
       "description": "Create a new Solana wallet with a random keypair. Returns wallet address and private key (base58 format). ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
       "authRequired": true,
-      "parameters": []
+      "parameters": [],
+      "topic": "multi-wallet"
     },
     "getAddress": {
       "name": "getAddress",
@@ -3909,7 +3911,8 @@
           "required": true,
           "description": "Private key (0x + 64 hex chars)."
         }
-      ]
+      ],
+      "topic": "multi-wallet"
     },
     "getEthereumAddressFromPrivateKey": {
       "name": "getEthereumAddressFromPrivateKey",
@@ -3925,7 +3928,8 @@
           "required": true,
           "description": "Private key (0x + 64 hex chars)."
         }
-      ]
+      ],
+      "topic": "multi-wallet"
     },
     "getConfig": {
       "name": "getConfig",
@@ -8858,7 +8862,12 @@
       "label": "Multi wallet",
       "description": "Multi wallet operations",
       "methods": [
-        "getAddress"
+        "getAddress",
+        "createWallet",
+        "createSolanaWallet",
+        "getEthereumAddress",
+        "getPublicKeyFromPrivateKey",
+        "getEthereumAddressFromPrivateKey"
       ],
       "category": "wallet"
     },
