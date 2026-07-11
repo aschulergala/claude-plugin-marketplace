@@ -1,9 +1,12 @@
 {
   "meta": {
-    "version": "5.0.4-beta.62",
-    "generatedAt": "2026-03-25T00:20:55.618Z",
-    "toolCount": 312,
-    "categoryCount": 38
+    "version": "5.0.4-beta.63",
+    "generatedAt": "2026-07-11T05:06:00.433Z",
+    "toolCount": 317,
+    "categoryCount": 39,
+    "warnings": [
+      "Auth metadata missing from manifest for 6 tool(s); used heuristic fallback: gala_launchpad_fetch_client_flags, gala_launchpad_fetch_notification_preferences, gala_launchpad_flush_cache_wallet_aliases, gala_launchpad_register_push_token, gala_launchpad_unregister_push_token, gala_launchpad_update_notification_preferences"
+    ]
   },
   "categories": {
     "pools": {
@@ -252,17 +255,17 @@
     "messages": {
       "key": "messages",
       "label": "Messages",
-      "description": "Messages operations",
-      "icon": "📦",
+      "description": "Unified chat and comment message operations",
+      "icon": "✉️",
       "count": 8,
       "read": 5,
       "write": 3
     },
     "restricted-names": {
       "key": "restricted-names",
-      "label": "Restricted-names",
-      "description": "Restricted-names operations",
-      "icon": "📦",
+      "label": "Restricted Names",
+      "description": "Restricted token name administration",
+      "icon": "🛑",
       "count": 2,
       "read": 1,
       "write": 1
@@ -288,65 +291,74 @@
     "holders": {
       "key": "holders",
       "label": "Holders",
-      "description": "Holders operations",
-      "icon": "📦",
+      "description": "Token holder rankings, distribution, and history",
+      "icon": "👥",
       "count": 5,
       "read": 5,
       "write": 0
     },
     "global-feed": {
       "key": "global-feed",
-      "label": "Global-feed",
-      "description": "Global-feed operations",
-      "icon": "📦",
+      "label": "Global Feed",
+      "description": "Real-time global event feed subscriptions",
+      "icon": "🌐",
       "count": 5,
       "read": 5,
       "write": 0
     },
     "websocket-admin": {
       "key": "websocket-admin",
-      "label": "Websocket-admin",
-      "description": "Websocket-admin operations",
-      "icon": "📦",
+      "label": "WebSocket Admin",
+      "description": "WebSocket event emission and connection administration",
+      "icon": "🛰️",
       "count": 24,
       "read": 18,
       "write": 6
     },
     "ai-moderation": {
       "key": "ai-moderation",
-      "label": "Ai-moderation",
-      "description": "Ai-moderation operations",
-      "icon": "📦",
+      "label": "AI Moderation",
+      "description": "AI-assisted content moderation and settings",
+      "icon": "🤖",
       "count": 5,
       "read": 4,
       "write": 1
     },
     "weekly-challenge": {
       "key": "weekly-challenge",
-      "label": "Weekly-challenge",
-      "description": "Weekly-challenge operations",
-      "icon": "📦",
+      "label": "Weekly Challenge",
+      "description": "Weekly token challenge leaderboards and history",
+      "icon": "🏆",
       "count": 2,
       "read": 2,
       "write": 0
     },
     "oembed": {
       "key": "oembed",
-      "label": "Oembed",
-      "description": "Oembed operations",
-      "icon": "📦",
+      "label": "OEmbed",
+      "description": "Social preview metadata for Launchpad pages",
+      "icon": "🔖",
       "count": 3,
       "read": 3,
       "write": 0
     },
     "platform-stats": {
       "key": "platform-stats",
-      "label": "Platform-stats",
-      "description": "Platform-stats operations",
-      "icon": "📦",
+      "label": "Platform Stats",
+      "description": "Platform-wide trading and token statistics",
+      "icon": "📊",
       "count": 1,
       "read": 1,
       "write": 0
+    },
+    "notifications": {
+      "key": "notifications",
+      "label": "Notifications",
+      "description": "Push notification and client preference management",
+      "icon": "🔔",
+      "count": 5,
+      "read": 4,
+      "write": 1
     }
   },
   "categoryGroups": [
@@ -359,8 +371,11 @@
         "trading",
         "trades",
         "balance",
+        "holders",
         "creation",
-        "referrals"
+        "referrals",
+        "weekly-challenge",
+        "platform-stats"
       ]
     },
     {
@@ -392,8 +407,12 @@
         "simulcasts",
         "chat",
         "chat-messages",
+        "messages",
         "comments",
-        "content-reactions"
+        "content-reactions",
+        "global-feed",
+        "notifications",
+        "oembed"
       ]
     },
     {
@@ -406,7 +425,10 @@
         "api-keys",
         "moderators",
         "content-flags",
-        "overseers"
+        "overseers",
+        "restricted-names",
+        "websocket-admin",
+        "ai-moderation"
       ]
     },
     {
@@ -714,7 +736,7 @@
       "name": "fetchTokenSpotPrice",
       "mcpTool": "gala_launchpad_fetch_token_spot_price",
       "category": "pools",
-      "description": "Fetch USD spot price for ANY token with smart routing\n\nRoutes to the correct backend automatically:\n- **tokenName** → Launchpad token (detects graduation status)\n- **tokenId** → DEX token via /v1/trade/price endpoint.",
+      "description": "Fetch USD spot price for ANY token with smart routing\n\nRoutes to the correct backend automatically:\n- **tokenName** → Launchpad token (detects graduation status)\n- **tokenId** → REST-backed DEX token price via /v1/trade/price (~1s freshness; no signer required).\n\nDEX read errors: restricted or ungraduated tokens return TokenRestrictedError (403), a missing pool returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -929,7 +951,7 @@
       "category": "pools",
       "description": "Validate if token name and/or symbol are available for use.\n\nCheck name and symbol availability before launching a token. Returns availability flags\nand any validation errors. Useful for token creation forms to prevent invalid submissions.\n\nRETURNS: { nameAvailable, symbolAvailable, nameBlocklisted, symbolBlocklisted, errors: [] }\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1002,7 +1024,7 @@
       "category": "pools",
       "description": "Watch for new DEX pool creation events in real-time.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "minTVL",
@@ -1037,7 +1059,7 @@
       "category": "pools",
       "description": "Watch for new launchpad token creation events in real-time.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "creatorAddress",
@@ -1088,7 +1110,7 @@
       "category": "pools",
       "description": "Watch for pool metadata updates in real-time.\n\nTriggers when pool metadata, social links, or badges are updated. Includes:\n- POOL_METADATA_UPDATED: Name, description, image, category changes\n- POOL_SOCIAL_LINKS_UPDATED: Website, Discord, Twitter, etc. changes\n- POOL_BADGE_ASSIGNED: New badges or badge assignments\n\nReturns:\n- poolsUpdated: Number of pool updates detected\n- updates: Array of pool update events with tokenName, updateType, and metadata changes\n\nFilter Options:\n- tokenName: Only watch updates for a specific token\n- updateType: Filter by type ('METADATA', 'SOCIAL_LINKS', or 'BADGE_ASSIGNED').",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1143,7 +1165,7 @@
       "category": "pools",
       "description": "Watch for token holder count changes in real-time.\n\nTriggers whenever the holder count for a token changes, including:\n- New holders making their first purchase\n- Holders liquidating their entire position\n- Changes in holder distribution and tiers\n\nReturns:\n- holdersChanged: Number of holder count change events detected\n- events: Array of holder count events with tokenName, newCount, previousCount, and timestamp\n\nFilter Options:\n- tokenName: Only watch holder changes for a specific token\n- minThreshold: Only notify if holder count changes by >= minThreshold.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1177,7 +1199,7 @@
       "category": "pools",
       "description": "Update token configuration (messages, comments, and social links).\n\nUpdate messaging configuration and/or social media links for a token.\nAt least one field must be provided.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Platform admin (API key)\n\nRETURNS: void (success with no content)\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1331,7 +1353,7 @@
       "category": "trading",
       "description": "Execute token purchase with slippage protection.\n\nWORKFLOW:\n1. calculateBuyAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. buy() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. fetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateBuyAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1394,7 +1416,7 @@
       "category": "trading",
       "description": "Execute token sale with slippage protection.\n\nWORKFLOW:\n1. calculateSellAmount() -> Get expected output (result.amount AND result.reverseBondingCurveFee)\n2. sell() -> Execute trade with BOTH expectedAmount AND maxAcceptableReverseBondingCurveFee\n3. fetchTrades() -> Verify trade completed\n\nCRITICAL: Extract BOTH parameters from calculateSellAmount:\n- result.amount -> expectedAmount\n- result.reverseBondingCurveFee -> maxAcceptableReverseBondingCurveFee\nOmitting reverseBondingCurveFee may cause transaction failures!\n\nRETURNS: Transaction details including input/output amounts and transaction ID.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1590,7 +1612,7 @@
       "category": "trading",
       "description": "Graduate a token pool by buying all remaining tokens in one transaction.\n\nWORKFLOW (automatic):\n1. Calls calculateBuyAmountForGraduation() internally\n2. Executes buy() with exact remaining token amount\n3. Returns transaction result\n\nPerformance optimization: Provide currentSupply to avoid fetching pool details twice.\n\nCRITICAL: This is a convenience method that combines multiple operations.\nThrows error if token is already graduated.\nslippageToleranceFactor is optional and uses SDK defaults if not provided.\n\nRETURNS: TradeResult with transaction details including amounts and transaction ID.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -1876,7 +1898,7 @@
       "name": "getSwapQuoteExactInput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_input",
       "category": "dex",
-      "description": "Get swap quote for exact input amount - specify how much you want to spend. Returns estimated output amount, fee tier, and price impact percentage.",
+      "description": "Get a REST-backed swap quote for an exact input amount from the DEX backend (~1s freshness; no signer required). Specify how much you want to spend. Returns estimated output amount, fee tier, and price impact percentage. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1905,7 +1927,7 @@
       "name": "getSwapQuoteExactOutput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_output",
       "category": "dex",
-      "description": "Get swap quote for exact output amount - specify how much you want to receive. Returns required input amount, fee tier, and price impact percentage.",
+      "description": "Get a REST-backed swap quote for an exact output amount from the DEX backend (~1s freshness; no signer required). Specify how much you want to receive. Returns required input amount, fee tier, and price impact percentage. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1934,7 +1956,7 @@
       "name": "calculateDexPoolQuoteLocal",
       "mcpTool": "gala_launchpad_calculate_dex_pool_quote_local",
       "category": "dex",
-      "description": "Calculate instant DEX quote using local bonding curve math. Auto-fetches pool data unless compositePoolData is provided (for bulk efficiency).",
+      "description": "Calculate an instant DEX quote using local math with zero network access for the calculation. Provide compositePoolData for a fully local operation; otherwise pool state is fetched from the DEX backend (~1s freshness; no signer required). Backend fetches can return TokenRestrictedError (403) for restricted tokens, a not-found error for missing pools, or 429 under heavy usage.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1991,7 +2013,7 @@
       "name": "calculateDexPoolQuoteExternal",
       "mcpTool": "gala_launchpad_calculate_dex_pool_quote_external",
       "category": "dex",
-      "description": "Calculate real-time DEX quote from GalaChain blockchain. Slower than local but always reflects current pool state. Use for final price verification.",
+      "description": "Get a server-computed real-time quote via the DEX backend (~1s freshness; no signer required). Use for final price verification. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2044,7 +2066,7 @@
       "category": "dex",
       "description": "Execute a token swap on GalaSwap DEX with slippage protection. Get a quote first using getSwapQuote tools.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "fromToken",
@@ -2128,7 +2150,7 @@
       "name": "fetchDexPools",
       "mcpTool": "gala_launchpad_fetch_dex_pools",
       "category": "dex-pools",
-      "description": "Fetch DEX pools with cursor-based pagination and filtering - query available liquidity pools on GalaSwap.",
+      "description": "Fetch REST-backed DEX pool data with cursor-based pagination and filtering (~1s freshness; no signer required). Heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2178,7 +2200,7 @@
       "name": "fetchAllDexPools",
       "mcpTool": "gala_launchpad_fetch_all_dex_pools",
       "category": "dex-pools",
-      "description": "Fetch all DEX pools with automatic pagination. No page/limit parameters needed - returns ALL pools matching filters.",
+      "description": "Fetch all REST-backed DEX pool data with automatic pagination (~1s freshness; no signer required). No page/limit parameters are needed; returns all pools matching filters. Heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2213,7 +2235,7 @@
           "name": "withPrices",
           "type": "boolean",
           "required": false,
-          "description": "Whether to fetch real-time pricing data for each pool (default: false)."
+          "description": "Whether to fetch REST-backed pricing data for each pool with ~1s freshness (default: false; no signer required)."
         }
       ],
       "topic": "fetch-dex-pools"
@@ -2222,7 +2244,7 @@
       "name": "getSwapPoolInfo",
       "mcpTool": "gala_launchpad_get_swap_pool_info",
       "category": "dex-pools",
-      "description": "Get liquidity and fee tier information for a token pair on GalaSwap DEX.",
+      "description": "Get REST-backed liquidity and fee tier information for a token pair from the DEX backend (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2245,7 +2267,7 @@
       "name": "fetchCompositePoolData",
       "mcpTool": "gala_launchpad_fetch_composite_pool_data",
       "category": "dex-pools",
-      "description": "Fetch complete pool state for offline DEX quote calculations. Returns pool liquidity, tick data, and token balances. Use this for bulk pricing operations or when you need multiple quotes for the same pool.",
+      "description": "Fetch complete pool state from the REST-backed DEX backend (~1s freshness; no signer required) for local DEX quote calculations. Returns pool liquidity, tick data, and token balances. Use this for bulk pricing operations or when you need multiple quotes for the same pool. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2279,7 +2301,7 @@
       "name": "getSwapPoolPrice",
       "mcpTool": "gala_launchpad_get_swap_pool_price",
       "category": "dex-pools",
-      "description": "Get current price, tick, and liquidity for a DEX pool. Use to check if liquidity positions are in-range.",
+      "description": "Get REST-backed price, tick, and liquidity for a DEX pool (~1s freshness; no signer required). Use to check if liquidity positions are in-range. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2359,7 +2381,7 @@
       "name": "getUserLiquidityPositions",
       "mcpTool": "gala_launchpad_get_user_liquidity_positions",
       "category": "dex-liquidity",
-      "description": "Get all open liquidity positions for a wallet address with optional pagination and real-time pricing. Note: bookmark pagination and pricing options are mutually exclusive - use getAllUserLiquidityPositionsTool for pricing with auto-pagination.",
+      "description": "Get REST-backed open liquidity positions for a wallet address with optional pagination and pricing (~1s freshness; no signer required). Bookmark pagination and pricing options are mutually exclusive; use getAllUserLiquidityPositionsTool for pricing with auto-pagination. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2385,7 +2407,7 @@
           "name": "withPrices",
           "type": "boolean",
           "required": false,
-          "description": "Whether to fetch real-time pricing for each position (optional, default: false). Cannot be used together with bookmark - if you need pagination, use bookmark without withPrices. Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
+          "description": "Whether to fetch REST-backed pricing for each position with ~1s freshness (optional, default: false; no signer required). Cannot be used together with bookmark - if you need pagination, use bookmark without withPrices. Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
         }
       ]
     },
@@ -2393,7 +2415,7 @@
       "name": "getAllUserLiquidityPositions",
       "mcpTool": "gala_launchpad_get_all_user_liquidity_positions",
       "category": "dex-liquidity",
-      "description": "Get ALL open liquidity positions for a wallet address with automatic pagination and optional real-time pricing.",
+      "description": "Get all REST-backed open liquidity positions for a wallet address with automatic pagination and optional pricing (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2407,7 +2429,7 @@
           "name": "withPrices",
           "type": "boolean",
           "required": false,
-          "description": "Whether to fetch real-time pricing for each position (optional, default: false). Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
+          "description": "Whether to fetch REST-backed pricing for each position with ~1s freshness (optional, default: false; no signer required). Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
         }
       ]
     },
@@ -2415,7 +2437,7 @@
       "name": "getLiquidityPositionById",
       "mcpTool": "gala_launchpad_get_liquidity_position_by_id",
       "category": "dex-liquidity",
-      "description": "Get specific liquidity position details by position ID including tokens, tick range, and accumulated fees.",
+      "description": "Get REST-backed liquidity position details by position ID, including tokens, tick range, and accumulated fees (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2437,7 +2459,7 @@
       "name": "getLiquidityPosition",
       "mcpTool": "gala_launchpad_get_liquidity_position",
       "category": "dex-liquidity",
-      "description": "Get liquidity position for a specific token pair and price range (tick boundaries).",
+      "description": "Get a REST-backed liquidity position for a token pair and price range (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2488,9 +2510,9 @@
       "name": "estimateRemoveLiquidity",
       "mcpTool": "gala_launchpad_estimate_remove_liquidity",
       "category": "dex-liquidity",
-      "description": "Estimate tokens received when removing liquidity at current market prices. Returns amount0 and amount1 (underlying token amounts, raw without slippage adjustment).",
+      "description": "Estimate tokens received when removing liquidity using REST-backed DEX pool state (~1s freshness; no signer required). Returns amount0 and amount1 (underlying token amounts, raw without slippage adjustment). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "token0",
@@ -2547,7 +2569,7 @@
       "category": "dex-liquidity",
       "description": "Add liquidity to a pool by specifying min/max price boundaries (SDK calculates tick boundaries).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "token0",
@@ -2616,7 +2638,7 @@
       "category": "dex-liquidity",
       "description": "Add liquidity to a pool by specifying exact tick boundaries (advanced usage).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "token0",
@@ -2685,7 +2707,7 @@
       "category": "dex-liquidity",
       "description": "Remove liquidity from an open position and withdraw underlying tokens.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "ownerAddress",
@@ -2729,7 +2751,7 @@
       "name": "fetchSwapPositionDirect",
       "mcpTool": "gala_launchpad_fetch_swap_position_direct",
       "category": "dex-liquidity",
-      "description": "Fetch a single liquidity position using ONLY the compound key (most efficient). Makes a direct HTTP call to GalaChain Gateway using token0, token1, fee, and tick range.",
+      "description": "Fetch a single REST-backed liquidity position by compound key using token0, token1, fee, and tick range (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2783,7 +2805,7 @@
       "category": "dex-liquidity",
       "description": "Collect accumulated trading fees from a liquidity position without modifying the position.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "ownerAddress",
@@ -3041,7 +3063,7 @@
       "category": "balance",
       "description": "Update user profile (fullName and profileImage). Returns success flag and updated profile data.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "fullName",
@@ -3099,7 +3121,7 @@
       "category": "balance",
       "description": "Fetch all tokens the authenticated user can manage (owned tokens + moderated tokens + overseer status).\n\nReturns a unified view of:\n- **ownedTokens**: Tokens created by this wallet (with live status, viewer count)\n- **moderatedTokens**: Tokens where user has a moderator role (MANAGER, TECHNICAL_PRODUCER, MODERATOR) with role and invite scope details\n- **isOverseer**: Whether user has platform-wide overseer access\n- **overseerSince**: When overseer status was granted (if applicable)\n\nUse this for building moderation dashboards or determining which tokens a user can access Studio for.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "cursor",
@@ -3122,7 +3144,7 @@
       "category": "referrals",
       "description": "Fetch the authenticated user's unique referral URL for sharing. The referral URL can be used to earn rewards when new users sign up through the link. Requires wallet configuration.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "referral-system"
     },
@@ -3233,7 +3255,7 @@
       "category": "creation",
       "description": "Create a new token on the launchpad.\n\nWORKFLOW:\n1. checkTokenName() → Verify name is available\n2. checkTokenSymbol() → Verify symbol is available\n3. launchToken() → Create token with validated name/symbol\n4. getUrlByTokenName() → Get frontend URL for the new token\n\nREQUIREMENT: At least one social URL (websiteUrl, twitterUrl, or telegramUrl) is required.\n\nRETURNS: Transaction details including token name, symbol, creator address, and transaction ID.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -3322,7 +3344,7 @@
       "category": "creation",
       "description": "Upload token image from filesystem (Node.js only).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -3351,7 +3373,7 @@
       "category": "creation",
       "description": "Upload profile image from filesystem (Node.js only).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "imagePath",
@@ -3410,7 +3432,7 @@
       "category": "nft",
       "description": "Estimate the dynamic fee to mint NFTs via DryRun. Fee varies based on quantity and network conditions.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "collection",
@@ -3451,7 +3473,7 @@
       "category": "nft",
       "description": "Calculate total fees for multiple NFT operations. Returns breakdown with total.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "claimCollection",
@@ -3490,7 +3512,7 @@
       "category": "nft",
       "description": "Claim an NFT collection name. Costs 10,000 GALA.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "collectionName",
@@ -3524,7 +3546,7 @@
       "category": "nft",
       "description": "Create a token class within an NFT collection. Costs 1,000 GALA.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "collection",
@@ -3630,7 +3652,7 @@
       "category": "nft",
       "description": "Mint NFTs from a token class. Costs dynamic fee based on quantity.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "collection",
@@ -3700,7 +3722,7 @@
       "category": "transfers",
       "description": "Transfer GALA tokens via GalaChain.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "recipientAddress",
@@ -3735,7 +3757,7 @@
       "category": "transfers",
       "description": "Transfer launchpad tokens via GalaChain.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "to",
@@ -3776,7 +3798,7 @@
       "category": "locks",
       "description": "Lock one or more token types on GalaChain in a single transaction.\n\nLocked tokens cannot be transferred until unlocked by the lock authority.\nUseful for staking, escrow, vesting, or other hold scenarios.\n\nSupports batch locking of multiple token types for efficiency.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokens",
@@ -3805,7 +3827,7 @@
       "category": "locks",
       "description": "Unlock one or more previously locked token types on GalaChain in a single transaction.\n\nReleases token holds, making them available for transfer again.\nMust be called by the lock authority (the address that locked the tokens\nor was designated as lock authority during the lock operation).\n\nSupports batch unlocking of multiple token types for efficiency.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokens",
@@ -3834,7 +3856,7 @@
       "category": "burns",
       "description": "Permanently burn (destroy) one or more token types on GalaChain in a single transaction.\n\n**WARNING: THIS OPERATION IS IRREVERSIBLE!**\n\nOnce tokens are burned, they are permanently destroyed and cannot be recovered.\nThe burned tokens are removed from circulation, reducing total supply.\n\nSupports batch burning of multiple token types in a single transaction.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokens",
@@ -3863,7 +3885,7 @@
       "category": "wallet",
       "description": "Create a new wallet with a random private key. Returns wallet address and private key. ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "multi-wallet"
     },
@@ -3873,7 +3895,7 @@
       "category": "wallet",
       "description": "Create a new Solana wallet with a random keypair. Returns wallet address and private key (base58 format). ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "multi-wallet"
     },
@@ -3903,7 +3925,7 @@
       "category": "wallet",
       "description": "Derive public key from private key using secp256k1. Returns uncompressed (0x04..., 132 chars) and compressed (0x02/03..., 68 chars) formats.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "privateKey",
@@ -3920,7 +3942,7 @@
       "category": "wallet",
       "description": "Derive Ethereum address from private key. Returns both Ethereum (0x...) and GalaChain (eth|...) address formats.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "privateKey",
@@ -3962,7 +3984,7 @@
       "name": "explainSdkUsage",
       "mcpTool": "gala_launchpad_explain_sdk_usage",
       "category": "utils",
-      "description": "Get detailed SDK code examples for all 310 MCP tools (mapping to 273 SDK methods) organized into 60 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, nft-collection-management, token-identification, graduation-detection, ai-moderation (AI content analysis - overseer only), weekly-challenge (weekly token competition leaderboard), platform-stats (platform-wide trading metrics), restricted-names (blocked token names list - overseer only), websocket-admin (real-time event broadcasting - admin/overseer), oembed (social media link preview metadata), messages (unified CHAT+COMMENT messages API), and holders (token holder distribution and whale analysis).",
+      "description": "Get detailed SDK code examples for all 310 MCP tools (mapping to 273 SDK methods) organized into 65 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, gdex-stream, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, nft-collection-management, token-identification, graduation-detection, ai-moderation (AI content analysis - overseer only), weekly-challenge (weekly token competition leaderboard), platform-stats (platform-wide trading metrics), restricted-names (blocked token names list - overseer only), websocket-admin (real-time event broadcasting - admin/overseer), oembed (social media link preview metadata), messages (unified CHAT+COMMENT messages API), and holders (token holder distribution and whale analysis).",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -3983,6 +4005,7 @@
             "transfers",
             "locks",
             "dex-trading",
+            "gdex-stream",
             "error-handling",
             "installation",
             "local-calculations",
@@ -4074,7 +4097,7 @@
       "category": "utils",
       "description": "Clear token caches. With tokenName: clears that launchpad token. Without tokenName: clears ALL caches (launchpad metadata + bridgeable tokens). Caches auto-warm from fetchPools/fetchBridgeableTokens calls.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -4101,7 +4124,7 @@
       "category": "utils",
       "description": "Check if wallet is configured in the SDK. Returns true if wallet is available for signing operations, false if in read-only mode.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "utilities-system"
     },
@@ -4121,7 +4144,7 @@
       "category": "utils",
       "description": "Configure a wallet for signing operations. Takes a private key and sets it as the active wallet.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "privateKey",
@@ -4147,7 +4170,7 @@
       "category": "utils",
       "description": "Dynamically switch the MCP server to a different environment (production, development, or testing). Preserves wallet configuration when switching.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "environment",
@@ -4168,7 +4191,7 @@
       "category": "utils",
       "description": "Clean up SDK resources (HTTP interceptors, WebSocket connections). Call when done using the SDK to prevent memory leaks.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "utilities-and-helpers"
     },
@@ -4261,7 +4284,7 @@
       "category": "bridge",
       "description": "Estimate bridge fees for transferring tokens between GalaChain and an external chain. Returns fee amount in source token. Amount parameter is optional but recommended for accurate estimates.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4294,7 +4317,7 @@
       "category": "bridge",
       "description": "Bridge tokens from GalaChain to an external chain (Ethereum or Solana). Requires wallet configuration.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4333,7 +4356,7 @@
       "category": "bridge",
       "description": "Bridge tokens from an external chain (Ethereum or Solana) to GalaChain. Requires wallet configuration.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4663,7 +4686,7 @@
       "category": "bridge",
       "description": "Request SOL airdrop from Solana devnet faucet. Only available in STAGE environment (development/testing). Maximum 2 SOL per request. Useful for funding wallets with gas fees for testing bridge operations.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "amount",
@@ -4804,7 +4827,7 @@
       "category": "bridge",
       "description": "Wrap a token to its asset-channel counterpart (e.g., MUSIC → GMUSIC). This is a cross-channel bridge within GalaChain, NOT an external bridge to Ethereum/Solana. Requires wallet configuration. Use for tokens that need to be wrapped before DEX trading.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4839,7 +4862,7 @@
       "category": "bridge",
       "description": "Unwrap a token back to its native channel (e.g., GMUSIC → MUSIC). Reverses a previous wrap operation. This is a cross-channel bridge within GalaChain, NOT an external bridge. Requires wallet configuration.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4874,7 +4897,7 @@
       "category": "bridge",
       "description": "Estimate fees for wrapping a token to the asset channel. Wrap operations use cross_channel_authorization fee type on the source channel.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4897,7 +4920,7 @@
       "category": "bridge",
       "description": "Estimate fees for unwrapping a token back to its native channel. Unwrap operations use automatic fee authorization on the asset channel.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenId",
@@ -4937,7 +4960,7 @@
       "category": "streaming",
       "description": "Start a live stream for a token.\n\nCreates a new stream session and returns streaming credentials.\nrtmpsUrl is the full RTMPS ingest URL; srtUrl is the full SRT ingest URL.\nUse streamKey + srtPassphrase for manual encoder configuration.\n\nRETURNS: { tokenName, streamKey, rtmpsUrl, srtUrl, srtPassphrase, playbackId, playbackUrl, status, createdAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -4954,7 +4977,7 @@
       "category": "streaming",
       "description": "Stop a live stream for a token.\n\nEnds the current stream session. The stream key remains valid for future streams.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -4971,7 +4994,7 @@
       "category": "streaming",
       "description": "Enable or disable streaming for a specific token (Admin only).\n\nControls per-token streaming capability. When disabled, prevents new streams\nfrom being started for this token. Existing active streams will continue\nuntil they end.\n\nRETURNS: { enabled, tokenName }\n\nAuthentication: Requires streamAdminApiKey configuration",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -4993,7 +5016,7 @@
       "category": "streaming",
       "description": "Reset the stream key for a token.\n\nGenerates a new stream key, invalidating the previous one.\nUse this if the stream key has been compromised.\n\nRETURNS: { tokenName, streamKey, rtmpsUrl, srtUrl, srtPassphrase, playbackId, resetAt }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5010,7 +5033,7 @@
       "category": "streaming",
       "description": "Set the next live stream countdown time for a token.\n\nSchedules a future live stream for this token. The countdown can be displayed on the pool page\nto let viewers know when the stream will go live.\n\nCan be called multiple times to update the scheduled time.\nPass null as nextLiveStreamAt to clear the countdown.\n\nRETURNS: { success: true, message: \"...\" }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5042,7 +5065,7 @@
       "category": "streaming",
       "description": "Enable or disable streaming globally (Admin only).\n\nControls platform-wide streaming capability.\nWhen disabled, no new streams can be started.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "enabled",
@@ -5059,7 +5082,7 @@
       "category": "streaming",
       "description": "Get the authenticated user's role for a token's stream with associated permissions.\n\nReturns effective role (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR) with boolean permission flags.\ncanStream: Can start/stop streams. canModerate: Can moderate chat/ban. canManageTeam: Can manage moderator invites.\n\nRETURNS: { role: 'OWNER'|'MANAGER'|'TECHNICAL_PRODUCER'|'MODERATOR'|null, isOwner, permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast }, source, inviteScope }\n\nAuthentication: Optional JWT - returns limited data if not authenticated",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5086,7 +5109,7 @@
       "category": "streaming",
       "description": "Check if the authenticated user has Studio access for a token.\n\nReturns comprehensive access information combining:\n1. Token ownership check (OWNER role)\n2. Claimed moderator invite (MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n3. Platform overseer status (global access)\n\nThis is used by frontends to determine whether to show \"Click to Studio\" links.\n\n**Access Sources:**\n- ownership: User is the token owner (OWNER role)\n- moderator_invite: User has a claimed moderator invite\n- overseer: User has platform-wide overseer access\n\n**Permissions Returned:**\n- canStream: Can start/stop streams\n- canModerate: Can moderate chat and ban users\n- canManageTeam: Can manage moderator invites\n- canViewRecordings: Can view and download recordings\n- canSimulcast: Can manage simulcast targets\n- canViewAnalytics: Can view stream analytics\n\nRETURNS: {\n  hasAccess: boolean,\n  role: 'OWNER' | 'MANAGER' | 'TECHNICAL_PRODUCER' | 'MODERATOR' | 'OVERSEER' | null,\n  permissions: { canStream, canModerate, canManageTeam, canViewRecordings, canSimulcast, canViewAnalytics },\n  accessSource: 'ownership' | 'moderator_invite' | 'overseer' | null,\n  inviteScope?: 'TOKEN' | 'ALL_OWNER_TOKENS' | null,\n  isOwner: boolean,\n  isOverseer: boolean\n}\n\nAuthentication: Optional JWT - returns limited data if not authenticated",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5155,7 +5178,7 @@
       "category": "recordings",
       "description": "Delete a stream recording.\n\nPermanently removes the recording. This action cannot be undone.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5195,7 +5218,7 @@
       "category": "simulcasts",
       "description": "Add a simulcast target to a stream.\n\nConfigure the stream to rebroadcast to an external platform like YouTube, Twitch, or Facebook.\n\nRETURNS: { target: { targetId, platform, rtmpUrl, status, name, createdAt }, tokenName }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5242,7 +5265,7 @@
       "category": "simulcasts",
       "description": "Remove a simulcast target from a stream.\n\nStops rebroadcasting to the specified platform.\n\nRETURNS: { success: true }\n\nAuthentication: Requires wallet signature (stream creator only)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5282,7 +5305,7 @@
       "category": "chat",
       "description": "Enable or disable chat for a specific token.\n\nDual-auth endpoint - supports both Admin API key and JWT (owner) auth.\n\n**Authorization:**\n- Admin (API key): Sets ADMIN_DISABLED when disabling - owner is locked out\n- Owner (JWT): Sets DISABLED when disabling - owner can re-enable later\n\nWhen ADMIN_DISABLED, only an admin can enable chat.\nOwners attempting to enable when ADMIN_DISABLED will get a 403 error.\n\nRETURNS: { enabled, tokenName, status }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5304,7 +5327,7 @@
       "category": "chat",
       "description": "Set slow mode interval for a stream chat.\n\nSlow mode throttles users to one message per N seconds.\nEnforcement is server-side (Redis-backed rate limiting).\nSetting to 0 disables slow mode.\n\nValid presets: 0 (off), 10, 30, 60, 300 seconds.\nMaximum: 600 seconds (10 minutes).\n\nRETURNS: { tokenName, slowModeSeconds }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5336,7 +5359,7 @@
       "category": "chat",
       "description": "Enable or disable chat globally (Admin only).\n\nControls platform-wide chat capability.\nWhen disabled, no chat messages can be sent.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "enabled",
@@ -5379,7 +5402,7 @@
       "category": "chat",
       "description": "Subscribe to a stream's real-time events.\n\nMust be connected via gala_launchpad_connect_stream_websocket first - throws error if not connected.\nAfter subscribing, you will receive these events:\n- stream_status: Live/offline status changes\n- viewer_count: Real-time viewer count updates\n- chat_message: New chat messages\n- chat_status: Chat enable/disable events\n\nRETURNS: { tokenName, status, playbackId, isLive, subscribedAt }",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5470,7 +5493,7 @@
       "category": "auth",
       "description": "Authenticate with wallet signature to get JWT token. Required before using protected features (streaming, chat, uploads). Returns expiresIn seconds; the token is managed internally and never returned via MCP.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "session-auth"
     },
@@ -5480,7 +5503,7 @@
       "category": "auth",
       "description": "Clear JWT token and end session. Future protected operations will fail until login() is called again.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "session-auth"
     },
@@ -5490,7 +5513,7 @@
       "category": "auth",
       "description": "Refresh JWT token before it expires. Use shouldRefreshToken() to check if refresh is needed. Returns expiresIn seconds; the token is managed internally and never returned via MCP.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "session-auth"
     },
@@ -5500,7 +5523,7 @@
       "category": "auth",
       "description": "Get current session information from backend. Returns authenticated address and token timestamps. Requires active session.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "session-auth"
     },
@@ -5520,7 +5543,7 @@
       "category": "auth",
       "description": "Check if JWT token should be refreshed (expires within threshold). Default threshold is 5 minutes. Returns boolean.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "thresholdMs",
@@ -5547,7 +5570,7 @@
       "category": "auth",
       "description": "Ensure valid token exists, refreshing if necessary. Call before long operations. Throws if not authenticated.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "thresholdMs",
@@ -5564,7 +5587,7 @@
       "category": "ban",
       "description": "Create a ban for a user on a token.\n\nBans prevent users from sending chat messages and reactions on the specified token's stream.\nCan be permanent (omit durationSeconds) or temporary (specify duration).\n\n**Duration Presets:**\n- 1 hour: 3600\n- 1 day: 86400\n- 1 week: 604800\n- 1 month: 2592000\n\nRETURNS: { ban: { id, userAddress, tokenName, reason, bannedBy, expiresAt, createdAt, isPermanent }, tokenName }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5599,7 +5622,7 @@
       "category": "ban",
       "description": "Remove a ban for a user on a token.\n\nUnbans the user, allowing them to send chat messages and reactions again.\n\nRETURNS: { removed: true, tokenName, userAddress }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5669,7 +5692,7 @@
       "category": "ban",
       "description": "Check if a specific user is banned on a token.\n\nReturns whether the user is currently banned and ban details if applicable.\n\nRETURNS: { banned: boolean, ban?: { ... }, tokenName, userAddress }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -5737,7 +5760,7 @@
       "category": "ban",
       "description": "Watch for user ban enforcement events in real-time.\n\nTriggers when users are banned, unbanned, or ban enforcement actions are taken. Includes:\n- USER_BANNED: User restricted from platform due to policy violation\n- USER_UNBANNED: Ban lifted, user access restored\n- BAN_ENFORCEMENT: Enforcement action taken (message deletion, chat suspension, etc.)\n\nReturns:\n- banActionsEnforced: Number of ban enforcement events detected\n- events: Array of ban events with userAddress, actionType, reason, tokenName, and timestamp\n\nFilter Options:\n- userAddress: Only watch bans for a specific user\n- actionType: Filter by action type ('BANNED', 'UNBANNED', or 'ENFORCEMENT')\n- tokenName: Only watch bans related to a specific token\n- reason: Filter by ban reason or violation type.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "userAddress",
@@ -5789,7 +5812,7 @@
       "category": "api-keys",
       "description": "Create a new API key for delegating permissions.\n\n**CRITICAL**: The rawKey in the response is ONLY shown once!\nStore it securely immediately - it cannot be retrieved again.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast\n- MANAGER: Moderator + Technical Producer + recordings\n- OWNER: Full access\n\n**Token Delegation:**\n- delegateAllTokens=true: Access to all current and future tokens\n- delegateAllTokens=false + tokenNames: Access to specific tokens only\n\nRETURNS: { id, keyPrefix, rawKey, description, role, delegateAllTokens, tokenNames, expiresAt, createdAt, ... }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "role",
@@ -5836,7 +5859,7 @@
       "category": "api-keys",
       "description": "List all API keys for the authenticated user.\n\nReturns a paginated list of API keys using cursor-based pagination.\nRaw keys are never included - they are only shown once at creation time.\n\nRETURNS: { apiKeys: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "cursor",
@@ -5859,7 +5882,7 @@
       "category": "api-keys",
       "description": "Get a single API key by ID.\n\nReturns the API key metadata. Raw key is never included.\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -5876,7 +5899,7 @@
       "category": "api-keys",
       "description": "Update an API key's metadata and permissions.\n\nCannot change the key itself, only metadata and permissions.\nAt least one field must be provided.\n\n**Updatable fields:**\n- role: Change permission level\n- description: Update label/description\n- delegateAllTokens: Toggle all-token access\n- tokenNames: Update specific token delegations (replaces existing)\n- expiresAt: Update expiration (null to remove)\n\nRETURNS: { id, keyPrefix, description, role, delegateAllTokens, tokenNames, expiresAt, lastUsedAt, createdAt, updatedAt }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -5929,7 +5952,7 @@
       "category": "api-keys",
       "description": "Revoke an API key.\n\nThis performs a soft delete - the key becomes immediately unusable\nbut is retained for audit purposes.\n\nRETURNS: { success: true, message: \"API key revoked\" }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -5946,7 +5969,7 @@
       "category": "api-keys",
       "description": "Get all valid API key roles.\n\nReturns the list of available roles for API keys.\nUseful for understanding the permission hierarchy.\n\n**Roles (hierarchical):**\n- MODERATOR: Manage comments, chat messages, ban/unban users\n- TECHNICAL_PRODUCER: Simulcast targets, stream key, stop/start stream\n- MANAGER: Moderator + Technical Producer + recordings + stream settings\n- OWNER: Full access (indistinguishable from normal auth)\n\nRETURNS: { roles: [\"MODERATOR\", \"TECHNICAL_PRODUCER\", \"MANAGER\", \"OWNER\"] }\n\nAuthentication: None required (utility method).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "api-key-management"
     },
@@ -5956,7 +5979,7 @@
       "category": "moderators",
       "description": "Create a moderator invite for a token or all tokens.\n\nCreates a magic link invite that can be shared to grant moderator access.\nThe recipient claims the invite after logging in.\n\n**Invite Scopes:**\n- TOKEN (default): Access to a specific token only. tokenName is required.\n- ALL_OWNER_TOKENS: Blanket access to ALL tokens owned by the inviter.\n  The moderator gains access to current AND future tokens. Omit tokenName.\n\n**Roles:**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast, stream key\n- MANAGER: All of the above + recordings + stream settings\n\n**Note:** OWNER role is not available for invites.\n\nRETURNS: { invite: { id, inviteScope, tokenName, role, inviteCode, inviteUrl, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires JWT auth as token owner.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteScope",
@@ -6006,7 +6029,7 @@
       "category": "moderators",
       "description": "Claim a moderator invite.\n\nClaims an invite using the code from a magic link URL. The authenticated\nuser's wallet becomes the moderator with the granted role.\n\n**Requirements:**\n- Invite must be in PENDING status\n- Invite must not be expired\n\n**Returns based on invite scope:**\n- TOKEN scope: { token: { tokenName, tokenSymbol, role, inviteScope, ... } }\n- ALL_OWNER_TOKENS scope: { blanketAccess: { inviteScope, role, claimedAt } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteCode",
@@ -6023,7 +6046,7 @@
       "category": "moderators",
       "description": "Get all tokens the current user moderates.\n\nReturns a paginated list of tokens where the authenticated user has claimed\na moderator invite and has active access using cursor-based pagination.\nUsed for the /studio dashboard.\n\nRETURNS: { tokens: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "cursor",
@@ -6046,7 +6069,7 @@
       "category": "moderators",
       "description": "List moderator invites.\n\nReturns a paginated list of moderator invites using cursor-based pagination.\nBehavior depends on tokenName:\n- With tokenName: Returns invites for that specific token (verifies ownership)\n- Without tokenName: Returns ALL invites created by the authenticated user across all tokens\n\nRETURNS: { invites: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6087,7 +6110,7 @@
       "category": "moderators",
       "description": "Revoke a moderator invite.\n\nRevokes an invite by ID, preventing it from being claimed. If already claimed,\nthe moderator loses access to the token.\n\nRETURNS: { success: true, message: \"Invite revoked\" }\n\nAuthentication: Requires JWT auth as token owner.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteId",
@@ -6104,7 +6127,7 @@
       "category": "moderators",
       "description": "Update the role of a moderator invite.\n\nChanges the role granted by the invite. For claimed invites, the moderator's\neffective permissions change immediately (enforced at runtime).\n\n**Roles:**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast, stream key\n- MANAGER: All of the above + recordings + stream settings\n\n**Note:** OWNER role is not available for invites.\n\nRETURNS: { invite: { id, inviteScope, tokenName, role, inviteCode, inviteUrl, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires JWT auth as token owner.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteId",
@@ -6132,7 +6155,7 @@
       "category": "moderators",
       "description": "Update a moderator invite's role and/or description.\n\nUpdates an existing moderator invite. At least one of role or description must be provided.\nCan update role, description, or both in a single call.\n\n**Roles:**\n- MODERATOR: Manage comments, chat, bans\n- TECHNICAL_PRODUCER: Stream control, simulcast, stream key\n- MANAGER: All of the above + recordings + stream settings\n\nRETURNS: { invite: { id, inviteScope, tokenName, role, inviteCode, inviteUrl, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires JWT auth as token owner.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteId",
@@ -6165,7 +6188,7 @@
       "category": "moderators",
       "description": "Get invite details by code (public endpoint).\n\nReturns public information about an invite for the claim page. This is used\nby the frontend to display invite details before the user logs in to claim.\n\n**Returned info:**\n- Token name, symbol, image\n- Role to be granted\n- Invite status and expiration\n- Who created the invite\n\nRETURNS: { tokenName, tokenSymbol, tokenImage, role, description, status, expiresAt, invitedBy: { address, fullName } }\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteCode",
@@ -6181,7 +6204,7 @@
       "category": "moderators",
       "description": "Watch for moderator management events in real-time.\n\nTriggers when moderators are added, removed, or their roles are updated. Includes:\n- MODERATOR_ADDED: New moderator invitation accepted\n- MODERATOR_REMOVED: Moderator permissions revoked\n- MODERATOR_ROLE_UPDATED: Permission level changed (e.g., to MANAGER)\n\nReturns:\n- moderatorsChanged: Number of moderator change events detected\n- events: Array of moderator events with tokenName, moderatorAddress, eventType, and role information\n\nFilter Options:\n- tokenName: Only watch changes for a specific token\n- eventType: Filter by event type ('ADDED', 'REMOVED', or 'ROLE_UPDATED')\n- moderatorAddress: Only watch changes for a specific moderator.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6226,7 +6249,7 @@
       "category": "moderators",
       "description": "Get list of active moderators for a specific token.\n\nReturns all moderators currently assigned to a token, including their:\n- Address / identifier\n- Role level (MODERATOR, TECHNICAL_PRODUCER, MANAGER, OWNER)\n- Permissions (can manage chat, ban users, etc.)\n- Join date\n- Status (active, pending invitation, or inactive)\n\nUseful for understanding chat management team, permissions analysis, and access control verification.\n\nReturns: Array of moderator objects with address, role, permissions, and status.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6242,7 +6265,7 @@
       "category": "content-flags",
       "description": "Create a content flag/report.\n\nTwo-tier system:\n- Chat/Comment: reason and details are optional (one-click flag)\n- Stream: reason is REQUIRED (modal flow)\n\nUse this when a user reports inappropriate content.\n\nRETURNS: { flag: { id, tokenName, contentType, contentId, reporterAddress, reportedUserAddress, reason, details, status, createdAt } }\n\nAuthentication: Requires JWT auth (logged-in user session).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6456,7 +6479,7 @@
       "category": "content-flags",
       "description": "Dismiss a flag (no action taken).\n\nMarks the flag as reviewed but takes no action on the content.\nUse when the flag is invalid, unfounded, or doesn't warrant action.\n\nRETURNS: { flag: { id, status: 'DISMISSED', reviewedBy, reviewedAt, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "flagId",
@@ -6473,7 +6496,7 @@
       "category": "content-flags",
       "description": "Take action on a flag.\n\nActions available:\n- DELETE_CONTENT: Remove the flagged content\n- BAN_USER: Ban the reported user from the token\n- DELETE_AND_BAN: Both delete content and ban user\n\nUse when the flag is valid and requires action.\n\nRETURNS: { flag: { id, status: 'ACTIONED', actionTaken, reviewedBy, reviewedAt, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner/moderator).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "flagId",
@@ -6501,7 +6524,7 @@
       "category": "overseers",
       "description": "Create an overseer invite.\n\nOverseers have GLOBAL platform access with MANAGER-level permissions across ALL tokens\n(current and future). This is different from moderators who have token-scoped access.\n\nCreates a magic link invite that can be shared to grant overseer access.\nThe recipient claims the invite after logging in.\n\nRETURNS: { invite: { id, inviteCode, inviteUrl, invitedBy, claimedBy, description, status, expiresAt, createdAt } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "description",
@@ -6524,7 +6547,7 @@
       "category": "overseers",
       "description": "List all overseer invites with cursor-based pagination and filtering.\n\nReturns a paginated list of overseer invites that can be filtered by status.\n\nRETURNS: { invites: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "status",
@@ -6559,7 +6582,7 @@
       "category": "overseers",
       "description": "Get overseer invite details by code (public endpoint).\n\nReturns public information about an invite for the claim page. This is used\nby the frontend to display invite details before the user logs in to claim.\n\n**Returned info:**\n- Description (if set)\n- Invite status and expiration\n- Who created the invite\n\nRETURNS: { description, status, expiresAt, invitedBy: { address, fullName } }\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteCode",
@@ -6575,7 +6598,7 @@
       "category": "overseers",
       "description": "Claim an overseer invite.\n\nClaims an invite using the code from a magic link URL. The authenticated\nuser's wallet becomes an overseer with GLOBAL access to ALL tokens on the platform.\n\n**Requirements:**\n- Invite must be in PENDING status\n- Invite must not be expired\n\nRETURNS: { invite: { id, inviteCode, inviteUrl, invitedBy, claimedBy, description, status, expiresAt, claimedAt, createdAt } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteCode",
@@ -6592,7 +6615,7 @@
       "category": "overseers",
       "description": "Revoke an overseer invite.\n\nRevokes an invite by ID, preventing it from being claimed. If already claimed,\nthe overseer loses access to the platform.\n\nRETURNS: { success: true, message: \"Invite revoked\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "inviteId",
@@ -6609,7 +6632,7 @@
       "category": "overseers",
       "description": "List all overseers with cursor-based pagination and filtering.\n\nReturns a paginated list of overseers that can be filtered by status.\n\nRETURNS: { overseers: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "status",
@@ -6642,7 +6665,7 @@
       "category": "overseers",
       "description": "Create an overseer directly (bypassing invite flow).\n\nDirectly promotes a user to overseer status without requiring them to claim an invite.\nA synthetic invite record is created for audit trail.\n\nUse this when you need to promote someone programmatically without requiring their\ninteraction (e.g., CLI admin tools, automated tests).\n\nRETURNS: { overseer: { id, userAddress, inviteId, status, createdAt } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "userAddress",
@@ -6664,7 +6687,7 @@
       "category": "overseers",
       "description": "Revoke an overseer's access.\n\nRevokes an overseer by wallet address, removing their global platform access.\n\nRETURNS: { success: true, message: \"Overseer access revoked\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "address",
@@ -6681,7 +6704,7 @@
       "category": "overseers",
       "description": "Check your own overseer status.\n\nReturns whether the authenticated user is currently an active overseer\nand their details if so.\n\nRETURNS: { isOverseer: boolean, overseer?: { id, userAddress, inviteId, status, createdAt } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "overseer-invites"
     },
@@ -6691,7 +6714,7 @@
       "category": "overseers",
       "description": "Get platform summary for CCTV dashboard.\n\nReturns quick counts for the overseer monitoring dashboard:\n- Active streams (pools with live streams)\n- Total viewers across all active streams\n- Pending content flags awaiting review\n- Total pools on the platform\n\nUse this for dashboard header stats. For detailed data, use:\n- gala_launchpad_fetch_pools (filter by muxStreamStatus=ACTIVE) for stream list\n- gala_launchpad_get_global_flags (status=PENDING) for pending flags\n\nRETURNS: { activeStreams, totalViewers, pendingFlags, totalPools }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "overseer-invites"
     },
@@ -6701,7 +6724,7 @@
       "category": "overseers",
       "description": "Get global user ban statistics.\n\nReturns the total count of active global user bans on the platform.\n\nRETURNS: { total: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "overseer-invites"
     },
@@ -6711,7 +6734,7 @@
       "category": "overseers",
       "description": "Get token ban (delisted tokens) statistics.\n\nReturns the total count of delisted/banned tokens on the platform.\n\nRETURNS: { total: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "overseer-invites"
     },
@@ -6751,7 +6774,7 @@
       "category": "overseers",
       "description": "List users with pagination and sorting (Overseer/Admin only).\n\nRetrieves a paginated list of users across the platform with optional filtering and sorting.\nUseful for overseer/admin dashboard user management.\n\n**Sort Options:**\n- address: User wallet address\n- flagsReceived: Content flags received\n- activeBans: Active bans count\n- createdAt: Account creation date (default)\n\nRETURNS: { items: [...], total: number, cursor?, pageSize }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "search",
@@ -6801,7 +6824,7 @@
       "category": "overseers",
       "description": "Get comprehensive user summary (Admin/Overseer only).\n\nRetrieves full profile, activity metrics, ban status, and other detailed information\nfor a specific user. Perfect for overseer dashboard user detail pages.\n\nRETURNS: { address, profile: { name, image, bio }, statistics: { tokens, positions, trades }, metrics: { flagsReceived, activeBans }, createdAt }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "userAddress",
@@ -6817,7 +6840,7 @@
       "category": "overseers",
       "description": "Flush all cache entries for a wallet address.\n\nClears all cached data associated with the specified address including:\n- User profile data (profile:data:*, profile:stats:*)\n- Overseer status\n- Owned tokens list\n- Ban status (global and per-token)\n- Moderator access entries\n\nUse this when:\n- User data appears stale or incorrect\n- After debugging user-specific issues\n- Resolving profile display inconsistencies\n\nRETURNS: { flushedCount, duration, target }\n- flushedCount: Number of cache keys flushed\n- duration: Time taken in milliseconds\n- target: Normalized address that was flushed\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "address",
@@ -6833,7 +6856,7 @@
       "category": "overseers",
       "description": "Flush all cache entries for a token.\n\nClears all cached data associated with the specified token including:\n- Stream chat messages and pinned messages\n- Recordings list\n- Holders data and rankings\n- Token ban status\n- Price data (GALA and USD)\n- Vault address mapping\n\nUse this when:\n- Token data appears stale or incorrect\n- Chat/stream data seems outdated\n- Price or holder data is inconsistent\n- After modifying token settings\n\nRETURNS: { flushedCount, duration, target }\n- flushedCount: Number of cache keys flushed\n- duration: Time taken in milliseconds\n- target: Normalized token name that was flushed\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6849,7 +6872,7 @@
       "category": "overseers",
       "description": "⚠️ NUCLEAR OPTION: Flush ALL Launchpad cache.\n\nClears ALL cached data across the entire Launchpad platform. This includes:\n- All user profile data\n- All token data (chat, recordings, holders, prices)\n- All overseer/moderator access data\n- All ban status data\n- Site configuration cache\n- Everything else\n\n**WARNING:** This will cause a temporary performance hit as all data\nneeds to be re-fetched from the database. Use only when absolutely necessary.\n\n**Safety Feature:** Requires confirm=true to prevent accidental usage.\n\nUse this when:\n- Major cache corruption suspected\n- After database migrations\n- Debugging platform-wide issues\n- Testing cache behavior\n\nRETURNS: { flushedCount, duration }\n- flushedCount: Total number of cache keys flushed\n- duration: Time taken in milliseconds\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "confirm",
@@ -6881,7 +6904,7 @@
       "category": "token-ban",
       "description": "Ban a token from the platform (overseer only).\n\nWhen a token is banned:\n- Hidden from ALL pool listings (including creator's profile)\n- Comments blocked on banned tokens\n- Live streaming blocked on banned tokens\n- Chat messages blocked on banned tokens\n- Trading NOT blocked (GalaChain handles trading independently)\n\nToken bans are permanent until explicitly removed by an overseer.\n\nRETURNS: { ban: { id, tokenName, reason, bannedBy, createdAt, updatedAt }, tokenName }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth with overseer status.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6904,7 +6927,7 @@
       "category": "token-ban",
       "description": "Remove a ban from a token (overseer only).\n\nWhen a token is unbanned:\n- Restored to all pool listings\n- Visible on creator's profile again\n- Comments re-enabled\n- Live streaming re-enabled\n- Chat re-enabled\n\nRETURNS: { removed: true, tokenName }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth with overseer status.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -6984,7 +7007,7 @@
       "category": "token-ban",
       "description": "Watch for token ban and unban events in real-time.\n\nTriggers when tokens are banned or unbanned by administrators. Includes:\n- TOKEN_BANNED: Token removed from trading/creation due to policy violation\n- TOKEN_UNBANNED: Ban lifted, token restored to normal status\n\nReturns:\n- tokenBansChanged: Number of ban status change events detected\n- events: Array of ban events with tokenName, newBanStatus, reason, and timestamp\n\nFilter Options:\n- tokenName: Only watch ban changes for a specific token\n- banStatus: Filter by status ('BANNED' or 'UNBANNED').",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7022,7 +7045,7 @@
       "category": "messages",
       "description": "Query messages with type/tokenName/userAddress filters.\n\nReturns paginated list of messages using cursor-based pagination.\nAt least one of type, tokenName, or userAddress must be provided.\nPublic endpoint - no authentication required.\n\n**Filter Combinations:**\n- type=CHAT + tokenName → Chat messages for a token\n- type=COMMENT + tokenName → Comments for a token\n- userAddress → All messages from a user\n- type + userAddress → User's messages of a specific type\n\n**Message Fields:**\n- id: Unique message ID (for updates/deletes/reactions)\n- type: CHAT or COMMENT\n- tokenName, tokenImage: Pool information\n- userAddress, userProfile: Author information\n- content: Message text\n- createdAt, updatedAt: Timestamps\n- reactions: Reaction counts by emoji type\n- flagCount: Number of flags against this message\n- holderTier?: Token holder tier badge ({ tier: 0-5, tierName: string })\n- isPinned?: Whether this message is pinned (CHAT only)\n\nRETURNS: {\n  messages: [...],\n  pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor }\n}\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "type",
@@ -7073,7 +7096,7 @@
       "category": "messages",
       "description": "Create a new message on a token pool.\n\nPosts a message to the specified token as either a CHAT message or COMMENT.\nMessages are stored in the unified pool_messages table.\n\n**Content Limits:**\n- CHAT: 1-500 characters\n- COMMENT: 1-2000 characters\n\nRETURNS: {\n  message: {\n    id, type, tokenName, tokenImage, userAddress, userProfile,\n    content, createdAt, deletedAt, flagCount, reactions, holderTier?\n  }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).\n\nUse the returned id with gala_launchpad_update_message or gala_launchpad_delete_message.\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "type",
@@ -7106,7 +7129,7 @@
       "category": "messages",
       "description": "Update a message's content.\n\nUpdates the content of an existing message (CHAT or COMMENT).\nOnly the original author can update their message.\nThe message will have an updatedAt timestamp after editing.\n\nRETURNS: {\n  message: {\n    id, type, tokenName, tokenImage, userAddress, userProfile,\n    content, createdAt, updatedAt, deletedAt, flagCount, reactions\n  }\n}\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)\nAuthorization: Message author only.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -7129,7 +7152,7 @@
       "category": "messages",
       "description": "Delete a message.\n\nSoft-deletes a message (CHAT or COMMENT) from the pool.\n\n**Authorization:**\n- Message author (JWT auth)\n- Pool owner (JWT auth)\n- Moderator with MANAGE_CHAT/MANAGE_COMMENTS permission (API key auth)\n- Platform overseer\n\nThe message remains in the database with deletedAt set (soft delete).\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session OR API key with MANAGE_CHAT or MANAGE_COMMENTS permission.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -7163,7 +7186,7 @@
       "category": "messages",
       "description": "Pin a message to a token's chat.\n\nOnly one message can be pinned per token at a time.\nPinning a new message automatically unpins any previously pinned message.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Moderator with MANAGER or MODERATOR role (JWT or API key)\n\nRETURNS: { success: true }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -7180,7 +7203,7 @@
       "category": "messages",
       "description": "Unpin a message from a token's chat.\n\nRemoves the pinned status from a message.\n\n**Authorization:**\n- Token owner (JWT auth)\n- Moderator with MANAGER or MODERATOR role (JWT or API key)\n\nRETURNS: { success: true }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "id",
@@ -7217,7 +7240,7 @@
       "category": "restricted-names",
       "description": "Update the restricted token names content.\n\nReplaces the entire list with newline-separated words.\nNewlines separate individual words to restrict.\n\n**Authorization:** Overseer only (JWT)\n\nRETURNS: { success: true }",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "content",
@@ -7306,7 +7329,7 @@
       "category": "content-reactions",
       "description": "Add a reaction to a chat message.\n\nConvenience wrapper for addContentReaction specifically for chat messages.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7342,7 +7365,7 @@
       "category": "content-reactions",
       "description": "Remove a reaction from a chat message.\n\nConvenience wrapper for removeContentReaction specifically for chat messages.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7378,7 +7401,7 @@
       "category": "content-reactions",
       "description": "Add a reaction to a comment.\n\nConvenience wrapper for addContentReaction specifically for comments.\n\nRETURNS: { data: { reactions, totalCount }, created: boolean }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7414,7 +7437,7 @@
       "category": "content-reactions",
       "description": "Remove a reaction from a comment.\n\nConvenience wrapper for removeContentReaction specifically for comments.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7450,7 +7473,7 @@
       "category": "trades",
       "description": "Query trades with flexible filtering options.\n\nReturns paginated list of trades with metadata using cursor-based pagination.\nAt least one of tokenName or userAddress is required.\n\nFilters:\n- tokenName: Filter by exact token name (e.g., 'anime')\n- userAddress: Filter by user wallet address\n- search: Fuzzy search by token name (ignored when tokenName is provided)\n- txnType: Filter by trade direction ('BUY' or 'SELL')\n- startDate/endDate: Filter by date range (ISO 8601)\n- minAmount/maxAmount: Filter by trade amount range\n\nRETURNS: { trades: [{ txnId, txnType, inputAmount, outputAmount, userAddress, tokenName, tokenImage, createdAt }], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }\n\nExamples:\n- Get all trades for a token: { tokenName: 'anime' }\n- Get all trades by a user: { userAddress: 'eth|123...' }\n- Get only buy trades: { tokenName: 'anime', txnType: 'BUY' }\n- Get trades in date range: { tokenName: 'anime', startDate: '2024-01-01', endDate: '2024-12-31' }\n- Get large trades: { tokenName: 'anime', minAmount: 1000 }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7525,7 +7548,7 @@
       "category": "trades",
       "description": "Watch for new trade execution events in real-time.\n\nTriggers whenever a trade is executed on any token. Includes buy and sell trades.\n\nReturns:\n- tradesExecuted: Number of trades detected\n- trades: Array of trade events with tokenName, userAddress, tradeType (BUY/SELL), amounts, and timestamp\n\nFilter Options:\n- tokenName: Only watch trades for a specific token\n- tradeType: Filter by direction ('BUY' or 'SELL')\n- minAmount: Only notify about trades >= minAmount\n- userAddress: Only watch trades from a specific user address.",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7614,7 +7637,7 @@
       "category": "holders",
       "description": "Get a user's holder rank and balance for a token.\n\nReturns the user's rank (1 = largest holder), balance, and total holder count.\nUseful for understanding a user's position in the holder distribution.\n\nReturns: { rank: number, balance: string, holderCount: number }\nReturns null if user is not a holder of the token.\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7637,7 +7660,7 @@
       "category": "holders",
       "description": "Get top token holders by balance.\n\nReturns a paginated list of the largest token holders, including their address,\nbalance, and percentage of total supply. Default returns top 10 holders.\n\nReturns: Array of { address: string, balance: string, percentage: number, rank: number }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7660,7 +7683,7 @@
       "category": "holders",
       "description": "Get holder statistics for a token.\n\nReturns the total number of holders and the total supply across all holders.\n\nReturns: { count: number, totalBalance: string }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7677,7 +7700,7 @@
       "category": "holders",
       "description": "Query holders by balance range.\n\nReturns holders whose balance falls within the specified min/max range.\nUseful for analyzing holder distribution across different tiers.\n\nReturns: Array of { address: string, balance: string, percentage: number, rank: number }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7712,7 +7735,7 @@
       "category": "holders",
       "description": "Get recent trade history for a specific holder.\n\nReturns the most recent trades that affected a user's holdings for a token.\nUseful for understanding how a holder's position was built up.\n\nReturns: { trades: [{ txnId, txnType, inputAmount, outputAmount, createdAt }], pageInfo: { hasNextPage, endCursor } }\n\nPublic endpoint - no authentication required.",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "tokenName",
@@ -7747,7 +7770,7 @@
       "category": "global-feed",
       "description": "Reference: Subscribe to the global feed for real-time updates.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature that requires the SDK to be initialized with WebSocket support.\nThis tool provides documentation. Actual subscription happens in your client code.\n\n## Global Feed Overview\n\nThe global feed broadcasts all important platform events to all subscribed clients:\n\n### Token Events (real-time for all tokens):\n- **stream_status**: Stream active/idle/disabled changes\n- **trade_executed**: Buy/sell trades on bonding curves\n- **holder_count_updated**: Holder count changes\n- **pool_badge_assigned**: Token badge assignments\n- **viewer_count**: Live viewer count updates\n\n### Site Config Events (platform-wide):\n- **site_config_changed**: Generic config changes\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Usage in Client Code\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed, useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Basic subscription\nconst { isSubscribed, siteConfig } = useGlobalFeed({ autoSubscribe: true });\n\n// Filtered subscription\nconst { events } = useGlobalFeedFiltered({\n  tokenNames: ['token1', 'token2'],\n  eventTypes: ['trade_executed']\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onTradeExecuted: (event) => console.log('Trade:', event),\n  onStreamGlobalStatus: (event) => console.log('Stream status:', event)\n});\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Authentication: docs/websocket/AUTHENTICATION.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": []
     },
     "unsubscribeFromGlobalFeedReference": {
@@ -7756,7 +7779,7 @@
       "category": "global-feed",
       "description": "Reference: Unsubscribe from the global feed.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Unsubscription happens in your client code.\n\n## When to Unsubscribe\n\nUnsubscribe from the global feed when:\n- Component unmounts (React)\n- User navigates away\n- Feature is no longer needed\n- Application is shutting down\n- Connection is being closed\n\n## Unsubscribing\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useEffect } from 'react';\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nexport function HomePage() {\n  const { isSubscribed, unsubscribe } = useGlobalFeed();\n\n  useEffect(() => {\n    // Subscribe on mount (auto via hook)\n\n    // Cleanup on unmount\n    return () => {\n      if (isSubscribed) {\n        unsubscribe();\n        console.log('Unsubscribed from global feed');\n      }\n    };\n  }, [isSubscribed, unsubscribe]);\n\n  return <div>{/* content */}</div>;\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onTradeExecuted: (event) => console.log('Trade:', event),\n  onStreamStatus: (event) => console.log('Stream status:', event),\n});\n\n// Later, when done with the feed\nservice.unsubscribeFromGlobalFeed();\nconsole.log('Unsubscribed from global feed');\n\n// And finally, close the connection\nawait service.disconnect();\nconsole.log('Disconnected from WebSocket');\n```\n\n## Cleanup Sequence\n\nBest practice cleanup sequence:\n\n```typescript\n// 1. Unsubscribe from global feed\nawait service.unsubscribeFromGlobalFeed();\n\n// 2. Unsubscribe from any token detail subscriptions if needed\nawait service.unsubscribeFromToken('tokenName');\n\n// 3. Disconnect WebSocket\nawait service.disconnect();\n```\n\n## Resource Management\n\nAfter unsubscribing:\n- Event listeners stop firing\n- Memory from event buffers is freed\n- No further network traffic from feed\n- Can still reconnect/resubscribe later if needed\n\n## Errors and Edge Cases\n\n```typescript\n// Safe to unsubscribe if not subscribed\nif (isSubscribed) {\n  unsubscribe();\n}\n\n// Safe to call multiple times\nunsubscribe();\nunsubscribe(); // No error\n\n// Disconnecting also unsubscribes automatically\nawait service.disconnect(); // Unsubscribes from all rooms\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": []
     },
     "globalFeedStatusReference": {
@@ -7765,7 +7788,7 @@
       "category": "global-feed",
       "description": "Reference: Check global feed subscription status.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Status checking happens in your client code.\n\n## Checking Subscription Status\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nconst { isSubscribed, isConnected } = useGlobalFeed({ autoSubscribe: true });\n\nif (isSubscribed && isConnected) {\n  console.log('Successfully subscribed and connected to global feed');\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nconst isSubscribed = service.isSubscribedToGlobalFeed();\nconst isConnected = service.isConnected();\n\nconsole.log(`Subscription status: ${isSubscribed ? 'subscribed' : 'not subscribed'}`);\nconsole.log(`Connection status: ${isConnected ? 'connected' : 'disconnected'}`);\n```\n\n## Status Indicators\n\n- **isSubscribed**: true if you've successfully subscribed to the `global:feed` room\n- **isConnected**: true if WebSocket connection is active and authenticated\n\n## Common Status Scenarios\n\n| Subscribed | Connected | Meaning |\n|-----------|-----------|---------|\n| false | false | Not initialized - call connect() and subscribe first |\n| true | false | Subscribed but connection dropped - reconnecting automatically |\n| false | true | Connected but not subscribed - call subscribeToGlobalFeed() |\n| true | true | ✅ Ready to receive events |\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": []
     },
     "monitorGlobalFeedEventsReference": {
@@ -7774,7 +7797,7 @@
       "category": "global-feed",
       "description": "Reference: Monitor and filter global feed events.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Event monitoring happens in your client code.\n\n## Available Event Types\n\n### Token Events (broadcast to all subscribers):\n- **stream_status**: Stream active/idle/disabled status changed\n- **trade_executed**: Buy/sell trade on bonding curve\n- **holder_count_updated**: Holder count increased/decreased\n- **pool_badge_assigned**: Pool earned a badge\n- **viewer_count**: Live viewer count updated\n- **token_config_updated**: Unified config change (countdown, language, toggles, social links)\n- **stats_updated**: Token stats update (price, market cap, bonding curve after trades)\n\n### Site Config Events (global feature flags):\n- **site_config_changed**: Generic config change event\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Monitoring Events\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Monitor specific event types on specific tokens\nconst { events } = useGlobalFeedFiltered({\n  tokenNames: ['bitcoin', 'ethereum'],\n  eventTypes: ['trade_executed', 'stream_status'],\n  maxBufferSize: 100\n});\n\n// Process buffered events\nevents.forEach(event => {\n  console.log(`Event: ${event.type}`, event.data);\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onTradeExecuted: (data) => {\n    console.log(`Trade on ${data.tokenName}: ${data.tradeType}`);\n  },\n  onStreamStatus: (data) => {\n    console.log(`Stream status: ${data.status}`);\n  },\n  onViewerCount: (data) => {\n    console.log(`Viewers: ${data.viewerCount}`);\n  },\n  onTokenConfigUpdated: (data) => {\n    console.log(`Config updated for ${data.tokenName}`);\n  },\n  onStatsUpdated: (data) => {\n    console.log(`Stats: ${data.tokenName} price=${data.galaPrice}`);\n  },\n  onStreamGlobalStatus: (data) => {\n    console.log(`Streaming globally ${data.enabled ? 'enabled' : 'disabled'}`);\n  },\n});\n```\n\n## Client-Side Filtering\n\nFor better performance, filter events on the client side:\n\n```typescript\n// Only process trades for visible tokens\nconst visibleTokens = new Set(['bitcoin', 'ethereum']);\n\nsocket.on('trade_executed', (data) => {\n  if (visibleTokens.has(data.tokenName)) {\n    updateTokenCard(data);\n  }\n});\n\n// Only process site config events\nsocket.on('stream_global_status', (data) => {\n  updateGlobalUI(data);\n});\n```\n\n## Use Cases\n\n1. **Homepage Card Updates**: Monitor stream_status, trade_executed, viewer_count, holder_count, stats_updated\n2. **Real-Time Charts**: Monitor stats_updated for price and volume data\n3. **Token Config Changes**: Monitor token_config_updated for countdown, language, toggle changes\n4. **Feature Availability**: Monitor site_config_changed events\n5. **Activity Feed**: Buffer and display recent events to users\n6. **Analytics**: Count and aggregate event types\n\n## Best Practices\n\n- **Buffer management**: Keep maxBufferSize reasonable (100-1000 events)\n- **Unsubscribe cleanup**: Leave the feed when the component unmounts\n- **Client-side filtering**: Filter by tokenNames to reduce processing\n- **Selective subscriptions**: Only listen to event types you need\n- **Error handling**: Handle connection drops and reconnection\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": []
     },
     "siteConfigStateReference": {
@@ -7783,7 +7806,7 @@
       "category": "global-feed",
       "description": "Reference: Access site configuration state from global feed.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Config access happens in your client code.\n\n## Site Configuration Events\n\nThe global feed broadcasts site-wide configuration changes. Track these to know when:\n- Streaming is globally enabled/disabled\n- Chat is globally enabled/disabled\n- Comments are globally enabled/disabled\n- Webhooks are globally enabled/disabled\n\n## Accessing Config State\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nconst { siteConfig } = useGlobalFeed({ autoSubscribe: true });\n\nif (siteConfig) {\n  console.log('Site Configuration:');\n  console.log('  Streaming:', siteConfig.streamingEnabled ? '🟢' : '🔴');\n  console.log('  Chat:', siteConfig.chatEnabled ? '🟢' : '🔴');\n  console.log('  Comments:', siteConfig.commentsEnabled ? '🟢' : '🔴');\n  console.log('  Webhooks:', siteConfig.webhooksEnabled ? '🟢' : '🔴');\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n  url: 'wss://api.launchpad.gala.com/ws',\n  authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n  onStreamGlobalStatus: (data) => {\n    console.log('Stream status changed:', data.enabled);\n  },\n  onStreamChatGlobalStatus: (data) => {\n    console.log('Chat status changed:', data.enabled);\n  },\n  onCommentsGlobalStatus: (data) => {\n    console.log('Comments status changed:', data.enabled);\n  },\n  onWebhooksGlobalStatus: (data) => {\n    console.log('Webhooks status changed:', data.enabled);\n  },\n});\n```\n\n## Site Config Interface\n\n```typescript\ninterface SiteConfigState {\n  streamingEnabled: boolean;   // Global streaming feature enabled\n  chatEnabled: boolean;        // Global chat feature enabled\n  commentsEnabled: boolean;    // Global comments feature enabled\n  webhooksEnabled: boolean;    // Global webhooks feature enabled\n  lastUpdated: ISO8601 string; // When config was last updated\n}\n```\n\n## Events\n\n- **site_config_changed**: Generic config change (includes all flags)\n- **stream_global_status**: Streaming enabled/disabled globally\n- **chat_global_status**: Chat enabled/disabled globally\n- **comments_global_status**: Comments enabled/disabled globally\n- **webhooks_global_status**: Webhooks enabled/disabled globally\n\n## Use Cases\n\n1. **Disable UI features**: If streaming is disabled, don't show stream controls\n2. **Show status messages**: Inform users when features are globally unavailable\n3. **Enable/disable monitoring**: Only set up detailed monitoring if features are enabled\n4. **Real-time notifications**: Notify users when features become available/unavailable\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/site-config-demo.ts\n\nAuthentication: None required (public endpoint)",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": []
     },
     "emitTradeExecuted": {
@@ -7792,7 +7815,7 @@
       "category": "websocket-admin",
       "description": "Emit a trade execution event to token subscribers.\n\nBroadcasts a trade execution event to all connected clients subscribed to a token.\nPerfect for notifying traders in real-time when a trade occurs on a token.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Trade executed event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7831,7 +7854,7 @@
       "category": "websocket-admin",
       "description": "Emit a balance update event to a specific user.\n\nNotifies a specific user that their token and/or GALA balances have changed, typically after a trade or transfer.\nPerfect for real-time wallet updates after trade execution or token transfers.\n\n**Event Recipients:** The specified user via their user:userAddress room\n\nRETURNS: { success: true, message: \"Balance updated event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "userAddress",
@@ -7900,7 +7923,7 @@
       "category": "websocket-admin",
       "description": "Emit a viewer count update event.\n\nBroadcasts updated viewer count to all connected clients subscribed to a token.\nUse this to show real-time viewer metrics during streams.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Viewer count event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7923,7 +7946,7 @@
       "category": "websocket-admin",
       "description": "Emit a stream countdown event.\n\nNotifies all subscribers of a token when the next live stream will start.\nPerfect for building anticipation and getting viewers ready for a scheduled stream.\n\n**Event Recipients:** All clients subscribed to the token:token_name room, plus globally\n\nRETURNS: { success: true, message: \"Stream countdown event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -7952,7 +7975,7 @@
       "category": "websocket-admin",
       "description": "Emit a chat message event to token chat subscribers.\n\nBroadcasts a system or admin chat message to all connected clients in a token's chat room.\nPerfect for announcements, moderation messages, or system notifications.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Chat message event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8010,7 +8033,7 @@
       "category": "websocket-admin",
       "description": "Emit a typing indicator event.\n\nShows which users are currently typing in a token's chat room.\nHelps create the perception of real-time conversation (e.g., \"3 users typing...\").\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Typing indicator event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8039,7 +8062,7 @@
       "category": "websocket-admin",
       "description": "Emit a token banned event.\n\nBroadcasts globally that a token has been banned from the platform.\nNotifies all connected clients about the ban for compliance and awareness.\n\n**Event Recipients:** All globally connected clients (broadcast)\n\nRETURNS: { success: true, message: \"Token banned event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8074,7 +8097,7 @@
       "category": "websocket-admin",
       "description": "Emit a token unbanned event.\n\nBroadcasts globally that a previously banned token has been unbanned/restored.\nNotifies all connected clients that the token is now available again.\n\n**Event Recipients:** All globally connected clients (broadcast)\n\nRETURNS: { success: true, message: \"Token unbanned event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8103,7 +8126,7 @@
       "category": "websocket-admin",
       "description": "Emit a moderator added event.\n\nNotifies subscribers that a user has been added or promoted to a moderator role.\nUseful for transparency and updating the UI with the new moderator information.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Moderator added event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8143,7 +8166,7 @@
       "category": "websocket-admin",
       "description": "Emit a moderator removed event.\n\nNotifies subscribers that a moderator has been removed or demoted from their role.\nUseful for transparency and updating the UI with the change in moderator status.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Moderator removed event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8172,7 +8195,7 @@
       "category": "websocket-admin",
       "description": "Emit a user profile updated event.\n\nNotifies a specific user that their profile has been updated (e.g., avatar, display name, bio).\nUseful for real-time profile synchronization across all their connected sessions/devices.\n\n**Event Recipients:** The specified user via their user:userAddress room\n\nRETURNS: { success: true, message: \"User profile updated event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "userAddress",
@@ -8201,7 +8224,7 @@
       "category": "websocket-admin",
       "description": "Emit a site configuration changed event.\n\nBroadcasts globally that the site configuration has changed (e.g., maintenance mode, trading disabled, fees updated).\nNotifies all connected clients about platform-wide changes requiring immediate awareness.\n\n**Event Recipients:** All globally connected clients (broadcast)\n\nRETURNS: { success: true, message: \"Site config changed event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "key",
@@ -8316,7 +8339,7 @@
       "category": "websocket-admin",
       "description": "Emit a recordings count updated event.\n\nNotifies all connected clients subscribed to a token that the number of available recordings has changed.\nUse this when recordings are added, removed, or become available to update UI counters.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Recordings count updated event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8344,7 +8367,7 @@
       "category": "websocket-admin",
       "description": "Emit a download ready event.\n\nNotifies all connected clients subscribed to a token that a recording download is ready.\nUse this when Mux has finished processing a recording and made it available for download.\n\n**Event Recipients:** All clients subscribed to the token:token_name room\n\nRETURNS: { success: true, message: \"Download ready event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tokenName",
@@ -8396,7 +8419,7 @@
       "category": "websocket-admin",
       "description": "Emit a generic WebSocket event (advanced/custom use).\n\nFor most use cases, use the specific boutique tools like:\n- gala_launchpad_emit_trade_executed\n- gala_launchpad_emit_chat_message\n- gala_launchpad_emit_stream_status\n- etc.\n\nThis generic tool is for advanced scenarios where you need custom event payloads\nor actions not covered by the boutique helpers.\n\n**Event Routing:**\n- If tokenName: Routes to token:tokenName room\n- If userAddress: Routes to user:userAddress room\n- If broadcast=true: Routes to global room\n\n**Payload Format:**\nProvide a JSON object with custom event data. Structure depends on your event type.\n\nRETURNS: { success: true, message: \"Event emitted\" }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "action",
@@ -8453,7 +8476,7 @@
       "category": "websocket-admin",
       "description": "List currently connected WebSocket clients with optional filtering.\n\nReturns a paginated list of connected WebSocket clients, with optional filters\nfor room, token, user addresses, authentication status, and connection duration.\nUseful for monitoring active connections and targeting specific audiences.\n\n**Query Parameters:**\n- room: Filter by room name (e.g., \"token:anime\")\n- tokenName: Shorthand for room=token:{name}\n- userAddress: Find specific user (exact match)\n- userAddresses: Find any of these users (comma-separated)\n- authenticated: Filter by auth status\n- isOverseer: Filter by admin/overseer status\n- minConnectionSeconds: Only clients connected longer than X seconds\n- offset/limit: Pagination\n\n**Connection Info Includes:**\n- Socket ID\n- Wallet address (if authenticated)\n- Authentication status\n- Connected rooms (subscribed channels)\n- Connection duration\n- Last activity timestamp\n\nRETURNS: {\n  clients: [\n    {\n      socketId, address?, authenticated, connectedAt, lastActivity, rooms: [...]\n    }\n  ],\n  summary: {\n    totalConnected, authenticatedCount, anonymousCount,\n    overseerCount, requestedUsersOnline,\n    rooms: [{ room, connectedCount, authenticatedCount }, ...]\n  },\n  pagination: { offset, limit, total, hasMore }\n}\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": false,
+      "authRequired": true,
       "parameters": [
         {
           "name": "room",
@@ -8581,7 +8604,7 @@
       "category": "websocket-admin",
       "description": "Get list of currently online overseers and admins.\n\nUseful for:\n- Finding active admins to notify about urgent issues\n- Checking if any overseers are online before admin events\n- Broadcasting to all online admins\n\nRETURNS: {\n  clients: [list of overseer clients],\n  count: total overseer count\n}\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [],
       "topic": "websocket-admin"
     },
@@ -8600,7 +8623,7 @@
       "category": "ai-moderation",
       "description": "Update AI moderation settings.\n\nConfigure AI-powered content moderation behavior.\nOnly provided fields will be updated.\n\nRETURNS: { settings: { enabled, mode, provider, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "enabled",
@@ -8648,7 +8671,7 @@
       "category": "ai-moderation",
       "description": "Trigger AI moderation for a content flag.\n\nQueues flagged content for AI moderation. Moderation runs asynchronously -\nuse gala_launchpad_get_ai_moderation_result to poll for results or listen\nfor the AI_MODERATION_COMPLETE WebSocket event.\n\nFor video content with tiered analysis enabled:\n- Quick scan runs first (5 frames at 480px)\n- If concerns found, detailed scan runs (20 frames at 640px)\n\nRETURNS: { queued: boolean, message: string }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "flagId",
@@ -8751,6 +8774,106 @@
       "authRequired": false,
       "parameters": [],
       "topic": "platform-stats"
+    },
+    "registerPushToken": {
+      "name": "registerPushToken",
+      "mcpTool": "gala_launchpad_register_push_token",
+      "category": "notifications",
+      "description": "Register a push notification device token.\n\nAssociates a push token (FCM or APNs) with the authenticated user.\nIf the token already exists, it updates the associated device info.\n\n**Parameters:**\n- token (required): Push notification token string (FCM or APNs)\n- platform (required): Device platform - \"ios\" or \"android\"\n- deviceId (optional): Device identifier for multi-device management\n\nRETURNS: { registered: boolean }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "token",
+          "type": "string",
+          "required": true,
+          "description": "Push notification token (FCM or APNs token, max 512 characters)"
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "required": true,
+          "description": "Device platform - must be \"ios\" or \"android\"",
+          "enum": [
+            "ios",
+            "android"
+          ]
+        },
+        {
+          "name": "deviceId",
+          "type": "string",
+          "required": false,
+          "description": "Optional device identifier for multi-device management (max 255 characters)"
+        }
+      ]
+    },
+    "unregisterPushToken": {
+      "name": "unregisterPushToken",
+      "mcpTool": "gala_launchpad_unregister_push_token",
+      "category": "notifications",
+      "description": "Unregister a push notification device token.\n\nDeactivates a push token so the device no longer receives notifications.\n\n**Parameters:**\n- token (required): The push notification token to unregister\n\nRETURNS: { unregistered: boolean }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "token",
+          "type": "string",
+          "required": true,
+          "description": "Push notification token to unregister"
+        }
+      ]
+    },
+    "fetchNotificationPreferences": {
+      "name": "fetchNotificationPreferences",
+      "mcpTool": "gala_launchpad_fetch_notification_preferences",
+      "category": "notifications",
+      "description": "Get notification preferences for the authenticated user.\n\nReturns the current push notification preference settings.\n\nRETURNS: { preferences: { tradesEnabled, streamsEnabled, chatEnabled, systemEnabled } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": []
+    },
+    "updateNotificationPreferences": {
+      "name": "updateNotificationPreferences",
+      "mcpTool": "gala_launchpad_update_notification_preferences",
+      "category": "notifications",
+      "description": "Update notification preferences for the authenticated user.\n\nPartial update - only provided fields are modified, others remain unchanged.\nAt least one field should be provided.\n\n**Preference fields (all optional):**\n- tradesEnabled: Enable/disable trade notifications\n- streamsEnabled: Enable/disable stream notifications\n- chatEnabled: Enable/disable chat notifications\n- systemEnabled: Enable/disable system notifications\n\nRETURNS: { preferences: { tradesEnabled, streamsEnabled, chatEnabled, systemEnabled } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
+      "operationType": "write",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tradesEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable trade notifications"
+        },
+        {
+          "name": "streamsEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable stream notifications"
+        },
+        {
+          "name": "chatEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable chat notifications"
+        },
+        {
+          "name": "systemEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Enable/disable system notifications"
+        }
+      ]
+    },
+    "fetchClientFlags": {
+      "name": "fetchClientFlags",
+      "mcpTool": "gala_launchpad_fetch_client_flags",
+      "category": "notifications",
+      "description": "Get client feature flags for the native mobile app.\n\nReturns feature flag overrides that control which features are enabled/disabled.\nUseful for checking platform feature availability before performing operations.\n\nRETURNS: { flags: { PUSH_NOTIFICATIONS, OFFLINE_MODE, BIOMETRIC_AUTH, DARK_MODE, LIVE_STREAMING, DEX_TRADING, ... } }\n\nAuthentication: None required (public endpoint).",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": []
     }
   },
   "topics": {
@@ -8918,6 +9041,31 @@
         "getSwapPoolInfo"
       ],
       "category": "dex"
+    },
+    "gdex-stream": {
+      "key": "gdex-stream",
+      "label": "Gdex stream",
+      "description": "Gdex stream operations",
+      "methods": [
+        "connect",
+        "disconnect",
+        "isConnected",
+        "request",
+        "serverInfo",
+        "ping",
+        "getPool",
+        "getBalance",
+        "getPositions",
+        "getBlockHeight",
+        "quote",
+        "getToken",
+        "subscribeSwaps",
+        "subscribePool",
+        "subscribeBalances",
+        "subscribePoolCreated",
+        "subscribeBlocks"
+      ],
+      "category": "utils"
     },
     "error-handling": {
       "key": "error-handling",
@@ -9615,6 +9763,17 @@
   },
   "authMatrix": {
     "public": [
+      "actionFlag",
+      "addLiquidityByPrice",
+      "addLiquidityByTicks",
+      "addReactionToChatMessage",
+      "addReactionToComment",
+      "addSimulcastTarget",
+      "banToken",
+      "bridgeIn",
+      "bridgeOut",
+      "burnTokens",
+      "buy",
       "calculateBuyAmount",
       "calculateBuyAmountExternal",
       "calculateBuyAmountForGraduation",
@@ -9629,10 +9788,52 @@
       "checkPoolExists",
       "checkTokenName",
       "checkTokenSymbol",
+      "claimModeratorInvite",
+      "claimNftCollection",
+      "claimOverseerInvite",
+      "cleanup",
+      "clearCache",
+      "collectPositionFees",
+      "createApiKey",
+      "createBan",
+      "createFlag",
+      "createMessage",
+      "createModeratorInvite",
+      "createNftTokenClass",
+      "createOverseerDirect",
+      "createOverseerInvite",
+      "createSolanaWallet",
+      "createWallet",
+      "deleteMessage",
+      "deleteRecording",
+      "dismissFlag",
+      "emitBalanceUpdated",
+      "emitChatMessage",
       "emitChatStatus",
+      "emitDownloadReady",
       "emitFeatureStatus",
+      "emitModeratorAdded",
+      "emitModeratorRemoved",
       "emitRecordingStatus",
+      "emitRecordingsCountUpdated",
+      "emitSiteConfigChanged",
+      "emitStreamCountdown",
       "emitStreamStatus",
+      "emitTokenBanned",
+      "emitTokenUnbanned",
+      "emitTradeExecuted",
+      "emitTypingIndicator",
+      "emitUserProfileUpdated",
+      "emitViewerCount",
+      "emitWebsocketEvent",
+      "ensureValidToken",
+      "estimateBridgeFee",
+      "estimateNftMintFee",
+      "estimateNftOperationFees",
+      "estimateRemoveLiquidity",
+      "estimateUnwrapFee",
+      "estimateWrapFee",
+      "executeSwap",
       "explainSdkUsage",
       "explainWebsocketEvents",
       "fetchAllAvailableDexTokens",
@@ -9648,6 +9849,7 @@
       "fetchAvailableBalance",
       "fetchAvailableDexTokens",
       "fetchBridgeableTokensByNetwork",
+      "fetchClientFlags",
       "fetchCompositePoolData",
       "fetchCurrentDexLeaderboard",
       "fetchCurrentDexSeason",
@@ -9663,7 +9865,6 @@
       "fetchLaunchpadFee",
       "fetchLaunchpadTokenSpotPrice",
       "fetchLockedTokens",
-      "fetchMessages",
       "fetchNftBalances",
       "fetchNftCollections",
       "fetchNftTokenClasses",
@@ -9672,6 +9873,7 @@
       "fetchPools",
       "fetchPriceHistory",
       "fetchProfile",
+      "fetchReferralUrl",
       "fetchReferrals",
       "fetchReferralsSummary",
       "fetchSaleDetails",
@@ -9691,7 +9893,11 @@
       "fetchUserHolderContext",
       "fetchVolumeData",
       "fetchWrappableTokens",
+      "flushAllCache",
+      "flushCacheByAddress",
+      "flushCacheByToken",
       "getAccessToken",
+      "getActiveModerators",
       "getActiveUsers",
       "getAddress",
       "getAiModerationResult",
@@ -9699,33 +9905,41 @@
       "getAiModerationStatus",
       "getAllSwapUserAssets",
       "getAllUserLiquidityPositions",
+      "getApiKey",
+      "getApiKeyRoles",
       "getAvailableRoles",
+      "getBanStats",
+      "getBanStatus",
       "getBridgeStatus",
       "getBundlerTransactionResult",
       "getCacheInfo",
       "getChatStatus",
       "getConfig",
-      "getConnectedClients",
       "getEngagementStats",
       "getEnvironment",
       "getEthereumAddress",
+      "getEthereumAddressFromPrivateKey",
       "getEthereumTransactionStatus",
       "getEventSchema",
       "getFlagStats",
       "getGlobalChatStatus",
       "getGlobalStreamingStatus",
-      "getHolderCount",
-      "getHolderHistory",
-      "getHolderRank",
-      "getHoldersByBalance",
       "getHomeOembed",
       "getInviteStats",
       "getLiquidityPosition",
       "getLiquidityPositionById",
+      "getManagedTokens",
       "getMessageStats",
+      "getModeratedTokens",
+      "getModeratorInvite",
+      "getMyOverseerStatus",
       "getNftCollectionClaimFee",
       "getNftTokenClassCreateFee",
+      "getOnlineOverseers",
       "getOnlineUsers",
+      "getOverseerInvite",
+      "getOverseerSummary",
+      "getOverseerUserSummary",
       "getPinnedMessage",
       "getPlatformStats",
       "getPlatformStatus",
@@ -9733,24 +9947,27 @@
       "getPoolRealtimeState",
       "getPremintQuote",
       "getProfileOembed",
+      "getPublicKeyFromPrivateKey",
       "getRecentTrades",
       "getRecordingDownload",
       "getRestrictedNames",
+      "getSession",
       "getSimulcastTargets",
       "getSolanaTransactionStatus",
       "getStreamRecordings",
+      "getStreamRole",
       "getSupportedBridgeTokens",
       "getSwapPoolInfo",
       "getSwapPoolPrice",
       "getSwapQuoteExactInput",
       "getSwapQuoteExactOutput",
       "getSwapUserAssets",
+      "getTokenAccess",
       "getTokenBan",
+      "getTokenBanStats",
       "getTokenViewers",
       "getTokenWeeklyHistory",
-      "getTopHolders",
       "getTradeQuote",
-      "getTrades",
       "getUrlByTokenName",
       "getUserLiquidityPositions",
       "getUserStats",
@@ -9760,6 +9977,10 @@
       "getWrapCounterpart",
       "getWrapStatus",
       "getWrappableToken",
+      "globalFeedReference",
+      "globalFeedStatusReference",
+      "graduateToken",
+      "hasWallet",
       "isAuthenticated",
       "isTokenBanned",
       "isTokenBridgeableToEthereum",
@@ -9768,103 +9989,16 @@
       "isTokenGraduated",
       "isTokenWrappable",
       "isUserOnline",
+      "launchToken",
+      "listApiKeys",
       "listBans",
       "listFlags",
       "listGlobalFlags",
-      "listTokenBans",
-      "resolveTokenClassKey",
-      "resolveVaultAddress"
-    ],
-    "authenticated": [
-      "actionFlag",
-      "addContentReaction",
-      "addLiquidityByPrice",
-      "addLiquidityByTicks",
-      "addReactionToChatMessage",
-      "addReactionToComment",
-      "addSimulcastTarget",
-      "banToken",
-      "bridgeIn",
-      "bridgeOut",
-      "burnTokens",
-      "buy",
-      "claimModeratorInvite",
-      "claimNftCollection",
-      "claimOverseerInvite",
-      "cleanup",
-      "clearCache",
-      "collectPositionFees",
-      "connectStreamWebsocket",
-      "createApiKey",
-      "createBan",
-      "createFlag",
-      "createMessage",
-      "createModeratorInvite",
-      "createNftTokenClass",
-      "createOverseerDirect",
-      "createOverseerInvite",
-      "createSolanaWallet",
-      "createWallet",
-      "deleteMessage",
-      "deleteRecording",
-      "dismissFlag",
-      "emitBalanceUpdated",
-      "emitChatMessage",
-      "emitDownloadReady",
-      "emitModeratorAdded",
-      "emitModeratorRemoved",
-      "emitRecordingsCountUpdated",
-      "emitSiteConfigChanged",
-      "emitStreamCountdown",
-      "emitTokenBanned",
-      "emitTokenUnbanned",
-      "emitTradeExecuted",
-      "emitTypingIndicator",
-      "emitUserProfileUpdated",
-      "emitViewerCount",
-      "emitWebsocketEvent",
-      "ensureValidToken",
-      "estimateBridgeFee",
-      "estimateNftMintFee",
-      "estimateNftOperationFees",
-      "estimateRemoveLiquidity",
-      "estimateUnwrapFee",
-      "estimateWrapFee",
-      "executeSwap",
-      "fetchReferralUrl",
-      "flushAllCache",
-      "flushCacheByAddress",
-      "flushCacheByToken",
-      "flushCacheWalletAliases",
-      "getActiveModerators",
-      "getApiKey",
-      "getApiKeyRoles",
-      "getBanStats",
-      "getBanStatus",
-      "getEthereumAddressFromPrivateKey",
-      "getManagedTokens",
-      "getModeratedTokens",
-      "getModeratorInvite",
-      "getMyOverseerStatus",
-      "getOnlineOverseers",
-      "getOverseerInvite",
-      "getOverseerSummary",
-      "getOverseerUserSummary",
-      "getPublicKeyFromPrivateKey",
-      "getSession",
-      "getStreamRole",
-      "getTokenAccess",
-      "getTokenBanStats",
-      "globalFeedReference",
-      "globalFeedStatusReference",
-      "graduateToken",
-      "hasWallet",
-      "launchToken",
-      "listApiKeys",
       "listModeratorInvites",
       "listOverseerInvites",
       "listOverseerUsers",
       "listOverseers",
+      "listTokenBans",
       "lockTokens",
       "login",
       "logout",
@@ -9881,21 +10015,19 @@
       "pinMessage",
       "refreshToken",
       "removeBan",
-      "removeContentReaction",
       "removeLiquidity",
       "removeReactionFromChatMessage",
       "removeReactionFromComment",
       "removeSimulcastTarget",
       "requestSolanaDevnetAirdrop",
       "resetStreamKey",
+      "resolveTokenClassKey",
+      "resolveVaultAddress",
       "revokeApiKey",
       "revokeModeratorInvite",
       "revokeOverseer",
       "revokeOverseerInvite",
       "sell",
-      "sendStreamChatViaWebSocket",
-      "sendStreamReaction",
-      "sendTypingIndicator",
       "setChatEnabled",
       "setGlobalChatEnabled",
       "setGlobalStreamingEnabled",
@@ -9929,6 +10061,27 @@
       "uploadTokenImage",
       "validateToken",
       "wrapToken"
+    ],
+    "authenticated": [
+      "addContentReaction",
+      "connectStreamWebsocket",
+      "fetchMessages",
+      "fetchNotificationPreferences",
+      "flushCacheWalletAliases",
+      "getConnectedClients",
+      "getHolderCount",
+      "getHolderHistory",
+      "getHolderRank",
+      "getHoldersByBalance",
+      "getTopHolders",
+      "getTrades",
+      "registerPushToken",
+      "removeContentReaction",
+      "sendStreamChatViaWebSocket",
+      "sendStreamReaction",
+      "sendTypingIndicator",
+      "unregisterPushToken",
+      "updateNotificationPreferences"
     ]
   },
   "explainSdkTeacher": {
@@ -9958,6 +10111,7 @@
       "fetch-dex-leaderboard-by-season-id",
       "fetch-dex-pools",
       "fetch-pools",
+      "gdex-stream",
       "global-bans",
       "global-feed-subscription",
       "graduation-detection",
@@ -10002,8 +10156,8 @@
       "weekly-challenge",
       "wrap-unwrap-operations"
     ],
-    "topicCount": 64,
-    "methodCount": 312,
+    "topicCount": 65,
+    "methodCount": 317,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   },
   "walletModule": {
@@ -10015,12 +10169,12 @@
         "methods": [
           {
             "name": "fromWallet",
-            "signature": "static fromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "signature": "static fromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "description": "Creates a PrivateKeyProvider from an existing ethers.js Wallet",
             "parameters": [
               {
                 "name": "wallet",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
                 "required": true,
                 "description": ""
               }
@@ -10129,10 +10283,10 @@
           },
           {
             "name": "getWallet",
-            "signature": "getWallet(): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "signature": "getWallet(): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "description": "Gets the underlying ethers.js Wallet instance\n\nUseful for operations that require direct Wallet access.",
             "parameters": [],
-            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "isAsync": false,
             "isStatic": false
           }
@@ -10657,11 +10811,11 @@
       {
         "name": "createProviderFromWallet",
         "description": "Creates a PrivateKeyProvider from an ethers.js Wallet\n\nConvenience function for SDK users who already have an ethers Wallet.",
-        "signature": "function createProviderFromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "signature": "function createProviderFromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "required": true,
             "description": ""
           }
@@ -10732,11 +10886,11 @@
       {
         "name": "walletToProvider",
         "description": "Converts an ethers Wallet to a WalletProvider\n\nFor backward compatibility with SDK code that uses ethers Wallet directly.",
-        "signature": "function walletToProvider(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "signature": "function walletToProvider(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
             "required": true,
             "description": ""
           }
@@ -10747,7 +10901,7 @@
       {
         "name": "providerToWallet",
         "description": "Gets an ethers Wallet from a provider if available\n\nFor backward compatibility with SDK code that needs ethers Wallet.\nOnly works with PrivateKeyProvider.",
-        "signature": "function providerToWallet(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "signature": "function providerToWallet(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
         "parameters": [
           {
             "name": "provider",
@@ -10756,7 +10910,7 @@
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
         "isAsync": false
       },
       {
