@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "5.0.4-beta.63",
-    "generatedAt": "2026-07-11T05:06:00.433Z",
+    "version": "5.0.4-beta.1",
+    "generatedAt": "2026-07-11T08:07:59.055Z",
     "topicCount": 65,
     "methodCount": 317,
     "warnings": [
@@ -2417,11 +2417,11 @@
         },
         {
           "userQuestion": "What are best practices for manage API keys?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Grant the minimum role set**: Inspect `getApiKeyRoles()` before calling `createApiKey()`.\n2. **Inventory and rotate keys**: Use `listApiKeys()` and `updateApiKey()` on a regular schedule.\n3. **Revoke compromised keys immediately**: Confirm the target with `getApiKey()` and then call `revokeApiKey()`."
         },
         {
           "userQuestion": "What errors should I handle when manage API keys?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.apikeymanagement(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `UnauthorizedAccess`: Creating or managing keys requires an authorized admin identity\n- `InvalidRole`: Requested role is not returned by `getApiKeyRoles()`\n- `ApiKeyNotFound`: The key was revoked or the identifier is stale\n\n**Best Practice:** Review `listApiKeys()` regularly and revoke unused credentials with `revokeApiKey()`."
         },
         {
           "userQuestion": "Can you walk me through a complete manage API keys example?",
@@ -2503,7 +2503,7 @@
         },
         {
           "userQuestion": "What are best practices for check token balances?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use the balance that matches the action**: Call `fetchAvailableBalance()` for spendable funds and `fetchTokenBalance()` for a specific token.\n2. **Avoid serial portfolio reads**: Use `fetchTokensHeld()` instead of repeatedly querying individual assets.\n3. **Refresh before signing**: Recheck `fetchGalaBalance()` immediately before a transaction because displayed balances can be stale."
         },
         {
           "userQuestion": "Can you walk me through a complete check token balances example?",
@@ -2536,7 +2536,7 @@
         },
         {
           "userQuestion": "What are best practices for manage user profiles?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Fetch before editing**: Seed forms from `fetchProfile()` and send only intended changes through `updateProfile()`.\n2. **Upload media before saving its reference**: Complete `uploadProfileImage()` before `updateProfile()`.\n3. **Paginate managed assets**: Use `getManagedTokens()` as the authority for role-based token access."
         },
         {
           "userQuestion": "Can you walk me through a complete manage user profiles example?",
@@ -2565,11 +2565,11 @@
         },
         {
           "userQuestion": "What are best practices for manage user bans?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check before mutating**: Use `getBanStatus()` before `createBan()` or `removeBan()` to keep actions idempotent.\n2. **Record actionable context**: Supply a clear reason and scope to `createBan()` for later moderator review.\n3. **Paginate moderation views**: Use `listBans()` and reconcile it with `getActiveUsers()` instead of assuming one response is exhaustive."
         },
         {
           "userQuestion": "What errors should I handle when manage user bans?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.banmanagement(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `UnauthorizedAccess`: Caller lacks owner or moderator permissions\n- `BanAlreadyExists`: User is already banned for the requested scope\n- `BanNotFound`: No matching active ban exists to remove\n\n**Tip:** Check `getBanStatus()` before calling `createBan()` or `removeBan()`."
         },
         {
           "userQuestion": "Can you walk me through a complete manage user bans example?",
@@ -2651,11 +2651,11 @@
         },
         {
           "userQuestion": "What are best practices for wrap and unwrap tokens?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Estimate before signing**: Call `estimateWrapFee()` or `estimateUnwrapFee()` before `wrapToken()` or `unwrapToken()`.\n2. **Verify the asset pair**: Use `isTokenWrappable()` and `getWrapCounterpart()` instead of assuming a counterpart.\n3. **Track asynchronous completion**: Poll `getWrapStatus()` after submission and reconcile status before retrying."
         },
         {
           "userQuestion": "What errors should I handle when wrap and unwrap tokens?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.wrapunwrapoperations(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `TokenNotWrappable`: No supported cross-channel counterpart exists\n- `InsufficientFee`: Estimated wrap or unwrap fee is not covered\n- `WrapOperationPending`: A prior operation has not reached a terminal state\n\n**Best Practice:** Verify with `isTokenWrappable()`, estimate fees, and poll `getWrapStatus()` before retrying."
         },
         {
           "userQuestion": "Can you walk me through a complete wrap and unwrap tokens example?",
@@ -2692,7 +2692,7 @@
         },
         {
           "userQuestion": "What are best practices for subscribe to real-time events?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Keep every cleanup handle**: Pair `subscribeToStream()` with `unsubscribeFromStream()` and remove listener callbacks when views unmount.\n2. **Recover from connection changes**: Use `onConnection()` and `onAuthenticated()` to restore subscriptions only after the socket is ready.\n3. **Subscribe narrowly**: Prefer focused listeners such as `onDexPoolCreation()` or `onStreamChatMessage()` over updating unrelated state from every event."
         },
         {
           "userQuestion": "Can you walk me through a complete subscribe to real-time events example?",
@@ -2729,11 +2729,11 @@
         },
         {
           "userQuestion": "What are best practices for global feed subscription?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Connect and authenticate before subscribing**: Call `connectStreamWebSocket()` and `authenticateStreamWebSocket()` before `subscribeToStream()`.\n2. **Use dedicated global listeners**: Register `onLaunchpadTokenCreation()` and `onDexPoolCreation()` for platform-wide creation events.\n3. **Clean up every feed**: Retain listener cleanup callbacks and pair `subscribeToStream()` with `unsubscribeFromStream()`."
         },
         {
           "userQuestion": "What should I learn next after global feed subscription?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Event subscriptions**: `explainSdkUsage({ topic: 'event-subscriptions' })`\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n- **Stream chat**: `explainSdkUsage({ topic: 'stream-chat' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for global feed subscription?",
@@ -2758,11 +2758,11 @@
         },
         {
           "userQuestion": "What are best practices for handle stream chat and messaging?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check both control layers**: Read `getGlobalChatStatus()` and `getChatStatus()` before enabling chat UI.\n2. **Authenticate before sending**: Call `connectStreamWebSocket()`, `authenticateStreamWebSocket()`, and `subscribeToStream()` before `sendStreamChatViaWebSocket()`.\n3. **Clean up connections**: Pair subscriptions with `unsubscribeFromStream()` and call `disconnectStreamWebSocket()` when the session ends."
         },
         {
           "userQuestion": "What errors should I handle when handle stream chat and messaging?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.streamchat(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `ChatDisabled`: Token or global chat is disabled\n- `WebSocketNotAuthenticated`: Stream socket has not completed authentication\n- `NotSubscribed`: Caller attempted to send before joining the token stream\n\n**Tip:** Check `getGlobalChatStatus()` and `getChatStatus()`, then authenticate and `subscribeToStream()` before sending."
         },
         {
           "userQuestion": "Can you walk me through a complete handle stream chat and messaging example?",
@@ -2799,11 +2799,11 @@
         },
         {
           "userQuestion": "What are best practices for manage content flags?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Load the full case**: Review `getComments()` and the flagged content returned by `listFlags()` before acting.\n2. **Choose one terminal outcome**: Use `dismissFlag()` for false positives or `actionFlag()` when enforcement is warranted.\n3. **Preserve an audit trail**: Add context with `createComment()` and correct it with `updateComment()` rather than silently losing moderator rationale."
         },
         {
           "userQuestion": "What errors should I handle when manage content flags?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.contentflagmanagement(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `FlagNotFound`: Flag ID is invalid or already resolved\n- `UnauthorizedAccess`: Caller cannot dismiss or action this flag\n- `InvalidResolution`: The requested action is not valid for the flag state\n\n**Best Practice:** Load the case with `listFlags()` and its comments before choosing `dismissFlag()` or `actionFlag()`."
         },
         {
           "userQuestion": "Can you walk me through a complete manage content flags example?",
@@ -2836,7 +2836,7 @@
         },
         {
           "userQuestion": "What are best practices for manage content reactions?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Pair every add with its matching removal**: Use `addReactionToChatMessage()` with `removeReactionFromChatMessage()` and the comment equivalents for comments.\n2. **Use the generic API for known content IDs**: Prefer `addContentReaction()` and `removeContentReaction()` when the content type is already available.\n3. **Handle duplicate toggles idempotently**: Reconcile the server result from `addReactionToComment()` before updating optimistic UI state."
         },
         {
           "userQuestion": "Can you walk me through a complete manage content reactions example?",
@@ -2914,11 +2914,11 @@
         },
         {
           "userQuestion": "What are best practices for fetch DEX leaderboard seasons?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Cache historical seasons**: `fetchAllDexSeasons()` data changes far less often than live standings.\n2. **Do not assume array order**: Sort the `fetchAllDexSeasons()` result by its explicit season dates or identifiers.\n3. **Handle an empty history**: Treat an empty `fetchAllDexSeasons()` response as a valid no-seasons state."
         },
         {
           "userQuestion": "What should I learn next after fetch DEX leaderboard seasons?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Fetch current dex season**: `explainSdkUsage({ topic: 'fetch-current-dex-season' })`\n- **Fetch current dex leaderboard**: `explainSdkUsage({ topic: 'fetch-current-dex-leaderboard' })`\n- **Fetch dex leaderboard by season id**: `explainSdkUsage({ topic: 'fetch-dex-leaderboard-by-season-id' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for fetch DEX leaderboard seasons?",
@@ -2943,11 +2943,11 @@
         },
         {
           "userQuestion": "What are best practices for view current DEX leaderboard?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Poll at a measured interval**: Cache `fetchCurrentDexLeaderboard()` responses instead of refreshing on every render.\n2. **Preserve server ranking**: Display the rank returned by `fetchCurrentDexLeaderboard()` rather than recomputing from rounded values.\n3. **Handle season rollover**: Refetch `fetchCurrentDexLeaderboard()` when the current season changes."
         },
         {
           "userQuestion": "What should I learn next after view current DEX leaderboard?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Fetch current dex season**: `explainSdkUsage({ topic: 'fetch-current-dex-season' })`\n- **Fetch all dex seasons**: `explainSdkUsage({ topic: 'fetch-all-dex-seasons' })`\n- **Fetch dex leaderboard by season id**: `explainSdkUsage({ topic: 'fetch-dex-leaderboard-by-season-id' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for view current DEX leaderboard?",
@@ -2972,11 +2972,11 @@
         },
         {
           "userQuestion": "What are best practices for get current DEX season info?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Treat no active season as valid**: Handle an empty `fetchCurrentDexSeason()` result without inventing dates.\n2. **Cache until a boundary approaches**: Reuse `fetchCurrentDexSeason()` based on its start and end timestamps.\n3. **Use server time semantics**: Interpret `fetchCurrentDexSeason()` timestamps consistently rather than localizing before comparisons."
         },
         {
           "userQuestion": "What should I learn next after get current DEX season info?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Fetch all dex seasons**: `explainSdkUsage({ topic: 'fetch-all-dex-seasons' })`\n- **Fetch current dex leaderboard**: `explainSdkUsage({ topic: 'fetch-current-dex-leaderboard' })`\n- **Fetch dex leaderboard by season id**: `explainSdkUsage({ topic: 'fetch-dex-leaderboard-by-season-id' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for get current DEX season info?",
@@ -3001,11 +3001,11 @@
         },
         {
           "userQuestion": "What are best practices for analyze DEX volume metrics?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Keep exact volume values**: Preserve numeric strings from `fetchDexAggregatedVolumeSummary()` until display formatting.\n2. **Label the aggregation window**: Present the period returned by `fetchDexAggregatedVolumeSummary()` with every total.\n3. **Cache dashboard reads**: Poll `fetchDexAggregatedVolumeSummary()` at a sensible interval instead of per component."
         },
         {
           "userQuestion": "What should I learn next after analyze DEX volume metrics?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Platform stats**: `explainSdkUsage({ topic: 'platform-stats' })`\n- **Trading analytics**: `explainSdkUsage({ topic: 'trading-analytics' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for analyze DEX volume metrics?",
@@ -3030,11 +3030,11 @@
         },
         {
           "userQuestion": "What are best practices for view DEX leaderboard rankings?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Validate the season first**: Choose an identifier from `fetchAllDexSeasons()` before calling `fetchDexLeaderboardBySeasonId()`.\n2. **Cache completed standings**: Historical `fetchDexLeaderboardBySeasonId()` results should not be fetched on every render.\n3. **Preserve authoritative ranks**: Do not reorder `fetchDexLeaderboardBySeasonId()` entries using rounded display values."
         },
         {
           "userQuestion": "What should I learn next after view DEX leaderboard rankings?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Fetch all dex seasons**: `explainSdkUsage({ topic: 'fetch-all-dex-seasons' })`\n- **Fetch current dex season**: `explainSdkUsage({ topic: 'fetch-current-dex-season' })`\n- **Fetch current dex leaderboard**: `explainSdkUsage({ topic: 'fetch-current-dex-leaderboard' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for view DEX leaderboard rankings?",
@@ -3059,7 +3059,7 @@
         },
         {
           "userQuestion": "What are best practices for analyze DEX trading data?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Fetch one coherent snapshot**: Use `fetchCompositePoolData()` when quotes and pool state must agree.\n2. **Prefer local math for repeated scenarios**: Use `calculateDexPoolQuoteExactAmountLocal()` after loading current state.\n3. **Refresh before execution**: Recheck important results with `calculateDexPoolQuoteExactAmount()` so stale liquidity does not drive a trade."
         },
         {
           "userQuestion": "Can you walk me through a complete analyze DEX trading data example?",
@@ -3088,7 +3088,7 @@
         },
         {
           "userQuestion": "What are best practices for discover tokens on DEX?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use the bounded query for screens**: Call `fetchAvailableDexTokens()` with filters and pagination.\n2. **Reserve full scans for offline work**: Use `fetchAllAvailableDexTokens()` only when the complete token universe is required.\n3. **Cache discovery results briefly**: Reuse `fetchAvailableDexTokens()` responses, but refresh before building a trade route."
         },
         {
           "userQuestion": "What should I learn next after discover tokens on DEX?",
@@ -3117,7 +3117,7 @@
         },
         {
           "userQuestion": "What are best practices for fetch dex pools?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use server pagination for interactive views**: Call `fetchDexPools()` with filters rather than downloading every pool.\n2. **Use full traversal intentionally**: Reserve `fetchAllDexPools()` for exports, indexing, or offline analysis.\n3. **Refresh before trading**: Pool discovery can be cached, but call `fetchDexPools()` again before relying on liquidity-sensitive data."
         },
         {
           "userQuestion": "What should I learn next after fetch dex pools?",
@@ -3146,7 +3146,7 @@
         },
         {
           "userQuestion": "What are best practices for lock and unlock tokens?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check locked funds first**: Call `fetchLockedBalance()` before `lockTokens()` or `unlockTokens()`.\n2. **Keep amounts as exact strings**: Pass validated decimal strings to `lockTokens()` and `burnTokens()`.\n3. **Require explicit burn confirmation**: Treat `burnTokens()` as irreversible and never retry it blindly after an ambiguous timeout."
         },
         {
           "userQuestion": "What errors should I handle when lock and unlock tokens?",
@@ -3158,7 +3158,7 @@
         },
         {
           "userQuestion": "What should I learn next after lock and unlock tokens?",
-          "assistantResponse": "**Related Topics:**\n\n- **Transfers**: `explainSdkUsage({ topic: 'transfers' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Burns**: `explainSdkUsage({ topic: 'burns' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Transfers**: `explainSdkUsage({ topic: 'transfers' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Token distribution**: `explainSdkUsage({ topic: 'token-distribution' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3179,7 +3179,7 @@
         },
         {
           "userQuestion": "What are best practices for messages?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Filter reads at the server**: Use `fetchMessages()` with token, type, user, and pagination filters.\n2. **Enforce ownership and role rules**: Expect authorization checks from `updateMessage()`, `deleteMessage()`, and `pinMessage()`.\n3. **Keep pin state authoritative**: Refresh with `getPinnedMessage()` after `pinMessage()` or `unpinMessage()`."
         },
         {
           "userQuestion": "Can you walk me through a complete messages example?",
@@ -3191,7 +3191,7 @@
         },
         {
           "userQuestion": "What should I learn next after messages?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Stream chat**: `explainSdkUsage({ topic: 'stream-chat' })`\n- **Content reactions**: `explainSdkUsage({ topic: 'content-reactions' })`\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n- **Moderator invites**: `explainSdkUsage({ topic: 'moderator-invites' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3212,11 +3212,11 @@
         },
         {
           "userQuestion": "What are best practices for manage moderator invites?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Grant the narrowest role**: Select an appropriate role in `createModeratorInvite()` and adjust it with `updateModeratorInviteRole()`.\n2. **Treat invite codes as secrets**: Resolve with `getModeratorInviteByCode()` only in the claim flow and then call `claimModeratorInvite()`.\n3. **Audit outstanding access**: Review `listModeratorInvites()` and promptly call `revokeModeratorInvite()` for stale links."
         },
         {
           "userQuestion": "What errors should I handle when manage moderator invites?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.moderatorinvites(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `InviteExpired`: Magic-link code is past its validity window\n- `InviteAlreadyClaimed`: Invite code has already been consumed\n- `InvalidModeratorRole`: Requested delegated role is not supported\n\n**Tip:** Audit `listModeratorInvites()` and revoke stale links with `revokeModeratorInvite()`."
         },
         {
           "userQuestion": "Can you walk me through a complete manage moderator invites example?",
@@ -3253,7 +3253,7 @@
         },
         {
           "userQuestion": "What are best practices for nft collection management?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Estimate every fee before signing**: Use `getNftCollectionClaimFee()`, `getNftTokenClassCreateFee()`, and `estimateNftMintFee()`.\n2. **Check namespace availability first**: Call `isNftCollectionAvailable()` before `claimNftCollection()`.\n3. **Verify each dependency in order**: Confirm `fetchNftCollections()` and `fetchNftTokenClasses()` before `mintNft()`."
         },
         {
           "userQuestion": "Can you walk me through a complete nft collection management example?",
@@ -3265,7 +3265,7 @@
         },
         {
           "userQuestion": "What should I learn next after nft collection management?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token creation**: `explainSdkUsage({ topic: 'token-creation' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Transfers**: `explainSdkUsage({ topic: 'transfers' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
@@ -3290,11 +3290,11 @@
         },
         {
           "userQuestion": "What are best practices for manage overseer invites?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Confirm overseer authority**: Check `getMyOverseerStatus()` before privileged invite or enforcement workflows.\n2. **Protect and expire invite codes**: Use `getOverseerInviteByCode()` only for claiming and revoke stale links with `revokeOverseerInvite()`.\n3. **Audit platform access**: Reconcile `listOverseers()` and `listOverseerInvites()` and use `revokeOverseer()` when access ends."
         },
         {
           "userQuestion": "What errors should I handle when manage overseer invites?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.overseerinvites(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `UnauthorizedAccess`: Caller is not an active overseer\n- `InviteExpired`: Overseer invite can no longer be claimed\n- `OverseerNotFound`: Target overseer or invite does not exist\n\n**Best Practice:** Confirm `getMyOverseerStatus()` and review `listOverseers()` before changing platform access."
         },
         {
           "userQuestion": "Can you walk me through a complete manage overseer invites example?",
@@ -3331,11 +3331,11 @@
         },
         {
           "userQuestion": "What are best practices for platform stats?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Cache dashboard data**: Poll `getPlatformStats()` at one shared interval rather than once per widget.\n2. **Preserve exact totals**: Keep values from `getPlatformStats()` unrounded until presentation.\n3. **Label every time window**: Display the 1h, 24h, and 7d fields from `getPlatformStats()` with their explicit periods."
         },
         {
           "userQuestion": "What should I learn next after platform stats?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Weekly challenge**: `explainSdkUsage({ topic: 'weekly-challenge' })`\n- **Trading analytics**: `explainSdkUsage({ topic: 'trading-analytics' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for platform stats?",
@@ -3360,7 +3360,7 @@
         },
         {
           "userQuestion": "What are best practices for fetch and search token pools?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Choose the narrowest read**: Use `fetchPoolDetails()` for one token and `fetchPools()` for paginated discovery.\n2. **Avoid accidental full scans**: Reserve `fetchAllPools()` for jobs that truly require every pool.\n3. **Resolve canonical identifiers**: Use `resolveTokenClassKey()` and `resolveVaultAddress()` instead of constructing identifiers by hand."
         },
         {
           "userQuestion": "Can you walk me through a complete fetch and search token pools example?",
@@ -3397,7 +3397,7 @@
         },
         {
           "userQuestion": "What are best practices for holders?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use bounded holder queries**: Call `getTopHolders()` or `getHoldersByBalance()` with practical limits.\n2. **Avoid reconstructing ranks**: Use `getHolderRank()` and `getHolderCount()` rather than sorting rounded balances client-side.\n3. **Cache distribution reads briefly**: `fetchTokenDistribution()` is reusable, while `getHolderHistory()` should be fetched on demand."
         },
         {
           "userQuestion": "Can you walk me through a complete holders example?",
@@ -3409,7 +3409,7 @@
         },
         {
           "userQuestion": "What should I learn next after holders?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token distribution**: `explainSdkUsage({ topic: 'token-distribution' })`\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Trading analytics**: `explainSdkUsage({ topic: 'trading-analytics' })`\n- **Recent trades**: `explainSdkUsage({ topic: 'recent-trades' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3430,7 +3430,7 @@
         },
         {
           "userQuestion": "What are best practices for view token price history?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use bounded ranges for charts**: Call `fetchPriceHistory()` for the visible interval.\n2. **Reserve full history for analysis**: Use `fetchAllPriceHistory()` for exports or backfills, not routine renders.\n3. **Cache immutable candles**: Refetch only the current interval after `fetchPriceHistory()` returns older completed points."
         },
         {
           "userQuestion": "What should I learn next after view token price history?",
@@ -3459,7 +3459,7 @@
         },
         {
           "userQuestion": "What are best practices for get token details and information?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use one canonical detail read**: Call `fetchTokenDetails()` instead of composing partial token metadata from unrelated endpoints.\n2. **Cache stable metadata separately**: Reuse immutable fields from `fetchTokenDetails()` while refreshing market-sensitive fields more often.\n3. **Handle missing tokens explicitly**: Treat a not-found result from `fetchTokenDetails()` as a normal empty state."
         },
         {
           "userQuestion": "What should I learn next after get token details and information?",
@@ -3488,11 +3488,11 @@
         },
         {
           "userQuestion": "What are best practices for analyze token distribution?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use aggregate context when possible**: Call `fetchUserHolderContext()` for one user instead of scanning the entire distribution.\n2. **Keep exact balances**: Preserve numeric strings returned by `fetchTokenDistribution()` until formatting.\n3. **Cache large distributions briefly**: Share `fetchTokenDistribution()` results across holder widgets and refresh deliberately."
         },
         {
           "userQuestion": "What should I learn next after analyze token distribution?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Holders**: `explainSdkUsage({ topic: 'holders' })`\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for analyze token distribution?",
@@ -3517,7 +3517,7 @@
         },
         {
           "userQuestion": "What are best practices for token identification?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Resolve identifiers through the SDK**: Use `resolveTokenClassKey()` instead of assembling pipe-delimited keys manually.\n2. **Detect venue before choosing a format**: Call `isTokenGraduated()` before passing a simple token name or DEX class key.\n3. **Use discovery as the authority**: Reconcile identifiers with `fetchPools()` before calling `fetchTokenPrice()`."
         },
         {
           "userQuestion": "Can you walk me through a complete token identification example?",
@@ -3525,7 +3525,7 @@
         },
         {
           "userQuestion": "What should I learn next after token identification?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Graduation detection**: `explainSdkUsage({ topic: 'graduation-detection' })`\n- **Token status**: `explainSdkUsage({ topic: 'token-status' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3546,7 +3546,7 @@
         },
         {
           "userQuestion": "What are best practices for manage referral rewards?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Generate the canonical link**: Use `fetchReferralUrl()` instead of constructing referral parameters manually.\n2. **Paginate detailed referrals**: Use `fetchReferrals()` for screens and `fetchAllReferrals()` only for exports.\n3. **Use aggregate data for dashboards**: Prefer `fetchReferralsSummary()` when individual referral records are unnecessary."
         },
         {
           "userQuestion": "Can you walk me through a complete manage referral rewards example?",
@@ -3575,11 +3575,11 @@
         },
         {
           "userQuestion": "What are best practices for restricted names?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Read-modify-write the whole list carefully**: Start with `getRestrictedNames()` before `updateRestrictedNames()`.\n2. **Normalize comparisons**: Apply consistent case and whitespace rules to names returned by `getRestrictedNames()`.\n3. **Avoid lost updates**: Refetch with `getRestrictedNames()` immediately before `updateRestrictedNames()` when multiple overseers may edit."
         },
         {
           "userQuestion": "What should I learn next after restricted names?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token creation**: `explainSdkUsage({ topic: 'token-creation' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n- **Token ban management**: `explainSdkUsage({ topic: 'token-ban-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for restricted names?",
@@ -3653,7 +3653,7 @@
         },
         {
           "userQuestion": "What are best practices for manage token bans?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check state before enforcement**: Use `isTokenBanned()` or `getTokenBan()` before `banToken()` and `unbanToken()`.\n2. **Include reviewable reasons**: Make `banToken()` actions specific enough for overseer audits.\n3. **Paginate the registry**: Traverse `listTokenBans()` rather than treating its first page as complete."
         },
         {
           "userQuestion": "Can you walk me through a complete manage token bans example?",
@@ -3686,11 +3686,11 @@
         },
         {
           "userQuestion": "What are best practices for recent trades?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use the convenience window for live UI**: Call `getRecentTrades()` with a small limit.\n2. **Use the broader query for filtering**: Switch to `getTrades()` for pagination or historical analysis.\n3. **Dedupe refreshes by transaction identity**: Merge successive `getRecentTrades()` responses instead of appending duplicates."
         },
         {
           "userQuestion": "What should I learn next after recent trades?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Trade history**: `explainSdkUsage({ topic: 'trade-history' })`\n- **Trading analytics**: `explainSdkUsage({ topic: 'trading-analytics' })`\n- **Holders**: `explainSdkUsage({ topic: 'holders' })`\n- **Gdex stream**: `explainSdkUsage({ topic: 'gdex-stream' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for recent trades?",
@@ -3715,7 +3715,7 @@
         },
         {
           "userQuestion": "What are best practices for view trading history?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use recent reads for compact UI**: Call `getRecentTrades()` with a bounded limit.\n2. **Use filtered pagination for history**: Call `getTrades()` when users need deeper or scoped results.\n3. **Merge pages by transaction identity**: Do not duplicate overlapping results from `getTrades()` and `getRecentTrades()`."
         },
         {
           "userQuestion": "What should I learn next after view trading history?",
@@ -3784,12 +3784,12 @@
           "assistantResponse": "1. **Wrap all SDK calls in try-catch**: Handle errors gracefully.\n2. **Check for specific error types**: Different errors require different handling.\n3. **Log errors for debugging**: Include context like token name and amounts."
         },
         {
-          "userQuestion": "What should I learn next after handle SDK errors properly?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "userQuestion": "What edge cases should I know about for handle SDK errors properly?",
+          "assistantResponse": "**Edge Cases:**\n1. **Ambiguous submission timeouts**: A transaction may succeed after the client times out\n2. **Nested causes**: Network and bundler failures can wrap the actionable SDK error\n3. **Retry safety**: Read operations are generally retryable, but transaction retries can duplicate intent\n\n**Gotcha:** Before resubmitting a timed-out transaction, call `getBundlerTransactionResult()` and reconcile the original result."
         },
         {
-          "userQuestion": "Any final tips for handle SDK errors properly?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+          "userQuestion": "What should I learn next after handle SDK errors properly?",
+          "assistantResponse": "**Related Topics:**\n\n- **Utilities and helpers**: `explainSdkUsage({ topic: 'utilities-and-helpers' })`\n- **Session auth**: `explainSdkUsage({ topic: 'session-auth' })`\n- **Event subscriptions**: `explainSdkUsage({ topic: 'event-subscriptions' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3810,7 +3810,7 @@
         },
         {
           "userQuestion": "What are best practices for perform local calculations?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use local math for responsive previews**: Call `calculateBuyAmountLocal()` or `calculateSellAmountLocal()` with current pool inputs.\n2. **Refresh authoritative inputs**: Recompute with `calculateBuyAmountExternal()` or `calculateSellAmountExternal()` before presenting a final quote.\n3. **Keep creation math separate**: Use `calculateInitialBuyAmount()` for initial purchases rather than reusing an active-pool calculation."
         },
         {
           "userQuestion": "Can you walk me through a complete perform local calculations example?",
@@ -3843,11 +3843,11 @@
         },
         {
           "userQuestion": "What are best practices for graduate token pools?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Calculate the exact requirement**: Call `calculateBuyAmountForGraduation()` before attempting graduation.\n2. **Recheck immediately before submission**: Pool state can move between `calculateBuyAmountForGraduation()` and `graduateToken()`.\n3. **Treat retries as state reconciliation**: After an ambiguous `graduateToken()` result, verify token status before submitting again."
         },
         {
           "userQuestion": "What errors should I handle when graduate token pools?",
-          "assistantResponse": "**General Error Handling:**\n\n```typescript\ntry {\n  const result = await sdk.poolgraduation(...);\n} catch (error) {\n  if (error instanceof Error) {\n    console.error('Operation failed:', error.message);\n    // Handle specific error types\n  }\n}\n```\n\n**Common Issues:**\n- Network timeouts - implement retry logic\n- Invalid parameters - validate before calling\n- Authentication errors - ensure valid session"
+          "assistantResponse": "**Common Errors:**\n- `GraduationThresholdNotMet`: Pool has not reached the required bonding-curve state\n- `TokenAlreadyGraduated`: A DEX pool already exists for the token\n- `CalculationStale`: Pool state changed after the graduation quote\n\n**Tip:** Re-run `calculateBuyAmountForGraduation()` immediately before `graduateToken()`."
         },
         {
           "userQuestion": "What should I learn next after graduate token pools?",
@@ -3909,7 +3909,7 @@
         },
         {
           "userQuestion": "What are best practices for analyze trading data?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Select the correct data source**: Use `fetchTrades()` for launchpad history and `getTrades()` for the supported trade query workflow.\n2. **Paginate rather than overfetch**: Request bounded pages from `fetchTrades()` and `getTrades()`.\n3. **Preserve exact amounts for analysis**: Parse returned amount strings with decimal-safe arithmetic."
         },
         {
           "userQuestion": "What should I learn next after analyze trading data?",
@@ -3938,7 +3938,7 @@
         },
         {
           "userQuestion": "What are best practices for trading quotes?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Load current sale inputs**: Call `fetchSaleDetails()` and `fetchLaunchpadFee()` before displaying a bonding-curve quote.\n2. **Use the proxy quote for live trades**: Prefer `getTradeQuote()` over deprecated chain-direct calculation methods.\n3. **Keep premint separate**: Use `getPremintQuote()` only for zero-supply token-creation flows."
         },
         {
           "userQuestion": "Can you walk me through a complete trading quotes example?",
@@ -3946,7 +3946,7 @@
         },
         {
           "userQuestion": "What should I learn next after trading quotes?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Buy tokens**: `explainSdkUsage({ topic: 'buy-tokens' })`\n- **Sell tokens**: `explainSdkUsage({ topic: 'sell-tokens' })`\n- **Local calculations**: `explainSdkUsage({ topic: 'local-calculations' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3967,7 +3967,7 @@
         },
         {
           "userQuestion": "What are best practices for transfer tokens?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Match the method to the asset**: Use `transferGala()` for GALA and `transferToken()` for launchpad tokens.\n2. **Validate recipient and exact amount before signing**: Never normalize address or decimal input inside `transferToken()`.\n3. **Reconcile ambiguous submissions**: Check balances or transaction state before retrying `transferGala()` after a timeout."
         },
         {
           "userQuestion": "What errors should I handle when transfer tokens?",
@@ -3996,7 +3996,7 @@
         },
         {
           "userQuestion": "What are best practices for ai moderation?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check service health first**: Gate automated workflows with `getAIModerationStatus()`.\n2. **Tune before enabling actions**: Read with `getAIModerationSettings()` and change thresholds deliberately with `updateAIModerationSettings()`.\n3. **Treat AI output as evidence**: Inspect `getAIModeration()` results before using `triggerAIModeration()` or taking a moderator action."
         },
         {
           "userQuestion": "Can you walk me through a complete ai moderation example?",
@@ -4008,7 +4008,7 @@
         },
         {
           "userQuestion": "What should I learn next after ai moderation?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4029,11 +4029,11 @@
         },
         {
           "userQuestion": "What are best practices for events tracking?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use stable event contracts**: Send defined `EVENT_TYPES` through `sdk.events.track()` with small, non-sensitive payloads.\n2. **Watch backpressure**: Inspect `sdk.events.getStats()` so queue drops or repeated failures are visible.\n3. **Flush lifecycle boundaries**: Call `sdk.events.flush()` before navigation and `sdk.events.shutdown()` during graceful application shutdown."
         },
         {
           "userQuestion": "What should I learn next after events tracking?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Event subscriptions**: `explainSdkUsage({ topic: 'event-subscriptions' })`\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n- **Stream chat**: `explainSdkUsage({ topic: 'stream-chat' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for events tracking?",
@@ -4058,7 +4058,7 @@
         },
         {
           "userQuestion": "What are best practices for gdex stream?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Dedupe replayed swaps**: Key `subscribeSwaps()` events by `transactionId` because reconnect delivery is effectively at least once.\n2. **Reconcile after reconnect**: Let `connect()` auto-reconnect and treat forced snapshots from resubscribed `subscribePool()` streams as authoritative.\n3. **Preserve precision and classify failures**: Parse decimal-string numerics with a bignum library and catch `GdexStreamError` from `request()`, including rate-limit and other -32xxx codes."
         },
         {
           "userQuestion": "Can you walk me through a complete gdex stream example?",
@@ -4070,7 +4070,7 @@
         },
         {
           "userQuestion": "What should I learn next after gdex stream?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Trading quotes**: `explainSdkUsage({ topic: 'trading-quotes' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Recent trades**: `explainSdkUsage({ topic: 'recent-trades' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
@@ -4095,7 +4095,7 @@
         },
         {
           "userQuestion": "What are best practices for global bans?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check exact status first**: Use `getGlobalBan()` before `createGlobalBan()` or `removeGlobalBan()`.\n2. **Make enforcement auditable**: Include a specific reason and scope when calling `createGlobalBan()`.\n3. **Paginate oversight screens**: Traverse `listGlobalBans()` results instead of assuming the first page is complete."
         },
         {
           "userQuestion": "Can you walk me through a complete global bans example?",
@@ -4103,7 +4103,7 @@
         },
         {
           "userQuestion": "What should I learn next after global bans?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4124,7 +4124,7 @@
         },
         {
           "userQuestion": "What are best practices for graduation detection?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check the venue before trading**: Call `isTokenGraduated()` to choose bonding-curve or DEX methods.\n2. **Resolve state from pool data**: Use `fetchPools()` when you also need the graduated token class key.\n3. **Keep state live**: Listen with `onDexPoolCreation()` and `onLaunchpadTokenCreation()` instead of polling every token continuously."
         },
         {
           "userQuestion": "Can you walk me through a complete graduation detection example?",
@@ -4132,7 +4132,7 @@
         },
         {
           "userQuestion": "What should I learn next after graduation detection?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token status**: `explainSdkUsage({ topic: 'token-status' })`\n- **Pool graduation**: `explainSdkUsage({ topic: 'pool-graduation' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Token identification**: `explainSdkUsage({ topic: 'token-identification' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4153,11 +4153,11 @@
         },
         {
           "userQuestion": "What are best practices for install and configure the SDK?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Verify the loaded package**: Call `getVersion()` at startup diagnostics to catch mismatched deployments.\n2. **Pin a compatible SDK version**: Keep the package version that supplies `getVersion()` aligned across server and client builds.\n3. **Log version once, not per request**: Cache the `getVersion()` result for support and telemetry."
         },
         {
           "userQuestion": "What should I learn next after install and configure the SDK?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Utilities system**: `explainSdkUsage({ topic: 'utilities-system' })`\n- **Wallet connect**: `explainSdkUsage({ topic: 'wallet-connect' })`\n- **Mcp to sdk mapping**: `explainSdkUsage({ topic: 'mcp-to-sdk-mapping' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for install and configure the SDK?",
@@ -4182,7 +4182,7 @@
         },
         {
           "userQuestion": "What are best practices for manage liquidity positions?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Inspect positions before changing them**: Use `getSwapLiquidityPositionById()` before removal or fee collection.\n2. **Prefer price-based ranges for user input**: Use `addSwapLiquidityByPrice()` unless exact ticks are intentional.\n3. **Estimate before committing**: Call `getSwapEstimateRemoveLiquidity()` before `removeSwapLiquidity()` and collect with `collectSwapPositionFees()` separately."
         },
         {
           "userQuestion": "What errors should I handle when manage liquidity positions?",
@@ -4223,11 +4223,11 @@
         },
         {
           "userQuestion": "What are best practices for map MCP tools to SDK methods?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Start from the documented topic**: Use `explainSdkUsage()` to identify the supported SDK workflow and method names.\n2. **Copy types, not secrets**: Adapt `explainSdkUsage()` examples with environment configuration supplied outside source code.\n3. **Recheck after SDK upgrades**: Run `explainSdkUsage()` again so renamed or newly preferred methods are reflected in integrations."
         },
         {
           "userQuestion": "What should I learn next after map MCP tools to SDK methods?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Installation**: `explainSdkUsage({ topic: 'installation' })`\n- **Utilities and helpers**: `explainSdkUsage({ topic: 'utilities-and-helpers' })`\n- **Error handling**: `explainSdkUsage({ topic: 'error-handling' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for map MCP tools to SDK methods?",
@@ -4252,7 +4252,7 @@
         },
         {
           "userQuestion": "What are best practices for oembed?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Request metadata for the right surface**: Use `getHomeOEmbed()`, `getPoolOEmbed()`, or `getProfileOEmbed()` rather than rewriting preview fields.\n2. **Cache public preview data briefly**: Reuse `getPoolOEmbed()` responses while allowing token metadata to refresh.\n3. **Escape metadata at render time**: Treat strings returned by `getProfileOEmbed()` as content, not trusted HTML."
         },
         {
           "userQuestion": "Can you walk me through a complete oembed example?",
@@ -4260,7 +4260,7 @@
         },
         {
           "userQuestion": "What should I learn next after oembed?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Profile management**: `explainSdkUsage({ topic: 'profile-management' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4281,11 +4281,11 @@
         },
         {
           "userQuestion": "What are best practices for get token prices with smart routing?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use the price source for the venue**: Call `fetchTokenPrice()` for launchpad tokens and `getSwapPoolPrice()` for DEX pools.\n2. **Preserve token identifiers**: Pass the token name to `fetchTokenPrice()` and canonical class keys to `getSwapPoolPrice()`.\n3. **Cache only for the displayed tolerance**: Refresh `getSwapPoolPrice()` before any trade-sensitive decision."
         },
         {
           "userQuestion": "What should I learn next after get token prices with smart routing?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Token identification**: `explainSdkUsage({ topic: 'token-identification' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for get token prices with smart routing?",
@@ -4355,7 +4355,7 @@
         },
         {
           "userQuestion": "What are best practices for check token pool status?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check current state once on load**: Call `isTokenGraduated()` to select the correct trading venue.\n2. **Listen for transitions**: Use `onDexPoolCreation()` so active screens switch to DEX behavior promptly.\n3. **Track newly launched pools separately**: Use `onLaunchpadTokenCreation()` for pre-graduation token discovery."
         },
         {
           "userQuestion": "Can you walk me through a complete check token pool status example?",
@@ -4363,7 +4363,7 @@
         },
         {
           "userQuestion": "What should I learn next after check token pool status?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Graduation detection**: `explainSdkUsage({ topic: 'graduation-detection' })`\n- **Pool graduation**: `explainSdkUsage({ topic: 'pool-graduation' })`\n- **Token identification**: `explainSdkUsage({ topic: 'token-identification' })`\n- **Event subscriptions**: `explainSdkUsage({ topic: 'event-subscriptions' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4384,7 +4384,7 @@
         },
         {
           "userQuestion": "What are best practices for use SDK utilities and helpers?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Reuse cached reference reads**: Inspect `getCacheInfo()` and use `clearCache()` only when freshness requires it.\n2. **Resolve live transaction outcomes**: Use `getBundlerTransactionResult()` after an ambiguous bundled submission.\n3. **Release resources explicitly**: Call `cleanup()` when the SDK instance is no longer needed."
         },
         {
           "userQuestion": "Can you walk me through a complete use SDK utilities and helpers example?",
@@ -4421,7 +4421,7 @@
         },
         {
           "userQuestion": "What are best practices for work with multiple wallets?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Keep chain identities explicit**: Use `getAddress()` for GalaChain and `getEthereumAddress()` for Ethereum rather than assuming formats match.\n2. **Create only the wallet type requested**: Choose `createWallet()` or `createSolanaWallet()` deliberately.\n3. **Derive public identifiers offline**: Use `getPublicKeyFromPrivateKey()` and `getEthereumAddressFromPrivateKey()` without logging private key material."
         },
         {
           "userQuestion": "Can you walk me through a complete work with multiple wallets example?",
@@ -4433,7 +4433,7 @@
         },
         {
           "userQuestion": "What should I learn next after work with multiple wallets?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Wallet connect**: `explainSdkUsage({ topic: 'wallet-connect' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Transfers**: `explainSdkUsage({ topic: 'transfers' })`\n- **Bridge operations**: `explainSdkUsage({ topic: 'bridge-operations' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4454,7 +4454,7 @@
         },
         {
           "userQuestion": "What are best practices for access system utilities?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Inspect configuration instead of duplicating it**: Use `getConfig()` and `getVersion()` in diagnostics.\n2. **Check capabilities before access**: Call `hasWallet()` before `getWallet()` and use `setWallet()` deliberately.\n3. **Own the socket lifecycle**: Pair `connectWebSocket()` with `disconnectWebSocket()` and confirm state with `isWebSocketConnected()`."
         },
         {
           "userQuestion": "Can you walk me through a complete access system utilities example?",
@@ -4491,7 +4491,7 @@
         },
         {
           "userQuestion": "What are best practices for wallet connect?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Check for an existing address first**: Call `getAddress()` before creating a new wallet with `createWallet()`.\n2. **Keep chain addresses distinct**: Use `getEthereumAddress()` only where an Ethereum-format address is required.\n3. **Never expose wallet secrets**: Store the wallet created by `createWallet()` in a secure signer or server-side secret store."
         },
         {
           "userQuestion": "Can you walk me through a complete wallet connect example?",
@@ -4499,7 +4499,7 @@
         },
         {
           "userQuestion": "What should I learn next after wallet connect?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Multi wallet**: `explainSdkUsage({ topic: 'multi-wallet' })`\n- **Session auth**: `explainSdkUsage({ topic: 'session-auth' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4520,7 +4520,7 @@
         },
         {
           "userQuestion": "What are best practices for websocket admin?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Verify audience before broadcasting**: Use `getConnectedClients()` or `getTokenViewers()` before high-volume emits.\n2. **Emit domain-specific events**: Choose `emitTradeExecuted()`, `emitChatMessage()`, or the matching typed emitter instead of overloading payloads.\n3. **Confirm presence with scoped reads**: Use `isUserOnline()` for one user and `getOnlineUsers()` for batches."
         },
         {
           "userQuestion": "Can you walk me through a complete websocket admin example?",
@@ -4532,7 +4532,7 @@
         },
         {
           "userQuestion": "What should I learn next after websocket admin?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Event subscriptions**: `explainSdkUsage({ topic: 'event-subscriptions' })`\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n- **Stream chat**: `explainSdkUsage({ topic: 'stream-chat' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Are there any advanced patterns for this topic?",
@@ -4557,11 +4557,11 @@
         },
         {
           "userQuestion": "What are best practices for weekly challenge?",
-          "assistantResponse": "1. **Use TypeScript**: Get full type safety and intellisense.\n2. **Handle errors**: Always wrap SDK calls in try-catch blocks.\n3. **Validate inputs**: Check parameters before making API calls.\n4. **Cache when appropriate**: Reduce API calls for static data."
+          "assistantResponse": "1. **Use UTC season boundaries**: Pass explicit week timestamps to `getWeeklyChallengeLeaderboard()` when viewing history.\n2. **Paginate standings**: Use the limit and page options on `getWeeklyChallengeLeaderboard()` for leaderboard screens.\n3. **Fetch token history on demand**: Call `getTokenWeeklyHistory()` for a selected token rather than for every row."
         },
         {
           "userQuestion": "What should I learn next after weekly challenge?",
-          "assistantResponse": "**Related Topics:**\n\n- Check the SDK documentation for related functionality\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+          "assistantResponse": "**Related Topics:**\n\n- **Platform stats**: `explainSdkUsage({ topic: 'platform-stats' })`\n- **Trading analytics**: `explainSdkUsage({ topic: 'trading-analytics' })`\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         },
         {
           "userQuestion": "Any final tips for weekly challenge?",
