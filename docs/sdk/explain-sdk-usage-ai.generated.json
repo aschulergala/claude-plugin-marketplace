@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "7.0.0",
-    "generatedAt": "2026-09-23T19:25:35.460Z",
+    "generatedAt": "2026-09-23T19:32:33.542Z",
     "topicCount": 69,
     "methodCount": 323,
     "warnings": []
@@ -92,6 +92,7 @@
         "gala_launchpad_fetch_pool_details",
         "gala_launchpad_fetch_pool_details_for_calculation",
         "gala_launchpad_fetch_volume_data",
+        "gala_launchpad_fetch_token_spot_price",
         "gala_launchpad_fetch_token_distribution",
         "gala_launchpad_resolve_vault_address",
         "gala_launchpad_resolve_token_class_key"
@@ -121,6 +122,7 @@
         "gala_launchpad_fetch_gala_balance",
         "gala_launchpad_fetch_token_balance",
         "gala_launchpad_fetch_available_balance",
+        "gala_launchpad_fetch_locked_tokens",
         "gala_launchpad_fetch_tokens_held",
         "gala_launchpad_fetch_tokens_created"
       ],
@@ -136,7 +138,7 @@
       "key": "token-creation",
       "label": "Token creation",
       "description": "Token creation operations",
-      "category": "utils",
+      "category": "pools",
       "methods": [
         "isTokenNameAvailable",
         "isTokenSymbolAvailable",
@@ -145,6 +147,8 @@
         "launchToken"
       ],
       "mcpTools": [
+        "gala_launchpad_check_token_name",
+        "gala_launchpad_check_token_symbol",
         "gala_launchpad_fetch_launch_token_fee",
         "gala_launchpad_upload_token_image",
         "gala_launchpad_launch_token"
@@ -305,7 +309,8 @@
       "mcpTools": [
         "gala_launchpad_lock_tokens",
         "gala_launchpad_unlock_tokens",
-        "gala_launchpad_burn_tokens"
+        "gala_launchpad_burn_tokens",
+        "gala_launchpad_fetch_locked_tokens"
       ],
       "explanation": "## Locks\n\n**Key concept:** Lock, unlock, and burn are native token writes in v7. Burn is irreversible and all three require a signer.\n\n**When to use:** Use for vesting/escrow workflows or an intentional supply reduction.\n\n**Covers methods:** `lockTokens()`, `unlockTokens()`, `burnTokens()`, `fetchLockedBalance()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst locked = await sdk.lockTokens({ tokens: [{ tokenName: 'anime', amount: '100' }] });\nawait sdk.unlockTokens({ tokens: [{ tokenName: 'anime', amount: '25' }] });\nconst balance = await sdk.fetchLockedBalance({ tokenName: 'anime', address: sdk.getAddress() });\nconsole.log(locked, balance);\n// Only call after explicit confirmation: await sdk.burnTokens({ tokens: [{ tokenName: 'anime', amount: '1' }] });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_lock_tokens`\n- `gala_launchpad_unlock_tokens`\n- `gala_launchpad_burn_tokens`\n- `gala_launchpad_fetch_locked_tokens`\n\n**Pitfalls:** Burn cannot be undone; v7 does not use the old DEX service or EIP-712 DEX write path here.\n\n**Related Topics:** `balances`, `transfers`, `error-handling`",
       "samplePrompts": [
@@ -319,13 +324,17 @@
       "key": "dex-trading",
       "label": "Dex trading",
       "description": "Dex trading operations",
-      "category": "utils",
+      "category": "dex",
       "methods": [
         "sdk.dex.quoting.quoteExactInput",
         "sdk.dex.quoting.quoteExactOutput",
         "sdk.dex.swaps.swap"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_get_swap_quote_exact_input",
+        "gala_launchpad_get_swap_quote_exact_output",
+        "gala_launchpad_execute_swap"
+      ],
       "explanation": "## Dex Trading\n\n**Key concept:** sdk.dex is the GSwap client. Quote with sdk.dex.quoting, submit with sdk.dex.swaps, and wait for queued confirmation.\n\n**When to use:** Use for graduated tokens and standard GalaChain assets.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '100', amountOutMinimum: quote.amountOut });\nconst trade = await submission.confirm();\nconsole.log(trade);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** A returned submission is not proof of execution until confirm() resolves.\n\n**Related Topics:** `queued-swap-recovery`, `dex-pools`, `liquidity-positions`",
       "samplePrompts": [
         "How do I trade tokens on GalaSwap?",
@@ -344,7 +353,8 @@
         "connectStreamWebSocket"
       ],
       "mcpTools": [
-        "gala_launchpad_subscribe_to_stream"
+        "gala_launchpad_subscribe_to_stream",
+        "gala_launchpad_connect_stream_websocket"
       ],
       "explanation": "## Gdex Stream\n\n**Key concept:** The SDK retains GDEX/stream websocket capabilities through the supported stream APIs; DEX state itself is read through GSwap.\n\n**When to use:** Use when a direct SDK integration owns websocket connection lifecycle.\n\n**Covers methods:** `subscribeToStream()`, `connectStreamWebSocket()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime', { onStreamStatusChanged: (event) => console.log(event) });\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_explain_sdk_usage`\n\n**Pitfalls:** Do not use removed flat DEX subscription methods.\n\n**Related Topics:** `event-subscriptions`, `stream-chat`, `dex-trading`",
       "samplePrompts": [
@@ -412,7 +422,8 @@
         "gala_launchpad_calculate_buy_amount_local",
         "gala_launchpad_calculate_sell_amount_local",
         "gala_launchpad_calculate_buy_amount_external",
-        "gala_launchpad_calculate_sell_amount_external"
+        "gala_launchpad_calculate_sell_amount_external",
+        "gala_launchpad_calculate_initial_buy"
       ],
       "explanation": "## Local Calculations\n\n**Key concept:** Bonding-curve amount calculations have local and external variants; local is fast while external reads backend state.\n\n**When to use:** Use local calculations for responsive UI and external calculations when fresh state matters.\n\n**Covers methods:** `calculateBuyAmountLocal()`, `calculateSellAmountLocal()`, `calculateBuyAmountExternal()`, `calculateSellAmountExternal()`, `calculateInitialBuyAmount()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst localBuy = await sdk.calculateBuyAmountLocal({ tokenName: 'anime', amount: '10', type: 'native' });\nconst externalSell = await sdk.calculateSellAmountExternal({ tokenName: 'anime', amount: '10', type: 'exact' });\nconst initial = await sdk.calculateInitialBuyAmount('10');\nconsole.log(localBuy, externalSell, initial);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_calculate_buy_amount_local`\n- `gala_launchpad_calculate_sell_amount_external`\n- `gala_launchpad_calculate_initial_buy`\n\n**Pitfalls:** Local results depend on cached pool metadata and are not transaction confirmation.\n\n**Related Topics:** `buy-tokens`, `sell-tokens`, `fetch-pools`",
       "samplePrompts": [
@@ -447,12 +458,15 @@
       "key": "spot-prices-smart-routing",
       "label": "Spot prices smart routing",
       "description": "Spot prices smart routing operations",
-      "category": "utils",
+      "category": "pools",
       "methods": [
         "fetchTokenPrice",
         "fetchGalaPrice"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_fetch_token_spot_price",
+        "gala_launchpad_fetch_gala_spot_price"
+      ],
       "explanation": "## Spot Prices Smart Routing\n\n**Key concept:** fetchTokenPrice() routes between Launchpad and DEX token formats, while fetchGalaPrice() reads native GALA spot price.\n\n**When to use:** Use when a price display may receive either a Launchpad name or DEX identifier.\n\n**Covers methods:** `fetchTokenPrice()`, `fetchGalaPrice()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst launchpadPrice = await sdk.fetchTokenPrice({ tokenName: 'anime' });\nconst dexPrice = await sdk.fetchTokenPrice({ tokenId: 'GALA|Unit|none|none' });\nconst galaPrice = await sdk.fetchGalaPrice();\nconsole.log(launchpadPrice, dexPrice, galaPrice);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_token_spot_price`\n- `gala_launchpad_fetch_gala_spot_price`\n\n**Pitfalls:** Do not construct a DEX token key from a token name; resolve the canonical key first.\n\n**Related Topics:** `token-identification`, `price-history`, `dex-token-discovery`",
       "samplePrompts": [
         "How do I get token prices with smart routing?",
@@ -490,14 +504,19 @@
       "key": "liquidity-positions",
       "label": "Liquidity positions",
       "description": "Liquidity positions operations",
-      "category": "utils",
+      "category": "dex-liquidity",
       "methods": [
         "sdk.dex.positions.getUserPositions",
         "sdk.dex.positions.addLiquidityByTicks",
         "sdk.dex.positions.removeLiquidity",
         "sdk.dex.positions.collectPositionFees"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_get_user_liquidity_positions",
+        "gala_launchpad_add_liquidity_by_ticks",
+        "gala_launchpad_remove_liquidity",
+        "gala_launchpad_collect_position_fees"
+      ],
       "explanation": "## Liquidity Positions\n\n**Key concept:** GSwap positions are accessed through sdk.dex.positions. Reads are signer-free; writes return queued submissions.\n\n**When to use:** Use for concentrated-liquidity portfolio screens and LP maintenance.\n\n**Covers methods:** `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`, `sdk.dex.positions.collectPositionFees()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst positions = await sdk.dex.positions.getUserPositions(sdk.getAddress());\nconsole.log(positions);\n// Writes use the position DTO and return a queued SubmittedTransaction.\n// const added = await sdk.dex.positions.addLiquidityByTicks({ token0: 'GALA|Unit|none|none', token1: 'GUSDC|Unit|none|none', fee: 3000, tickLower: -60, tickUpper: 60, amount0Desired: '10', amount1Desired: '1' });\n// await added.confirm();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_user_liquidity_positions`\n- `gala_launchpad_add_liquidity_by_ticks`\n- `gala_launchpad_remove_liquidity`\n- `gala_launchpad_collect_position_fees`\n\n**Pitfalls:** LP operations require full DEX token identifiers; old flat DEX methods are gone.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `queued-swap-recovery`",
       "samplePrompts": [
         "How do I manage liquidity positions?",
@@ -510,12 +529,15 @@
       "key": "advanced-dex-analysis",
       "label": "Advanced dex analysis",
       "description": "Advanced dex analysis operations",
-      "category": "utils",
+      "category": "dex",
       "methods": [
         "sdk.dex.quoting.quoteExactInput",
         "sdk.dex.quoting.quoteExactOutput"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_get_swap_quote_exact_input",
+        "gala_launchpad_get_swap_quote_exact_output"
+      ],
       "explanation": "## Advanced Dex Analysis\n\n**Key concept:** GSwap quoting replaces legacy composite-pool and exact-amount helpers while preserving exact-input and exact-output workflows.\n\n**When to use:** Use for route analysis, price impact, and trade previews.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst exactIn = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst exactOut = await sdk.dex.quoting.quoteExactOutput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconsole.log(exactIn, exactOut);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_calculate_dex_pool_quote_local`\n- `gala_launchpad_calculate_dex_pool_quote_external`\n\n**Pitfalls:** A quote can become stale; apply minimum output or maximum input on the subsequent swap.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `spot-prices-smart-routing`",
       "samplePrompts": [
         "How do I analyze DEX trading data?",
@@ -549,7 +571,7 @@
       "key": "utilities-and-helpers",
       "label": "Utilities and helpers",
       "description": "Utilities and helpers operations",
-      "category": "utils",
+      "category": "pools",
       "methods": [
         "fetchGalaPrice",
         "fetchTokenClassesWithSupply",
@@ -559,6 +581,7 @@
         "cleanup"
       ],
       "mcpTools": [
+        "gala_launchpad_fetch_gala_spot_price",
         "gala_launchpad_fetch_token_classes_with_supply",
         "gala_launchpad_get_bundler_transaction_result",
         "gala_launchpad_get_cache_info",
@@ -697,13 +720,17 @@
       "key": "fetch-dex-pools",
       "label": "Fetch dex pools",
       "description": "Fetch dex pools operations",
-      "category": "utils",
+      "category": "dex-pools",
       "methods": [
         "sdk.dex.pools.getPools",
         "sdk.dex.pools.getPool",
         "sdk.dex.pools.getSlot0"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_fetch_dex_pools",
+        "gala_launchpad_get_swap_pool_info",
+        "gala_launchpad_get_swap_pool_price"
+      ],
       "explanation": "## Fetch Dex Pools\n\n**Key concept:** GSwap pool discovery lives under sdk.dex.pools and replaces removed flat fetchDexPools methods.\n\n**When to use:** Use for DEX pool lists, pool metadata, and slot-0 price state.\n\n**Covers methods:** `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst pools = await sdk.dex.pools.getPools();\nconst pool = await sdk.dex.pools.getPool('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconst slot0 = await sdk.dex.pools.getSlot0('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconsole.log(pools, pool, slot0);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_dex_pools`\n- `gala_launchpad_fetch_all_dex_pools`\n- `gala_launchpad_get_swap_pool_info`\n- `gala_launchpad_get_swap_pool_price`\n\n**Pitfalls:** Use full token identifiers and a valid fee tier; DEX reads do not require a signer.\n\n**Related Topics:** `dex-token-discovery`, `dex-trading`, `advanced-dex-analysis`",
       "samplePrompts": [
         "How do I fetch dex pools?",
@@ -747,7 +774,8 @@
       "mcpTools": [
         "gala_launchpad_buy",
         "gala_launchpad_calculate_buy_amount",
-        "gala_launchpad_fetch_pools"
+        "gala_launchpad_fetch_pools",
+        "gala_launchpad_execute_swap"
       ],
       "explanation": "## Mcp To Sdk Mapping\n\n**Key concept:** MCP names are snake_case transport names; direct SDK calls use flat LaunchpadSDK methods or sdk.dex namespaces.\n\n**When to use:** Use when migrating an MCP workflow into application code.\n\n**Covers methods:** `buy()`, `calculateBuyAmount()`, `fetchPools()`, `sdk.dex.swaps.swap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\n// gala_launchpad_calculate_buy_amount -> sdk.calculateBuyAmount()\n// gala_launchpad_buy -> sdk.buy()\n// gala_launchpad_fetch_pools -> sdk.fetchPools()\nconsole.log(await sdk.calculateBuyAmount({ tokenName: 'anime', amount: '10', type: 'native' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_explain_sdk_usage`\n- `gala_launchpad_calculate_buy_amount`\n- `gala_launchpad_buy`\n- `gala_launchpad_fetch_pools`\n\n**Pitfalls:** Do not copy an MCP tool name into JavaScript; remove the gala_launchpad_ prefix and convert snake_case.\n\n**Related Topics:** `installation`, `dex-trading`, `buy-tokens`",
       "samplePrompts": [
@@ -790,11 +818,13 @@
       "key": "dex-token-discovery",
       "label": "Dex token discovery",
       "description": "Dex token discovery operations",
-      "category": "utils",
+      "category": "dex-pools",
       "methods": [
         "sdk.dex.symbols.list"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_fetch_available_dex_tokens"
+      ],
       "explanation": "## Dex Token Discovery\n\n**Key concept:** The GSwap symbol registry is exposed through sdk.dex.symbols.list(), replacing removed flat available-token methods.\n\n**When to use:** Use before constructing a quote, swap, or position request.\n\n**Covers methods:** `sdk.dex.symbols.list()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst symbols = await sdk.dex.symbols.list();\nconsole.log(symbols.find((entry) => entry.symbol === 'GALA'));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_available_dex_tokens`\n- `gala_launchpad_fetch_all_available_dex_tokens`\n\n**Pitfalls:** Use canonical registry metadata; do not invent a TokenClassKey from a display symbol.\n\n**Related Topics:** `token-identification`, `dex-pools`, `dex-trading`",
       "samplePrompts": [
         "How do I discover tokens on DEX?",
@@ -919,7 +949,7 @@
       "key": "stream-chat",
       "label": "Stream chat",
       "description": "Stream chat operations",
-      "category": "utils",
+      "category": "chat",
       "methods": [
         "connectStreamWebSocket",
         "subscribeToStream",
@@ -930,9 +960,11 @@
         "setSlowMode"
       ],
       "mcpTools": [
+        "gala_launchpad_connect_stream_websocket",
         "gala_launchpad_subscribe_to_stream",
         "gala_launchpad_send_stream_chat_via_web_socket",
         "gala_launchpad_send_stream_reaction",
+        "gala_launchpad_set_chat_enabled",
         "gala_launchpad_set_slow_mode"
       ],
       "explanation": "## Stream Chat\n\n**Key concept:** Stream chat uses websocket lifecycle plus send, reaction, typing, per-token controls, and slow-mode methods.\n\n**When to use:** Use for live chat clients and creator moderation controls.\n\n**Covers methods:** `connectStreamWebSocket()`, `subscribeToStream()`, `sendStreamChatViaWebSocket()`, `sendStreamReaction()`, `disableChat()`, `enableChat()`, `setSlowMode()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime');\nawait sdk.sendStreamChatViaWebSocket('anime', 'Hello from the SDK');\nawait sdk.sendStreamReaction('anime', '🔥');\nawait sdk.setSlowMode('anime', 30);\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_send_stream_chat_via_web_socket`\n- `gala_launchpad_send_stream_reaction`\n- `gala_launchpad_set_chat_enabled`\n- `gala_launchpad_set_slow_mode`\n\n**Pitfalls:** Global chat enable/disable was removed; use per-token controls and current websocket APIs.\n\n**Related Topics:** `streaming`, `chat-messages`, `content-reactions`",
@@ -1019,6 +1051,7 @@
         "gala_launchpad_get_moderated_tokens",
         "gala_launchpad_list_moderator_invites",
         "gala_launchpad_revoke_moderator_invite",
+        "gala_launchpad_get_moderator_invite",
         "gala_launchpad_update_moderator_invite_role"
       ],
       "explanation": "## Moderator Invites\n\n**Key concept:** Moderator methods create, claim, list, inspect, update, and revoke token-scoped delegation.\n\n**When to use:** Use when a token owner grants limited Studio or moderation access.\n\n**Covers methods:** `createModeratorInvite()`, `claimModeratorInvite()`, `getModeratedTokens()`, `listModeratorInvites()`, `revokeModeratorInvite()`, `getModeratorInviteByCode()`, `updateModeratorInviteRole()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst invite = await sdk.createModeratorInvite({ tokenName: 'anime', role: 'MODERATOR', description: 'Community helper' });\nconsole.log(invite, await sdk.listModeratorInvites({ tokenName: 'anime' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_create_moderator_invite`\n- `gala_launchpad_claim_moderator_invite`\n- `gala_launchpad_list_moderator_invites`\n- `gala_launchpad_update_moderator_invite_role`\n- `gala_launchpad_revoke_moderator_invite`\n- `gala_launchpad_get_moderator_invite`\n\n**Pitfalls:** Invite codes are bearer credentials; send them only through a trusted channel.\n\n**Related Topics:** `api-key-management`, `overseer-invites`, `streaming`",
@@ -1183,6 +1216,7 @@
         "gala_launchpad_get_nft_token_class_create_fee",
         "gala_launchpad_estimate_nft_mint_fee",
         "gala_launchpad_estimate_nft_operation_fees",
+        "gala_launchpad_check_nft_collection_available",
         "gala_launchpad_claim_nft_collection",
         "gala_launchpad_fetch_nft_collections",
         "gala_launchpad_create_nft_token_class",
@@ -1212,7 +1246,8 @@
       "mcpTools": [
         "gala_launchpad_fetch_pools",
         "gala_launchpad_is_token_graduated",
-        "gala_launchpad_resolve_token_class_key"
+        "gala_launchpad_resolve_token_class_key",
+        "gala_launchpad_fetch_token_spot_price"
       ],
       "explanation": "## Token Identification\n\n**Key concept:** Launchpad methods use simple token names; GSwap methods use registered symbols or full TokenClassKeys.\n\n**When to use:** Use before crossing from bonding-curve reads into DEX quotes or swaps.\n\n**Covers methods:** `fetchPools()`, `isTokenGraduated()`, `resolveTokenClassKey()`, `fetchTokenPrice()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst graduated = await sdk.isTokenGraduated('anime');\nconst tokenClassKey = await sdk.resolveTokenClassKey('anime');\nconsole.log(graduated, tokenClassKey, await sdk.fetchTokenPrice({ tokenId: tokenClassKey }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_pools`\n- `gala_launchpad_is_token_graduated`\n- `gala_launchpad_resolve_token_class_key`\n- `gala_launchpad_fetch_token_spot_price`\n\n**Pitfalls:** Never hand-build a TokenClassKey.\n\n**Related Topics:** `graduation-detection`, `dex-token-discovery`, `dex-trading`",
       "samplePrompts": [
@@ -1249,7 +1284,7 @@
       "key": "ai-moderation",
       "label": "Ai moderation",
       "description": "Ai moderation operations",
-      "category": "utils",
+      "category": "ai-moderation",
       "methods": [
         "getAIModerationSettings",
         "updateAIModerationSettings",
@@ -1257,7 +1292,13 @@
         "triggerAIModeration",
         "getAIModerationStatus"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_get_ai_moderation_settings",
+        "gala_launchpad_update_ai_moderation_settings",
+        "gala_launchpad_get_ai_moderation_result",
+        "gala_launchpad_trigger_ai_moderation",
+        "gala_launchpad_get_ai_moderation_status"
+      ],
       "explanation": "## Ai Moderation\n\n**Key concept:** Overseer-only AI methods manage settings, trigger analysis, read results, and inspect status.\n\n**When to use:** Use in a protected moderation service before automated action.\n\n**Covers methods:** `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`, `triggerAIModeration()`, `getAIModerationStatus()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconsole.log(await sdk.getAIModerationSettings(), await sdk.getAIModerationStatus());\n// Trigger only after policy review: await sdk.triggerAIModeration({ contentId: 'message-id', contentType: 'CHAT' });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_ai_moderation_settings`\n- `gala_launchpad_update_ai_moderation_settings`\n- `gala_launchpad_get_ai_moderation_result`\n- `gala_launchpad_trigger_ai_moderation`\n- `gala_launchpad_get_ai_moderation_status`\n\n**Pitfalls:** AI output is a signal, not authorization to delete or ban without policy.\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`",
       "samplePrompts": [
         "How do I ai moderation?",
@@ -1360,13 +1401,17 @@
       "key": "oembed",
       "label": "Oembed",
       "description": "Oembed operations",
-      "category": "utils",
+      "category": "oembed",
       "methods": [
         "getHomeOEmbed",
         "getPoolOEmbed",
         "getProfileOEmbed"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_get_home_oembed",
+        "gala_launchpad_get_pool_oembed",
+        "gala_launchpad_get_profile_oembed"
+      ],
       "explanation": "## Oembed\n\n**Key concept:** OEmbed methods produce metadata for home, pool, and profile pages.\n\n**When to use:** Use when a social platform requests a preview document.\n\n**Covers methods:** `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.getHomeOEmbed());\nconsole.log(await sdk.getPoolOEmbed({ tokenName: 'anime' }));\nconsole.log(await sdk.getProfileOEmbed({ address: 'eth|0x1234567890123456789012345678901234567890' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_home_oembed`\n- `gala_launchpad_get_pool_oembed`\n- `gala_launchpad_get_profile_oembed`\n\n**Pitfalls:** Use SDK DTOs so canonical URLs and metadata stay aligned with the frontend.\n\n**Related Topics:** `token-details`, `profile-management`",
       "samplePrompts": [
         "How do I oembed?",
@@ -1472,7 +1517,8 @@
         "connectStreamWebSocket"
       ],
       "mcpTools": [
-        "gala_launchpad_subscribe_to_stream"
+        "gala_launchpad_subscribe_to_stream",
+        "gala_launchpad_connect_stream_websocket"
       ],
       "explanation": "## Global Feed Subscription\n\n**Key concept:** The supported stream subscription API delivers realtime events; MCP also exposes a global-feed reference.\n\n**When to use:** Use for a platform activity feed or realtime monitoring client.\n\n**Covers methods:** `subscribeToStream()`, `connectStreamWebSocket()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nconst subscription = await sdk.subscribeToStream('anime', { onStreamStatusChanged: (event) => console.log(event), onStreamReaction: (event) => console.log(event) });\nconsole.log(subscription);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_global_feed_reference`\n- `gala_launchpad_monitor_global_feed_events_reference`\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n\n**Pitfalls:** Filter by token and event type; do not assume every event is a trade.\n\n**Related Topics:** `event-subscriptions`, `streaming`, `recent-trades`",
       "samplePrompts": [
@@ -1545,12 +1591,15 @@
       "key": "queued-swap-recovery",
       "label": "Queued swap recovery",
       "description": "Queued swap recovery operations",
-      "category": "utils",
+      "category": "dex",
       "methods": [
         "sdk.dex.swaps.swap",
         "sdk.dex.swaps.confirmSwap"
       ],
-      "mcpTools": [],
+      "mcpTools": [
+        "gala_launchpad_execute_swap",
+        "gala_launchpad_get_swap_result"
+      ],
       "explanation": "## Queued Swap Recovery\n\n**Key concept:** GSwap swap() returns a durable queued submission; confirmSwap(uniqueKey) resolves a persisted outcome without resubmitting.\n\n**When to use:** Use after timeout, process restart, or unknown submission outcome.\n\n**Covers methods:** `sdk.dex.swaps.swap()`, `sdk.dex.swaps.confirmSwap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '10', amountOutMinimum: quote.amountOut });\ntry { console.log(await submission.confirm()); } catch (error) { console.log('Recover with:', submission.uniqueKey, error); console.log(await sdk.dex.swaps.confirmSwap(submission.uniqueKey)); }\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** Recovery must use the original uniqueKey; never submit a second swap just because confirmation timed out.\n\n**Related Topics:** `dex-trading`, `error-handling`",
       "samplePrompts": [
         "How do I queued swap recovery?",
@@ -1655,9 +1704,12 @@
       "label": "Pools",
       "topics": [
         "fetch-pools",
+        "token-creation",
         "token-details",
         "token-distribution",
         "price-history",
+        "spot-prices-smart-routing",
+        "utilities-and-helpers",
         "token-identification",
         "holders"
       ]
@@ -1672,24 +1724,12 @@
     "utils": {
       "label": "Utilities",
       "topics": [
-        "token-creation",
         "token-status",
         "multi-wallet",
-        "dex-trading",
         "installation",
-        "spot-prices-smart-routing",
-        "liquidity-positions",
-        "advanced-dex-analysis",
-        "utilities-and-helpers",
         "utilities-system",
-        "fetch-dex-pools",
-        "dex-token-discovery",
-        "stream-chat",
         "graduation-detection",
-        "ai-moderation",
-        "oembed",
-        "events-tracking",
-        "queued-swap-recovery"
+        "events-tracking"
       ]
     },
     "wallet": {
@@ -1710,12 +1750,27 @@
         "locks"
       ]
     },
+    "dex": {
+      "label": "DEX Trading",
+      "topics": [
+        "dex-trading",
+        "advanced-dex-analysis",
+        "queued-swap-recovery"
+      ]
+    },
     "chat": {
       "label": "Chat",
       "topics": [
         "gdex-stream",
         "event-subscriptions",
+        "stream-chat",
         "global-feed-subscription"
+      ]
+    },
+    "dex-liquidity": {
+      "label": "DEX Liquidity",
+      "topics": [
+        "liquidity-positions"
       ]
     },
     "dex-analytics": {
@@ -1726,6 +1781,13 @@
         "fetch-dex-leaderboard-by-season-id",
         "fetch-current-dex-leaderboard",
         "fetch-dex-aggregated-volume-summary"
+      ]
+    },
+    "dex-pools": {
+      "label": "DEX Pools",
+      "topics": [
+        "fetch-dex-pools",
+        "dex-token-discovery"
       ]
     },
     "bridge": {
@@ -1809,6 +1871,12 @@
         "nft-collection-management"
       ]
     },
+    "ai-moderation": {
+      "label": "AI Moderation",
+      "topics": [
+        "ai-moderation"
+      ]
+    },
     "weekly-challenge": {
       "label": "Weekly Challenge",
       "topics": [
@@ -1831,6 +1899,12 @@
       "label": "WebSocket Admin",
       "topics": [
         "websocket-admin"
+      ]
+    },
+    "oembed": {
+      "label": "OEmbed",
+      "topics": [
+        "oembed"
       ]
     },
     "messages": {
@@ -1905,17 +1979,17 @@
       ]
     },
     {
-      "id": "token-creation-demo",
-      "title": "Example: Token creation",
-      "topic": "token-creation",
+      "id": "token-status-demo",
+      "title": "Example: Token status",
+      "topic": "token-status",
       "messages": [
         {
           "role": "user",
-          "content": "How do I create and launch new tokens?"
+          "content": "How do I check token pool status?"
         },
         {
           "role": "assistant",
-          "content": "## Token Creation\n\n**Key concept:** Token creation validates the name and symbol, reads the launch fee, optionally uploads an image, and calls launchToken().\n\n**When to use:** Use when creating a new pre-graduation token from a Node.js or browser application.\n\n**Covers methods:** `isTokenNameAvailable()`, `isTokenSymbolAvailable()`, `fetchLaunchTokenFee()`, `uploadTokenImage()`, `launchToken()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nif (!(await sdk.isTokenNameAvailable('anime')) || !(await sdk.isTokenSymbolAvailable('ANIME'))) throw new Error('Name or symbol is unavailable');\nconsole.log('Launch fee:', await sdk.fetchLaunchTokenFee());\nconst result = await sdk.launchToken({ tokenName: 'anime', tokenSymbol: 'ANIME', tokenDescription: 'Example token', tokenImage: 'https://example.test/anime.png' });\nconsole.log(result.transactionId);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_check_token_name`\n- `gala_launchpad_check_token_symbol`\n- `gala_launchpad_fetch_launch_token_fee`\n- `gala_launchpad_upload_token_image`\n- `gala_launchpad_launch_token`\n\n**Pitfalls:** Availability checks are advisory; handle a rejected launch and never put a real private key in source control.\n\n**Related Topics:** `pool-graduation`, `token-details`, `wallet-connect`"
+          "content": "## Token Status\n\n**Key concept:** Use isTokenGraduated() for an explicit check and the supported Launchpad creation watcher for realtime token events.\n\n**When to use:** Use before choosing bonding-curve versus DEX code and when refreshing token listings.\n\n**Covers methods:** `isTokenGraduated()`, `onLaunchpadTokenCreation()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst graduated = await sdk.isTokenGraduated('anime');\nconsole.log('Graduated:', graduated);\nconst unsubscribe = sdk.onLaunchpadTokenCreation((event) => console.log('Created:', event));\nunsubscribe();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_is_token_graduated`\n- `gala_launchpad_on_launchpad_token_creation`\n\n**Pitfalls:** The legacy DEX pool-creation subscription is not the supported v7 path; use current DEX reads and Launchpad realtime APIs.\n\n**Related Topics:** `graduation-detection`, `fetch-pools`, `event-subscriptions`"
         }
       ]
     },
@@ -1965,6 +2039,21 @@
       ]
     },
     {
+      "id": "dex-trading-demo",
+      "title": "Example: Dex trading",
+      "topic": "dex-trading",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I trade tokens on GalaSwap?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Dex Trading\n\n**Key concept:** sdk.dex is the GSwap client. Quote with sdk.dex.quoting, submit with sdk.dex.swaps, and wait for queued confirmation.\n\n**When to use:** Use for graduated tokens and standard GalaChain assets.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '100', amountOutMinimum: quote.amountOut });\nconst trade = await submission.confirm();\nconsole.log(trade);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** A returned submission is not proof of execution until confirm() resolves.\n\n**Related Topics:** `queued-swap-recovery`, `dex-pools`, `liquidity-positions`"
+        }
+      ]
+    },
+    {
       "id": "gdex-stream-demo",
       "title": "Example: Gdex stream",
       "topic": "gdex-stream",
@@ -1980,6 +2069,21 @@
       ]
     },
     {
+      "id": "liquidity-positions-demo",
+      "title": "Example: Liquidity positions",
+      "topic": "liquidity-positions",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I manage liquidity positions?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Liquidity Positions\n\n**Key concept:** GSwap positions are accessed through sdk.dex.positions. Reads are signer-free; writes return queued submissions.\n\n**When to use:** Use for concentrated-liquidity portfolio screens and LP maintenance.\n\n**Covers methods:** `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`, `sdk.dex.positions.collectPositionFees()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst positions = await sdk.dex.positions.getUserPositions(sdk.getAddress());\nconsole.log(positions);\n// Writes use the position DTO and return a queued SubmittedTransaction.\n// const added = await sdk.dex.positions.addLiquidityByTicks({ token0: 'GALA|Unit|none|none', token1: 'GUSDC|Unit|none|none', fee: 3000, tickLower: -60, tickUpper: 60, amount0Desired: '10', amount1Desired: '1' });\n// await added.confirm();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_user_liquidity_positions`\n- `gala_launchpad_add_liquidity_by_ticks`\n- `gala_launchpad_remove_liquidity`\n- `gala_launchpad_collect_position_fees`\n\n**Pitfalls:** LP operations require full DEX token identifiers; old flat DEX methods are gone.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `queued-swap-recovery`"
+        }
+      ]
+    },
+    {
       "id": "fetch-all-dex-seasons-demo",
       "title": "Example: Fetch all dex seasons",
       "topic": "fetch-all-dex-seasons",
@@ -1991,6 +2095,21 @@
         {
           "role": "assistant",
           "content": "## Fetch All Dex Seasons\n\n**Key concept:** fetchAllDexSeasons() returns historical and current competition seasons.\n\n**When to use:** Use to populate a season selector or historical rankings.\n\n**Covers methods:** `fetchAllDexSeasons()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.fetchAllDexSeasons());\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_all_dex_seasons`\n\n**Pitfalls:** Do not assume the first season is current.\n\n**Related Topics:** `fetch-current-dex-season`, `fetch-dex-leaderboard-by-season-id`"
+        }
+      ]
+    },
+    {
+      "id": "fetch-dex-pools-demo",
+      "title": "Example: Fetch dex pools",
+      "topic": "fetch-dex-pools",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I fetch dex pools?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Fetch Dex Pools\n\n**Key concept:** GSwap pool discovery lives under sdk.dex.pools and replaces removed flat fetchDexPools methods.\n\n**When to use:** Use for DEX pool lists, pool metadata, and slot-0 price state.\n\n**Covers methods:** `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst pools = await sdk.dex.pools.getPools();\nconst pool = await sdk.dex.pools.getPool('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconst slot0 = await sdk.dex.pools.getSlot0('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconsole.log(pools, pool, slot0);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_dex_pools`\n- `gala_launchpad_fetch_all_dex_pools`\n- `gala_launchpad_get_swap_pool_info`\n- `gala_launchpad_get_swap_pool_price`\n\n**Pitfalls:** Use full token identifiers and a valid fee tier; DEX reads do not require a signer.\n\n**Related Topics:** `dex-token-discovery`, `dex-trading`, `advanced-dex-analysis`"
         }
       ]
     },
@@ -2190,6 +2309,21 @@
       ]
     },
     {
+      "id": "ai-moderation-demo",
+      "title": "Example: Ai moderation",
+      "topic": "ai-moderation",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I ai moderation?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Ai Moderation\n\n**Key concept:** Overseer-only AI methods manage settings, trigger analysis, read results, and inspect status.\n\n**When to use:** Use in a protected moderation service before automated action.\n\n**Covers methods:** `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`, `triggerAIModeration()`, `getAIModerationStatus()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconsole.log(await sdk.getAIModerationSettings(), await sdk.getAIModerationStatus());\n// Trigger only after policy review: await sdk.triggerAIModeration({ contentId: 'message-id', contentType: 'CHAT' });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_ai_moderation_settings`\n- `gala_launchpad_update_ai_moderation_settings`\n- `gala_launchpad_get_ai_moderation_result`\n- `gala_launchpad_trigger_ai_moderation`\n- `gala_launchpad_get_ai_moderation_status`\n\n**Pitfalls:** AI output is a signal, not authorization to delete or ban without policy.\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`"
+        }
+      ]
+    },
+    {
       "id": "weekly-challenge-demo",
       "title": "Example: Weekly challenge",
       "topic": "weekly-challenge",
@@ -2246,6 +2380,21 @@
         {
           "role": "assistant",
           "content": "## Websocket Admin\n\n**Key concept:** Admin event emitters and connection inspection support platform realtime operations.\n\n**When to use:** Use only from an authenticated overseer/admin service.\n\n**Covers methods:** `emitTradeExecuted()`, `emitStreamStatus()`, `emitChatMessage()`, `getConnectedClients()`, `isUserOnline()`, `getOnlineUsers()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconsole.log(await sdk.getConnectedClients({}), await sdk.isUserOnline('eth|0x1234567890123456789012345678901234567890'));\n// Emit only a validated payload: await sdk.emitChatStatus('anime', { enabled: true });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_connected_clients`\n- `gala_launchpad_is_user_online`\n- `gala_launchpad_get_online_users`\n- `gala_launchpad_emit_chat_status`\n- `gala_launchpad_emit_websocket_event`\n\n**Pitfalls:** Emitters change live state seen by clients; validate payloads and permissions.\n\n**Related Topics:** `event-subscriptions`, `overseer-invites`, `stream-chat`"
+        }
+      ]
+    },
+    {
+      "id": "oembed-demo",
+      "title": "Example: Oembed",
+      "topic": "oembed",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I oembed?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Oembed\n\n**Key concept:** OEmbed methods produce metadata for home, pool, and profile pages.\n\n**When to use:** Use when a social platform requests a preview document.\n\n**Covers methods:** `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.getHomeOEmbed());\nconsole.log(await sdk.getPoolOEmbed({ tokenName: 'anime' }));\nconsole.log(await sdk.getProfileOEmbed({ address: 'eth|0x1234567890123456789012345678901234567890' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_home_oembed`\n- `gala_launchpad_get_pool_oembed`\n- `gala_launchpad_get_profile_oembed`\n\n**Pitfalls:** Use SDK DTOs so canonical URLs and metadata stay aligned with the frontend.\n\n**Related Topics:** `token-details`, `profile-management`"
         }
       ]
     },
@@ -2311,6 +2460,39 @@
     }
   ],
   "demoConversations": [
+    {
+      "topicKey": "ai-moderation",
+      "label": "Ai moderation",
+      "category": "ai-moderation",
+      "description": "AI-assisted content moderation and settings",
+      "methodCount": 5,
+      "exchanges": [
+        {
+          "userQuestion": "How do I ai moderation?",
+          "assistantResponse": "## Ai Moderation\n\n**Key concept:** Overseer-only AI methods manage settings, trigger analysis, read results, and inspect status.\n\n**When to use:** Use in a protected moderation service before automated action.\n\n**Covers methods:** `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`, `triggerAIModeration()`, `getAIModerationStatus()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconsole.log(await sdk.getAIModerationSettings(), await sdk.getAIModerationStatus());\n// Trigger only after policy review: await sdk.triggerAIModeration({ contentId: 'message-id', contentType: 'CHAT' });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_ai_moderation_settings`\n- `gala_launchpad_update_ai_moderation_settings`\n- `gala_launchpad_get_ai_moderation_result`\n- `gala_launchpad_trigger_ai_moderation`\n- `gala_launchpad_get_ai_moderation_status`\n\n**Pitfalls:** AI output is a signal, not authorization to delete or ban without policy.\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`"
+        },
+        {
+          "userQuestion": "What parameters does getAIModerationSettings() accept?",
+          "assistantResponse": "The primary methods for Ai moderation are `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for ai moderation?",
+          "assistantResponse": "1. **Check service health first**: Gate automated workflows with `getAIModerationStatus()`.\n2. **Tune before enabling actions**: Read with `getAIModerationSettings()` and change thresholds deliberately with `updateAIModerationSettings()`.\n3. **Treat AI output as evidence**: Inspect `getAIModeration()` results before using `triggerAIModeration()` or taking a moderator action."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete ai moderation example?",
+          "assistantResponse": "**Complete Workflow: Ai moderation**\n\nHere's the typical flow: `getAIModerationSettings()` → `updateAIModerationSettings()` → `getAIModeration()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Ai moderation?",
+          "assistantResponse": "**Additional Methods:**\n\n- `triggerAIModeration()`\n- `getAIModerationStatus()`\n\n**Total methods in this topic:** 5\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after ai moderation?",
+          "assistantResponse": "**Related Topics:**\n\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
     {
       "topicKey": "api-key-management",
       "label": "Api key management",
@@ -2666,6 +2848,43 @@
       ]
     },
     {
+      "topicKey": "stream-chat",
+      "label": "Stream chat",
+      "category": "chat",
+      "description": "Stream chat and messaging",
+      "methodCount": 7,
+      "exchanges": [
+        {
+          "userQuestion": "How do I handle stream chat and messaging?",
+          "assistantResponse": "## Stream Chat\n\n**Key concept:** Stream chat uses websocket lifecycle plus send, reaction, typing, per-token controls, and slow-mode methods.\n\n**When to use:** Use for live chat clients and creator moderation controls.\n\n**Covers methods:** `connectStreamWebSocket()`, `subscribeToStream()`, `sendStreamChatViaWebSocket()`, `sendStreamReaction()`, `disableChat()`, `enableChat()`, `setSlowMode()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime');\nawait sdk.sendStreamChatViaWebSocket('anime', 'Hello from the SDK');\nawait sdk.sendStreamReaction('anime', '🔥');\nawait sdk.setSlowMode('anime', 30);\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_send_stream_chat_via_web_socket`\n- `gala_launchpad_send_stream_reaction`\n- `gala_launchpad_set_chat_enabled`\n- `gala_launchpad_set_slow_mode`\n\n**Pitfalls:** Global chat enable/disable was removed; use per-token controls and current websocket APIs.\n\n**Related Topics:** `streaming`, `chat-messages`, `content-reactions`"
+        },
+        {
+          "userQuestion": "What parameters does connectStreamWebSocket() accept?",
+          "assistantResponse": "The primary methods for Stream chat are `connectStreamWebSocket()`, `subscribeToStream()`, `sendStreamChatViaWebSocket()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for handle stream chat and messaging?",
+          "assistantResponse": "1. **Check both control layers**: Read `getGlobalChatStatus()` and `getChatStatus()` before enabling chat UI.\n2. **Authenticate before sending**: Call `connectStreamWebSocket()`, `authenticateStreamWebSocket()`, and `subscribeToStream()` before `sendStreamChatViaWebSocket()`.\n3. **Clean up connections**: Pair subscriptions with `unsubscribeFromStream()` and call `disconnectStreamWebSocket()` when the session ends."
+        },
+        {
+          "userQuestion": "What errors should I handle when handle stream chat and messaging?",
+          "assistantResponse": "**Common Errors:**\n- `ChatDisabled`: Token or global chat is disabled\n- `WebSocketNotAuthenticated`: Stream socket has not completed authentication\n- `NotSubscribed`: Caller attempted to send before joining the token stream\n\n**Tip:** Check `getGlobalChatStatus()` and `getChatStatus()`, then authenticate and `subscribeToStream()` before sending."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete handle stream chat and messaging example?",
+          "assistantResponse": "**Complete Workflow: Stream chat**\n\nHere's the typical flow: `connectStreamWebSocket()` → `subscribeToStream()` → `sendStreamChatViaWebSocket()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Stream chat?",
+          "assistantResponse": "**Additional Methods:**\n\n- `sendStreamReaction()`\n- `disableChat()`\n- `enableChat()`\n- `setSlowMode()`\n\n**Total methods in this topic:** 7\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after handle stream chat and messaging?",
+          "assistantResponse": "**Related Topics:**\n\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n- **Content reactions**: `explainSdkUsage({ topic: 'content-reactions' })`\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "chat-messages",
       "label": "Chat messages",
       "category": "chat-messages",
@@ -2790,6 +3009,105 @@
         {
           "userQuestion": "What should I learn next after manage content reactions?",
           "assistantResponse": "**Related Topics:**\n\n- **Stream chat**: `explainSdkUsage({ topic: 'stream-chat' })`\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "advanced-dex-analysis",
+      "label": "Advanced dex analysis",
+      "category": "dex",
+      "description": "GalaSwap quotes, swaps, and user assets",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I analyze DEX trading data?",
+          "assistantResponse": "## Advanced Dex Analysis\n\n**Key concept:** GSwap quoting replaces legacy composite-pool and exact-amount helpers while preserving exact-input and exact-output workflows.\n\n**When to use:** Use for route analysis, price impact, and trade previews.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst exactIn = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst exactOut = await sdk.dex.quoting.quoteExactOutput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconsole.log(exactIn, exactOut);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_calculate_dex_pool_quote_local`\n- `gala_launchpad_calculate_dex_pool_quote_external`\n\n**Pitfalls:** A quote can become stale; apply minimum output or maximum input on the subsequent swap.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `spot-prices-smart-routing`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.quoting.quoteExactInput() accept?",
+          "assistantResponse": "The primary methods for Advanced dex analysis are `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for analyze DEX trading data?",
+          "assistantResponse": "1. **Fetch one coherent snapshot**: Use `fetchCompositePoolData()` when quotes and pool state must agree.\n2. **Prefer local math for repeated scenarios**: Use `calculateDexPoolQuoteExactAmountLocal()` after loading current state.\n3. **Refresh before execution**: Recheck important results with `calculateDexPoolQuoteExactAmount()` so stale liquidity does not drive a trade."
+        },
+        {
+          "userQuestion": "What should I learn next after analyze DEX trading data?",
+          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for analyze DEX trading data?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "dex-trading",
+      "label": "Dex trading",
+      "category": "dex",
+      "description": "GalaSwap quotes, swaps, and user assets",
+      "methodCount": 3,
+      "exchanges": [
+        {
+          "userQuestion": "How do I trade tokens on GalaSwap?",
+          "assistantResponse": "## Dex Trading\n\n**Key concept:** sdk.dex is the GSwap client. Quote with sdk.dex.quoting, submit with sdk.dex.swaps, and wait for queued confirmation.\n\n**When to use:** Use for graduated tokens and standard GalaChain assets.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '100', amountOutMinimum: quote.amountOut });\nconst trade = await submission.confirm();\nconsole.log(trade);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** A returned submission is not proof of execution until confirm() resolves.\n\n**Related Topics:** `queued-swap-recovery`, `dex-pools`, `liquidity-positions`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.quoting.quoteExactInput() accept?",
+          "assistantResponse": "The primary methods for Dex trading are `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for trade tokens on GalaSwap?",
+          "assistantResponse": "1. **Get quotes first**: Always call `getSwapQuoteExactInput()` or `getSwapQuoteExactOutput()` before executing.\n2. **Check slippage**: DEX trades can have significant slippage on large orders.\n3. **Monitor gas**: DEX operations may require more gas for complex routes."
+        },
+        {
+          "userQuestion": "What errors should I handle when trade tokens on GalaSwap?",
+          "assistantResponse": "**Common Errors:**\n- `InsufficientLiquidity`: Not enough liquidity in pool for your trade size\n- `PriceImpactTooHigh`: Large orders cause significant slippage\n- `InvalidFeeTier`: Use 500, 3000, or 10000 for fee tier\n\n**Best Practice:** Start with smaller amounts and check price impact."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete trade tokens on GalaSwap example?",
+          "assistantResponse": "**Complete Workflow: Dex trading**\n\nHere's the typical flow: `sdk.dex.quoting.quoteExactInput()` → `sdk.dex.quoting.quoteExactOutput()` → `sdk.dex.swaps.swap()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What edge cases should I know about for trade tokens on GalaSwap?",
+          "assistantResponse": "**Edge Cases:**\n1. **Multi-hop routes**: Some token pairs require routing through GALA\n2. **Fee tiers**: Different pools may have different fees (500, 3000, 10000 bps)\n3. **Minimum output**: Set reasonable minimums to avoid dust trades\n\n**Gotcha:** Price quotes are valid for a limited time - execute promptly!"
+        },
+        {
+          "userQuestion": "When would I actually use trade tokens on GalaSwap in a real application?",
+          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Token Swaps**: Exchange between any supported tokens\n2. **Graduated Token Trading**: Trade tokens after bonding curve completion\n3. **Stablecoin Conversion**: Swap volatile tokens for GUSDC\n4. **Portfolio Diversification**: Spread holdings across multiple assets"
+        },
+        {
+          "userQuestion": "What should I learn next after trade tokens on GalaSwap?",
+          "assistantResponse": "**Related Topics:**\n\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Advanced dex analysis**: `explainSdkUsage({ topic: 'advanced-dex-analysis' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "queued-swap-recovery",
+      "label": "Queued swap recovery",
+      "category": "dex",
+      "description": "GalaSwap quotes, swaps, and user assets",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I queued swap recovery?",
+          "assistantResponse": "## Queued Swap Recovery\n\n**Key concept:** GSwap swap() returns a durable queued submission; confirmSwap(uniqueKey) resolves a persisted outcome without resubmitting.\n\n**When to use:** Use after timeout, process restart, or unknown submission outcome.\n\n**Covers methods:** `sdk.dex.swaps.swap()`, `sdk.dex.swaps.confirmSwap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '10', amountOutMinimum: quote.amountOut });\ntry { console.log(await submission.confirm()); } catch (error) { console.log('Recover with:', submission.uniqueKey, error); console.log(await sdk.dex.swaps.confirmSwap(submission.uniqueKey)); }\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** Recovery must use the original uniqueKey; never submit a second swap just because confirmation timed out.\n\n**Related Topics:** `dex-trading`, `error-handling`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.swaps.swap() accept?",
+          "assistantResponse": "The primary methods for Queued swap recovery are `sdk.dex.swaps.swap()`, `sdk.dex.swaps.confirmSwap()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for queued swap recovery?",
+          "assistantResponse": "1. **Persist the uniqueKey before waiting**: Store `submission.uniqueKey` from `sdk.dex.swaps.swap()` before calling `confirm()`, so a crash or timeout can still be reconciled.\n2. **Recover, never resubmit**: After a timeout or restart, call `sdk.dex.swaps.confirmSwap(uniqueKey)`; a second `swap()` can execute the trade twice.\n3. **Treat a chain rejection as final**: When `confirm()` or `confirmSwap()` reports a rejected trade, re-quote with `quoteExactInput()` before building a new swap."
+        },
+        {
+          "userQuestion": "What should I learn next after queued swap recovery?",
+          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Error handling**: `explainSdkUsage({ topic: 'error-handling' })`\n- **Dex pools**: `explainSdkUsage({ topic: 'dex-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for queued swap recovery?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
     },
@@ -2935,6 +3253,101 @@
         {
           "userQuestion": "Any final tips for view DEX leaderboard rankings?",
           "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "liquidity-positions",
+      "label": "Liquidity positions",
+      "category": "dex-liquidity",
+      "description": "Liquidity position management",
+      "methodCount": 4,
+      "exchanges": [
+        {
+          "userQuestion": "How do I manage liquidity positions?",
+          "assistantResponse": "## Liquidity Positions\n\n**Key concept:** GSwap positions are accessed through sdk.dex.positions. Reads are signer-free; writes return queued submissions.\n\n**When to use:** Use for concentrated-liquidity portfolio screens and LP maintenance.\n\n**Covers methods:** `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`, `sdk.dex.positions.collectPositionFees()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst positions = await sdk.dex.positions.getUserPositions(sdk.getAddress());\nconsole.log(positions);\n// Writes use the position DTO and return a queued SubmittedTransaction.\n// const added = await sdk.dex.positions.addLiquidityByTicks({ token0: 'GALA|Unit|none|none', token1: 'GUSDC|Unit|none|none', fee: 3000, tickLower: -60, tickUpper: 60, amount0Desired: '10', amount1Desired: '1' });\n// await added.confirm();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_user_liquidity_positions`\n- `gala_launchpad_add_liquidity_by_ticks`\n- `gala_launchpad_remove_liquidity`\n- `gala_launchpad_collect_position_fees`\n\n**Pitfalls:** LP operations require full DEX token identifiers; old flat DEX methods are gone.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `queued-swap-recovery`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.positions.getUserPositions() accept?",
+          "assistantResponse": "The primary methods for Liquidity positions are `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for manage liquidity positions?",
+          "assistantResponse": "1. **Inspect positions before changing them**: Use `getSwapLiquidityPositionById()` before removal or fee collection.\n2. **Prefer price-based ranges for user input**: Use `addSwapLiquidityByPrice()` unless exact ticks are intentional.\n3. **Estimate before committing**: Call `getSwapEstimateRemoveLiquidity()` before `removeSwapLiquidity()` and collect with `collectSwapPositionFees()` separately."
+        },
+        {
+          "userQuestion": "What errors should I handle when manage liquidity positions?",
+          "assistantResponse": "**Common Errors:**\n- `TickOutOfRange`: Invalid tick boundaries for fee tier\n- `InsufficientAmount`: Not enough tokens for position\n- `PositionNotFound`: Position ID doesn't exist\n\n**Tip:** Use `addSwapLiquidityByPrice()` for easier price-based ranges."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete manage liquidity positions example?",
+          "assistantResponse": "**Complete Workflow: Liquidity positions**\n\nHere's the typical flow: `sdk.dex.positions.getUserPositions()` → `sdk.dex.positions.addLiquidityByTicks()` → `sdk.dex.positions.removeLiquidity()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "When would I actually use manage liquidity positions in a real application?",
+          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Fee Earning**: Provide liquidity to earn trading fees\n2. **Market Making**: Set tight ranges for active trading pairs\n3. **Range Orders**: Use LP positions as limit orders\n4. **Yield Strategies**: Combine with other DeFi protocols"
+        },
+        {
+          "userQuestion": "What should I learn next after manage liquidity positions?",
+          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Advanced dex analysis**: `explainSdkUsage({ topic: 'advanced-dex-analysis' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "dex-token-discovery",
+      "label": "Dex token discovery",
+      "category": "dex-pools",
+      "description": "DEX pool discovery and information",
+      "methodCount": 1,
+      "exchanges": [
+        {
+          "userQuestion": "How do I discover tokens on DEX?",
+          "assistantResponse": "## Dex Token Discovery\n\n**Key concept:** The GSwap symbol registry is exposed through sdk.dex.symbols.list(), replacing removed flat available-token methods.\n\n**When to use:** Use before constructing a quote, swap, or position request.\n\n**Covers methods:** `sdk.dex.symbols.list()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst symbols = await sdk.dex.symbols.list();\nconsole.log(symbols.find((entry) => entry.symbol === 'GALA'));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_available_dex_tokens`\n- `gala_launchpad_fetch_all_available_dex_tokens`\n\n**Pitfalls:** Use canonical registry metadata; do not invent a TokenClassKey from a display symbol.\n\n**Related Topics:** `token-identification`, `dex-pools`, `dex-trading`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.symbols.list() accept?",
+          "assistantResponse": "The primary methods for Dex token discovery are `sdk.dex.symbols.list()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for discover tokens on DEX?",
+          "assistantResponse": "1. **Use the bounded query for screens**: Call `fetchAvailableDexTokens()` with filters and pagination.\n2. **Reserve full scans for offline work**: Use `fetchAllAvailableDexTokens()` only when the complete token universe is required.\n3. **Cache discovery results briefly**: Reuse `fetchAvailableDexTokens()` responses, but refresh before building a trade route."
+        },
+        {
+          "userQuestion": "What should I learn next after discover tokens on DEX?",
+          "assistantResponse": "**Related Topics:**\n\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for discover tokens on DEX?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "fetch-dex-pools",
+      "label": "Fetch dex pools",
+      "category": "dex-pools",
+      "description": "DEX pool discovery and information",
+      "methodCount": 3,
+      "exchanges": [
+        {
+          "userQuestion": "How do I fetch dex pools?",
+          "assistantResponse": "## Fetch Dex Pools\n\n**Key concept:** GSwap pool discovery lives under sdk.dex.pools and replaces removed flat fetchDexPools methods.\n\n**When to use:** Use for DEX pool lists, pool metadata, and slot-0 price state.\n\n**Covers methods:** `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst pools = await sdk.dex.pools.getPools();\nconst pool = await sdk.dex.pools.getPool('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconst slot0 = await sdk.dex.pools.getSlot0('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconsole.log(pools, pool, slot0);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_dex_pools`\n- `gala_launchpad_fetch_all_dex_pools`\n- `gala_launchpad_get_swap_pool_info`\n- `gala_launchpad_get_swap_pool_price`\n\n**Pitfalls:** Use full token identifiers and a valid fee tier; DEX reads do not require a signer.\n\n**Related Topics:** `dex-token-discovery`, `dex-trading`, `advanced-dex-analysis`"
+        },
+        {
+          "userQuestion": "What parameters does sdk.dex.pools.getPools() accept?",
+          "assistantResponse": "The primary methods for Fetch dex pools are `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for fetch dex pools?",
+          "assistantResponse": "1. **Use server pagination for interactive views**: Call `fetchDexPools()` with filters rather than downloading every pool.\n2. **Use full traversal intentionally**: Reserve `fetchAllDexPools()` for exports, indexing, or offline analysis.\n3. **Refresh before trading**: Pool discovery can be cached, but call `fetchDexPools()` again before relying on liquidity-sensitive data."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete fetch dex pools example?",
+          "assistantResponse": "**Complete Workflow: Fetch dex pools**\n\nHere's the typical flow: `sdk.dex.pools.getPools()` → `sdk.dex.pools.getPool()` → `sdk.dex.pools.getSlot0()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after fetch dex pools?",
+          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Dex token discovery**: `explainSdkUsage({ topic: 'dex-token-discovery' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3112,6 +3525,35 @@
         {
           "userQuestion": "What should I learn next after notifications?",
           "assistantResponse": "**Related Topics:**\n\n- **Session auth**: `explainSdkUsage({ topic: 'session-auth' })`\n- **Profile management**: `explainSdkUsage({ topic: 'profile-management' })`\n- **Utilities system**: `explainSdkUsage({ topic: 'utilities-system' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "oembed",
+      "label": "Oembed",
+      "category": "oembed",
+      "description": "Social preview metadata for Launchpad pages",
+      "methodCount": 3,
+      "exchanges": [
+        {
+          "userQuestion": "How do I oembed?",
+          "assistantResponse": "## Oembed\n\n**Key concept:** OEmbed methods produce metadata for home, pool, and profile pages.\n\n**When to use:** Use when a social platform requests a preview document.\n\n**Covers methods:** `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.getHomeOEmbed());\nconsole.log(await sdk.getPoolOEmbed({ tokenName: 'anime' }));\nconsole.log(await sdk.getProfileOEmbed({ address: 'eth|0x1234567890123456789012345678901234567890' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_home_oembed`\n- `gala_launchpad_get_pool_oembed`\n- `gala_launchpad_get_profile_oembed`\n\n**Pitfalls:** Use SDK DTOs so canonical URLs and metadata stay aligned with the frontend.\n\n**Related Topics:** `token-details`, `profile-management`"
+        },
+        {
+          "userQuestion": "What parameters does getHomeOEmbed() accept?",
+          "assistantResponse": "The primary methods for Oembed are `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for oembed?",
+          "assistantResponse": "1. **Request metadata for the right surface**: Use `getHomeOEmbed()`, `getPoolOEmbed()`, or `getProfileOEmbed()` rather than rewriting preview fields.\n2. **Cache public preview data briefly**: Reuse `getPoolOEmbed()` responses while allowing token metadata to refresh.\n3. **Escape metadata at render time**: Treat strings returned by `getProfileOEmbed()` as content, not trusted HTML."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete oembed example?",
+          "assistantResponse": "**Complete Workflow: Oembed**\n\nHere's the typical flow: `getHomeOEmbed()` → `getPoolOEmbed()` → `getProfileOEmbed()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What should I learn next after oembed?",
+          "assistantResponse": "**Related Topics:**\n\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Profile management**: `explainSdkUsage({ topic: 'profile-management' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3306,6 +3748,80 @@
       ]
     },
     {
+      "topicKey": "spot-prices-smart-routing",
+      "label": "Spot prices smart routing",
+      "category": "pools",
+      "description": "Pool management, pricing, and token availability",
+      "methodCount": 2,
+      "exchanges": [
+        {
+          "userQuestion": "How do I get token prices with smart routing?",
+          "assistantResponse": "## Spot Prices Smart Routing\n\n**Key concept:** fetchTokenPrice() routes between Launchpad and DEX token formats, while fetchGalaPrice() reads native GALA spot price.\n\n**When to use:** Use when a price display may receive either a Launchpad name or DEX identifier.\n\n**Covers methods:** `fetchTokenPrice()`, `fetchGalaPrice()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst launchpadPrice = await sdk.fetchTokenPrice({ tokenName: 'anime' });\nconst dexPrice = await sdk.fetchTokenPrice({ tokenId: 'GALA|Unit|none|none' });\nconst galaPrice = await sdk.fetchGalaPrice();\nconsole.log(launchpadPrice, dexPrice, galaPrice);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_token_spot_price`\n- `gala_launchpad_fetch_gala_spot_price`\n\n**Pitfalls:** Do not construct a DEX token key from a token name; resolve the canonical key first.\n\n**Related Topics:** `token-identification`, `price-history`, `dex-token-discovery`"
+        },
+        {
+          "userQuestion": "What parameters does fetchTokenPrice() accept?",
+          "assistantResponse": "The primary methods for Spot prices smart routing are `fetchTokenPrice()`, `fetchGalaPrice()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for get token prices with smart routing?",
+          "assistantResponse": "1. **Use the price source for the venue**: Call `fetchTokenPrice()` for launchpad tokens and `getSwapPoolPrice()` for DEX pools.\n2. **Preserve token identifiers**: Pass the token name to `fetchTokenPrice()` and canonical class keys to `getSwapPoolPrice()`.\n3. **Cache only for the displayed tolerance**: Refresh `getSwapPoolPrice()` before any trade-sensitive decision."
+        },
+        {
+          "userQuestion": "What should I learn next after get token prices with smart routing?",
+          "assistantResponse": "**Related Topics:**\n\n- **Token identification**: `explainSdkUsage({ topic: 'token-identification' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        },
+        {
+          "userQuestion": "Any final tips for get token prices with smart routing?",
+          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
+        }
+      ]
+    },
+    {
+      "topicKey": "token-creation",
+      "label": "Token creation",
+      "category": "pools",
+      "description": "Pool management, pricing, and token availability",
+      "methodCount": 5,
+      "exchanges": [
+        {
+          "userQuestion": "How do I create and launch new tokens?",
+          "assistantResponse": "## Token Creation\n\n**Key concept:** Token creation validates the name and symbol, reads the launch fee, optionally uploads an image, and calls launchToken().\n\n**When to use:** Use when creating a new pre-graduation token from a Node.js or browser application.\n\n**Covers methods:** `isTokenNameAvailable()`, `isTokenSymbolAvailable()`, `fetchLaunchTokenFee()`, `uploadTokenImage()`, `launchToken()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nif (!(await sdk.isTokenNameAvailable('anime')) || !(await sdk.isTokenSymbolAvailable('ANIME'))) throw new Error('Name or symbol is unavailable');\nconsole.log('Launch fee:', await sdk.fetchLaunchTokenFee());\nconst result = await sdk.launchToken({ tokenName: 'anime', tokenSymbol: 'ANIME', tokenDescription: 'Example token', tokenImage: 'https://example.test/anime.png' });\nconsole.log(result.transactionId);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_check_token_name`\n- `gala_launchpad_check_token_symbol`\n- `gala_launchpad_fetch_launch_token_fee`\n- `gala_launchpad_upload_token_image`\n- `gala_launchpad_launch_token`\n\n**Pitfalls:** Availability checks are advisory; handle a rejected launch and never put a real private key in source control.\n\n**Related Topics:** `pool-graduation`, `token-details`, `wallet-connect`"
+        },
+        {
+          "userQuestion": "What parameters does isTokenNameAvailable() accept?",
+          "assistantResponse": "The primary methods for Token creation are `isTokenNameAvailable()`, `isTokenSymbolAvailable()`, `fetchLaunchTokenFee()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for create and launch new tokens?",
+          "assistantResponse": "1. **Check availability**: Verify token name and symbol are available first.\n2. **Upload image first**: Use `uploadTokenImage()` before `launchToken()`.\n3. **Review fees**: Check launch fees with `fetchLaunchTokenFee()`."
+        },
+        {
+          "userQuestion": "What errors should I handle when create and launch new tokens?",
+          "assistantResponse": "**Common Errors:**\n- `TokenNameTaken`: Name already exists - check availability first\n- `SymbolTaken`: Symbol in use - verify with `isTokenSymbolAvailable()`\n- `InsufficientLaunchFee`: Check fee with `fetchLaunchTokenFee()`\n\n**Important:** Token creation is irreversible!"
+        },
+        {
+          "userQuestion": "Can you walk me through a complete create and launch new tokens example?",
+          "assistantResponse": "**Complete Workflow: Token creation**\n\nHere's the typical flow: `isTokenNameAvailable()` → `isTokenSymbolAvailable()` → `fetchLaunchTokenFee()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What edge cases should I know about for create and launch new tokens?",
+          "assistantResponse": "**Edge Cases:**\n1. **Image requirements**: JPEG/PNG, reasonable size\n2. **Name restrictions**: Alphanumeric only, 3-20 chars\n3. **Symbol format**: Uppercase, 1-8 chars\n\n**Gotcha:** Once created, tokens cannot be renamed or have their symbol changed!"
+        },
+        {
+          "userQuestion": "What other methods are available for Token creation?",
+          "assistantResponse": "**Additional Methods:**\n\n- `uploadTokenImage()`\n- `launchToken()`\n\n**Total methods in this topic:** 5\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "When would I actually use create and launch new tokens in a real application?",
+          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Community Tokens**: Launch tokens for DAOs or communities\n2. **Gaming Tokens**: Create in-game currencies or assets\n3. **Creator Coins**: Personal tokens for content creators\n4. **Project Tokens**: Utility tokens for new projects"
+        },
+        {
+          "userQuestion": "What should I learn next after create and launch new tokens?",
+          "assistantResponse": "**Related Topics:**\n\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
       "topicKey": "token-details",
       "label": "Token details",
       "category": "pools",
@@ -3389,6 +3905,39 @@
         {
           "userQuestion": "What should I learn next after token identification?",
           "assistantResponse": "**Related Topics:**\n\n- **Graduation detection**: `explainSdkUsage({ topic: 'graduation-detection' })`\n- **Token status**: `explainSdkUsage({ topic: 'token-status' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
+        }
+      ]
+    },
+    {
+      "topicKey": "utilities-and-helpers",
+      "label": "Utilities and helpers",
+      "category": "pools",
+      "description": "Pool management, pricing, and token availability",
+      "methodCount": 6,
+      "exchanges": [
+        {
+          "userQuestion": "How do I use SDK utilities and helpers?",
+          "assistantResponse": "## Utilities And Helpers\n\n**Key concept:** Utility methods cover supply reads, cache inspection, cleanup, and transaction lookup.\n\n**When to use:** Use to build diagnostics, warm data, and controlled shutdown paths.\n\n**Covers methods:** `fetchGalaPrice()`, `fetchTokenClassesWithSupply()`, `getBundlerTransactionResult()`, `getCacheInfo()`, `clearCache()`, `cleanup()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst supply = await sdk.fetchTokenClassesWithSupply([{ collection: 'GALA', category: 'Unit', type: 'none', additionalKey: 'none' }]);\nconsole.log(supply, sdk.getCacheInfo());\nsdk.clearCache();\nawait sdk.cleanup();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_token_classes_with_supply`\n- `gala_launchpad_get_cache_info`\n- `gala_launchpad_clear_cache`\n- `gala_launchpad_cleanup`\n\n**Pitfalls:** clearCache() is local maintenance; it does not invalidate chain state or cancel a transaction.\n\n**Related Topics:** `utilities-system`, `error-handling`, `balances`"
+        },
+        {
+          "userQuestion": "What parameters does fetchGalaPrice() accept?",
+          "assistantResponse": "The primary methods for Utilities and helpers are `fetchGalaPrice()`, `fetchTokenClassesWithSupply()`, `getBundlerTransactionResult()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
+        },
+        {
+          "userQuestion": "What are best practices for use SDK utilities and helpers?",
+          "assistantResponse": "1. **Reuse cached reference reads**: Inspect `getCacheInfo()` and use `clearCache()` only when freshness requires it.\n2. **Resolve live transaction outcomes**: Use `getBundlerTransactionResult()` after an ambiguous bundled submission.\n3. **Release resources explicitly**: Call `cleanup()` when the SDK instance is no longer needed."
+        },
+        {
+          "userQuestion": "Can you walk me through a complete use SDK utilities and helpers example?",
+          "assistantResponse": "**Complete Workflow: Utilities and helpers**\n\nHere's the typical flow: `fetchGalaPrice()` → `fetchTokenClassesWithSupply()` → `getBundlerTransactionResult()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
+        },
+        {
+          "userQuestion": "What other methods are available for Utilities and helpers?",
+          "assistantResponse": "**Additional Methods:**\n\n- `getCacheInfo()`\n- `clearCache()`\n- `cleanup()`\n\n**Total methods in this topic:** 6\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
+        },
+        {
+          "userQuestion": "What should I learn next after use SDK utilities and helpers?",
+          "assistantResponse": "**Related Topics:**\n\n- **Utilities system**: `explainSdkUsage({ topic: 'utilities-system' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -3868,138 +4417,6 @@
       ]
     },
     {
-      "topicKey": "advanced-dex-analysis",
-      "label": "Advanced dex analysis",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 2,
-      "exchanges": [
-        {
-          "userQuestion": "How do I analyze DEX trading data?",
-          "assistantResponse": "## Advanced Dex Analysis\n\n**Key concept:** GSwap quoting replaces legacy composite-pool and exact-amount helpers while preserving exact-input and exact-output workflows.\n\n**When to use:** Use for route analysis, price impact, and trade previews.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst exactIn = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst exactOut = await sdk.dex.quoting.quoteExactOutput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconsole.log(exactIn, exactOut);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_calculate_dex_pool_quote_local`\n- `gala_launchpad_calculate_dex_pool_quote_external`\n\n**Pitfalls:** A quote can become stale; apply minimum output or maximum input on the subsequent swap.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `spot-prices-smart-routing`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.quoting.quoteExactInput() accept?",
-          "assistantResponse": "The primary methods for Advanced dex analysis are `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for analyze DEX trading data?",
-          "assistantResponse": "1. **Fetch one coherent snapshot**: Use `fetchCompositePoolData()` when quotes and pool state must agree.\n2. **Prefer local math for repeated scenarios**: Use `calculateDexPoolQuoteExactAmountLocal()` after loading current state.\n3. **Refresh before execution**: Recheck important results with `calculateDexPoolQuoteExactAmount()` so stale liquidity does not drive a trade."
-        },
-        {
-          "userQuestion": "What should I learn next after analyze DEX trading data?",
-          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for analyze DEX trading data?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "ai-moderation",
-      "label": "Ai moderation",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 5,
-      "exchanges": [
-        {
-          "userQuestion": "How do I ai moderation?",
-          "assistantResponse": "## Ai Moderation\n\n**Key concept:** Overseer-only AI methods manage settings, trigger analysis, read results, and inspect status.\n\n**When to use:** Use in a protected moderation service before automated action.\n\n**Covers methods:** `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`, `triggerAIModeration()`, `getAIModerationStatus()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconsole.log(await sdk.getAIModerationSettings(), await sdk.getAIModerationStatus());\n// Trigger only after policy review: await sdk.triggerAIModeration({ contentId: 'message-id', contentType: 'CHAT' });\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_ai_moderation_settings`\n- `gala_launchpad_update_ai_moderation_settings`\n- `gala_launchpad_get_ai_moderation_result`\n- `gala_launchpad_trigger_ai_moderation`\n- `gala_launchpad_get_ai_moderation_status`\n\n**Pitfalls:** AI output is a signal, not authorization to delete or ban without policy.\n\n**Related Topics:** `content-flag-management`, `ban-management`, `overseer-invites`"
-        },
-        {
-          "userQuestion": "What parameters does getAIModerationSettings() accept?",
-          "assistantResponse": "The primary methods for Ai moderation are `getAIModerationSettings()`, `updateAIModerationSettings()`, `getAIModeration()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for ai moderation?",
-          "assistantResponse": "1. **Check service health first**: Gate automated workflows with `getAIModerationStatus()`.\n2. **Tune before enabling actions**: Read with `getAIModerationSettings()` and change thresholds deliberately with `updateAIModerationSettings()`.\n3. **Treat AI output as evidence**: Inspect `getAIModeration()` results before using `triggerAIModeration()` or taking a moderator action."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete ai moderation example?",
-          "assistantResponse": "**Complete Workflow: Ai moderation**\n\nHere's the typical flow: `getAIModerationSettings()` → `updateAIModerationSettings()` → `getAIModeration()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What other methods are available for Ai moderation?",
-          "assistantResponse": "**Additional Methods:**\n\n- `triggerAIModeration()`\n- `getAIModerationStatus()`\n\n**Total methods in this topic:** 5\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
-        },
-        {
-          "userQuestion": "What should I learn next after ai moderation?",
-          "assistantResponse": "**Related Topics:**\n\n- **Content flag management**: `explainSdkUsage({ topic: 'content-flag-management' })`\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n- **Overseer invites**: `explainSdkUsage({ topic: 'overseer-invites' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
-      "topicKey": "dex-token-discovery",
-      "label": "Dex token discovery",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 1,
-      "exchanges": [
-        {
-          "userQuestion": "How do I discover tokens on DEX?",
-          "assistantResponse": "## Dex Token Discovery\n\n**Key concept:** The GSwap symbol registry is exposed through sdk.dex.symbols.list(), replacing removed flat available-token methods.\n\n**When to use:** Use before constructing a quote, swap, or position request.\n\n**Covers methods:** `sdk.dex.symbols.list()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst symbols = await sdk.dex.symbols.list();\nconsole.log(symbols.find((entry) => entry.symbol === 'GALA'));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_available_dex_tokens`\n- `gala_launchpad_fetch_all_available_dex_tokens`\n\n**Pitfalls:** Use canonical registry metadata; do not invent a TokenClassKey from a display symbol.\n\n**Related Topics:** `token-identification`, `dex-pools`, `dex-trading`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.symbols.list() accept?",
-          "assistantResponse": "The primary methods for Dex token discovery are `sdk.dex.symbols.list()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for discover tokens on DEX?",
-          "assistantResponse": "1. **Use the bounded query for screens**: Call `fetchAvailableDexTokens()` with filters and pagination.\n2. **Reserve full scans for offline work**: Use `fetchAllAvailableDexTokens()` only when the complete token universe is required.\n3. **Cache discovery results briefly**: Reuse `fetchAvailableDexTokens()` responses, but refresh before building a trade route."
-        },
-        {
-          "userQuestion": "What should I learn next after discover tokens on DEX?",
-          "assistantResponse": "**Related Topics:**\n\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for discover tokens on DEX?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "dex-trading",
-      "label": "Dex trading",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 3,
-      "exchanges": [
-        {
-          "userQuestion": "How do I trade tokens on GalaSwap?",
-          "assistantResponse": "## Dex Trading\n\n**Key concept:** sdk.dex is the GSwap client. Quote with sdk.dex.quoting, submit with sdk.dex.swaps, and wait for queued confirmation.\n\n**When to use:** Use for graduated tokens and standard GalaChain assets.\n\n**Covers methods:** `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '100', amountOutMinimum: quote.amountOut });\nconst trade = await submission.confirm();\nconsole.log(trade);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_swap_quote_exact_input`\n- `gala_launchpad_get_swap_quote_exact_output`\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** A returned submission is not proof of execution until confirm() resolves.\n\n**Related Topics:** `queued-swap-recovery`, `dex-pools`, `liquidity-positions`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.quoting.quoteExactInput() accept?",
-          "assistantResponse": "The primary methods for Dex trading are `sdk.dex.quoting.quoteExactInput()`, `sdk.dex.quoting.quoteExactOutput()`, `sdk.dex.swaps.swap()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for trade tokens on GalaSwap?",
-          "assistantResponse": "1. **Get quotes first**: Always call `getSwapQuoteExactInput()` or `getSwapQuoteExactOutput()` before executing.\n2. **Check slippage**: DEX trades can have significant slippage on large orders.\n3. **Monitor gas**: DEX operations may require more gas for complex routes."
-        },
-        {
-          "userQuestion": "What errors should I handle when trade tokens on GalaSwap?",
-          "assistantResponse": "**Common Errors:**\n- `InsufficientLiquidity`: Not enough liquidity in pool for your trade size\n- `PriceImpactTooHigh`: Large orders cause significant slippage\n- `InvalidFeeTier`: Use 500, 3000, or 10000 for fee tier\n\n**Best Practice:** Start with smaller amounts and check price impact."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete trade tokens on GalaSwap example?",
-          "assistantResponse": "**Complete Workflow: Dex trading**\n\nHere's the typical flow: `sdk.dex.quoting.quoteExactInput()` → `sdk.dex.quoting.quoteExactOutput()` → `sdk.dex.swaps.swap()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What edge cases should I know about for trade tokens on GalaSwap?",
-          "assistantResponse": "**Edge Cases:**\n1. **Multi-hop routes**: Some token pairs require routing through GALA\n2. **Fee tiers**: Different pools may have different fees (500, 3000, 10000 bps)\n3. **Minimum output**: Set reasonable minimums to avoid dust trades\n\n**Gotcha:** Price quotes are valid for a limited time - execute promptly!"
-        },
-        {
-          "userQuestion": "When would I actually use trade tokens on GalaSwap in a real application?",
-          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Token Swaps**: Exchange between any supported tokens\n2. **Graduated Token Trading**: Trade tokens after bonding curve completion\n3. **Stablecoin Conversion**: Swap volatile tokens for GUSDC\n4. **Portfolio Diversification**: Spread holdings across multiple assets"
-        },
-        {
-          "userQuestion": "What should I learn next after trade tokens on GalaSwap?",
-          "assistantResponse": "**Related Topics:**\n\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Advanced dex analysis**: `explainSdkUsage({ topic: 'advanced-dex-analysis' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
       "topicKey": "events-tracking",
       "label": "Events tracking",
       "category": "utils",
@@ -4025,35 +4442,6 @@
         {
           "userQuestion": "Any final tips for events tracking?",
           "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "fetch-dex-pools",
-      "label": "Fetch dex pools",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 3,
-      "exchanges": [
-        {
-          "userQuestion": "How do I fetch dex pools?",
-          "assistantResponse": "## Fetch Dex Pools\n\n**Key concept:** GSwap pool discovery lives under sdk.dex.pools and replaces removed flat fetchDexPools methods.\n\n**When to use:** Use for DEX pool lists, pool metadata, and slot-0 price state.\n\n**Covers methods:** `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst pools = await sdk.dex.pools.getPools();\nconst pool = await sdk.dex.pools.getPool('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconst slot0 = await sdk.dex.pools.getSlot0('GALA|Unit|none|none', 'GUSDC|Unit|none|none', 3000);\nconsole.log(pools, pool, slot0);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_dex_pools`\n- `gala_launchpad_fetch_all_dex_pools`\n- `gala_launchpad_get_swap_pool_info`\n- `gala_launchpad_get_swap_pool_price`\n\n**Pitfalls:** Use full token identifiers and a valid fee tier; DEX reads do not require a signer.\n\n**Related Topics:** `dex-token-discovery`, `dex-trading`, `advanced-dex-analysis`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.pools.getPools() accept?",
-          "assistantResponse": "The primary methods for Fetch dex pools are `sdk.dex.pools.getPools()`, `sdk.dex.pools.getPool()`, `sdk.dex.pools.getSlot0()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for fetch dex pools?",
-          "assistantResponse": "1. **Use server pagination for interactive views**: Call `fetchDexPools()` with filters rather than downloading every pool.\n2. **Use full traversal intentionally**: Reserve `fetchAllDexPools()` for exports, indexing, or offline analysis.\n3. **Refresh before trading**: Pool discovery can be cached, but call `fetchDexPools()` again before relying on liquidity-sensitive data."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete fetch dex pools example?",
-          "assistantResponse": "**Complete Workflow: Fetch dex pools**\n\nHere's the typical flow: `sdk.dex.pools.getPools()` → `sdk.dex.pools.getPool()` → `sdk.dex.pools.getSlot0()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What should I learn next after fetch dex pools?",
-          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Liquidity positions**: `explainSdkUsage({ topic: 'liquidity-positions' })`\n- **Dex token discovery**: `explainSdkUsage({ topic: 'dex-token-discovery' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
@@ -4116,43 +4504,6 @@
       ]
     },
     {
-      "topicKey": "liquidity-positions",
-      "label": "Liquidity positions",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 4,
-      "exchanges": [
-        {
-          "userQuestion": "How do I manage liquidity positions?",
-          "assistantResponse": "## Liquidity Positions\n\n**Key concept:** GSwap positions are accessed through sdk.dex.positions. Reads are signer-free; writes return queued submissions.\n\n**When to use:** Use for concentrated-liquidity portfolio screens and LP maintenance.\n\n**Covers methods:** `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`, `sdk.dex.positions.collectPositionFees()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst positions = await sdk.dex.positions.getUserPositions(sdk.getAddress());\nconsole.log(positions);\n// Writes use the position DTO and return a queued SubmittedTransaction.\n// const added = await sdk.dex.positions.addLiquidityByTicks({ token0: 'GALA|Unit|none|none', token1: 'GUSDC|Unit|none|none', fee: 3000, tickLower: -60, tickUpper: 60, amount0Desired: '10', amount1Desired: '1' });\n// await added.confirm();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_user_liquidity_positions`\n- `gala_launchpad_add_liquidity_by_ticks`\n- `gala_launchpad_remove_liquidity`\n- `gala_launchpad_collect_position_fees`\n\n**Pitfalls:** LP operations require full DEX token identifiers; old flat DEX methods are gone.\n\n**Related Topics:** `dex-trading`, `dex-pools`, `queued-swap-recovery`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.positions.getUserPositions() accept?",
-          "assistantResponse": "The primary methods for Liquidity positions are `sdk.dex.positions.getUserPositions()`, `sdk.dex.positions.addLiquidityByTicks()`, `sdk.dex.positions.removeLiquidity()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for manage liquidity positions?",
-          "assistantResponse": "1. **Inspect positions before changing them**: Use `getSwapLiquidityPositionById()` before removal or fee collection.\n2. **Prefer price-based ranges for user input**: Use `addSwapLiquidityByPrice()` unless exact ticks are intentional.\n3. **Estimate before committing**: Call `getSwapEstimateRemoveLiquidity()` before `removeSwapLiquidity()` and collect with `collectSwapPositionFees()` separately."
-        },
-        {
-          "userQuestion": "What errors should I handle when manage liquidity positions?",
-          "assistantResponse": "**Common Errors:**\n- `TickOutOfRange`: Invalid tick boundaries for fee tier\n- `InsufficientAmount`: Not enough tokens for position\n- `PositionNotFound`: Position ID doesn't exist\n\n**Tip:** Use `addSwapLiquidityByPrice()` for easier price-based ranges."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete manage liquidity positions example?",
-          "assistantResponse": "**Complete Workflow: Liquidity positions**\n\nHere's the typical flow: `sdk.dex.positions.getUserPositions()` → `sdk.dex.positions.addLiquidityByTicks()` → `sdk.dex.positions.removeLiquidity()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "When would I actually use manage liquidity positions in a real application?",
-          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Fee Earning**: Provide liquidity to earn trading fees\n2. **Market Making**: Set tight ranges for active trading pairs\n3. **Range Orders**: Use LP positions as limit orders\n4. **Yield Strategies**: Combine with other DeFi protocols"
-        },
-        {
-          "userQuestion": "What should I learn next after manage liquidity positions?",
-          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Advanced dex analysis**: `explainSdkUsage({ topic: 'advanced-dex-analysis' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
       "topicKey": "multi-wallet",
       "label": "Multi wallet",
       "category": "utils",
@@ -4182,175 +4533,6 @@
       ]
     },
     {
-      "topicKey": "oembed",
-      "label": "Oembed",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 3,
-      "exchanges": [
-        {
-          "userQuestion": "How do I oembed?",
-          "assistantResponse": "## Oembed\n\n**Key concept:** OEmbed methods produce metadata for home, pool, and profile pages.\n\n**When to use:** Use when a social platform requests a preview document.\n\n**Covers methods:** `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.getHomeOEmbed());\nconsole.log(await sdk.getPoolOEmbed({ tokenName: 'anime' }));\nconsole.log(await sdk.getProfileOEmbed({ address: 'eth|0x1234567890123456789012345678901234567890' }));\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_get_home_oembed`\n- `gala_launchpad_get_pool_oembed`\n- `gala_launchpad_get_profile_oembed`\n\n**Pitfalls:** Use SDK DTOs so canonical URLs and metadata stay aligned with the frontend.\n\n**Related Topics:** `token-details`, `profile-management`"
-        },
-        {
-          "userQuestion": "What parameters does getHomeOEmbed() accept?",
-          "assistantResponse": "The primary methods for Oembed are `getHomeOEmbed()`, `getPoolOEmbed()`, `getProfileOEmbed()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for oembed?",
-          "assistantResponse": "1. **Request metadata for the right surface**: Use `getHomeOEmbed()`, `getPoolOEmbed()`, or `getProfileOEmbed()` rather than rewriting preview fields.\n2. **Cache public preview data briefly**: Reuse `getPoolOEmbed()` responses while allowing token metadata to refresh.\n3. **Escape metadata at render time**: Treat strings returned by `getProfileOEmbed()` as content, not trusted HTML."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete oembed example?",
-          "assistantResponse": "**Complete Workflow: Oembed**\n\nHere's the typical flow: `getHomeOEmbed()` → `getPoolOEmbed()` → `getProfileOEmbed()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What should I learn next after oembed?",
-          "assistantResponse": "**Related Topics:**\n\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Profile management**: `explainSdkUsage({ topic: 'profile-management' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
-      "topicKey": "queued-swap-recovery",
-      "label": "Queued swap recovery",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 2,
-      "exchanges": [
-        {
-          "userQuestion": "How do I queued swap recovery?",
-          "assistantResponse": "## Queued Swap Recovery\n\n**Key concept:** GSwap swap() returns a durable queued submission; confirmSwap(uniqueKey) resolves a persisted outcome without resubmitting.\n\n**When to use:** Use after timeout, process restart, or unknown submission outcome.\n\n**Covers methods:** `sdk.dex.swaps.swap()`, `sdk.dex.swaps.confirmSwap()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nconst quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '10');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '10', amountOutMinimum: quote.amountOut });\ntry { console.log(await submission.confirm()); } catch (error) { console.log('Recover with:', submission.uniqueKey, error); console.log(await sdk.dex.swaps.confirmSwap(submission.uniqueKey)); }\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_execute_swap`\n- `gala_launchpad_get_swap_result`\n\n**Pitfalls:** Recovery must use the original uniqueKey; never submit a second swap just because confirmation timed out.\n\n**Related Topics:** `dex-trading`, `error-handling`"
-        },
-        {
-          "userQuestion": "What parameters does sdk.dex.swaps.swap() accept?",
-          "assistantResponse": "The primary methods for Queued swap recovery are `sdk.dex.swaps.swap()`, `sdk.dex.swaps.confirmSwap()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for queued swap recovery?",
-          "assistantResponse": "1. **Persist the uniqueKey before waiting**: Store `submission.uniqueKey` from `sdk.dex.swaps.swap()` before calling `confirm()`, so a crash or timeout can still be reconciled.\n2. **Recover, never resubmit**: After a timeout or restart, call `sdk.dex.swaps.confirmSwap(uniqueKey)`; a second `swap()` can execute the trade twice.\n3. **Treat a chain rejection as final**: When `confirm()` or `confirmSwap()` reports a rejected trade, re-quote with `quoteExactInput()` before building a new swap."
-        },
-        {
-          "userQuestion": "What should I learn next after queued swap recovery?",
-          "assistantResponse": "**Related Topics:**\n\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n- **Error handling**: `explainSdkUsage({ topic: 'error-handling' })`\n- **Dex pools**: `explainSdkUsage({ topic: 'dex-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for queued swap recovery?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "spot-prices-smart-routing",
-      "label": "Spot prices smart routing",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 2,
-      "exchanges": [
-        {
-          "userQuestion": "How do I get token prices with smart routing?",
-          "assistantResponse": "## Spot Prices Smart Routing\n\n**Key concept:** fetchTokenPrice() routes between Launchpad and DEX token formats, while fetchGalaPrice() reads native GALA spot price.\n\n**When to use:** Use when a price display may receive either a Launchpad name or DEX identifier.\n\n**Covers methods:** `fetchTokenPrice()`, `fetchGalaPrice()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst launchpadPrice = await sdk.fetchTokenPrice({ tokenName: 'anime' });\nconst dexPrice = await sdk.fetchTokenPrice({ tokenId: 'GALA|Unit|none|none' });\nconst galaPrice = await sdk.fetchGalaPrice();\nconsole.log(launchpadPrice, dexPrice, galaPrice);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_token_spot_price`\n- `gala_launchpad_fetch_gala_spot_price`\n\n**Pitfalls:** Do not construct a DEX token key from a token name; resolve the canonical key first.\n\n**Related Topics:** `token-identification`, `price-history`, `dex-token-discovery`"
-        },
-        {
-          "userQuestion": "What parameters does fetchTokenPrice() accept?",
-          "assistantResponse": "The primary methods for Spot prices smart routing are `fetchTokenPrice()`, `fetchGalaPrice()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for get token prices with smart routing?",
-          "assistantResponse": "1. **Use the price source for the venue**: Call `fetchTokenPrice()` for launchpad tokens and `getSwapPoolPrice()` for DEX pools.\n2. **Preserve token identifiers**: Pass the token name to `fetchTokenPrice()` and canonical class keys to `getSwapPoolPrice()`.\n3. **Cache only for the displayed tolerance**: Refresh `getSwapPoolPrice()` before any trade-sensitive decision."
-        },
-        {
-          "userQuestion": "What should I learn next after get token prices with smart routing?",
-          "assistantResponse": "**Related Topics:**\n\n- **Token identification**: `explainSdkUsage({ topic: 'token-identification' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for get token prices with smart routing?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "stream-chat",
-      "label": "Stream chat",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 7,
-      "exchanges": [
-        {
-          "userQuestion": "How do I handle stream chat and messaging?",
-          "assistantResponse": "## Stream Chat\n\n**Key concept:** Stream chat uses websocket lifecycle plus send, reaction, typing, per-token controls, and slow-mode methods.\n\n**When to use:** Use for live chat clients and creator moderation controls.\n\n**Covers methods:** `connectStreamWebSocket()`, `subscribeToStream()`, `sendStreamChatViaWebSocket()`, `sendStreamReaction()`, `disableChat()`, `enableChat()`, `setSlowMode()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime');\nawait sdk.sendStreamChatViaWebSocket('anime', 'Hello from the SDK');\nawait sdk.sendStreamReaction('anime', '🔥');\nawait sdk.setSlowMode('anime', 30);\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_send_stream_chat_via_web_socket`\n- `gala_launchpad_send_stream_reaction`\n- `gala_launchpad_set_chat_enabled`\n- `gala_launchpad_set_slow_mode`\n\n**Pitfalls:** Global chat enable/disable was removed; use per-token controls and current websocket APIs.\n\n**Related Topics:** `streaming`, `chat-messages`, `content-reactions`"
-        },
-        {
-          "userQuestion": "What parameters does connectStreamWebSocket() accept?",
-          "assistantResponse": "The primary methods for Stream chat are `connectStreamWebSocket()`, `subscribeToStream()`, `sendStreamChatViaWebSocket()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for handle stream chat and messaging?",
-          "assistantResponse": "1. **Check both control layers**: Read `getGlobalChatStatus()` and `getChatStatus()` before enabling chat UI.\n2. **Authenticate before sending**: Call `connectStreamWebSocket()`, `authenticateStreamWebSocket()`, and `subscribeToStream()` before `sendStreamChatViaWebSocket()`.\n3. **Clean up connections**: Pair subscriptions with `unsubscribeFromStream()` and call `disconnectStreamWebSocket()` when the session ends."
-        },
-        {
-          "userQuestion": "What errors should I handle when handle stream chat and messaging?",
-          "assistantResponse": "**Common Errors:**\n- `ChatDisabled`: Token or global chat is disabled\n- `WebSocketNotAuthenticated`: Stream socket has not completed authentication\n- `NotSubscribed`: Caller attempted to send before joining the token stream\n\n**Tip:** Check `getGlobalChatStatus()` and `getChatStatus()`, then authenticate and `subscribeToStream()` before sending."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete handle stream chat and messaging example?",
-          "assistantResponse": "**Complete Workflow: Stream chat**\n\nHere's the typical flow: `connectStreamWebSocket()` → `subscribeToStream()` → `sendStreamChatViaWebSocket()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What other methods are available for Stream chat?",
-          "assistantResponse": "**Additional Methods:**\n\n- `sendStreamReaction()`\n- `disableChat()`\n- `enableChat()`\n- `setSlowMode()`\n\n**Total methods in this topic:** 7\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
-        },
-        {
-          "userQuestion": "What should I learn next after handle stream chat and messaging?",
-          "assistantResponse": "**Related Topics:**\n\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n- **Content reactions**: `explainSdkUsage({ topic: 'content-reactions' })`\n- **Ban management**: `explainSdkUsage({ topic: 'ban-management' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
-      "topicKey": "token-creation",
-      "label": "Token creation",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 5,
-      "exchanges": [
-        {
-          "userQuestion": "How do I create and launch new tokens?",
-          "assistantResponse": "## Token Creation\n\n**Key concept:** Token creation validates the name and symbol, reads the launch fee, optionally uploads an image, and calls launchToken().\n\n**When to use:** Use when creating a new pre-graduation token from a Node.js or browser application.\n\n**Covers methods:** `isTokenNameAvailable()`, `isTokenSymbolAvailable()`, `fetchLaunchTokenFee()`, `uploadTokenImage()`, `launchToken()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage', wallet: process.env.WALLET_PRIVATE_KEY });\nif (!(await sdk.isTokenNameAvailable('anime')) || !(await sdk.isTokenSymbolAvailable('ANIME'))) throw new Error('Name or symbol is unavailable');\nconsole.log('Launch fee:', await sdk.fetchLaunchTokenFee());\nconst result = await sdk.launchToken({ tokenName: 'anime', tokenSymbol: 'ANIME', tokenDescription: 'Example token', tokenImage: 'https://example.test/anime.png' });\nconsole.log(result.transactionId);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_check_token_name`\n- `gala_launchpad_check_token_symbol`\n- `gala_launchpad_fetch_launch_token_fee`\n- `gala_launchpad_upload_token_image`\n- `gala_launchpad_launch_token`\n\n**Pitfalls:** Availability checks are advisory; handle a rejected launch and never put a real private key in source control.\n\n**Related Topics:** `pool-graduation`, `token-details`, `wallet-connect`"
-        },
-        {
-          "userQuestion": "What parameters does isTokenNameAvailable() accept?",
-          "assistantResponse": "The primary methods for Token creation are `isTokenNameAvailable()`, `isTokenSymbolAvailable()`, `fetchLaunchTokenFee()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for create and launch new tokens?",
-          "assistantResponse": "1. **Check availability**: Verify token name and symbol are available first.\n2. **Upload image first**: Use `uploadTokenImage()` before `launchToken()`.\n3. **Review fees**: Check launch fees with `fetchLaunchTokenFee()`."
-        },
-        {
-          "userQuestion": "What errors should I handle when create and launch new tokens?",
-          "assistantResponse": "**Common Errors:**\n- `TokenNameTaken`: Name already exists - check availability first\n- `SymbolTaken`: Symbol in use - verify with `isTokenSymbolAvailable()`\n- `InsufficientLaunchFee`: Check fee with `fetchLaunchTokenFee()`\n\n**Important:** Token creation is irreversible!"
-        },
-        {
-          "userQuestion": "Can you walk me through a complete create and launch new tokens example?",
-          "assistantResponse": "**Complete Workflow: Token creation**\n\nHere's the typical flow: `isTokenNameAvailable()` → `isTokenSymbolAvailable()` → `fetchLaunchTokenFee()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What edge cases should I know about for create and launch new tokens?",
-          "assistantResponse": "**Edge Cases:**\n1. **Image requirements**: JPEG/PNG, reasonable size\n2. **Name restrictions**: Alphanumeric only, 3-20 chars\n3. **Symbol format**: Uppercase, 1-8 chars\n\n**Gotcha:** Once created, tokens cannot be renamed or have their symbol changed!"
-        },
-        {
-          "userQuestion": "What other methods are available for Token creation?",
-          "assistantResponse": "**Additional Methods:**\n\n- `uploadTokenImage()`\n- `launchToken()`\n\n**Total methods in this topic:** 5\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
-        },
-        {
-          "userQuestion": "When would I actually use create and launch new tokens in a real application?",
-          "assistantResponse": "**Real-World Use Cases:**\n\n1. **Community Tokens**: Launch tokens for DAOs or communities\n2. **Gaming Tokens**: Create in-game currencies or assets\n3. **Creator Coins**: Personal tokens for content creators\n4. **Project Tokens**: Utility tokens for new projects"
-        },
-        {
-          "userQuestion": "What should I learn next after create and launch new tokens?",
-          "assistantResponse": "**Related Topics:**\n\n- **Token details**: `explainSdkUsage({ topic: 'token-details' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n- **Streaming**: `explainSdkUsage({ topic: 'streaming' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        }
-      ]
-    },
-    {
       "topicKey": "token-status",
       "label": "Token status",
       "category": "utils",
@@ -4376,39 +4558,6 @@
         {
           "userQuestion": "Any final tips for check token pool status?",
           "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "utilities-and-helpers",
-      "label": "Utilities and helpers",
-      "category": "utils",
-      "description": "SDK configuration and helpers",
-      "methodCount": 6,
-      "exchanges": [
-        {
-          "userQuestion": "How do I use SDK utilities and helpers?",
-          "assistantResponse": "## Utilities And Helpers\n\n**Key concept:** Utility methods cover supply reads, cache inspection, cleanup, and transaction lookup.\n\n**When to use:** Use to build diagnostics, warm data, and controlled shutdown paths.\n\n**Covers methods:** `fetchGalaPrice()`, `fetchTokenClassesWithSupply()`, `getBundlerTransactionResult()`, `getCacheInfo()`, `clearCache()`, `cleanup()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconst supply = await sdk.fetchTokenClassesWithSupply([{ collection: 'GALA', category: 'Unit', type: 'none', additionalKey: 'none' }]);\nconsole.log(supply, sdk.getCacheInfo());\nsdk.clearCache();\nawait sdk.cleanup();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_token_classes_with_supply`\n- `gala_launchpad_get_cache_info`\n- `gala_launchpad_clear_cache`\n- `gala_launchpad_cleanup`\n\n**Pitfalls:** clearCache() is local maintenance; it does not invalidate chain state or cancel a transaction.\n\n**Related Topics:** `utilities-system`, `error-handling`, `balances`"
-        },
-        {
-          "userQuestion": "What parameters does fetchGalaPrice() accept?",
-          "assistantResponse": "The primary methods for Utilities and helpers are `fetchGalaPrice()`, `fetchTokenClassesWithSupply()`, `getBundlerTransactionResult()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for use SDK utilities and helpers?",
-          "assistantResponse": "1. **Reuse cached reference reads**: Inspect `getCacheInfo()` and use `clearCache()` only when freshness requires it.\n2. **Resolve live transaction outcomes**: Use `getBundlerTransactionResult()` after an ambiguous bundled submission.\n3. **Release resources explicitly**: Call `cleanup()` when the SDK instance is no longer needed."
-        },
-        {
-          "userQuestion": "Can you walk me through a complete use SDK utilities and helpers example?",
-          "assistantResponse": "**Complete Workflow: Utilities and helpers**\n\nHere's the typical flow: `fetchGalaPrice()` → `fetchTokenClassesWithSupply()` → `getBundlerTransactionResult()`\n\n**Step-by-Step:**\n1. **Setup**: Initialize SDK with your configuration\n2. **Validate**: Check prerequisites (balances, permissions)\n3. **Calculate**: Use calculation methods to preview results\n4. **Execute**: Perform the main operation\n5. **Verify**: Confirm the operation succeeded\n\n**Pro Tip:** The SDK methods are designed to be called in sequence. Each step provides data needed for the next."
-        },
-        {
-          "userQuestion": "What other methods are available for Utilities and helpers?",
-          "assistantResponse": "**Additional Methods:**\n\n- `getCacheInfo()`\n- `clearCache()`\n- `cleanup()`\n\n**Total methods in this topic:** 6\n\nEach method serves a specific purpose in the workflow. Use TypeScript intellisense or the SDK documentation to explore parameter options for each method."
-        },
-        {
-          "userQuestion": "What should I learn next after use SDK utilities and helpers?",
-          "assistantResponse": "**Related Topics:**\n\n- **Utilities system**: `explainSdkUsage({ topic: 'utilities-system' })`\n- **Balances**: `explainSdkUsage({ topic: 'balances' })`\n- **Fetch pools**: `explainSdkUsage({ topic: 'fetch-pools' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
         }
       ]
     },
