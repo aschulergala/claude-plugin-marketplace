@@ -1,12 +1,10 @@
 {
   "meta": {
-    "version": "5.1.0",
-    "generatedAt": "2026-07-11T09:00:10.596Z",
-    "toolCount": 317,
-    "categoryCount": 39,
-    "warnings": [
-      "Auth metadata missing from manifest for 6 tool(s); used heuristic fallback: gala_launchpad_fetch_client_flags, gala_launchpad_fetch_notification_preferences, gala_launchpad_flush_cache_wallet_aliases, gala_launchpad_register_push_token, gala_launchpad_unregister_push_token, gala_launchpad_update_notification_preferences"
-    ]
+    "version": "7.0.0",
+    "generatedAt": "2026-09-23T19:25:35.460Z",
+    "toolCount": 323,
+    "categoryCount": 41,
+    "warnings": []
   },
   "categories": {
     "pools": {
@@ -14,8 +12,8 @@
       "label": "Pools",
       "description": "Pool management, pricing, and token availability.",
       "icon": "🏊",
-      "count": 27,
-      "read": 24,
+      "count": 26,
+      "read": 23,
       "write": 3
     },
     "trading": {
@@ -32,8 +30,8 @@
       "label": "DEX Trading",
       "description": "GalaSwap quotes, swaps, and user assets.",
       "icon": "🔄",
-      "count": 7,
-      "read": 6,
+      "count": 8,
+      "read": 7,
       "write": 1
     },
     "dex-pools": {
@@ -185,9 +183,9 @@
       "label": "Chat",
       "description": "Stream chat and messaging.",
       "icon": "💬",
-      "count": 11,
-      "read": 5,
-      "write": 6
+      "count": 8,
+      "read": 3,
+      "write": 5
     },
     "auth": {
       "key": "auth",
@@ -359,6 +357,24 @@
       "count": 5,
       "read": 4,
       "write": 1
+    },
+    "comments": {
+      "key": "comments",
+      "label": "Comments",
+      "description": "Pool comment management.",
+      "icon": "💭",
+      "count": 5,
+      "read": 1,
+      "write": 4
+    },
+    "chat-messages": {
+      "key": "chat-messages",
+      "label": "Chat Messages",
+      "description": "Stream chat message operations.",
+      "icon": "💬",
+      "count": 4,
+      "read": 1,
+      "write": 3
     }
   },
   "categoryGroups": [
@@ -596,7 +612,7 @@
           "description": "Token name."
         }
       ],
-      "topic": "fetch-pools"
+      "topic": "token-details"
     },
     "fetchPoolDetailsForCalculation": {
       "name": "fetchPoolDetailsForCalculation",
@@ -672,23 +688,6 @@
       ],
       "topic": "token-distribution"
     },
-    "fetchTokenBadges": {
-      "name": "fetchTokenBadges",
-      "mcpTool": "gala_launchpad_fetch_token_badges",
-      "category": "pools",
-      "description": "Get achievement badges for volume and engagement.",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
-        }
-      ],
-      "topic": "fetch-pools"
-    },
     "fetchVolumeData": {
       "name": "fetchVolumeData",
       "mcpTool": "gala_launchpad_fetch_volume_data",
@@ -730,13 +729,13 @@
           ]
         }
       ],
-      "topic": "fetch-pools"
+      "topic": "trading-analytics"
     },
     "fetchTokenSpotPrice": {
       "name": "fetchTokenSpotPrice",
       "mcpTool": "gala_launchpad_fetch_token_spot_price",
       "category": "pools",
-      "description": "Fetch USD spot price for ANY token with smart routing\n\nRoutes to the correct backend automatically:\n- **tokenName** → Launchpad token (detects graduation status)\n- **tokenId** → REST-backed DEX token price via /v1/trade/price (~1s freshness; no signer required).\n\nDEX read errors: restricted or ungraduated tokens return TokenRestrictedError (403), a missing pool returns a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Fetch USD spot price for ANY token with smart routing\n\nRoutes to the correct backend automatically:\n- **tokenName** → Launchpad token (detects graduation status)\n- **tokenId** → REST-backed DEX token price via /market/price (~1s freshness; no signer required).\n\nDEX read errors: restricted or ungraduated tokens return TokenRestrictedError (403), a missing pool returns a not-found error, and heavy usage may return 429 rate limit.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -965,7 +964,8 @@
           "required": false,
           "description": "Token symbol to validate (optional)."
         }
-      ]
+      ],
+      "topic": "token-details"
     },
     "resolveVaultAddress": {
       "name": "resolveVaultAddress",
@@ -1050,8 +1050,7 @@
           "required": false,
           "description": "How long to watch for new events in seconds (default: 60)."
         }
-      ],
-      "topic": "graduation-detection"
+      ]
     },
     "onLaunchpadTokenCreation": {
       "name": "onLaunchpadTokenCreation",
@@ -1312,7 +1311,7 @@
           ]
         }
       ],
-      "topic": "buy-tokens"
+      "topic": "mcp-to-sdk-mapping"
     },
     "calculateSellAmount": {
       "name": "calculateSellAmount",
@@ -1408,7 +1407,7 @@
           "description": "Optional private key override for this operation (format: \"0x\" + 64 hex characters). If provided, uses this wallet instead of the default MCP server wallet."
         }
       ],
-      "topic": "buy-tokens"
+      "topic": "mcp-to-sdk-mapping"
     },
     "sell": {
       "name": "sell",
@@ -1898,7 +1897,7 @@
       "name": "getSwapQuoteExactInput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_input",
       "category": "dex",
-      "description": "Get a REST-backed swap quote for an exact input amount from the DEX backend (~1s freshness; no signer required). Specify how much you want to spend. Returns estimated output amount, fee tier, and price impact percentage. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get a v6 GSwap quote for an exact input amount through sdk.dex.quoting.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1919,15 +1918,20 @@
           "type": "any",
           "required": true,
           "description": "Amount of source token to spend."
+        },
+        {
+          "name": "fee",
+          "type": "number",
+          "required": false,
+          "description": "Optional fee tier in basis points."
         }
-      ],
-      "topic": "dex-trading"
+      ]
     },
     "getSwapQuoteExactOutput": {
       "name": "getSwapQuoteExactOutput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_output",
       "category": "dex",
-      "description": "Get a REST-backed swap quote for an exact output amount from the DEX backend (~1s freshness; no signer required). Specify how much you want to receive. Returns required input amount, fee tier, and price impact percentage. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get a v6 GSwap quote for an exact output amount through sdk.dex.quoting.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -1948,15 +1952,20 @@
           "type": "any",
           "required": true,
           "description": "Desired amount of destination token to receive."
+        },
+        {
+          "name": "fee",
+          "type": "number",
+          "required": false,
+          "description": "Optional fee tier in basis points."
         }
-      ],
-      "topic": "dex-trading"
+      ]
     },
     "calculateDexPoolQuoteLocal": {
       "name": "calculateDexPoolQuoteLocal",
       "mcpTool": "gala_launchpad_calculate_dex_pool_quote_local",
       "category": "dex",
-      "description": "Calculate an instant DEX quote using local math with zero network access for the calculation. Provide compositePoolData for a fully local operation; otherwise pool state is fetched from the DEX backend (~1s freshness; no signer required). Backend fetches can return TokenRestrictedError (403) for restricted tokens, a not-found error for missing pools, or 429 under heavy usage.",
+      "description": "Calculate a DEX quote through the v6 GSwap quoting service.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2000,12 +2009,6 @@
           "type": "any",
           "required": true,
           "description": "Amount of fromToken to swap."
-        },
-        {
-          "name": "compositePoolData",
-          "type": "string",
-          "required": false,
-          "description": "Optional: Pre-fetched composite pool data as JSON string from gala_launchpad_fetch_composite_pool_data. If provided, skips fetch for efficiency (ideal for bulk quotes)."
         }
       ]
     },
@@ -2013,7 +2016,7 @@
       "name": "calculateDexPoolQuoteExternal",
       "mcpTool": "gala_launchpad_calculate_dex_pool_quote_external",
       "category": "dex",
-      "description": "Get a server-computed real-time quote via the DEX backend (~1s freshness; no signer required). Use for final price verification. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Calculate a server-backed DEX quote through the v6 GSwap quoting service.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2064,7 +2067,7 @@
       "name": "executeSwap",
       "mcpTool": "gala_launchpad_execute_swap",
       "category": "dex",
-      "description": "Execute a token swap on GalaSwap DEX with slippage protection. Get a quote first using getSwapQuote tools.",
+      "description": "Execute a GSwap trade through sdk.dex.swaps.swap and return its confirmation result.",
       "operationType": "write",
       "authRequired": false,
       "parameters": [
@@ -2084,13 +2087,13 @@
           "name": "inputAmount",
           "type": "any",
           "required": true,
-          "description": "Amount of source token to spend."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "estimatedOutput",
           "type": "any",
           "required": true,
-          "description": "Expected output amount from quote (for slippage calculation)."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "feeTier",
@@ -2109,14 +2112,35 @@
           "required": false,
           "description": "Decimal format (0.05 = 5% slippage)."
         }
-      ],
-      "topic": "dex-trading"
+      ]
+    },
+    "getSwapResult": {
+      "name": "getSwapResult",
+      "mcpTool": "gala_launchpad_get_swap_result",
+      "category": "dex",
+      "description": "Resolve the outcome of a previously queued GSwap swap by its uniqueKey through sdk.dex.swaps.confirmSwap, without resubmitting. Use after gala_launchpad_execute_swap reported an unknown outcome or timed out.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "uniqueKey",
+          "type": "string",
+          "required": true,
+          "description": "The uniqueKey of a previously submitted swap (1-128 chars of A-Z a-z 0-9 . _ : -)."
+        },
+        {
+          "name": "timeoutMs",
+          "type": "number",
+          "required": false,
+          "description": "How long to wait for the result (default 30000 ms)."
+        }
+      ]
     },
     "getSwapUserAssets": {
       "name": "getSwapUserAssets",
       "mcpTool": "gala_launchpad_get_swap_user_assets",
       "category": "dex",
-      "description": "Get all token assets and balances for a wallet address with rich metadata (image, name, description).",
+      "description": "Get one page of GSwap assets for a wallet through sdk.dex.assets.getUserAssets.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2124,16 +2148,15 @@
           "name": "walletAddress",
           "type": "any",
           "required": true,
-          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
+          "description": "Wallet address."
         }
-      ],
-      "topic": "dex-trading"
+      ]
     },
     "getAllSwapUserAssets": {
       "name": "getAllSwapUserAssets",
       "mcpTool": "gala_launchpad_get_all_swap_user_assets",
       "category": "dex",
-      "description": "Get ALL token assets and balances for a wallet (auto-paginates) with rich metadata (image, name, description). Complete portfolio view for DEX trading.",
+      "description": "Fetch all GSwap assets for a wallet through sdk.dex.assets.getUserAssets.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2141,16 +2164,15 @@
           "name": "walletAddress",
           "type": "any",
           "required": true,
-          "description": "Wallet address to query (e.g., \"0x1234...\" or \"eth|1234...\")."
+          "description": "Wallet address."
         }
-      ],
-      "topic": "utilities-and-helpers"
+      ]
     },
     "fetchDexPools": {
       "name": "fetchDexPools",
       "mcpTool": "gala_launchpad_fetch_dex_pools",
       "category": "dex-pools",
-      "description": "Fetch REST-backed DEX pool data with cursor-based pagination and filtering (~1s freshness; no signer required). Heavy usage may return 429 rate limit.",
+      "description": "Fetch current-contract GSwap pools through sdk.dex.pools.getPools.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2193,14 +2215,13 @@
           "required": false,
           "description": "Results per page (default: 10, maximum: 100)."
         }
-      ],
-      "topic": "fetch-dex-pools"
+      ]
     },
     "fetchAllDexPools": {
       "name": "fetchAllDexPools",
       "mcpTool": "gala_launchpad_fetch_all_dex_pools",
       "category": "dex-pools",
-      "description": "Fetch all REST-backed DEX pool data with automatic pagination (~1s freshness; no signer required). No page/limit parameters are needed; returns all pools matching filters. Heavy usage may return 429 rate limit.",
+      "description": "Fetch all current-contract GSwap pools through sdk.dex.pools.getPools.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2235,16 +2256,15 @@
           "name": "withPrices",
           "type": "boolean",
           "required": false,
-          "description": "Whether to fetch REST-backed pricing data for each pool with ~1s freshness (default: false; no signer required)."
+          "description": "Include current prices when available."
         }
-      ],
-      "topic": "fetch-dex-pools"
+      ]
     },
     "getSwapPoolInfo": {
       "name": "getSwapPoolInfo",
       "mcpTool": "gala_launchpad_get_swap_pool_info",
       "category": "dex-pools",
-      "description": "Get REST-backed liquidity and fee tier information for a token pair from the DEX backend (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get current-contract GSwap pool information for a token pair.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2260,14 +2280,13 @@
           "required": true,
           "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         }
-      ],
-      "topic": "dex-trading"
+      ]
     },
     "fetchCompositePoolData": {
       "name": "fetchCompositePoolData",
       "mcpTool": "gala_launchpad_fetch_composite_pool_data",
       "category": "dex-pools",
-      "description": "Fetch complete pool state from the REST-backed DEX backend (~1s freshness; no signer required) for local DEX quote calculations. Returns pool liquidity, tick data, and token balances. Use this for bulk pricing operations or when you need multiple quotes for the same pool. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Fetch a current-contract GSwap composite pool snapshot through sdk.dex.pools.getCompositePool.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2275,13 +2294,13 @@
           "name": "token0",
           "type": "string",
           "required": true,
-          "description": "First token class key (e.g., \"GALA|Unit|none|none\")."
+          "description": "Full token class key in pipe-delimited format (e.g., \"GALA|Unit|none|none\" or \"Token|Unit|SYMBOL|client:xxx\")."
         },
         {
           "name": "token1",
           "type": "string",
           "required": true,
-          "description": "Second token class key (e.g., \"Token|Unit|BENE|client:5c806869e7fd0e2384461ce9\")."
+          "description": "Full token class key in pipe-delimited format (e.g., \"GALA|Unit|none|none\" or \"Token|Unit|SYMBOL|client:xxx\")."
         },
         {
           "name": "fee",
@@ -2294,14 +2313,13 @@
             10000
           ]
         }
-      ],
-      "topic": "advanced-dex-analysis"
+      ]
     },
     "getSwapPoolPrice": {
       "name": "getSwapPoolPrice",
       "mcpTool": "gala_launchpad_get_swap_pool_price",
       "category": "dex-pools",
-      "description": "Get REST-backed price, tick, and liquidity for a DEX pool (~1s freshness; no signer required). Use to check if liquidity positions are in-range. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get current-contract GSwap price state through sdk.dex.pools.getSlot0.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2328,14 +2346,13 @@
             10000
           ]
         }
-      ],
-      "topic": "utilities-and-helpers"
+      ]
     },
     "fetchAvailableDexTokens": {
       "name": "fetchAvailableDexTokens",
       "mcpTool": "gala_launchpad_fetch_available_dex_tokens",
       "category": "dex-pools",
-      "description": "Discover all tokens available on the DEX (cursor-based pagination). Returns rich token metadata without requiring a wallet address. Use for token discovery and listing.",
+      "description": "List registered GSwap trading symbols through sdk.dex.symbols.list.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2357,14 +2374,13 @@
           "required": false,
           "description": "Cursor from previous response (omit for first page)."
         }
-      ],
-      "topic": "dex-token-discovery"
+      ]
     },
     "fetchAllAvailableDexTokens": {
       "name": "fetchAllAvailableDexTokens",
       "mcpTool": "gala_launchpad_fetch_all_available_dex_tokens",
       "category": "dex-pools",
-      "description": "Discover ALL tokens available on the DEX (auto-paginates). Returns complete list with rich metadata. Use for comprehensive token catalogs.",
+      "description": "List all registered GSwap trading symbols through sdk.dex.symbols.list.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2374,14 +2390,13 @@
           "required": false,
           "description": "Optional search query (fuzzy match filter)."
         }
-      ],
-      "topic": "dex-token-discovery"
+      ]
     },
     "getUserLiquidityPositions": {
       "name": "getUserLiquidityPositions",
       "mcpTool": "gala_launchpad_get_user_liquidity_positions",
       "category": "dex-liquidity",
-      "description": "Get REST-backed open liquidity positions for a wallet address with optional pagination and pricing (~1s freshness; no signer required). Bookmark pagination and pricing options are mutually exclusive; use getAllUserLiquidityPositionsTool for pricing with auto-pagination. Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get current-contract GSwap liquidity positions owned by an address.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2390,24 +2405,6 @@
           "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
-        },
-        {
-          "name": "limit",
-          "type": "number",
-          "required": false,
-          "description": "Maximum number of positions to return (optional)."
-        },
-        {
-          "name": "bookmark",
-          "type": "string",
-          "required": false,
-          "description": "Pagination bookmark from previous response (optional). Cannot be used together with withPrices - if you need pricing, use getAllUserLiquidityPositionsTool instead."
-        },
-        {
-          "name": "withPrices",
-          "type": "boolean",
-          "required": false,
-          "description": "Whether to fetch REST-backed pricing for each position with ~1s freshness (optional, default: false; no signer required). Cannot be used together with bookmark - if you need pagination, use bookmark without withPrices. Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
         }
       ]
     },
@@ -2415,7 +2412,7 @@
       "name": "getAllUserLiquidityPositions",
       "mcpTool": "gala_launchpad_get_all_user_liquidity_positions",
       "category": "dex-liquidity",
-      "description": "Get all REST-backed open liquidity positions for a wallet address with automatic pagination and optional pricing (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), missing pools return a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get all current-contract GSwap liquidity positions owned by an address.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2424,12 +2421,6 @@
           "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
-        },
-        {
-          "name": "withPrices",
-          "type": "boolean",
-          "required": false,
-          "description": "Whether to fetch REST-backed pricing for each position with ~1s freshness (optional, default: false; no signer required). Pricing concurrency is controlled by SDK-level pricingConcurrency configuration."
         }
       ]
     },
@@ -2437,38 +2428,10 @@
       "name": "getLiquidityPositionById",
       "mcpTool": "gala_launchpad_get_liquidity_position_by_id",
       "category": "dex-liquidity",
-      "description": "Get REST-backed liquidity position details by position ID, including tokens, tick range, and accumulated fees (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Get one current-contract GSwap position by its pair, fee, owner, and tick range.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
-        {
-          "name": "ownerAddress",
-          "type": "any",
-          "required": true,
-          "description": "Wallet address that owns the position."
-        },
-        {
-          "name": "positionId",
-          "type": "string",
-          "required": true,
-          "description": "Unique position identifier."
-        }
-      ]
-    },
-    "getLiquidityPosition": {
-      "name": "getLiquidityPosition",
-      "mcpTool": "gala_launchpad_get_liquidity_position",
-      "category": "dex-liquidity",
-      "description": "Get a REST-backed liquidity position for a token pair and price range (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [
-        {
-          "name": "ownerAddress",
-          "type": "any",
-          "required": true,
-          "description": "Wallet address that owns the position."
-        },
         {
           "name": "token0",
           "type": "string",
@@ -2503,6 +2466,63 @@
           "type": "number",
           "required": true,
           "description": "Upper tick boundary of the position."
+        },
+        {
+          "name": "ownerAddress",
+          "type": "any",
+          "required": true,
+          "description": "Wallet address that owns the position."
+        }
+      ]
+    },
+    "getLiquidityPosition": {
+      "name": "getLiquidityPosition",
+      "mcpTool": "gala_launchpad_get_liquidity_position",
+      "category": "dex-liquidity",
+      "description": "Get one current-contract GSwap position by pair, owner, and tick range.",
+      "operationType": "read",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "token0",
+          "type": "string",
+          "required": true,
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
+        },
+        {
+          "name": "token1",
+          "type": "string",
+          "required": true,
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
+        },
+        {
+          "name": "fee",
+          "type": "number",
+          "required": true,
+          "description": "Fee tier in basis points: 500 (0.05%), 3000 (0.30%), 10000 (1.00%).",
+          "enum": [
+            500,
+            3000,
+            10000
+          ]
+        },
+        {
+          "name": "tickLower",
+          "type": "number",
+          "required": true,
+          "description": "Lower tick boundary of the position."
+        },
+        {
+          "name": "tickUpper",
+          "type": "number",
+          "required": true,
+          "description": "Upper tick boundary of the position."
+        },
+        {
+          "name": "ownerAddress",
+          "type": "any",
+          "required": true,
+          "description": "Wallet address that owns the position."
         }
       ]
     },
@@ -2510,7 +2530,7 @@
       "name": "estimateRemoveLiquidity",
       "mcpTool": "gala_launchpad_estimate_remove_liquidity",
       "category": "dex-liquidity",
-      "description": "Estimate tokens received when removing liquidity using REST-backed DEX pool state (~1s freshness; no signer required). Returns amount0 and amount1 (underlying token amounts, raw without slippage adjustment). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Estimate token amounts released by a current-contract GSwap liquidity withdrawal.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2553,7 +2573,7 @@
           "name": "liquidity",
           "type": "any",
           "required": true,
-          "description": "Liquidity amount to estimate removal for."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "ownerAddress",
@@ -2567,7 +2587,7 @@
       "name": "addLiquidityByPrice",
       "mcpTool": "gala_launchpad_add_liquidity_by_price",
       "category": "dex-liquidity",
-      "description": "Add liquidity to a pool by specifying min/max price boundaries (SDK calculates tick boundaries).",
+      "description": "Add liquidity through sdk.dex.positions.addLiquidityByPrice and return confirm() output.",
       "operationType": "write",
       "authRequired": false,
       "parameters": [
@@ -2596,15 +2616,15 @@
         },
         {
           "name": "minPrice",
-          "type": "string",
+          "type": "any",
           "required": true,
-          "description": "Minimum price boundary (e.g., \"0.90\")."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "maxPrice",
-          "type": "string",
+          "type": "any",
           "required": true,
-          "description": "Maximum price boundary (e.g., \"1.10\")."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         },
         {
           "name": "amount0Desired",
@@ -2629,6 +2649,12 @@
           "type": "any",
           "required": false,
           "description": "Minimum acceptable amount1 (optional, defaults to 0)."
+        },
+        {
+          "name": "amountIsToken0",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether amount is denominated in token0."
         }
       ]
     },
@@ -2636,7 +2662,7 @@
       "name": "addLiquidityByTicks",
       "mcpTool": "gala_launchpad_add_liquidity_by_ticks",
       "category": "dex-liquidity",
-      "description": "Add liquidity to a pool by specifying exact tick boundaries (advanced usage).",
+      "description": "Add liquidity through sdk.dex.positions.addLiquidityByTicks and return confirm() output.",
       "operationType": "write",
       "authRequired": false,
       "parameters": [
@@ -2653,7 +2679,7 @@
           "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
         },
         {
-          "name": "feeTier",
+          "name": "fee",
           "type": "number",
           "required": true,
           "description": "Fee tier in basis points: 500 (0.05%), 3000 (0.30%), 10000 (1.00%).",
@@ -2667,13 +2693,13 @@
           "name": "tickLower",
           "type": "number",
           "required": true,
-          "description": "Lower tick boundary (must be multiple of tickSpacing)."
+          "description": "Lower tick boundary of the position."
         },
         {
           "name": "tickUpper",
           "type": "number",
           "required": true,
-          "description": "Upper tick boundary (must be multiple of tickSpacing)."
+          "description": "Upper tick boundary of the position."
         },
         {
           "name": "amount0Desired",
@@ -2698,6 +2724,12 @@
           "type": "any",
           "required": false,
           "description": "Minimum acceptable amount1 (optional, defaults to 0)."
+        },
+        {
+          "name": "amountIsToken0",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether amount is denominated in token0."
         }
       ]
     },
@@ -2705,10 +2737,45 @@
       "name": "removeLiquidity",
       "mcpTool": "gala_launchpad_remove_liquidity",
       "category": "dex-liquidity",
-      "description": "Remove liquidity from an open position and withdraw underlying tokens.",
+      "description": "Remove current-contract GSwap liquidity and return confirm() output.",
       "operationType": "write",
       "authRequired": false,
       "parameters": [
+        {
+          "name": "token0",
+          "type": "string",
+          "required": true,
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
+        },
+        {
+          "name": "token1",
+          "type": "string",
+          "required": true,
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
+        },
+        {
+          "name": "fee",
+          "type": "number",
+          "required": true,
+          "description": "Fee tier in basis points: 500 (0.05%), 3000 (0.30%), 10000 (1.00%).",
+          "enum": [
+            500,
+            3000,
+            10000
+          ]
+        },
+        {
+          "name": "tickLower",
+          "type": "number",
+          "required": true,
+          "description": "Lower tick boundary of the position."
+        },
+        {
+          "name": "tickUpper",
+          "type": "number",
+          "required": true,
+          "description": "Upper tick boundary of the position."
+        },
         {
           "name": "ownerAddress",
           "type": "any",
@@ -2716,34 +2783,22 @@
           "description": "Wallet address that owns the position."
         },
         {
-          "name": "positionId",
-          "type": "string",
-          "required": true,
-          "description": "Position identifier to remove liquidity from."
-        },
-        {
           "name": "liquidity",
           "type": "any",
-          "required": true,
-          "description": "Amount of liquidity to remove (full liquidity to close position)."
-        },
-        {
-          "name": "amount0Min",
-          "type": "any",
-          "required": true,
-          "description": "Minimum acceptable amount of token0 to receive."
-        },
-        {
-          "name": "amount1Min",
-          "type": "any",
-          "required": true,
-          "description": "Minimum acceptable amount of token1 to receive."
-        },
-        {
-          "name": "deadline",
-          "type": "number",
           "required": false,
-          "description": "Transaction deadline (unix timestamp, optional)."
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
+        },
+        {
+          "name": "amount0",
+          "type": "any",
+          "required": false,
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
+        },
+        {
+          "name": "amount1",
+          "type": "any",
+          "required": false,
+          "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         }
       ]
     },
@@ -2751,7 +2806,7 @@
       "name": "fetchSwapPositionDirect",
       "mcpTool": "gala_launchpad_fetch_swap_position_direct",
       "category": "dex-liquidity",
-      "description": "Fetch a single REST-backed liquidity position by compound key using token0, token1, fee, and tick range (~1s freshness; no signer required). Restricted tokens return TokenRestrictedError (403), a missing pool or position returns a not-found error, and heavy usage may return 429 rate limit.",
+      "description": "Fetch one current-contract GSwap position by its compound pair and tick key.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -2796,40 +2851,56 @@
           "required": true,
           "description": "Wallet address that owns the position."
         }
-      ],
-      "topic": "utilities-and-helpers"
+      ]
     },
     "collectPositionFees": {
       "name": "collectPositionFees",
       "mcpTool": "gala_launchpad_collect_position_fees",
       "category": "dex-liquidity",
-      "description": "Collect accumulated trading fees from a liquidity position without modifying the position.",
+      "description": "Collect current-contract GSwap position fees and return confirm() output.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
+        {
+          "name": "token0",
+          "type": "string",
+          "required": true,
+          "description": "First token in pair (e.g., \"GALA\" or \"GALA|Unit|none|none\")."
+        },
+        {
+          "name": "token1",
+          "type": "string",
+          "required": true,
+          "description": "Second token in pair (e.g., \"GUSDC\" or \"Token|Unit|GUSDC|client:xxx\")."
+        },
+        {
+          "name": "fee",
+          "type": "number",
+          "required": true,
+          "description": "Fee tier in basis points: 500 (0.05%), 3000 (0.30%), 10000 (1.00%).",
+          "enum": [
+            500,
+            3000,
+            10000
+          ]
+        },
+        {
+          "name": "tickLower",
+          "type": "number",
+          "required": true,
+          "description": "Lower tick boundary of the position."
+        },
+        {
+          "name": "tickUpper",
+          "type": "number",
+          "required": true,
+          "description": "Upper tick boundary of the position."
+        },
         {
           "name": "ownerAddress",
           "type": "any",
           "required": true,
           "description": "Wallet address that owns the position."
-        },
-        {
-          "name": "positionId",
-          "type": "string",
-          "required": true,
-          "description": "Position identifier to collect fees from."
-        },
-        {
-          "name": "amount0Max",
-          "type": "any",
-          "required": false,
-          "description": "Maximum amount of token0 fees to collect (optional)."
-        },
-        {
-          "name": "amount1Max",
-          "type": "any",
-          "required": false,
-          "description": "Maximum amount of token1 fees to collect (optional)."
         }
       ]
     },
@@ -3886,8 +3957,7 @@
       "description": "Create a new wallet with a random private key. Returns wallet address and private key. ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
       "authRequired": false,
-      "parameters": [],
-      "topic": "multi-wallet"
+      "parameters": []
     },
     "createSolanaWallet": {
       "name": "createSolanaWallet",
@@ -3896,8 +3966,7 @@
       "description": "Create a new Solana wallet with a random keypair. Returns wallet address and private key (base58 format). ⚠️ SECURITY: Store the private key securely immediately — it cannot be retrieved again and grants full access to the wallet.",
       "operationType": "write",
       "authRequired": false,
-      "parameters": [],
-      "topic": "multi-wallet"
+      "parameters": []
     },
     "getAddress": {
       "name": "getAddress",
@@ -3907,7 +3976,7 @@
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
-      "topic": "utilities-system"
+      "topic": "wallet-connect"
     },
     "getEthereumAddress": {
       "name": "getEthereumAddress",
@@ -3917,7 +3986,7 @@
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
-      "topic": "utilities-system"
+      "topic": "wallet-connect"
     },
     "getPublicKeyFromPrivateKey": {
       "name": "getPublicKeyFromPrivateKey",
@@ -3961,7 +4030,7 @@
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
-      "topic": "utilities-system"
+      "topic": "events-tracking"
     },
     "getUrlByTokenName": {
       "name": "getUrlByTokenName",
@@ -3984,7 +4053,7 @@
       "name": "explainSdkUsage",
       "mcpTool": "gala_launchpad_explain_sdk_usage",
       "category": "utils",
-      "description": "Get detailed SDK code examples for all 310 MCP tools (mapping to 273 SDK methods) organized into 65 composite workflow topics covering: buy-tokens, sell-tokens, pool-graduation, fetch-pools, balances, token-creation, token-status, dex-trading, gdex-stream, liquidity-positions, advanced-dex-analysis, price-history, token-details, token-distribution, profile-management, multi-wallet, transfers, locks, trading-analytics, utilities-and-helpers, utilities-system, error-handling, installation, local-calculations, spot-prices-smart-routing, event-subscriptions, mcp-to-sdk-mapping, DEX leaderboards, bridge-operations, dex-token-discovery, wrap-unwrap-operations, referral-system, account-management, session-auth, streaming, stream-chat, ban-management, api-key-management, moderator-invites, overseer-invites, content-flag-management, content-reactions, trade-history, token-ban-management, nft-collection-management, token-identification, graduation-detection, ai-moderation (AI content analysis - overseer only), weekly-challenge (weekly token competition leaderboard), platform-stats (platform-wide trading metrics), restricted-names (blocked token names list - overseer only), websocket-admin (real-time event broadcasting - admin/overseer), oembed (social media link preview metadata), messages (unified CHAT+COMMENT messages API), and holders (token holder distribution and whale analysis).",
+      "description": "Get detailed SDK code examples for 323 MCP tools across 69 composite v7 SDK topics, including flat LaunchpadSDK methods, the sdk.dex GSwap client, queued swap recovery, streaming, moderation, comments, chat messages, and notifications.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4000,6 +4069,9 @@
             "fetch-pools",
             "balances",
             "token-creation",
+            "token-details",
+            "token-distribution",
+            "token-status",
             "wallet-connect",
             "multi-wallet",
             "transfers",
@@ -4010,31 +4082,28 @@
             "installation",
             "local-calculations",
             "price-history",
-            "token-details",
             "spot-prices-smart-routing",
             "profile-management",
-            "token-distribution",
             "liquidity-positions",
             "advanced-dex-analysis",
             "trading-analytics",
             "utilities-and-helpers",
+            "utilities-system",
             "fetch-all-dex-seasons",
+            "fetch-current-dex-season",
             "fetch-dex-leaderboard-by-season-id",
+            "fetch-current-dex-leaderboard",
             "fetch-dex-aggregated-volume-summary",
             "fetch-dex-pools",
-            "token-status",
-            "utilities-system",
             "event-subscriptions",
             "mcp-to-sdk-mapping",
-            "fetch-current-dex-season",
-            "fetch-current-dex-leaderboard",
             "bridge-operations",
             "dex-token-discovery",
             "wrap-unwrap-operations",
             "referral-system",
+            "session-auth",
             "streaming",
             "stream-chat",
-            "session-auth",
             "ban-management",
             "api-key-management",
             "moderator-invites",
@@ -4058,11 +4127,14 @@
             "global-feed-subscription",
             "events-tracking",
             "global-bans",
-            "recent-trades"
+            "recent-trades",
+            "queued-swap-recovery",
+            "comments",
+            "chat-messages",
+            "notifications"
           ]
         }
-      ],
-      "topic": "mcp-to-sdk-mapping"
+      ]
     },
     "isTokenGraduated": {
       "name": "isTokenGraduated",
@@ -4136,7 +4208,7 @@
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
-      "topic": "utilities-system"
+      "topic": "multi-wallet"
     },
     "setWallet": {
       "name": "setWallet",
@@ -4153,13 +4225,13 @@
           "description": "Private key (0x prefixed hexadecimal string) to configure as the active wallet."
         }
       ],
-      "topic": "utilities-system"
+      "topic": "multi-wallet"
     },
     "getEnvironment": {
       "name": "getEnvironment",
       "mcpTool": "gala_launchpad_get_environment",
       "category": "utils",
-      "description": "Get the current environment (production, development, or testing) that the MCP server is using.",
+      "description": "Get the current environment (`prod` or `stage`) that the MCP server is using.",
       "operationType": "read",
       "authRequired": false,
       "parameters": []
@@ -4168,7 +4240,7 @@
       "name": "switchEnvironment",
       "mcpTool": "gala_launchpad_switch_environment",
       "category": "utils",
-      "description": "Dynamically switch the MCP server to a different environment (production, development, or testing). Preserves wallet configuration when switching.",
+      "description": "Dynamically switch the MCP server to `prod` or `stage`. Preserves wallet configuration when switching.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4178,9 +4250,8 @@
           "required": true,
           "description": "Target environment to switch to.",
           "enum": [
-            "production",
-            "development",
-            "testing"
+            "prod",
+            "stage"
           ]
         }
       ]
@@ -4428,8 +4499,7 @@
             "Solana"
           ]
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchEthereumWalletTokenBalance": {
       "name": "fetchEthereumWalletTokenBalance",
@@ -4451,8 +4521,7 @@
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchEthereumWalletNativeBalance": {
       "name": "fetchEthereumWalletNativeBalance",
@@ -4468,8 +4537,7 @@
           "required": false,
           "description": "Ethereum address (0x format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchEthereumWalletAllBalances": {
       "name": "fetchEthereumWalletAllBalances",
@@ -4508,8 +4576,7 @@
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchSolanaWalletNativeBalance": {
       "name": "fetchSolanaWalletNativeBalance",
@@ -4525,8 +4592,7 @@
           "required": false,
           "description": "Solana address (base58 format). Defaults to configured wallet address."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchSolanaWalletAllBalances": {
       "name": "fetchSolanaWalletAllBalances",
@@ -4575,8 +4641,7 @@
           "required": false,
           "description": "Results per page (max: 1000, default: 1000)."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchAllBridgeableTokensByNetwork": {
       "name": "fetchAllBridgeableTokensByNetwork",
@@ -4596,8 +4661,7 @@
             "SOLANA"
           ]
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchAllTokensBridgeableToEthereum": {
       "name": "fetchAllTokensBridgeableToEthereum",
@@ -4606,8 +4670,7 @@
       "description": "Fetch all tokens that can be bridged to Ethereum. Convenience method with auto-pagination and caching.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "bridge-operations"
+      "parameters": []
     },
     "fetchAllTokensBridgeableToSolana": {
       "name": "fetchAllTokensBridgeableToSolana",
@@ -4616,8 +4679,7 @@
       "description": "Fetch all tokens that can be bridged to Solana. Convenience method with auto-pagination and caching.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "bridge-operations"
+      "parameters": []
     },
     "isTokenBridgeableToNetwork": {
       "name": "isTokenBridgeableToNetwork",
@@ -4643,8 +4705,7 @@
             "SOLANA"
           ]
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "isTokenBridgeableToEthereum": {
       "name": "isTokenBridgeableToEthereum",
@@ -4660,8 +4721,7 @@
           "required": true,
           "description": "Token identifier in flexible format (string or object)."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "isTokenBridgeableToSolana": {
       "name": "isTokenBridgeableToSolana",
@@ -4677,8 +4737,7 @@
           "required": true,
           "description": "Token identifier in flexible format (string or object)."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "requestSolanaDevnetAirdrop": {
       "name": "requestSolanaDevnetAirdrop",
@@ -4700,8 +4759,7 @@
           "required": false,
           "description": "Optional Solana address to receive airdrop (defaults to configured wallet)."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "getSolanaTransactionStatus": {
       "name": "getSolanaTransactionStatus",
@@ -4717,8 +4775,7 @@
           "required": true,
           "description": "Base58-encoded Solana transaction signature (87-88 characters). Get this from requestSolanaDevnetAirdrop or bridge operations."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "getEthereumTransactionStatus": {
       "name": "getEthereumTransactionStatus",
@@ -4734,8 +4791,7 @@
           "required": true,
           "description": "Ethereum transaction hash (0x-prefixed 64-character hex string, 66 total characters). Get this from bridgeOut or bridgeIn operations."
         }
-      ],
-      "topic": "bridge-operations"
+      ]
     },
     "fetchWrappableTokens": {
       "name": "fetchWrappableTokens",
@@ -4767,8 +4823,7 @@
       "description": "Fetch ALL wrappable tokens with auto-pagination. Returns cached data if available. Wrappable tokens are token pairs that can be wrapped/unwrapped into each other (e.g., MUSIC ↔ GMUSIC).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "wrap-unwrap-operations"
+      "parameters": []
     },
     "getWrappableToken": {
       "name": "getWrappableToken",
@@ -4784,8 +4839,7 @@
           "required": true,
           "description": "Token identifier in flexible format. Pipe-delimited: \"$MUSIC|Unit|none|none\" or TokenClassKey object: { collection, category, type, additionalKey }"
         }
-      ],
-      "topic": "wrap-unwrap-operations"
+      ]
     },
     "getWrapCounterpart": {
       "name": "getWrapCounterpart",
@@ -4818,8 +4872,7 @@
           "required": true,
           "description": "Token identifier in flexible format. Pipe-delimited: \"$MUSIC|Unit|none|none\" or TokenClassKey object: { collection, category, type, additionalKey }"
         }
-      ],
-      "topic": "wrap-unwrap-operations"
+      ]
     },
     "wrapToken": {
       "name": "wrapToken",
@@ -4934,8 +4987,7 @@
           "required": true,
           "description": "Amount to unwrap for fee estimation."
         }
-      ],
-      "topic": "wrap-unwrap-operations"
+      ]
     },
     "getWrapStatus": {
       "name": "getWrapStatus",
@@ -5024,8 +5076,7 @@
           "required": true,
           "description": "Token name."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "setNextLiveStreamCountdown": {
       "name": "setNextLiveStreamCountdown",
@@ -5073,8 +5124,7 @@
           "required": true,
           "description": "Whether streaming should be enabled globally."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "getStreamRole": {
       "name": "getStreamRole",
@@ -5100,8 +5150,7 @@
       "description": "Get all available roles and permissions for token delegation.\n\nReturns reference data about the role system, including:\n- All available roles (OWNER, MANAGER, TECHNICAL_PRODUCER, MODERATOR)\n- Role descriptions and hierarchy levels\n- Permissions assigned to each role\n- Complete list of all available permissions\n\n**Role Hierarchy (highest to lowest):**\n- OWNER (level 3): Full access to all token operations\n- MANAGER (level 2): Full moderator + tech producer + recordings + settings\n- TECHNICAL_PRODUCER (level 1): Stream setup and management\n- MODERATOR (level 0): Community and chat management\n\n**Available Permissions:**\n- MANAGE_COMMENTS: Create/delete comments\n- MANAGE_CHAT: Send/delete chat messages\n- BAN_USERS: Ban users from token streams\n- UNBAN_USERS: Remove bans from users\n- MANAGE_SIMULCAST: Add/remove simulcast targets\n- GET_STREAM_KEY: View the stream key\n- STOP_STREAM: Stop an active stream\n- RESET_STREAM_KEY: Generate a new stream key\n- START_STREAM: Start a new stream\n- DELETE_RECORDINGS: Delete stream recordings\n- MANAGE_STREAM_SETTINGS: Update stream settings (countdown, language)\n\nThis is static reference data - it doesn't change per user or token.\nUseful for building role selection UIs and understanding permission hierarchies.\n\nRETURNS: { roles: [...], permissions: [...] }\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "streaming"
+      "parameters": []
     },
     "getTokenAccess": {
       "name": "getTokenAccess",
@@ -5169,8 +5218,7 @@
           "required": true,
           "description": "Recording asset ID (Mux asset ID)."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "deleteRecording": {
       "name": "deleteRecording",
@@ -5192,8 +5240,7 @@
           "required": true,
           "description": "Recording asset ID (Mux asset ID)."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "getSimulcastTargets": {
       "name": "getSimulcastTargets",
@@ -5256,8 +5303,7 @@
           "required": false,
           "description": "Optional display name for the simulcast target."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "removeSimulcastTarget": {
       "name": "removeSimulcastTarget",
@@ -5279,8 +5325,7 @@
           "required": true,
           "description": "Simulcast target ID."
         }
-      ],
-      "topic": "streaming"
+      ]
     },
     "getChatStatus": {
       "name": "getChatStatus",
@@ -5296,8 +5341,7 @@
           "required": true,
           "description": "Token name."
         }
-      ],
-      "topic": "stream-chat"
+      ]
     },
     "setChatEnabled": {
       "name": "setChatEnabled",
@@ -5340,49 +5384,6 @@
           "type": "number",
           "required": true,
           "description": "Slow mode interval in seconds (0 = disabled, max 600). Common values: 0, 10, 30, 60, 300."
-        }
-      ]
-    },
-    "getGlobalChatStatus": {
-      "name": "getGlobalChatStatus",
-      "mcpTool": "gala_launchpad_get_global_chat_status",
-      "category": "chat",
-      "description": "Get global chat status.\n\nReturns platform-wide chat status.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: None required (public endpoint).",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [],
-      "topic": "stream-chat"
-    },
-    "setGlobalChatEnabled": {
-      "name": "setGlobalChatEnabled",
-      "mcpTool": "gala_launchpad_set_global_chat_enabled",
-      "category": "chat",
-      "description": "Enable or disable chat globally (Admin only).\n\nControls platform-wide chat capability.\nWhen disabled, no chat messages can be sent.\n\nRETURNS: { enabled, updatedAt }\n\nAuthentication: Requires streamAdminApiKey configuration.",
-      "operationType": "write",
-      "authRequired": false,
-      "parameters": [
-        {
-          "name": "enabled",
-          "type": "boolean",
-          "required": true,
-          "description": "Whether chat should be enabled globally."
-        }
-      ],
-      "topic": "stream-chat"
-    },
-    "getEngagementStats": {
-      "name": "getEngagementStats",
-      "mcpTool": "gala_launchpad_get_engagement_stats",
-      "category": "chat",
-      "description": "Get engagement statistics for a token.\n\nReturns aggregated engagement metrics including:\n- Chat: message count, unique chatters, session start time\n- Comments: total count, unique commenters\n\nChat stats are scoped to the current/last stream session.\nComment stats are all-time for the token.\n\nRETURNS: {\n tokenName: string,\n chat: { messageCount: number, uniqueChatters: number, since: string | null },\n comments: { count: number, uniqueCommenters: number }\n}",
-      "operationType": "read",
-      "authRequired": false,
-      "parameters": [
-        {
-          "name": "tokenName",
-          "type": "any",
-          "required": true,
-          "description": "Token name."
         }
       ],
       "topic": "stream-chat"
@@ -5534,8 +5535,7 @@
       "description": "Check if user is authenticated with valid (non-expired) JWT token. Returns boolean.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "session-auth"
+      "parameters": []
     },
     "shouldRefreshToken": {
       "name": "shouldRefreshToken",
@@ -5551,8 +5551,7 @@
           "required": false,
           "description": "Custom threshold in milliseconds (default: 300000 = 5 minutes)."
         }
-      ],
-      "topic": "session-auth"
+      ]
     },
     "getAccessToken": {
       "name": "getAccessToken",
@@ -5561,8 +5560,7 @@
       "description": "Check whether an access token is available. Returns authenticated: true/false. Token values are never returned via MCP — use ensureValidToken() to validate.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "session-auth"
+      "parameters": []
     },
     "ensureValidToken": {
       "name": "ensureValidToken",
@@ -5803,8 +5801,7 @@
           "required": false,
           "description": "How long to watch for new events in seconds (default: 60)."
         }
-      ],
-      "topic": "event-subscriptions"
+      ]
     },
     "createApiKey": {
       "name": "createApiKey",
@@ -6623,8 +6620,7 @@
           "required": true,
           "description": "Overseer invite ID (positive integer)."
         }
-      ],
-      "topic": "overseer-invites"
+      ]
     },
     "listOverseers": {
       "name": "listOverseers",
@@ -6695,8 +6691,7 @@
           "required": true,
           "description": "Wallet address of the overseer to revoke (eth|... or 0x... format)."
         }
-      ],
-      "topic": "overseer-invites"
+      ]
     },
     "getMyOverseerStatus": {
       "name": "getMyOverseerStatus",
@@ -6705,8 +6700,7 @@
       "description": "Check your own overseer status.\n\nReturns whether the authenticated user is currently an active overseer\nand their details if so.\n\nRETURNS: { isOverseer: boolean, overseer?: { id, userAddress, inviteId, status, createdAt } }\n\nAuthentication: Requires JWT auth.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "overseer-invites"
+      "parameters": []
     },
     "getOverseerSummary": {
       "name": "getOverseerSummary",
@@ -6726,7 +6720,7 @@
       "operationType": "read",
       "authRequired": false,
       "parameters": [],
-      "topic": "overseer-invites"
+      "topic": "global-bans"
     },
     "getTokenBanStats": {
       "name": "getTokenBanStats",
@@ -6735,8 +6729,7 @@
       "description": "Get token ban (delisted tokens) statistics.\n\nReturns the total count of delisted/banned tokens on the platform.\n\nRETURNS: { total: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "overseer-invites"
+      "parameters": []
     },
     "getInviteStats": {
       "name": "getInviteStats",
@@ -6745,8 +6738,7 @@
       "description": "Get overseer invite statistics.\n\nReturns counts for each invite status: total, pending, claimed, and revoked.\n\nRETURNS: { total: number, pending: number, claimed: number, revoked: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "overseer-invites"
+      "parameters": []
     },
     "getFlagStats": {
       "name": "getFlagStats",
@@ -6755,8 +6747,7 @@
       "description": "Get content flag statistics.\n\nReturns counts for each flag status: total, pending, actioned, and dismissed.\n\nRETURNS: { total: number, pending: number, actioned: number, dismissed: number }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "overseer-invites"
+      "parameters": []
     },
     "getUserStats": {
       "name": "getUserStats",
@@ -6888,7 +6879,7 @@
       "category": "overseers",
       "description": "Flush wallet-alias cache entries (eth| → client| resolution cache).\n\nClears the Redis cache that maps eth| addresses to their GalaChain client| aliases.\nUse this when a user's login returns a stale eth| address even though they have\na client| alias on GalaChain. After flushing, the next login will re-resolve\nthe alias from the GalaChain public-key contract.\n\n- Without address: flushes ALL wallet-alias entries (use after updating the public-key contract URL)\n- With address: flushes only the specified address's alias entry\n\nUse this when:\n- A user logs in and gets their eth| address instead of their client| alias\n- After fixing GALA_PUBLIC_KEY_CONTRACT configuration\n- After a GalaChain network outage caused null-cached aliases\n- Debugging alias resolution issues on dev/staging environments\n\nRETURNS: { flushedCount, duration, target? }\n- flushedCount: Number of alias cache entries flushed\n- duration: Time taken in milliseconds\n- target: Normalized address (only present when flushing a single address)\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as existing Overseer.",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "address",
@@ -7768,7 +7759,7 @@
       "name": "globalFeedReference",
       "mcpTool": "gala_launchpad_global_feed_reference",
       "category": "global-feed",
-      "description": "Reference: Subscribe to the global feed for real-time updates.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature that requires the SDK to be initialized with WebSocket support.\nThis tool provides documentation. Actual subscription happens in your client code.\n\n## Global Feed Overview\n\nThe global feed broadcasts all important platform events to all subscribed clients:\n\n### Token Events (real-time for all tokens):\n- **stream_status**: Stream active/idle/disabled changes\n- **trade_executed**: Buy/sell trades on bonding curves\n- **holder_count_updated**: Holder count changes\n- **pool_badge_assigned**: Token badge assignments\n- **viewer_count**: Live viewer count updates\n\n### Site Config Events (platform-wide):\n- **site_config_changed**: Generic config changes\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Usage in Client Code\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed, useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Basic subscription\nconst { isSubscribed, siteConfig } = useGlobalFeed({ autoSubscribe: true });\n\n// Filtered subscription\nconst { events } = useGlobalFeedFiltered({\n tokenNames: ['token1', 'token2'],\n eventTypes: ['trade_executed']\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (event) => console.log('Trade:', event),\n onStreamGlobalStatus: (event) => console.log('Stream status:', event)\n});\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Authentication: docs/websocket/AUTHENTICATION.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint).",
+      "description": "Reference: Subscribe to the global feed for real-time updates.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature that requires the SDK to be initialized with WebSocket support.\nThis tool provides documentation. Actual subscription happens in your client code.\n\n## Global Feed Overview\n\nThe global feed broadcasts all important platform events to all subscribed clients:\n\n### Token Events (real-time for all tokens):\n- **stream_status**: Stream active/idle/disabled changes\n- **trade_executed**: Buy/sell trades on bonding curves\n- **holder_count_updated**: Holder count changes\n- **pool_badge_assigned**: Token badge assignments\n- **viewer_count**: Live viewer count updates\n\n### Site Config Events (platform-wide):\n- **site_config_changed**: Generic config changes\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Usage in Client Code\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed, useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Basic subscription\nconst { isSubscribed, siteConfig } = useGlobalFeed({ autoSubscribe: true });\n\n// Filtered subscription\nconst { events } = useGlobalFeedFiltered({\n tokenNames: ['token1', 'token2'],\n eventTypes: ['trade_executed']\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (event) => console.log('Trade:', event),\n onStreamGlobalStatus: (event) => console.log('Stream status:', event)\n});\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Authentication: docs/websocket/AUTHENTICATION.md\n- Example: examples/websocket-events-demo.ts\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
       "parameters": []
@@ -7777,7 +7768,7 @@
       "name": "unsubscribeFromGlobalFeedReference",
       "mcpTool": "gala_launchpad_unsubscribe_from_global_feed_reference",
       "category": "global-feed",
-      "description": "Reference: Unsubscribe from the global feed.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Unsubscription happens in your client code.\n\n## When to Unsubscribe\n\nUnsubscribe from the global feed when:\n- Component unmounts (React)\n- User navigates away\n- Feature is no longer needed\n- Application is shutting down\n- Connection is being closed\n\n## Unsubscribing\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useEffect } from 'react';\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nexport function HomePage() {\n const { isSubscribed, unsubscribe } = useGlobalFeed();\n\n useEffect(() => {\n // Subscribe on mount (auto via hook)\n\n // Cleanup on unmount\n return () => {\n if (isSubscribed) {\n unsubscribe();\n console.log('Unsubscribed from global feed');\n }\n };\n }, [isSubscribed, unsubscribe]);\n\n return <div>{/* content */}</div>;\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (event) => console.log('Trade:', event),\n onStreamStatus: (event) => console.log('Stream status:', event),\n});\n\n// Later, when done with the feed\nservice.unsubscribeFromGlobalFeed();\nconsole.log('Unsubscribed from global feed');\n\n// And finally, close the connection\nawait service.disconnect();\nconsole.log('Disconnected from WebSocket');\n```\n\n## Cleanup Sequence\n\nBest practice cleanup sequence:\n\n```typescript\n// 1. Unsubscribe from global feed\nawait service.unsubscribeFromGlobalFeed();\n\n// 2. Unsubscribe from any token detail subscriptions if needed\nawait service.unsubscribeFromToken('tokenName');\n\n// 3. Disconnect WebSocket\nawait service.disconnect();\n```\n\n## Resource Management\n\nAfter unsubscribing:\n- Event listeners stop firing\n- Memory from event buffers is freed\n- No further network traffic from feed\n- Can still reconnect/resubscribe later if needed\n\n## Errors and Edge Cases\n\n```typescript\n// Safe to unsubscribe if not subscribed\nif (isSubscribed) {\n unsubscribe();\n}\n\n// Safe to call multiple times\nunsubscribe();\nunsubscribe(); // No error\n\n// Disconnecting also unsubscribes automatically\nawait service.disconnect(); // Unsubscribes from all rooms\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts\n\nAuthentication: None required (public endpoint).",
+      "description": "Reference: Unsubscribe from the global feed.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Unsubscription happens in your client code.\n\n## When to Unsubscribe\n\nUnsubscribe from the global feed when:\n- Component unmounts (React)\n- User navigates away\n- Feature is no longer needed\n- Application is shutting down\n- Connection is being closed\n\n## Unsubscribing\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useEffect } from 'react';\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nexport function HomePage() {\n const { isSubscribed, unsubscribe } = useGlobalFeed();\n\n useEffect(() => {\n // Subscribe on mount (auto via hook)\n\n // Cleanup on unmount\n return () => {\n if (isSubscribed) {\n unsubscribe();\n console.log('Unsubscribed from global feed');\n }\n };\n }, [isSubscribed, unsubscribe]);\n\n return <div>{/* content */}</div>;\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (event) => console.log('Trade:', event),\n onStreamStatus: (event) => console.log('Stream status:', event),\n});\n\n// Later, when done with the feed\nservice.unsubscribeFromGlobalFeed();\nconsole.log('Unsubscribed from global feed');\n\n// And finally, close the connection\nawait service.disconnect();\nconsole.log('Disconnected from WebSocket');\n```\n\n## Cleanup Sequence\n\nBest practice cleanup sequence:\n\n```typescript\n// 1. Unsubscribe from global feed\nawait service.unsubscribeFromGlobalFeed();\n\n// 2. Unsubscribe from any token detail subscriptions if needed\nawait service.unsubscribeFromToken('tokenName');\n\n// 3. Disconnect WebSocket\nawait service.disconnect();\n```\n\n## Resource Management\n\nAfter unsubscribing:\n- Event listeners stop firing\n- Memory from event buffers is freed\n- No further network traffic from feed\n- Can still reconnect/resubscribe later if needed\n\n## Errors and Edge Cases\n\n```typescript\n// Safe to unsubscribe if not subscribed\nif (isSubscribed) {\n unsubscribe();\n}\n\n// Safe to call multiple times\nunsubscribe();\nunsubscribe(); // No error\n\n// Disconnecting also unsubscribes automatically\nawait service.disconnect(); // Unsubscribes from all rooms\n```\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Example: examples/websocket-events-demo.ts\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
       "parameters": []
@@ -7786,7 +7777,7 @@
       "name": "globalFeedStatusReference",
       "mcpTool": "gala_launchpad_global_feed_status_reference",
       "category": "global-feed",
-      "description": "Reference: Check global feed subscription status.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Status checking happens in your client code.\n\n## Checking Subscription Status\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nconst { isSubscribed, isConnected } = useGlobalFeed({ autoSubscribe: true });\n\nif (isSubscribed && isConnected) {\n console.log('Successfully subscribed and connected to global feed');\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nconst isSubscribed = service.isSubscribedToGlobalFeed();\nconst isConnected = service.isConnected();\n\nconsole.log(`Subscription status: ${isSubscribed ? 'subscribed' : 'not subscribed'}`);\nconsole.log(`Connection status: ${isConnected ? 'connected' : 'disconnected'}`);\n```\n\n## Status Indicators\n\n- **isSubscribed**: true if you've successfully subscribed to the `global:feed` room\n- **isConnected**: true if WebSocket connection is active and authenticated\n\n## Common Status Scenarios\n\n| Subscribed | Connected | Meaning |\n|-----------|-----------|---------|\n| false | false | Not initialized - call connect() and subscribe first |\n| true | false | Subscribed but connection dropped - reconnecting automatically |\n| false | true | Connected but not subscribed - call subscribeToGlobalFeed() |\n| true | true | ✅ Ready to receive events |\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint).",
+      "description": "Reference: Check global feed subscription status.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Status checking happens in your client code.\n\n## Checking Subscription Status\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeed } from '@gala-chain/launchpad-sdk';\n\nconst { isSubscribed, isConnected } = useGlobalFeed({ autoSubscribe: true });\n\nif (isSubscribed && isConnected) {\n console.log('Successfully subscribed and connected to global feed');\n}\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nconst isSubscribed = service.isSubscribedToGlobalFeed();\nconst isConnected = service.isConnected();\n\nconsole.log(`Subscription status: ${isSubscribed ? 'subscribed' : 'not subscribed'}`);\nconsole.log(`Connection status: ${isConnected ? 'connected' : 'disconnected'}`);\n```\n\n## Status Indicators\n\n- **isSubscribed**: true if you've successfully subscribed to the `global:feed` room\n- **isConnected**: true if WebSocket connection is active and authenticated\n\n## Common Status Scenarios\n\n| Subscribed | Connected | Meaning |\n|-----------|-----------|---------|\n| false | false | Not initialized - call connect() and subscribe first |\n| true | false | Subscribed but connection dropped - reconnecting automatically |\n| false | true | Connected but not subscribed - call subscribeToGlobalFeed() |\n| true | true | ✅ Ready to receive events |\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Example: examples/websocket-events-demo.ts\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
       "parameters": []
@@ -7795,7 +7786,7 @@
       "name": "monitorGlobalFeedEventsReference",
       "mcpTool": "gala_launchpad_monitor_global_feed_events_reference",
       "category": "global-feed",
-      "description": "Reference: Monitor and filter global feed events.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Event monitoring happens in your client code.\n\n## Available Event Types\n\n### Token Events (broadcast to all subscribers):\n- **stream_status**: Stream active/idle/disabled status changed\n- **trade_executed**: Buy/sell trade on bonding curve\n- **holder_count_updated**: Holder count increased/decreased\n- **pool_badge_assigned**: Pool earned a badge\n- **viewer_count**: Live viewer count updated\n- **token_config_updated**: Unified config change (countdown, language, toggles, social links)\n- **stats_updated**: Token stats update (price, market cap, bonding curve after trades)\n\n### Site Config Events (global feature flags):\n- **site_config_changed**: Generic config change event\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Monitoring Events\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Monitor specific event types on specific tokens\nconst { events } = useGlobalFeedFiltered({\n tokenNames: ['bitcoin', 'ethereum'],\n eventTypes: ['trade_executed', 'stream_status'],\n maxBufferSize: 100\n});\n\n// Process buffered events\nevents.forEach(event => {\n console.log(`Event: ${event.type}`, event.data);\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (data) => {\n console.log(`Trade on ${data.tokenName}: ${data.tradeType}`);\n },\n onStreamStatus: (data) => {\n console.log(`Stream status: ${data.status}`);\n },\n onViewerCount: (data) => {\n console.log(`Viewers: ${data.viewerCount}`);\n },\n onTokenConfigUpdated: (data) => {\n console.log(`Config updated for ${data.tokenName}`);\n },\n onStatsUpdated: (data) => {\n console.log(`Stats: ${data.tokenName} price=${data.galaPrice}`);\n },\n onStreamGlobalStatus: (data) => {\n console.log(`Streaming globally ${data.enabled ? 'enabled' : 'disabled'}`);\n },\n});\n```\n\n## Client-Side Filtering\n\nFor better performance, filter events on the client side:\n\n```typescript\n// Only process trades for visible tokens\nconst visibleTokens = new Set(['bitcoin', 'ethereum']);\n\nsocket.on('trade_executed', (data) => {\n if (visibleTokens.has(data.tokenName)) {\n updateTokenCard(data);\n }\n});\n\n// Only process site config events\nsocket.on('stream_global_status', (data) => {\n updateGlobalUI(data);\n});\n```\n\n## Use Cases\n\n1. **Homepage Card Updates**: Monitor stream_status, trade_executed, viewer_count, holder_count, stats_updated\n2. **Real-Time Charts**: Monitor stats_updated for price and volume data\n3. **Token Config Changes**: Monitor token_config_updated for countdown, language, toggle changes\n4. **Feature Availability**: Monitor site_config_changed events\n5. **Activity Feed**: Buffer and display recent events to users\n6. **Analytics**: Count and aggregate event types\n\n## Best Practices\n\n- **Buffer management**: Keep maxBufferSize reasonable (100-1000 events)\n- **Unsubscribe cleanup**: Leave the feed when the component unmounts\n- **Client-side filtering**: Filter by tokenNames to reduce processing\n- **Selective subscriptions**: Only listen to event types you need\n- **Error handling**: Handle connection drops and reconnection\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Examples: examples/global-feed-demo.ts, examples/global-feed-filtering-demo.ts\n\nAuthentication: None required (public endpoint).",
+      "description": "Reference: Monitor and filter global feed events.\n\n**IMPORTANT**: The global feed is a CLIENT-SIDE feature in the SDK.\nThis tool provides documentation. Event monitoring happens in your client code.\n\n## Available Event Types\n\n### Token Events (broadcast to all subscribers):\n- **stream_status**: Stream active/idle/disabled status changed\n- **trade_executed**: Buy/sell trade on bonding curve\n- **holder_count_updated**: Holder count increased/decreased\n- **pool_badge_assigned**: Pool earned a badge\n- **viewer_count**: Live viewer count updated\n- **token_config_updated**: Unified config change (countdown, language, toggles, social links)\n- **stats_updated**: Token stats update (price, market cap, bonding curve after trades)\n\n### Site Config Events (global feature flags):\n- **site_config_changed**: Generic config change event\n- **stream_global_status**: Global streaming enabled/disabled\n- **chat_global_status**: Global chat enabled/disabled\n- **comments_global_status**: Global comments enabled/disabled\n- **webhooks_global_status**: Global webhooks enabled/disabled\n\n## Monitoring Events\n\n### React/TypeScript (using SDK hooks):\n```typescript\nimport { useGlobalFeedFiltered } from '@gala-chain/launchpad-sdk';\n\n// Monitor specific event types on specific tokens\nconst { events } = useGlobalFeedFiltered({\n tokenNames: ['bitcoin', 'ethereum'],\n eventTypes: ['trade_executed', 'stream_status'],\n maxBufferSize: 100\n});\n\n// Process buffered events\nevents.forEach(event => {\n console.log(`Event: ${event.type}`, event.data);\n});\n```\n\n### Vanilla JS (using StreamWebSocketService):\n```typescript\nimport { StreamWebSocketService } from '@gala-chain/launchpad-sdk';\n\nconst service = new StreamWebSocketService({\n url: 'wss://api.launchpad.gala.com/ws',\n authToken: token\n});\n\nawait service.connect();\nawait service.subscribeToGlobalFeed({\n onTradeExecuted: (data) => {\n console.log(`Trade on ${data.tokenName}: ${data.tradeType}`);\n },\n onStreamStatus: (data) => {\n console.log(`Stream status: ${data.status}`);\n },\n onViewerCount: (data) => {\n console.log(`Viewers: ${data.viewerCount}`);\n },\n onTokenConfigUpdated: (data) => {\n console.log(`Config updated for ${data.tokenName}`);\n },\n onStatsUpdated: (data) => {\n console.log(`Stats: ${data.tokenName} price=${data.galaPrice}`);\n },\n onStreamGlobalStatus: (data) => {\n console.log(`Streaming globally ${data.enabled ? 'enabled' : 'disabled'}`);\n },\n});\n```\n\n## Client-Side Filtering\n\nFor better performance, filter events on the client side:\n\n```typescript\n// Only process trades for visible tokens\nconst visibleTokens = new Set(['bitcoin', 'ethereum']);\n\nsocket.on('trade_executed', (data) => {\n if (visibleTokens.has(data.tokenName)) {\n updateTokenCard(data);\n }\n});\n\n// Only process site config events\nsocket.on('stream_global_status', (data) => {\n updateGlobalUI(data);\n});\n```\n\n## Use Cases\n\n1. **Homepage Card Updates**: Monitor stream_status, trade_executed, viewer_count, holder_count, stats_updated\n2. **Real-Time Charts**: Monitor stats_updated for price and volume data\n3. **Token Config Changes**: Monitor token_config_updated for countdown, language, toggle changes\n4. **Feature Availability**: Monitor site_config_changed events\n5. **Activity Feed**: Buffer and display recent events to users\n6. **Analytics**: Count and aggregate event types\n\n## Best Practices\n\n- **Buffer management**: Keep maxBufferSize reasonable (100-1000 events)\n- **Unsubscribe cleanup**: Leave the feed when the component unmounts\n- **Client-side filtering**: Filter by tokenNames to reduce processing\n- **Selective subscriptions**: Only listen to event types you need\n- **Error handling**: Handle connection drops and reconnection\n\n## Documentation\n\nFull guides available in the SDK:\n- Quick Start (5 min): docs/websocket/QUICKSTART.md\n- Complete Guide: docs/websocket/GLOBAL-FEED.md\n- Example: examples/websocket-events-demo.ts\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
       "parameters": []
@@ -7886,8 +7877,7 @@
           "required": false,
           "description": "Optional reason for the balance change (e.g., \"Trade executed\", \"Transfer received\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitStreamStatus": {
       "name": "emitStreamStatus",
@@ -7937,8 +7927,7 @@
           "required": true,
           "description": "Current number of viewers."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitStreamCountdown": {
       "name": "emitStreamCountdown",
@@ -7966,8 +7955,7 @@
           "required": false,
           "description": "Optional number of seconds until the stream goes live."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitChatMessage": {
       "name": "emitChatMessage",
@@ -8024,8 +8012,7 @@
           "required": false,
           "description": "Optional reason for the status change (e.g., \"Moderation pause\", \"Maintenance complete\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitTypingIndicator": {
       "name": "emitTypingIndicator",
@@ -8053,8 +8040,7 @@
           "required": false,
           "description": "Optional count of typing users (computed from typingUsers length if not provided)."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitTokenBanned": {
       "name": "emitTokenBanned",
@@ -8088,8 +8074,7 @@
           "required": false,
           "description": "Optional ISO 8601 timestamp - if provided, indicates when token can be unbanned (for temporary bans)."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitTokenUnbanned": {
       "name": "emitTokenUnbanned",
@@ -8117,8 +8102,7 @@
           "required": false,
           "description": "Optional wallet address of the admin/moderator who lifted the ban."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitModeratorAdded": {
       "name": "emitModeratorAdded",
@@ -8157,8 +8141,7 @@
           "required": false,
           "description": "Optional reason for adding the moderator (e.g., \"Trusted community member\", \"Promoted for good behavior\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitModeratorRemoved": {
       "name": "emitModeratorRemoved",
@@ -8186,8 +8169,7 @@
           "required": false,
           "description": "Optional reason for removing the moderator (e.g., \"Inactive for 60 days\", \"Misconduct\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitUserProfileUpdated": {
       "name": "emitUserProfileUpdated",
@@ -8215,8 +8197,7 @@
           "required": false,
           "description": "Optional human-readable summary of the changes (e.g., \"Profile updated successfully\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitSiteConfigChanged": {
       "name": "emitSiteConfigChanged",
@@ -8244,8 +8225,7 @@
           "required": false,
           "description": "Optional human-readable description of the config change (e.g., \"Scheduled maintenance 3am-4am UTC\")."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitFeatureStatus": {
       "name": "emitFeatureStatus",
@@ -8279,8 +8259,7 @@
           "required": false,
           "description": "Optional ISO 8601 timestamp indicating when the feature will come back online (if disabled)."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "emitRecordingStatus": {
       "name": "emitRecordingStatus",
@@ -8595,8 +8574,7 @@
           "required": false,
           "description": "Maximum viewers to return (default: 25, max: 100)."
         }
-      ],
-      "topic": "websocket-admin"
+      ]
     },
     "getOnlineOverseers": {
       "name": "getOnlineOverseers",
@@ -8605,8 +8583,7 @@
       "description": "Get list of currently online overseers and admins.\n\nUseful for:\n- Finding active admins to notify about urgent issues\n- Checking if any overseers are online before admin events\n- Broadcasting to all online admins\n\nRETURNS: {\n clients: [list of overseer clients],\n count: total overseer count\n}\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth as Overseer.",
       "operationType": "read",
       "authRequired": false,
-      "parameters": [],
-      "topic": "websocket-admin"
+      "parameters": []
     },
     "getAiModerationSettings": {
       "name": "getAiModerationSettings",
@@ -8781,7 +8758,7 @@
       "category": "notifications",
       "description": "Register a push notification device token.\n\nAssociates a push token (FCM or APNs) with the authenticated user.\nIf the token already exists, it updates the associated device info.\n\n**Parameters:**\n- token (required): Push notification token string (FCM or APNs)\n- platform (required): Device platform - \"ios\" or \"android\"\n- deviceId (optional): Device identifier for multi-device management\n\nRETURNS: { registered: boolean }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "token",
@@ -8805,7 +8782,8 @@
           "required": false,
           "description": "Optional device identifier for multi-device management (max 255 characters)."
         }
-      ]
+      ],
+      "topic": "notifications"
     },
     "unregisterPushToken": {
       "name": "unregisterPushToken",
@@ -8813,7 +8791,7 @@
       "category": "notifications",
       "description": "Unregister a push notification device token.\n\nDeactivates a push token so the device no longer receives notifications.\n\n**Parameters:**\n- token (required): The push notification token to unregister\n\nRETURNS: { unregistered: boolean }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "token",
@@ -8821,7 +8799,8 @@
           "required": true,
           "description": "Push notification token to unregister."
         }
-      ]
+      ],
+      "topic": "notifications"
     },
     "fetchNotificationPreferences": {
       "name": "fetchNotificationPreferences",
@@ -8829,8 +8808,9 @@
       "category": "notifications",
       "description": "Get notification preferences for the authenticated user.\n\nReturns the current push notification preference settings.\n\nRETURNS: { preferences: { tradesEnabled, streamsEnabled, chatEnabled, systemEnabled } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "read",
-      "authRequired": true,
-      "parameters": []
+      "authRequired": false,
+      "parameters": [],
+      "topic": "notifications"
     },
     "updateNotificationPreferences": {
       "name": "updateNotificationPreferences",
@@ -8838,7 +8818,7 @@
       "category": "notifications",
       "description": "Update notification preferences for the authenticated user.\n\nPartial update - only provided fields are modified, others remain unchanged.\nAt least one field should be provided.\n\n**Preference fields (all optional):**\n- tradesEnabled: Enable/disable trade notifications\n- streamsEnabled: Enable/disable stream notifications\n- chatEnabled: Enable/disable chat notifications\n- systemEnabled: Enable/disable system notifications\n\nRETURNS: { preferences: { tradesEnabled, streamsEnabled, chatEnabled, systemEnabled } }\n\nAuthentication: Requires JWT auth (call sdk.login() first).",
       "operationType": "write",
-      "authRequired": true,
+      "authRequired": false,
       "parameters": [
         {
           "name": "tradesEnabled",
@@ -8864,7 +8844,8 @@
           "required": false,
           "description": "Enable/disable system notifications."
         }
-      ]
+      ],
+      "topic": "notifications"
     },
     "fetchClientFlags": {
       "name": "fetchClientFlags",
@@ -8873,7 +8854,244 @@
       "description": "Get client feature flags for the native mobile app.\n\nReturns feature flag overrides that control which features are enabled/disabled.\nUseful for checking platform feature availability before performing operations.\n\nRETURNS: { flags: { PUSH_NOTIFICATIONS, OFFLINE_MODE, BIOMETRIC_AUTH, DARK_MODE, LIVE_STREAMING, DEX_TRADING, ... } }\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "notifications"
+    },
+    "getComments": {
+      "name": "getComments",
+      "mcpTool": "gala_launchpad_get_comments",
+      "category": "comments",
+      "description": "Query comments with tokenName/userAddress filters.\n\nReturns paginated list of comments matching the filter criteria using cursor-based pagination.\nAt least one of tokenName or userAddress must be provided.\nPublic endpoint - no authentication required.\n\nEach comment includes:\n- id: Unique message ID (for updates/deletes)\n- tokenName, tokenImage: Pool information\n- userAddress, userProfile: Author information\n- content: Comment text\n- createdAt, updatedAt: Timestamps\n- reactions: Reaction counts by emoji type\n- flagCount: Number of flags against this comment\n- holderTier?: Token holder tier badge ({ tier: 0-5, tierName: string })\n\nRETURNS: { messages: [...], pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor } }",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": false,
+          "description": "Filter by token name (e.g., \"anime\")."
+        },
+        {
+          "name": "userAddress",
+          "type": "any",
+          "required": false,
+          "description": "Filter by user wallet address (eth|... or 0x... format)."
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": "Cursor from previous response (omit for first page)."
+        },
+        {
+          "name": "pageSize",
+          "type": "any",
+          "required": false,
+          "description": "Results per page (default: 20, maximum: 100)."
+        }
+      ],
+      "topic": "comments"
+    },
+    "createComment": {
+      "name": "createComment",
+      "mcpTool": "gala_launchpad_create_comment",
+      "category": "comments",
+      "description": "Create a new comment on a token pool.\n\nAdds a new comment to the specified token's comment section.\nReturns the created comment with id for reactions and further operations.\n\nRETURNS: { comment: { id, tokenName, tokenImage, userAddress, userProfile, content, createdAt, reactions, flagCount, holderTier? } }\n\nholderTier is present if the author holds tokens (tier 0-5 based on % of max supply held).\n\nUse the returned id with gala_launchpad_update_comment or gala_launchpad_delete_comment.\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Comment content (1-2000 characters)."
+        }
+      ],
+      "topic": "comments"
+    },
+    "updateComment": {
+      "name": "updateComment",
+      "mcpTool": "gala_launchpad_update_comment",
+      "category": "comments",
+      "description": "Update a comment's content.\n\nUpdates the content of an existing comment.\nOnly the original author can update their comment.\n\nRETURNS: { comment: { id, tokenName, tokenImage, userAddress, userProfile, content, createdAt, updatedAt, reactions, flagCount } }\n\nAuthentication: Requires JWT session (call gala_launchpad_login first)\nAuthorization: Comment author only.",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Comment content (1-2000 characters)."
+        }
+      ],
+      "topic": "comments"
+    },
+    "deleteComment": {
+      "name": "deleteComment",
+      "mcpTool": "gala_launchpad_delete_comment",
+      "category": "comments",
+      "description": "Delete a comment.\n\nSoft-deletes a comment from the pool's comment section.\n\nRETURNS: { success: true }\n\nAuthentication: Requires JWT session or API key\nAuthorization: Comment author, pool creator, moderator with MANAGE_COMMENTS permission, or platform overseer.",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        }
+      ],
+      "topic": "comments"
+    },
+    "onCommentCreated": {
+      "name": "onCommentCreated",
+      "mcpTool": "gala_launchpad_on_comment_created",
+      "category": "comments",
+      "description": "Watch for new pool comments in real-time.\n\nTriggers whenever a user posts a comment on a token's pool page. Includes:\n- Comment text and metadata\n- Author information\n- Timestamp\n- Token association\n\nReturns:\n- commentsCreated: Number of new comments detected\n- comments: Array of comment events with tokenName, authorAddress, text, timestamp, and ID\n\nFilter Options:\n- tokenName: Only watch comments for a specific token\n- authorAddress: Only watch comments from a specific user\n- minLength: Only notify about comments with at least this character length.",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": false,
+          "description": "Only watch comments for this token (optional)."
+        },
+        {
+          "name": "authorAddress",
+          "type": "string",
+          "required": false,
+          "description": "Only watch comments from this author (optional)."
+        },
+        {
+          "name": "minLength",
+          "type": "number",
+          "required": false,
+          "description": "Only notify about comments with at least this character length (optional)."
+        },
+        {
+          "name": "intervalMs",
+          "type": "number",
+          "required": false,
+          "description": "Poll interval in milliseconds (default: 30000 / 30 seconds)."
+        },
+        {
+          "name": "durationSeconds",
+          "type": "number",
+          "required": false,
+          "description": "How long to watch for new events in seconds (default: 60)."
+        }
+      ]
+    },
+    "getChatMessages": {
+      "name": "getChatMessages",
+      "mcpTool": "gala_launchpad_get_chat_messages",
+      "category": "chat-messages",
+      "description": "Query chat messages with tokenName/userAddress filters.\n\nReturns paginated list of chat messages from the unified pool_messages table using cursor-based pagination.\nAt least one of tokenName or userAddress must be provided.\nPublic endpoint - no authentication required.\n\nRETURNS: {\n messages: [{\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, updatedAt?, deletedAt, flagCount, reactions, holderTier?\n }],\n pageInfo: { hasNextPage, endCursor, hasPreviousPage, startCursor }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).",
+      "operationType": "read",
+      "authRequired": true,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": false,
+          "description": "Token name to filter by (e.g., \"anime\")."
+        },
+        {
+          "name": "userAddress",
+          "type": "any",
+          "required": false,
+          "description": "User address to filter by (eth|... or 0x... format)."
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": "Cursor from previous response (omit for first page)."
+        },
+        {
+          "name": "pageSize",
+          "type": "any",
+          "required": false,
+          "description": "Results per page (default: 50, maximum: 100)."
+        }
+      ],
+      "topic": "chat-messages"
+    },
+    "sendChatMessage": {
+      "name": "sendChatMessage",
+      "mcpTool": "gala_launchpad_send_chat_message",
+      "category": "chat-messages",
+      "description": "Send a new chat message on a token pool.\n\nPosts a message to the specified token's chat via REST API.\nMessages are stored in the unified pool_messages table.\n\nRETURNS: {\n message: {\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, deletedAt, flagCount, reactions, holderTier?\n }\n}\n\nholderTier is present if the author holds tokens ({ tier: 0-5, tierName: string }).\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "tokenName",
+          "type": "any",
+          "required": true,
+          "description": "Token name to post the message to (e.g., \"anime\")."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Chat message content (1-500 characters)."
+        }
+      ],
+      "topic": "chat-messages"
+    },
+    "updateChatMessage": {
+      "name": "updateChatMessage",
+      "mcpTool": "gala_launchpad_update_chat_message",
+      "category": "chat-messages",
+      "description": "Update a chat message's content (author only).\n\nEdits an existing chat message. Only the original author can update.\nThe message will have an updatedAt timestamp after editing.\n\nRETURNS: {\n message: {\n id, tokenName, tokenImage, userAddress, userProfile,\n content, createdAt, updatedAt, deletedAt, flagCount, reactions\n }\n}\n\nAuthentication: Requires JWT session (call gala_launchpad_login first).",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "description": "Updated message content (1-500 characters)."
+        }
+      ],
+      "topic": "chat-messages"
+    },
+    "deleteChatMessage": {
+      "name": "deleteChatMessage",
+      "mcpTool": "gala_launchpad_delete_chat_message",
+      "category": "chat-messages",
+      "description": "Delete a chat message.\n\nRemoves a message from the chat. Supports multiple authorization methods:\n- Message author (JWT auth)\n- Pool owner (JWT auth)\n- Moderator with MANAGE_CHAT permission (API key auth)\n\nThe message remains in the database with deletedAt set (soft delete).\n\nRETURNS: void (success with no content)\n\nAuthentication: Requires JWT session OR API key with MANAGE_CHAT permission.",
+      "operationType": "write",
+      "authRequired": false,
+      "parameters": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Message ID in format msg-{timestamp}-{uuid} or chat-{timestamp}-{uuid} (supports both modern and legacy formats)."
+        }
+      ],
+      "topic": "chat-messages"
     }
   },
   "topics": {
@@ -8919,7 +9137,6 @@
         "fetchVolumeData",
         "fetchTokenPrice",
         "fetchTokenDistribution",
-        "fetchTokenBadges",
         "resolveVaultAddress",
         "resolveTokenClassKey"
       ],
@@ -8932,9 +9149,10 @@
       "methods": [
         "fetchGalaBalance",
         "fetchTokenBalance",
+        "fetchAvailableBalance",
+        "fetchLockedBalance",
         "fetchTokensHeld",
-        "fetchTokensCreated",
-        "fetchAvailableBalance"
+        "fetchTokensCreated"
       ],
       "category": "balance"
     },
@@ -8956,7 +9174,9 @@
       "label": "Token details",
       "description": "Token details operations.",
       "methods": [
-        "fetchTokenDetails"
+        "fetchTokenDetails",
+        "fetchPoolDetails",
+        "validateToken"
       ],
       "category": "pools"
     },
@@ -8976,7 +9196,6 @@
       "description": "Token status operations.",
       "methods": [
         "isTokenGraduated",
-        "onDexPoolCreation",
         "onLaunchpadTokenCreation"
       ],
       "category": "utils"
@@ -8987,8 +9206,8 @@
       "description": "Wallet connect operations.",
       "methods": [
         "getAddress",
-        "createWallet",
-        "getEthereumAddress"
+        "getEthereumAddress",
+        "hasWallet"
       ],
       "category": "wallet"
     },
@@ -8997,14 +9216,12 @@
       "label": "Multi wallet",
       "description": "Multi wallet operations.",
       "methods": [
-        "getAddress",
-        "createWallet",
-        "createSolanaWallet",
-        "getEthereumAddress",
+        "setWallet",
+        "getWallet",
         "getPublicKeyFromPrivateKey",
         "getEthereumAddressFromPrivateKey"
       ],
-      "category": "wallet"
+      "category": "utils"
     },
     "transfers": {
       "key": "transfers",
@@ -9033,12 +9250,9 @@
       "label": "Dex trading",
       "description": "Dex trading operations.",
       "methods": [
-        "getSwapQuoteExactInput",
-        "getSwapQuoteExactOutput",
-        "executeSwap",
-        "getSwapUserAssets",
-        "getAllSwapUserAssets",
-        "getSwapPoolInfo"
+        "sdk.dex.quoting.quoteExactInput",
+        "sdk.dex.quoting.quoteExactOutput",
+        "sdk.dex.swaps.swap"
       ],
       "category": "dex"
     },
@@ -9047,32 +9261,18 @@
       "label": "Gdex stream",
       "description": "Gdex stream operations.",
       "methods": [
-        "connect",
-        "disconnect",
-        "isConnected",
-        "request",
-        "serverInfo",
-        "ping",
-        "getPool",
-        "getBalance",
-        "getPositions",
-        "getBlockHeight",
-        "quote",
-        "getToken",
-        "subscribeSwaps",
-        "subscribePool",
-        "subscribeBalances",
-        "subscribePoolCreated",
-        "subscribeBlocks"
+        "subscribeToStream",
+        "connectStreamWebSocket"
       ],
-      "category": "utils"
+      "category": "chat"
     },
     "error-handling": {
       "key": "error-handling",
       "label": "Error handling",
       "description": "Error handling operations.",
       "methods": [
-        "getBundlerTransactionResult"
+        "getBundlerTransactionResult",
+        "getConfig"
       ],
       "category": "trading"
     },
@@ -9081,7 +9281,8 @@
       "label": "Installation",
       "description": "Installation operations.",
       "methods": [
-        "getVersion"
+        "getVersion",
+        "getConfig"
       ],
       "category": "utils"
     },
@@ -9114,7 +9315,7 @@
       "description": "Spot prices smart routing operations.",
       "methods": [
         "fetchTokenPrice",
-        "getSwapPoolPrice"
+        "fetchGalaPrice"
       ],
       "category": "pools"
     },
@@ -9135,15 +9336,10 @@
       "label": "Liquidity positions",
       "description": "Liquidity positions operations.",
       "methods": [
-        "getSwapUserLiquidityPositions",
-        "getAllSwapUserLiquidityPositions",
-        "getSwapLiquidityPosition",
-        "getSwapLiquidityPositionById",
-        "addSwapLiquidityByPrice",
-        "addSwapLiquidityByTicks",
-        "getSwapEstimateRemoveLiquidity",
-        "removeSwapLiquidity",
-        "collectSwapPositionFees"
+        "sdk.dex.positions.getUserPositions",
+        "sdk.dex.positions.addLiquidityByTicks",
+        "sdk.dex.positions.removeLiquidity",
+        "sdk.dex.positions.collectPositionFees"
       ],
       "category": "dex-liquidity"
     },
@@ -9152,12 +9348,10 @@
       "label": "Advanced dex analysis",
       "description": "Advanced dex analysis operations.",
       "methods": [
-        "fetchCompositePoolData",
-        "calculateDexPoolQuoteExactAmountLocal",
-        "calculateDexPoolQuoteExactAmountExternal",
-        "calculateDexPoolQuoteExactAmount"
+        "sdk.dex.quoting.quoteExactInput",
+        "sdk.dex.quoting.quoteExactOutput"
       ],
-      "category": "dex-pools"
+      "category": "dex"
     },
     "trading-analytics": {
       "key": "trading-analytics",
@@ -9165,7 +9359,7 @@
       "description": "Trading analytics operations.",
       "methods": [
         "fetchTrades",
-        "getTrades"
+        "fetchVolumeData"
       ],
       "category": "trading"
     },
@@ -9176,14 +9370,10 @@
       "methods": [
         "fetchGalaPrice",
         "fetchTokenClassesWithSupply",
-        "calculateInitialBuyAmount",
         "getBundlerTransactionResult",
-        "getSwapPoolPrice",
-        "fetchSwapPositionDirect",
-        "getAllSwapUserAssets",
-        "cleanup",
+        "getCacheInfo",
         "clearCache",
-        "getCacheInfo"
+        "cleanup"
       ],
       "category": "pools"
     },
@@ -9192,19 +9382,12 @@
       "label": "Utilities system",
       "description": "Utilities system operations.",
       "methods": [
-        "getAddress",
         "getConfig",
-        "getEthereumAddress",
-        "getUrlByTokenName",
         "getVersion",
-        "getWallet",
-        "hasWallet",
-        "setWallet",
-        "connectWebSocket",
-        "disconnectWebSocket",
-        "isWebSocketConnected"
+        "getUrlByTokenName",
+        "hasWallet"
       ],
-      "category": "wallet"
+      "category": "utils"
     },
     "fetch-all-dex-seasons": {
       "key": "fetch-all-dex-seasons",
@@ -9256,8 +9439,9 @@
       "label": "Fetch dex pools",
       "description": "Fetch dex pools operations.",
       "methods": [
-        "fetchDexPools",
-        "fetchAllDexPools"
+        "sdk.dex.pools.getPools",
+        "sdk.dex.pools.getPool",
+        "sdk.dex.pools.getSlot0"
       ],
       "category": "dex-pools"
     },
@@ -9267,39 +9451,7 @@
       "description": "Event subscriptions operations.",
       "methods": [
         "subscribeToStream",
-        "unsubscribeFromStream",
-        "onStreamStatusChanged",
-        "onUserBanned",
-        "onUserUnbanned",
-        "onBanEnforcement",
-        "onContentFlagged",
-        "onFlagResolved",
-        "onStreamChatMessage",
-        "onStreamChatUpdated",
-        "onStreamChatDeleted",
-        "onStreamChatPinned",
-        "onStreamChatUnpinned",
-        "onChatStatusChanged",
-        "onViewerCountChanged",
-        "onRecordingStatusChanged",
-        "onSimulcastStatusChanged",
-        "onDownloadReady",
-        "onUserTyping",
-        "onStreamReaction",
-        "onContentReactionAdded",
-        "onContentReactionRemoved",
-        "onStreamCountdownUpdated",
-        "onStreamLanguageUpdated",
-        "onStreamControlStatusChanged",
-        "onConnection",
-        "onAuthenticated",
-        "onTokenSubscribed",
-        "onTokenUnsubscribed",
-        "onRoomSubscribed",
-        "onRoomLeft",
-        "onDexPoolCreation",
-        "onLaunchpadTokenCreation",
-        "onEngagementStatsUpdated"
+        "onLaunchpadTokenCreation"
       ],
       "category": "chat"
     },
@@ -9308,9 +9460,12 @@
       "label": "Mcp to sdk mapping",
       "description": "Mcp to sdk mapping operations.",
       "methods": [
-        "explainSdkUsage"
+        "buy",
+        "calculateBuyAmount",
+        "fetchPools",
+        "sdk.dex.swaps.swap"
       ],
-      "category": "utils"
+      "category": "trading"
     },
     "bridge-operations": {
       "key": "bridge-operations",
@@ -9321,23 +9476,8 @@
         "bridgeOut",
         "bridgeIn",
         "getBridgeStatus",
-        "fetchEthereumWalletTokenBalance",
-        "fetchEthereumWalletNativeBalance",
         "fetchEthereumWalletAllBalances",
-        "fetchSolanaWalletTokenBalance",
-        "fetchSolanaWalletNativeBalance",
-        "fetchSolanaWalletAllBalances",
-        "getSupportedBridgeTokens",
-        "getEthereumTransactionStatus",
-        "getSolanaTransactionStatus",
-        "fetchBridgeableTokensByNetwork",
-        "fetchAllBridgeableTokensByNetwork",
-        "fetchAllTokensBridgeableToEthereum",
-        "fetchAllTokensBridgeableToSolana",
-        "isTokenBridgeableToNetwork",
-        "isTokenBridgeableToEthereum",
-        "isTokenBridgeableToSolana",
-        "requestSolanaDevnetAirdrop"
+        "fetchSolanaWalletAllBalances"
       ],
       "category": "bridge"
     },
@@ -9346,8 +9486,7 @@
       "label": "Dex token discovery",
       "description": "Dex token discovery operations.",
       "methods": [
-        "fetchAvailableDexTokens",
-        "fetchAllAvailableDexTokens"
+        "sdk.dex.symbols.list"
       ],
       "category": "dex-pools"
     },
@@ -9356,16 +9495,12 @@
       "label": "Wrap unwrap operations",
       "description": "Wrap unwrap operations operations.",
       "methods": [
+        "fetchWrappableTokens",
+        "getWrapCounterpart",
+        "estimateWrapFee",
         "wrapToken",
         "unwrapToken",
-        "estimateWrapFee",
-        "estimateUnwrapFee",
-        "getWrapStatus",
-        "fetchWrappableTokens",
-        "fetchAllWrappableTokens",
-        "getWrappableToken",
-        "getWrapCounterpart",
-        "isTokenWrappable"
+        "getWrapStatus"
       ],
       "category": "bridge"
     },
@@ -9387,13 +9522,10 @@
       "description": "Session auth operations.",
       "methods": [
         "login",
-        "logout",
-        "refreshToken",
         "getSession",
-        "isAuthenticated",
-        "shouldRefreshToken",
-        "getAccessToken",
-        "ensureValidToken"
+        "ensureValidToken",
+        "refreshToken",
+        "logout"
       ],
       "category": "auth"
     },
@@ -9404,19 +9536,9 @@
       "methods": [
         "startStream",
         "stopStream",
-        "getStreamInfo",
-        "disableStream",
-        "enableStream",
-        "resetStreamKey",
         "getStreamRecordings",
-        "getRecordingDownload",
-        "deleteRecording",
         "getSimulcastTargets",
-        "addSimulcastTarget",
-        "removeSimulcastTarget",
         "getGlobalStreamingStatus",
-        "setGlobalStreamingEnabled",
-        "getAvailableRoles",
         "getStreamRole",
         "getTokenAccess"
       ],
@@ -9427,20 +9549,13 @@
       "label": "Stream chat",
       "description": "Stream chat operations.",
       "methods": [
-        "getChatStatus",
-        "disableChat",
-        "enableChat",
-        "getGlobalChatStatus",
-        "setGlobalChatEnabled",
         "connectStreamWebSocket",
-        "authenticateStreamWebSocket",
         "subscribeToStream",
-        "unsubscribeFromStream",
         "sendStreamChatViaWebSocket",
         "sendStreamReaction",
-        "disconnectStreamWebSocket",
-        "isStreamWebSocketConnected",
-        "getEngagementStats"
+        "disableChat",
+        "enableChat",
+        "setSlowMode"
       ],
       "category": "chat"
     },
@@ -9492,18 +9607,10 @@
       "description": "Overseer invites operations.",
       "methods": [
         "createOverseerInvite",
-        "claimOverseerInvite",
         "listOverseerInvites",
-        "getOverseerInviteByCode",
-        "revokeOverseerInvite",
+        "claimOverseerInvite",
         "listOverseers",
-        "revokeOverseer",
-        "getMyOverseerStatus",
         "getOverseerSummary",
-        "getBanStats",
-        "getTokenBanStats",
-        "getInviteStats",
-        "getFlagStats",
         "getUserStats"
       ],
       "category": "overseers"
@@ -9517,11 +9624,7 @@
         "listFlags",
         "listGlobalFlags",
         "dismissFlag",
-        "actionFlag",
-        "getComments",
-        "createComment",
-        "updateComment",
-        "deleteComment"
+        "actionFlag"
       ],
       "category": "content-flags"
     },
@@ -9544,8 +9647,7 @@
       "label": "Trade history",
       "description": "Trade history operations.",
       "methods": [
-        "getTrades",
-        "getRecentTrades"
+        "getTrades"
       ],
       "category": "trades"
     },
@@ -9600,7 +9702,6 @@
       "methods": [
         "isTokenGraduated",
         "fetchPools",
-        "onDexPoolCreation",
         "onLaunchpadTokenCreation"
       ],
       "category": "utils"
@@ -9616,7 +9717,7 @@
         "triggerAIModeration",
         "getAIModerationStatus"
       ],
-      "category": "utils"
+      "category": "ai-moderation"
     },
     "weekly-challenge": {
       "key": "weekly-challenge",
@@ -9653,25 +9754,11 @@
       "description": "Websocket admin operations.",
       "methods": [
         "emitTradeExecuted",
-        "emitBalanceUpdated",
         "emitStreamStatus",
-        "emitViewerCount",
-        "emitStreamCountdown",
         "emitChatMessage",
-        "emitChatStatus",
-        "emitTypingIndicator",
-        "emitTokenBanned",
-        "emitTokenUnbanned",
-        "emitModeratorAdded",
-        "emitModeratorRemoved",
-        "emitUserProfileUpdated",
-        "emitSiteConfigChanged",
-        "emitFeatureStatus",
         "getConnectedClients",
         "isUserOnline",
-        "getOnlineUsers",
-        "getTokenViewers",
-        "getOnlineOverseers"
+        "getOnlineUsers"
       ],
       "category": "websocket-admin"
     },
@@ -9684,7 +9771,7 @@
         "getPoolOEmbed",
         "getProfileOEmbed"
       ],
-      "category": "utils"
+      "category": "oembed"
     },
     "messages": {
       "key": "messages",
@@ -9708,7 +9795,6 @@
       "description": "Holders operations.",
       "methods": [
         "fetchTokenDistribution",
-        "getTrades",
         "getTopHolders",
         "getHolderCount",
         "getHolderRank",
@@ -9734,21 +9820,28 @@
       "label": "Global feed subscription",
       "description": "Global feed subscription operations.",
       "methods": [
-        "subscribeToStream"
+        "subscribeToStream",
+        "connectStreamWebSocket"
       ],
       "category": "chat"
+    },
+    "events-tracking": {
+      "key": "events-tracking",
+      "label": "Events tracking",
+      "description": "Events tracking operations.",
+      "methods": [
+        "getConfig"
+      ],
+      "category": "utils"
     },
     "global-bans": {
       "key": "global-bans",
       "label": "Global bans",
       "description": "Global bans operations.",
       "methods": [
-        "createGlobalBan",
-        "removeGlobalBan",
-        "listGlobalBans",
-        "getGlobalBan"
+        "getBanStats"
       ],
-      "category": "utils"
+      "category": "overseers"
     },
     "recent-trades": {
       "key": "recent-trades",
@@ -9759,6 +9852,53 @@
         "getTrades"
       ],
       "category": "trades"
+    },
+    "queued-swap-recovery": {
+      "key": "queued-swap-recovery",
+      "label": "Queued swap recovery",
+      "description": "Queued swap recovery operations.",
+      "methods": [
+        "sdk.dex.swaps.swap",
+        "sdk.dex.swaps.confirmSwap"
+      ],
+      "category": "dex"
+    },
+    "comments": {
+      "key": "comments",
+      "label": "Comments",
+      "description": "Comments operations.",
+      "methods": [
+        "getComments",
+        "createComment",
+        "updateComment",
+        "deleteComment"
+      ],
+      "category": "comments"
+    },
+    "chat-messages": {
+      "key": "chat-messages",
+      "label": "Chat messages",
+      "description": "Chat messages operations.",
+      "methods": [
+        "getChatMessages",
+        "sendChatMessage",
+        "updateChatMessage",
+        "deleteChatMessage"
+      ],
+      "category": "chat-messages"
+    },
+    "notifications": {
+      "key": "notifications",
+      "label": "Notifications",
+      "description": "Notifications operations.",
+      "methods": [
+        "registerPushToken",
+        "unregisterPushToken",
+        "fetchNotificationPreferences",
+        "updateNotificationPreferences",
+        "fetchClientFlags"
+      ],
+      "category": "notifications"
     }
   },
   "authMatrix": {
@@ -9796,6 +9936,7 @@
       "collectPositionFees",
       "createApiKey",
       "createBan",
+      "createComment",
       "createFlag",
       "createMessage",
       "createModeratorInvite",
@@ -9804,6 +9945,8 @@
       "createOverseerInvite",
       "createSolanaWallet",
       "createWallet",
+      "deleteChatMessage",
+      "deleteComment",
       "deleteMessage",
       "deleteRecording",
       "dismissFlag",
@@ -9868,6 +10011,7 @@
       "fetchNftBalances",
       "fetchNftCollections",
       "fetchNftTokenClasses",
+      "fetchNotificationPreferences",
       "fetchPoolDetails",
       "fetchPoolDetailsForCalculation",
       "fetchPools",
@@ -9881,7 +10025,6 @@
       "fetchSolanaWalletNativeBalance",
       "fetchSolanaWalletTokenBalance",
       "fetchSwapPositionDirect",
-      "fetchTokenBadges",
       "fetchTokenBalance",
       "fetchTokenClassesWithSupply",
       "fetchTokenDetails",
@@ -9896,6 +10039,7 @@
       "flushAllCache",
       "flushCacheByAddress",
       "flushCacheByToken",
+      "flushCacheWalletAliases",
       "getAccessToken",
       "getActiveModerators",
       "getActiveUsers",
@@ -9915,14 +10059,12 @@
       "getCacheInfo",
       "getChatStatus",
       "getConfig",
-      "getEngagementStats",
       "getEnvironment",
       "getEthereumAddress",
       "getEthereumAddressFromPrivateKey",
       "getEthereumTransactionStatus",
       "getEventSchema",
       "getFlagStats",
-      "getGlobalChatStatus",
       "getGlobalStreamingStatus",
       "getHomeOembed",
       "getInviteStats",
@@ -9961,6 +10103,7 @@
       "getSwapPoolPrice",
       "getSwapQuoteExactInput",
       "getSwapQuoteExactOutput",
+      "getSwapResult",
       "getSwapUserAssets",
       "getTokenAccess",
       "getTokenBan",
@@ -10005,6 +10148,7 @@
       "mintNft",
       "monitorGlobalFeedEventsReference",
       "onBanEnforcement",
+      "onCommentCreated",
       "onDexPoolCreation",
       "onHolderCountChanged",
       "onLaunchpadTokenCreation",
@@ -10014,6 +10158,7 @@
       "onTradeExecuted",
       "pinMessage",
       "refreshToken",
+      "registerPushToken",
       "removeBan",
       "removeLiquidity",
       "removeReactionFromChatMessage",
@@ -10028,8 +10173,8 @@
       "revokeOverseer",
       "revokeOverseerInvite",
       "sell",
+      "sendChatMessage",
       "setChatEnabled",
-      "setGlobalChatEnabled",
       "setGlobalStreamingEnabled",
       "setNextLiveStreamCountdown",
       "setSlowMode",
@@ -10047,13 +10192,17 @@
       "unbanToken",
       "unlockTokens",
       "unpinMessage",
+      "unregisterPushToken",
       "unsubscribeFromGlobalFeedReference",
       "unwrapToken",
       "updateAiModerationSettings",
       "updateApiKey",
+      "updateChatMessage",
+      "updateComment",
       "updateMessage",
       "updateModeratorInvite",
       "updateModeratorInviteRole",
+      "updateNotificationPreferences",
       "updateProfile",
       "updateRestrictedNames",
       "updateTokenConfig",
@@ -10066,8 +10215,8 @@
       "addContentReaction",
       "connectStreamWebsocket",
       "fetchMessages",
-      "fetchNotificationPreferences",
-      "flushCacheWalletAliases",
+      "getChatMessages",
+      "getComments",
       "getConnectedClients",
       "getHolderCount",
       "getHolderHistory",
@@ -10075,13 +10224,10 @@
       "getHoldersByBalance",
       "getTopHolders",
       "getTrades",
-      "registerPushToken",
       "removeContentReaction",
       "sendStreamChatViaWebSocket",
       "sendStreamReaction",
-      "sendTypingIndicator",
-      "unregisterPushToken",
-      "updateNotificationPreferences"
+      "sendTypingIndicator"
     ]
   },
   "explainSdkTeacher": {
@@ -10097,6 +10243,8 @@
       "ban-management",
       "bridge-operations",
       "buy-tokens",
+      "chat-messages",
+      "comments",
       "content-flag-management",
       "content-reactions",
       "dex-token-discovery",
@@ -10125,12 +10273,14 @@
       "moderator-invites",
       "multi-wallet",
       "nft-collection-management",
+      "notifications",
       "oembed",
       "overseer-invites",
       "platform-stats",
       "pool-graduation",
       "price-history",
       "profile-management",
+      "queued-swap-recovery",
       "recent-trades",
       "referral-system",
       "restricted-names",
@@ -10156,8 +10306,8 @@
       "weekly-challenge",
       "wrap-unwrap-operations"
     ],
-    "topicCount": 65,
-    "methodCount": 317,
+    "topicCount": 69,
+    "methodCount": 323,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   },
   "walletModule": {
@@ -10169,17 +10319,17 @@
         "methods": [
           {
             "name": "fromWallet",
-            "signature": "static fromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "signature": "static fromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "description": "Creates a PrivateKeyProvider from an existing ethers.js Wallet.",
             "parameters": [
               {
                 "name": "wallet",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
                 "required": true,
                 "description": ""
               }
             ],
-            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "isAsync": false,
             "isStatic": true
           },
@@ -10201,18 +10351,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10283,10 +10433,10 @@
           },
           {
             "name": "getWallet",
-            "signature": "getWallet(): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "signature": "getWallet(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "description": "Gets the underlying ethers.js Wallet instance\n\nUseful for operations that require direct Wallet access.",
             "parameters": [],
-            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "isAsync": false,
             "isStatic": false
           }
@@ -10351,18 +10501,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4).",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10406,10 +10556,10 @@
           },
           {
             "name": "getProvider",
-            "signature": "getProvider(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "signature": "getProvider(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "Gets the underlying EIP-1193 provider.",
             "parameters": [],
-            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "isAsync": false,
             "isStatic": false
           }
@@ -10417,7 +10567,7 @@
         "constructorParams": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
@@ -10474,18 +10624,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4)\n\nGala Wallet requires calling setAddress() before signing.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10554,7 +10704,7 @@
         "methods": [
           {
             "name": "createBrowserClient",
-            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new BrowserConnectClient.",
             "parameters": [
               {
@@ -10564,16 +10714,16 @@
                 "description": ""
               }
             ],
-            "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
           {
             "name": "createTrustWalletClient",
-            "signature": "static async createTrustWalletClient(): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createTrustWalletClient(): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new TrustWalletConnectClient.",
             "parameters": [],
-            "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
@@ -10631,23 +10781,23 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(_domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, _types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, _value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712\n\nNote:",
             "parameters": [
               {
-                "name": "_domain",
-                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "name": "domain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
-                "name": "_types",
-                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "name": "types",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
               {
-                "name": "_value",
+                "name": "value",
                 "type": "Record<string, unknown>",
                 "required": true,
                 "description": ""
@@ -10686,10 +10836,10 @@
           },
           {
             "name": "getClient",
-            "signature": "getClient(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "signature": "getClient(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "description": "Gets the underlying.",
             "parameters": [],
-            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "isAsync": false,
             "isStatic": false
           }
@@ -10697,7 +10847,7 @@
         "constructorParams": [
           {
             "name": "client",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "required": true,
             "description": ""
           }
@@ -10709,7 +10859,7 @@
       {
         "name": "detectWallets",
         "description": "Detects available wallets using EIP-6963 standard\n\nEIP-6963 is the modern standard for wallet detection that allows\nmultiple wallets to announce themselves without conflicting.",
-        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "parameters": [
           {
             "name": "timeout",
@@ -10718,18 +10868,18 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "example": "* ```typescript\n * const { wallets, primary, hasWallets } = await detectWallets();\n *\n * if (hasWallets) {\n *   console.log('Available wallets:', wallets.map(w => w.name));\n *\n *   // Create provider from first wallet\n *   const provider = new ExternalWalletProvider(primary.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
       {
         "name": "subscribeToWalletChanges",
         "description": "Subscribes to wallet connection/disconnection events.",
-        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
+        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
         "parameters": [
           {
             "name": "callback",
-            "type": "(result: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
+            "type": "(result: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
             "required": true,
             "description": ""
           }
@@ -10741,7 +10891,7 @@
       {
         "name": "getWalletByRdns",
         "description": "Gets a specific wallet by its RDNS identifier.",
-        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "parameters": [
           {
             "name": "rdns",
@@ -10756,7 +10906,7 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "example": "* ```typescript\n * const metamask = await getWalletByRdns('io.metamask');\n * if (metamask) {\n *   const provider = new ExternalWalletProvider(metamask.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
@@ -10795,57 +10945,57 @@
       {
         "name": "createWalletProvider",
         "description": "Creates a WalletProvider from configuration\n\nThis is the main factory function for creating wallet providers.\nIt automatically selects the appropriate provider type based on config.",
-        "signature": "function createWalletProvider(config: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+        "signature": "function createWalletProvider(config: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
         "parameters": [
           {
             "name": "config",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderConfig",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderConfig",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
         "example": "* ```typescript\n * // From private key\n * const provider = createWalletProvider({ privateKey: '0x...' });\n *\n * // From browser wallet\n * const provider = createWalletProvider({ eip1193Provider: window.ethereum });\n * await provider.connect();\n * ```",
         "isAsync": false
       },
       {
         "name": "createProviderFromWallet",
         "description": "Creates a PrivateKeyProvider from an ethers.js Wallet\n\nConvenience function for SDK users who already have an ethers Wallet.",
-        "signature": "function createProviderFromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "signature": "function createProviderFromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "isAsync": false
       },
       {
         "name": "createProviderFromEip1193",
         "description": "Creates an ExternalWalletProvider from an EIP-1193 provider\n\nConvenience function for creating providers from browser wallets.",
-        "signature": "function createProviderFromEip1193(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "signature": "function createProviderFromEip1193(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "isAsync": false
       },
       {
         "name": "isPrivateKeyProvider",
         "description": "Checks if a provider is a PrivateKeyProvider\n\nUseful for determining if private key operations are available.",
-        "signature": "function isPrivateKeyProvider(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isPrivateKeyProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -10856,11 +11006,11 @@
       {
         "name": "isExternalProvider",
         "description": "Checks if a provider is an external provider.",
-        "signature": "function isExternalProvider(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isExternalProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -10871,11 +11021,11 @@
       {
         "name": "getPrivateKeyIfAvailable",
         "description": "Gets the private key from a provider if available\n\nThis is a safe way to get the private key, returning undefined\ninstead of throwing for external providers.",
-        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
+        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -10886,41 +11036,41 @@
       {
         "name": "walletToProvider",
         "description": "Converts an ethers Wallet to a WalletProvider\n\nFor backward compatibility with SDK code that uses ethers Wallet directly.",
-        "signature": "function walletToProvider(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "signature": "function walletToProvider(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "isAsync": false
       },
       {
         "name": "providerToWallet",
         "description": "Gets an ethers Wallet from a provider if available\n\nFor backward compatibility with SDK code that needs ethers Wallet.\nOnly works with PrivateKeyProvider.",
-        "signature": "function providerToWallet(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "signature": "function providerToWallet(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
         "isAsync": false
       },
       {
         "name": "ensureConnected",
         "description": "Ensures a wallet provider is connected\n\nCalls connect() if not already connected and returns the address.",
-        "signature": "async function ensureConnected(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
+        "signature": "async function ensureConnected(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -10946,9 +11096,9 @@
       {
         "name": "getInjectedEip1193Provider",
         "description": "Gets window.ethereum if available (browser only).",
-        "signature": "function getInjectedEip1193Provider(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "signature": "function getInjectedEip1193Provider(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "parameters": [],
-        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "isAsync": false
       }
     ],
@@ -11016,7 +11166,7 @@
         "properties": [
           {
             "name": "providerType",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderType",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderType",
             "description": "",
             "optional": false
           }
@@ -11066,13 +11216,13 @@
         "properties": [
           {
             "name": "info",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
             "description": "",
             "optional": false
           },
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           }
@@ -11091,7 +11241,7 @@
           },
           {
             "name": "detail",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
             "description": "",
             "optional": false
           }
@@ -11128,7 +11278,7 @@
           },
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           },
@@ -11147,13 +11297,13 @@
         "properties": [
           {
             "name": "wallets",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "byId",
-            "type": "Map<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet>",
+            "type": "Map<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet>",
             "description": "",
             "optional": false
           },
@@ -11165,7 +11315,7 @@
           },
           {
             "name": "primary",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": true
           }
@@ -11184,7 +11334,7 @@
           },
           {
             "name": "eip1193Provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
             "description": "",
             "optional": true
           },
@@ -11221,7 +11371,7 @@
           },
           {
             "name": "providerType",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
             "description": "",
             "optional": true
           },
@@ -11295,7 +11445,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11307,7 +11457,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
@@ -11331,11 +11481,11 @@
       {
         "name": "useWallet",
         "description": "Hook to access the current wallet state and actions\n\nThis is the primary hook for wallet integration. It provides:\n- Current connection state (address, isConnected, etc.)\n- Detected wallets list\n- Actions (connect, disconnect, etc.).",
-        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/types\").WalletContextValue",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/types\").WalletContextValue",
         "returnProperties": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11377,19 +11527,19 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11401,7 +11551,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11444,18 +11594,18 @@
       {
         "name": "useWalletProvider",
         "description": "Hook to get the current wallet provider.",
-        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
         "returnProperties": [],
         "example": "* ```tsx\n * const provider = useWalletProvider();\n * if (provider) {\n *   const signature = await provider.signMessage('Hello');\n * }\n * ```"
       },
       {
         "name": "useWalletConnection",
         "description": "Hook for managing wallet connection\n\nProvides a focused interface for connection management:\n- Connection status tracking\n- Connect/disconnect actions\n- Error handling.",
-        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
         "returnProperties": [
           {
             "name": "status",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/types\").ConnectionStatus",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/types\").ConnectionStatus",
             "description": "",
             "optional": false
           },
@@ -11479,13 +11629,13 @@
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11507,11 +11657,11 @@
       {
         "name": "useWalletDetection",
         "description": "Hook for detecting available browser wallets\n\nUses EIP-6963 to discover installed wallet extensions.\nAutomatically updates when new wallets are detected.",
-        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
         "returnProperties": [
           {
             "name": "wallets",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
@@ -11535,7 +11685,7 @@
           },
           {
             "name": "getWallet",
-            "type": "(rdns: string) => import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "(rdns: string) => import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": false
           },
@@ -11569,7 +11719,7 @@
         "properties": [
           {
             "name": "provider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11611,7 +11761,7 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           }
@@ -11624,13 +11774,13 @@
         "properties": [
           {
             "name": "connect",
-            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11642,7 +11792,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11685,7 +11835,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11697,7 +11847,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
