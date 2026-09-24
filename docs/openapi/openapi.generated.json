@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Gala Launchpad API",
-    "version": "7.0.0-beta.1",
+    "version": "7.0.0-beta.4",
     "description": "Consolidated API documentation auto-generated from SDK source code.\n\nSupports multiple environments and backend services. This specification covers 150+ endpoints across 25 endpoint groups, with full request/response schemas derived from TypeScript types.\n\nUse the servers selector to switch between production, staging, and development environments. Per-endpoint server overrides are used for service-specific backends.",
     "contact": {
       "name": "Gala Games",
@@ -6540,9 +6540,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "all",
-              "DEFI",
-              "ASSET"
+              "both",
+              "held",
+              "created"
             ]
           },
           "address": {
@@ -6896,10 +6896,8 @@
                 "type": {
                   "type": "string",
                   "enum": [
-                    "all",
-                    "DEFI",
-                    "ASSET",
-                    "COLLECTION",
+                    "both",
+                    "held",
                     "created"
                   ]
                 },
@@ -6955,10 +6953,8 @@
                     "type": {
                       "type": "string",
                       "enum": [
-                        "all",
-                        "DEFI",
-                        "ASSET",
-                        "COLLECTION",
+                        "both",
+                        "held",
                         "created"
                       ]
                     },
@@ -10329,20 +10325,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1000": {
-                "$ref": "#/components/schemas/__@match@1000"
+              "__@match@997": {
+                "$ref": "#/components/schemas/__@match@997"
               },
-              "__@replace@1002": {
-                "$ref": "#/components/schemas/__@replace@1002"
+              "__@replace@999": {
+                "$ref": "#/components/schemas/__@replace@999"
               },
-              "__@search@1005": {
-                "$ref": "#/components/schemas/__@search@1005"
+              "__@search@1002": {
+                "$ref": "#/components/schemas/__@search@1002"
               },
-              "__@split@1007": {
-                "$ref": "#/components/schemas/__@split@1007"
+              "__@split@1004": {
+                "$ref": "#/components/schemas/__@split@1004"
               },
-              "__@matchAll@1009": {
-                "$ref": "#/components/schemas/__@matchAll@1009"
+              "__@matchAll@1006": {
+                "$ref": "#/components/schemas/__@matchAll@1006"
               }
             },
             "description": "Regex pattern for validation"
@@ -10448,20 +10444,20 @@
               "dotAll": {
                 "type": "boolean"
               },
-              "__@match@1000": {
-                "$ref": "#/components/schemas/__@match@1000"
+              "__@match@997": {
+                "$ref": "#/components/schemas/__@match@997"
               },
-              "__@replace@1002": {
-                "$ref": "#/components/schemas/__@replace@1002"
+              "__@replace@999": {
+                "$ref": "#/components/schemas/__@replace@999"
               },
-              "__@search@1005": {
-                "$ref": "#/components/schemas/__@search@1005"
+              "__@search@1002": {
+                "$ref": "#/components/schemas/__@search@1002"
               },
-              "__@split@1007": {
-                "$ref": "#/components/schemas/__@split@1007"
+              "__@split@1004": {
+                "$ref": "#/components/schemas/__@split@1004"
               },
-              "__@matchAll@1009": {
-                "$ref": "#/components/schemas/__@matchAll@1009"
+              "__@matchAll@1006": {
+                "$ref": "#/components/schemas/__@matchAll@1006"
               }
             },
             "description": "Regex pattern for validation"
@@ -12252,6 +12248,9 @@
                   "sqrt": {
                     "$ref": "#/components/schemas/sqrt"
                   },
+                  "toBigInt": {
+                    "$ref": "#/components/schemas/toBigInt"
+                  },
                   "toExponential": {
                     "$ref": "#/components/schemas/toExponential"
                   },
@@ -12269,6 +12268,9 @@
                   },
                   "toNumber": {
                     "$ref": "#/components/schemas/toNumber"
+                  },
+                  "toObject": {
+                    "$ref": "#/components/schemas/toObject"
                   },
                   "toPrecision": {
                     "$ref": "#/components/schemas/toPrecision"
@@ -13657,7 +13659,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -13671,7 +13673,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -13741,10 +13743,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@693": {
-                    "$ref": "#/components/schemas/__@iterator@693"
+                  "__@iterator@690": {
+                    "$ref": "#/components/schemas/__@iterator@690"
                   },
-                  "__@toStringTag@1845": {
+                  "__@toStringTag@1931": {
                     "type": "string"
                   }
                 }
@@ -15152,8 +15154,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "description": "Last updated timestamp"
@@ -15645,7 +15647,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -15659,7 +15661,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -15729,10 +15731,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@693": {
-                    "$ref": "#/components/schemas/__@iterator@693"
+                  "__@iterator@690": {
+                    "$ref": "#/components/schemas/__@iterator@690"
                   },
-                  "__@toStringTag@1845": {
+                  "__@toStringTag@1931": {
                     "type": "string"
                   }
                 }
@@ -16361,8 +16363,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "description": "Season start timestamp (parsed to Date object)"
@@ -16499,8 +16501,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "description": "Season end timestamp (parsed to Date object)"
@@ -19415,15 +19417,9 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "string"
               }
             ],
-            "description": "Token type, defaults to 'DEFI'"
+            "description": "Token type, defaults to 'both'"
           }
         },
         "required": [
@@ -19450,15 +19446,9 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "string"
               }
             ],
-            "description": "Token type, defaults to 'DEFI'"
+            "description": "Token type, defaults to 'both'"
           }
         },
         "required": [
@@ -19488,15 +19478,9 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "string"
               }
             ],
-            "description": "Token type, defaults to 'DEFI'"
+            "description": "Token type, defaults to 'both'"
           }
         },
         "required": [
@@ -19517,7 +19501,7 @@
             "description": "Wallet address to query (eth|[40-hex-chars] format).\nIf not provided, defaults to the authenticated wallet address."
           }
         },
-        "description": "Options for fetching tokens held by user with filtering support\n\nSupports both exact matching and fuzzy search for efficient backend filtering."
+        "description": "Options for fetching tokens held by user with filtering support\n\nSupports exact tokenName matching and fuzzy search on holdings."
       },
       "FetchTokensCreatedOptions": {
         "type": "object",
@@ -19546,7 +19530,7 @@
             "description": "Filter by graduation status.\n- 'all' (default): Return all tokens regardless of status\n- 'graduated': Return only graduated tokens (DEX trading)\n- 'active': Return only bonding curve tokens (not yet graduated)"
           }
         },
-        "description": "Options for fetching tokens created by user with filtering support\n\nSupports both exact matching and fuzzy search for efficient backend filtering."
+        "description": "Options for fetching tokens created by user with filtering support\n\nBackend search narrows the result; exact tokenName filtering is applied locally."
       },
       "FetchTokenSpotPriceParams": {
         "type": "object",
@@ -20272,7 +20256,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@1845": {
+                              "__@toStringTag@1931": {
                                 "type": "string"
                               }
                             }
@@ -20286,7 +20270,7 @@
                               "slice": {
                                 "$ref": "#/components/schemas/slice"
                               },
-                              "__@toStringTag@1845": {
+                              "__@toStringTag@1931": {
                                 "type": "string"
                               }
                             }
@@ -20356,10 +20340,10 @@
                       "values": {
                         "$ref": "#/components/schemas/values"
                       },
-                      "__@iterator@693": {
-                        "$ref": "#/components/schemas/__@iterator@693"
+                      "__@iterator@690": {
+                        "$ref": "#/components/schemas/__@iterator@690"
                       },
-                      "__@toStringTag@1845": {
+                      "__@toStringTag@1931": {
                         "type": "string"
                       }
                     }
@@ -20540,8 +20524,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "nullable": true,
@@ -20679,8 +20663,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "nullable": true,
@@ -22296,8 +22280,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "nullable": true,
@@ -22435,8 +22419,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "nullable": true,
@@ -22637,8 +22621,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "description": "Timestamp of the price snapshot (created_at from database)"
@@ -22748,11 +22732,11 @@
       "PriceSeriesTimeframe": {
         "type": "string",
         "enum": [
-          "ALL",
           "1D",
           "1W",
           "1M",
-          "1Y"
+          "1Y",
+          "ALL"
         ],
         "description": "Time windows accepted by the DEX market price-series endpoint."
       },
@@ -24700,10 +24684,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24738,10 +24722,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24776,10 +24760,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24814,10 +24798,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24852,10 +24836,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24890,10 +24874,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24928,10 +24912,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -24966,10 +24950,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25004,10 +24988,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25042,10 +25026,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25080,10 +25064,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25118,10 +25102,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25156,10 +25140,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25194,10 +25178,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25232,10 +25216,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25270,10 +25254,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25308,10 +25292,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25346,10 +25330,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25384,10 +25368,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25422,10 +25406,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25460,10 +25444,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25498,10 +25482,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25536,10 +25520,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25574,10 +25558,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25612,10 +25596,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25650,10 +25634,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25688,10 +25672,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25726,10 +25710,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25764,10 +25748,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -25802,10 +25786,10 @@
               "values": {
                 "$ref": "#/components/schemas/values"
               },
-              "__@iterator@693": {
-                "$ref": "#/components/schemas/__@iterator@693"
+              "__@iterator@690": {
+                "$ref": "#/components/schemas/__@iterator@690"
               },
-              "__@toStringTag@1845": {
+              "__@toStringTag@1931": {
                 "type": "string"
               }
             }
@@ -26714,8 +26698,8 @@
                   "toJSON": {
                     "$ref": "#/components/schemas/toJSON"
                   },
-                  "__@toPrimitive@2599": {
-                    "$ref": "#/components/schemas/__@toPrimitive@2599"
+                  "__@toPrimitive@2709": {
+                    "$ref": "#/components/schemas/__@toPrimitive@2709"
                   }
                 }
               }
@@ -28999,12 +28983,6 @@
               },
               {
                 "type": "string"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "string"
               }
             ],
             "description": "Token type filter"
@@ -29106,10 +29084,8 @@
           "type": {
             "type": "string",
             "enum": [
-              "all",
-              "DEFI",
-              "ASSET",
-              "COLLECTION",
+              "both",
+              "held",
               "created"
             ],
             "description": "Token type"
@@ -29371,8 +29347,8 @@
               "toJSON": {
                 "$ref": "#/components/schemas/toJSON"
               },
-              "__@toPrimitive@2599": {
-                "$ref": "#/components/schemas/__@toPrimitive@2599"
+              "__@toPrimitive@2709": {
+                "$ref": "#/components/schemas/__@toPrimitive@2709"
               }
             },
             "description": "Last update timestamp"
@@ -29396,6 +29372,38 @@
             },
             "nullable": true,
             "description": "Array of tokens"
+          },
+          "launches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserTokenInfo"
+            },
+            "nullable": true,
+            "description": "Launches returned by the created-token route"
+          },
+          "pageInfo": {
+            "type": "object",
+            "properties": {
+              "hasNextPage": {
+                "type": "boolean"
+              },
+              "hasPreviousPage": {
+                "type": "boolean"
+              },
+              "endCursor": {
+                "type": "string",
+                "nullable": true
+              },
+              "startCursor": {
+                "type": "string",
+                "nullable": true
+              },
+              "totalCount": {
+                "type": "number"
+              }
+            },
+            "nullable": true,
+            "description": "Backend cursor pagination envelope"
           },
           "count": {
             "type": "number",
@@ -29776,7 +29784,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -29790,7 +29798,7 @@
                           "slice": {
                             "$ref": "#/components/schemas/slice"
                           },
-                          "__@toStringTag@1845": {
+                          "__@toStringTag@1931": {
                             "type": "string"
                           }
                         }
@@ -29860,10 +29868,10 @@
                   "values": {
                     "$ref": "#/components/schemas/values"
                   },
-                  "__@iterator@693": {
-                    "$ref": "#/components/schemas/__@iterator@693"
+                  "__@iterator@690": {
+                    "$ref": "#/components/schemas/__@iterator@690"
                   },
-                  "__@toStringTag@1845": {
+                  "__@toStringTag@1931": {
                     "type": "string"
                   }
                 }
@@ -30907,10 +30915,8 @@
       "UserTokenType": {
         "type": "string",
         "enum": [
-          "all",
-          "DEFI",
-          "ASSET",
-          "COLLECTION",
+          "both",
+          "held",
           "created"
         ],
         "description": "User token type enumeration - derived from USER_TOKEN_TYPE const"

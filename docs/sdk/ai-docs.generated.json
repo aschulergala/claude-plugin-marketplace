@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "7.0.0-beta.1",
-    "generatedAt": "2026-09-23T20:05:38.743Z",
+    "version": "7.0.0-beta.4",
+    "generatedAt": "2026-09-24T00:49:46.557Z",
     "toolCount": 323,
     "categoryCount": 41,
     "warnings": []
@@ -3059,7 +3059,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Optional token name (exact match filter)."
+          "description": "Optional exact token name. Holdings are filtered by the backend; created-token results are searched by the backend and matched exactly on the returned page."
         },
         {
           "name": "search",
@@ -3074,7 +3074,7 @@
       "name": "fetchTokensCreated",
       "mcpTool": "gala_launchpad_fetch_tokens_created",
       "category": "balance",
-      "description": "Get tokens created by a wallet with optional filtering. Supports exact match (tokenName) and fuzzy search (search) for efficient backend filtering.",
+      "description": "Get tokens created by a wallet with optional filtering. Search is handled by the backend; tokenName is matched exactly against the returned page because the created route does not support tokenName filtering.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -3100,7 +3100,7 @@
           "name": "tokenName",
           "type": "any",
           "required": false,
-          "description": "Optional token name (exact match filter)."
+          "description": "Optional exact token name. Holdings are filtered by the backend; created-token results are searched by the backend and matched exactly on the returned page."
         },
         {
           "name": "search",
@@ -10319,17 +10319,17 @@
         "methods": [
           {
             "name": "fromWallet",
-            "signature": "static fromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "signature": "static fromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "description": "Creates a PrivateKeyProvider from an existing ethers.js Wallet.",
             "parameters": [
               {
                 "name": "wallet",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
                 "required": true,
                 "description": ""
               }
             ],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "isAsync": false,
             "isStatic": true
           },
@@ -10351,18 +10351,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10433,10 +10433,10 @@
           },
           {
             "name": "getWallet",
-            "signature": "getWallet(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "signature": "getWallet(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "description": "Gets the underlying ethers.js Wallet instance\n\nUseful for operations that require direct Wallet access.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "isAsync": false,
             "isStatic": false
           }
@@ -10501,18 +10501,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4).",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10556,10 +10556,10 @@
           },
           {
             "name": "getProvider",
-            "signature": "getProvider(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "signature": "getProvider(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "Gets the underlying EIP-1193 provider.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "isAsync": false,
             "isStatic": false
           }
@@ -10567,7 +10567,7 @@
         "constructorParams": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
@@ -10624,18 +10624,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4)\n\nGala Wallet requires calling setAddress() before signing.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10704,7 +10704,7 @@
         "methods": [
           {
             "name": "createBrowserClient",
-            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new BrowserConnectClient.",
             "parameters": [
               {
@@ -10714,16 +10714,16 @@
                 "description": ""
               }
             ],
-            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
           {
             "name": "createTrustWalletClient",
-            "signature": "static async createTrustWalletClient(): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createTrustWalletClient(): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new TrustWalletConnectClient.",
             "parameters": [],
-            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
@@ -10781,18 +10781,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712\n\nNote:",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10836,10 +10836,10 @@
           },
           {
             "name": "getClient",
-            "signature": "getClient(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "signature": "getClient(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "description": "Gets the underlying.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "isAsync": false,
             "isStatic": false
           }
@@ -10847,7 +10847,7 @@
         "constructorParams": [
           {
             "name": "client",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "required": true,
             "description": ""
           }
@@ -10859,7 +10859,7 @@
       {
         "name": "detectWallets",
         "description": "Detects available wallets using EIP-6963 standard\n\nEIP-6963 is the modern standard for wallet detection that allows\nmultiple wallets to announce themselves without conflicting.",
-        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "parameters": [
           {
             "name": "timeout",
@@ -10868,18 +10868,18 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "example": "* ```typescript\n * const { wallets, primary, hasWallets } = await detectWallets();\n *\n * if (hasWallets) {\n *   console.log('Available wallets:', wallets.map(w => w.name));\n *\n *   // Create provider from first wallet\n *   const provider = new ExternalWalletProvider(primary.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
       {
         "name": "subscribeToWalletChanges",
         "description": "Subscribes to wallet connection/disconnection events.",
-        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
+        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
         "parameters": [
           {
             "name": "callback",
-            "type": "(result: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
+            "type": "(result: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
             "required": true,
             "description": ""
           }
@@ -10891,7 +10891,7 @@
       {
         "name": "getWalletByRdns",
         "description": "Gets a specific wallet by its RDNS identifier.",
-        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "parameters": [
           {
             "name": "rdns",
@@ -10906,7 +10906,7 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "example": "* ```typescript\n * const metamask = await getWalletByRdns('io.metamask');\n * if (metamask) {\n *   const provider = new ExternalWalletProvider(metamask.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
@@ -10945,57 +10945,57 @@
       {
         "name": "createWalletProvider",
         "description": "Creates a WalletProvider from configuration\n\nThis is the main factory function for creating wallet providers.\nIt automatically selects the appropriate provider type based on config.",
-        "signature": "function createWalletProvider(config: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+        "signature": "function createWalletProvider(config: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
         "parameters": [
           {
             "name": "config",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderConfig",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderConfig",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
         "example": "* ```typescript\n * // From private key\n * const provider = createWalletProvider({ privateKey: '0x...' });\n *\n * // From browser wallet\n * const provider = createWalletProvider({ eip1193Provider: window.ethereum });\n * await provider.connect();\n * ```",
         "isAsync": false
       },
       {
         "name": "createProviderFromWallet",
         "description": "Creates a PrivateKeyProvider from an ethers.js Wallet\n\nConvenience function for SDK users who already have an ethers Wallet.",
-        "signature": "function createProviderFromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "signature": "function createProviderFromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "isAsync": false
       },
       {
         "name": "createProviderFromEip1193",
         "description": "Creates an ExternalWalletProvider from an EIP-1193 provider\n\nConvenience function for creating providers from browser wallets.",
-        "signature": "function createProviderFromEip1193(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "signature": "function createProviderFromEip1193(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "isAsync": false
       },
       {
         "name": "isPrivateKeyProvider",
         "description": "Checks if a provider is a PrivateKeyProvider\n\nUseful for determining if private key operations are available.",
-        "signature": "function isPrivateKeyProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isPrivateKeyProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11006,11 +11006,11 @@
       {
         "name": "isExternalProvider",
         "description": "Checks if a provider is an external provider.",
-        "signature": "function isExternalProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isExternalProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11021,11 +11021,11 @@
       {
         "name": "getPrivateKeyIfAvailable",
         "description": "Gets the private key from a provider if available\n\nThis is a safe way to get the private key, returning undefined\ninstead of throwing for external providers.",
-        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
+        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11036,41 +11036,41 @@
       {
         "name": "walletToProvider",
         "description": "Converts an ethers Wallet to a WalletProvider\n\nFor backward compatibility with SDK code that uses ethers Wallet directly.",
-        "signature": "function walletToProvider(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "signature": "function walletToProvider(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "isAsync": false
       },
       {
         "name": "providerToWallet",
         "description": "Gets an ethers Wallet from a provider if available\n\nFor backward compatibility with SDK code that needs ethers Wallet.\nOnly works with PrivateKeyProvider.",
-        "signature": "function providerToWallet(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "signature": "function providerToWallet(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/node_modules/.pnpm/ethers@6.16.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.commonjs/wallet/wallet\").Wallet | undefined",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
         "isAsync": false
       },
       {
         "name": "ensureConnected",
         "description": "Ensures a wallet provider is connected\n\nCalls connect() if not already connected and returns the address.",
-        "signature": "async function ensureConnected(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
+        "signature": "async function ensureConnected(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11096,9 +11096,9 @@
       {
         "name": "getInjectedEip1193Provider",
         "description": "Gets window.ethereum if available (browser only).",
-        "signature": "function getInjectedEip1193Provider(): import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "signature": "function getInjectedEip1193Provider(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "parameters": [],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "isAsync": false
       }
     ],
@@ -11166,7 +11166,7 @@
         "properties": [
           {
             "name": "providerType",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderType",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderType",
             "description": "",
             "optional": false
           }
@@ -11216,13 +11216,13 @@
         "properties": [
           {
             "name": "info",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
             "description": "",
             "optional": false
           },
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           }
@@ -11241,7 +11241,7 @@
           },
           {
             "name": "detail",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
             "description": "",
             "optional": false
           }
@@ -11278,7 +11278,7 @@
           },
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           },
@@ -11297,13 +11297,13 @@
         "properties": [
           {
             "name": "wallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "byId",
-            "type": "Map<string, import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet>",
+            "type": "Map<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet>",
             "description": "",
             "optional": false
           },
@@ -11315,7 +11315,7 @@
           },
           {
             "name": "primary",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": true
           }
@@ -11334,7 +11334,7 @@
           },
           {
             "name": "eip1193Provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
             "description": "",
             "optional": true
           },
@@ -11371,7 +11371,7 @@
           },
           {
             "name": "providerType",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
             "description": "",
             "optional": true
           },
@@ -11445,7 +11445,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11457,7 +11457,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
@@ -11481,11 +11481,11 @@
       {
         "name": "useWallet",
         "description": "Hook to access the current wallet state and actions\n\nThis is the primary hook for wallet integration. It provides:\n- Current connection state (address, isConnected, etc.)\n- Detected wallets list\n- Actions (connect, disconnect, etc.).",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/types\").WalletContextValue",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/types\").WalletContextValue",
         "returnProperties": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11527,19 +11527,19 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11551,7 +11551,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11594,18 +11594,18 @@
       {
         "name": "useWalletProvider",
         "description": "Hook to get the current wallet provider.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
         "returnProperties": [],
         "example": "* ```tsx\n * const provider = useWalletProvider();\n * if (provider) {\n *   const signature = await provider.signMessage('Hello');\n * }\n * ```"
       },
       {
         "name": "useWalletConnection",
         "description": "Hook for managing wallet connection\n\nProvides a focused interface for connection management:\n- Connection status tracking\n- Connect/disconnect actions\n- Error handling.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
         "returnProperties": [
           {
             "name": "status",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/types\").ConnectionStatus",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/types\").ConnectionStatus",
             "description": "",
             "optional": false
           },
@@ -11629,13 +11629,13 @@
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11657,11 +11657,11 @@
       {
         "name": "useWalletDetection",
         "description": "Hook for detecting available browser wallets\n\nUses EIP-6963 to discover installed wallet extensions.\nAutomatically updates when new wallets are detected.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
+        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
         "returnProperties": [
           {
             "name": "wallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
@@ -11685,7 +11685,7 @@
           },
           {
             "name": "getWallet",
-            "type": "(rdns: string) => import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "(rdns: string) => import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": false
           },
@@ -11719,7 +11719,7 @@
         "properties": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11761,7 +11761,7 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           }
@@ -11774,13 +11774,13 @@
         "properties": [
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11792,7 +11792,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11835,7 +11835,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11847,7 +11847,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/omni-v7-topics/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
