@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GalaChain Claude Plugin Marketplace</title>
-  <meta name="description" content="Transform Claude into a GalaChain Expert with 323 MCP tools and 69 teaching topics. One command installation.">
+  <meta name="description" content="Transform Claude into a GalaChain Expert with 323 MCP tools across 41 categories and 69 teaching topics. One command installation.">
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -1393,16 +1393,16 @@
 
       <div class="hero-stats">
         <span class="hero-stat-badge">
-          <span class="hero-stat-number">323</span> MCP TOOLS
+          <span class="hero-stat-number" data-stat-key="tools">323</span> MCP TOOLS
         </span>
         <span class="hero-stat-badge">
-          <span class="hero-stat-number">38</span> CATEGORIES
+          <span class="hero-stat-number" data-stat-key="categories">41</span> CATEGORIES
         </span>
         <span class="hero-stat-badge">
-          <span class="hero-stat-number">69</span> TOPICS
+          <span class="hero-stat-number" data-stat-key="topics">69</span> TOPICS
         </span>
         <span class="hero-stat-badge">
-          <span class="hero-stat-number">8</span> PATHS
+          <span class="hero-stat-number" data-stat-key="paths">7</span> PATHS
         </span>
       </div>
 
@@ -1520,19 +1520,19 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number" data-target="323">0</div>
+          <div class="stat-number" data-target="323">323</div>
           <div class="stat-label">MCP Tools</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="38">0</div>
+          <div class="stat-number" data-target="41">41</div>
           <div class="stat-label">Categories</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="69">0</div>
+          <div class="stat-number" data-target="69">69</div>
           <div class="stat-label">Teaching Topics</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="8">0</div>
+          <div class="stat-number" data-target="7">7</div>
           <div class="stat-label">Learning Paths</div>
         </div>
       </div>
@@ -1553,40 +1553,40 @@
         <div class="feature-card">
           <div class="feature-icon" aria-hidden="true">💱</div>
           <h3 class="feature-title">Trading</h3>
-          <span class="feature-count">20+ tools</span>
+          <span class="feature-count" data-category-key="trading">17 tools</span>
           <p class="feature-description">
-            Buy, sell, and track tokens with ease. Real-time market data,
-            order management, and portfolio tracking at your fingertips.
+            Buy and sell tokens on Launchpad, with quotes and trading analytics
+            for bonding-curve activity.
           </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon" aria-hidden="true">💧</div>
           <h3 class="feature-title">Liquidity</h3>
-          <span class="feature-count">15+ tools</span>
+          <span class="feature-count" data-category-key="dex-liquidity">10 tools</span>
           <p class="feature-description">
-            Manage DEX pools, provide liquidity, and collect trading fees.
-            Full control over your LP positions and rewards.
+            Read and manage DEX liquidity positions, including position details
+            and liquidity operations.
           </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon" aria-hidden="true">🌐</div>
           <h3 class="feature-title">Bridging</h3>
-          <span class="feature-count">18+ tools</span>
+          <span class="feature-count" data-category-key="bridge">31 tools</span>
           <p class="feature-description">
-            Seamless cross-chain operations between GalaChain and other networks.
-            Bridge tokens, track transfers, manage approvals.
+            Explore bridge routes, fees, wrapping workflows, and transfer status
+            across supported networks.
           </p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon" aria-hidden="true">🎓</div>
           <h3 class="feature-title">Learning</h3>
-          <span class="feature-count">69 topics</span>
+          <span class="feature-count" data-topic-count>69 topics</span>
           <p class="feature-description">
-            AI-powered tutoring on GalaChain concepts. From basics to advanced
-            topics, learn at your own pace with interactive guidance.
+            AI-powered tutoring on GalaChain concepts. Follow practical learning paths across the v7 SDK, trading, token
+            operations, bridging, streaming, and application integration.
           </p>
         </div>
       </div>
@@ -1604,53 +1604,169 @@
       </div>
 
       <div class="categories-grid">
-        <div class="category-chip">
-          <span>Token Trading</span>
-          <span class="category-count">12</span>
+        <div class="category-chip" data-category-key="pools">
+          <span>Pools</span>
+          <span class="category-count">26</span>
         </div>
-        <div class="category-chip">
-          <span>Allowances</span>
+        <div class="category-chip" data-category-key="trading">
+          <span>Trading</span>
+          <span class="category-count">17</span>
+        </div>
+        <div class="category-chip" data-category-key="dex">
+          <span>DEX Trading</span>
           <span class="category-count">8</span>
         </div>
-        <div class="category-chip">
+        <div class="category-chip" data-category-key="dex-pools">
           <span>DEX Pools</span>
-          <span class="category-count">15</span>
-        </div>
-        <div class="category-chip">
-          <span>Bridging</span>
-          <span class="category-count">18</span>
-        </div>
-        <div class="category-chip">
-          <span>Token Info</span>
-          <span class="category-count">10</span>
-        </div>
-        <div class="category-chip">
-          <span>Balances</span>
-          <span class="category-count">6</span>
-        </div>
-        <div class="category-chip">
-          <span>Burn Tokens</span>
-          <span class="category-count">4</span>
-        </div>
-        <div class="category-chip">
-          <span>Vesting</span>
-          <span class="category-count">8</span>
-        </div>
-        <div class="category-chip">
-          <span>Fee Collection</span>
-          <span class="category-count">5</span>
-        </div>
-        <div class="category-chip">
-          <span>Price Quotes</span>
           <span class="category-count">7</span>
         </div>
-        <div class="category-chip">
-          <span>Transactions</span>
+        <div class="category-chip" data-category-key="dex-liquidity">
+          <span>DEX Liquidity</span>
+          <span class="category-count">10</span>
+        </div>
+        <div class="category-chip" data-category-key="dex-analytics">
+          <span>DEX Analytics</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="balance">
+          <span>Balances</span>
           <span class="category-count">9</span>
         </div>
-        <div class="category-chip">
-          <span>Analytics</span>
+        <div class="category-chip" data-category-key="referrals">
+          <span>Referrals</span>
+          <span class="category-count">4</span>
+        </div>
+        <div class="category-chip" data-category-key="creation">
+          <span>Token Creation</span>
+          <span class="category-count">4</span>
+        </div>
+        <div class="category-chip" data-category-key="nft">
+          <span>NFTs</span>
           <span class="category-count">11</span>
+        </div>
+        <div class="category-chip" data-category-key="transfers">
+          <span>Transfers</span>
+          <span class="category-count">2</span>
+        </div>
+        <div class="category-chip" data-category-key="locks">
+          <span>Locks</span>
+          <span class="category-count">2</span>
+        </div>
+        <div class="category-chip" data-category-key="burns">
+          <span>Burns</span>
+          <span class="category-count">1</span>
+        </div>
+        <div class="category-chip" data-category-key="wallet">
+          <span>Wallet</span>
+          <span class="category-count">6</span>
+        </div>
+        <div class="category-chip" data-category-key="utils">
+          <span>Utilities</span>
+          <span class="category-count">16</span>
+        </div>
+        <div class="category-chip" data-category-key="bridge">
+          <span>Bridge</span>
+          <span class="category-count">31</span>
+        </div>
+        <div class="category-chip" data-category-key="streaming">
+          <span>Live Stream</span>
+          <span class="category-count">10</span>
+        </div>
+        <div class="category-chip" data-category-key="recordings">
+          <span>Recordings</span>
+          <span class="category-count">3</span>
+        </div>
+        <div class="category-chip" data-category-key="simulcasts">
+          <span>Simulcasts</span>
+          <span class="category-count">3</span>
+        </div>
+        <div class="category-chip" data-category-key="chat">
+          <span>Chat</span>
+          <span class="category-count">8</span>
+        </div>
+        <div class="category-chip" data-category-key="auth">
+          <span>Auth</span>
+          <span class="category-count">8</span>
+        </div>
+        <div class="category-chip" data-category-key="ban">
+          <span>Ban Management</span>
+          <span class="category-count">6</span>
+        </div>
+        <div class="category-chip" data-category-key="api-keys">
+          <span>API Keys</span>
+          <span class="category-count">6</span>
+        </div>
+        <div class="category-chip" data-category-key="moderators">
+          <span>Moderators</span>
+          <span class="category-count">10</span>
+        </div>
+        <div class="category-chip" data-category-key="content-flags">
+          <span>Content Flags</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="overseers">
+          <span>Overseers</span>
+          <span class="category-count">21</span>
+        </div>
+        <div class="category-chip" data-category-key="token-ban">
+          <span>Token Ban</span>
+          <span class="category-count">6</span>
+        </div>
+        <div class="category-chip" data-category-key="messages">
+          <span>Messages</span>
+          <span class="category-count">8</span>
+        </div>
+        <div class="category-chip" data-category-key="restricted-names">
+          <span>Restricted Names</span>
+          <span class="category-count">2</span>
+        </div>
+        <div class="category-chip" data-category-key="content-reactions">
+          <span>Reactions</span>
+          <span class="category-count">6</span>
+        </div>
+        <div class="category-chip" data-category-key="trades">
+          <span>Trade History</span>
+          <span class="category-count">3</span>
+        </div>
+        <div class="category-chip" data-category-key="holders">
+          <span>Holders</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="global-feed">
+          <span>Global Feed</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="websocket-admin">
+          <span>WebSocket Admin</span>
+          <span class="category-count">24</span>
+        </div>
+        <div class="category-chip" data-category-key="ai-moderation">
+          <span>AI Moderation</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="weekly-challenge">
+          <span>Weekly Challenge</span>
+          <span class="category-count">2</span>
+        </div>
+        <div class="category-chip" data-category-key="oembed">
+          <span>OEmbed</span>
+          <span class="category-count">3</span>
+        </div>
+        <div class="category-chip" data-category-key="platform-stats">
+          <span>Platform Stats</span>
+          <span class="category-count">1</span>
+        </div>
+        <div class="category-chip" data-category-key="notifications">
+          <span>Notifications</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="comments">
+          <span>Comments</span>
+          <span class="category-count">5</span>
+        </div>
+        <div class="category-chip" data-category-key="chat-messages">
+          <span>Chat Messages</span>
+          <span class="category-count">4</span>
         </div>
       </div>
     </div>
@@ -1662,89 +1778,52 @@
       <div class="section-header">
         <h2 class="section-title">Learning Paths</h2>
         <p class="section-subtitle">
-          Structured learning journeys for every skill level
+          Structured learning journeys for every skill level<br><span id="sdk-version">Docs for launchpad-sdk 7.0.0-beta.4</span>
         </p>
       </div>
 
       <div class="learning-grid">
-        <div class="learning-card">
+        <div class="learning-card" data-topic-keys="installation,wallet-connect,token-identification,token-details,fetch-pools,balances,error-handling">
           <div class="learning-icon" aria-hidden="true">🚀</div>
-          <h3 class="learning-title">Getting Started</h3>
-          <div class="learning-topics">6 topics</div>
-          <p class="learning-description">
-            Introduction to GalaChain, wallet setup, basic operations,
-            and your first transactions.
-          </p>
-        </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">💰</div>
-          <h3 class="learning-title">Token Mastery</h3>
-          <div class="learning-topics">8 topics</div>
-          <p class="learning-description">
-            Deep dive into token standards, minting, burning, transfers,
-            and advanced token operations.
-          </p>
-        </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">📊</div>
-          <h3 class="learning-title">DeFi Operations</h3>
-          <div class="learning-topics">10 topics</div>
-          <p class="learning-description">
-            Liquidity provision, yield farming, DEX mechanics,
-            and advanced trading strategies.
-          </p>
-        </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">🔧</div>
-          <h3 class="learning-title">Developer Track</h3>
-          <div class="learning-topics">12 topics</div>
-          <p class="learning-description">
-            Smart contract design, SDK integration, API usage,
-            and building on GalaChain.
-          </p>
-        </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">🛡️</div>
-          <h3 class="learning-title">Security Best Practices</h3>
-          <div class="learning-topics">5 topics</div>
-          <p class="learning-description">
-            Wallet security, transaction safety, common pitfalls,
-            and protecting your assets.
-          </p>
-        </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">🌍</div>
-          <h3 class="learning-title">Cross-Chain</h3>
+          <h3 class="learning-title">Beginner foundations</h3>
           <div class="learning-topics">7 topics</div>
-          <p class="learning-description">
-            Bridging fundamentals, multi-chain strategies,
-            and interoperability concepts.
-          </p>
+          <p class="learning-description">Build vocabulary and learn safe read workflows before transaction details.</p>
         </div>
-
-        <div class="learning-card">
-          <div class="learning-icon" aria-hidden="true">🎯</div>
-          <h3 class="learning-title">Advanced Topics</h3>
-          <div class="learning-topics">9 topics</div>
-          <p class="learning-description">
-            Governance, staking mechanics, oracle integration,
-            and protocol internals.
-          </p>
+        <div class="learning-card" data-topic-keys="token-details,token-identification,buy-tokens,sell-tokens,trading-quotes,trading-analytics,pool-graduation,graduation-detection,token-status,dex-token-discovery,fetch-dex-pools,dex-trading,queued-swap-recovery,error-handling,trade-history,recent-trades">
+          <div class="learning-icon" aria-hidden="true">💰</div>
+          <h3 class="learning-title">Trading and token lifecycle</h3>
+          <div class="learning-topics">16 topics</div>
+          <p class="learning-description">Follow a token from Launchpad identity through its possible transition to DEX trading.</p>
         </div>
-
-        <div class="learning-card">
+        <div class="learning-card" data-topic-keys="dex-token-discovery,fetch-dex-pools,spot-prices-smart-routing,advanced-dex-analysis,dex-trading,queued-swap-recovery,liquidity-positions,fetch-current-dex-season,fetch-all-dex-seasons,fetch-current-dex-leaderboard,fetch-dex-leaderboard-by-season-id,fetch-dex-aggregated-volume-summary,weekly-challenge">
+          <div class="learning-icon" aria-hidden="true">📊</div>
+          <h3 class="learning-title">DEX, liquidity, and analytics</h3>
+          <div class="learning-topics">13 topics</div>
+          <p class="learning-description">Explore markets, swaps, liquidity positions, and DEX activity data.</p>
+        </div>
+        <div class="learning-card" data-topic-keys="restricted-names,token-creation,token-details,token-status,fetch-pools,token-distribution,holders,balances,transfers,locks,pool-graduation,graduation-detection,dex-trading">
+          <div class="learning-icon" aria-hidden="true">🔧</div>
+          <h3 class="learning-title">Create and operate a token</h3>
+          <div class="learning-topics">13 topics</div>
+          <p class="learning-description">Connect launch validation with token discovery, ownership, movement, and graduation.</p>
+        </div>
+        <div class="learning-card" data-topic-keys="bridge-operations,wrap-unwrap-operations,wallet-connect,error-handling">
+          <div class="learning-icon" aria-hidden="true">🌍</div>
+          <h3 class="learning-title">Bridge and cross-network flows</h3>
+          <div class="learning-topics">4 topics</div>
+          <p class="learning-description">Understand routes, wrapping, signer requirements, and status tracking.</p>
+        </div>
+        <div class="learning-card" data-topic-keys="streaming,gdex-stream,stream-chat,chat-messages,messages,comments,content-reactions,content-flag-management,ban-management,token-ban-management,global-bans,moderator-invites,ai-moderation,global-feed-subscription">
           <div class="learning-icon" aria-hidden="true">🎮</div>
-          <h3 class="learning-title">Gaming Integration</h3>
-          <div class="learning-topics">6 topics</div>
-          <p class="learning-description">
-            NFT gaming assets, in-game economies, Gala Games integration,
-            and play-to-earn mechanics.
-          </p>
+          <h3 class="learning-title">Streaming and community features</h3>
+          <div class="learning-topics">14 topics</div>
+          <p class="learning-description">Combine realtime updates with chat, community content, and moderation workflows.</p>
+        </div>
+        <div class="learning-card" data-topic-keys="mcp-to-sdk-mapping,multi-wallet,session-auth,event-subscriptions,notifications,events-tracking,api-key-management,websocket-admin,platform-stats,oembed,referral-system,nft-collection-management,utilities-and-helpers,utilities-system,local-calculations">
+          <div class="learning-icon" aria-hidden="true">🧩</div>
+          <h3 class="learning-title">Application integration and advanced topics</h3>
+          <div class="learning-topics">15 topics</div>
+          <p class="learning-description">Connect identity, events, and platform capabilities to application needs.</p>
         </div>
       </div>
     </div>
@@ -1811,6 +1890,60 @@
       }
     });
 
+    // ============================================
+    // GENERATED SDK DATA
+    // ============================================
+    async function loadGeneratedDocs() {
+      try {
+        const [sdkResponse, topicsResponse] = await Promise.all([
+          fetch('./docs/sdk/ai-docs.generated.json'),
+          fetch('./docs/sdk/explain-sdk-usage-ai.generated.json')
+        ]);
+        if (!sdkResponse.ok || !topicsResponse.ok) return;
+        const [sdkDocs, teachingDocs] = await Promise.all([sdkResponse.json(), topicsResponse.json()]);
+        const topicKeys = new Set(Object.keys(teachingDocs.topics || {}));
+        const pathCards = [...document.querySelectorAll('.learning-card[data-topic-keys]')];
+        const pathTopics = pathCards.map(card => card.dataset.topicKeys.split(',').filter(Boolean));
+        if (!sdkDocs.meta || !sdkDocs.categories || !teachingDocs.topics ||
+            pathTopics.some(topics => topics.some(topic => !topicKeys.has(topic)))) return;
+
+        const statTargets = document.querySelectorAll('.stat-number[data-target]');
+        const statValues = [sdkDocs.meta.toolCount, sdkDocs.meta.categoryCount, topicKeys.size, pathCards.length];
+        statValues.forEach((value, index) => {
+          if (Number.isFinite(value) && statTargets[index]) {
+            statTargets[index].dataset.target = value;
+            if (statTargets[index].textContent === '0' || statTargets[index].textContent === '323' ||
+                statTargets[index].textContent === '41' || statTargets[index].textContent === '69' ||
+                statTargets[index].textContent === '7') statTargets[index].textContent = value;
+          }
+        });
+        const heroValues = { tools: statValues[0], categories: statValues[1], topics: statValues[2], paths: statValues[3] };
+        document.querySelectorAll('.hero-stat-number[data-stat-key]').forEach(number => {
+          const value = heroValues[number.dataset.statKey];
+          if (Number.isFinite(value)) number.textContent = value;
+        });
+
+        document.querySelectorAll('.feature-count[data-category-key]').forEach(count => {
+          const category = sdkDocs.categories[count.dataset.categoryKey];
+          if (category && Number.isFinite(category.count)) count.textContent = `${category.count} tools`;
+        });
+        const learningCount = document.querySelector('[data-topic-count]');
+        if (learningCount) learningCount.textContent = `${topicKeys.size} topics`;
+        pathCards.forEach((card, index) => {
+          const count = card.querySelector('.learning-topics');
+          if (count) count.textContent = `${pathTopics[index].length} topics`;
+        });
+        document.querySelectorAll('.category-chip[data-category-key]').forEach(chip => {
+          const category = sdkDocs.categories[chip.dataset.categoryKey];
+          const count = chip.querySelector('.category-count');
+          if (category && count && Number.isFinite(category.count)) count.textContent = category.count;
+        });
+        const version = document.getElementById('sdk-version');
+        if (version && sdkDocs.meta.version) version.textContent = `Docs for launchpad-sdk ${sdkDocs.meta.version}`;
+      } catch (_) {
+        // Keep the complete static HTML fallback when generated docs are unavailable.
+      }
+    }
     // ============================================
     // ANIMATED COUNTERS
     // ============================================
@@ -1948,7 +2081,8 @@
     // ============================================
     // INITIALIZE
     // ============================================
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadGeneratedDocs();
       animateCounters();
     });
   </script>
