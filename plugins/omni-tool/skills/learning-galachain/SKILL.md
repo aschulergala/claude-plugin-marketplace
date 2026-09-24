@@ -1,6 +1,6 @@
 ---
 name: learning-galachain
-description: Comprehensive learning system for GalaChain development with 63 topics and 312 SDK methods
+description: Learn to build on GalaChain with the v7 SDK and indexed topics
 triggers:
   - "How do I learn GalaChain?"
   - "Teach me about GalaChain"
@@ -11,390 +11,224 @@ triggers:
   - "What are all the things I can do?"
 ---
 
-# Learning GalaChain: Comprehensive Developer Guide
-
-Welcome! This skill teaches you everything about GalaChain development using our built-in teaching system.
-
-## What You'll Learn
-
-The GalaChain OmniTool includes **63 carefully organized teaching topics** covering:
+# Learning GalaChain
 
-- **Trading**: Buying, selling, graduation, analytics, error handling
-- **Pools & Info**: Pool discovery, token details, price history, distribution
-- **Balances**: Balance queries, profiles, account management
-- **Token Operations**: Creating, status, transfers, locks
-- **DEX**: Swaps, token discovery, pool analysis, liquidity positions
-- **DEX Analytics**: Seasons, leaderboards, volume summaries
-- **Bridging**: Cross-chain operations, token wrapping
-- **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat
-- **Community**: Bans, content flags, reactions, moderators, token bans, AI moderation
-- **Governance**: Overseers, API keys, event subscriptions, restricted names, WebSocket admin
-- **Wallet & Auth**: Multi-wallet, JWT sessions
-- **Utilities**: Installation, helpers, system utils, MCP mapping, platform stats, OEmbed
-- **Streaming & Chat**: RTMP, recordings, simulcast, real-time chat, unified messages
-- **Pools & Token Info**: Pool discovery, token details, price history, distribution, holders
-- **DEX Analytics**: Seasons, leaderboards, volume summaries, weekly challenges
-- **And more**: 312 SDK methods fully documented
+This skill uses `gala_launchpad_explain_sdk_usage` to teach from current v7 SDK examples, matching MCP tools, pitfalls, and related material. The live tool's `topic` enum is the source of truth. `/omni-tool:topics` is a convenient local index of 69 topics, not a substitute for the live enum; honor exact live values if the server has changed.
 
-## The Teaching System
+## How a topic lesson works
 
-### How It Works
+Ask the teaching tool for the closest exact topic. Build the answer around:
 
-1. **Fetch Content** - Call `gala_launchpad_explain_sdk_usage` with a topic name
-2. **Get Examples** - Receive TypeScript code examples for that topic
-3. **Learn at Your Level** - Content adapted to your personality preference
-4. **Execute Safely** - Use MCP tools to practice what you learned
-5. **Build Confidence** - Move from concepts to real applications
+1. **Concept:** what the capability does and the problem it solves.
+2. **Use case:** when it fits, with any prerequisites.
+3. **Steps:** a small ordered workflow.
+4. **v7 example:** the returned SDK example and its corresponding MCP tool names.
+5. **Parameters and trade-offs:** values that affect outcome, cost, or risk.
+6. **Pitfalls:** version-specific behavior, common mistakes, and recovery.
+7. **Next topics:** relevant exact values from the live enum.
 
-### The 63 Topics
+Adapt the depth to the selected personality. Tutor defines terms and progresses gradually; expert focuses on decisions and edge cases; pragmatist shows a useful implementation path; Socratic guides discovery with focused questions. If the MCP teaching tool is missing, stop calling it, state that live examples are unavailable, and point to `/omni-tool:setup`.
 
-All topics are accessible via `/omni-tool:ask [topic]`:
+## Learning paths
 
-**See topics list**: `/omni-tool:topics`
+Treat these sequences as guided routes rather than prerequisites. The user can skip a topic when they already know the concept. Briefly explain why the next topic follows from the previous one, and use the live topic output for exact examples.
 
-Each topic includes:
-- Concept explanation
-- Step-by-step guide
-- Code examples
-- MCP tool equivalents
-- Common mistakes to avoid
-- Related topics for deeper learning
+Each sequence below uses only topic names in the v7 local index. Follow the live enum if a connected server has newer topics.
 
-## Learning Paths
+### Path 1: Beginner foundations
 
-### 🏪 Path 1: Trading Essentials
+Build vocabulary and learn safe read workflows before transaction details. By the end, the learner should be able to explain network selection, identify whether an operation needs a signer, and find canonical token data.
 
-Learn to buy, sell, and manage tokens on bonding curves and DEX.
+Build a mental model before attempting a write:
 
-1. **Token Basics** - `/omni-tool:ask token-details`
-   - What tokens are
-   - How to verify them
-   - Metadata importance
+1. `installation` — connect to the v7 server and understand `prod` versus `stage`.
+2. `wallet-connect` — learn read-only versus signer-backed behavior.
+3. `token-identification` — distinguish a Launchpad token name from a full DEX identifier.
+4. `token-details` — inspect canonical token information.
+5. `fetch-pools` — browse Launchpad pools and token listings.
+6. `balances` — understand balance reads and address context.
+7. `error-handling` — learn how to diagnose failures and recover safely.
 
-2. **Buying Tokens** - `/omni-tool:ask buy-tokens`
-   - Bonding curve mechanics
-   - Purchase process
-   - Price calculation
+Practice the read topics first. A configured wallet mode in preferences does not grant signing access; writes require `PRIVATE_KEY` in the MCP process environment.
 
-3. **Selling Tokens** - `/omni-tool:ask sell-tokens`
-   - Exit strategies
-   - Fee implications
-   - Timing considerations
-
-4. **Trading Analytics** - `/omni-tool:ask trading-analytics`
-   - Analyze trade history
-   - Metrics and trends
-   - Performance tracking
+### Path 2: Trading and token lifecycle
 
-5. **Graduation** - `/omni-tool:ask pool-graduation`
-   - Move from bonding curve to DEX
-   - Preparation steps
-   - What happens after graduation
+Follow the token from its Launchpad identity through a possible DEX transition. The key checkpoint is recognizing that graduation changes both the trading surface and the identifier format.
 
-### 💰 Path 2: Liquidity Management
-
-Become an LP (liquidity provider) and earn trading fees.
+Understand how the trading surface changes with token state:
 
-1. **DEX Pool Discovery** - `/omni-tool:ask fetch-dex-pools`
-   - Find DEX pools
-   - Filter and sort options
-   - Risk assessment
+1. `token-details` → `token-identification` for identity and metadata.
+2. `buy-tokens` → `sell-tokens` for bonding-curve execution.
+3. `trading-quotes` → `trading-analytics` for estimation and context.
+4. `pool-graduation` → `graduation-detection` → `token-status` to detect lifecycle changes.
+5. `dex-token-discovery` → `fetch-dex-pools` → `dex-trading` after graduation.
+6. `queued-swap-recovery` → `error-handling` for interrupted DEX confirmation.
+7. `trade-history` → `recent-trades` to explore activity records.
 
-2. **LP Positions** - `/omni-tool:ask liquidity-positions`
-   - Concentrated liquidity strategy
-   - Position management
-   - Adding and removing liquidity
-
-3. **Advanced Analysis** - `/omni-tool:ask advanced-dex-analysis`
-   - Composite pool data
-   - Deep analytics
-   - Strategy optimization
-
-4. **Seasonal Analytics** - `/omni-tool:ask fetch-all-dex-seasons`
-   - DEX season data
-   - Leaderboard tracking
-   - Volume trends
+Trade-off to understand: bonding-curve methods use the simple token name; DEX methods use a full `TokenClassKey`. Quotes, fees, and slippage bounds matter, and a queued swap is not complete until confirmation resolves.
 
-### 🔄 Path 3: DEX Swapping
-
-Trade tokens on the decentralized exchange.
+### Path 3: DEX, liquidity, and analytics
 
-1. **Token Discovery** - `/omni-tool:ask dex-token-discovery`
-   - Find tradeable tokens
-   - Check liquidity
-   - Verify trading pairs
+Start from market discovery, then compare swaps, position management, and activity data. Learners should be able to separate a quote from a submitted trade and describe what an LP range means.
 
-2. **DEX Trading** - `/omni-tool:ask dex-trading`
-   - Execute swaps (exact input and output)
-   - Get swap quotes
-   - Manage slippage
-
-3. **Price Routing** - `/omni-tool:ask spot-prices-smart-routing`
-   - Spot prices
-   - Smart routing
-   - Optimal execution
-
-### 🌉 Path 4: Bridging & Cross-Chain
-
-Move tokens between GalaChain and other blockchains.
-
-1. **Bridge Operations** - `/omni-tool:ask bridge-operations`
-   - Bridge to Ethereum and Solana
-   - Estimate fees
-   - Track bridge status
-   - Supported tokens and networks
+Learn discovery before managing positions:
 
-2. **Token Wrapping** - `/omni-tool:ask wrap-unwrap-operations`
-   - Cross-channel wrapping
-   - Wrap/unwrap fees
-   - Wrappable token discovery
-
-### 📡 Path 5: Streaming & Community
-
-Build a streaming community with chat and moderation.
-
-1. **Start Streaming** - `/omni-tool:ask streaming`
-   - RTMP setup and stream keys
-   - Start/stop operations
-   - Recordings and VODs
-   - Simulcast to multiple platforms
-
-2. **Live Chat** - `/omni-tool:ask stream-chat`
-   - REST API for history
-   - WebSocket for real-time
-   - Chat status and engagement
-
-3. **Ban Management** - `/omni-tool:ask ban-management`
-   - Ban/unban users
-   - List and check bans
-   - Active user tracking
-
-4. **Content Moderation** - `/omni-tool:ask content-flag-management`
-   - Flag inappropriate content
-   - Review and action flags
-   - Global flag management
-
-5. **Moderator Team** - `/omni-tool:ask moderator-invites`
-   - Invite moderators
-   - Role assignment
-   - Invite management
-
-### 🎫 Path 6: Token Creation
-
-Launch your own token with bonding curves.
-
-1. **Create Token** - `/omni-tool:ask token-creation`
-   - Token parameters
-   - Bonding curve configuration
-   - Initial setup
-
-2. **Token Status** - `/omni-tool:ask token-status`
-   - Check graduation status
-   - Monitor supply
-   - Track events
-
-3. **Token Distribution** - `/omni-tool:ask token-distribution`
-   - Analyze who owns what
-   - Holder context
-   - Distribution health
-
-4. **Price History** - `/omni-tool:ask price-history`
-   - Historical data access
-   - Charting data
-   - Analytics
-
-5. **Token Graduation** - `/omni-tool:ask pool-graduation`
-   - Transition to DEX
-   - Graduation detection
-   - Next steps after graduation
-
-### ⚡ Path 7: Advanced Features
-
-Expert-level capabilities for sophisticated applications.
-
-1. **NFT Collections** - `/omni-tool:ask nft-collection-management`
-   - Create collections
-   - Mint NFTs
-   - Manage inventory
-
-2. **Token Wrapping** - `/omni-tool:ask wrap-unwrap-operations`
-   - Cross-channel wrapping
-   - Fee estimation
-   - Wrappable token discovery
-
-3. **API Management** - `/omni-tool:ask api-key-management`
-   - Create API credentials
-   - Secure storage
-   - Rotation policies
-
-4. **Event Monitoring** - `/omni-tool:ask event-subscriptions`
-   - Real-time subscriptions
-   - Event filtering
-   - Event-driven architecture
-
-5. **Governance** - `/omni-tool:ask overseer-invites`
-   - Platform-wide controls
-   - Oversight functions
-   - Admin operations
-
-### 👑 Path 8: Mastery
-
-Complete all 63 topics and build a sophisticated application.
-
-Recommended order:
-1. Complete Path 1: Trading Essentials
-2. Complete Path 2: Liquidity Management
-3. Complete Path 3: DEX Swapping
-4. Complete Path 4: Bridging
-5. Complete Path 5: Streaming
-6. Complete Path 6: Token Creation
-7. Complete Path 7: Advanced Features
-8. **Build your project** combining multiple paths
-
-## Quick Reference: Common Scenarios
-
-### "I want to trade"
-```
-1. /omni-tool:ask token-details
-2. /omni-tool:ask buy-tokens
-3. /omni-tool:ask sell-tokens
-4. Start trading with confidence!
-```
-
-### "I want to be an LP and earn fees"
-```
-1. /omni-tool:ask fetch-dex-pools
-2. /omni-tool:ask liquidity-positions
-3. /omni-tool:ask advanced-dex-analysis
-```
-
-### "I want to create a token"
-```
-1. /omni-tool:ask token-creation
-2. /omni-tool:ask token-details
-3. /omni-tool:ask token-distribution (to track distribution)
-4. /omni-tool:ask pool-graduation (next phase)
-```
-
-### "I want to stream with chat"
-```
-1. /omni-tool:ask streaming
-2. /omni-tool:ask stream-chat
-3. /omni-tool:ask ban-management
-4. /omni-tool:ask moderator-invites
-```
-
-### "I want to bridge tokens to Ethereum"
-```
-1. /omni-tool:ask bridge-operations
-2. /omni-tool:ask wrap-unwrap-operations
-```
-
-## How to Learn Effectively
-
-### Do This
-
-1. **Follow learning paths** - Concepts build on each other
-2. **Ask one topic at a time** - Deep understanding beats breadth
-3. **Practice what you learn** - Use MCP tools to execute operations
-4. **Start small** - Small amounts before large positions
-5. **Experiment** - Try different strategies and observe results
-6. **Ask follow-up questions** - Each response suggests related topics
-7. **Build projects** - Combine topics into complete applications
-
-### Avoid This
-
-1. **Jumping around randomly** - Learn dependencies first
-2. **Large trades without practice** - Start small, scale up
-3. **Ignoring error messages** - Errors teach you important lessons
-4. **Skipping documentation** - The teaching system is your friend
-5. **Trying advanced topics first** - Build foundations first
-6. **Not verifying assumptions** - Always check before large operations
-
-## The MCP Tool Equivalence
-
-For every topic, we show you:
-
-1. **SDK code** - TypeScript examples using the SDK
-2. **MCP tool** - Equivalent command using the 312-tool MCP server
-
-Example for "buy-tokens":
-```typescript
-// SDK approach
-const result = await sdk.buyTokens({
-  tokenName: 'anime',
-  amount: '100',
-  type: 'native'
-});
-
-// MCP tool equivalent
-gala_launchpad_buy_tokens tokenName=anime amount=100 type=native
-```
-
-This dual approach helps you understand:
-- SDK is for building applications
-- MCP tools are for one-off operations or Claude interactions
-- They're equivalent - choose based on your use case
-
-## Configuration for Your Learning
-
-Customize the learning system:
-
-```bash
-# Set your personality preference
-/omni-tool:setup --personality=tutor
-
-# Or run full setup wizard
-/omni-tool:setup
-```
-
-Options:
-- **Tutor**: Patient, thorough, best for beginners
-- **Expert**: Fast, direct, best for experienced traders
-- **Pragmatist**: Balanced, practical approach
-- **Socratic**: Questions first, discovery-focused
-
-## Resources Available
-
-### Commands
-- `/omni-tool:ask [topic]` - Learn about any topic
-- `/omni-tool:topics` - Browse all 63 topics
-- `/omni-tool:setup` - Configure your preferences
-
-### Agent
-- `galachain-builder` - Ask the agent for help building apps
-
-### Teaching Content
-- 63 comprehensive topics
-- 312 SDK methods documented
-- Hundreds of code examples
-- 312 MCP tools available
-
-## Next Steps
-
-1. **Pick a learning path** that matches your goals
-2. **Ask the first topic**: `/omni-tool:ask [topic-name]`
-3. **Explore related topics** as suggested
-4. **Practice with MCP tools** to build confidence
-5. **Build your first project** combining multiple concepts
-6. **Master all 63 topics** and become a GalaChain expert
-
-## Pro Tips
-
-- **Mix learning and doing** - Read 5 minutes, practice 10 minutes
-- **Use the agent** - Ask `galachain-builder` for guidance
-- **Start with what interests you** - Motivation is fuel
-- **Join the community** - Share what you build
-- **Revisit basics** - Solid foundations enable advanced work
-- **Automate with MCP** - Use MCP tools for repetitive tasks
-
----
-
-**Ready to start?**
-
-Pick your first topic and run:
-```bash
-/omni-tool:ask [your-chosen-topic]
-```
-
-Let's build the future of GalaChain together! 🚀
+1. `dex-token-discovery` and `fetch-dex-pools` to find markets.
+2. `spot-prices-smart-routing` and `advanced-dex-analysis` to evaluate price and pool context.
+3. `dex-trading` and `queued-swap-recovery` for swap and recovery flow.
+4. `liquidity-positions` for position reads and liquidity operations.
+5. `fetch-current-dex-season`, `fetch-all-dex-seasons`, and `fetch-current-dex-leaderboard` for current DEX programs.
+6. `fetch-dex-leaderboard-by-season-id`, `fetch-dex-aggregated-volume-summary`, and `weekly-challenge` for historical or challenge data.
+
+Liquidity has price-range and inventory risks. Compare position behavior and possible fee outcomes; never equate potential fees with guaranteed return. Use `confirm()` for queued swap outcomes and `confirmSwap(uniqueKey)` to recover the same submission rather than resubmitting.
+
+### Path 4: Create and operate a token
+
+Connect the launch checklist to the information and operations users need afterward. Review what is validated before launch, what is read after launch, and which actions can change balances or supply.
+
+1. `restricted-names` for name constraints.
+2. `token-creation` for validation, launch fee, image, and creation flow.
+3. `token-details`, `token-status`, and `fetch-pools` for discovery and status.
+4. `token-distribution`, `holders`, and `balances` for ownership views.
+5. `transfers` and `locks` for token movement and lock workflows.
+6. `pool-graduation`, `graduation-detection`, and `dex-trading` for the post-graduation path.
+
+Name and symbol checks can become stale before a write. Explain signing requirements and validate the target network. Burn, transfer, and graduation operations may have consequential effects; use the live topic and explicit confirmation.
+
+### Path 5: Bridge and cross-network flows
+
+Learn the route and status model before configuring signers or submitting anything. The learner should be able to restate the complete source-to-destination path and explain how they will check status.
+
+1. `bridge-operations` for routes, fees, and status.
+2. `wrap-unwrap-operations` for channel wrapping behavior.
+3. `wallet-connect` and `error-handling` for signer and failure context.
+
+A bridge and a wrap are different workflows. For Solana bridging, the server may require `SOLANA_PRIVATE_KEY`; `ETHEREUM_RPC_URL` and `SOLANA_RPC_URL` are optional bridge RPC overrides. Keys belong in the MCP process environment, never in this skill or the plugin preferences. Explain asset, source, destination, fee, and status tracking before a user signs.
+
+### Path 6: Streaming and community features
+
+Combine realtime updates with moderation and content workflows while keeping permissions visible. Compare when a one-time read is enough with when an event subscription is useful.
+
+1. `streaming` and `gdex-stream` for stream lifecycle and realtime stream events.
+2. `stream-chat`, `chat-messages`, and `messages` for chat and message flows.
+3. `comments`, `content-reactions`, and `content-flag-management` for community content.
+4. `ban-management`, `token-ban-management`, `global-bans`, and `moderator-invites` for moderation.
+5. `ai-moderation` and `global-feed-subscription` for moderation configuration and platform events.
+
+Separate user-facing operations from moderator or administrative capabilities. Check authorization requirements in the live topic before suggesting a write.
+
+### Path 7: Application integration and advanced topics
+
+Use this path when the core workflow is clear and the application needs identity, events, or privileged capabilities. Keep administrative capabilities behind the correct role and make the data source visible in the design.
+
+1. `mcp-to-sdk-mapping` to understand tool-to-method mapping.
+2. `multi-wallet` and `session-auth` for account and session patterns.
+3. `event-subscriptions`, `notifications`, and `events-tracking` for event-driven features.
+4. `api-key-management` and `websocket-admin` for privileged integration needs.
+5. `platform-stats`, `oembed`, `referral-system`, and `nft-collection-management` for adjacent platform features.
+6. `utilities-and-helpers`, `utilities-system`, and `local-calculations` for supporting functionality.
+
+Administrative topics can require elevated access. Confirm the user's intended authority and consult the current topic before proposing execution.
+
+## Checkpoints along the paths
+
+Use a small checkpoint after each cluster so the learner connects topics instead of collecting names:
+
+- **Foundations:** can they tell which information is safe to read without a signer and which action would require signing?
+- **Trading:** can they tell whether a token is on the bonding curve or DEX, and which identifier each path expects?
+- **Liquidity:** can they explain how a price range changes a position and name the uncertainty around fee outcomes?
+- **Token operation:** can they state which values need validating before launch, transfer, lock, or graduation?
+- **Bridge:** can they identify both networks, the asset, signer needs, fee, and status path?
+- **Community:** can they distinguish a user-facing action from a moderation or administrator action?
+- **Integration:** can they explain what event or identity data the application needs and which topics supply it?
+
+If the learner is unsure, fetch the next relevant topic and narrow the question rather than jumping to a write example.
+
+## Topic-specific study prompts
+
+Use these questions to turn a path into active learning:
+
+- **Foundations:** Which calls need a signer, and what does the selected network mean for the result?
+- **Trading:** Which identifier and trading surface apply to this token now? What proves that the operation finished?
+- **Liquidity:** What changes when the price leaves a position's range? Which data can be observed before submitting a change?
+- **Token operation:** Which launch values are checked in advance, and which can still fail when submitted?
+- **Bridge:** What identifies the source and destination asset, and how will status be checked afterward?
+- **Community:** Which role is allowed to moderate, and how should the app explain that boundary?
+- **Integration:** Does the app need a one-time read, a stream of updates, or both?
+
+The live topic answer should resolve implementation details; these prompts help the learner understand what to look for.
+
+## Practice and review
+
+After each lesson, ask the learner to summarize the next decision or identify which prerequisite they still need. For example, before a DEX trade, check that they understand the full token identifier, quote limits, queued submission, and recovery key. Before bridging, check that source, destination, asset, signer, and tracking are all clear.
+
+A practice sequence should make progress visible without requiring a real write: inspect data, explain the intended operation, review the live example, then decide whether the user actually wants to submit. If the environment or signer is unknown, ask or explain the dependency rather than assuming.
+
+## v7 behavior to keep in mind
+
+Launchpad SDK methods are flat on the SDK. GSwap DEX operations live in namespaces such as `sdk.dex.quoting`, `sdk.dex.swaps`, and `sdk.dex.positions`. Use examples returned by the live teaching topic for exact code and response handling; do not invent method signatures or revive removed flat DEX methods.
+
+For GSwap, `swap()` queues a submission. Call `confirm()` to resolve it. If the process stops or confirmation times out, `queued-swap-recovery` documents how to find the result using the original `uniqueKey`; never create another swap only because the first confirmation was interrupted.
+
+## Topic answer structure
+
+For every lesson, keep the response useful on its own: begin with the concept and use case, then prerequisites and ordered steps. Include an exact live SDK example when requested, name equivalent MCP tools, explain key parameters, and call out pitfalls or recovery. Finish with a small set of related topics. This lets learners use `/omni-tool:ask` as a focused lesson without needing to read the entire skill.
+
+## Project-based practice
+
+When the learner has a concrete project, choose the smallest path that answers the next product question:
+
+- A token detail page can combine `token-details`, `token-identification`, and `fetch-pools` before any signer is introduced.
+- A trade preview can combine `trading-quotes`, `balances`, and `error-handling`, then add writes only after the user understands the expected outcome.
+- A DEX status screen can combine `fetch-dex-pools`, `liquidity-positions`, and `queued-swap-recovery` to represent both positions and pending outcomes.
+- A bridge tracker can focus on `bridge-operations` and status updates without starting a transfer.
+- A live community page can combine `streaming`, `stream-chat`, `comments`, and `notifications` according to the events it must show.
+
+Keep the boundary between a teaching example and a production-ready application clear. The live topic provides a method example; product code still needs validation, state management, error display, and appropriate access controls.
+
+## Learning progress
+
+The paths can be combined for a project. A token application can follow foundations, token operation, then trading. A market dashboard can follow foundations and DEX analytics without enabling writes. A community application can focus on streaming and integration topics. Let the user choose based on the feature they want to understand; there is no requirement to finish every path.
+
+At the end of a lesson, suggest one useful next topic and explain why it follows. Keep the recommendation within the live enum, and don't claim the local index is exhaustive if the server exposes newer values.
+
+## Answer depth by learner stage
+
+- **New to GalaChain,** define terms, explain one operation at a time, and prefer reads or `stage`.
+- **Building an application:** connect the topic to user experience, data flow, and failure handling.
+- **Experienced integrator:** focus on exact live signatures, identity formats, queued state, and operational trade-offs.
+
+Keep the same accurate network and security guidance at every level. A shorter expert answer still needs the important failure behavior.
+
+## Short guided labs
+
+Use these read-first exercises to apply what the topic taught:
+
+1. **Token viewer:** combine `fetch-pools`, `token-details`, and `token-identification`; display the canonical identifier and basic state.
+2. **Trade preview:** combine `trading-quotes`, `balances`, and `error-handling`; show the expected result and explain why a preview is not execution.
+3. **DEX recovery plan:** combine `dex-trading` and `queued-swap-recovery`; describe confirmation and how to look up the original submission after interruption.
+4. **Bridge status page:** combine `bridge-operations` and `notifications`; present route and status without initiating a bridge.
+5. **Community panel:** combine `stream-chat`, `chat-messages`, and `content-flag-management`; distinguish reading conversation from moderation actions.
+
+Ask the learner to explain one design choice after each lab. Extend the exercise only after they understand its data, signer, and failure boundaries.
+
+## Revisit and connect topics
+
+When a learner returns to a workflow, recap only the relevant context: current token state, chosen network, signer availability, and the last confirmed result. Then select the next topic from the path. This avoids teaching an operation as if earlier steps had succeeded when they may not have.
+
+Use related topics to answer specific gaps. For example, pair `error-handling` with a failed operation, `token-identification` with an identifier mismatch, and `queued-swap-recovery` with an uncertain DEX result. Prefer the closest current topic over repeating a general tutorial.
+
+## Learn safely
+
+- Start with reads and `stage` for experimentation.
+- `prod` is the real network; say so before a consequential operation.
+- The server defaults to `prod` when `ENVIRONMENT` is unset and accepts only `prod` or `stage`.
+- Without `PRIVATE_KEY`, the server is read-only. Never ask users to paste their key into chat.
+- If the key is configured in `~/.claude.json`, warn that the file contains a secret and should not be committed or shared.
+- Explain the effect of each write and wait for the user's explicit intent before running it.
+
+## Commands
+
+- `/omni-tool:ask [question or topic]` fetches a focused live lesson.
+- `/omni-tool:topics` browses the local topic index; the server enum remains authoritative.
+- `/omni-tool:setup` configures the MCP connection and teaching preferences.

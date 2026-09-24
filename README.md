@@ -10,25 +10,17 @@ claude plugins add omni-tool
 
 ## Features
 
-- **310 MCP Tools** - Comprehensive GalaChain operations
-- **38 Categories** - Trading, liquidity, bridging, and more
-- **63 Teaching Topics** - AI-powered learning
-- **8 Learning Paths** - Structured skill development
+- **323 MCP tools** for GalaChain operations
+- **69 teaching topics** indexed for the v7 SDK
+- **8 learning paths** for structured learning
 
-## Categories
-
-| Category | Tools | Description |
-|----------|-------|-------------|
-| Trading | 20+ | Buy, sell, track tokens |
-| Liquidity | 15+ | DEX pools, fee collection |
-| Bridging | 18+ | Cross-chain operations |
-| Learning | 63 topics | AI-powered tutoring |
+**Version 2.0.0 requires `@gala-chain/launchpad-mcp-server` 7.x.** The supported environments are `prod` (real GalaChain mainnet) and `stage` (test network).
 
 ## Links
 
 - [Landing Page](https://aschulergala.github.io/claude-plugin-marketplace/)
 - [Plugin Manifest](https://aschulergala.github.io/claude-plugin-marketplace/marketplace.json)
-- [GitHub](https://github.com/aschulergala/claude-plugin-marketplace) 🐙
+- [GitHub](https://github.com/aschulergala/claude-plugin-marketplace)
 - [Gala Games](https://gala.com)
 
 ## License

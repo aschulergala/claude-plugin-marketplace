@@ -1,306 +1,219 @@
 ---
 name: omni-tool:topics
-description: List all 63 teaching topics organized by category
+description: Browse the local index of 69 GalaChain SDK topics
 arguments:
   - name: category
-    description: "Filter by category (trading, pools, balances, token-ops, dex, dex-pools, dex-analytics, bridge, streaming, community, governance, wallet, utils, referrals, trades, nft, or 'all'). Includes messages, holders, restricted-names, websocket-admin, platform-stats, oembed, ai-moderation, weekly-challenge, events-tracking, trading-quotes, global-bans, global-feed-subscription, recent-trades."
+    description: "Optional topic category; omit to show all categories"
     required: false
   - name: format
-    description: "Output format: list (default), detailed, or tree"
+    description: "Output format: list, detailed, or tree"
     required: false
 ---
 
-# GalaChain Topics Command
+# GalaChain Topics
 
-Browse all 63 teaching topics organized by domain. Each topic includes:
-- **Description** - What this feature does
-- **Difficulty** - Beginner, intermediate, or advanced
-- **Prerequisites** - Recommended topics to learn first
-- **MCP Tools** - Number of available MCP tools for this topic
+Browse the local index of 69 v7 learning topics by category, learning path, or use case. Use `gala_launchpad_explain_sdk_usage` for current content. Its `topic` enum is the live source of truth: honor exact values from the connected server, including topics added after this file was published.
 
 ## Usage
 
-```bash
-# List all topics
+```text
 /omni-tool:topics
-
-# Filter by category
 /omni-tool:topics trading
-/omni-tool:topics dex-pools
-/omni-tool:topics bridge
-
-# Different formats
-/omni-tool:topics --format=detailed
+/omni-tool:topics dex --format=detailed
 /omni-tool:topics --format=tree
-/omni-tool:topics trading --format=detailed
 ```
 
-## All Topics by Category
+`list` is the compact default, `detailed` adds descriptions and related topics, and `tree` groups the full index. If the caller cannot filter locally, show the requested section and direct the user to the live enum for newer entries.
 
-### 🏪 Trading (7 topics)
+## Topics by category
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `buy-tokens` | Beginner | Purchase tokens on bonding curves | 2 |
-| `sell-tokens` | Beginner | Sell tokens on bonding curves | 2 |
-| `pool-graduation` | Intermediate | Transition from bonding curve to DEX | 2 |
-| `error-handling` | Intermediate | Error recovery patterns | 1 |
-| `local-calculations` | Intermediate | Local computation methods | 4 |
-| `trading-analytics` | Beginner | Trading analytics and metrics | 2 |
-| `trading-quotes` | Intermediate | Buy/sell cost estimation via getTradeQuote() | 4 |
+### AI Moderation
+`ai-moderation`
 
-### 🔍 Pools & Token Info (6 topics)
+### API Keys
+`api-key-management`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `fetch-pools` | Beginner | Query and filter token pools | 9 |
-| `token-details` | Beginner | Token metadata and verification | 1 |
-| `token-distribution` | Beginner | Token holder analysis | 2 |
-| `price-history` | Beginner | Historical price data | 2 |
-| `token-identification` | Intermediate | Token format concepts (tokenName vs tokenClassKey) | 3 |
-| `holders` | Beginner | Token holder lists and distribution | 3 |
+### Authentication
+`session-auth`
 
-### 💰 Balances & Accounts (2 topics)
+### Balances
+`balances`, `profile-management`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `balances` | Beginner | Balance queries and portfolio | 5 |
-| `profile-management` | Beginner | User profile operations | 4 |
+### Bans
+`ban-management`
 
-### 🎫 Token Operations (4 topics)
+### Bridging
+`bridge-operations`, `wrap-unwrap-operations`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `token-creation` | Intermediate | Launch new tokens with bonding curves | 3 |
-| `token-status` | Beginner | Token supply and status | 3 |
-| `transfers` | Beginner | Send tokens to addresses | 2 |
-| `locks` | Intermediate | Lock/unlock tokens | 3 |
+### Chat
+`event-subscriptions`, `gdex-stream`, `global-feed-subscription`, `stream-chat`
 
-### 🔄 DEX Trading (2 topics)
+### Chat Messages
+`chat-messages`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `dex-trading` | Intermediate | DEX swaps and quotes | 6 |
-| `dex-token-discovery` | Beginner | Find tokens trading on DEX | 2 |
+### Comments
+`comments`
 
-### 💧 DEX Pools & Liquidity (3 topics)
+### Content Flags
+`content-flag-management`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `fetch-dex-pools` | Beginner | DEX pool discovery | 2 |
-| `liquidity-positions` | Advanced | LP position management | - |
-| `advanced-dex-analysis` | Advanced | Advanced pool analysis | 1 |
+### Content Reactions
+`content-reactions`
 
-### 📊 DEX Analytics (6 topics)
+### DEX
+`advanced-dex-analysis`, `dex-trading`, `queued-swap-recovery`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `fetch-all-dex-seasons` | Beginner | All DEX seasons data | 1 |
-| `fetch-current-dex-season` | Beginner | Current season info | 1 |
-| `fetch-dex-leaderboard-by-season-id` | Beginner | Season leaderboards | 1 |
-| `fetch-current-dex-leaderboard` | Beginner | Current leaderboard | 1 |
-| `fetch-dex-aggregated-volume-summary` | Beginner | Volume analytics | 1 |
-| `weekly-challenge` | Beginner | Weekly challenge leaderboards and token history | 3 |
+### DEX Analytics
+`fetch-all-dex-seasons`, `fetch-current-dex-leaderboard`, `fetch-current-dex-season`, `fetch-dex-aggregated-volume-summary`, `fetch-dex-leaderboard-by-season-id`
 
-### 🌉 Bridging (2 topics)
+### DEX Liquidity
+`liquidity-positions`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `bridge-operations` | Intermediate | All bridge operations (Ethereum, Solana, fees, status) | 15 |
-| `wrap-unwrap-operations` | Advanced | Cross-channel token wrapping | 10 |
+### DEX Pools
+`dex-token-discovery`, `fetch-dex-pools`
 
-### 📡 Streaming & Chat (3 topics)
+### Locks
+`locks`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `streaming` | Beginner | RTMP streaming, recordings, simulcast | 14 |
-| `stream-chat` | Beginner | Real-time chat integration (REST + WebSocket) | 7 |
-| `messages` | Intermediate | Unified messages API (fetch, create, update, pin) | 5 |
+### Messages
+`messages`
 
-### 🛡️ Community & Moderation (8 topics)
+### Moderators
+`moderator-invites`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `ban-management` | Intermediate | Ban/unban users | 5 |
-| `global-bans` | Intermediate | Platform-wide ban management | - |
-| `content-flag-management` | Intermediate | Content moderation | 5 |
-| `content-reactions` | Beginner | Reaction management | 6 |
-| `moderator-invites` | Intermediate | Moderator management | 6 |
-| `token-ban-management` | Intermediate | Token-level bans | 5 |
-| `ai-moderation` | Advanced | AI content moderation config and results | 4 |
-| `global-feed-subscription` | Intermediate | Subscribe to platform-wide event feed | 1 |
+### NFTs
+`nft-collection-management`
 
-### ⚡ Governance & Admin (5 topics)
+### Notifications
+`notifications`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `overseer-invites` | Advanced | Platform governance | 8 |
-| `api-key-management` | Beginner | API credentials | 6 |
-| `event-subscriptions` | Advanced | Real-time event monitoring | 4 |
-| `restricted-names` | Advanced | Restricted token name management (admin) | 4 |
-| `websocket-admin` | Advanced | WebSocket admin emit tools | 4 |
+### OEmbed
+`oembed`
 
-### 🔑 Wallet & Auth (2 topics)
+### Overseers
+`global-bans`, `overseer-invites`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `multi-wallet` | Beginner | Multi-wallet management | 1 |
-| `session-auth` | Intermediate | JWT authentication | 8 |
+### Platform Stats
+`platform-stats`
 
-### 🔧 Utilities & Reference (9 topics)
+### Pools
+`fetch-pools`, `holders`, `price-history`, `spot-prices-smart-routing`, `token-creation`, `token-details`, `token-distribution`, `token-identification`, `utilities-and-helpers`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `installation` | Beginner | SDK setup guide | 1 |
-| `spot-prices-smart-routing` | Intermediate | Price routing | 1 |
-| `utilities-and-helpers` | Intermediate | Helper functions | 8 |
-| `utilities-system` | Beginner | System utilities | 8 |
-| `mcp-to-sdk-mapping` | Beginner | MCP-to-SDK method mapping | 1 |
-| `graduation-detection` | Intermediate | Detect token graduation | 4 |
-| `platform-stats` | Beginner | Platform-wide statistics and metrics | 2 |
-| `oembed` | Beginner | OEmbed embeds for pools, profiles, home | 3 |
-| `events-tracking` | Intermediate | SDK event batching and analytics ingestion | - |
+### Referrals
+`referral-system`
 
-### 🎁 Referrals (1 topic)
+### Restricted Names
+`restricted-names`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `referral-system` | Beginner | Referral tracking | 4 |
+### Streaming
+`streaming`
 
-### 📜 Trade History (2 topics)
+### Token Bans
+`token-ban-management`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `trade-history` | Beginner | Trade history queries | 1 |
-| `recent-trades` | Beginner | Recent trade queries across tokens | 2 |
+### Trades
+`recent-trades`, `trade-history`
 
-### 🎨 NFTs (1 topic)
+### Trading
+`buy-tokens`, `error-handling`, `local-calculations`, `mcp-to-sdk-mapping`, `pool-graduation`, `sell-tokens`, `trading-analytics`, `trading-quotes`
 
-| Topic | Difficulty | Description | MCP Tools |
-|-------|-----------|-------------|-----------|
-| `nft-collection-management` | Advanced | NFT collections and minting | 10 |
+### Transfers
+`transfers`
 
-## Learning Paths
+### Utilities
+`events-tracking`, `graduation-detection`, `installation`, `multi-wallet`, `token-status`, `utilities-system`
 
-### Path 1: Token Trading Essentials
-1. Start: `token-details` - Understand what tokens are
-2. Learn: `buy-tokens` - How to purchase
-3. Learn: `sell-tokens` - How to exit
-4. Learn: `trading-analytics` - Analyze trades
-5. Advanced: `pool-graduation` - Move to DEX
+### Wallet
+`wallet-connect`
 
-### Path 2: Liquidity Management
-1. Start: `fetch-dex-pools` - Find DEX pools
-2. Learn: `liquidity-positions` - Add LP positions
-3. Learn: `advanced-dex-analysis` - Analyze pool data
-4. Advanced: `fetch-all-dex-seasons` - Seasonal analytics
+### WebSocket Admin
+`websocket-admin`
 
-### Path 3: DEX Swapping
-1. Start: `dex-token-discovery` - Find tokens
-2. Learn: `dex-trading` - Execute swaps
-3. Advanced: `spot-prices-smart-routing` - Price routing
+### Weekly Challenge
+`weekly-challenge`
 
-### Path 4: Cross-Chain Bridging
-1. Start: `bridge-operations` - Bridge to Ethereum & Solana
-2. Advanced: `wrap-unwrap-operations` - Token wrapping
+## Learning paths
 
-### Path 5: Live Streaming & Community
-1. Start: `streaming` - Begin streaming (RTMP, recordings, simulcast)
-2. Learn: `stream-chat` - Add live chat
-3. Learn: `ban-management` - Manage community
-4. Advanced: `moderator-invites` - Build mod team
+All names below are from `topics-v7.tsv`. Follow the connected server's current enum if it adds or renames topics.
 
-### Path 6: Platform Master
-Complete all paths 1-5, then:
-1. `token-creation` - Create your own token
-2. `nft-collection-management` - Add NFT support
-3. `overseer-invites` - Governance
-4. `event-subscriptions` - Real-time analytics
+### Path 1: Token lifecycle and trading
 
-## Quick Reference by Use Case
+1. `token-details` → `token-identification` to understand what the app is trading.
+2. `buy-tokens` → `sell-tokens` for bonding-curve trades.
+3. `trading-quotes` → `trading-analytics` to reason about expected output and activity.
+4. `pool-graduation` → `graduation-detection` → `token-status` to follow a token's state.
+5. `dex-token-discovery` → `fetch-dex-pools` → `dex-trading` for DEX markets.
+6. `queued-swap-recovery` → `error-handling` for uncertain submission outcomes.
 
-**"I want to trade tokens"**
-→ `buy-tokens` → `sell-tokens` → `dex-trading` → `trading-analytics`
+### Path 2: DEX and liquidity
 
-**"I want to provide liquidity"**
-→ `fetch-dex-pools` → `liquidity-positions` → `advanced-dex-analysis`
+1. `dex-token-discovery` → `fetch-dex-pools` to find pools.
+2. `spot-prices-smart-routing` → `advanced-dex-analysis` to evaluate price and pool context.
+3. `dex-trading` → `queued-swap-recovery` to learn submission, confirmation, and recovery.
+4. `liquidity-positions` to understand positions and liquidity workflows.
+5. `fetch-current-dex-season` → `fetch-current-dex-leaderboard` → `fetch-dex-aggregated-volume-summary` for current analytics.
 
-**"I want to bridge tokens"**
-→ `bridge-operations` → `wrap-unwrap-operations`
+### Path 3: Token creation and operation
 
-**"I want to launch a token"**
-→ `token-creation` → `token-details` → `pool-graduation` → `dex-trading`
+1. `restricted-names` → `token-creation` for name checks and launch.
+2. `token-details` → `token-status` → `fetch-pools` for discovery.
+3. `balances` → `token-distribution` → `holders` for ownership views.
+4. `transfers` → `locks` for token operations.
+5. `pool-graduation` → `graduation-detection` → `dex-trading` for the post-graduation transition.
 
-**"I want to stream live"**
-→ `streaming` → `stream-chat` → `ban-management` → `moderator-invites`
+### Path 4: Bridge and wrap
 
-**"I want complete mastery"**
-→ Start with Path 1 → Continue to Path 5 → Master with Path 6
+1. `bridge-operations` for bridge routes, fees, and tracking.
+2. `wrap-unwrap-operations` for cross-channel wrapping.
+3. `wallet-connect` → `error-handling` for signer and failure context.
 
-## Difficulty Levels Explained
+Check bridge requirements in the live topic. Solana paths may require `SOLANA_PRIVATE_KEY`; the MCP server also supports optional `ETHEREUM_RPC_URL` and `SOLANA_RPC_URL` overrides.
 
-### Beginner
-- Core concepts and common operations
-- Simple 1-3 parameter operations
-- Read-only or basic write operations
-- No special error handling needed
-- Perfect for your first time with GalaChain
+### Path 5: Streaming and community
 
-### Intermediate
-- More complex workflows
-- 3-5 parameters with interdependencies
-- Requires understanding of related concepts
-- Some error conditions to handle
-- Good next step after mastering basics
+1. `streaming` → `gdex-stream` for stream lifecycle and updates.
+2. `stream-chat` → `chat-messages` → `messages` for conversation features.
+3. `comments` → `content-reactions` → `content-flag-management` for community content.
+4. `ban-management` → `token-ban-management` → `moderator-invites` for moderation.
+5. `ai-moderation` → `global-feed-subscription` for moderation and event context.
 
-### Advanced
-- Complex strategies and optimization
-- 5+ parameters with subtle interactions
-- Requires deep understanding of DeFi
-- Multiple error conditions and recovery paths
-- For expert developers building sophisticated apps
+### Path 6: Application integration
 
-## Tips for Learning
+1. `installation` → `mcp-to-sdk-mapping` for server and method orientation.
+2. `wallet-connect` → `multi-wallet` → `session-auth` for account handling.
+3. `event-subscriptions` → `notifications` → `events-tracking` for event-driven features.
+4. `api-key-management` → `websocket-admin` for privileged integration needs.
+5. Continue with `platform-stats`, `oembed`, `referral-system`, and `nft-collection-management` where they fit the product.
 
-### Get Started
-1. Pick a use case that excites you
-2. Find the recommended learning path
-3. Start with beginner topics
-4. Use `/omni-tool:ask [topic]` to learn
+## Quick reference by use case
 
-### Practice
-1. After learning theory, execute with MCP tools
-2. Start small (small amounts, testnet if available)
-3. Debug errors using the auto-explain system
-4. Experiment with parameters
+- **Trade a token:** `token-identification` → `buy-tokens` / `sell-tokens` → `pool-graduation` → `dex-trading`.
+- **Provide liquidity:** `fetch-dex-pools` → `advanced-dex-analysis` → `liquidity-positions`.
+- **Recover an uncertain swap:** `queued-swap-recovery` → `error-handling`.
+- **Launch a token:** `restricted-names` → `token-creation` → `token-details` → `pool-graduation`.
+- **Bridge assets:** `bridge-operations` → `wrap-unwrap-operations`.
+- **Build community features:** `streaming` → `stream-chat` → `chat-messages` → `comments` → `content-flag-management`.
 
-### Go Deeper
-1. Related topics are always suggested
-2. Advanced topics unlock advanced strategies
-3. Combine topics for complex workflows
-4. Share what you learn with others
+## How to read a topic answer
 
-## Commands to Get More Info
+A focused topic answer should provide:
 
-```bash
-# Learn about a specific topic
-/omni-tool:ask buy-tokens
+- **What it does** and where it fits in the GalaChain lifecycle.
+- **When to use it**, including network, identity, and wallet prerequisites.
+- **How it works**, preferably as ordered steps.
+- **SDK example** from the live tool when examples are requested, with the equivalent MCP tool names.
+- **Key parameters and trade-offs**, such as amount type, fees, slippage, token identifier, or position range.
+- **Common pitfalls and recovery**, including v7-specific behavior.
+- **Related topics** using exact values from the live enum.
 
-# See more advanced topics in a category
-/omni-tool:topics governance --format=detailed
+For DEX swaps, explain that `swap()` queues work, `confirm()` resolves it, and `confirmSwap(uniqueKey)` recovers the original operation after interruption. Do not recommend submitting another swap to resolve uncertainty. Launchpad methods are flat, while GSwap DEX methods are grouped under `sdk.dex.*`; use the live v7 example for exact signatures.
 
-# Get the full teaching system
-/omni-tool:topics --format=tree
+## Difficulty guide
 
-# Set your learning preferences
-/omni-tool:setup
-```
+- **Beginner:** core ideas and read workflows; start with `installation`, `token-details`, `fetch-pools`, and `balances`.
+- **Intermediate:** multiple related concepts or a write workflow; continue to `buy-tokens`, `token-creation`, `bridge-operations`, or `liquidity-positions`.
+- **Advanced:** recovery, analysis, or privileged capabilities; study `queued-swap-recovery`, `advanced-dex-analysis`, `websocket-admin`, and `api-key-management` as needed.
 
-## Next Steps
+## Use the index
 
-- Pick a learning path that matches your goals
-- Ask about the first topic: `/omni-tool:ask [topic-name]`
-- Set your personality mode for personalized teaching
-- Join the community to share what you build!
-
-Let's build amazing things on GalaChain! 🚀
+Choose a learning path, then ask `/omni-tool:ask [topic]` for current content. Start with read topics and use `stage` when trying a workflow. The server accepts only `prod` or `stage`, defaults to `prod` when unset, and requires `PRIVATE_KEY` in its process environment for writes. The live topic enum wins whenever this local index is behind.
