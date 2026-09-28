@@ -3,7 +3,7 @@
     "gala-launchpad": {
       "command": "npx",
       "args": ["-y", "@gala-chain/launchpad-mcp-server@beta"],
-      "env": { "ENVIRONMENT": "qa1" }
+      "env": { "ENVIRONMENT": "stage" }
     }
   }
 }
