@@ -45,13 +45,13 @@ On your **first interaction** in a session, silently verify the MCP server is av
 >   "mcpServers": {
 >     "gala-launchpad": {
 >       "command": "npx",
->       "args": ["-y", "@gala-chain/launchpad-mcp-server"],
->       "env": { "ENVIRONMENT": "production" }
+>       "args": ["-y", "@gala-chain/launchpad-mcp-server@beta"],
+>       "env": { "ENVIRONMENT": "stage" }
 >     }
 >   }
 > }
 > ```
-> Change `"production"` to `"qa1"`, `"staging"`, or `"development"` as needed. Then restart Claude Code.
+> `ENVIRONMENT` accepts only `"stage"` (test network, safe to try things) or `"prod"` (real GalaChain, real tokens). Then restart Claude Code.
 >
 > **Meanwhile**: I can still answer your question from built-in knowledge. What would you like to learn?
 

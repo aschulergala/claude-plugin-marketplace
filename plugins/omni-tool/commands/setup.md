@@ -16,7 +16,7 @@ Interactive wizard to configure the GalaChain OmniTool plugin for your workflow.
 
 # Or configure specific setting directly
 /omni-tool:setup --personality=expert
-/omni-tool:setup --environment=staging
+/omni-tool:setup --environment=stage
 /omni-tool:setup --wallet-mode=full-access
 ```
 
@@ -68,32 +68,22 @@ How Claude teaches and interacts with you:
 - Create and manage tokens
 - Add liquidity positions
 - Bridge tokens
-- Requires: `GALACHAIN_PRIVATE_KEY` environment variable
+- Requires: `PRIVATE_KEY` environment variable
 
-### 3. Environment (Default: production)
+### 3. Environment (Default: stage)
 
-**Production**
+The MCP server supports exactly two environments — anything else fails to start.
+
+**Stage** (default — recommended for testing)
+- GalaChain's test network
+- Same API contracts as production
+- Safe to try things: browse, trade, create tokens
+- Perfect for learning and testing workflows
+
+**Prod**
 - Real GalaChain network
 - Real tokens and transactions
 - Real money (⚠️ careful!)
-- Most features available
-
-**QA1**
-- QA environment for pre-release testing
-- Mirrors production contracts
-- Safe for integration testing
-- Use when testing against latest builds
-
-**Staging**
-- Test network with unlimited fake tokens
-- Practice trading safely
-- Same API contracts as production
-- Perfect for testing workflows
-
-**Development**
-- Local backend at localhost:4000
-- Requires backend service running
-- For SDK and MCP server development
 
 ### 4. Learning Preferences
 
@@ -153,13 +143,13 @@ Before configuring preferences, verify the MCP server is reachable:
 >   "mcpServers": {
 >     "gala-launchpad": {
 >       "command": "npx",
->       "args": ["-y", "@gala-chain/launchpad-mcp-server"],
->       "env": { "ENVIRONMENT": "production" }
+>       "args": ["-y", "@gala-chain/launchpad-mcp-server@beta"],
+>       "env": { "ENVIRONMENT": "stage" }
 >     }
 >   }
 > }
 > ```
-> After restarting Claude Code, run `/omni-tool:setup` again.
+> `ENVIRONMENT` accepts only `"stage"` (test network) or `"prod"` (real GalaChain). After restarting Claude Code, run `/omni-tool:setup` again.
 
 ## Interactive Setup Flow
 
@@ -184,11 +174,9 @@ Let's configure your experience.
 
 3. Environment
    Which network should we connect to?
-   → Production (real GalaChain network)
-   → QA1 (pre-release QA environment)
-   → Staging (test network, unlimited fake tokens)
-   → Development (localhost:4000)
-   [Current: production]
+   → Stage (test network, safe to try things)
+   → Prod (real GalaChain network)
+   [Current: stage]
 
 4. Learning Preferences
    How should Claude teach you?
@@ -214,20 +202,18 @@ After collecting preferences, **automatically write the MCP server config** to `
 2. Merge or add the `gala-launchpad` entry with the chosen environment
 3. Write the file back
 
-The `ENVIRONMENT` value maps directly to the chosen environment:
-- `production` → `"ENVIRONMENT": "production"`
-- `qa1` → `"ENVIRONMENT": "qa1"`
-- `staging` → `"ENVIRONMENT": "staging"`
-- `development` → `"ENVIRONMENT": "development"`
+The `ENVIRONMENT` value maps directly to the chosen environment (only these two are valid; anything else fails to start):
+- `stage` → `"ENVIRONMENT": "stage"`
+- `prod` → `"ENVIRONMENT": "prod"`
 
-Example result for qa1:
+Example result for stage:
 ```json
 {
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/launchpad-mcp-server"],
-      "env": { "ENVIRONMENT": "qa1" }
+      "args": ["-y", "@gala-chain/launchpad-mcp-server@beta"],
+      "env": { "ENVIRONMENT": "stage" }
     }
   }
 }
@@ -248,10 +234,10 @@ agent_personality: tutor
 
 # Wallet configuration: read-only or full-access
 wallet_mode: read-only
-# private_key: ${GALACHAIN_PRIVATE_KEY}
+# private_key: ${PRIVATE_KEY}
 
-# Environment: production, qa1, staging, development
-environment: production
+# Environment: stage or prod (only these two are valid)
+environment: stage
 
 # Learning preferences
 show_advanced_topics: true
@@ -269,70 +255,50 @@ auto_suggest_examples: true
 
 ## Environment Variables
 
-### Production/Staging Access
+### Full-Access Mode (stage or prod)
 ```bash
-# Required for full-access mode
-export GALACHAIN_PRIVATE_KEY=your_private_key_hex
+# Required for full-access mode (omit for read-only)
+export PRIVATE_KEY=your_private_key_hex
 
-# Optional: override environment
-export GALACHAIN_ENVIRONMENT=staging
+# Optional: override environment (only "stage" or "prod" are valid)
+export ENVIRONMENT=stage
+
+# Optional: Solana bridge operations, custom RPC endpoints, streaming config
+export SOLANA_PRIVATE_KEY=your_solana_key
+export ETHEREUM_RPC_URL=https://your-rpc-endpoint
+export SOLANA_RPC_URL=https://your-solana-rpc-endpoint
 ```
 
-### Development (localhost)
-```bash
-# Backend service must be running
-export LAUNCHPAD_API_URL=http://localhost:4000
-
-# Optional wallet for testing
-export GALACHAIN_PRIVATE_KEY=your_test_key
-```
+There is no local/development mode — the MCP server always talks to stage or prod.
 
 ## Configuration Examples
 
 ### Beginner Learning Setup
 ```bash
 /omni-tool:setup
-# Select: Tutor, Read-Only, Production
+# Select: Tutor, Read-Only, Stage
 # Enable all learning options
 ```
 
-→ Result: Patient teaching with examples, no risk of transactions
+→ Result: Patient teaching with examples, no risk of transactions, safe test network
+
+### Full Testing Setup
+```bash
+/omni-tool:setup
+# Select: Pragmatist, Full-Access, Stage
+# Enable all learning options
+```
+
+→ Result: Real trades, token creation, and liquidity ops against GalaChain's stage network — nothing here touches real funds
 
 ### Experienced Trader Setup
 ```bash
 /omni-tool:setup
-# Select: Expert, Full-Access, Production
+# Select: Expert, Full-Access, Prod
 # Disable redundant explanations
 ```
 
-→ Result: Fast guidance, execute trades immediately
-
-### QA1 Integration Testing Setup
-```bash
-/omni-tool:setup
-# Select: Expert, Full-Access, QA1
-# Show advanced topics and error handling
-```
-
-→ Result: Full access against QA1 pre-release environment for integration testing
-
-### Safe Testing Setup
-```bash
-/omni-tool:setup
-# Select: Pragmatist, Full-Access, Staging
-# Enable all learning options
-```
-
-→ Result: Practical examples with unlimited fake tokens for testing
-
-### Developer Setup
-```bash
-/omni-tool:setup
-# Select: Expert, Full-Access, Development
-# Show advanced topics and error handling
-```
-
-→ Result: Direct API interaction with localhost backend
+→ Result: Fast guidance, execute real trades immediately (⚠️ real money)
 
 ## After Setup
 
@@ -382,51 +348,31 @@ You can:
 ```
 Personality: Tutor
 Wallet: Read-Only
-Environment: Production
+Environment: Stage
 Learning: All enabled
 Auto: All enabled
 ```
-Perfect for beginners.
+Perfect for beginners — no risk of a real transaction.
+
+### 🧪 Full Testing Mode
+```
+Personality: Pragmatist
+Wallet: Full-Access
+Environment: Stage
+Learning: All enabled
+Auto: All enabled
+```
+Real trades, token creation, liquidity ops — all against GalaChain's stage network, nothing here touches real funds. This is the recommended way to fully exercise the plugin.
 
 ### ⚡ Trader Mode
 ```
 Personality: Expert
 Wallet: Full-Access
-Environment: Production
+Environment: Prod
 Learning: Minimal
 Auto: Error explanations only
 ```
-Fast and direct for experienced traders.
-
-### 🔬 QA Mode
-```
-Personality: Expert
-Wallet: Full-Access
-Environment: QA1
-Learning: Advanced only
-Auto: Errors and examples
-```
-Integration testing against pre-release builds.
-
-### 🧪 Testing Mode
-```
-Personality: Pragmatist
-Wallet: Full-Access
-Environment: Staging
-Learning: All enabled
-Auto: All enabled
-```
-Safe practice with real operations.
-
-### 🛠️ Developer Mode
-```
-Personality: Expert
-Wallet: Full-Access
-Environment: Development
-Learning: Advanced only
-Auto: Errors and examples
-```
-Direct localhost backend access.
+Fast and direct for experienced traders (⚠️ real money).
 
 ## Troubleshooting Setup
 
@@ -436,7 +382,7 @@ Direct localhost backend access.
 - Run setup again to recreate
 
 ### "Private key isn't being recognized"
-- Check `GALACHAIN_PRIVATE_KEY` environment variable
+- Check the `PRIVATE_KEY` environment variable (not `GALACHAIN_PRIVATE_KEY`)
 - Verify it's a valid hex string (0x... or just hex)
 - Make sure it's set before running operations
 
@@ -450,10 +396,10 @@ Direct localhost backend access.
 - Verify `~/.claude.json` contains the `gala-launchpad` entry
 - Re-run `/omni-tool:setup` to rewrite the config if needed
 
-### "Staging or QA1 seems broken"
-- Staging/QA1 backends may occasionally be under maintenance
+### "Stage seems broken"
+- Stage may occasionally be under maintenance
 - Check `/omni-tool:topics` to verify MCP connection
-- Try switching to `production` with `/omni-tool:setup` if blocked
+- Try switching to `prod` with `/omni-tool:setup` if blocked
 
 ## Next Steps
 
