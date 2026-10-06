@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "7.0.0-beta.4",
-    "generatedAt": "2026-09-24T00:49:46.557Z",
+    "version": "7.0.0-beta.5",
+    "generatedAt": "2026-09-28T19:38:48.945Z",
     "toolCount": 323,
     "categoryCount": 41,
     "warnings": []
@@ -731,8 +731,8 @@
       ],
       "topic": "trading-analytics"
     },
-    "fetchTokenSpotPrice": {
-      "name": "fetchTokenSpotPrice",
+    "fetchTokenPrice": {
+      "name": "fetchTokenPrice",
       "mcpTool": "gala_launchpad_fetch_token_spot_price",
       "category": "pools",
       "description": "Fetch USD spot price for ANY token with smart routing\n\nRoutes to the correct backend automatically:\n- **tokenName** → Launchpad token (detects graduation status)\n- **tokenId** → REST-backed DEX token price via /market/price (~1s freshness; no signer required).\n\nDEX read errors: restricted or ungraduated tokens return TokenRestrictedError (403), a missing pool returns a not-found error, and heavy usage may return 429 rate limit.",
@@ -767,16 +767,18 @@
             "external"
           ]
         }
-      ]
+      ],
+      "topic": "token-identification"
     },
-    "fetchGalaSpotPrice": {
-      "name": "fetchGalaSpotPrice",
+    "fetchGalaPrice": {
+      "name": "fetchGalaPrice",
       "mcpTool": "gala_launchpad_fetch_gala_spot_price",
       "category": "pools",
       "description": "Fetch current GALA USD spot price (convenience method).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "utilities-and-helpers"
     },
     "fetchLaunchpadTokenSpotPrice": {
       "name": "fetchLaunchpadTokenSpotPrice",
@@ -912,8 +914,8 @@
       ],
       "topic": "price-history"
     },
-    "checkTokenName": {
-      "name": "checkTokenName",
+    "isTokenNameAvailable": {
+      "name": "isTokenNameAvailable",
       "mcpTool": "gala_launchpad_check_token_name",
       "category": "pools",
       "description": "Check if token name is available.",
@@ -926,10 +928,11 @@
           "required": true,
           "description": "Token name."
         }
-      ]
+      ],
+      "topic": "token-creation"
     },
-    "checkTokenSymbol": {
-      "name": "checkTokenSymbol",
+    "isTokenSymbolAvailable": {
+      "name": "isTokenSymbolAvailable",
       "mcpTool": "gala_launchpad_check_token_symbol",
       "category": "pools",
       "description": "Check if token symbol is available.",
@@ -942,7 +945,8 @@
           "required": true,
           "description": "Token symbol."
         }
-      ]
+      ],
+      "topic": "token-creation"
     },
     "validateToken": {
       "name": "validateToken",
@@ -1539,8 +1543,8 @@
       ],
       "topic": "trading-analytics"
     },
-    "calculateInitialBuy": {
-      "name": "calculateInitialBuy",
+    "calculateInitialBuyAmount": {
+      "name": "calculateInitialBuyAmount",
       "mcpTool": "gala_launchpad_calculate_initial_buy",
       "category": "trading",
       "description": "Calculate amounts for initial token purchase during creation (pre-mint phase).",
@@ -1553,7 +1557,8 @@
           "required": true,
           "description": "GALA amount to spend for initial buy (standard decimal format, e.g., \"100\" for 100 GALA)."
         }
-      ]
+      ],
+      "topic": "local-calculations"
     },
     "getBundlerTransactionResult": {
       "name": "getBundlerTransactionResult",
@@ -1893,8 +1898,8 @@
       ],
       "topic": "trading-quotes"
     },
-    "getSwapQuoteExactInput": {
-      "name": "getSwapQuoteExactInput",
+    "sdk.dex.quoting.quoteExactInput": {
+      "name": "sdk.dex.quoting.quoteExactInput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_input",
       "category": "dex",
       "description": "Get a v6 GSwap quote for an exact input amount through sdk.dex.quoting.",
@@ -1925,10 +1930,11 @@
           "required": false,
           "description": "Optional fee tier in basis points."
         }
-      ]
+      ],
+      "topic": "advanced-dex-analysis"
     },
-    "getSwapQuoteExactOutput": {
-      "name": "getSwapQuoteExactOutput",
+    "sdk.dex.quoting.quoteExactOutput": {
+      "name": "sdk.dex.quoting.quoteExactOutput",
       "mcpTool": "gala_launchpad_get_swap_quote_exact_output",
       "category": "dex",
       "description": "Get a v6 GSwap quote for an exact output amount through sdk.dex.quoting.",
@@ -1959,7 +1965,8 @@
           "required": false,
           "description": "Optional fee tier in basis points."
         }
-      ]
+      ],
+      "topic": "advanced-dex-analysis"
     },
     "calculateDexPoolQuoteLocal": {
       "name": "calculateDexPoolQuoteLocal",
@@ -2063,8 +2070,8 @@
         }
       ]
     },
-    "executeSwap": {
-      "name": "executeSwap",
+    "sdk.dex.swaps.swap": {
+      "name": "sdk.dex.swaps.swap",
       "mcpTool": "gala_launchpad_execute_swap",
       "category": "dex",
       "description": "Execute a GSwap trade through sdk.dex.swaps.swap and return its confirmation result.",
@@ -2112,10 +2119,11 @@
           "required": false,
           "description": "Decimal format (0.05 = 5% slippage)."
         }
-      ]
+      ],
+      "topic": "queued-swap-recovery"
     },
-    "getSwapResult": {
-      "name": "getSwapResult",
+    "sdk.dex.swaps.confirmSwap": {
+      "name": "sdk.dex.swaps.confirmSwap",
       "mcpTool": "gala_launchpad_get_swap_result",
       "category": "dex",
       "description": "Resolve the outcome of a previously queued GSwap swap by its uniqueKey through sdk.dex.swaps.confirmSwap, without resubmitting. Use after gala_launchpad_execute_swap reported an unknown outcome or timed out.",
@@ -2134,10 +2142,11 @@
           "required": false,
           "description": "How long to wait for the result (default 30000 ms)."
         }
-      ]
+      ],
+      "topic": "queued-swap-recovery"
     },
-    "getSwapUserAssets": {
-      "name": "getSwapUserAssets",
+    "sdk.dex.assets.getUserAssets": {
+      "name": "sdk.dex.assets.getUserAssets",
       "mcpTool": "gala_launchpad_get_swap_user_assets",
       "category": "dex",
       "description": "Get one page of GSwap assets for a wallet through sdk.dex.assets.getUserAssets.",
@@ -2168,8 +2177,8 @@
         }
       ]
     },
-    "fetchDexPools": {
-      "name": "fetchDexPools",
+    "sdk.dex.pools.getPools": {
+      "name": "sdk.dex.pools.getPools",
       "mcpTool": "gala_launchpad_fetch_dex_pools",
       "category": "dex-pools",
       "description": "Fetch current-contract GSwap pools through sdk.dex.pools.getPools.",
@@ -2215,7 +2224,8 @@
           "required": false,
           "description": "Results per page (default: 10, maximum: 100)."
         }
-      ]
+      ],
+      "topic": "fetch-dex-pools"
     },
     "fetchAllDexPools": {
       "name": "fetchAllDexPools",
@@ -2256,12 +2266,12 @@
           "name": "withPrices",
           "type": "boolean",
           "required": false,
-          "description": "Include current prices when available."
+          "description": "Include current prices when available (default: true)."
         }
       ]
     },
-    "getSwapPoolInfo": {
-      "name": "getSwapPoolInfo",
+    "sdk.dex.pools.getPool": {
+      "name": "sdk.dex.pools.getPool",
       "mcpTool": "gala_launchpad_get_swap_pool_info",
       "category": "dex-pools",
       "description": "Get current-contract GSwap pool information for a token pair.",
@@ -2280,7 +2290,8 @@
           "required": true,
           "description": "Token identifier in pipe-delimited format (e.g., \"GALA|Unit|none|none\", \"Token|Unit|BENE|client:xxx\")."
         }
-      ]
+      ],
+      "topic": "fetch-dex-pools"
     },
     "fetchCompositePoolData": {
       "name": "fetchCompositePoolData",
@@ -2315,8 +2326,8 @@
         }
       ]
     },
-    "getSwapPoolPrice": {
-      "name": "getSwapPoolPrice",
+    "sdk.dex.pools.getSlot0": {
+      "name": "sdk.dex.pools.getSlot0",
       "mcpTool": "gala_launchpad_get_swap_pool_price",
       "category": "dex-pools",
       "description": "Get current-contract GSwap price state through sdk.dex.pools.getSlot0.",
@@ -2346,10 +2357,11 @@
             10000
           ]
         }
-      ]
+      ],
+      "topic": "fetch-dex-pools"
     },
-    "fetchAvailableDexTokens": {
-      "name": "fetchAvailableDexTokens",
+    "sdk.dex.symbols.list": {
+      "name": "sdk.dex.symbols.list",
       "mcpTool": "gala_launchpad_fetch_available_dex_tokens",
       "category": "dex-pools",
       "description": "List registered GSwap trading symbols through sdk.dex.symbols.list.",
@@ -2374,7 +2386,8 @@
           "required": false,
           "description": "Cursor from previous response (omit for first page)."
         }
-      ]
+      ],
+      "topic": "dex-token-discovery"
     },
     "fetchAllAvailableDexTokens": {
       "name": "fetchAllAvailableDexTokens",
@@ -2392,8 +2405,8 @@
         }
       ]
     },
-    "getUserLiquidityPositions": {
-      "name": "getUserLiquidityPositions",
+    "sdk.dex.positions.getUserPositions": {
+      "name": "sdk.dex.positions.getUserPositions",
       "mcpTool": "gala_launchpad_get_user_liquidity_positions",
       "category": "dex-liquidity",
       "description": "Get current-contract GSwap liquidity positions owned by an address.",
@@ -2406,7 +2419,8 @@
           "required": true,
           "description": "Wallet address that owns the position."
         }
-      ]
+      ],
+      "topic": "liquidity-positions"
     },
     "getAllUserLiquidityPositions": {
       "name": "getAllUserLiquidityPositions",
@@ -2475,8 +2489,8 @@
         }
       ]
     },
-    "getLiquidityPosition": {
-      "name": "getLiquidityPosition",
+    "sdk.dex.positions.getPosition": {
+      "name": "sdk.dex.positions.getPosition",
       "mcpTool": "gala_launchpad_get_liquidity_position",
       "category": "dex-liquidity",
       "description": "Get one current-contract GSwap position by pair, owner, and tick range.",
@@ -2526,8 +2540,8 @@
         }
       ]
     },
-    "estimateRemoveLiquidity": {
-      "name": "estimateRemoveLiquidity",
+    "sdk.dex.positions.estimateRemoveLiquidity": {
+      "name": "sdk.dex.positions.estimateRemoveLiquidity",
       "mcpTool": "gala_launchpad_estimate_remove_liquidity",
       "category": "dex-liquidity",
       "description": "Estimate token amounts released by a current-contract GSwap liquidity withdrawal.",
@@ -2583,8 +2597,8 @@
         }
       ]
     },
-    "addLiquidityByPrice": {
-      "name": "addLiquidityByPrice",
+    "sdk.dex.positions.addLiquidityByPrice": {
+      "name": "sdk.dex.positions.addLiquidityByPrice",
       "mcpTool": "gala_launchpad_add_liquidity_by_price",
       "category": "dex-liquidity",
       "description": "Add liquidity through sdk.dex.positions.addLiquidityByPrice and return confirm() output.",
@@ -2658,8 +2672,8 @@
         }
       ]
     },
-    "addLiquidityByTicks": {
-      "name": "addLiquidityByTicks",
+    "sdk.dex.positions.addLiquidityByTicks": {
+      "name": "sdk.dex.positions.addLiquidityByTicks",
       "mcpTool": "gala_launchpad_add_liquidity_by_ticks",
       "category": "dex-liquidity",
       "description": "Add liquidity through sdk.dex.positions.addLiquidityByTicks and return confirm() output.",
@@ -2731,10 +2745,11 @@
           "required": false,
           "description": "Whether amount is denominated in token0."
         }
-      ]
+      ],
+      "topic": "liquidity-positions"
     },
-    "removeLiquidity": {
-      "name": "removeLiquidity",
+    "sdk.dex.positions.removeLiquidity": {
+      "name": "sdk.dex.positions.removeLiquidity",
       "mcpTool": "gala_launchpad_remove_liquidity",
       "category": "dex-liquidity",
       "description": "Remove current-contract GSwap liquidity and return confirm() output.",
@@ -2800,7 +2815,8 @@
           "required": false,
           "description": "Amount in standard decimal format (e.g., \"1\" for 1 GALA)."
         }
-      ]
+      ],
+      "topic": "liquidity-positions"
     },
     "fetchSwapPositionDirect": {
       "name": "fetchSwapPositionDirect",
@@ -2853,8 +2869,8 @@
         }
       ]
     },
-    "collectPositionFees": {
-      "name": "collectPositionFees",
+    "sdk.dex.positions.collectPositionFees": {
+      "name": "sdk.dex.positions.collectPositionFees",
       "mcpTool": "gala_launchpad_collect_position_fees",
       "category": "dex-liquidity",
       "description": "Collect current-contract GSwap position fees and return confirm() output.",
@@ -2902,7 +2918,8 @@
           "required": true,
           "description": "Wallet address that owns the position."
         }
-      ]
+      ],
+      "topic": "liquidity-positions"
     },
     "fetchAllDexSeasons": {
       "name": "fetchAllDexSeasons",
@@ -3001,8 +3018,8 @@
       ],
       "topic": "balances"
     },
-    "fetchLockedTokens": {
-      "name": "fetchLockedTokens",
+    "fetchLockedBalance": {
+      "name": "fetchLockedBalance",
       "mcpTool": "gala_launchpad_fetch_locked_tokens",
       "category": "balance",
       "description": "Get locked token details including all active locks, lock authorities, and expiration times. Returns locked quantity, individual hold details with lockAuthority, expiration timestamps, and lock names. Accepts tokenName for convenience - automatically resolves to tokenId for GalaChain query.",
@@ -3027,7 +3044,8 @@
           "required": false,
           "description": "Include expired locks in results (default: false - excludes expired)."
         }
-      ]
+      ],
+      "topic": "locks"
     },
     "fetchTokensHeld": {
       "name": "fetchTokensHeld",
@@ -3561,8 +3579,8 @@
       ],
       "topic": "nft-collection-management"
     },
-    "checkNftCollectionAvailable": {
-      "name": "checkNftCollectionAvailable",
+    "isNftCollectionAvailable": {
+      "name": "isNftCollectionAvailable",
       "mcpTool": "gala_launchpad_check_nft_collection_available",
       "category": "nft",
       "description": "Check if an NFT collection name is available for claiming.",
@@ -3575,7 +3593,8 @@
           "required": true,
           "description": "NFT collection name (alphanumeric, 3-50 characters)."
         }
-      ]
+      ],
+      "topic": "nft-collection-management"
     },
     "claimNftCollection": {
       "name": "claimNftCollection",
@@ -5343,8 +5362,8 @@
         }
       ]
     },
-    "setChatEnabled": {
-      "name": "setChatEnabled",
+    "enableChat": {
+      "name": "enableChat",
       "mcpTool": "gala_launchpad_set_chat_enabled",
       "category": "chat",
       "description": "Enable or disable chat for a specific token.\n\nDual-auth endpoint - supports both Admin API key and JWT (owner) auth.\n\n**Authorization:**\n- Admin (API key): Sets ADMIN_DISABLED when disabling - owner is locked out\n- Owner (JWT): Sets DISABLED when disabling - owner can re-enable later\n\nWhen ADMIN_DISABLED, only an admin can enable chat.\nOwners attempting to enable when ADMIN_DISABLED will get a 403 error.\n\nRETURNS: { enabled, tokenName, status }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (token owner).",
@@ -5363,7 +5382,8 @@
           "required": true,
           "description": "Whether chat should be enabled."
         }
-      ]
+      ],
+      "topic": "stream-chat"
     },
     "setSlowMode": {
       "name": "setSlowMode",
@@ -5388,14 +5408,15 @@
       ],
       "topic": "stream-chat"
     },
-    "connectStreamWebsocket": {
-      "name": "connectStreamWebsocket",
+    "connectStreamWebSocket": {
+      "name": "connectStreamWebSocket",
       "mcpTool": "gala_launchpad_connect_stream_websocket",
       "category": "chat",
       "description": "Connect to the stream WebSocket server.\n\nEstablishes a WebSocket connection for real-time stream events.\nMust be called before subscribing to streams or sending WebSocket chat.\n\nThrows error if connection fails or if already connected. Check SDK state before calling.\nThis connection persists until explicitly disconnected or the SDK is cleaned up.\nUse gala_launchpad_disconnect_stream_websocket to close the connection.\n\nRETURNS: { connected: true, message: 'Connected to stream WebSocket' }\n\nAuthentication: None required for connection (authentication needed for some operations).",
       "operationType": "read",
       "authRequired": true,
-      "parameters": []
+      "parameters": [],
+      "topic": "global-feed-subscription"
     },
     "subscribeToStream": {
       "name": "subscribeToStream",
@@ -6179,8 +6200,8 @@
         }
       ]
     },
-    "getModeratorInvite": {
-      "name": "getModeratorInvite",
+    "getModeratorInviteByCode": {
+      "name": "getModeratorInviteByCode",
       "mcpTool": "gala_launchpad_get_moderator_invite",
       "category": "moderators",
       "description": "Get invite details by code (public endpoint).\n\nReturns public information about an invite for the claim page. This is used\nby the frontend to display invite details before the user logs in to claim.\n\n**Returned info:**\n- Token name, symbol, image\n- Role to be granted\n- Invite status and expiration\n- Who created the invite\n\nRETURNS: { tokenName, tokenSymbol, tokenImage, role, description, status, expiresAt, invitedBy: { address, fullName } }\n\nAuthentication: None required (public endpoint).",
@@ -6193,7 +6214,8 @@
           "required": true,
           "description": "The 64-character hex invite code from the magic link URL."
         }
-      ]
+      ],
+      "topic": "moderator-invites"
     },
     "onModeratorChanged": {
       "name": "onModeratorChanged",
@@ -8585,17 +8607,18 @@
       "authRequired": false,
       "parameters": []
     },
-    "getAiModerationSettings": {
-      "name": "getAiModerationSettings",
+    "getAIModerationSettings": {
+      "name": "getAIModerationSettings",
       "mcpTool": "gala_launchpad_get_ai_moderation_settings",
       "category": "ai-moderation",
       "description": "Get current AI moderation settings.\n\nReturns configuration for AI-powered content moderation including:\n- Whether AI moderation is enabled\n- Moderation mode (DISABLED, ADVISORY)\n- Provider configuration\n- Tiered analysis settings (frames, resolution, escalation threshold)\n\nRETURNS: { settings: { enabled, mode, provider, maxFrames, frameInterval, tieredAnalysisEnabled, quickScanFrames, quickScanWidth, escalationConfidenceThreshold, escalationRecommendations } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "ai-moderation"
     },
-    "updateAiModerationSettings": {
-      "name": "updateAiModerationSettings",
+    "updateAIModerationSettings": {
+      "name": "updateAIModerationSettings",
       "mcpTool": "gala_launchpad_update_ai_moderation_settings",
       "category": "ai-moderation",
       "description": "Update AI moderation settings.\n\nConfigure AI-powered content moderation behavior.\nOnly provided fields will be updated.\n\nRETURNS: { settings: { enabled, mode, provider, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
@@ -8624,10 +8647,11 @@
           "required": false,
           "description": "AI provider name (e.g., \"claude\")."
         }
-      ]
+      ],
+      "topic": "ai-moderation"
     },
-    "getAiModerationResult": {
-      "name": "getAiModerationResult",
+    "getAIModeration": {
+      "name": "getAIModeration",
       "mcpTool": "gala_launchpad_get_ai_moderation_result",
       "category": "ai-moderation",
       "description": "Get AI moderation result for a specific content flag.\n\nRetrieves the AI moderation results for flagged content, including:\n- Recommendation (NO_ACTION, REVIEW_REQUIRED, DELETE_CONTENT, BAN_USER, DELETE_AND_BAN)\n- Confidence score (0-1)\n- Detected categories with individual confidence scores\n- Summary and reasoning for the recommendation\n- Tiered analysis metadata (tier used, escalation info, token usage)\n\nRETURNS: { moderation: { id, flagId, status, analysisType, provider, recommendation, confidence, categories, summary, reasoning, analysisTier, escalatedFromQuick, tokensUsed, ... } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
@@ -8640,10 +8664,11 @@
           "required": true,
           "description": "Flag ID to moderate (positive integer)."
         }
-      ]
+      ],
+      "topic": "ai-moderation"
     },
-    "triggerAiModeration": {
-      "name": "triggerAiModeration",
+    "triggerAIModeration": {
+      "name": "triggerAIModeration",
       "mcpTool": "gala_launchpad_trigger_ai_moderation",
       "category": "ai-moderation",
       "description": "Trigger AI moderation for a content flag.\n\nQueues flagged content for AI moderation. Moderation runs asynchronously -\nuse gala_launchpad_get_ai_moderation_result to poll for results or listen\nfor the AI_MODERATION_COMPLETE WebSocket event.\n\nFor video content with tiered analysis enabled:\n- Quick scan runs first (5 frames at 480px)\n- If concerns found, detailed scan runs (20 frames at 640px)\n\nRETURNS: { queued: boolean, message: string }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
@@ -8656,16 +8681,18 @@
           "required": true,
           "description": "Flag ID to moderate (positive integer)."
         }
-      ]
+      ],
+      "topic": "ai-moderation"
     },
-    "getAiModerationStatus": {
-      "name": "getAiModerationStatus",
+    "getAIModerationStatus": {
+      "name": "getAIModerationStatus",
       "mcpTool": "gala_launchpad_get_ai_moderation_status",
       "category": "ai-moderation",
       "description": "Get AI system status.\n\nReturns the current status of the AI moderation system:\n- Whether AI is enabled globally\n- Current mode (DISABLED, ADVISORY)\n- Provider availability (e.g., Claude API accessible)\n\nUseful for checking if AI moderation is operational before\ntriggering moderation for flagged content.\n\nRETURNS: { status: { enabled, mode, providerAvailable, providers: [{ name, available }] } }\n\nAuthentication: Requires streamAdminApiKey (admin) OR JWT auth (overseer).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "ai-moderation"
     },
     "getWeeklyChallengeLeaderboard": {
       "name": "getWeeklyChallengeLeaderboard",
@@ -8701,17 +8728,18 @@
       ],
       "topic": "weekly-challenge"
     },
-    "getHomeOembed": {
-      "name": "getHomeOembed",
+    "getHomeOEmbed": {
+      "name": "getHomeOEmbed",
       "mcpTool": "gala_launchpad_get_home_oembed",
       "category": "oembed",
       "description": "Get oEmbed metadata for the home page.\n\nReturns oEmbed JSON data featuring the top/live token for social media previews.\nUsed by Twitter Cards, Open Graph, and other social preview consumers.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, featuredToken?, featuredSymbol?, featuredImage?, featuredIsLive? } }\n\nAuthentication: None required (public endpoint).",
       "operationType": "read",
       "authRequired": false,
-      "parameters": []
+      "parameters": [],
+      "topic": "oembed"
     },
-    "getPoolOembed": {
-      "name": "getPoolOembed",
+    "getPoolOEmbed": {
+      "name": "getPoolOEmbed",
       "mcpTool": "gala_launchpad_get_pool_oembed",
       "category": "oembed",
       "description": "Get oEmbed metadata for a pool/token page.\n\nReturns oEmbed JSON data for a token's buy/sell page, including\nlive stream status if applicable.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, tokenName, symbol, image, isLive?, viewerCount? } }\n\nAuthentication: None required (public endpoint).",
@@ -8724,10 +8752,11 @@
           "required": true,
           "description": "Token name (case-insensitive)."
         }
-      ]
+      ],
+      "topic": "oembed"
     },
-    "getProfileOembed": {
-      "name": "getProfileOembed",
+    "getProfileOEmbed": {
+      "name": "getProfileOEmbed",
       "mcpTool": "gala_launchpad_get_profile_oembed",
       "category": "oembed",
       "description": "Get oEmbed metadata for a user profile page.\n\nReturns oEmbed JSON data for a user's profile including stats like\ntokens created, graduation rate, and total volume.\n\nRETURNS: { oembed: { type, version, title, provider_name, provider_url, address, displayName?, avatarUrl?, tokensCreated, tokensGraduated, graduationRate, totalVolumeGala, isLiveStreaming?, liveStreamToken? } }\n\nAuthentication: None required (public endpoint).",
@@ -8740,7 +8769,8 @@
           "required": true,
           "description": "User wallet address (e.g., \"eth|0x123...\")."
         }
-      ]
+      ],
+      "topic": "oembed"
     },
     "getPlatformStats": {
       "name": "getPlatformStats",
@@ -9904,8 +9934,6 @@
   "authMatrix": {
     "public": [
       "actionFlag",
-      "addLiquidityByPrice",
-      "addLiquidityByTicks",
       "addReactionToChatMessage",
       "addReactionToComment",
       "addSimulcastTarget",
@@ -9920,20 +9948,16 @@
       "calculateBuyAmountLocal",
       "calculateDexPoolQuoteExternal",
       "calculateDexPoolQuoteLocal",
-      "calculateInitialBuy",
+      "calculateInitialBuyAmount",
       "calculateSellAmount",
       "calculateSellAmountExternal",
       "calculateSellAmountLocal",
-      "checkNftCollectionAvailable",
       "checkPoolExists",
-      "checkTokenName",
-      "checkTokenSymbol",
       "claimModeratorInvite",
       "claimNftCollection",
       "claimOverseerInvite",
       "cleanup",
       "clearCache",
-      "collectPositionFees",
       "createApiKey",
       "createBan",
       "createComment",
@@ -9969,14 +9993,13 @@
       "emitUserProfileUpdated",
       "emitViewerCount",
       "emitWebsocketEvent",
+      "enableChat",
       "ensureValidToken",
       "estimateBridgeFee",
       "estimateNftMintFee",
       "estimateNftOperationFees",
-      "estimateRemoveLiquidity",
       "estimateUnwrapFee",
       "estimateWrapFee",
-      "executeSwap",
       "explainSdkUsage",
       "explainWebsocketEvents",
       "fetchAllAvailableDexTokens",
@@ -9990,7 +10013,6 @@
       "fetchAllTokensBridgeableToSolana",
       "fetchAllWrappableTokens",
       "fetchAvailableBalance",
-      "fetchAvailableDexTokens",
       "fetchBridgeableTokensByNetwork",
       "fetchClientFlags",
       "fetchCompositePoolData",
@@ -9998,16 +10020,15 @@
       "fetchCurrentDexSeason",
       "fetchDexAggregatedVolumeSummary",
       "fetchDexLeaderboardBySeasonId",
-      "fetchDexPools",
       "fetchEthereumWalletAllBalances",
       "fetchEthereumWalletNativeBalance",
       "fetchEthereumWalletTokenBalance",
       "fetchGalaBalance",
-      "fetchGalaSpotPrice",
+      "fetchGalaPrice",
       "fetchLaunchTokenFee",
       "fetchLaunchpadFee",
       "fetchLaunchpadTokenSpotPrice",
-      "fetchLockedTokens",
+      "fetchLockedBalance",
       "fetchNftBalances",
       "fetchNftCollections",
       "fetchNftTokenClasses",
@@ -10029,7 +10050,7 @@
       "fetchTokenClassesWithSupply",
       "fetchTokenDetails",
       "fetchTokenDistribution",
-      "fetchTokenSpotPrice",
+      "fetchTokenPrice",
       "fetchTokensCreated",
       "fetchTokensHeld",
       "fetchTrades",
@@ -10040,13 +10061,13 @@
       "flushCacheByAddress",
       "flushCacheByToken",
       "flushCacheWalletAliases",
+      "getAIModeration",
+      "getAIModerationSettings",
+      "getAIModerationStatus",
       "getAccessToken",
       "getActiveModerators",
       "getActiveUsers",
       "getAddress",
-      "getAiModerationResult",
-      "getAiModerationSettings",
-      "getAiModerationStatus",
       "getAllSwapUserAssets",
       "getAllUserLiquidityPositions",
       "getApiKey",
@@ -10066,14 +10087,13 @@
       "getEventSchema",
       "getFlagStats",
       "getGlobalStreamingStatus",
-      "getHomeOembed",
+      "getHomeOEmbed",
       "getInviteStats",
-      "getLiquidityPosition",
       "getLiquidityPositionById",
       "getManagedTokens",
       "getMessageStats",
       "getModeratedTokens",
-      "getModeratorInvite",
+      "getModeratorInviteByCode",
       "getMyOverseerStatus",
       "getNftCollectionClaimFee",
       "getNftTokenClassCreateFee",
@@ -10085,10 +10105,10 @@
       "getPinnedMessage",
       "getPlatformStats",
       "getPlatformStatus",
-      "getPoolOembed",
+      "getPoolOEmbed",
       "getPoolRealtimeState",
       "getPremintQuote",
-      "getProfileOembed",
+      "getProfileOEmbed",
       "getPublicKeyFromPrivateKey",
       "getRecentTrades",
       "getRecordingDownload",
@@ -10099,12 +10119,6 @@
       "getStreamRecordings",
       "getStreamRole",
       "getSupportedBridgeTokens",
-      "getSwapPoolInfo",
-      "getSwapPoolPrice",
-      "getSwapQuoteExactInput",
-      "getSwapQuoteExactOutput",
-      "getSwapResult",
-      "getSwapUserAssets",
       "getTokenAccess",
       "getTokenBan",
       "getTokenBanStats",
@@ -10112,7 +10126,6 @@
       "getTokenWeeklyHistory",
       "getTradeQuote",
       "getUrlByTokenName",
-      "getUserLiquidityPositions",
       "getUserStats",
       "getVersion",
       "getWallet",
@@ -10125,11 +10138,14 @@
       "graduateToken",
       "hasWallet",
       "isAuthenticated",
+      "isNftCollectionAvailable",
       "isTokenBanned",
       "isTokenBridgeableToEthereum",
       "isTokenBridgeableToNetwork",
       "isTokenBridgeableToSolana",
       "isTokenGraduated",
+      "isTokenNameAvailable",
+      "isTokenSymbolAvailable",
       "isTokenWrappable",
       "isUserOnline",
       "launchToken",
@@ -10160,7 +10176,6 @@
       "refreshToken",
       "registerPushToken",
       "removeBan",
-      "removeLiquidity",
       "removeReactionFromChatMessage",
       "removeReactionFromComment",
       "removeSimulcastTarget",
@@ -10172,9 +10187,24 @@
       "revokeModeratorInvite",
       "revokeOverseer",
       "revokeOverseerInvite",
+      "sdk.dex.assets.getUserAssets",
+      "sdk.dex.pools.getPool",
+      "sdk.dex.pools.getPools",
+      "sdk.dex.pools.getSlot0",
+      "sdk.dex.positions.addLiquidityByPrice",
+      "sdk.dex.positions.addLiquidityByTicks",
+      "sdk.dex.positions.collectPositionFees",
+      "sdk.dex.positions.estimateRemoveLiquidity",
+      "sdk.dex.positions.getPosition",
+      "sdk.dex.positions.getUserPositions",
+      "sdk.dex.positions.removeLiquidity",
+      "sdk.dex.quoting.quoteExactInput",
+      "sdk.dex.quoting.quoteExactOutput",
+      "sdk.dex.swaps.confirmSwap",
+      "sdk.dex.swaps.swap",
+      "sdk.dex.symbols.list",
       "sell",
       "sendChatMessage",
-      "setChatEnabled",
       "setGlobalStreamingEnabled",
       "setNextLiveStreamCountdown",
       "setSlowMode",
@@ -10188,14 +10218,14 @@
       "switchEnvironment",
       "transferGala",
       "transferToken",
-      "triggerAiModeration",
+      "triggerAIModeration",
       "unbanToken",
       "unlockTokens",
       "unpinMessage",
       "unregisterPushToken",
       "unsubscribeFromGlobalFeedReference",
       "unwrapToken",
-      "updateAiModerationSettings",
+      "updateAIModerationSettings",
       "updateApiKey",
       "updateChatMessage",
       "updateComment",
@@ -10213,7 +10243,7 @@
     ],
     "authenticated": [
       "addContentReaction",
-      "connectStreamWebsocket",
+      "connectStreamWebSocket",
       "fetchMessages",
       "getChatMessages",
       "getComments",
@@ -10319,17 +10349,17 @@
         "methods": [
           {
             "name": "fromWallet",
-            "signature": "static fromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "signature": "static fromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "description": "Creates a PrivateKeyProvider from an existing ethers.js Wallet.",
             "parameters": [
               {
                 "name": "wallet",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
                 "required": true,
                 "description": ""
               }
             ],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
             "isAsync": false,
             "isStatic": true
           },
@@ -10351,18 +10381,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10433,10 +10463,10 @@
           },
           {
             "name": "getWallet",
-            "signature": "getWallet(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
+            "signature": "getWallet(): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "description": "Gets the underlying ethers.js Wallet instance\n\nUseful for operations that require direct Wallet access.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
+            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "isAsync": false,
             "isStatic": false
           }
@@ -10501,18 +10531,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4).",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10556,10 +10586,10 @@
           },
           {
             "name": "getProvider",
-            "signature": "getProvider(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "signature": "getProvider(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "Gets the underlying EIP-1193 provider.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "isAsync": false,
             "isStatic": false
           }
@@ -10567,7 +10597,7 @@
         "constructorParams": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
@@ -10624,18 +10654,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712 (eth_signTypedData_v4)\n\nGala Wallet requires calling setAddress() before signing.",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10704,7 +10734,7 @@
         "methods": [
           {
             "name": "createBrowserClient",
-            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createBrowserClient(provider?: unknown): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new BrowserConnectClient.",
             "parameters": [
               {
@@ -10714,16 +10744,16 @@
                 "description": ""
               }
             ],
-            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
           {
             "name": "createTrustWalletClient",
-            "signature": "static async createTrustWalletClient(): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "signature": "static async createTrustWalletClient(): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "description": "Creates a GalaChainConnectProvider with a new TrustWalletConnectClient.",
             "parameters": [],
-            "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
+            "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectProvider>",
             "isAsync": true,
             "isStatic": true
           },
@@ -10781,18 +10811,18 @@
           },
           {
             "name": "signTypedData",
-            "signature": "async signTypedData(domain: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
+            "signature": "async signTypedData(domain: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain, types: Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>, value: Record<string, unknown>): Promise<string>",
             "description": "Signs typed data using EIP-712\n\nNote:",
             "parameters": [
               {
                 "name": "domain",
-                "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataDomain",
+                "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataDomain",
                 "required": true,
                 "description": ""
               },
               {
                 "name": "types",
-                "type": "Record<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").TypedDataField[]>",
+                "type": "Record<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").TypedDataField[]>",
                 "required": true,
                 "description": ""
               },
@@ -10836,10 +10866,10 @@
           },
           {
             "name": "getClient",
-            "signature": "getClient(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "signature": "getClient(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "description": "Gets the underlying.",
             "parameters": [],
-            "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "isAsync": false,
             "isStatic": false
           }
@@ -10847,7 +10877,7 @@
         "constructorParams": [
           {
             "name": "client",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/GalaChainConnectProvider\").GalaChainConnectClient",
             "required": true,
             "description": ""
           }
@@ -10859,7 +10889,7 @@
       {
         "name": "detectWallets",
         "description": "Detects available wallets using EIP-6963 standard\n\nEIP-6963 is the modern standard for wallet detection that allows\nmultiple wallets to announce themselves without conflicting.",
-        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "signature": "async function detectWallets(timeout?: number): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "parameters": [
           {
             "name": "timeout",
@@ -10868,18 +10898,18 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult>",
+        "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult>",
         "example": "* ```typescript\n * const { wallets, primary, hasWallets } = await detectWallets();\n *\n * if (hasWallets) {\n *   console.log('Available wallets:', wallets.map(w => w.name));\n *\n *   // Create provider from first wallet\n *   const provider = new ExternalWalletProvider(primary.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
       {
         "name": "subscribeToWalletChanges",
         "description": "Subscribes to wallet connection/disconnection events.",
-        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
+        "signature": "function subscribeToWalletChanges(callback: (result: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult) => void): () => void",
         "parameters": [
           {
             "name": "callback",
-            "type": "(result: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
+            "type": "(result: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletDetectionResult) => void",
             "required": true,
             "description": ""
           }
@@ -10891,7 +10921,7 @@
       {
         "name": "getWalletByRdns",
         "description": "Gets a specific wallet by its RDNS identifier.",
-        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "signature": "async function getWalletByRdns(rdns: string, timeout?: number | undefined): Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "parameters": [
           {
             "name": "rdns",
@@ -10906,7 +10936,7 @@
             "description": ""
           }
         ],
-        "returns": "Promise<import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | null>",
+        "returns": "Promise<import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | null>",
         "example": "* ```typescript\n * const metamask = await getWalletByRdns('io.metamask');\n * if (metamask) {\n *   const provider = new ExternalWalletProvider(metamask.provider);\n *   await provider.connect();\n * }\n * ```",
         "isAsync": true
       },
@@ -10945,57 +10975,57 @@
       {
         "name": "createWalletProvider",
         "description": "Creates a WalletProvider from configuration\n\nThis is the main factory function for creating wallet providers.\nIt automatically selects the appropriate provider type based on config.",
-        "signature": "function createWalletProvider(config: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+        "signature": "function createWalletProvider(config: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderConfig): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
         "parameters": [
           {
             "name": "config",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderConfig",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderConfig",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
         "example": "* ```typescript\n * // From private key\n * const provider = createWalletProvider({ privateKey: '0x...' });\n *\n * // From browser wallet\n * const provider = createWalletProvider({ eip1193Provider: window.ethereum });\n * await provider.connect();\n * ```",
         "isAsync": false
       },
       {
         "name": "createProviderFromWallet",
         "description": "Creates a PrivateKeyProvider from an ethers.js Wallet\n\nConvenience function for SDK users who already have an ethers Wallet.",
-        "signature": "function createProviderFromWallet(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "signature": "function createProviderFromWallet(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/PrivateKeyProvider\").PrivateKeyProvider",
         "isAsync": false
       },
       {
         "name": "createProviderFromEip1193",
         "description": "Creates an ExternalWalletProvider from an EIP-1193 provider\n\nConvenience function for creating providers from browser wallets.",
-        "signature": "function createProviderFromEip1193(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "signature": "function createProviderFromEip1193(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/ExternalWalletProvider\").ExternalWalletProvider",
         "isAsync": false
       },
       {
         "name": "isPrivateKeyProvider",
         "description": "Checks if a provider is a PrivateKeyProvider\n\nUseful for determining if private key operations are available.",
-        "signature": "function isPrivateKeyProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isPrivateKeyProvider(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11006,11 +11036,11 @@
       {
         "name": "isExternalProvider",
         "description": "Checks if a provider is an external provider.",
-        "signature": "function isExternalProvider(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): boolean",
+        "signature": "function isExternalProvider(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): boolean",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11021,11 +11051,11 @@
       {
         "name": "getPrivateKeyIfAvailable",
         "description": "Gets the private key from a provider if available\n\nThis is a safe way to get the private key, returning undefined\ninstead of throwing for external providers.",
-        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
+        "signature": "async function getPrivateKeyIfAvailable(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): Promise<string | undefined>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11036,41 +11066,41 @@
       {
         "name": "walletToProvider",
         "description": "Converts an ethers Wallet to a WalletProvider\n\nFor backward compatibility with SDK code that uses ethers Wallet directly.",
-        "signature": "function walletToProvider(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "signature": "function walletToProvider(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "parameters": [
           {
             "name": "wallet",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
         "isAsync": false
       },
       {
         "name": "providerToWallet",
         "description": "Gets an ethers Wallet from a provider if available\n\nFor backward compatibility with SDK code that needs ethers Wallet.\nOnly works with PrivateKeyProvider.",
-        "signature": "function providerToWallet(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
+        "signature": "function providerToWallet(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined): import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "required": true,
             "description": ""
           }
         ],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/node_modules/.pnpm/ethers@6.17.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/ethers/lib.esm/wallet/wallet\").Wallet | undefined",
         "isAsync": false
       },
       {
         "name": "ensureConnected",
         "description": "Ensures a wallet provider is connected\n\nCalls connect() if not already connected and returns the address.",
-        "signature": "async function ensureConnected(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
+        "signature": "async function ensureConnected(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider): Promise<string>",
         "parameters": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider",
             "required": true,
             "description": ""
           }
@@ -11096,9 +11126,9 @@
       {
         "name": "getInjectedEip1193Provider",
         "description": "Gets window.ethereum if available (browser only).",
-        "signature": "function getInjectedEip1193Provider(): import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "signature": "function getInjectedEip1193Provider(): import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "parameters": [],
-        "returns": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | null",
+        "returns": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | null",
         "isAsync": false
       }
     ],
@@ -11166,7 +11196,7 @@
         "properties": [
           {
             "name": "providerType",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderType",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderType",
             "description": "",
             "optional": false
           }
@@ -11216,13 +11246,13 @@
         "properties": [
           {
             "name": "info",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip6963ProviderInfo",
             "description": "",
             "optional": false
           },
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           }
@@ -11241,7 +11271,7 @@
           },
           {
             "name": "detail",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip6963ProviderDetail",
             "description": "",
             "optional": false
           }
@@ -11278,7 +11308,7 @@
           },
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider",
             "description": "",
             "optional": false
           },
@@ -11297,13 +11327,13 @@
         "properties": [
           {
             "name": "wallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "byId",
-            "type": "Map<string, import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet>",
+            "type": "Map<string, import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet>",
             "description": "",
             "optional": false
           },
@@ -11315,7 +11345,7 @@
           },
           {
             "name": "primary",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": true
           }
@@ -11334,7 +11364,7 @@
           },
           {
             "name": "eip1193Provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").Eip1193Provider | undefined",
             "description": "",
             "optional": true
           },
@@ -11371,7 +11401,7 @@
           },
           {
             "name": "providerType",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProviderType | undefined",
             "description": "",
             "optional": true
           },
@@ -11445,7 +11475,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11457,7 +11487,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
@@ -11481,11 +11511,11 @@
       {
         "name": "useWallet",
         "description": "Hook to access the current wallet state and actions\n\nThis is the primary hook for wallet integration. It provides:\n- Current connection state (address, isConnected, etc.)\n- Detected wallets list\n- Actions (connect, disconnect, etc.).",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/types\").WalletContextValue",
+        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/types\").WalletContextValue",
         "returnProperties": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11527,19 +11557,19 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11551,7 +11581,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11594,18 +11624,18 @@
       {
         "name": "useWalletProvider",
         "description": "Hook to get the current wallet provider.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
+        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
         "returnProperties": [],
         "example": "* ```tsx\n * const provider = useWalletProvider();\n * if (provider) {\n *   const signature = await provider.signMessage('Hello');\n * }\n * ```"
       },
       {
         "name": "useWalletConnection",
         "description": "Hook for managing wallet connection\n\nProvides a focused interface for connection management:\n- Connection status tracking\n- Connect/disconnect actions\n- Error handling.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
+        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/useWalletConnection\").UseWalletConnectionReturn",
         "returnProperties": [
           {
             "name": "status",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/types\").ConnectionStatus",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/types\").ConnectionStatus",
             "description": "",
             "optional": false
           },
@@ -11629,13 +11659,13 @@
           },
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11657,11 +11687,11 @@
       {
         "name": "useWalletDetection",
         "description": "Hook for detecting available browser wallets\n\nUses EIP-6963 to discover installed wallet extensions.\nAutomatically updates when new wallets are detected.",
-        "returnType": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
+        "returnType": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/react/useWalletDetection\").UseWalletDetectionReturn",
         "returnProperties": [
           {
             "name": "wallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           },
@@ -11685,7 +11715,7 @@
           },
           {
             "name": "getWallet",
-            "type": "(rdns: string) => import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
+            "type": "(rdns: string) => import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet | undefined",
             "description": "",
             "optional": false
           },
@@ -11719,7 +11749,7 @@
         "properties": [
           {
             "name": "provider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null",
             "description": "",
             "optional": false
           },
@@ -11761,7 +11791,7 @@
           },
           {
             "name": "detectedWallets",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet[]",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet[]",
             "description": "",
             "optional": false
           }
@@ -11774,13 +11804,13 @@
         "properties": [
           {
             "name": "connect",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
+            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => Promise<string>",
             "description": "",
             "optional": false
           },
           {
             "name": "connectDetected",
-            "type": "(wallet: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
+            "type": "(wallet: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").DetectedWallet) => Promise<string>",
             "description": "",
             "optional": false
           },
@@ -11792,7 +11822,7 @@
           },
           {
             "name": "setProvider",
-            "type": "(provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
+            "type": "(provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | null) => void",
             "description": "",
             "optional": false
           },
@@ -11835,7 +11865,7 @@
           },
           {
             "name": "initialProvider",
-            "type": "import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider | undefined",
+            "type": "import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider | undefined",
             "description": "",
             "optional": true
           },
@@ -11847,7 +11877,7 @@
           },
           {
             "name": "onConnect",
-            "type": "((address: string, provider: import(\"/mnt/build/worktrees/launchpad-sdk/docs-regen/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
+            "type": "((address: string, provider: import(\"/home/andy/dev-gala/launchpad-sdk/packages/sdk/src/wallet/types\").WalletProvider) => void) | undefined",
             "description": "",
             "optional": true
           },
@@ -11898,7 +11928,7 @@
       },
       "galachain": {
         "id": "tokenClassKey",
-        "description": "Pipe-delimited TokenClassKey with 4 components: collection|category|type|additionalKey. The \"type\" is the token SYMBOL (set at creation), which may differ from tokenName. Required for DEX operations. NEVER construct manually - always query via fetchPools() or resolveTokenClassKey().",
+        "description": "Pipe-delimited TokenClassKey with 4 components: collection|category|type|additionalKey. The \"type\" is the token SYMBOL (set at creation), which may differ from tokenName. Required for DEX operations (sdk.dex.*, the GSwap client) - a registered DEX trading symbol string (e.g. \"GALA\") also works there, but NEVER the Launchpad tokenName. NEVER construct a TokenClassKey manually - always query via fetchPools() or resolveTokenClassKey().",
         "pattern": "^[^|]+\\|[^|]+\\|[^|]+\\|[^|]+$",
         "examples": [
           "GALA|Unit|none|none",
@@ -11907,13 +11937,13 @@
         ],
         "parameterName": "tokenId",
         "usedBy": [
-          "executeSwap",
-          "getSwapQuoteExactInput",
-          "getSwapQuoteExactOutput",
-          "addSwapLiquidityByPrice",
-          "addSwapLiquidityByTicks",
-          "removeSwapLiquidity",
-          "collectSwapPositionFees"
+          "sdk.dex.swaps.swap",
+          "sdk.dex.quoting.quoteExactInput",
+          "sdk.dex.quoting.quoteExactOutput",
+          "sdk.dex.positions.addLiquidityByPrice",
+          "sdk.dex.positions.addLiquidityByTicks",
+          "sdk.dex.positions.removeLiquidity",
+          "sdk.dex.positions.collectPositionFees"
         ]
       }
     },
@@ -11960,40 +11990,40 @@
         "notes": "Smart router auto-detects format"
       },
       {
-        "method": "executeSwap",
+        "method": "sdk.dex.swaps.swap",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "DEX only, requires full format"
+        "notes": "DEX only; accepts a registered DEX symbol (e.g. \"GALA\") or full TokenClassKey, never a Launchpad tokenName"
       },
       {
-        "method": "getSwapQuoteExactInput",
+        "method": "sdk.dex.quoting.quoteExactInput",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "DEX quotes require full format"
+        "notes": "DEX quotes; accepts a registered DEX symbol or full TokenClassKey"
       },
       {
-        "method": "getSwapQuoteExactOutput",
+        "method": "sdk.dex.quoting.quoteExactOutput",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "DEX quotes require full format"
+        "notes": "DEX quotes; accepts a registered DEX symbol or full TokenClassKey"
       },
       {
-        "method": "addSwapLiquidityByPrice",
+        "method": "sdk.dex.positions.addLiquidityByPrice",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "LP operations use full format"
+        "notes": "LP operations use full DEX token format"
       },
       {
-        "method": "addSwapLiquidityByTicks",
+        "method": "sdk.dex.positions.addLiquidityByTicks",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "LP operations use full format"
+        "notes": "LP operations use full DEX token format"
       },
       {
-        "method": "removeSwapLiquidity",
+        "method": "sdk.dex.positions.removeLiquidity",
         "accepts": "tokenClassKey",
         "rejects": "tokenName",
-        "notes": "LP operations use full format"
+        "notes": "LP operations use full DEX token format"
       },
       {
         "method": "transferToken",
@@ -12027,12 +12057,12 @@
         "notes": "Checks bonding curve status"
       }
     ],
-    "decisionTree": "Q: What operation am I doing?\n│\n├── Buying/selling a NEW token (bonding curve)?\n│   └── Use tokenName: sdk.buy({ tokenName: 'anime', ... })\n│\n├── Swapping on DEX (graduated tokens, GALA, GUSDC)?\n│   └── Use tokenClassKey: sdk.executeSwap('GALA|Unit|none|none', ...)\n│\n├── Transferring tokens?\n│   ├── Launchpad token? → sdk.transferToken({ tokenName: 'anime', ... })\n│   └── Standard token? → sdk.transferToken({ tokenId: 'GALA|Unit|none|none', ... })\n│\n└── Checking price?\n    └── Either works: sdk.fetchTokenPrice({ tokenName: 'anime' })\n                   OR sdk.fetchTokenPrice({ tokenId: 'GALA|Unit|none|none' })",
+    "decisionTree": "Q: What operation am I doing?\n│\n├── Buying/selling a NEW token (bonding curve)?\n│   └── Use tokenName: sdk.buy({ tokenName: 'anime', ... })\n│\n├── Swapping on DEX (graduated tokens, GALA, GUSDC)?\n│   └── Use tokenClassKey: sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', fee, { exactIn, amountOutMinimum })\n│\n├── Transferring tokens?\n│   ├── Launchpad token? → sdk.transferToken({ tokenName: 'anime', ... })\n│   └── Standard token? → sdk.transferToken({ tokenId: 'GALA|Unit|none|none', ... })\n│\n└── Checking price?\n    └── Either works: sdk.fetchTokenPrice({ tokenName: 'anime' })\n                   OR sdk.fetchTokenPrice({ tokenId: 'GALA|Unit|none|none' })",
     "commonMistakes": [
       {
         "wrong": "sdk.executeSwap('GALA', 'GUSDC', '100', ...)",
-        "correct": "sdk.executeSwap('GALA|Unit|none|none', 'GUSDC|Unit|none|eth:0xa0b...', '100', ...)",
-        "explanation": "DEX operations require full tokenClassKey format with pipe delimiters"
+        "correct": "const quote = await sdk.dex.quoting.quoteExactInput('GALA|Unit|none|none', 'GUSDC|Unit|none|none', '100');\nconst submission = await sdk.dex.swaps.swap('GALA|Unit|none|none', 'GUSDC|Unit|none|none', quote.fee, { exactIn: '100', amountOutMinimum: quote.amountOut });\nconst trade = await submission.confirm();",
+        "explanation": "There is no sdk.executeSwap() method. DEX swaps go through sdk.dex (the GSwap client): quote with sdk.dex.quoting, submit with sdk.dex.swaps.swap(), then await submission.confirm() - the swap is queued (RequestTrade) and not final until confirm() resolves. Token identifiers there accept a registered DEX symbol (e.g. 'GALA') or a full pipe-delimited TokenClassKey, never a Launchpad tokenName."
       },
       {
         "wrong": "sdk.buy({ tokenName: 'Token|Unit|ANIME|client:gala-launchpad', ... })",

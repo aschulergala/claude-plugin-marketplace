@@ -1,64 +1,102 @@
 {
   "meta": {
-    "version": "6.0.0",
-    "generatedAt": "2025-01-14T00:00:00Z",
-    "eventCount": 17,
-    "subscriptionMethodCount": 17,
+    "version": "7.0.0-beta.5",
+    "generatedAt": "2026-09-28T19:39:07.097Z",
+    "eventCount": 22,
+    "subscriptionMethodCount": 20,
+    "note": "Covers the individually-typed event surface (StreamWebSocketService's named subscribeXxx() methods and their matching event interfaces in websocket-events.dto.ts). A larger set of streaming/chat/reaction/comment/typing/global-feed events (see STREAM_EVENTS in StreamWebSocketService.ts) is reachable only through the generic subscribeToStream(tokenName, { onXxx }) callback object and subscribeToGlobalFeed() -- those are not individually documented here yet.",
     "categories": {
-      "token-bans": {
+      "token-ban-events": {
         "label": "Token Ban Events",
         "description": "Events related to token bans at the platform level",
-        "events": ["TOKEN_BANNED", "TOKEN_UNBANNED"]
+        "events": [
+          "TOKEN_BANNED",
+          "TOKEN_UNBANNED"
+        ]
       },
-      "moderators": {
+      "moderator-events": {
         "label": "Moderator Events",
-        "description": "Events for moderator management and role changes",
-        "events": ["MODERATOR_ADDED", "MODERATOR_REMOVED", "MODERATOR_ROLE_UPDATED"]
+        "description": "Events for moderator invites, management, and role changes",
+        "events": [
+          "MODERATOR_ADDED",
+          "MODERATOR_REMOVED",
+          "MODERATOR_ROLE_UPDATED",
+          "MODERATOR_INVITE_CREATED"
+        ]
       },
-      "overseers": {
+      "overseer-events": {
         "label": "Overseer Events",
         "description": "Events for platform-level overseer management",
-        "events": ["OVERSEER_ADDED", "OVERSEER_REMOVED"]
+        "events": [
+          "OVERSEER_ADDED",
+          "OVERSEER_REMOVED"
+        ]
       },
-      "trades": {
+      "trade-events": {
         "label": "Trade Events",
-        "description": "Events for executed trades and bonding curve operations",
-        "events": ["TRADE_EXECUTED"]
+        "description": "Events for executed trades and the trader's own balance updates",
+        "events": [
+          "TRADE_EXECUTED",
+          "BALANCE_UPDATED"
+        ]
       },
-      "pool-metadata": {
+      "pool-metadata-events": {
         "label": "Pool Metadata Events",
-        "description": "Events for pool information and badge updates",
-        "events": ["POOL_METADATA_UPDATED", "POOL_SOCIAL_LINKS_UPDATED", "POOL_BADGE_ASSIGNED"]
+        "description": "Events for pool information, social links, config, and badge updates",
+        "events": [
+          "POOL_METADATA_UPDATED",
+          "POOL_SOCIAL_LINKS_UPDATED",
+          "TOKEN_CONFIG_UPDATED",
+          "POOL_BADGE_ASSIGNED"
+        ]
       },
-      "holders": {
+      "holder-count-events": {
         "label": "Holder Count Events",
         "description": "Events for token holder count changes",
-        "events": ["HOLDER_COUNT_UPDATED"]
+        "events": [
+          "HOLDER_COUNT_UPDATED"
+        ]
       },
-      "comments": {
+      "comment-events": {
         "label": "Comment Events",
         "description": "Events for pool comments and discussions",
-        "events": ["COMMENT_CREATED"]
+        "events": [
+          "COMMENT_CREATED"
+        ]
       },
-      "user-profiles": {
+      "user-profile-events": {
         "label": "User Profile Events",
         "description": "Events for user profile updates",
-        "events": ["USER_PROFILE_UPDATED"]
+        "events": [
+          "USER_PROFILE_UPDATED"
+        ]
       },
-      "api-keys": {
+      "api-key-events": {
         "label": "API Key Events",
-        "description": "Events for API key management",
-        "events": ["API_KEY_CREATED", "API_KEY_UPDATED", "API_KEY_REVOKED"]
+        "description": "Events for API key lifecycle changes",
+        "events": [
+          "API_KEY_CREATED",
+          "API_KEY_UPDATED",
+          "API_KEY_REVOKED"
+        ]
+      },
+      "platform-engagement-stats-events": {
+        "label": "Platform & Engagement Stats Events",
+        "description": "Events for platform-wide trading stats and per-token chat/comment engagement stats",
+        "events": [
+          "STATS_UPDATED",
+          "ENGAGEMENT_STATS_UPDATED"
+        ]
       }
     }
   },
   "events": {
     "TOKEN_BANNED": {
       "name": "TOKEN_BANNED",
-      "constant": "token_banned",
+      "constant": "TOKEN_BANNED",
       "interface": "TokenBannedEvent",
       "description": "Emitted when a token is globally banned (overseer action). Broadcast to overseer room.",
-      "room": "global",
+      "room": "overseer",
       "since": "6.0.0",
       "subscriptionMethod": "subscribeTokenBanned",
       "fields": [
@@ -90,10 +128,10 @@
     },
     "TOKEN_UNBANNED": {
       "name": "TOKEN_UNBANNED",
-      "constant": "token_unbanned",
+      "constant": "TOKEN_UNBANNED",
       "interface": "TokenUnbannedEvent",
       "description": "Emitted when a token ban is lifted. Broadcast to overseer room.",
-      "room": "global",
+      "room": "overseer",
       "since": "6.0.0",
       "subscriptionMethod": "subscribeTokenUnbanned",
       "fields": [
@@ -113,7 +151,7 @@
     },
     "MODERATOR_ADDED": {
       "name": "MODERATOR_ADDED",
-      "constant": "moderator_added",
+      "constant": "MODERATOR_ADDED",
       "interface": "ModeratorAddedEvent",
       "description": "Emitted when a user is added as a moderator for a token. Broadcast to token room.",
       "room": "token",
@@ -160,7 +198,7 @@
     },
     "MODERATOR_REMOVED": {
       "name": "MODERATOR_REMOVED",
-      "constant": "moderator_removed",
+      "constant": "MODERATOR_REMOVED",
       "interface": "ModeratorRemovedEvent",
       "description": "Emitted when a moderator is removed from a token. Broadcast to token room.",
       "room": "token",
@@ -189,7 +227,7 @@
     },
     "MODERATOR_ROLE_UPDATED": {
       "name": "MODERATOR_ROLE_UPDATED",
-      "constant": "moderator_role_updated",
+      "constant": "MODERATOR_ROLE_UPDATED",
       "interface": "ModeratorRoleUpdatedEvent",
       "description": "Emitted when a moderator's role is updated (promoted/demoted). Broadcast to token room.",
       "room": "token",
@@ -234,12 +272,65 @@
         }
       ]
     },
+    "MODERATOR_INVITE_CREATED": {
+      "name": "MODERATOR_INVITE_CREATED",
+      "constant": "MODERATOR_INVITE_CREATED",
+      "interface": "ModeratorInviteCreatedEvent",
+      "description": "Emitted when a moderator invite is created (pending, not yet claimed). Broadcast to token room + inviter's user room.",
+      "room": "token+user",
+      "since": "8.5.0",
+      "subscriptionMethod": "subscribeModeratorInviteCreated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which the invite was created"
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "required": true,
+          "description": "ModeratorRole enum value for the invite"
+        },
+        {
+          "name": "invitedBy",
+          "type": "string",
+          "required": true,
+          "description": "Address of the user who created the invite"
+        },
+        {
+          "name": "inviteId",
+          "type": "number",
+          "required": true,
+          "description": "Database ID of the invite"
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the invite was created"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Optional description for the invite"
+        },
+        {
+          "name": "expiresAt",
+          "type": "string",
+          "required": false,
+          "description": "Optional ISO 8601 expiration timestamp"
+        }
+      ]
+    },
     "OVERSEER_ADDED": {
       "name": "OVERSEER_ADDED",
-      "constant": "overseer_added",
+      "constant": "OVERSEER_ADDED",
       "interface": "OverseerAddedEvent",
       "description": "Emitted when a user becomes an overseer (system administrator). Broadcast to overseer room + global announcement.",
-      "room": "global",
+      "room": "overseer+global",
       "since": "6.0.0",
       "subscriptionMethod": "subscribeOverseerAdded",
       "fields": [
@@ -277,10 +368,10 @@
     },
     "OVERSEER_REMOVED": {
       "name": "OVERSEER_REMOVED",
-      "constant": "overseer_removed",
+      "constant": "OVERSEER_REMOVED",
       "interface": "OverseerRemovedEvent",
       "description": "Emitted when overseer privileges are revoked from a user. Broadcast to overseer room.",
-      "room": "global",
+      "room": "overseer",
       "since": "6.0.0",
       "subscriptionMethod": "subscribeOverseerRemoved",
       "fields": [
@@ -306,7 +397,7 @@
     },
     "TRADE_EXECUTED": {
       "name": "TRADE_EXECUTED",
-      "constant": "trade_executed",
+      "constant": "TRADE_EXECUTED",
       "interface": "TradeExecutedEvent",
       "description": "Emitted when a trade is executed on a bonding curve (buy/sell). Broadcast to token room. High-frequency event - may be throttled (1 per second per token).",
       "room": "token",
@@ -341,13 +432,13 @@
           "name": "inputAmount",
           "type": "string | number",
           "required": true,
-          "description": "Amount of input currency"
+          "description": "Amount of input currency (string or number)"
         },
         {
           "name": "outputAmount",
           "type": "string | number",
           "required": true,
-          "description": "Amount of output currency"
+          "description": "Amount of output currency (string or number)"
         },
         {
           "name": "newPrice",
@@ -366,12 +457,89 @@
           "type": "string",
           "required": true,
           "description": "ISO 8601 timestamp of when the trade occurred"
+        },
+        {
+          "name": "holderDelta",
+          "type": "{ type: 'NEW_HOLDER' | 'EXITED_HOLDER' | 'BALANCE_CHANGED'; userAddress: string; balance: string; rank: number; previousRank?: number }",
+          "required": false,
+          "description": "Optional holder rank information including balance and rank change"
+        },
+        {
+          "name": "holderCount",
+          "type": "number",
+          "required": false,
+          "description": "Optional current total holder count for the token"
+        },
+        {
+          "name": "candle",
+          "type": "{ startTime: number; open: number; high: number; low: number; close: number; volume: number; resolution: number }",
+          "required": false,
+          "description": "Optional 1-minute candle data for price tracking"
+        }
+      ]
+    },
+    "BALANCE_UPDATED": {
+      "name": "BALANCE_UPDATED",
+      "constant": "BALANCE_UPDATED",
+      "interface": "BalanceUpdatedEvent",
+      "description": "Emitted when a user's balance is updated after a trade. Broadcast to user-specific room (user:{address}) - private to user only. Contains the actual new balance amounts, allowing immediate cache population without refetch. No dedicated subscribeXxx() method yet -- reach it via subscribeToStream(tokenName, { onBalanceUpdated }).",
+      "room": "user",
+      "since": "7.0.0",
+      "subscriptionMethod": null,
+      "fields": [
+        {
+          "name": "userAddress",
+          "type": "string",
+          "required": true,
+          "description": "Wallet address of the user whose balance was updated"
+        },
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which balance changed"
+        },
+        {
+          "name": "tradeType",
+          "type": "'BUY' | 'SELL'",
+          "required": true,
+          "description": "Trade type that caused the balance update: BUY or SELL"
+        },
+        {
+          "name": "inputAmount",
+          "type": "string",
+          "required": true,
+          "description": "Amount of input currency (string format)"
+        },
+        {
+          "name": "outputAmount",
+          "type": "string",
+          "required": true,
+          "description": "Amount of output currency (string format)"
+        },
+        {
+          "name": "galaBalance",
+          "type": "string",
+          "required": true,
+          "description": "User's new GALA balance after the trade (string format for precision)"
+        },
+        {
+          "name": "tokenBalance",
+          "type": "string",
+          "required": true,
+          "description": "User's new balance of the token after the trade (string format for precision)"
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp of when the balance was updated"
         }
       ]
     },
     "POOL_METADATA_UPDATED": {
       "name": "POOL_METADATA_UPDATED",
-      "constant": "pool_metadata_updated",
+      "constant": "POOL_METADATA_UPDATED",
       "interface": "PoolMetadataUpdatedEvent",
       "description": "Emitted when pool metadata is updated (generic update). Broadcast to token room.",
       "room": "token",
@@ -412,7 +580,7 @@
     },
     "POOL_SOCIAL_LINKS_UPDATED": {
       "name": "POOL_SOCIAL_LINKS_UPDATED",
-      "constant": "pool_social_links_updated",
+      "constant": "POOL_SOCIAL_LINKS_UPDATED",
       "interface": "PoolSocialLinksUpdatedEvent",
       "description": "Emitted when pool social links are updated. Broadcast to token room.",
       "room": "token",
@@ -469,9 +637,92 @@
         }
       ]
     },
+    "TOKEN_CONFIG_UPDATED": {
+      "name": "TOKEN_CONFIG_UPDATED",
+      "constant": "TOKEN_CONFIG_UPDATED",
+      "interface": "TokenConfigUpdatedEvent",
+      "description": "Unified token config update emitted to token room + global feed. Fired by PATCH /v1/tokens/:tokenName when any config field changes. Contains only the changed fields (delta payload). Individual events (STREAM_COUNTDOWN_UPDATED, STREAM_LANGUAGE_UPDATED, POOL_SOCIAL_LINKS_UPDATED) still fire for backward compatibility — this provides a single event for global feed consumers. No dedicated subscribeXxx() method yet -- reach it via subscribeToStream(tokenName, { onTokenConfigUpdated }).",
+      "room": "token+global",
+      "since": "8.4.0",
+      "subscriptionMethod": null,
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which config was updated"
+        },
+        {
+          "name": "nextLiveStreamAt",
+          "type": "string | null",
+          "required": false,
+          "description": "Next live stream countdown (ISO 8601 or null to clear)"
+        },
+        {
+          "name": "streamLanguage",
+          "type": "string",
+          "required": false,
+          "description": "Stream language (ISO 639-1 code)"
+        },
+        {
+          "name": "chatEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether chat is enabled for this token"
+        },
+        {
+          "name": "streamingEnabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether streaming is enabled for this token"
+        },
+        {
+          "name": "websiteUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Website URL"
+        },
+        {
+          "name": "telegramUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Telegram URL"
+        },
+        {
+          "name": "twitterUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Twitter/X URL"
+        },
+        {
+          "name": "instagramUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Instagram URL"
+        },
+        {
+          "name": "facebookUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Facebook URL"
+        },
+        {
+          "name": "redditUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "Reddit URL"
+        },
+        {
+          "name": "tiktokUrl",
+          "type": "string | null",
+          "required": false,
+          "description": "TikTok URL"
+        }
+      ]
+    },
     "POOL_BADGE_ASSIGNED": {
       "name": "POOL_BADGE_ASSIGNED",
-      "constant": "pool_badge_assigned",
+      "constant": "POOL_BADGE_ASSIGNED",
       "interface": "PoolBadgeAssignedEvent",
       "description": "Emitted when a badge is assigned to a pool. Broadcast to token room.",
       "room": "token",
@@ -506,7 +757,7 @@
     },
     "HOLDER_COUNT_UPDATED": {
       "name": "HOLDER_COUNT_UPDATED",
-      "constant": "holder_count_updated",
+      "constant": "HOLDER_COUNT_UPDATED",
       "interface": "HolderCountUpdatedEvent",
       "description": "Emitted when the holder count for a token changes. Usually triggered by trade execution. Broadcast to token room.",
       "room": "token",
@@ -547,10 +798,10 @@
     },
     "COMMENT_CREATED": {
       "name": "COMMENT_CREATED",
-      "constant": "comment_created",
+      "constant": "COMMENT_CREATED",
       "interface": "CommentCreatedEvent",
       "description": "Emitted when a new comment is posted on a pool. Broadcast to comment room. Note: Update and delete events already exist via PoolMessageService.",
-      "room": "token",
+      "room": "comment",
       "since": "6.0.0",
       "subscriptionMethod": "subscribeCommentCreated",
       "fields": [
@@ -600,7 +851,7 @@
     },
     "USER_PROFILE_UPDATED": {
       "name": "USER_PROFILE_UPDATED",
-      "constant": "user_profile_updated",
+      "constant": "USER_PROFILE_UPDATED",
       "interface": "UserProfileUpdatedEvent",
       "description": "Emitted when a user updates their profile (name, image, bio, badges). Broadcast to user-specific room (user:{address}). Global impact - user appears in many contexts.",
       "room": "user",
@@ -635,7 +886,7 @@
     },
     "API_KEY_CREATED": {
       "name": "API_KEY_CREATED",
-      "constant": "api_key_created",
+      "constant": "API_KEY_CREATED",
       "interface": "ApiKeyCreatedEvent",
       "description": "Emitted when an API key is created. Broadcast to user-specific room (user:{address}) - private to owner.",
       "room": "user",
@@ -688,7 +939,7 @@
     },
     "API_KEY_UPDATED": {
       "name": "API_KEY_UPDATED",
-      "constant": "api_key_updated",
+      "constant": "API_KEY_UPDATED",
       "interface": "ApiKeyUpdatedEvent",
       "description": "Emitted when an API key settings are updated. Broadcast to user-specific room (user:{address}) - private to owner.",
       "room": "user",
@@ -729,7 +980,7 @@
     },
     "API_KEY_REVOKED": {
       "name": "API_KEY_REVOKED",
-      "constant": "api_key_revoked",
+      "constant": "API_KEY_REVOKED",
       "interface": "ApiKeyRevokedEvent",
       "description": "Emitted when an API key is revoked/deleted. Broadcast to user-specific room (user:{address}) - private to owner.",
       "room": "user",
@@ -765,6 +1016,100 @@
           "type": "string",
           "required": true,
           "description": "ISO 8601 timestamp of when the API key was revoked"
+        }
+      ]
+    },
+    "STATS_UPDATED": {
+      "name": "STATS_UPDATED",
+      "constant": "STATS_UPDATED",
+      "interface": "StatsUpdatedEvent",
+      "description": "Emitted when platform stats are updated after a trade. Broadcast globally to all connected clients. Contains enriched token-specific stats for surgical cache updates.",
+      "room": "global",
+      "since": "8.3.0",
+      "subscriptionMethod": "subscribeStatsUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name that triggered the stats update"
+        },
+        {
+          "name": "galaPrice",
+          "type": "string",
+          "required": true,
+          "description": "Current token price in GALA"
+        },
+        {
+          "name": "usdPrice",
+          "type": "string",
+          "required": true,
+          "description": "Current token price in USD"
+        },
+        {
+          "name": "marketCapUsd",
+          "type": "string",
+          "required": true,
+          "description": "Current market cap in USD"
+        },
+        {
+          "name": "circulatingSupply",
+          "type": "string",
+          "required": true,
+          "description": "Current circulating supply"
+        },
+        {
+          "name": "bondingCurvePercentage",
+          "type": "number",
+          "required": true,
+          "description": "Current bonding curve percentage (0-100)"
+        },
+        {
+          "name": "galaInPool",
+          "type": "string",
+          "required": true,
+          "description": "Current GALA amount in the bonding curve pool"
+        },
+        {
+          "name": "tradeAmount",
+          "type": "number",
+          "required": true,
+          "description": "Trade volume that caused this update (in GALA)"
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": true,
+          "description": "ISO 8601 timestamp"
+        }
+      ]
+    },
+    "ENGAGEMENT_STATS_UPDATED": {
+      "name": "ENGAGEMENT_STATS_UPDATED",
+      "constant": "ENGAGEMENT_STATS_UPDATED",
+      "interface": "EngagementStatsUpdatedEvent",
+      "description": "Emitted after the chat flush job processes messages for a stream. Contains updated engagement stats (chat + comment counts). Broadcast to token room every ~15 seconds when chat activity occurs.",
+      "room": "token",
+      "since": "8.5.0",
+      "subscriptionMethod": "subscribeEngagementStatsUpdated",
+      "fields": [
+        {
+          "name": "tokenName",
+          "type": "string",
+          "required": true,
+          "description": "Token name for which engagement stats were updated"
+        },
+        {
+          "name": "chat",
+          "type": "{ messageCount: number; uniqueChatters: number; since: string | null }",
+          "required": true,
+          "description": "Chat statistics (live stream messages - scoped to current/last stream session)"
+        },
+        {
+          "name": "comments",
+          "type": "{ count: number; uniqueCommenters: number }",
+          "required": true,
+          "description": "Comment statistics (token page comments - all-time)"
         }
       ]
     }
