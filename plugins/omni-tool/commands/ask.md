@@ -15,7 +15,7 @@ arguments:
 
 # GalaChain Ask
 
-Ask a question in your own words or provide an exact topic name. Match it to the closest live `gala_launchpad_explain_sdk_usage` topic and use the server's current explanation, code, MCP tool names, pitfalls, and related topics. Its topic enum is the live source of truth; the local index of 69 topics is a guide and may lag behind a newer server.
+Ask a question in your own words or provide an exact topic name. Match it to the closest live `gala_launchpad_explain_sdk_usage` topic and use the server's current explanation, code, MCP tool names, pitfalls, and related topics. Its topic enum is the live source of truth; the local index of 68 topics is a guide and may lag behind a newer server.
 
 ## Usage examples
 
