@@ -1,6 +1,6 @@
 ---
 name: omni-tool:topics
-description: Browse the local index of 69 GalaChain SDK topics
+description: Browse the local index of 68 GalaChain SDK topics
 arguments:
   - name: category
     description: "Optional topic category; omit to show all categories"
@@ -12,7 +12,7 @@ arguments:
 
 # GalaChain Topics
 
-Browse the local index of 69 v7 learning topics by category, learning path, or use case. Use `gala_launchpad_explain_sdk_usage` for current content. Its `topic` enum is the live source of truth: honor exact values from the connected server, including topics added after this file was published.
+Browse the local index of 68 v7 learning topics by category, learning path, or use case. Use `gala_launchpad_explain_sdk_usage` for current content. Its `topic` enum is the live source of truth: honor exact values from the connected server, including topics added after this file was published.
 
 ## Usage
 
@@ -46,7 +46,7 @@ Browse the local index of 69 v7 learning topics by category, learning path, or u
 `bridge-operations`, `wrap-unwrap-operations`
 
 ### Chat
-`event-subscriptions`, `gdex-stream`, `global-feed-subscription`, `stream-chat`
+`event-subscriptions`, `global-feed-subscription`, `stream-chat`
 
 ### Chat Messages
 `chat-messages`
@@ -171,7 +171,7 @@ Check bridge requirements in the live topic. Solana paths may require `SOLANA_PR
 
 ### Path 5: Streaming and community
 
-1. `streaming` → `gdex-stream` for stream lifecycle and updates.
+1. `streaming` for stream lifecycle and updates. (The gSwap realtime stream, including swaps and liquidity changes, is in `@gala-chain/gswap-sdk`, not this server.)
 2. `stream-chat` → `chat-messages` → `messages` for conversation features.
 3. `comments` → `content-reactions` → `content-flag-management` for community content.
 4. `ban-management` → `token-ban-management` → `moderator-invites` for moderation.

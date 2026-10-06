@@ -39,7 +39,7 @@ The server accepts exactly two `ENVIRONMENT` values:
 
 The server defaults to `prod` when `ENVIRONMENT` is unset. For setup, ask the user to choose `prod` or `stage`, then write that exact value. Do not write any other environment string; the v7 server rejects anything except `prod` and `stage`.
 
-After the entry is merged into `~/.claude.json`, remind the user to restart Claude Code. When connected, report that the server exposes 323 tools and the local learning index covers 69 topics. The live `gala_launchpad_explain_sdk_usage` topic enum is authoritative if the local index differs.
+After the entry is merged into `~/.claude.json`, remind the user to restart Claude Code. When connected, report that the server exposes 323 tools and the local learning index covers 68 topics. The live `gala_launchpad_explain_sdk_usage` topic enum is authoritative if the local index differs.
 
 ## 2. Choose wallet access
 
@@ -278,4 +278,4 @@ Confirm the file is `.claude/galachain-omnitool.local.md` in the project and con
 
 ## Next steps
 
-Use `/omni-tool:ask token-details` to inspect a token, `/omni-tool:ask buy-tokens` to learn the bonding-curve flow, or `/omni-tool:topics` to browse all 69 indexed topics. The topic enum returned by the connected v7 server remains the live source of truth.
+Use `/omni-tool:ask token-details` to inspect a token, `/omni-tool:ask buy-tokens` to learn the bonding-curve flow, or `/omni-tool:topics` to browse all 68 indexed topics. The topic enum returned by the connected v7 server remains the live source of truth.
