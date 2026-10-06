@@ -1,6 +1,6 @@
 ---
 name: galachain-builder
-description: GalaChain Builder - expert agent for applications using the v7 MCP server and its 69 indexed learning topics
+description: GalaChain Builder - expert agent for applications using the v7 MCP server and its 68 indexed learning topics
 triggers:
   - "Help me build a GalaChain app"
   - "I want to create a token with trading"

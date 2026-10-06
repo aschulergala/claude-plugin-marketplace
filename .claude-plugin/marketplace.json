@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "omni-tool",
-      "description": "Transform Claude into a GalaChain Expert Developer Agent with 323 MCP tools and 69 teaching topics.",
+      "description": "Transform Claude into a GalaChain Expert Developer Agent with 323 MCP tools and 68 teaching topics.",
       "source": "./plugins/omni-tool",
       "version": "2.0.0",
       "author": {

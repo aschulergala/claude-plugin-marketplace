@@ -109,7 +109,7 @@ A bridge and a wrap are different workflows. For Solana bridging, the server may
 
 Combine realtime updates with moderation and content workflows while keeping permissions visible. Compare when a one-time read is enough with when an event subscription is useful.
 
-1. `streaming` and `gdex-stream` for stream lifecycle and realtime stream events.
+1. `streaming` for stream lifecycle and realtime events. (The gSwap realtime stream, including swaps and liquidity changes, is in `@gala-chain/gswap-sdk`, not this server.)
 2. `stream-chat`, `chat-messages`, and `messages` for chat and message flows.
 3. `comments`, `content-reactions`, and `content-flag-management` for community content.
 4. `ban-management`, `token-ban-management`, `global-bans`, and `moderator-invites` for moderation.
