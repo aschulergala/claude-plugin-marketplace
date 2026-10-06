@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "7.0.0",
-    "generatedAt": "2026-10-06T18:17:46.176Z",
+    "version": "8.0.0",
+    "generatedAt": "2026-10-06T21:55:29.494Z",
     "toolCount": 323,
     "categoryCount": 41,
     "warnings": []
@@ -4072,7 +4072,7 @@
       "name": "explainSdkUsage",
       "mcpTool": "gala_launchpad_explain_sdk_usage",
       "category": "utils",
-      "description": "Get detailed SDK code examples for 323 MCP tools across 69 composite v7 SDK topics, including flat LaunchpadSDK methods, the sdk.dex GSwap client, queued swap recovery, streaming, moderation, comments, chat messages, and notifications.",
+      "description": "Get detailed SDK code examples for 323 MCP tools across 68 composite v7 SDK topics, including flat LaunchpadSDK methods, the sdk.dex GSwap client, queued swap recovery, streaming, moderation, comments, chat messages, and notifications.",
       "operationType": "read",
       "authRequired": false,
       "parameters": [
@@ -4096,7 +4096,6 @@
             "transfers",
             "locks",
             "dex-trading",
-            "gdex-stream",
             "error-handling",
             "installation",
             "local-calculations",
@@ -9286,16 +9285,6 @@
       ],
       "category": "dex"
     },
-    "gdex-stream": {
-      "key": "gdex-stream",
-      "label": "Gdex stream",
-      "description": "Gdex stream operations.",
-      "methods": [
-        "subscribeToStream",
-        "connectStreamWebSocket"
-      ],
-      "category": "chat"
-    },
     "error-handling": {
       "key": "error-handling",
       "label": "Error handling",
@@ -10289,7 +10278,6 @@
       "fetch-dex-leaderboard-by-season-id",
       "fetch-dex-pools",
       "fetch-pools",
-      "gdex-stream",
       "global-bans",
       "global-feed-subscription",
       "graduation-detection",
@@ -10336,7 +10324,7 @@
       "weekly-challenge",
       "wrap-unwrap-operations"
     ],
-    "topicCount": 69,
+    "topicCount": 68,
     "methodCount": 323,
     "exampleUsage": "gala_launchpad_explain_sdk_usage({ topic: \"buy-tokens\" })"
   },

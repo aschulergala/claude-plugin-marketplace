@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "7.0.0",
-    "generatedAt": "2026-10-06T18:17:46.176Z",
-    "topicCount": 69,
+    "version": "8.0.0",
+    "generatedAt": "2026-10-06T21:55:29.494Z",
+    "topicCount": 68,
     "methodCount": 323,
     "warnings": []
   },
@@ -332,26 +332,6 @@
         "Show me how to trade tokens on GalaSwap with the SDK",
         "Explain the trade tokens on GalaSwap workflow",
         "What methods do I need for trade tokens on GalaSwap?"
-      ]
-    },
-    "gdex-stream": {
-      "key": "gdex-stream",
-      "label": "Gdex stream",
-      "description": "Gdex stream operations",
-      "category": "chat",
-      "methods": [
-        "subscribeToStream",
-        "connectStreamWebSocket"
-      ],
-      "mcpTools": [
-        "gala_launchpad_subscribe_to_stream"
-      ],
-      "explanation": "## Gdex Stream\n\n**Key concept:** The SDK retains GDEX/stream websocket capabilities through the supported stream APIs; DEX state itself is read through GSwap.\n\n**When to use:** Use when a direct SDK integration owns websocket connection lifecycle.\n\n**Covers methods:** `subscribeToStream()`, `connectStreamWebSocket()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime', { onStreamStatusChanged: (event) => console.log(event) });\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_explain_sdk_usage`\n\n**Pitfalls:** Do not use removed flat DEX subscription methods.\n\n**Related Topics:** `event-subscriptions`, `stream-chat`, `dex-trading`",
-      "samplePrompts": [
-        "How do I gdex stream?",
-        "Show me how to gdex stream with the SDK",
-        "Explain the gdex stream workflow",
-        "What methods do I need for gdex stream?"
       ]
     },
     "error-handling": {
@@ -1710,14 +1690,6 @@
         "locks"
       ]
     },
-    "chat": {
-      "label": "Chat",
-      "topics": [
-        "gdex-stream",
-        "event-subscriptions",
-        "global-feed-subscription"
-      ]
-    },
     "dex-analytics": {
       "label": "DEX Analytics",
       "topics": [
@@ -1726,6 +1698,13 @@
         "fetch-dex-leaderboard-by-season-id",
         "fetch-current-dex-leaderboard",
         "fetch-dex-aggregated-volume-summary"
+      ]
+    },
+    "chat": {
+      "label": "Chat",
+      "topics": [
+        "event-subscriptions",
+        "global-feed-subscription"
       ]
     },
     "bridge": {
@@ -1965,21 +1944,6 @@
       ]
     },
     {
-      "id": "gdex-stream-demo",
-      "title": "Example: Gdex stream",
-      "topic": "gdex-stream",
-      "messages": [
-        {
-          "role": "user",
-          "content": "How do I gdex stream?"
-        },
-        {
-          "role": "assistant",
-          "content": "## Gdex Stream\n\n**Key concept:** The SDK retains GDEX/stream websocket capabilities through the supported stream APIs; DEX state itself is read through GSwap.\n\n**When to use:** Use when a direct SDK integration owns websocket connection lifecycle.\n\n**Covers methods:** `subscribeToStream()`, `connectStreamWebSocket()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime', { onStreamStatusChanged: (event) => console.log(event) });\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_explain_sdk_usage`\n\n**Pitfalls:** Do not use removed flat DEX subscription methods.\n\n**Related Topics:** `event-subscriptions`, `stream-chat`, `dex-trading`"
-        }
-      ]
-    },
-    {
       "id": "fetch-all-dex-seasons-demo",
       "title": "Example: Fetch all dex seasons",
       "topic": "fetch-all-dex-seasons",
@@ -1991,6 +1955,21 @@
         {
           "role": "assistant",
           "content": "## Fetch All Dex Seasons\n\n**Key concept:** fetchAllDexSeasons() returns historical and current competition seasons.\n\n**When to use:** Use to populate a season selector or historical rankings.\n\n**Covers methods:** `fetchAllDexSeasons()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nconsole.log(await sdk.fetchAllDexSeasons());\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_fetch_all_dex_seasons`\n\n**Pitfalls:** Do not assume the first season is current.\n\n**Related Topics:** `fetch-current-dex-season`, `fetch-dex-leaderboard-by-season-id`"
+        }
+      ]
+    },
+    {
+      "id": "event-subscriptions-demo",
+      "title": "Example: Event subscriptions",
+      "topic": "event-subscriptions",
+      "messages": [
+        {
+          "role": "user",
+          "content": "How do I subscribe to real-time events?"
+        },
+        {
+          "role": "assistant",
+          "content": "## Event Subscriptions\n\n**Key concept:** Launchpad stream subscriptions and typed callbacks provide supported realtime updates; DEX state is read through GSwap.\n\n**When to use:** Use for live token pages, stream status, and event-driven UI.\n\n**Covers methods:** `subscribeToStream()`, `onLaunchpadTokenCreation()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nconst subscription = await sdk.subscribeToStream('anime', { onStreamStatusChanged: (status) => console.log(status), onStreamChatMessage: (message) => console.log(message) });\nconsole.log(subscription);\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_on_launchpad_token_creation`\n\n**Pitfalls:** Always retain and invoke the cleanup function supplied by the subscription workflow.\n\n**Related Topics:** `streaming`, `stream-chat`, `token-status`"
         }
       ]
     },
@@ -2603,35 +2582,6 @@
         },
         {
           "userQuestion": "Any final tips for subscribe to real-time events?",
-          "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
-        }
-      ]
-    },
-    {
-      "topicKey": "gdex-stream",
-      "label": "Gdex stream",
-      "category": "chat",
-      "description": "Stream chat and messaging",
-      "methodCount": 2,
-      "exchanges": [
-        {
-          "userQuestion": "How do I gdex stream?",
-          "assistantResponse": "## Gdex Stream\n\n**Key concept:** The SDK retains GDEX/stream websocket capabilities through the supported stream APIs; DEX state itself is read through GSwap.\n\n**When to use:** Use when a direct SDK integration owns websocket connection lifecycle.\n\n**Covers methods:** `subscribeToStream()`, `connectStreamWebSocket()`\n\n```typescript\nimport { createLaunchpadSDK, getPublicKeyFromPrivateKey, getEthereumAddressFromPrivateKey } from '@gala-chain/launchpad-sdk';\n\nconst sdk = createLaunchpadSDK({ env: 'stage' });\nawait sdk.connectStreamWebSocket();\nawait sdk.subscribeToStream('anime', { onStreamStatusChanged: (event) => console.log(event) });\nsdk.disconnectStreamWebSocket();\n```\n\n**MCP Tool Equivalents:**\n- `gala_launchpad_connect_stream_websocket`\n- `gala_launchpad_subscribe_to_stream`\n- `gala_launchpad_explain_sdk_usage`\n\n**Pitfalls:** Do not use removed flat DEX subscription methods.\n\n**Related Topics:** `event-subscriptions`, `stream-chat`, `dex-trading`"
-        },
-        {
-          "userQuestion": "What parameters does subscribeToStream() accept?",
-          "assistantResponse": "The primary methods for Gdex stream are `subscribeToStream()`, `connectStreamWebSocket()`. Each method accepts configuration options as a single object parameter.\n\n**Common Parameters:**\n- `tokenName`: The token identifier (e.g., 'dragnrkti')\n- `amount`: Quantity as a string (for precision)\n- Wallet/auth options when transactions are involved\n\nCheck the SDK documentation or use TypeScript intellisense for the complete parameter interface."
-        },
-        {
-          "userQuestion": "What are best practices for gdex stream?",
-          "assistantResponse": "1. **There is no client SDK wrapper**: gdex-stream is a raw JSON-RPC 2.0 protocol over WebSocket. Send `{ method: 'gdex_subscribe', params: { channel: 'swap', pool/poolHash } }` yourself and listen for `gdex_subscription` notification messages; channels are `pool`, `balance`, `poolCreated`, `swap`, `blocks`.\n2. **Dedupe replayed swaps**: Key `swap` channel events by `transactionId` because reconnect delivery is effectively at least once.\n3. **Preserve precision and classify failures**: Parse decimal-string numerics with a bignum library and handle JSON-RPC error responses (RpcError shape: `{ code, message, data? }`), including rate-limit and other -32xxx codes."
-        },
-        {
-          "userQuestion": "What should I learn next after gdex stream?",
-          "assistantResponse": "**Related Topics:**\n\n- **Trading quotes**: `explainSdkUsage({ topic: 'trading-quotes' })`\n- **Fetch dex pools**: `explainSdkUsage({ topic: 'fetch-dex-pools' })`\n- **Recent trades**: `explainSdkUsage({ topic: 'recent-trades' })`\n- **Dex trading**: `explainSdkUsage({ topic: 'dex-trading' })`\n\n**Learning Path:** Start with the basics, then explore related topics to build a complete understanding of the SDK capabilities."
-        },
-        {
-          "userQuestion": "Any final tips for gdex stream?",
           "assistantResponse": "**Quick Tips:**\n\n1. **Start Simple**: Begin with the basic use case before exploring advanced features\n2. **Use TypeScript**: The SDK has full TypeScript support for better autocomplete and type safety\n3. **Check the Demos**: The examples/ directory has working demos for most SDK features\n4. **Read Error Messages**: SDK errors include helpful context for troubleshooting\n\nYou're ready to start building with this feature!"
         }
       ]
