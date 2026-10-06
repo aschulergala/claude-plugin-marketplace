@@ -25,7 +25,7 @@ Call `gala_launchpad_explain_sdk_usage` with the `installation` topic. If the to
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/launchpad-mcp-server@^7.0.0"],
+      "args": ["-y", "@gala-chain/launchpad-mcp-server@^8.0.0"],
       "env": { "ENVIRONMENT": "prod" }
     }
   }
@@ -73,7 +73,7 @@ Full-access requires the Ethereum-format private key in the MCP server process e
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/launchpad-mcp-server@^7.0.0"],
+      "args": ["-y", "@gala-chain/launchpad-mcp-server@^8.0.0"],
       "env": {
         "ENVIRONMENT": "stage",
         "PRIVATE_KEY": "0x..."
@@ -254,7 +254,7 @@ Keep the environment, signing, and presentation settings separate when diagnosin
 
 ### The setup command cannot find the MCP tool
 
-Check that `~/.claude.json` has the `gala-launchpad` entry and the package pin `@^7.0.0`. Restart Claude Code after editing. If the error says the tool is unknown, stop calling it and use the installation instructions above.
+Check that `~/.claude.json` has the `gala-launchpad` entry and the package pin `@^8.0.0`. Restart Claude Code after editing. If the error says the tool is unknown, stop calling it and use the installation instructions above.
 
 ### Server exits during startup
 
