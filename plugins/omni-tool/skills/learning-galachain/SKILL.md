@@ -13,7 +13,7 @@ triggers:
 
 # Learning GalaChain
 
-This skill uses `gala_launchpad_explain_sdk_usage` to teach from current v7 SDK examples, matching MCP tools, pitfalls, and related material. The live tool's `topic` enum is the source of truth. `/omni-tool:topics` is a convenient local index of 69 topics, not a substitute for the live enum; honor exact live values if the server has changed.
+This skill uses `gala_launchpad_explain_sdk_usage` to teach from current v7 SDK examples, matching MCP tools, pitfalls, and related material. The live tool's `topic` enum is the source of truth. `/omni-tool:topics` is a convenient local index of 68 topics, not a substitute for the live enum; honor exact live values if the server has changed.
 
 ## How a topic lesson works
 
