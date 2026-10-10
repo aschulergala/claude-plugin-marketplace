@@ -1,7 +1,7 @@
 {
   "meta": {
-    "version": "8.0.0",
-    "generatedAt": "2026-10-06T21:55:32.436Z",
+    "version": "8.1.0",
+    "generatedAt": "2026-10-10T02:55:37.627Z",
     "eventCount": 22,
     "subscriptionMethodCount": 20,
     "note": "Covers the individually-typed event surface (StreamWebSocketService's named subscribeXxx() methods and their matching event interfaces in websocket-events.dto.ts). A larger set of streaming/chat/reaction/comment/typing/global-feed events (see STREAM_EVENTS in StreamWebSocketService.ts) is reachable only through the generic subscribeToStream(tokenName, { onXxx }) callback object and subscribeToGlobalFeed() -- those are not individually documented here yet.",
