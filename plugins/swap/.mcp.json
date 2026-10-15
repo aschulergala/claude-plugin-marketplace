@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "gala-swap": {
+      "command": "npx",
+      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0-rc.3"],
+      "env": { "ENVIRONMENT": "prod", "GALA_TOOLSETS": "core,gswap" }
+    }
+  }
+}

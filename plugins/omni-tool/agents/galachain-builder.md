@@ -27,7 +27,7 @@ At session start, request `gala_launchpad_explain_sdk_usage` with topic `install
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/launchpad-mcp-server@^8.0.0"],
+      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0-rc.3"],
       "env": { "ENVIRONMENT": "prod" }
     }
   }

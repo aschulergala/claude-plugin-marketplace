@@ -1,0 +1,12 @@
+{
+  "name": "launchpad",
+  "version": "1.0.0",
+  "description": "The Gala Launchpad MCP tools only: pools, bonding-curve trading, token creation, balances, streaming and chat. Runs @gala-chain/gala-mcp-server with the core (wallet, bridge) and launchpad toolsets (287 tools), so the DEX tools stay out of the model's context.",
+  "author": {
+    "name": "Gala Launchpad Team",
+    "email": "aschuler@gala.games"
+  },
+  "repository": "https://github.com/aschulergala/claude-plugin-marketplace",
+  "license": "MIT",
+  "keywords": ["galachain", "gala-launchpad", "bonding-curve", "tokens", "mcp"]
+}
