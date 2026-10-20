@@ -12,7 +12,7 @@ arguments:
 
 # GalaChain Topics
 
-Browse the local index of 68 v7 learning topics by category, learning path, or use case. Use `gala_launchpad_explain_sdk_usage` for current content. Its `topic` enum is the live source of truth: honor exact values from the connected server, including topics added after this file was published.
+Browse the local index of 68 v7 learning topics by category, learning path, or use case. Use `gala_explain_sdk_usage` for current content. Its `topic` enum is the live source of truth: honor exact values from the connected server, including topics added after this file was published.
 
 ## Usage
 

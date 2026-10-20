@@ -1,6 +1,6 @@
 {
   "name": "omni-tool",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Transform Claude into a GalaChain Expert Developer Agent with 322 MCP tools and 68 teaching topics.",
   "author": {
     "name": "Gala Launchpad Team",
