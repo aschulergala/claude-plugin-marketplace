@@ -27,7 +27,7 @@ At session start, request `gala_explain_sdk_usage` with topic `installation`. If
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0-rc.11"],
+      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0"],
       "env": { "ENVIRONMENT": "prod" }
     }
   }
