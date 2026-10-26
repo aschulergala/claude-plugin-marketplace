@@ -18,14 +18,14 @@ Setup checks the MCP connection first. If the teaching tool is unavailable, stop
 
 ## 1. Check the MCP connection
 
-Call `gala_launchpad_explain_sdk_usage` with the `installation` topic. If the tool is unknown or missing, do not retry it. Explain that the MCP server is not connected and show this `~/.claude.json` entry, keeping all unrelated JSON and MCP server entries intact:
+Call `gala_explain_sdk_usage` with the `installation` topic. If the tool is unknown or missing, do not retry it. Explain that the MCP server is not connected and show this `~/.claude.json` entry, keeping all unrelated JSON and MCP server entries intact:
 
 ```json
 {
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0-rc.3"],
+      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0"],
       "env": { "ENVIRONMENT": "prod" }
     }
   }
@@ -41,7 +41,7 @@ The server defaults to `prod` when `ENVIRONMENT` is unset. For setup, ask the us
 
 Optionally set `GALA_TOOLSETS` in the `env` block (or pass `--toolsets` to `gala-mcp`) to a comma list of `core`, `launchpad`, `gswap`, `composite` to load only part of the tools, for example `"GALA_TOOLSETS": "core,launchpad"` (287 tools) or `"core,gswap"` (77 tools). The default loads all four toolsets. The marketplace also ships the `launchpad` and `swap` plugins, which are those two subsets.
 
-After the entry is merged into `~/.claude.json`, remind the user to restart Claude Code. When connected, report that the server exposes 322 tools (the default toolsets: core 45, launchpad 242, gswap 32, composite 3) and the local learning index covers 68 topics. The live `gala_launchpad_explain_sdk_usage` topic enum is authoritative if the local index differs.
+After the entry is merged into `~/.claude.json`, remind the user to restart Claude Code. When connected, report that the server exposes 322 tools (the default toolsets: core 45, launchpad 242, gswap 32, composite 3) and the local learning index covers 68 topics. The live `gala_explain_sdk_usage` topic enum is authoritative if the local index differs.
 
 ## 2. Choose wallet access
 
@@ -75,7 +75,7 @@ Full-access requires the Ethereum-format private key in the MCP server process e
   "mcpServers": {
     "gala-launchpad": {
       "command": "npx",
-      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0-rc.3"],
+      "args": ["-y", "@gala-chain/gala-mcp-server@^1.0.0"],
       "env": {
         "ENVIRONMENT": "stage",
         "PRIVATE_KEY": "0x..."
@@ -256,7 +256,7 @@ Keep the environment, signing, and presentation settings separate when diagnosin
 
 ### The setup command cannot find the MCP tool
 
-Check that `~/.claude.json` has the `gala-launchpad` entry and the package `@gala-chain/gala-mcp-server@^1.0.0-rc.3`. Restart Claude Code after editing. If the error says the tool is unknown, stop calling it and use the installation instructions above.
+Check that `~/.claude.json` has the `gala-launchpad` entry and the package `@gala-chain/gala-mcp-server@^1.0.0`. Restart Claude Code after editing. If the error says the tool is unknown, stop calling it and use the installation instructions above.
 
 ### Server exits during startup
 
