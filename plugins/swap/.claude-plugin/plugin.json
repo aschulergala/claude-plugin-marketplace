@@ -1,7 +1,7 @@
 {
   "name": "swap",
-  "version": "1.0.0",
-  "description": "The GSwap DEX MCP tools only: swap quotes and swaps, pools, liquidity positions and fees, market prices, leaderboard. Runs @gala-chain/gala-mcp-server with the core (wallet, bridge) and gswap toolsets (77 tools), so the launchpad tools stay out of the model's context.",
+  "version": "1.1.0",
+  "description": "The GSwap DEX MCP tools only: swap quotes and swaps, pools, liquidity positions and fees, market prices, leaderboard. Runs @gala-chain/gala-mcp-server with the core (wallet, bridge) and gswap toolsets (79 tools), so the launchpad tools stay out of the model's context.",
   "author": {
     "name": "Gala Launchpad Team",
     "email": "aschuler@gala.games"
